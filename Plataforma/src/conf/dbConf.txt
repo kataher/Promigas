@@ -1,0 +1,5 @@
+uri:097699-DOCENT-P\PROMIGAS
+dbName:Plataforma
+user:sa
+pass:123
+port:1433
