@@ -330,6 +330,7 @@
                     $("#gasspecificgra_fri").val("");
                     $("#pipelineefficiency_fri").val("");
                     $("#upstreampressure_fri").val("");
+                    $("#downstreampressure_fri").val("");
                     $("#flowrate_fri").val("");
                     $("#internalpipe_fri").val("");
                     $("#lengthof_fri").val("");

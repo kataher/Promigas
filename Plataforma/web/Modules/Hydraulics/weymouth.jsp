@@ -324,6 +324,7 @@
                     $("#gasspecificgra_wdp").val("");
                     $("#pipelineefficiency_wdp").val("");
                     $("#upstreampressure_wdp").val("");
+                    $("#downstreampressure_wdp").val("");
                     $("#flowrate_wdp").val("");
                     $("#internalpipe_wdp").val("");
                     $("#lengthof_wdp").val("");

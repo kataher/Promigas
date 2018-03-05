@@ -388,6 +388,7 @@
                     $("#gasflowingtemp_aga").val("");
                     $("#gasspecificgra_aga").val("");
                     $("#pipelineefficiency_aga").val("");
+                    $("#flowrate_aga").val("");
                     $("#upstreampressure_aga").val("");
                     $("#downstreampressure_aga").val("");
                     $("#internalpipe_aga").val("");

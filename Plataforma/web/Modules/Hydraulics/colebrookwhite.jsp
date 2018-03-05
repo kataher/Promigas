@@ -473,6 +473,7 @@
                     $("#gasflowingtemp_cfr").val("");
                     $("#gasspecificgra_cfr").val("");
                     $("#pipelineefficiency_cfr").val("");
+                    $("#flowrate_cfr").val("");
                     $("#upstreampressure_cfr").val("");
                     $("#downstreampressure_cfr").val("");
                     $("#internalpipe_cfr").val("");

@@ -332,6 +332,7 @@
                     $("#gasspecificgra_igt").val("");
                     $("#pipelineefficiency_igt").val("");
                     $("#upstreampressure_igt").val("");
+                    $("#downstreampressure_igt").val("");
                     $("#flowrate_igt").val("");
                     $("#internalpipe_igt").val("");
                     $("#lengthof_igt").val("");

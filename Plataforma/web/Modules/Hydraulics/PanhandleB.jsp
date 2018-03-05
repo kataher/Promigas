@@ -320,6 +320,7 @@
                     $("#gasspecificgra_bdp").val("");
                     $("#pipelineefficiency_bdp").val("");
                     $("#upstreampressure_bdp").val("");
+                    $("#downstreampressure_bdp").val("");
                     $("#flowrate_bdp").val("");
                     $("#internalpipe_bdp").val("");
                     $("#lengthof_bdp").val("");
