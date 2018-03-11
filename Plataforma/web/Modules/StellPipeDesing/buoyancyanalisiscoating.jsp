@@ -334,7 +334,34 @@
                 var val = $("#wthi_sel_basc").val().trim().split(",");
                 $("#nom_wall_basc").val(val[1]);
             }
-
+                    
+            function cleanOut_basc() {
+                $("#pipe_weight_basc").val("");
+                $("#total_vol_basc").val("");
+                $("#corr_coat_vol_basc").val("");
+                $("#conc_coat_thick_basc").val("");
+                $("#max_stress_basc").val("");
+                $("#weight_pipe_air_basc").val("");
+                $("#weight_wat_dis_basc").val("");
+                $("#weight_sugm_pipe_basc").val("");
+                $("#weight_joint_basc").val("");
+            }
+            
+            function cleanIn_basc() {
+                $("#nomout_basc").val("");
+                $("#nom_wall_basc").val("");
+                $("#spec_gra_basc").val("");
+                $("#corr_coa_thick_basc").val("");
+                $("#pipe_lenght_basc").val("");
+            }
+            
+            function cleanAll_basc() {
+                cleanOut_basc();
+                cleanIn_basc();
+                $("#water_dens").val("");
+                $("#conc_water_dens").val("");
+                $("#corr_coa").val("");
+            }
         </script>        
     </body>
 </html>

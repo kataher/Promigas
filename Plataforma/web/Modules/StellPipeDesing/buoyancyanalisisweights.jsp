@@ -319,6 +319,34 @@
                 var val = $("#wthi_sel_baw").val().trim().split(",");
                 $("#nom_wall_baw").val(val[1]);
             }
+            
+            function cleanOut_baw() {
+                $("#buoy_force_baw").val("");
+                $("#weight_pipe_baw").val("");
+                $("#weight_coat_baw").val("");
+                $("#weight_prod_pipe_baw").val("");
+                $("#down_force_baw").val("");
+                $("#net_force_baw").val("");
+                $("#down_force_conc_baw").val("");
+                $("#conc_weight_spac_baw").val("");
+            }
+            
+            function cleanIn_baw() {
+                $("#nomout_baw").val("");
+                $("#nom_wall_baw").val("");
+                $("#corr_coa_baw").val("");
+                $("#esp_capa_baw").val("");
+                $("#vol_agua_baw").val("");
+                $("#dens_recu_baw").val("");
+                $("#dens_prod_baw").val("");
+                $("#dens_conc_baw").val("");
+                $("#safe_fact_baw").val("");
+            }
+            
+            function cleanAll_baw() {
+                cleanOut_baw();
+                cleanIn_baw();
+            }
         </script>
     </body>
 </html>

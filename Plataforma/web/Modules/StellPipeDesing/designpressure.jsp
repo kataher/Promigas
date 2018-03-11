@@ -718,6 +718,26 @@
                 $("#fact_pipeop_dp").val($("#design_factor_sel_dp").val().split(",")[1]);
                 // cleanOut_dp();
             }
+            
+            function cleanOut_dp() {
+                $("#despress_pipeop_dp").val("");
+            }
+            
+            function cleanIn_dp() {
+                $("#nom_pipeop_dp").val("");
+                $("#nomout_pipeop_dp").val("");
+                $("#nomwall_pipeop_dp").val("");
+                $("#gra_pipeop_dp").val("");
+                $("#yield_pipeop_dp").val("");
+                $("#fact_pipeop_dp").val("");
+                $("#long_pipeop_dp").val("");
+                $("#temp_pipeop_dp").val("");
+            }
+            
+            function cleanAll_dp() {
+                cleanOut_dp();
+                cleanIn_dp();
+            }
 
         </script>       
     </body>
