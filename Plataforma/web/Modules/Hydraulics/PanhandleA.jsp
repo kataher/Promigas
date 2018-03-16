@@ -252,13 +252,13 @@
                 var x = document.getElementById("unknown_adp").selectedIndex;
                 var y = document.getElementById("unknown_adp").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
-                
-                if(y[x].text == "Flow rate"){
+
+                if (y[x].text == "Flow rate") {
                     document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [MSCFD]";
                 }
             }
             $(document).ready(function () {
-                
+
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_adp"),
                         $("#error_Dialog_adp"));
@@ -360,8 +360,8 @@
             }
 
             function calculate_adp() {
-            
-             
+
+
                 var variables = {
                     "basetemperature_adp": $("#basetemperature_adp").val().replace(",", ""),
                     "basepressure_adp": $("#basepressure_adp").val().replace(",", ""),
@@ -377,11 +377,11 @@
                     "downstreamelevation_adp": $("#downstreamelevation_adp").val().replace(",", "")
 
                 };
-                   
+
                 var isOk = validate(variables);
-                if(isOk === false){
+                if (isOk === false) {
                     alert("You must complete all fields");
-                }else{
+                } else {
                     var unidades = {
                         "bt_sel_adp": $("#bt_sel_adp").val().split(",")[1],
                         "bte_sel_adp": $("#bte_sel_adp").val().split(",")[1],
@@ -393,7 +393,7 @@
                         "ue_sel_apd": $("#ue_sel_apd").val().split(",")[1],
                         "de_sel_apd": $("#de_sel_apd").val().split(",")[1]
                     };
-                } 
+                }
 
                 var opcion = $("#unknown_adp").val();
                 var res;
@@ -481,11 +481,11 @@
                 if (sw !== true) {
                     inp.value = "";
                 }
-                
+
                 onchange_Input_zero(inp);
                 cleanOut_adp();
             }
-            
+
             function load_adpuE_sel_adp() {
                 var parametros = {
                     "combo": "fluE",
@@ -642,7 +642,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        
+
                         var newHtml = "<select class='form-control' name='le_sel_apd' id= 'le_sel_apd' >" + data;
                         $("#div_le_sel_apd").html(newHtml);
                     },
@@ -654,7 +654,7 @@
                     }
                 });
             }
-            
+
             function load_in5_sel_apd() {
                 var parametros = {
                     "combo": "in5",
@@ -671,8 +671,8 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' name='ue_sel_apd' id= 'ue_sel_apd' >" + data;
                         $("#div_ue_sel_apd").html(newHtml);
-                        
-                         newHtml = "<select class='form-control' name='de_sel_apd' id= 'de_sel_apd' >" + data;
+
+                        newHtml = "<select class='form-control' name='de_sel_apd' id= 'de_sel_apd' >" + data;
                         $("#div_de_sel_apd").html(newHtml);
 
                     },
