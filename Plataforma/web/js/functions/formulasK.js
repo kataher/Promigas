@@ -1,5 +1,6 @@
 //Formulas del modulo 1
-
+//@ sourceURL=/formulasK.js
+//
 //Generales
 function get_Pres(pres, E, unie, unis){
     //Para convertir PSIG en PSIA,  sumarle a la primera 14,7 (la presion atmosferica)
@@ -2799,8 +2800,8 @@ function flowrate_Form(vari, uni) {
        S = 0 ;
     }
     
-    var Q = ((435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539))), 0.5394) * Math.pow(D,2.6182);
-    alert((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)));
+    var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
+    //alert((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)));
     
     var res = [Q/1000];
     
