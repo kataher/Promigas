@@ -2948,7 +2948,7 @@ function upstreampressure_Form(vari, uni) {
 
     var h = get_Long(parseFloat(vari.enteree_adp), uni.ee_sel_adp, "ft"); 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), h, uni.bte_sel_adp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
