@@ -72,7 +72,7 @@
                                     
                                     <div class="form-group">
                                         <div class="col-md-12">
-                                        <label>Height [ft]:</label>
+                                        <label>Height:</label>
                                         </div>
                                         <div class="col-md-8">
                                         <input value = "0" class="form-control" type="text" id="enteree_dgv" name="enteree_dgv" onchange="onchange_Input_dgv(this)" required>
@@ -411,8 +411,8 @@
                             $("#div_pid_sel_dgv").html(newHtml);
                             selINHtml = newHtml;
                             
-                            newHtml = "<select class='form-control' name='al_sel_dgv' id= 'al_sel_dgv' onchange='cleanOut_dgv()'> " + data;
-                            $("#div_al_sel_dgv").html(newHtml);
+                            /*newHtml = "<select class='form-control' name='al_sel_dgv' id= 'al_sel_dgv' onchange='cleanOut_dgv()'> " + data;
+                            $("#div_al_sel_dgv").html(newHtml);*/
                             
                         },
                         error: function (xhr, ajaxOptions, err) {
@@ -587,7 +587,8 @@
                             "gasv_dgv": $("#gasv_dgv").val(),
                             "flowr_dgv" : $("#flowr_dgv").val(),
                             "gst_dgv" : $("#gst_dgv").val(),
-                            "tipo_sel_dgv": $("#tipo_sel_dgv").val()
+                            "tipo_sel_dgv": $("#tipo_sel_dgv").val(),
+                            "gs_sel_dgv": $("#gs_sel_dgv").val().split(",")[0]
                     };
                     
                     if(variables.tipo_sel_dgv == 1){

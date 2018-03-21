@@ -600,6 +600,10 @@
                             newHtml = "<select class=\"form-control\" name=\"str_sel_chp\" id= \"str_sel_chp\" onchange=\"onchange_long_chp(this)\">" + data;
                             $("#div_str_sel_chp").html(newHtml);
                             
+                            newHtml = "<select class=\"form-control\" name=\"prd_sel_chp\" id= \"prd_sel_chp\" onchange=\"onchange_long_chp(this)\">" + data;
+                            $("#div_prd_sel_chp").html(newHtml);
+                            
+                            
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_chp"), "Error");
@@ -652,14 +656,8 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class=\"form-control\" name=\"prd_sel_chp\" id= \"prd_sel_chp\" onchange=\"cleanOut_chp()\">" + data;
-                            $("#div_prd_sel_chp").html(newHtml);
-                            
-                            newHtml = "<select class=\"form-control\" name=\"ee_sel_chp\" id= \"ee_sel_chp\" onchange=\"cleanOut_chp()\">" + data;
+                            var newHtml = "<select class=\"form-control\" name=\"ee_sel_chp\" id= \"ee_sel_chp\" onchange=\"cleanOut_chp()\">" + data;
                             $("#div_ee_sel_chp").html(newHtml);
-                            
-                            
-                            
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_chp"), "Error");

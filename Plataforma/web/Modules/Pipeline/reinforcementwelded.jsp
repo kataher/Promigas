@@ -243,7 +243,7 @@
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
                                                                             In Accordance with ASME B31.8 value of M >=0.25[in.]
-                                                                            <input class="form-control" value="0.25" type="text" id="tar_rwb" name="tar_rwb"  required>
+                                                                            <input class="form-control" value="0.25" type="text" id="tar_rwb" name="tar_rwb"  onchange="onchangeDb_rwb()" required>
                                                                         </div>
                                                                     </div>                                 
                                                                 </div>
@@ -409,7 +409,7 @@
                                     <div class="col-lg-12">
                                      <div class="form-group">
                                     <label>Db - Outside Diameter of the Header [in.]:</label>
-                                    <input type="text" id="bodh_rwb" name="bodh_rwb" required class="form-control">
+                                    <input type="text" id="bodh_rwb" name="bodh_rwb" onchange="onchangeDb_rwb(this)" required class="form-control">
                                     </div>
                                     </div>
                                </div>
@@ -665,6 +665,10 @@
                                 $("#proyects_sel_rwb"),
                                 $("#error_Dialog_rwb"));
                 });
+                
+                function onchangeDb_rwb(){
+                    //alert("cambiar");
+                }
                 
                 function load_history_rwb(){
                     var parametros = {
@@ -1445,6 +1449,8 @@
                     load_wt_sel1_rwb();
                     var po = $("#nominalps_sel_rwb1").val();
                     $("#bodh_rwb").val(po);
+                    
+                    onchangeDb_rwb();
                     
                 }
                 

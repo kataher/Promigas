@@ -822,7 +822,6 @@
                         var res = reliefValveSizing_Form(variables, unidades);
 
                         $("#criticafr_rvs").val(res[0]);
-                        $("#flowingc_rvs").val(res[1]);
                         $("#ccoefficient_rvs").val(res[3]);
                         $("#z_rvs").val(res[4]);
                         
@@ -831,6 +830,12 @@
                             $('#requirede_rvs').val(res[2]);
                         }else{
                             $('#requiredfo_rvs').val(res[2]);       
+                        }
+                        
+                        if(res[1] === "1"){
+                            $("#flowingc_rvs").val("Sonic Flow");                        
+                        }else{
+                            $("#flowingc_rvs").val("Subsonic Flow");
                         }
 
                         show_OkDialog($("#calculate_Dialog_rvs"), "Satisfactory process");

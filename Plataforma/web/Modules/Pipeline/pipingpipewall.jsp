@@ -199,7 +199,7 @@
                                     </div>
             <div class="form-group">
              <div class="col-md-12">
-            <label>Nominal Pipe Size</label>
+            <label>Nominal Pipe Size [in]</label>
                 </div>
              <div class="col-md-12">
             <input class="form-control" type="text" id="nominalps_ppw" name="nominalps_ppw" onchange="onchange_Input_ppw(this)" required ></div>

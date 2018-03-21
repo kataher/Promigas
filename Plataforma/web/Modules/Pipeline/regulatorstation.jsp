@@ -1292,7 +1292,12 @@
                         
                         $("#gassizingc_rs").val(res[0]);
                         $("#gassizingr_rs").val(res[1]);
-                        $("#flowc_rs").val(res[2]);
+                        
+                        if(res[2] === "2"){
+                           $("#flowc_rs").val("Sonic Flow");
+                        }else{
+                            $("#flowc_rs").val("Subsonic Flow");
+                        }
 
                         show_OkDialog($("#calculate_Dialog_rs"), "Satisfactory process");
                     }

@@ -196,7 +196,7 @@
             </div>
                                     <div class="form-group">
             <div class="col-md-12">
-            <label>Pressure Loss through Orifice:</label>
+            <label>Pressure Loss through Orifice [psi]:</label>
             </div>
             <div class="col-md-8">
             <input value="1" class="form-control" type="text" id="pressurel_htz" name="pressurel_htz" onchange="onchange_Input_htz(this)" required>
@@ -433,7 +433,7 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class='form-control' name='oc_sel_htz' id= 'oc_sel_htz' onchange='onchange_orico_htz'>" + data;
+                            var newHtml = "<select class='form-control' name='oc_sel_htz' id= 'oc_sel_htz' onchange='onchange_orico_htz()'>" + data;
                             $("#div_oc_sel_htz").html(newHtml);
                             onchange_orico_htz();
                         },
@@ -762,9 +762,15 @@
 
                         $("#compressibilityf_htz").val(res[0]);
                         $("#branchgv_htz").val(res[1]);
-                        $("#condflujo_htz").val(res[2]);
                         $("#calculatedoa_htz").val(res[3]);
                         $("#calculatedtd_htz").val(res[4]);
+                        
+                        if(res[2] === "1"){
+                            $("#condflujo_htz").val("Sonic Flow");
+                        }else{
+                            $("#condflujo_htz").val("Subsonic Flow");
+                        }
+                        
 
                         show_OkDialog($("#calculate_Dialog_htz"), "Satisfactory process");
                     }

@@ -294,6 +294,11 @@
                     $("#specifich_rvr").val(x[2]);
                     $("#criticalf_rvr").val(x[3]);
                     
+                    //
+                    $("#pesomolecular_rvr").val(x[1]);
+                    $("#specifichs_rvr").val(x[2]);
+                    $("#criticalfw_rvr").val(x[3]);
+                    
                     $("#specificg_rvr").val(G.toFixed(2));
                     
                     $("#specificgra_rvr").val(G.toFixed(2));
@@ -480,6 +485,10 @@
                             $("#molecularw_rvr").val(x[1]);
                             $("#specifich_rvr").val(x[2]);
                             $("#criticalf_rvr").val(x[3]);
+                            
+                            $("#pesomolecular_rvr").val(x[1]);
+                            $("#specifichs_rvr").val(x[2]);
+                            $("#criticalfw_rvr").val(x[3]);
                             
                             
                         },
