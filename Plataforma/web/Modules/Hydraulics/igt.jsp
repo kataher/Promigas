@@ -234,7 +234,7 @@
                       
  <input type="button" id="calculateBtn" name="calculateBtn" value="Calculate" onclick="calculate_igt()" class="btn btn-info btn-block">
  <input type="submit" id="saveBtn" name="saveBtn" value="Save" onclick="save_igt()" class="btn btn-success btn-block">   
- <input type="button" id="delteBtn" name="delteBtn" value="Eliminar" onclick="deleteReg_igt()" class="btn btn-danger btn-block">
+ <input type="button" id="delteBtn" name="delteBtn" value="Delete" onclick="deleteReg_igt()" class="btn btn-danger btn-block">
             
             </div>
                            </div>
@@ -245,7 +245,7 @@
             <input type="button" id="cleanAllBtn" name="cleanBtn" value="Clean All" onclick="cleanAll_igt()" class="btn btn-warning btn-block">
             <input type="button" id="cleanInputBtn" name="cleanBtn" value="Clean Input Data" onclick="cleanIn_igt()" class="btn btn-warning btn-block">
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_igt()" class="btn btn-warning btn-block">
-            <input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_igt()" class="btn btn-warning btn-block">
+            <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_igt()" class="btn btn-warning btn-block" -->
             </div>
             <input type="hidden" id="opcion_igt" name="opcion_igt"> 
             <input type="hidden" id="id_igt" name="opcion_igt">      

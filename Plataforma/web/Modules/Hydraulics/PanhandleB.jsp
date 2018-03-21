@@ -178,9 +178,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-12"  id="internal">
+                                    <div class="col-md-6"  id="internal">
                                         <label>Internal Pipe Diameter</label>
                                         <input class="form-control" type="text" id="internalpipe_bdp" name="internalpipe_bdp"  required onchange="onchange_Input_bdp(this)">
+                                    </div>
+                                    <div class="col-md-6"  id="div_diam_sel_bdp">
+                                        <select class="form-control" id="diam_sel_bdp" name="diam_sel_bdp"></select>      
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -232,7 +235,7 @@
 
                             <input type="button" id="calculateBtn" name="calculateBtn" value="Calculate" onclick="calculate_bdp()" class="btn btn-info btn-block">
                             <input type="submit" id="saveBtn" name="saveBtn" value="Save" onclick="save_bdp()" class="btn btn-success btn-block">   
-                            <input type="button" id="delteBtn" name="delteBtn" value="Eliminar" onclick="deleteReg_bdp()" class="btn btn-danger btn-block">
+                            <input type="button" id="delteBtn" name="delteBtn" value="Delete" onclick="deleteReg_bdp()" class="btn btn-danger btn-block">
 
                         </div>
                     </div>
@@ -243,7 +246,7 @@
             <input type="button" id="cleanAllBtn" name="cleanBtn" value="Clean All" onclick="cleanAll_bdp()" class="btn btn-warning btn-block">
             <input type="button" id="cleanInputBtn" name="cleanBtn" value="Clean Input Data" onclick="cleanIn_bdp()" class="btn btn-warning btn-block">
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_bdp()" class="btn btn-warning btn-block">
-            <input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_bdp()" class="btn btn-warning btn-block">
+            <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_bdp()" class="btn btn-warning btn-block" -->
         </div>
         <input type="hidden" id="opcion_bdp" name="opcion_bdp"> 
         <input type="hidden" id="id_bdp" name="opcion_bdp">      
@@ -273,6 +276,7 @@
                 load_len_sel_bdp();
                 load_he_sel_bdp();
                 load_temp_sel_bdp();
+                load_diam_sel_bdp();
 
             });
 
@@ -301,6 +305,32 @@
                     }
                 });
             }
+            
+            function load_diam_sel_bdp(){
+                    var parametros = {
+                            "combo": "in4",
+                            "opcion" : "5"
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        async: false,
+                        beforeSend: function (xhr) {                            
+                            block("Cargando...");
+                        },
+                        success: function(data, status, request){ 
+                            var newHtml = "<select class='form-control' name='diam_sel_bdp' id= 'diam_sel_bdp'>" + data;
+                            $("#div_diam_sel_bdp").html(newHtml);
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            show_OkDialog($("#error_Dialog_bdp"), "Error");
+                        },
+                        complete: function(){
+                            unBlock();
+                        }
+                     });
+                }
 
 
 
@@ -421,7 +451,8 @@
                     "bp_sel_bdp": $("#bp_sel_bdp").val().split(",")[1],
                     "le_sel_bdp": $("#le_sel_bdp").val().split(",")[1],
                     "ue_sel_bdp": $("#ue_sel_bdp").val().split(",")[1],
-                    "de_sel_bdp": $("#de_sel_bdp").val().split(",")[1]
+                    "de_sel_bdp": $("#de_sel_bdp").val().split(",")[1],
+                    "diam_sel_bdp": $("#diam_sel_bdp").val().split(",")[1]
                 };
 
 
@@ -547,6 +578,10 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_bdp\" id= \"gft_sel_bdp\" >" + data;
                         $("#div_gft_sel_bdp").html(newHtml);
+                        
+                        
+                        newHtml = "<select class=\"form-control\" name=\"bt_sel_bdp\" id= \"bt_sel_bdp\" >" + data;
+                        $("#div_bt_sel_bdp").html(newHtml);
 
                     },
                     error: function (xhr, ajaxOptions, err) {

@@ -68,7 +68,7 @@
                   <input type="submit" id="saveBtn" name="saveBtn" value="Save" onclick="save_pe()" class="btn btn-success btn-block">   
                    </div>
                   <div class ="col-xs-4">
-                  <input type="button" id="delteBtn" name="delteBtn" value="Eliminar" onclick="deleteReg_pe()" class="btn btn-danger btn-block">
+                  <input type="button" id="delteBtn" name="delteBtn" value="Delete" onclick="deleteReg_pe()" class="btn btn-danger btn-block">
                  </div>
              </div>
                             </div>

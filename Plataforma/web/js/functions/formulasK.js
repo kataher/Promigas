@@ -3046,6 +3046,8 @@ function downstreampressureB_Form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
     L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
@@ -3127,6 +3129,8 @@ function flowrateB_Form(vari, uni) {
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_bdp, "psia");
+    
+    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
 
@@ -3265,6 +3269,8 @@ function upstreampressureB_Form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
     L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
@@ -3344,6 +3350,8 @@ function flowrate_cl_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_cfr,"MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in");
     L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
@@ -3429,6 +3437,7 @@ function downstream_cl_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
     L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
@@ -3526,6 +3535,8 @@ function upstream_cl_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
     L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
@@ -3991,6 +4002,7 @@ function flowrate_aga_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_aga,"MMSCFD");
 
+    L = get_Long(parseFloat(L), uni.diam_sel_aga, "in");
     L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
@@ -4141,6 +4153,8 @@ function downstream_aga_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
     L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
@@ -4228,6 +4242,8 @@ function upstream_aga_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
     L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");

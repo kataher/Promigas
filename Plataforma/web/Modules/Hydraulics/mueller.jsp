@@ -233,7 +233,7 @@
                       
  <input type="button" id="calculateBtn" name="calculateBtn" value="Calculate" onclick="calculate_mll()" class="btn btn-info btn-block">
  <input type="submit" id="saveBtn" name="saveBtn" value="Save" onclick="save_mll()" class="btn btn-success btn-block">   
- <input type="button" id="delteBtn" name="delteBtn" value="Eliminar" onclick="deleteReg_mll()" class="btn btn-danger btn-block">
+ <input type="button" id="delteBtn" name="delteBtn" value="Delete" onclick="deleteReg_mll()" class="btn btn-danger btn-block">
             
             </div>
                            </div>
@@ -244,7 +244,7 @@
             <input type="button" id="cleanAllBtn" name="cleanBtn" value="Clean All" onclick="cleanAll_mll()" class="btn btn-warning btn-block">
             <input type="button" id="cleanInputBtn" name="cleanBtn" value="Clean Input Data" onclick="cleanIn_mll()" class="btn btn-warning btn-block">
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_mll()" class="btn btn-warning btn-block">
-            <input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_mll()" class="btn btn-warning btn-block">
+            <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_mll()" class="btn btn-warning btn-block" -->
             </div>
             <input type="hidden" id="opcion_mll" name="opcion_mll"> 
             <input type="hidden" id="id_mll" name="opcion_mll">      
