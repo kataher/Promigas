@@ -46,8 +46,8 @@ function get_Rc(k){
 
 function is_Subsonico(p1, p2, rc){
     
-    if(p2 >= p1 * rc){
-        return true;
+    if(p2 > p1 * rc){
+        return true; //Es subsonico
     }
     
     return false;
@@ -115,7 +115,7 @@ function get_Flujo(value, unie, unis){
         }
     }else if(unie === "MMSCFH"){
          if(unis === "SCFH"){
-            return value / Math.pow(10,6);
+            return value * Math.pow(10,6);
         }else if(unis === "MSCFH"){
             return value / Math.pow(10,3);
         }else if(unis === "SCFD"){
@@ -415,10 +415,6 @@ function adiabaticHead_Form(vari, uni){
     if(vari.opz_ah === "compfactors2_ah"){
         Zs = parseFloat(vari.z1s_ah); //Z1 - Factor de compresibilidad en condiciones de succión
     }else{
-        alert("Ts: " + Ts);
-        alert("Ps: " + Ps);
-        alert("GasG: " + GasG);        
-        alert("Elev: " + elev);
         Zs = getZ(Ts, Ps, GasG,  "psia", elev); //Z1 - Factor de compresibilidad en condiciones de succión:
     }
     
@@ -526,8 +522,7 @@ function adiabaticHorsePower_Form(vari, uni){
 
 //1.1.3 Polytropic Horse Power
 function polytropicHorsePower_Form(vari, uni){
-    //Validado Julio
-     
+    
     var elev =  get_Long(parseFloat(vari.enteree_php), uni.ee_sel_php, "ft"); //Altura [ft]:
     var MW = 1;
     var GasG = 0;
@@ -676,13 +671,14 @@ function capacityHorsePower_Form(vari, uni){
      
     var Qact = PD * (VE/100); //Cylinder Capacity [ft3/min]
     var Qs = Qact * (Ps/Pb) * (Tb/T1) * (Zb/Z1) * 60 * 24 / 1000000; //Equivalent Capacity [MMSCFD]:
-    var HP = 100/33 * Ps * (Qs/Nm) * (k/(k-1)) * (Math.pow(r, (k-1)/k) - 1); //Cylinder Brake Horse Power [HP]
+    
+    var HP = 100/33 * Ps * (Qs/Nm) * ((k-1)/k) * (Math.pow(r, (k-1)/k) - 1); //Cylinder Brake Horse Power [HP]
     
     T2 = get_Temp(T2, "R", uni.st_sel_chp);
     Z1 = parseFloat(Z1);
     Z2 = parseFloat(Z2);
    
-    var res = [PD.toFixed(4), T2.toFixed(4), Z1.toFixed(4), Z2.toFixed(4), VE.toFixed(4), Qact.toFixed(4), Qs.toFixed(4), HP.toFixed(4)];   
+    var res = [PD.toFixed(4), T2.toFixed(4), Z1.toFixed(4), Z2.toFixed(4), VE.toFixed(4), Qact.toFixed(4), Qs.toFixed(4), HP.toFixed(1)];   
     changeToDecimal(res);
     
     return  res;
@@ -703,13 +699,22 @@ function diameterGV_Form(vari, uni){
     var G  = vari.gst_dgv;
     var v; //Velocidad del gas [ft/min]
     var D; //Diametro interno de la tuberia [in]
-    var g=0; 
-    if(G==1){
-        G = 17.4/28.9;
+        
+    var MW = 1;
+    var GasG = 0;
+    var Mair = 28.96443;
+    
+    if(vari.gs_sel_dgv === "9"){ //Gas Specific Gravity (Relative to Air)
+        MW = G * Mair; //G = M / Mair ,  where G=gas specific gravity, M=gas molecular weight, 
+        GasG = G;
+    }else if(vari.gs_sel_dgv === "63"){ // Gas Molecular Weight
+        MW = G;
+        GasG = MW / Mair; //G = M / Mair
     }
+    
     var presPsig = get_Pres(parseFloat(vari.flowingp_dgv), elev, uni.fp_sel_dgv, "psig"); //Presion en psig  
     
-    var Z = Math.pow((1+((presPsig*344400* Math.pow(10,(1.78* G)))/(Math.pow(Tf,3.825)))),(-1));
+    var Z = Math.pow((1+((presPsig*344400* Math.pow(10,(1.78* GasG)))/(Math.pow(Tf,3.825)))),(-1));
    //             (1+)
     if(vari.tipo_sel_dgv == "2"){ //Se calcula el diametro, se pide la velocidad
         v = parseFloat(vari.gasv_dgv);
@@ -753,18 +758,17 @@ function regulatorSizing1_Form(vari, uni){
     var Rc = get_Rc(k);
     
     var Cgc, Cgr, exp1, FlowC;
-    
     if(is_Subsonico(p1, p2, Rc)){
         exp1 = Math.pow(520/(Gf*T), 0.5);
         Cgc = (Q*1000)/((p1)*exp1*Math.sin(((3417/C1)*Math.pow((p1-p2)/(p1),0.5))*Math.PI/180)); //Cg- Coeficiente de Dimensionamiento- Calculado:
         Cgr = Cgc/(Ca/100); //Cgr-Coeficiente de Dimensionamiento- Recomendado:
-        FlowC = "Subsonic Flow"; //Flow Conditions:
+        FlowC = 1; //Flow Conditions:
     }else{
         exp1 = Math.pow(520/(Gf*T), 0.5);
         Cgc = (Q*1000)/((p1)*exp1); //Cg- Coeficiente de Dimensionamiento- Calculado:
         Cgr = Cgc/(Ca/100); //Cgr-Coeficiente de Dimensionamiento- Recomendado:
-        FlowC = "Sonic Flow"; //Flow Conditions:
-    }    
+        FlowC = 2;//"Sonic Flow"; //Flow Conditions:
+    }   
     
     var res = [Cgc.toFixed(2), Cgr.toFixed(2), FlowC];
     changeToDecimal(res);
@@ -778,23 +782,23 @@ function regulatorSizing2_Form(vari, uni){
     //Pendiente conversion de Flujo
     
     var elev = get_Long(parseFloat(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
-    var P1 = get_Pres(parseFloat(vari.p1opu_rs), elev, uni.p1opu_sel_rs, "psig"); //P1- Presión de Operación-Aguas Arriba
+    var P1 = get_Pres(parseFloat(vari.p1opu_rs), elev, uni.p1opu_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
     var Qb = get_Flujo(parseFloat(vari.flowrateu_rs), uni.fru_sel_rs, "MSCFH"); //Q - Flujo
     var u1 = parseFloat(vari.ag_rs);     //V-Velocidad del Gas Asumida [ft/sec]
     var Tf = parseFloat(vari.tempu_rs); // T-Factor de Temperatura
-    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "F");  //Temperatura de flujo del gas
+    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "R");  //Temperatura de flujo del gas
     var syms = parseFloat(vari.smys_rs); //SMYS- Esfuerzo de Fluencia Especificado [pstemp_rsi]
     var Jf = parseFloat(vari.jfu_rs); //E- Factor de Junta Longitudinal
     var Df = parseFloat(vari.df_rs); // Factor de diseño
         
-    var ID1 = Math.pow((((Qb*1000)*((14.7/P1)*(T/60))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12;
+    var ID1 = Math.pow((((Qb*1000)*((14.7/P1)*(T/520))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12; //verificación de la formula
     
-    var aux = ID1/(1-(P1/(syms*Df*Jf*Tf)));
-    var MinR = P1*aux/(2*syms*Df*Jf*Tf); //Espesor de Pared Mínimo Requerido [in]
-    var OD1 = (ID1+MinR).toFixed(2); ///OD1- Diametro Exterior Calculado [in]:*/
+    var P1psig = get_Pres(P1, elev, "psia", "psig");
+    var esp = ((P1psig * ID1) / (2 * syms))*(1 / (Df*Jf*Tf)); //Espesor de Pared Mínimo Requerido [in]
+    var OD1 = (ID1+esp).toFixed(2); ///OD1- Diametro Exterior Calculado [in]:*/
     
     
-    var res = [ID1.toFixed(2), MinR.toFixed(2),OD1 ];
+    var res = [ID1.toFixed(3), esp.toFixed(3),OD1 ];
     changeToDecimal(res);
     
     return res;
@@ -803,26 +807,24 @@ function regulatorSizing2_Form(vari, uni){
 //1.3 form 3 Regulator and Station Piping Sizing
 function regulatorSizing3_Form(vari, uni){
     
-    //Validado Hoja de Excel
-    //Pendiente conversion de Flujo
-    
     var elev = get_Long(parseFloat(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
-    var P2 = get_Pres(parseFloat(vari.p2op_rs), elev, uni.p2op_sel_rs, "psig"); //P1- Presión de Operación-Aguas Arriba
+    var P2 = get_Pres(parseFloat(vari.p2op_rs), elev, uni.p2op_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
     var Qb = get_Flujo(parseFloat(vari.flowrated_rs), uni.frd_sel_rs, "MSCFH"); //Q - Flujo 
-    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "F"); //Temperatura de flujo del gas
+    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "R"); //Temperatura de flujo del gas
     var u1 = parseFloat(vari.agd_rs); //V- Velocidad del Gas Asumida [ft/sec]
     var syms = parseFloat(vari.smysd_rs); //SMYS- Esfuerzo de Fluencia Mínimo [psi]
     var Df = parseFloat(vari.df_rs); // F- Factor de Diseño
     var Jf = parseFloat(vari.jfdp_rs); // Longitudinal Joint Factor - E
     var Tf = parseFloat(vari.tempu_rs); // T-Factor de Temperatura
     
-    var ID2 = Math.pow((((Qb*1000)*((14.7/P2)*(T/60))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12;
+    var ID2 = Math.pow((((Qb*1000)*((14.7/P2)*(T/520))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12;
     
-    var aux = ID2/(1-(P2/(syms*Df*Jf*Tf)));
-    var MinR = P2*aux/(2*syms*Df*Jf*Tf); //Espesor de Pared Mínimo Requerido [in]
-    var OD2 = (ID2+MinR).toFixed(2); ///OD1- Diametro Exterior Calculado [in]:*/
+    var P2psig = get_Pres(P2, elev, "psia", "psig");
+    var esp = ((P2psig * ID2) / (2 * syms))*(1 / (Df*Jf*Tf)); //Espesor de Pared Mínimo Requerido [in]
     
-    var res = [ID2.toFixed(2), MinR.toFixed(2), OD2];
+    var OD2 = (ID2+esp).toFixed(2); ///OD1- Diametro Exterior Calculado [in]:*/
+    
+    var res = [ID2.toFixed(3), esp.toFixed(3), OD2];
     changeToDecimal(res);
     
     return res;
@@ -831,10 +833,6 @@ function regulatorSizing3_Form(vari, uni){
 
 //1.13 Relief Valve Sizing
 function reliefValveSizing_Form(vari,uni){
-    //Con P1, set de presion para la valvula de alivio
-    
-    //validado Hoja de Excel Dimensionamiento de Valuvula de alivio
-    //Vbo Julio OK
     var elev =  get_Long(parseFloat(vari.enteree_rvs), uni.ee_sel_rvs, "ft"); //Altura
     
     var opso = vari.opso; //Area o flow
@@ -842,7 +840,8 @@ function reliefValveSizing_Form(vari,uni){
     
     var P1 = get_Pres(parseFloat(vari.relief_rvs), elev, uni.rv_sel_rvs, "psia"); //>Set de presión de la válvula de alívio
     var T = get_Temp(parseFloat(vari.gasvaporf_rvs), uni.gfv_sel_rvs, "R"); //Temperatura del gas o vapor
-    var P2 = get_Pres(parseFloat(vari.gasp_rvs), elev, uni.bp_sel_rvs, "psig"); // Back pressure
+    var P2 = get_Pres(parseFloat(vari.gasp_rvs), elev, uni.bp_sel_rvs, "psia"); // Back pressure
+    
     
     
     var Fl = parseFloat(vari.requiredf_rvs); //Flujo requerido [MSCFH]
@@ -864,27 +863,27 @@ function reliefValveSizing_Form(vari,uni){
     var out; //Área Efectiva de Descarga [in2]: 
     var r = P2 / P1;
     var F2 = Math.pow(((k / (k - 1)) * Math.pow(r, (2 / k)) * ((1 - Math.pow(r, ((k - 1) / k))) / (1 - r))), 0.5);
-     
     
     if(opso == "sizingo1_rvs") //Área de descarga efectiva requerida
     { // 'Cálculo de Área'
         V =  Fl * 1000 / (60);
+        
         if(opsk == "selectk2_rvs")
         {   // 'Gravedad Especifica'
             if (P2 <= Pcf){
-                tf = "Sonic Flow";
+                tf = "1";
                 A = (V * Math.pow((T * Z * G),0.5)) / (1.175 * C * Kd * P1 * Kb * Kc);
             }else{
-                tf = "Subsonic Flow";
+                tf = "2";
                 A = (V / (864 * F2 * Kd * Kc)) * Math.pow((Z * T * G / (P1 * (P1 - P2))), 0.5);
             }
         }else{ //Peso Molecular'
             if(P2 <= Pcf)
             { 
-                tf = "Sonic Flow";
+                tf = "1";
                 A = (V * Math.pow((T * Z * M), 0.5)) / (6.32 * C * Kd * P1 * Kb * Kc);
             }else{
-                tf = "Subsonic Flow";
+                tf = "2";
                 A = (V / (4645 * F2 * Kd * Kc)) * Math.pow((Z * T * M / (P1 * (P1 - P2))), 0.5);
             }
         }
@@ -896,18 +895,18 @@ function reliefValveSizing_Form(vari,uni){
         if(opsk == "selectk2_rvs")
         {   // 'Gravedad Especifica'
             if (P2 <= Pcf){
-                tf = "Sonic Flow";
+                tf = "1";
                 V = (1.175 * C * Kd * P1 * Kb * Kc * A / Math.pow((T * Z * G), 0.5)) * (60 / 1000);
             }else{
-                tf = "Subsonic Flow";
+                tf = "2";
                 V = (864 * F2 * Kd * Kc * A * Math.pow(((P1 * (P1 - P2)) / (Z * T * G)), 0.5)) * (60 / 1000);
             }
         }else{//Peso Molecular'
             if (P2 <= Pcf){
-                tf = "Sonic Flow";
+                tf = "1";
                 V = (6.32 * C * Kd * P1 * Kb * Kc * A / Math.pow((T * Z * M), 0.5)) * (60 / 1000);
             }else{
-                tf = "Subsonic Flow";
+                tf = "2";
                 V = (4645 * F2 * Kd * Kc * A * Math.pow(((P1 * (P1 - P2)) / (Z * T * M)), 0.5)) * (60 / 1000);
             }
         }
@@ -925,8 +924,6 @@ function reliefValveSizing_Form(vari,uni){
 //1.14 Relief Valve Reaction Force
 function reliefValveReaction_Form(vari,uni){
     
-    //Validado Excel Julio
-    
     var opsk = vari.opsk_rvr;
     var elev = get_Long(parseFloat(vari.enteree_rvr), uni.ee_sel_rvr, "ft"); //Altura [ft]
     var W = parseFloat(vari.requiredf_rvr); // Flujo del gas o vapor [lbm/hr]
@@ -937,9 +934,7 @@ function reliefValveReaction_Form(vari,uni){
     var M; // Peso molecular del gas o vapor
     var G; // Gravedad Específica
     
-    var F = (W/366) * (Math.sqrt((k*T)/((k-1)*M))) + (A*P); 
-    
-    
+    var F = (W/366) * (Math.sqrt((k*T)/((k-1)*M))) + (A*P);
     
     if(opsk === "selectk2_rvr")
     {   // 'Gravedad Especifica'
@@ -949,6 +944,7 @@ function reliefValveReaction_Form(vari,uni){
         M = parseFloat(vari.pesomolecular_rvr); 
         G = M / 28.96443;
     }  
+    
     var Z = getZ(T, P, G, "psig", elev); //Z1 - Factor de compresibilidad en condiciones de succión:
     
     F = (W/366)* Math.pow((k*T)/((k-1)*M),0.5) + (A*P); //Fuerza de reacción en el punto de descarga [lbf]
@@ -1007,8 +1003,6 @@ function hotTapSizing_Form(vari, uni){
     var Pb = get_Pres(parseFloat(vari.pressureb_htz), elev, uni.preb_sel_htz, "psia"); // Presión base (psig)
     var Tb = get_Temp(parseFloat(vari.baset_htz), uni.bt_sel_htz, "R"); //Temperatura base (R)
     
-    
-    
     var P2 = P1 - dP; //Presión en la derivación
     
     var Z;
@@ -1024,25 +1018,36 @@ function hotTapSizing_Form(vari, uni){
     var P2psia = get_Pres(P2, elev, "psig", "psia");
     var P1psia = get_Pres(P1, elev, "psig", "psia");
     
-    var condFlujo =  "Sonic Flow";  
+    var condFlujo =  "1";  
     var F; //Flowing Conditions:
     var A; //Calculated Orifice Area [in2]
     var d; //Calculate Tap Diameter [in]
-    var Q2 = Qm *(60*24)/1000000; //MMSCFD
     
-    if(P2psia>=P1psia*Rc){
-        condFlujo =  "Subsonic Flow";
+    //Qm SCFH
+    //Qm debe estar en SCFM
+    
+    var QmMin = Qm / 60;
+    
+    //alert(P2psia);
+    //alert(Rc);
+    
+    
+    //if(P2psia>=P1psia*Rc){
+    if(is_Subsonico(P1psia, P2psia, Rc)){
+        condFlujo =  "2";
         F = Math.pow(((  Math.pow(((P1psia)/(P2psia)),((k-1)/k)) * (Math.pow(((P1psia)/(P2psia)),((k-1)/k)) - 1)  ) / (((k-1)/k)*(((P1psia)/(P2psia))-1))), (0.5));
-        A = Qm/(4647*k*F)* Math.pow((28.964*G*T)/(P2*dP), 0.5);        
+        A = (QmMin/(4647*k*F))* Math.pow((28.964*G*T)/(P2*dP), 0.5);        
     }else{
         F = 520* Math.pow( k * Math.pow((2/(k+1)), ((k+1)/(k-1))), 0.5);
-        A = Qm * Math.pow((28.964*G*T*Z), 0.5) /(6.32*F*K*P1psia); 
+        A = QmMin * Math.pow((28.964*G*T*Z), 0.5) /(6.32*F*K*P1psia); 
     }
     
+    var Q2 = get_Flujo(Qm, "SCFH", "MMSCFD");
     
-    var v = 127.3 * Math.pow(10,3) * Q2 * Pb * T * Z /( Math.pow(dC,2)* P2psia * Tb); //Branch Gas Velocity [ft/sec]:
-    var d = Math.pow(A, 0.5); //Calculate Tap Diameter [in]
-    var res = [Z.toFixed(3), v.toFixed(4), condFlujo, A.toFixed(4), d.toFixed(4)];
+    var d = Math.pow(((4*A)/Math.PI), 0.5); //Calculate Tap Diameter [in]
+       
+    var v = (127.3 * Math.pow(10,3) * Q2 * Pb * T * Z /( Math.pow(d,2)* P1psia * Tb))/60; //Branch Gas Velocity [ft/sec]:
+    var res = [Z, v, condFlujo, A, d];
     changeToDecimal(res);
     return res;
     
@@ -2562,7 +2567,7 @@ function p_wall_thinkness_Form(vari, uni) {
     var E = parseFloat(vari.ljf_ppw);
     var T = parseFloat(vari.temperaturedf_ppw);
     var t = ((P * D) / (2 * S * F * E * T)) + tc;
-    return  t;
+    return  t.toFixed(3);
 }
 
 //1.2
@@ -2597,16 +2602,23 @@ function reinforcementwelded_Form(vari, uni) {
     var bnwtb = parseFloat(vari.bnwtb_rwb);
     var smys2 = parseFloat(vari.smys2_rwb);
     var ljf1 = parseFloat(vari.ljf1_rwb);
-    var mrod = parseFloat(vari.mrod_rwb);
+    var mrod = get_Long(parseFloat(vari.mrod_rwb), uni.mrod_sel_rwb, "in");
     var tar = parseFloat(vari.tar_rwb);
-    var rsmys = parseFloat(vari.rsmys_rwb);   // Esta variable no se usa.
+    var rsmys = parseFloat(vari.rsmys_rwb);
+    
+    
 
     var rwtoth = p1 * odh / (2 * df * temp * ljf * smys);
+    
     var etithw = nwtb - rwtoth;
     var rwtotb = p1 * bodh / (2 * temp * ljf1 * df * smys2);
     var etitb = bnwtb - rwtotb;
-    var arrr = (bodh - 2 * bnwtb) * rwtoth;
-    var a1rr = etithw * bodh;
+    
+    var d = (bodh - 2 * bnwtb);    
+    var arrr = d * rwtoth;
+    
+    var a1rr = (nwtb - rwtoth) * d;
+    
     var lheight = 0;
     if ((2.5 * nwtb) < (2.5 * bnwtb + 0.38)) {
         lheight = 2.5 * nwtb;
