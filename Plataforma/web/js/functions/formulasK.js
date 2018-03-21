@@ -4319,6 +4319,8 @@ function flowrate_igt_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_igt,"MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
     L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
@@ -4455,6 +4457,8 @@ function downstream_igt_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
     L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
@@ -4539,6 +4543,8 @@ function upstream_igt_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
     L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
@@ -5217,6 +5223,7 @@ function flowrate_fri_form(vari, uni) {
 
     // Q = get_Flujo(parseFloat(Q),uni.if_sel_fri,"MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
     L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
@@ -5355,6 +5362,8 @@ function downstream_fri_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "MMSCFD");
 
+
+    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
     L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
@@ -5435,6 +5444,7 @@ function upstream_fri_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
     L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
