@@ -5708,10 +5708,10 @@ function bending_stress_form(vari,uni) {
     var F17 = parseFloat(vari.pipe_lenght_bds); // ft
     var F18 = parseFloat(vari.mod_elas_bds);    // psi
     
-   // F15 = get_Long(parseFloat(vari.pipe_dia_bds), uni.ee_sel_bds, "in");
-   // F16 = get_Long(parseFloat(vari.pipe_wt_bds), uni.ee1_sel_bds, "in");
-    F17 = get_Long(parseFloat(vari.pipe_lenght_bds), uni.pipe_lenght_sel_bds, "ft");
-   //var F18 = get_Pres(parseFloat(vari.mod_elas_bds), 0, uni.dp_sel_ppw, "psig");
+   F15 = get_Long(parseFloat(F15), uni.ee_sel_bds, "in");
+   F16 = get_Long(parseFloat(F16), uni.ee1_sel_bds, "in");
+   F17 = get_Long(parseFloat(F17), uni.pipe_lenght_sel_bds, "ft");
+   F18 = get_Pres(parseFloat(F18), 0, uni.dp_sel_ppw, "psig");
  
  
     var E_MaxEsFl = (10.2 * (10.69 * (F15 - F16) * F16) * F15 * Math.pow(F17, 2)) / (Math.pow(F15, 4) - Math.pow((F15 - 2 * F16), 4));
