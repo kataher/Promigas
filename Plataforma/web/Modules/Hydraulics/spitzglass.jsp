@@ -115,21 +115,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Height:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value = "0" class="form-control" type="text" id="enteree_spi" name="enteree_spi" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_ee_sel_spi">
-                                        <select class="form-control" id="ee_sel_spi" name="ee_sel_spi"> </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_spi" name="gasflowingtemp_spi" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasflowingtemp_spi" name="gasflowingtemp_spi" onchange="onchange_Input_spi(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_spi">
                                         <select class="form-control" id="gft_sel_spi" name="gft_sel_spi"> </select>
@@ -138,14 +126,14 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Gas Specific Gravity:</label>
-                                        <input class="form-control" type="text" id="gasspecificgra_spi" name="gasspecificgra_spi" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasspecificgra_spi" name="gasspecificgra_spi" onchange="onchange_Input_spi(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
 
                                     <div class="col-md-12 form-group">
                                         <label>Pipeline Efficiency Factor</label>
-                                        <input class="form-control" type="text" id="pipelineefficiency_spi" name="pipelineefficiency_spi" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="pipelineefficiency_spi" name="pipelineefficiency_spi" onchange="onchange_Input_spi(this)" required>
                                     </div>
                                 </div>
                                 <!-- Desaparece opción 1-->
@@ -153,10 +141,10 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="flowrate_spi" name="flowrate_spi" required >
+                                        <input class="form-control" type="text" id="flowrate_spi" name="flowrate_spi" onchange="onchange_Input_spi(this)" required >
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_spi">
-                                        <select class="form-control" id="if_sel_spi" name="if_sel_spi" onchange="onchange_fr_spi(this)"> </select>
+                                        <select class="form-control" id="if_sel_spi" name="if_sel_spi" onchange="cleanOut_spi()"> </select>
                                     </div>
 
                                 </div>
@@ -164,7 +152,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_spi" name="upstreampressure_spi"  required>
+                                        <input class="form-control" type="text" id="upstreampressure_spi" name="upstreampressure_spi" onchange="onchange_Input_spi(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_spi">
                                         <select class="form-control" id="up_sel_spi" name="up_sel_spi"> </select>
@@ -174,7 +162,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_spi" name="downstreampressure_spi"  required>
+                                        <input class="form-control" type="text" id="downstreampressure_spi" name="downstreampressure_spi" onchange="onchange_Input_spi(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_spi">
                                         <select class="form-control" id="bp_sel_spi" name="bp_sel_spi"> </select>
@@ -186,34 +174,34 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_spi" name="internalpipe_spi"  required onchange="onchange_Input_spi(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_spi">
-                                        <select class="form-control" id="diam_sel_spi" name="diam_sel_spi"> </select>
+                                        <select class="form-control" id="diam_sel_spi" name="diam_sel_spi" onchange='cleanOut_spi()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_spi" name="lengthof_spi"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="lengthof_spi" name="lengthof_spi"  required onchange="onchange_Input_spi(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_spi">
-                                        <select class="form-control" id="le_sel_spi" name="le_sel_spi"> </select>
+                                        <select class="form-control" id="le_sel_spi" name="le_sel_spi" onchange='cleanOut_spi()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_spi" name="upstreamelevation_spi" required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="upstreamelevation_spi" name="upstreamelevation_spi" required onchange="onchange_Input_spi(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_spi">
-                                        <select class="form-control" id="ue_sel_spi" name="ue_sel_spi"> </select>
+                                        <select class="form-control" id="ue_sel_spi" name="ue_sel_spi" onchange='cleanOut_spi()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_spi" name="downstreamelevation_spi"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="downstreamelevation_spi" name="downstreamelevation_spi"  required onchange="onchange_Input_spi(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_spi">
-                                        <select class="form-control" id="de_sel_spi" name="de_sel_spi"> </select>
+                                        <select class="form-control" id="de_sel_spi" name="de_sel_spi" onchange='cleanOut_spi()'> </select>
                                     </div>
                                 </div>
 
@@ -295,7 +283,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_spi' id= 'diam_sel_spi'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_spi' id= 'diam_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_diam_sel_spi").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -336,9 +324,7 @@
 
 
             function cleanOut_spi() {
-                $("#downstreampressure_spi").val("");
-                $("#transmissionfactor_spi").val("");
-                $("#velocity_spi").val("");
+                $("#resultado").val("");
             }
 
             function cleanSugg_spi() {
@@ -562,7 +548,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_spi\" id= \"if_sel_spi\" onchange=\"onchange_fr_spi(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_spi\" id= \"if_sel_spi\" onchange=\"cleanOut_spi()\">" + data;
                         $("#div_if_sel_spi").html(newHtml);
 
                         $("#if_sel_spi").val("71,MMSCFD");
@@ -619,9 +605,7 @@
                 });
             }
             function onchange_pres_spi(imp) {
-                /*cleanOut_spi();
-                 var obj = [$("#dp_sel_spi"), $("#sp_sel_spi")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_spi();
             }
             function load_in_sel_spi() {
                 var parametros = {
@@ -668,10 +652,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_spi' id= 'st_sel_spi' onchange='onchange_temp_spi(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_spi' id= 'st_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_st_sel_spi").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_spi' id= 'bt_sel_spi' onchange='onchange_temp_spi(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_spi' id= 'bt_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_bt_sel_spi").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_spi\" id= \"gft_sel_spi\" onchange=\"onchange_pres_spi(this)\">" + data;
@@ -704,13 +688,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_spi' id= 'ue_sel_spi' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_spi' id= 'ue_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_ue_sel_spi").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_spi' id= 'de_sel_spi' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_spi' id= 'de_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_de_sel_spi").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_spi' id= 'le_sel_spi' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_spi' id= 'le_sel_spi' onchange='cleanOut_spi()'>" + data;
                         $("#div_le_sel_spi").html(newHtml);
 
                         var vecObj = [$("#de_sel_spi"), $("#ue_sel_spi"), , $("#le_sel_spi")];
@@ -727,14 +711,14 @@
             }
             function onchange_Input_spi(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
-                onchange_Input_zero(inp);
 
+                onchange_Input_zero(inp);
+                cleanOut_spi();
             }
         </script>
 

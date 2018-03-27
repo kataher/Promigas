@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                         <div class="col-sm-12"> <label>Base Temperature:</label> </div>
                                         <div class="col-sm-5">
-                                            <input class="form-control" type="text" id="basetemperature_igt" name="basetemperature_igt" onchange="onchange_Input_zero(this)" required value="60">
+                                            <input class="form-control" type="text" id="basetemperature_igt" name="basetemperature_igt" onchange="onchange_Input_igt(this)" required value="60">
                                         </div>
                                         <div class="col-sm-6" id="div_bt_sel_igt">
                                             <select class="form-control" id="bt_sel_igt" name="bt_sel_igt" onchange="cleanOut_igt()"> </select>
@@ -80,7 +80,7 @@
                                             <label>Base Pressure:</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input  class="form-control" type="text" id="basepressure_igt" name="basepressure_igt" onchange="onchange_Input_zero(this)" required value="14.65"><br>
+                                            <input  class="form-control" type="text" id="basepressure_igt" name="basepressure_igt" onchange="onchange_Input_igt(this)" required value="14.65"><br>
                                         </div>
 
                                         <div class="col-sm-6" id="div_bte_sel_igt">
@@ -115,21 +115,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Height:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value = "0" class="form-control" type="text" id="enteree_igt" name="enteree_igt" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_ee_sel_igt">
-                                        <select class="form-control" id="ee_sel_igt" name="ee_sel_igt"> </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_igt" name="gasflowingtemp_igt" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasflowingtemp_igt" name="gasflowingtemp_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_igt">
                                         <select class="form-control" id="gft_sel_igt" name="gft_sel_igt"> </select>
@@ -138,13 +126,13 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Gas Specific Gravity:</label>
-                                        <input class="form-control" type="text" id="gasspecificgra_igt" name="gasspecificgra_igt" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasspecificgra_igt" name="gasspecificgra_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Pipeline Efficiency Factor</label>
-                                        <input class="form-control" type="text" id="pipelineefficiency_igt" name="pipelineefficiency_igt"  onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="pipelineefficiency_igt" name="pipelineefficiency_igt"  onchange="onchange_Input_igt(this)" required>
                                     </div>
                                 </div>
                                 <!-- Desaparece opción 1-->
@@ -152,10 +140,10 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="flowrate_igt" name="flowrate_igt" required >
+                                        <input class="form-control" type="text" id="flowrate_igt" name="flowrate_igt" required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_igt">
-                                        <select class="form-control" id="if_sel_igt" name="if_sel_igt" onchange="onchange_fr_igt(this)"> </select>
+                                        <select class="form-control" id="if_sel_igt" name="if_sel_igt" onchange='cleanOut_igt()'> </select>
                                     </div>
 
                                 </div>
@@ -163,7 +151,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_igt" name="upstreampressure_igt"  required>
+                                        <input class="form-control" type="text" id="upstreampressure_igt" name="upstreampressure_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_igt">
                                         <select class="form-control" id="up_sel_igt" name="up_sel_igt"> </select>
@@ -173,7 +161,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_igt" name="downstreampressure_igt"  required>
+                                        <input class="form-control" type="text" id="downstreampressure_igt" name="downstreampressure_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_igt">
                                         <select class="form-control" id="bp_sel_igt" name="bp_sel_igt"> </select>
@@ -185,34 +173,34 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_igt" name="internalpipe_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_igt">
-                                        <select class="form-control" id="diam_sel_igt" name="diam_sel_igt"> </select>
+                                        <select class="form-control" id="diam_sel_igt" name="diam_sel_igt" onchange='cleanOut_igt()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_igt" name="lengthof_igt"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="lengthof_igt" name="lengthof_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_igt">
-                                        <select class="form-control" id="le_sel_igt" name="le_sel_igt"> </select>
+                                        <select class="form-control" id="le_sel_igt" name="le_sel_igt" onchange='cleanOut_igt()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_igt" name="upstreamelevation_igt" required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="upstreamelevation_igt" name="upstreamelevation_igt" required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_igt">
-                                        <select class="form-control" id="ue_sel_igt" name="ue_sel_igt"> </select>
+                                        <select class="form-control" id="ue_sel_igt" name="ue_sel_igt" onchange='cleanOut_igt()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_igt" name="downstreamelevation_igt"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="downstreamelevation_igt" name="downstreamelevation_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_igt">
-                                        <select class="form-control" id="de_sel_igt" name="de_sel_igt"> </select>
+                                        <select class="form-control" id="de_sel_igt" name="de_sel_igt" onchange='cleanOut_igt()'> </select>
                                     </div>
                                 </div>
 
@@ -265,16 +253,7 @@
                 var y = document.getElementById("unknown_igt").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
             }
-            function onchange_Input_zero(inp) {
-
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
-            }
+            
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_igt"),
@@ -305,7 +284,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_igt' id='diam_sel_igt'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_igt' id='diam_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_diam_sel_igt").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -346,9 +325,7 @@
 
 
             function cleanOut_igt() {
-                $("#downstreampressure_igt").val("");
-                $("#transmissionfactor_igt").val("");
-                $("#velocity_igt").val("");
+                $("#resultado").val("");
             }
 
             function cleanSugg_igt() {
@@ -557,7 +534,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_igt\" id= \"if_sel_igt\" onchange=\"onchange_fr_igt(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_igt\" id= \"if_sel_igt\" onchange='cleanOut_igt()'>" + data;
                         $("#div_if_sel_igt").html(newHtml);
 
                         $("#if_sel_igt").val("71,MMSCFD");
@@ -614,9 +591,7 @@
                 });
             }
             function onchange_pres_igt(imp) {
-                /*cleanOut_igt();
-                 var obj = [$("#dp_sel_igt"), $("#sp_sel_igt")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_igt();
             }
             function load_in_sel_igt() {
                 var parametros = {
@@ -663,10 +638,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_igt' id= 'st_sel_igt' onchange='onchange_temp_igt(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_igt' id= 'st_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_st_sel_igt").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_igt' id= 'bt_sel_igt' onchange='onchange_temp_igt(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_igt' id= 'bt_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_bt_sel_igt").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_igt\" id= \"gft_sel_igt\" onchange=\"onchange_pres_igt(this)\">" + data;
@@ -699,13 +674,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_igt' id= 'ue_sel_igt' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_igt' id= 'ue_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_ue_sel_igt").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_igt' id= 'de_sel_igt' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_igt' id= 'de_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_de_sel_igt").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_igt' id= 'le_sel_igt' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_igt' id= 'le_sel_igt' onchange='cleanOut_igt()'>" + data;
                         $("#div_le_sel_igt").html(newHtml);
 
                         var vecObj = [$("#de_sel_igt"), $("#ue_sel_igt"), , $("#le_sel_igt")];
@@ -720,15 +695,17 @@
                     }
                 });
             }
-            function onchange_Input_zero(inp) {
+            
+            function onchange_Input_igt(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
 
+                onchange_Input_zero(inp);
+                cleanOut_igt();
             }
 
         </script>

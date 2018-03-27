@@ -114,21 +114,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Height:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value = "0" class="form-control" type="text" id="enteree_mll" name="enteree_mll" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_ee_sel_mll">
-                                        <select class="form-control" id="ee_sel_mll" name="ee_sel_mll"> </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_mll" name="gasflowingtemp_mll" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasflowingtemp_mll" name="gasflowingtemp_mll" onchange="onchange_Input_mll(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_mll">
                                         <select class="form-control" id="gft_sel_mll" name="gft_sel_mll"> </select>
@@ -137,13 +125,13 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Gas Specific Gravity:</label>
-                                        <input class="form-control" type="text" id="gasspecificgra_mll" name="gasspecificgra_mll" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasspecificgra_mll" name="gasspecificgra_mll" onchange="onchange_Input_mll(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Pipeline Efficiency Factor</label>
-                                        <input class="form-control" type="text" id="pipelineefficiency_mll" name="pipelineefficiency_mll" onchange="onchange_Input_zero(this)"  required>
+                                        <input class="form-control" type="text" id="pipelineefficiency_mll" name="pipelineefficiency_mll" onchange="onchange_Input_mll(this)"  required>
                                     </div>
                                 </div>
                                 <!-- Desaparece opción 1-->
@@ -151,10 +139,10 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="flowrate_mll" name="flowrate_mll" required >
+                                        <input class="form-control" type="text" id="flowrate_mll" name="flowrate_mll" required onchange="onchange_Input_mll(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_mll">
-                                        <select class="form-control" id="if_sel_mll" name="if_sel_mll" onchange="onchange_fr_mll(this)"> </select>
+                                        <select class="form-control" id="if_sel_mll" name="if_sel_mll" onchange="cleanOut_mll()"> </select>
                                     </div>
 
                                 </div>
@@ -162,7 +150,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_mll" name="upstreampressure_mll"  required>
+                                        <input class="form-control" type="text" id="upstreampressure_mll" name="upstreampressure_mll" onchange="onchange_Input_mll(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_mll">
                                         <select class="form-control" id="up_sel_mll" name="up_sel_mll"> </select>
@@ -172,7 +160,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_mll" name="downstreampressure_mll"  required>
+                                        <input class="form-control" type="text" id="downstreampressure_mll" name="downstreampressure_mll" onchange="onchange_Input_mll(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_mll">
                                         <select class="form-control" id="bp_sel_mll" name="bp_sel_mll"> </select>
@@ -184,34 +172,34 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_mll" name="internalpipe_mll"  required onchange="onchange_Input_mll(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_mll">
-                                        <select class="form-control" id="diam_sel_mll" name="diam_sel_mll"> </select>
+                                        <select class="form-control" id="diam_sel_mll" name="diam_sel_mll" onchange='cleanOut_mll()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_mll" name="lengthof_mll"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="lengthof_mll" name="lengthof_mll"  required onchange="onchange_Input_mll(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_mll">
-                                        <select class="form-control" id="le_sel_mll" name="le_sel_mll"> </select>
+                                        <select class="form-control" id="le_sel_mll" name="le_sel_mll" onchange='cleanOut_mll()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_mll" name="upstreamelevation_mll" required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="upstreamelevation_mll" name="upstreamelevation_mll" required onchange="onchange_Input_mll(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_mll">
-                                        <select class="form-control" id="ue_sel_mll" name="ue_sel_mll"> </select>
+                                        <select class="form-control" id="ue_sel_mll" name="ue_sel_mll" onchange='cleanOut_mll()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_mll" name="downstreamelevation_mll"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="downstreamelevation_mll" name="downstreamelevation_mll"  required onchange="onchange_Input_mll(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_mll">
-                                        <select class="form-control" id="de_sel_mll" name="de_sel_mll"> </select>
+                                        <select class="form-control" id="de_sel_mll" name="de_sel_mll" onchange='cleanOut_mll()'> </select>
                                     </div>
                                 </div>
 
@@ -264,16 +252,7 @@
                 var y = document.getElementById("unknown_mll").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
             }
-            function onchange_Input_zero(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
-            }
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_mll"),
@@ -304,7 +283,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_mll' id= 'diam_sel_mll'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_mll' id= 'diam_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_diam_sel_mll").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -345,9 +324,7 @@
 
 
             function cleanOut_mll() {
-                $("#downstreampressure_mll").val("");
-                $("#transmissionfactor_mll").val("");
-                $("#velocity_mll").val("");
+                $("#resultado").val("");
             }
 
             function cleanSugg_mll() {
@@ -559,7 +536,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_mll\" id= \"if_sel_mll\" onchange=\"onchange_fr_mll(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_mll\" id= \"if_sel_mll\" onchange=\"cleanOut_mll()\">" + data;
                         $("#div_if_sel_mll").html(newHtml);
 
                         $("#if_sel_mll").val("71,MMSCFD");
@@ -616,9 +593,7 @@
                 });
             }
             function onchange_pres_mll(imp) {
-                /*cleanOut_mll();
-                 var obj = [$("#dp_sel_mll"), $("#sp_sel_mll")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_mll();
             }
             function load_in_sel_mll() {
                 var parametros = {
@@ -665,10 +640,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_mll' id= 'st_sel_mll' onchange='onchange_temp_mll(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_mll' id= 'st_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_st_sel_mll").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_mll' id= 'bt_sel_mll' onchange='onchange_temp_mll(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_mll' id= 'bt_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_bt_sel_mll").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_mll\" id= \"gft_sel_mll\" onchange=\"onchange_pres_mll(this)\">" + data;
@@ -701,13 +676,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_mll' id= 'ue_sel_mll' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_mll' id= 'ue_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_ue_sel_mll").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_mll' id= 'de_sel_mll' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_mll' id= 'de_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_de_sel_mll").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_mll' id= 'le_sel_mll' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_mll' id= 'le_sel_mll' onchange='cleanOut_mll()'>" + data;
                         $("#div_le_sel_mll").html(newHtml);
 
                         var vecObj = [$("#de_sel_mll"), $("#ue_sel_mll"), , $("#le_sel_mll")];
@@ -722,15 +697,16 @@
                     }
                 });
             }
-            function onchange_Input_zero(inp) {
+            function onchange_Input_mll(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
 
+                onchange_Input_zero(inp);
+                cleanOut_mll();
             }
 
         </script>

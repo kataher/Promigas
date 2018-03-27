@@ -114,21 +114,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Height:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value = "0" class="form-control" type="text" id="enteree_wdp" name="enteree_wdp" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_ee_sel_wdp">
-                                        <select class="form-control" id="ee_sel_wdp" name="ee_sel_wdp"> </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_wdp" name="gasflowingtemp_wdp" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasflowingtemp_wdp" name="gasflowingtemp_wdp" onchange="onchange_Input_wdp(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_wdp">
                                         <select class="form-control" id="gft_sel_wdp" name="gft_sel_wdp"> </select>
@@ -138,7 +126,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Gas Specific Gravity:</label>
-                                            <input class="form-control" type="text" id="gasspecificgra_wdp" name="gasspecificgra_wdp" onchange="onchange_Input_zero(this)" required>
+                                            <input class="form-control" type="text" id="gasspecificgra_wdp" name="gasspecificgra_wdp" onchange="onchange_Input_wdp(this)" required>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +134,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Pipeline Efficiency Factor</label>
-                                            <input class="form-control" type="text" id="pipelineefficiency_wdp" name="pipelineefficiency_wdp"  onchange="onchange_Input_zero(this)" required>
+                                            <input class="form-control" type="text" id="pipelineefficiency_wdp" name="pipelineefficiency_wdp"  onchange="onchange_Input_wdp(this)" required>
                                         </div>
                                     </div>
                                 </div>
@@ -155,10 +143,10 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="flowrate_wdp" name="flowrate_wdp" required >
+                                        <input class="form-control" type="text" id="flowrate_wdp" name="flowrate_wdp" required onchange="onchange_Input_wdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_wdp">
-                                        <select class="form-control" id="if_sel_wdp" name="if_sel_wdp" onchange="onchange_fr_wdp(this)"> </select>
+                                        <select class="form-control" id="if_sel_wdp" name="if_sel_wdp" onchange="cleanOut_wdp()"> </select>
                                     </div>
 
                                 </div>
@@ -166,7 +154,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_wdp" name="upstreampressure_wdp"  required>
+                                        <input class="form-control" type="text" id="upstreampressure_wdp" name="upstreampressure_wdp" onchange="onchange_Input_wdp(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_wdp">
                                         <select class="form-control" id="up_sel_wdp" name="up_sel_wdp"> </select>
@@ -176,7 +164,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_wdp" name="downstreampressure_wdp"  required>
+                                        <input class="form-control" type="text" id="downstreampressure_wdp" name="downstreampressure_wdp" onchange="onchange_Input_wdp(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_wdp">
                                         <select class="form-control" id="bp_sel_wdp" name="bp_sel_wdp"> </select>
@@ -188,34 +176,34 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_wdp" name="internalpipe_wdp"  required onchange="onchange_Input_wdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_wdp">
-                                        <select class="form-control" id="diam_sel_wdp" name="diam_sel_wdp"> </select>
+                                        <select class="form-control" id="diam_sel_wdp" name="diam_sel_wdp" onchange='cleanOut_wdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_wdp" name="lengthof_wdp"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="lengthof_wdp" name="lengthof_wdp"  required onchange="onchange_Input_wdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_wdp">
-                                        <select class="form-control" id="le_sel_wdp" name="le_sel_wdp"> </select>
+                                        <select class="form-control" id="le_sel_wdp" name="le_sel_wdp" onchange='cleanOut_wdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_wdp" name="upstreamelevation_wdp" required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="upstreamelevation_wdp" name="upstreamelevation_wdp" required onchange="onchange_Input_wdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_wdp">
-                                        <select class="form-control" id="ue_sel_wdp" name="ue_sel_wdp"> </select>
+                                        <select class="form-control" id="ue_sel_wdp" name="ue_sel_wdp" onchange='cleanOut_wdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_wdp" name="downstreamelevation_wdp"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="downstreamelevation_wdp" name="downstreamelevation_wdp"  required onchange="onchange_Input_wdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_wdp">
-                                        <select class="form-control" id="de_sel_wdp" name="de_sel_wdp"> </select>
+                                        <select class="form-control" id="de_sel_wdp" name="de_sel_wdp" onchange='cleanOut_wdp()'> </select>
                                     </div>
                                 </div>
 
@@ -296,7 +284,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_wdp' id= 'diam_sel_wdp'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_wdp' id= 'diam_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_diam_sel_wdp").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -337,9 +325,7 @@
 
 
             function cleanOut_wdp() {
-                $("#downstreampressure_wdp").val("");
-                $("#transmissionfactor_wdp").val("");
-                $("#velocity_wdp").val("");
+                $("#resultado").val("");
             }
 
             function cleanSugg_wdp() {
@@ -547,7 +533,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_wdp\" id= \"if_sel_wdp\" onchange=\"onchange_fr_wdp(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_wdp\" id= \"if_sel_wdp\" onchange='cleanOut_wdp()'>" + data;
                         $("#div_if_sel_wdp").html(newHtml);
 
                         $("#if_sel_wdp").val("71,MMSCFD");
@@ -604,9 +590,7 @@
                 });
             }
             function onchange_pres_wdp(imp) {
-                /*cleanOut_wdp();
-                 var obj = [$("#dp_sel_wdp"), $("#sp_sel_wdp")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_wdp();
             }
             function load_in_sel_wdp() {
                 var parametros = {
@@ -653,10 +637,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_wdp' id= 'st_sel_wdp' onchange='onchange_temp_wdp(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_wdp' id= 'st_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_st_sel_wdp").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_wdp' id= 'bt_sel_wdp' onchange='onchange_temp_wdp(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_wdp' id= 'bt_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_bt_sel_wdp").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_wdp\" id= \"gft_sel_wdp\" onchange=\"onchange_pres_wdp(this)\">" + data;
@@ -689,13 +673,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_wdp' id= 'ue_sel_wdp' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_wdp' id= 'ue_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_ue_sel_wdp").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_wdp' id= 'de_sel_wdp' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_wdp' id= 'de_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_de_sel_wdp").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_wdp' id= 'le_sel_wdp' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_wdp' id= 'le_sel_wdp' onchange='cleanOut_wdp()'>" + data;
                         $("#div_le_sel_wdp").html(newHtml);
 
                         var vecObj = [$("#de_sel_wdp"), $("#ue_sel_wdp"), , $("#le_sel_wdp")];
@@ -710,15 +694,16 @@
                     }
                 });
             }
-            function onchange_Input_zero(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+            function onchange_Input_wdp(inp) {
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
 
+                onchange_Input_zero(inp);
+                cleanOut_wdp();
             }
         </script>
 

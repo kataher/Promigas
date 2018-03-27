@@ -114,21 +114,9 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Height:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value = "0" class="form-control" type="text" id="enteree_fri" name="enteree_fri" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_ee_sel_fri">
-                                        <select class="form-control" id="ee_sel_fri" name="ee_sel_fri"> </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_fri" name="gasflowingtemp_fri" onchange="onchange_Input_zero(this)" required>
+                                        <input class="form-control" type="text" id="gasflowingtemp_fri" name="gasflowingtemp_fri" onchange="onchange_Input_fri(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_fri">
                                         <select class="form-control" id="gft_sel_fri" name="gft_sel_fri"> </select>
@@ -144,7 +132,7 @@
 
                                     <div class="col-md-12 form-group">
                                         <label>Pipeline Efficiency Factor</label>
-                                        <input class="form-control" type="text" id="pipelineefficiency_fri" name="pipelineefficiency_fri"  required>
+                                        <input class="form-control" type="text" id="pipelineefficiency_fri" name="pipelineefficiency_fri" onchange="onchange_Input_fri(this)" required>
                                     </div>
                                 </div>
                                 <!-- Desaparece opción 1-->
@@ -152,10 +140,10 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="flowrate_fri" name="flowrate_fri" required >
+                                        <input class="form-control" type="text" id="flowrate_fri" name="flowrate_fri" required onchange="onchange_Input_fri(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_fri">
-                                        <select class="form-control" id="if_sel_fri" name="if_sel_fri" onchange="onchange_fr_fri(this)"> </select>
+                                        <select class="form-control" id="if_sel_fri" name="if_sel_fri" onchange="cleanOut_fri()"> </select>
                                     </div>
 
                                 </div>
@@ -163,7 +151,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_fri" name="upstreampressure_fri"  required>
+                                        <input class="form-control" type="text" id="upstreampressure_fri" name="upstreampressure_fri" onchange="onchange_Input_fri(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_fri">
                                         <select class="form-control" id="up_sel_fri" name="up_sel_fri"> </select>
@@ -173,7 +161,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_fri" name="downstreampressure_fri"  required>
+                                        <input class="form-control" type="text" id="downstreampressure_fri" name="downstreampressure_fri" onchange="onchange_Input_fri(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_fri">
                                         <select class="form-control" id="bp_sel_fri" name="bp_sel_fri"> </select>
@@ -185,34 +173,34 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_fri" name="internalpipe_fri"  required onchange="onchange_Input_fri(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_fri">
-                                        <select class="form-control" id="diam_sel_fri" name="diam_sel_fri"> </select>
+                                        <select class="form-control" id="diam_sel_fri" name="diam_sel_fri" onchange='cleanOut_fri()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_fri" name="lengthof_fri"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="lengthof_fri" name="lengthof_fri"  required onchange="onchange_Input_fri(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_fri">
-                                        <select class="form-control" id="le_sel_fri" name="le_sel_fri"> </select>
+                                        <select class="form-control" id="le_sel_fri" name="le_sel_fri" onchange='cleanOut_fri()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_fri" name="upstreamelevation_fri" required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="upstreamelevation_fri" name="upstreamelevation_fri" required onchange="onchange_Input_fri(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_fri">
-                                        <select class="form-control" id="ue_sel_fri" name="ue_sel_fri"> </select>
+                                        <select class="form-control" id="ue_sel_fri" name="ue_sel_fri" onchange='cleanOut_fri()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_fri" name="downstreamelevation_fri"  required onchange="onchange_Input_zero(this)">
+                                        <input class="form-control" type="text" id="downstreamelevation_fri" name="downstreamelevation_fri"  required onchange="onchange_Input_fri(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_fri">
-                                        <select class="form-control" id="de_sel_fri" name="de_sel_fri"> </select>
+                                        <select class="form-control" id="de_sel_fri" name="de_sel_fri" onchange='cleanOut_fri()'> </select>
                                     </div>
                                 </div>
 
@@ -265,16 +253,6 @@
                 var y = document.getElementById("unknown_fri").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
             }
-            function onchange_Input_zero(inp) {
-
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
-            }
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_fri"),
@@ -304,7 +282,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_fri' id='diam_sel_fri'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_fri' id='diam_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_diam_sel_fri").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -345,9 +323,7 @@
 
 
             function cleanOut_fri() {
-                $("#downstreampressure_fri").val("");
-                $("#transmissionfactor_fri").val("");
-                $("#velocity_fri").val("");
+                $("#resultado_fri").val("");
             }
 
             function cleanSugg_fri() {
@@ -559,7 +535,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_fri\" id= \"if_sel_fri\" onchange=\"onchange_fr_fri(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_fri\" id= \"if_sel_fri\" onchange='cleanOut_fri()'>" + data;
                         $("#div_if_sel_fri").html(newHtml);
 
                         $("#if_sel_fri").val("71,MMSCFD");
@@ -616,9 +592,7 @@
                 });
             }
             function onchange_pres_fri(imp) {
-                /*cleanOut_fri();
-                 var obj = [$("#dp_sel_fri"), $("#sp_sel_fri")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_fri();
             }
             function load_in_sel_fri() {
                 var parametros = {
@@ -665,10 +639,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_fri' id= 'st_sel_fri' onchange='onchange_temp_fri(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_fri' id= 'st_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_st_sel_fri").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_fri' id= 'bt_sel_fri' onchange='onchange_temp_fri(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_fri' id= 'bt_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_bt_sel_fri").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_fri\" id= \"gft_sel_fri\" onchange=\"onchange_pres_fri(this)\">" + data;
@@ -701,13 +675,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_fri' id= 'ue_sel_fri' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_fri' id= 'ue_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_ue_sel_fri").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_fri' id= 'de_sel_fri' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_fri' id= 'de_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_de_sel_fri").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_fri' id= 'le_sel_fri' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_fri' id= 'le_sel_fri' onchange='cleanOut_fri()'>" + data;
                         $("#div_le_sel_fri").html(newHtml);
 
                         var vecObj = [$("#de_sel_fri"), $("#ue_sel_fri"), , $("#le_sel_fri")];
@@ -722,15 +696,16 @@
                     }
                 });
             }
-            function onchange_Input_zero(inp) {
+            function onchange_Input_fri(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
 
+                onchange_Input_zero(inp);
+                cleanOut_fri();
             }
 
         </script>

@@ -117,21 +117,9 @@
                             <form role="form">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <label>Height:</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input value = "0" class="form-control" type="text" id="enteree_aga" name="enteree_aga" required>
-                                        </div>
-                                        <div class="col-md-4" id = "div_ee_sel_aga">
-                                            <select class="form-control" id="ee_sel_aga" name="ee_sel_aga"> </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
                                         <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                         <div class="col-md-8">                                              
-                                            <input class="form-control" type="text" id="gasflowingtemp_aga" name="gasflowingtemp_aga" onchange="onchange_Input_zero(this)" required>
+                                            <input class="form-control" type="text" id="gasflowingtemp_aga" name="gasflowingtemp_aga" onchange="onchange_Input_aga(this)" required>
                                         </div>   
                                         <div class="col-md-4" id = "div_gft_sel_aga">
                                             <select class="form-control" id="gft_sel_aga" name="gft_sel_aga"> </select>
@@ -153,13 +141,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <input class="form-control" type="text" id="pipelineroughness_aga" name="pipelineroughness_aga" required>
+                                            <input class="form-control" type="text" id="pipelineroughness_aga" name="pipelineroughness_aga" onchange="onchange_Input_aga(this)" required>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12">
                                             <label>Pipeline Efficiency Factor</label>
-                                            <input class="form-control" type="text" id="pipelineefficiency_aga" name="pipelineefficiency_aga"  required>
+                                            <input class="form-control" type="text" id="pipelineefficiency_aga" name="pipelineefficiency_aga" onchange="onchange_Input_aga(this)" required>
                                         </div>
                                     </div>
                                     <!-- Desaparece opción 1-->
@@ -167,10 +155,10 @@
                                     <div class="col-md-12" id="flowrate">
                                         <div class="col-md-12"><label>Flow Rate</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="flowrate_aga" name="flowrate_aga" required >
+                                            <input class="form-control" type="text" id="flowrate_aga" name="flowrate_aga" required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_if_sel_aga">
-                                            <select class="form-control" id="if_sel_aga" name="if_sel_aga" onchange="onchange_fr_aga(this)"> </select>
+                                            <select class="form-control" id="if_sel_aga" name="if_sel_aga" onchange="cleanOut_aga()"> </select>
                                         </div>
 
                                     </div>
@@ -178,7 +166,7 @@
                                     <div class="col-md-12"  id="upstream">
                                         <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="upstreampressure_aga" name="upstreampressure_aga"  required>
+                                            <input class="form-control" type="text" id="upstreampressure_aga" name="upstreampressure_aga" onchange="onchange_Input_aga(this)" required>
                                         </div>
                                         <div class="col-md-4" id="div_up_sel_aga">
                                             <select class="form-control" id="up_sel_aga" name="up_sel_aga"> </select>
@@ -188,7 +176,7 @@
                                     <div class="col-md-12 success"  id="downstream">
                                         <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="downstreampressure_aga" name="downstreampressure_aga"  required>
+                                            <input class="form-control" type="text" id="downstreampressure_aga" name="downstreampressure_aga" onchange="onchange_Input_aga(this)" required>
                                         </div>
                                         <div class="col-md-4" id="div_bp_sel_aga">
                                             <select class="form-control" id="bp_sel_aga" name="bp_sel_aga"> </select>
@@ -200,34 +188,34 @@
                                             <input class="form-control" value="954.4" type="text" id="internalpipe_aga" name="internalpipe_aga"  required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_diam_sel_aga">
-                                            <select class="form-control" id="diam_sel_aga" name="diam_sel_aga"> </select>
+                                            <select class="form-control" id="diam_sel_aga" name="diam_sel_aga" onchange='cleanOut_aga()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Length of Pipeline</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="lengthof_aga" name="lengthof_aga"  required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="lengthof_aga" name="lengthof_aga"  required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_le_sel_aga">
-                                            <select class="form-control" id="le_sel_aga" name="le_sel_aga"> </select>
+                                            <select class="form-control" id="le_sel_aga" name="le_sel_aga" onchange='cleanOut_aga()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="upstreamelevation_aga" name="upstreamelevation_aga" required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="upstreamelevation_aga" name="upstreamelevation_aga" required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_ue_sel_aga">
-                                            <select class="form-control" id="ue_sel_aga" name="ue_sel_aga"> </select>
+                                            <select class="form-control" id="ue_sel_aga" name="ue_sel_aga" onchange='cleanOut_aga()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Downstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="downstreamelevation_aga" name="downstreamelevation_aga"  required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="downstreamelevation_aga" name="downstreamelevation_aga"  required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_de_sel_aga">
-                                            <select class="form-control" id="de_sel_aga" name="de_sel_aga"> </select>
+                                            <select class="form-control" id="de_sel_aga" name="de_sel_aga" onchange='cleanOut_aga()'> </select>
                                         </div>
                                     </div>
 
@@ -320,7 +308,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_aga' id= 'diam_sel_aga'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_aga' id= 'diam_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_diam_sel_aga").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -346,7 +334,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ee_sel_aga' id= 'ee_sel_aga'>" + data;
+                        var newHtml = "<select class='form-control' name='ee_sel_aga' id= 'ee_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_ee_sel_aga").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -390,22 +378,11 @@
             function onchange_rou_aga() {
                 var po = $("#roughness_aga").val().split(",")[1];
                 $("#pipelineroughness_aga").val(po);
-            }
-            function onchange_Input_zero(inp) {
-
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
+                cleanOut_aga();
             }
 
             function cleanOut_aga() {
-                $("#flowrate_aga").val("");
-                $("#transmissionfactor_aga").val("");
-                $("#velocity_aga").val("");
+                $("#flowrate_aga_r").val("");
             }
 
             function cleanSugg_aga() {
@@ -615,7 +592,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_aga\" id= \"if_sel_aga\" onchange=\"onchange_fr_aga(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_aga\" id= \"if_sel_aga\" onchange='cleanOut_aga()'>" + data;
                         $("#div_if_sel_aga").html(newHtml);
 
                         $("#if_sel_aga").val("71,MMSCFD");
@@ -672,9 +649,7 @@
                 });
             }
             function onchange_pres_aga(imp) {
-                /*cleanOut_aga();
-                 var obj = [$("#dp_sel_aga"), $("#sp_sel_aga")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_aga();
             }
             function load_in_sel_aga() {
                 var parametros = {
@@ -721,10 +696,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_aga' id= 'st_sel_aga' onchange='onchange_temp_aga(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_aga' id= 'st_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_st_sel_aga").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_aga' id= 'bt_sel_aga' onchange='onchange_temp_aga(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_aga' id= 'bt_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_bt_sel_aga").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"gft_sel_aga\" id= \"gft_sel_aga\" onchange=\"onchange_pres_aga(this)\">" + data;
@@ -757,13 +732,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_aga' id= 'ue_sel_aga' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_aga' id= 'ue_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_ue_sel_aga").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_aga' id= 'de_sel_aga' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_aga' id= 'de_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_de_sel_aga").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_aga' id= 'le_sel_aga' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_aga' id= 'le_sel_aga' onchange='cleanOut_aga()'>" + data;
                         $("#div_le_sel_aga").html(newHtml);
 
                         var vecObj = [$("#de_sel_aga"), $("#ue_sel_aga"), , $("#le_sel_aga")];
@@ -778,15 +753,16 @@
                     }
                 });
             }
-            function onchange_Input_zero(inp) {
+            function onchange_Input_aga(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
+                var sw = validateDecimal(inp.value);
 
-                if (pos == 0) {
-                    inp.value = "0" + str;
+                if (sw !== true) {
+                    inp.value = "";
                 }
 
+                onchange_Input_zero(inp);
+                cleanOut_aga();
             }
         </script>
 
