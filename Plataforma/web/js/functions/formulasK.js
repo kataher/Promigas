@@ -3704,6 +3704,7 @@ function flowrate_wdp_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_wdp,"MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
     L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
@@ -3838,6 +3839,7 @@ function downstream_wdp_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
     L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
@@ -3926,6 +3928,7 @@ function upstream_wdp_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
     L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
@@ -4620,7 +4623,8 @@ function flowrate_mll_form(vari, uni) {
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_mll, "psia");
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_mll,"MMSCFD");
-
+    
+    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
     L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
@@ -4757,6 +4761,7 @@ function downstream_mll_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
     L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
@@ -4842,6 +4847,7 @@ function upstream_mll_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
     L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
@@ -4918,6 +4924,7 @@ function flowrate_spi_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_spi,"MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
     L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
@@ -5063,6 +5070,7 @@ function downstream_spi_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
     L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
@@ -5147,6 +5155,7 @@ function upstream_spi_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "MMSCFD");
 
+    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
     L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
