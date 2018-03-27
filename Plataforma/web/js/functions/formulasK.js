@@ -5847,7 +5847,7 @@ function roundToTwo(num) {
     return +(Math.round(num + "e+2") + "e-2");
 }
 //3.4
-function buyancy_weight_form(vari) {
+function buyancy_weight_form(vari, uni) {
     /*
      * ENTRADA
      * F14 = Nominal Pipe Outside Diameter
@@ -5871,6 +5871,10 @@ function buyancy_weight_form(vari) {
     var F21 = parseFloat(vari.dens_conc_baw);
     var F22 = parseFloat(vari.safe_fact_baw);
 
+    F14 = get_Long(F14, uni.nomout_sel_baw, "in");
+    F15 = get_Long(F15, uni.nom_wall_sel_baw, "in");
+    F16 = get_Long(F16, uni.corr_coa_sel_baw, "in");
+    
     var F26 = ((Math.PI / 4) * Math.pow(((F14 + 2 * F16) / 12), 2)) * F18;
     var F27 = 10.6802 * F15 * (F14 - F15);
     var F28 = (((Math.PI / 4) * Math.pow(((F14 + 2 * F16) / 12), 2)) - ((Math.PI / 4) * Math.pow(((F14) / 12), 2))) * F19;
