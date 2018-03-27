@@ -5766,7 +5766,9 @@ function bending_stress_fluid_form(vari,uni) {
     var F19 = parseFloat(vari.vel_fluid_bdsf);
     var F20 = parseFloat(vari.lenght_pipe_bdsf);
     
-    F20 = get_Long(parseFloat(vari.lenght_pipe_bdsf), uni.lenght_pipe_sel_bdsf, "ft");
+    F16 = get_Long(parseFloat(F16), uni.pipe_diam_sel_bdsf, "in");
+    F17 = get_Long(parseFloat(F17), uni.pipe_in_diam_sel_bdsf, "in");
+    F20 = get_Long(parseFloat(F20), uni.lenght_pipe_sel_bdsf, "ft");
     
     
     var ef = (F15 * (Math.pow(F16, 2)) * (Math.pow(F19, 2)) * (Math.pow(F20, 2))) / (58.4 * ((Math.pow(F16, 4)) - (Math.pow(F18, 4))));

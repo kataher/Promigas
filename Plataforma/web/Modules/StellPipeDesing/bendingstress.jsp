@@ -412,7 +412,7 @@
                     "ee_sel_bds": $("#pipe_out_diam_sel_bds").val().split(",")[1],
                     "ee1_sel_bds": $("#wall_thick_sel_bds").val().split(",")[1],
                     "pipe_lenght_sel_bds": $("#pipe_lenght_sel_bds").val().split(",")[1],
-                    "dp_sel_ppw": $("#mod_elast_sel_bds").val().split(",")[1],
+                    "dp_sel_ppw": $("#mod_elast_sel_bds").val().split(",")[1]
                 };
 
                 var res = bending_stress_form(variables, unidades);
