@@ -179,15 +179,13 @@
                                         <select class="form-control" id="bp_sel_fri" name="bp_sel_fri"> </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-12" id="internal">
                                     <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
-                                    <div class="col-md-8 form-group success"  id="internal">
-
-                                        <input class="form-control" type="text" id="internalpipe_fri" name="internalpipe_fri"  required>
+                                    <div class="col-md-8">
+                                        <input class="form-control" value="954.4" type="text" id="internalpipe_fri" name="internalpipe_fri"  required onchange="onchange_Input_fri(this)">
                                     </div>
-
-                                    <div class="col-md-4"  id="div_diam_sel_fri">
-                                        <select class="form-control" id="diam_sel_fri" name="diam_sel_fri"></select>      
+                                    <div class="col-md-4" id = "div_diam_sel_fri">
+                                        <select class="form-control" id="diam_sel_fri" name="diam_sel_fri"> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -317,7 +315,7 @@
                     }
                 });
             }
-            
+
             function load_he_sel_fri() {
                 var parametros = {
                     "combo": "he",

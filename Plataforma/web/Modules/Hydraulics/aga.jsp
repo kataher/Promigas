@@ -194,15 +194,13 @@
                                             <select class="form-control" id="bp_sel_aga" name="bp_sel_aga"> </select>
                                         </div>
                                     </div>
-                                    <div  class="col-md-12">
-                                        <div class="col-md-12">
-                                            <label>Internal Pipe Diameter</label>
+                                    <div class="col-md-12" id="internal">
+                                        <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
+                                        <div class="col-md-8">
+                                            <input class="form-control" value="954.4" type="text" id="internalpipe_aga" name="internalpipe_aga"  required onchange="onchange_Input_aga(this)">
                                         </div>
-                                        <div class="col-md-8 success"  id="internal">
-                                            <input class="form-control" type="text" id="internalpipe_aga" name="internalpipe_aga"  required>
-                                        </div>
-                                        <div class="col-md-4" id="div_diam_sel_aga">
-                                            <select class="form-control" id="diam_sel_aga" name="diam_sel_aga"></select>      
+                                        <div class="col-md-4" id = "div_diam_sel_aga">
+                                            <select class="form-control" id="diam_sel_aga" name="diam_sel_aga"> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

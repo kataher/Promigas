@@ -196,18 +196,13 @@
                                             <select class="form-control" id="bp_sel_cfr" name="bp_sel_cfr"> </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <div class="col-md-12">
-                                            <label>Internal Pipe Diameter</label>
-                                        </div>
+                                    <div class="col-md-12" id="internal">
+                                        <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
                                         <div class="col-md-8">
-                                            <div class="form-group success"  id="internal">
-
-                                                <input class="form-control" type="text" id="internalpipe_cfr" name="internalpipe_cfr"  required>
-                                            </div>
+                                            <input class="form-control" value="954.4" type="text" id="internalpipe_cfr" name="internalpipe_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
-                                        <div class="col-md-4" id="div_diam_sel_cfr">
-                                            <select class="form-control" id="diam_sel_cfr" name="diam_sel_cfr"></select>      
+                                        <div class="col-md-4" id = "div_diam_sel_cfr">
+                                            <select class="form-control" id="diam_sel_cfr" name="diam_sel_cfr"> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">

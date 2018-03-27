@@ -179,14 +179,12 @@
                                         <select class="form-control" id="bp_sel_igt" name="bp_sel_igt"> </select>
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label>Internal Pipe Diameter</label>
+                                <div class="col-md-12" id="internal">
+                                    <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
+                                    <div class="col-md-8">
+                                        <input class="form-control" value="954.4" type="text" id="internalpipe_igt" name="internalpipe_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
-                                    <div class="col-md-8 form-group success"  id="internal">
-                                        <input class="form-control" type="text" id="internalpipe_igt" name="internalpipe_igt"  required>
-                                    </div>
-                                    <div class="col-md-4" id="div_diam_sel_igt">
+                                    <div class="col-md-4" id = "div_diam_sel_igt">
                                         <select class="form-control" id="diam_sel_igt" name="diam_sel_igt"> </select>
                                     </div>
                                 </div>
