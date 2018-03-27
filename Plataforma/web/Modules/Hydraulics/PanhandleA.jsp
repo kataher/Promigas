@@ -142,7 +142,7 @@
                                         <input class="form-control" value="100000" type="text" id="flowrate_adp" name="flowrate_adp" required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_adp">
-                                        <select class="form-control" id="if_sel_adp" name="if_sel_adp" onchange="onchange_fr_adp(this)"> </select>
+                                        <select class="form-control" id="if_sel_adp" name="if_sel_adp" onchange="cleanOut_adp()"> </select>
                                     </div>
 
                                 </div>
@@ -181,7 +181,7 @@
                                         <input class="form-control" value="15" type="text" id="lengthof_adp" name="lengthof_adp"  required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_apd">
-                                        <select class="form-control" id="le_sel_apd" name="le_sel_apd"> </select>
+                                        <select class="form-control" id="le_sel_apd" name="le_sel_apd" onchange="cleanOut_adp()"> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -190,7 +190,7 @@
                                         <input class="form-control" type="text"  value="0" id="upstreamelevation_adp" name="upstreamelevation_adp" required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_apd">
-                                        <select class="form-control" id="ue_sel_apd" name="ue_sel_apd"> </select>
+                                        <select class="form-control" id="ue_sel_apd" name="ue_sel_apd" onchange="cleanOut_adp()"> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -199,7 +199,7 @@
                                         <input class="form-control" value="0" type="text" id="downstreamelevation_adp" name="downstreamelevation_adp"  required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_apd">
-                                        <select class="form-control" id="de_sel_apd" name="de_sel_apd"> </select>
+                                        <select class="form-control" id="de_sel_apd" name="de_sel_apd" onchange="cleanOut_adp()"> </select>
                                     </div>
                                 </div>
 
@@ -500,7 +500,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_adp\" id= \"if_sel_adp\" onchange=\"onchange_fr_adp(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_adp\" id= \"if_sel_adp\" onchange=\"cleanOut_adp()\">" + data;
                         $("#div_if_sel_adp").html(newHtml);
 
                         $("#if_sel_adp").val("71,MMSCFD");
@@ -536,7 +536,7 @@
                         newHtml = "<select class=\"form-control\" name=\"bp_sel_adp\" id= \"bp_sel_adp\" onchange=\"cleanOut_adp()\">" + data;
                         $("#div_bp_sel_adp").html(newHtml);
 
-                        var newHtml = "<select class=\"form-control\" name=\"bte_sel_adp\" id= \"bte_sel_adp\" onchange=\"onchange_pres_adp(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"bte_sel_adp\" id= \"bte_sel_adp\" onchange=\"cleanOut_adp()\">" + data;
                         $("#div_bte_sel_adp").html(newHtml);
 
                         /*  var newHtml = "<select class=\"form-control\" name=\"gasft_sel_adp\" id= \"gasft_sel_adp\" onchange=\"onchange_pres_adp(this)\">" + data;
@@ -557,9 +557,7 @@
                 });
             }
             function onchange_pres_adp(imp) {
-                /*cleanOut_adp();
-                 var obj = [$("#dp_sel_adp"), $("#sp_sel_adp")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_adp();
             }
             function load_in_sel_adp() {
                 var parametros = {
@@ -606,13 +604,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_adp' id= 'st_sel_adp' onchange='onchange_temp_adp(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_adp' id= 'st_sel_adp' onchange='cleanOut_adp()'>" + data;
                         $("#div_st_sel_adp").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_adp' id= 'bt_sel_adp' onchange='onchange_temp_adp(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_adp' id= 'bt_sel_adp' onchange='cleanOut_adp()'>" + data;
                         $("#div_bt_sel_adp").html(newHtml);
 
-                        var newHtml = "<select class=\"form-control\" name=\"gasft_sel_adp\" id= \"gasft_sel_adp\" onchange=\"onchange_pres_adp(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"gasft_sel_adp\" id= \"gasft_sel_adp\" onchange=\"cleanOut_adp()\">" + data;
                         $("#div_gasft_sel_adp").html(newHtml)
 
                         var vecObj = [$("#bt_sel_adp"), $("#gasft_sel_adp")];
@@ -643,7 +641,7 @@
                     },
                     success: function (data, status, request) {
 
-                        var newHtml = "<select class='form-control' name='le_sel_apd' id= 'le_sel_apd' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_apd' id= 'le_sel_apd' onchange='cleanOut_adp()'>" + data;
                         $("#div_le_sel_apd").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -669,10 +667,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_apd' id= 'ue_sel_apd' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_apd' id= 'ue_sel_apd' onchange='cleanOut_adp()'>" + data;
                         $("#div_ue_sel_apd").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='de_sel_apd' id= 'de_sel_apd' >" + data;
+                        newHtml = "<select class='form-control' name='de_sel_apd' id= 'de_sel_apd' onchange='cleanOut_adp()'>" + data;
                         $("#div_de_sel_apd").html(newHtml);
 
                     },
@@ -699,7 +697,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ipd_sel_apd' id= 'ipd_sel_apd' >" + data;
+                        var newHtml = "<select class='form-control' name='ipd_sel_apd' id= 'ipd_sel_apd' onchange='cleanOut_adp()'>" + data;
                         $("#div_ipd_sel_apd").html(newHtml);
 
                     },

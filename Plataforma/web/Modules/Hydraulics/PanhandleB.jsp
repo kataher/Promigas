@@ -83,7 +83,7 @@
                                         </div>
 
                                         <div class="col-sm-6" id="div_bte_sel_bdp">
-                                            <select class="form-control" id="bte_sel_bdp" name="bte_sel_bdp"> </select>
+                                            <select class="form-control" id="bte_sel_bdp" name="bte_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -112,17 +112,6 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="col-md-12">
-                                <div class="col-md-12">
-                                    <label>Height:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input value = "0" class="form-control" type="text" id="enteree_adp" name="enteree_adp" required>
-                                </div>
-                                <div class="col-md-4" id = "div_ee_sel_adp">
-                                    <select class="form-control" id="ee_sel_adp" name="ee_sel_adp"> </select>
-                                </div>
-                            </div>
                             <div class="form-group">
 
                                 <div class="col-md-12">
@@ -153,7 +142,7 @@
                                         <input class="form-control" type="text" id="flowrate_bdp" name="flowrate_bdp" required onchange="onchange_Input_bdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_bdp">
-                                        <select class="form-control" id="if_sel_bdp" name="if_sel_bdp" onchange="onchange_fr_bdp(this)"> </select>
+                                        <select class="form-control" id="if_sel_bdp" name="if_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                     </div>
 
                                 </div>
@@ -183,7 +172,7 @@
                                         <input class="form-control" value="954.4" type="text" id="internalpipe_bdp" name="internalpipe_bdp"  required onchange="onchange_Input_bdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_bdp">
-                                        <select class="form-control" id="diam_sel_bdp" name="diam_sel_bdp"> </select>
+                                        <select class="form-control" id="diam_sel_bdp" name="diam_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -192,7 +181,7 @@
                                         <input class="form-control" type="text" id="lengthof_bdp" name="lengthof_bdp"  required onchange="onchange_Input_bdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_bdp">
-                                        <select class="form-control" id="le_sel_bdp" name="le_sel_bdp"> </select>
+                                        <select class="form-control" id="le_sel_bdp" name="le_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -201,7 +190,7 @@
                                         <input class="form-control" type="text" id="upstreamelevation_bdp" name="upstreamelevation_bdp" required onchange="onchange_Input_bdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_bdp">
-                                        <select class="form-control" id="ue_sel_bdp" name="ue_sel_bdp"> </select>
+                                        <select class="form-control" id="ue_sel_bdp" name="ue_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -210,7 +199,7 @@
                                         <input class="form-control" type="text" id="downstreamelevation_bdp" name="downstreamelevation_bdp"  required onchange="onchange_Input_bdp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_bdp">
-                                        <select class="form-control" id="de_sel_bdp" name="de_sel_bdp"> </select>
+                                        <select class="form-control" id="de_sel_bdp" name="de_sel_bdp" onchange='cleanOut_bdp()'> </select>
                                     </div>
                                 </div>
 
@@ -320,7 +309,7 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class='form-control' name='diam_sel_bdp' id= 'diam_sel_bdp'>" + data;
+                            var newHtml = "<select class='form-control' name='diam_sel_bdp' id= 'diam_sel_bdp' onchange='cleanOut_bdp()'>" + data;
                             $("#div_diam_sel_bdp").html(newHtml);
                         },
                         error: function (xhr, ajaxOptions, err) {
@@ -335,9 +324,7 @@
 
 
             function cleanOut_bdp() {
-                $("#downstreampressure_bdp").val("");
-                $("#transmissionfactor_bdp").val("");
-                $("#velocity_bdp").val("");
+                $("#resultado").val("");
             }
 
             function cleanSugg_bdp() {
@@ -548,7 +535,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_bdp\" id= \"if_sel_bdp\" onchange=\"onchange_fr_bdp(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_bdp\" id= \"if_sel_bdp\" onchange='cleanOut_bdp()'>" + data;
                         $("#div_if_sel_bdp").html(newHtml);
 
                         $("#if_sel_bdp").val("71,MMSCFD");
@@ -576,11 +563,11 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"gft_sel_bdp\" id= \"gft_sel_bdp\" >" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"gft_sel_bdp\" id= \"gft_sel_bdp\" onchange='cleanOut_bdp()'>" + data;
                         $("#div_gft_sel_bdp").html(newHtml);
                         
                         
-                        newHtml = "<select class=\"form-control\" name=\"bt_sel_bdp\" id= \"bt_sel_bdp\" >" + data;
+                        newHtml = "<select class=\"form-control\" name=\"bt_sel_bdp\" id= \"bt_sel_bdp\" onchange='cleanOut_bdp()'>" + data;
                         $("#div_bt_sel_bdp").html(newHtml);
 
                     },
@@ -636,9 +623,7 @@
                 });
             }
             function onchange_pres_bdp(imp) {
-                /*cleanOut_bdp();
-                 var obj = [$("#dp_sel_bdp"), $("#sp_sel_bdp")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_bdp();
             }
             function load_in_sel_bdp() {
                 var parametros = {
@@ -685,13 +670,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_bdp' id= 'ue_sel_bdp' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_bdp' id= 'ue_sel_bdp' onchange='cleanOut_bdp()'>" + data;
                         $("#div_ue_sel_bdp").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_bdp' id= 'de_sel_bdp' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_bdp' id= 'de_sel_bdp' onchange='cleanOut_bdp()'>" + data;
                         $("#div_de_sel_bdp").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_bdp' id= 'le_sel_bdp' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_bdp' id= 'le_sel_bdp' onchange='cleanOut_bdp()'>" + data;
                         $("#div_le_sel_bdp").html(newHtml);
 
                         var vecObj = [$("#de_sel_bdp"), $("#ue_sel_bdp"), , $("#le_sel_bdp")];

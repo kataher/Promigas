@@ -115,24 +115,10 @@
                         <div class="col-lg-12">
                             <form role="form">
                                 <div class="form-group">
-
-                                    <div class="col-md-12">   
-                                        <div class="col-md-12">
-                                            <label>Height:</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input value = "0" class="form-control" type="text" id="enteree_crf" name="enteree_crf" required>
-                                        </div>
-                                        <div class="col-md-4" id = "div_ee_sel_crf">
-                                            <select class="form-control" id="ee_sel_crf" name="ee_sel_crf"> </select>
-                                        </div>
-                                    </div>
-
-
                                     <div class="col-md-12">
                                         <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                         <div class="col-md-8">                                              
-                                            <input class="form-control" type="text" id="gasflowingtemp_cfr" name="gasflowingtemp_cfr" onchange="onchange_Input_zero(this)" required>
+                                            <input class="form-control" type="text" id="gasflowingtemp_cfr" name="gasflowingtemp_cfr" onchange="onchange_Input_cfr(this)" required>
                                         </div>   
                                         <div class="col-md-4" id = "div_ee_sel_cfr">
                                             <select class="form-control" id="ee_sel_cfr" name="ee_sel_cfr"> </select>
@@ -155,13 +141,13 @@
                                             </div>
                                         </div>
                                         <div class="col-md-4"> 
-                                            <input class="form-control" type="text" id="pipelineroughness_cfr" name="pipelineroughness_cfr" required>
+                                            <input class="form-control" type="text" id="pipelineroughness_cfr" name="pipelineroughness_cfr" required onchange="onchange_Input_cfr(this)">
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12">
                                             <label>Pipeline Efficiency Factor</label>
-                                            <input class="form-control" type="text" id="pipelineefficiency_cfr" name="pipelineefficiency_cfr"  required>
+                                            <input class="form-control" type="text" id="pipelineefficiency_cfr" name="pipelineefficiency_cfr"  onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                     </div>
                                     <!-- Desaparece opción 1-->
@@ -169,7 +155,7 @@
                                     <div class="col-md-12" id="flowrate">
                                         <div class="col-md-12"><label>Flow Rate</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="flowrate_cfr" name="flowrate_cfr" required >
+                                            <input class="form-control" type="text" id="flowrate_cfr" name="flowrate_cfr" onchange="onchange_Input_cfr(this)"  required >
                                         </div>
                                         <div class="col-md-4" id = "div_if_sel_cfr">
                                             <select class="form-control" id="if_sel_cfr" name="if_sel_cfr" onchange="onchange_fr_cfr(this)"> </select>
@@ -180,7 +166,7 @@
                                     <div class="col-md-12"  id="upstream">
                                         <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="upstreampressure_cfr" name="upstreampressure_cfr"  required>
+                                            <input class="form-control" type="text" id="upstreampressure_cfr" name="upstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                         <div class="col-md-4" id="div_up_sel_cfr">
                                             <select class="form-control" id="up_sel_cfr" name="up_sel_cfr"> </select>
@@ -190,7 +176,7 @@
                                     <div class="col-md-12 success"  id="downstream">
                                         <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="downstreampressure_cfr" name="downstreampressure_cfr"  required>
+                                            <input class="form-control" type="text" id="downstreampressure_cfr" name="downstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                         <div class="col-md-4" id="div_bp_sel_cfr">
                                             <select class="form-control" id="bp_sel_cfr" name="bp_sel_cfr"> </select>
@@ -202,34 +188,34 @@
                                             <input class="form-control" value="954.4" type="text" id="internalpipe_cfr" name="internalpipe_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_diam_sel_cfr">
-                                            <select class="form-control" id="diam_sel_cfr" name="diam_sel_cfr"> </select>
+                                            <select class="form-control" id="diam_sel_cfr" name="diam_sel_cfr" onchange='cleanOut_cfr()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Length of Pipeline</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="lengthof_cfr" name="lengthof_cfr"  required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="lengthof_cfr" name="lengthof_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_le_sel_cfr">
-                                            <select class="form-control" id="le_sel_cfr" name="le_sel_cfr"> </select>
+                                            <select class="form-control" id="le_sel_cfr" name="le_sel_cfr" onchange='cleanOut_cfr()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="upstreamelevation_cfr" name="upstreamelevation_cfr" required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="upstreamelevation_cfr" name="upstreamelevation_cfr" required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_ue_sel_cfr">
-                                            <select class="form-control" id="ue_sel_cfr" name="ue_sel_cfr"> </select>
+                                            <select class="form-control" id="ue_sel_cfr" name="ue_sel_cfr" onchange='cleanOut_cfr()'> </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Downstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="downstreamelevation_cfr" name="downstreamelevation_cfr"  required onchange="onchange_Input_zero(this)">
+                                            <input class="form-control" type="text" id="downstreamelevation_cfr" name="downstreamelevation_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_de_sel_cfr">
-                                            <select class="form-control" id="de_sel_cfr" name="de_sel_cfr"> </select>
+                                            <select class="form-control" id="de_sel_cfr" name="de_sel_cfr" onchange='cleanOut_cfr()'> </select>
                                         </div>
                                     </div>
 
@@ -292,16 +278,7 @@
                 var y = document.getElementById("unknown_cfr").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
             }
-            function onchange_Input_zero(inp) {
 
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
-            }
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_cfr"),
@@ -332,7 +309,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='diam_sel_cfr' id='diam_sel_cfr'>" + data;
+                        var newHtml = "<select class='form-control' name='diam_sel_cfr' id='diam_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_diam_sel_cfr").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -358,7 +335,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ee_sel_crf' id= 'ee_sel_crf'>" + data;
+                        var newHtml = "<select class='form-control' name='ee_sel_crf' id= 'ee_sel_crf' onchange='cleanOut_cfr()'>" + data;
                         $("#div_ee_sel_crf").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -474,6 +451,7 @@
             function onchange_rou_cfr() {
                 var po = $("#roughness_cfr").val();
                 $("#pipelineroughness_cfr").val(po.split(",")[1]);
+                cleanOut_cfr();
             }
 
             function onchange_Input_cfr(inp) {
@@ -487,9 +465,7 @@
             }
 
             function cleanOut_cfr() {
-                $("#flowrate_cfr").val("");
-                $("#transmissionfactor_cfr").val("");
-                $("#velocity_cfr").val("");
+                $("#resultado_cfr").val("");
             }
 
             function cleanSugg_cfr() {
@@ -695,7 +671,7 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"if_sel_cfr\" id= \"if_sel_cfr\" onchange=\"onchange_fr_cfr(this)\">" + data;
+                        var newHtml = "<select class=\"form-control\" name=\"if_sel_cfr\" id= \"if_sel_cfr\" onchange=\"cleanOut_cfr()\">" + data;
                         $("#div_if_sel_cfr").html(newHtml);
 
                         $("#if_sel_cfr").val("71,MMSCFD");
@@ -752,9 +728,7 @@
                 });
             }
             function onchange_pres_cfr(imp) {
-                /*cleanOut_cfr();
-                 var obj = [$("#dp_sel_cfr"), $("#sp_sel_cfr")];
-                 onchageGeneral(obj, imp.value);*/
+                cleanOut_cfr();
             }
             function load_in_sel_cfr() {
                 var parametros = {
@@ -801,10 +775,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='st_sel_cfr' id= 'st_sel_cfr' onchange='onchange_temp_cfr(this)'>" + data;
+                        var newHtml = "<select class='form-control' name='st_sel_cfr' id= 'st_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_st_sel_cfr").html(newHtml);
 
-                        newHtml = "<select class='form-control' name='bt_sel_cfr' id= 'bt_sel_cfr' onchange='onchange_temp_cfr(this)'>" + data;
+                        newHtml = "<select class='form-control' name='bt_sel_cfr' id= 'bt_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_bt_sel_cfr").html(newHtml);
 
                         var newHtml = "<select class=\"form-control\" name=\"ee_sel_cfr\" id= \"ee_sel_cfr\" onchange=\"onchange_pres_cfr(this)\">" + data;
@@ -837,13 +811,13 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ue_sel_cfr' id= 'ue_sel_cfr' >" + data;
+                        var newHtml = "<select class='form-control' name='ue_sel_cfr' id= 'ue_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_ue_sel_cfr").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='de_sel_cfr' id= 'de_sel_cfr' >" + data;
+                        var newHtml = "<select class='form-control' name='de_sel_cfr' id= 'de_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_de_sel_cfr").html(newHtml);
 
-                        var newHtml = "<select class='form-control' name='le_sel_cfr' id= 'le_sel_cfr' >" + data;
+                        var newHtml = "<select class='form-control' name='le_sel_cfr' id= 'le_sel_cfr' onchange='cleanOut_cfr()'>" + data;
                         $("#div_le_sel_cfr").html(newHtml);
 
                         var vecObj = [$("#de_sel_cfr"), $("#ue_sel_cfr"), , $("#le_sel_cfr")];
@@ -857,16 +831,6 @@
                         unBlock();
                     }
                 });
-            }
-            function onchange_Input_zero(inp) {
-
-                var str = inp.value;
-                var pos = str.indexOf(".");
-
-                if (pos == 0) {
-                    inp.value = "0" + str;
-                }
-
             }
 
         </script>
