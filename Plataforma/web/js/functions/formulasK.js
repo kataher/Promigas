@@ -5780,7 +5780,7 @@ function bending_stress_fluid_form(vari,uni) {
     return [ef];
 }
 //3.3
-function buoyancy_analisis_form(vari) {
+function buoyancy_analisis_form(vari, uni) {
     /*
      * ENTRADA
      * F16 = Water Density 
@@ -5801,6 +5801,10 @@ function buoyancy_analisis_form(vari) {
     var F21 = parseFloat(vari.water_dens);
     var F22 = parseFloat(vari.conc_water_dens);
     var F23 = parseFloat(vari.corr_coa);
+    
+    F16 = get_Long(F16, uni.nomout_sel_basc, "in");
+    F17 = get_Long(F17, uni.nom_wall_sel_basc, "in");
+    F20 = get_Long(F20, uni.pipe_len_sel_basc, "ft");
 
     var F27 = 10.68 * (F16 - F17) * F17;
     var F30 = (-F18 - (F16 / 3) * (F16 - 32 * F17)) * (48 / (F16 * (63 - F22)));

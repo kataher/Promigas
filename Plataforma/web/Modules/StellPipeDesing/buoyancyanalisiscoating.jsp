@@ -89,26 +89,46 @@
                                     </div> 
                                 </div>
                             </div>
-                            <div class="col-lg-12">
-
-                                <label>Water Density [lbs/ft<sup>3</sup>]</label>                    
-
-                                <input type="text" class="form-control" id="water_dens" name="water_dens" value="62.40"> 
-
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Water Density [lbs/ft<sup>3</sup>]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="62.40" id="water_dens" name="water_dens" onchange='onchange_Input_basc(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_water_dens_sel_basc">
+                                    <select class="form-control" id="water_dens_sel_basc" name="water_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                        <option>lbs/ft<sup>3</sup></option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-lg-12">
 
-                                <label>Concrete Coating Density [lbs/ft<sup>3</sup>]</label>                    
-
-                                <input type="text" class="form-control" id="conc_water_dens" name="conc_water_dens" value="143">
-
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Concrete Coating Density [lbs/ft<sup>3</sup>]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="143" id="conc_water_dens" name="conc_water_dens" onchange='onchange_Input_basc(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_ccoat_dens_sel_basc">
+                                    <select class="form-control" id="ccoat_dens_sel_basc" name="ccoat_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                        <option>lbs/ft<sup>3</sup></option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-lg-12">
 
-                                <label>Corrision Coating Density [lbs/ft<sup>3</sup>]:</label>                    
-
-                                <input type="text" class="form-control" id="corr_coa" name="corr_coa" value="71.80">
-
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Corrosion Coating Density [lbs/ft<sup>3</sup>]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" value="71.80" id="corr_coa" name="corr_coa" onchange='onchange_Input_basc(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_corr_dens_sel_basc">
+                                    <select class="form-control" id="corr_dens_sel_basc" name="corr_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                        <option>lbs/ft<sup>3</sup></option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -125,16 +145,67 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_basc" name="nomout_basc"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_basc" name="nom_wall_basc">                  
-                                <label>Design Specific Gravity Ratio: </label>            
-                                <input type="text" name="spec_gra_basc" id="spec_gra_basc" class="form-control">
-                                <label>Corrosion Coating Thickness [MIL.]: </label>
-                                <input type="text" name="corr_coa_thick_basc" id="corr_coa_thick_basc" class="form-control">
-                                <label>Pipe Lenght [ft./Join]:</label>
-                                <input type="text" name="pipe_lenght_basc" id="pipe_lenght_basc" class="form-control">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Outside Diameter [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomout_basc" name="nomout_basc" onchange='onchange_Input_basc(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomout_sel_basc">
+                                        <select class="form-control" id="nomout_sel_basc" name="nomout_sel_basc" onchange='cleanOut_basc()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Wall Thickness [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_wall_basc" name="nom_wall_basc" onchange='onchange_Input_basc(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_wall_sel_basc">
+                                        <select class="form-control" id="nom_wall_sel_basc" name="nom_wall_sel_basc" onchange='cleanOut_basc()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Design Specific Gravity Ratio:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="spec_gra_basc" name="spec_gra_basc" onchange='onchange_Input_basc(this)' required> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Corrosion Coating Thickness [MIL.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="corr_coa_thick_basc" name="corr_coa_thick_basc" onchange='onchange_Input_basc(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_corr_coa_thick_sel_basc">
+                                        <select class="form-control" id="corr_coa_thick_sel_basc" name="corr_coa_thick_sel_basc" onchange='cleanOut_basc()'> 
+                                            <option>MIL</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Pipe Length [ft./Join]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="pipe_lenght_basc" name="pipe_lenght_basc" onchange='onchange_Input_basc(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_pipe_len_sel_basc">
+                                        <select class="form-control" id="pipe_len_sel_basc" name="pipe_len_sel_basc" onchange='cleanOut_basc()'> 
+                                        </select>
+                                    </div>
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -152,31 +223,31 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Pipe Weight [lbs/ft.]:</label>
-                                <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control"> 
+                                <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Total Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control"> 
+                                <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Corrosion Coating Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control"> 
+                                <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Concrete Coating Thickness [in.]:</label>
-                                <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control"> 
+                                <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Concrete Coating Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control"> 
+                                <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Weight of Pipe in Air [lbs/ft]:</label>
-                                <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control"> 
+                                <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Weight of Water Displaced [lbs/ft]:</label>
-                                <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control"> 
+                                <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control" readonly> 
                                 <BR>
                                 <label>Weight of Sugmerged Pipe [lbs/ft]:</label>
-                                <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control"> 
+                                <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control" readonly> 
                                 <BR>                      
                                 <label>Weight per Joint [lbs/Joint]:</label>
-                                <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control"> 
+                                <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control" readonly> 
                                 <BR>                                                                          
                                 <div>    
                                     <input type="button" id="calculateBtn_basc" name="calculateBtn_basc" value="Calculate" onclick="calculate_basc()" class="btn btn-info btn-block">
@@ -209,11 +280,44 @@
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_basc"),
                         $("#error_Dialog_basc"));
-                        
+
                 $("#opt_basc").val("1");
                 load_np_sel_basc("npsn");
-
+                load_in_sel_basc();
             });
+
+            function load_in_sel_basc() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='nom_wall_sel_basc' id= 'nom_wall_sel_basc' onchange='cleanOut_basc()'>" + data;
+                        $("#div_nom_wall_sel_basc").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nomout_sel_basc' id= 'nomout_sel_basc' onchange='cleanOut_basc()'>" + data;
+                        $("#div_nomout_sel_basc").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='pipe_len_sel_basc' id= 'pipe_len_sel_basc' onchange='cleanOut_basc()'>" + data;
+                        $("#div_pipe_len_sel_basc").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_basc"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function calculate_basc() {
                 var variables = {
                     "water_dens": $("#water_dens").val(),
@@ -226,8 +330,14 @@
                     "pipe_lenght_basc": $("#pipe_lenght_basc").val(),
 
                 };
-
-                var res = buoyancy_analisis_form(variables);
+                
+                var unidades = {
+                    "pipe_len_sel_basc": $("#pipe_len_sel_basc").val().split(",")[1],
+                    "nom_wall_sel_basc": $("#nom_wall_sel_basc").val().split(",")[1],
+                    "nomout_sel_basc": $("#nomout_sel_basc").val().split(",")[1]
+                };
+                
+                var res = buoyancy_analisis_form(variables, unidades);
 
                 $("#pipe_weight_basc").val(res[0]);
                 $("#total_vol_basc").val(res[1]);
@@ -323,18 +433,18 @@
             }
 
             function onchange_nps_basc() {
-                //cleanOut_basc();
                 var po = $("#nomps_sel_basc").val();
                 $("#nom_pipe_basc").val(po);
                 $("#nomout_basc").val(po);
                 load_wt_sel_basc();
+                cleanOut_basc();
             }
             function onchange_wt_basc() {
-                //cleanOut_basc();
                 var val = $("#wthi_sel_basc").val().trim().split(",");
                 $("#nom_wall_basc").val(val[1]);
+                cleanOut_basc();
             }
-                    
+
             function cleanOut_basc() {
                 $("#pipe_weight_basc").val("");
                 $("#total_vol_basc").val("");
@@ -346,7 +456,7 @@
                 $("#weight_sugm_pipe_basc").val("");
                 $("#weight_joint_basc").val("");
             }
-            
+
             function cleanIn_basc() {
                 $("#nomout_basc").val("");
                 $("#nom_wall_basc").val("");
@@ -354,13 +464,25 @@
                 $("#corr_coa_thick_basc").val("");
                 $("#pipe_lenght_basc").val("");
             }
-            
+
             function cleanAll_basc() {
                 cleanOut_basc();
                 cleanIn_basc();
                 $("#water_dens").val("");
                 $("#conc_water_dens").val("");
                 $("#corr_coa").val("");
+            }
+            
+            function onchange_Input_basc(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_basc();
             }
         </script>        
     </body>
