@@ -5937,7 +5937,7 @@ function design_pressure_form(vari, uni) {
     return [P.toFixed(3)];
 }
 //3.6
-function desing_pressure_polyethylene_form(vari) {
+function desing_pressure_polyethylene_form(vari, uni) {
 
     /*
      * ENTRADA
@@ -5955,6 +5955,14 @@ function desing_pressure_polyethylene_form(vari) {
     var TextBox8 = parseFloat(vari.hyd_pipeop_dpp);
     var TextBox9 = parseFloat(vari.fact_pipeop_dpp);
     var ComboBox2 = parseFloat(vari.minimal_sel_dpp);
+    
+    TextBox5 = get_Long(TextBox5, uni.nom_pipeop_sel_dpp, "in");
+    TextBox6 = get_Long(TextBox6, uni.out_pipeop_sel_dpp, "in");
+    TextBox7 = get_Long(TextBox7, uni.wall_pipeop_sel_dpp, "in");
+    
+    TextBox8 = get_Pres(TextBox8, uni.hyd_pipeop_sel_dpp, "psig");
+    
+    
     //ComboBox2 = 21; // coregir cuando se carge el combo
     var t = TextBox6 / ComboBox2;
     /*if (t < 0.062){

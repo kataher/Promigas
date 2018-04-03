@@ -118,16 +118,66 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal pipe size:</label>
-                                <input type="text" class="form-control" id="nom_pipeop_dpp" name="nom_pipeop_dpp"> 
-                                <label>Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="out_pipeop_dpp" name="out_pipeop_dpp"> 
-                                <label>Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="wall_pipeop_dpp" name="wall_pipeop_dpp"> 
-                                <label>Hydrostatic Design Basis [psi]: </label>            
-                                <input type="text" name="hyd_pipeop_dpp" id="hyd_pipeop_dpp" class="form-control">
-                                <label>Design Factor:</label>
-                                <input type="text" name="fact_pipeop_dpp" id="fact_pipeop_dpp" class="form-control">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal pipe size:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_pipeop_dpp" name="nom_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_pipeop_sel_dpp">
+                                        <select class="form-control" id="nom_pipeop_sel_dpp" name="nom_pipeop_sel_dpp" onchange='cleanOut_dpp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Outside Diameter [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="out_pipeop_dpp" name="out_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_out_pipeop_sel_dpp">
+                                        <select class="form-control" id="out_pipeop_sel_dpp" name="out_pipeop_sel_dpp" onchange='cleanOut_dpp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Wall Thickness [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="wall_pipeop_dpp" name="wall_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_wall_pipeop_sel_dpp">
+                                        <select class="form-control" id="wall_pipeop_sel_dpp" name="wall_pipeop_sel_dpp" onchange='cleanOut_dpp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Hydrostatic Design Basis [psi]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="hyd_pipeop_dpp" name="hyd_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_hyd_pipeop_sel_dpp">
+                                        <select class="form-control" id="hyd_pipeop_sel_dpp" name="hyd_pipeop_sel_dpp" onchange='cleanOut_dpp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Design Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="fact_pipeop_dpp" name="fact_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
+                                    </div>
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -145,7 +195,7 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Design Pressure [psig]:</label>
-                                <input type="text" name="despress_pipeop_dpp" id="despress_pipeop_dpp" class="form-control"> 
+                                <input type="text" name="despress_pipeop_dpp" id="despress_pipeop_dpp" class="form-control" readonly> 
                                 <BR>
                                 <div>    
                                     <input type="button" id="calculateBtn_dpp" name="calculateBtn_dpp" value="Calculate" onclick="calculate_dpp()" class="btn btn-info btn-block">
@@ -182,8 +232,68 @@
                 $("#opt_dpp").val("1");
                 load_np_sel_dpp("npsn");
                 load_hyd_sel_wtpe("HDB");
-
+                load_in_sel_dpp();
+                load_pres_sel_dpp();
             });
+            
+            function load_in_sel_dpp() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='nom_pipeop_sel_dpp' id='nom_pipeop_sel_dpp' onchange='cleanOut_dpp()'>" + data;
+                        $("#div_nom_pipeop_sel_dpp").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='out_pipeop_sel_dpp' id='out_pipeop_sel_dpp' onchange='cleanOut_dpp()'>" + data;
+                        $("#div_out_pipeop_sel_dpp").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='wall_pipeop_sel_dpp' id='wall_pipeop_sel_dpp' onchange='cleanOut_dpp()'>" + data;
+                        $("#div_wall_pipeop_sel_dpp").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_dpp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
+            function load_pres_sel_dpp() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='hyd_pipeop_sel_dpp' id='hyd_pipeop_sel_dpp' onchange='cleanOut_dpp()'>" + data;
+                        $("#div_hyd_pipeop_sel_dpp").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_dpp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function calculate_dpp() {
                 var variables = {
                     "nom_pipeop_dpp": $("#nom_pipeop_dpp").val(),
@@ -194,7 +304,14 @@
                     "minimal_sel_dpp": $("#wthi_sel_dpp option:selected").html()
                 };
 
-                var res = desing_pressure_polyethylene_form(variables);
+                var unidades = {
+                    "nom_pipeop_sel_dpp": $("#nom_pipeop_sel_dpp").val().split(",")[1],
+                    "wall_pipeop_sel_dpp": $("#wall_pipeop_sel_dpp").val().split(",")[1],
+                    "out_pipeop_sel_dpp": $("#out_pipeop_sel_dpp").val().split(",")[1],
+                    "hyd_pipeop_sel_dpp": $("#hyd_pipeop_sel_dpp").val().split(",")[1]
+                };
+                
+                var res = desing_pressure_polyethylene_form(variables, unidades);
 
                 $("#despress_pipeop_dpp").val(res[0]);
 
@@ -285,14 +402,14 @@
                 });
             }
             function onchange_nps_dpp() {
-                //cleanOut_rwb();
+                cleanOut_dpp();
                 var po = $("#nomps_sel_dpp").val();
                 $("#nom_pipeop_dpp").val(po);
                 $("#out_pipeop_dpp").val(po);
                 load_wt_sel_dpp();
             }
             function onchange_wt_dpp() {
-                //cleanOut_rwb();
+                cleanOut_dpp();
                 var val = $("#wthi_sel_dpp").val().trim().split(",");
                 $("#wall_pipeop_dpp").val(val[1]);
             }
@@ -330,7 +447,7 @@
             function onchange_hyd_wtpe() {
                 var po = $("#piping_sel_dpp").val();
                 $("#hyd_pipeop_dpp").val(po.split(",")[1]);
-
+                cleanOut_dpp();
             }
 
             function cleanOut_dpp() {
@@ -348,6 +465,18 @@
             function cleanAll_dpp() {
                 cleanOut_dpp();
                 cleanIn_dpp();
+            }
+            
+            function onchange_Input_dpp(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_dpp();
             }
         </script>          
     </body>
