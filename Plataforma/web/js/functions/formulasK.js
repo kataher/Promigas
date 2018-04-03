@@ -5927,7 +5927,7 @@ function design_pressure_form(vari, uni) {
     D = get_Long(D, uni.nomout_pipeop_sel_dp, "in");
     t = get_Long(t, uni.nomwall_pipeop_sel_dp, "in");
     
-    S = get_Pres(S, uni.yield_pipeop_sel_dp, "psig");
+    //S = get_Pres(S, uni.yield_pipeop_sel_dp, "psig");
     
     var P = 2 * S * t * F * E * T / D;
     /*
@@ -5960,7 +5960,7 @@ function desing_pressure_polyethylene_form(vari, uni) {
     TextBox6 = get_Long(TextBox6, uni.out_pipeop_sel_dpp, "in");
     TextBox7 = get_Long(TextBox7, uni.wall_pipeop_sel_dpp, "in");
     
-    TextBox8 = get_Pres(TextBox8, uni.hyd_pipeop_sel_dpp, "psig");
+    //TextBox8 = get_Pres(TextBox8, uni.hyd_pipeop_sel_dpp, "psig");
     
     
     //ComboBox2 = 21; // coregir cuando se carge el combo
@@ -6052,7 +6052,7 @@ function gaspipeline_form(vari) {
     return [Rw, D, W, RW, Ux, (D * 3.2), W1];
 }
 //3.8
-function hoop_longitudinal_form(vari) {
+function hoop_longitudinal_form(vari, uni) {
     /*
      * ENTRADA
      * F15 = Tamaño nominal de la tubería
@@ -6065,6 +6065,13 @@ function hoop_longitudinal_form(vari) {
     var F16 = parseFloat(vari.nomout_hoop);
     var F17 = parseFloat(vari.nom_wall_hoop);
     var F18 = parseFloat(vari.int_press_hoop);
+    
+    F15 = get_Long(F15, uni.nom_pipe_sel_hoop, "in");
+    F16 = get_Long(F16, uni.nomout_sel_hoop, "in");
+    F17 = get_Long(F17, uni.nom_wall_sel_hoop, "in");
+    
+    //F18 = get_Pres(F18, uni.int_press_sel_hoop, "psig");
+    
     var F21 = F18 * F16 / (2 * F17);
     var F22 = F18 * F16 / (4 * F17);
     /*

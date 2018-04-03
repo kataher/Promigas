@@ -98,14 +98,57 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal pipe size:</label>
-                                <input type="text" name="nom_pipe_hoop" id="nom_pipe_hoop" class="form-control">
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_hoop" name="nomout_hoop"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_hoop" name="nom_wall_hoop">                  
-                                <label>Internal Pressure [psig]: </label>            
-                                <input type="text" name="int_press_hoop" id="int_press_hoop" class="form-control">                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal pipe size:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_pipe_hoop" name="nom_pipe_hoop" onchange='onchange_Input_hoop(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_pipe_sel_hoop">
+                                        <select class="form-control" id="nom_pipe_sel_hoop" name="nom_pipe_sel_hoop" onchange='cleanOut_hoop()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Outside Diameter [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomout_hoop" name="nomout_hoop" onchange='onchange_Input_hoop(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomout_sel_hoop">
+                                        <select class="form-control" id="nomout_sel_hoop" name="nomout_sel_hoop" onchange='cleanOut_hoop()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Wall Thickness [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_wall_hoop" name="nom_wall_hoop" onchange='onchange_Input_hoop(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_wall_sel_hoop">
+                                        <select class="form-control" id="nom_wall_sel_hoop" name="nom_wall_sel_hoop" onchange='cleanOut_hoop()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Internal Pressure [psig]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="int_press_hoop" name="int_press_hoop" onchange='onchange_Input_hoop(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_int_press_sel_hoop">
+                                        <select class="form-control" id="int_press_sel_hoop" name="int_press_sel_hoop" onchange='cleanOut_hoop()'> 
+                                        </select>
+                                    </div>
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -123,10 +166,10 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Hoop Stress [psi]:</label>
-                                <input type="text" name="hoop_press_hoop" id="hoop_press_hoop" class="form-control"> 
+                                <input type="text" name="hoop_press_hoop" id="hoop_press_hoop" class="form-control" readonly> 
                                 <BR>
                                 <label>Longitudinal Stress [psi]:</label>
-                                <input type="text" name="long_press_hoop" id="long_press_hoop" class="form-control"> 
+                                <input type="text" name="long_press_hoop" id="long_press_hoop" class="form-control" readonly> 
                                 <BR>                                                                                                
                                 <div>    
                                     <input type="button" id="calculateBtn_hoop" name="calculateBtn_hoop" value="Calculate" onclick="calculate_hoop()" class="btn btn-info btn-block">
@@ -161,8 +204,68 @@
                         $("#error_Dialog_hoop"));
                 $("#opt_hoop").val("1");
                 load_np_sel_hoop("npsn");
-
+                load_in_sel_hoop();
+                load_pres_sel_hoop();
             });
+            
+            function load_in_sel_hoop() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='nom_pipe_sel_hoop' id='nom_pipe_sel_hoop' onchange='cleanOut_hoop()'>" + data;
+                        $("#div_nom_pipe_sel_hoop").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nomout_sel_hoop' id='nomout_sel_hoop' onchange='cleanOut_hoop()'>" + data;
+                        $("#div_nomout_sel_hoop").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nom_wall_sel_hoop' id='nom_wall_sel_hoop' onchange='cleanOut_hoop()'>" + data;
+                        $("#div_nom_wall_sel_hoop").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_hoop"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
+            function load_pres_sel_hoop() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='int_press_sel_hoop' id='int_press_sel_hoop' onchange='cleanOut_hoop()'>" + data;
+                        $("#div_int_press_sel_hoop").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_hoop"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function calculate_hoop() {
                 var variables = {
                     "nom_pipe_hoop": $("#nom_pipe_hoop").val(),
@@ -170,8 +273,15 @@
                     "nom_wall_hoop": $("#nom_wall_hoop").val(),
                     "int_press_hoop": $("#int_press_hoop").val()
                 };
+                
+                var unidades = {
+                    "nom_pipe_sel_hoop": $("#nom_pipe_sel_hoop").val().split(",")[1],
+                    "nomout_sel_hoop": $("#nomout_sel_hoop").val().split(",")[1],
+                    "nom_wall_sel_hoop": $("#nom_wall_sel_hoop").val().split(",")[1],
+                    "int_press_sel_hoop": $("#int_press_sel_hoop").val().split(",")[1]
+                };
 
-                var res = hoop_longitudinal_form(variables);
+                var res = hoop_longitudinal_form(variables, unidades);
 
                 $("#hoop_press_hoop").val(res[0]);
                 $("#long_press_hoop").val(res[1]);
@@ -250,14 +360,14 @@
             }
 
             function onchange_nps_hoop() {
-                //cleanOut_hoop();
+                cleanOut_hoop();
                 var po = $("#nomps_sel_hoop").val();
                 $("#nom_pipe_hoop").val(po);
                 $("#nomout_hoop").val(po);
                 load_wt_sel_hoop();
             }
             function onchange_wt_hoop() {
-                //cleanOut_hoop();
+                cleanOut_hoop();
                 var val = $("#wthi_sel_hoop").val().trim().split(",");
                 $("#nom_wall_hoop").val(val[1]);
             }
@@ -277,6 +387,18 @@
             function cleanAll_hoop() {
                 cleanOut_hoop();
                 cleanIn_hoop();
+            }
+            
+            function onchange_Input_hoop(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_hoop();
             }
         </script>          
     </body>

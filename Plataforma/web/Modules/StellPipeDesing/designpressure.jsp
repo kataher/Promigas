@@ -374,18 +374,14 @@
                 load_joinf_sel_dp("jointf5l");
                 load_desingf_sel_dp();
                 load_pres_sel_dp();
-                console.log("Call");
                 load_in_sel_dp();
-                console.log("Called");
             });
 
             function load_in_sel_dp() {
-                console.log("Entering");
                 var parametros = {
                     "combo": "in",
                     "opcion": "5"
                 };
-                console.log("Calling");
                 $.ajax({
                     type: "POST",
                     url: "Modules/manager.jsp",
@@ -395,7 +391,6 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        console.log("Filling");
                         var newHtml = "<select class='form-control' name='nom_pipeop_sel_dp' id='nom_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
                         $("#div_nom_pipeop_sel_dp").html(newHtml);
 
@@ -419,7 +414,6 @@
                     "combo": "pres",
                     "opcion": "5"
                 };
-                console.log("Calling2");
                 $.ajax({
                     type: "POST",
                     url: "Modules/manager.jsp",
@@ -431,7 +425,6 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' name='yield_pipeop_sel_dp' id='yield_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
                         $("#div_yield_pipeop_sel_dp").html(newHtml);
-                        console.log("Filling2");
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_dp"), "Error");

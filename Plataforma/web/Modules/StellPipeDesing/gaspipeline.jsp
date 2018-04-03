@@ -138,11 +138,11 @@
                                 </div>
                                 <div class="panel-body">                                                        
                                     <label>R Soil Parameter Funcion:</label>
-                                    <input type="text" name="r_soil" id="r_soil" class="form-control">
+                                    <input type="text" name="r_soil" id="r_soil" class="form-control" readonly>
                                     <label>Depth of Crater [ft.]:</label>
-                                    <input type="text" name="depth_cra" id="depth_cra" class="form-control">                   
+                                    <input type="text" name="depth_cra" id="depth_cra" class="form-control" readonly>                   
                                     <label>Width of Crater [ft.]:</label>
-                                    <input type="text" name="width_cra" id="width_cra" class="form-control">                    
+                                    <input type="text" name="width_cra" id="width_cra" class="form-control" readonly>                    
                                 </div>          
                             </div>
                             <div class="panel panel-default">
@@ -151,7 +151,7 @@
                                 </div>
                                 <div class="panel-body">                                                        
                                     <label>Radius of Crater [ft.]:</label>
-                                    <input type="text" name="rad_cra" id="rad_cra" class="form-control">                  
+                                    <input type="text" name="rad_cra" id="rad_cra" class="form-control" readonly>                  
                                 </div>          
                             </div>
                             <div class="panel panel-default">
@@ -160,11 +160,11 @@
                                 </div>
                                 <div class="panel-body">                                                        
                                     <label>Velocity of Explosive Gases [ft/sec]:</label>
-                                    <input type="text" name="vel_exp" id="vel_exp" class="form-control">                  
+                                    <input type="text" name="vel_exp" id="vel_exp" class="form-control" readonly>                  
                                     <label>Depth of Crater [ft.]:</label>
-                                    <input type="text" name="depth_cra_PRCI" id="depth_cra_PRCI" class="form-control">                   
+                                    <input type="text" name="depth_cra_PRCI" id="depth_cra_PRCI" class="form-control" readonly>                   
                                     <label>Width of Crater [ft.]:</label>
-                                    <input type="text" name="width_cra_PRCI" id="width_cra_PRCI" class="form-control">
+                                    <input type="text" name="width_cra_PRCI" id="width_cra_PRCI" class="form-control" readonly>
                                 </div>          
                             </div>  
                             <div class="col-lg-12">&nbsp;</div>
