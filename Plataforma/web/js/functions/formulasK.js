@@ -5902,7 +5902,7 @@ function buyancy_weight_form(vari, uni) {
     return [F26.toFixed(2), F27.toFixed(2), F28.toFixed(2), F29.toFixed(2), F30.toFixed(2), F31.toFixed(2), F32.toFixed(2), F33.toFixed(2)];
 }
 //3.5
-function design_pressure_form(vari) {
+function design_pressure_form(vari, uni) {
     /*
      *  Entrada
      *  nom_pipeop_dp = Tamaño nominal de la tubería
@@ -5923,6 +5923,12 @@ function design_pressure_form(vari) {
     var E = parseFloat(vari.long_pipeop_dp);
     var T = parseFloat(vari.temp_pipeop_dp);
 
+    nom_pipeop_dp = get_Long(nom_pipeop_dp, uni.nom_pipeop_sel_dp, "in");
+    D = get_Long(D, uni.nomout_pipeop_sel_dp, "in");
+    t = get_Long(t, uni.nomwall_pipeop_sel_dp, "in");
+    
+    S = get_Pres(S, uni.yield_pipeop_sel_dp, "psig");
+    
     var P = 2 * S * t * F * E * T / D;
     /*
      * Salida

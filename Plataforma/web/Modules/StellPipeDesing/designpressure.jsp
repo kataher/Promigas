@@ -113,7 +113,8 @@
                                 <div class="form-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            Design Factor -F                        </div>
+                                            Design Factor -F                       
+                                        </div>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-lg-12">
@@ -198,22 +199,93 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal pipe size:</label>
-                                <input type="text" class="form-control" id="nom_pipeop_dp" name="nom_pipeop_dp"> 
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_pipeop_dp" name="nomout_pipeop_dp"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nomwall_pipeop_dp" name="nomwall_pipeop_dp"> 
-                                <label>Grade: </label>            
-                                <input type="text" name="gra_pipeop_dp" id="gra_pipeop_dp" class="form-control">
-                                <label>Specified Minimun Yield Strength [psi]: </label>
-                                <input type="text" name="yield_pipeop_dp" id="yield_pipeop_dp" class="form-control">
-                                <label>Design Factor:</label>
-                                <input type="text" name="fact_pipeop_dp" id="fact_pipeop_dp" class="form-control">
-                                <label>Longitudinal Join Factor:</label>
-                                <input type="text" name="long_pipeop_dp" id="long_pipeop_dp" class="form-control">
-                                <label>Temperature Derating Factor:</label>
-                                <input type="text" name="temp_pipeop_dp" id="temp_pipeop_dp" class="form-control">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal pipe size:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_pipeop_dp" name="nom_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_pipeop_sel_dp">
+                                        <select class="form-control" id="nom_pipeop_sel_dp" name="nom_pipeop_sel_dp" onchange='cleanOut_dp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Outside Diameter [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomout_pipeop_dp" name="nomout_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomout_pipeop_sel_dp">
+                                        <select class="form-control" id="nomout_pipeop_sel_dp" name="nomout_pipeop_sel_dp" onchange='cleanOut_dp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Wall Thickness [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomwall_pipeop_dp" name="nomwall_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomwall_pipeop_sel_dp">
+                                        <select class="form-control" id="nomwall_pipeop_sel_dp" name="nomwall_pipeop_sel_dp" onchange='cleanOut_dp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Grade:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="gra_pipeop_dp" name="gra_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Specified Minimun Yield Strength [psi]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="yield_pipeop_dp" name="yield_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_yield_pipeop_sel_dp">
+                                        <select class="form-control" id="yield_pipeop_sel_dp" name="yield_pipeop_sel_dp" onchange='cleanOut_dp()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Design Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="fact_pipeop_dp" name="fact_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Longitudinal Join Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="long_pipeop_dp" name="long_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Temperature Derating Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="temp_pipeop_dp" name="temp_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                    </div>
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -231,7 +303,7 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Design Pressure [psig]:</label>
-                                <input type="text" name="despress_pipeop_dp" id="despress_pipeop_dp" class="form-control"> 
+                                <input type="text" name="despress_pipeop_dp" id="despress_pipeop_dp" class="form-control" readonly> 
                                 <BR>
                                 <div>    
                                     <input type="button" id="calculateBtn_dp" name="calculateBtn_dp" value="Calculate" onclick="calculate_dp()" class="btn btn-info btn-block">
@@ -260,7 +332,6 @@
         <input type="hidden" id="opt_dp" name="opt_dp"> 
         <input type="hidden" id="id_dp" name="id_dp">   
         <script>
-
             function calculate_dp() {
                 //alert("Entro");
                 var variables = {
@@ -273,17 +344,23 @@
                     "fact_pipeop_dp": $("#fact_pipeop_dp").val(),
                     "long_pipeop_dp": $("#long_pipeop_dp").val(),
                     "temp_pipeop_dp": $("#temp_pipeop_dp").val()
-
-
                 };
 
-                var res = design_pressure_form(variables);
+                var unidades = {
+                    "nom_pipeop_sel_dp": $("#nom_pipeop_sel_dp").val().split(",")[1],
+                    "nomwall_pipeop_sel_dp": $("#nomwall_pipeop_sel_dp").val().split(",")[1],
+                    "nomout_pipeop_sel_dp": $("#nomout_pipeop_sel_dp").val().split(",")[1],
+                    "yield_pipeop_sel_dp": $("#yield_pipeop_sel_dp").val().split(",")[1]
+                };
+
+                var res = design_pressure_form(variables, unidades);
 
                 $("#despress_pipeop_dp").val(res[0]);
 
 
                 show_OkDialog($("#calculate_Dialog_wdp"), "Proceso satisfactorio");
             }
+
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_dp"),
@@ -296,8 +373,74 @@
                 load_grade_sel_dp("gra5l");
                 load_joinf_sel_dp("jointf5l");
                 load_desingf_sel_dp();
-
+                load_pres_sel_dp();
+                console.log("Call");
+                load_in_sel_dp();
+                console.log("Called");
             });
+
+            function load_in_sel_dp() {
+                console.log("Entering");
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                console.log("Calling");
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        console.log("Filling");
+                        var newHtml = "<select class='form-control' name='nom_pipeop_sel_dp' id='nom_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
+                        $("#div_nom_pipeop_sel_dp").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nomout_pipeop_sel_dp' id='nomout_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
+                        $("#div_nomout_pipeop_sel_dp").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nomwall_pipeop_sel_dp' id='nomwall_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
+                        $("#div_nomwall_pipeop_sel_dp").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_dp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
+            function load_pres_sel_dp() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                console.log("Calling2");
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='yield_pipeop_sel_dp' id='yield_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
+                        $("#div_yield_pipeop_sel_dp").html(newHtml);
+                        console.log("Filling2");
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_dp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
 
             function load_deratingf_sel_dp() {
                 var parametros = {
@@ -380,43 +523,6 @@
                     },
                     error: function (xhr, ajaxOptions, err) {
                         $("#opt_dp").val("1");
-                        show_OkDialog($("#error_Dialog_dp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function load_in_sel_dp() {
-                var parametros = {
-                    "combo": "in",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"md_sel_dp\" id= \"md_sel_dp\" onchange=\"cleanOut_dp()\">" + data;
-                        $("#div_md_sel_dp").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"pipeo_sel_dp\" id= \"pipeo_sel_dp\" onchange=\"cleanOut_dp()\">" + data;
-                        $("#div_pipeo_sel_dp").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"np_sel_dp\" id= \"np_sel_dp\" onchange=\"cleanOut_dp()\">" + data;
-                        $("#div_np_sel_dp").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"le_sel_dp\" id= \"le_sel_dp\" onchange=\"cleanOut_dp()\">" + data;
-                        $("#div_le_sel_dp").html(newHtml);
-
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_dp"), "Error");
                     },
                     complete: function () {
@@ -672,17 +778,17 @@
                 //  cleanOut_dp();
 
             }
+            
             function onchange_Input_dp(inp) {
 
                 var sw = validateDecimal(inp.value);
 
-                if (sw != true) {
+                if (sw !== true) {
                     inp.value = "";
                 }
 
                 onchange_Input_zero(inp);
-                // cleanOut_dp();
-
+                cleanOut_dp();
             }
 
             function onchange_nps_dp() {
@@ -690,10 +796,12 @@
                 $("#nom_pipeop_dp").val(res);
                 $("#nomout_pipeop_dp").val($("#nominalps_sel_dp").val());
                 load_wt_sel_dp();
+                cleanOut_dp();
             }
 
             function onchange_wt_dp() {
                 $("#nomwall_pipeop_dp").val($("#wt_sel_dp").val().split(",")[1]);
+                cleanOut_dp();
             }
 
             function onchange_gra_dp() {
@@ -701,28 +809,28 @@
                 $("#specifiedmys_dp").val(x.split(",")[1]);
                 var res = $("#grade_sel_dp option:selected").html();
                 $("#gra_pipeop_dp").val(x.split(",")[1]);
-                // cleanOut_dp();
+                cleanOut_dp();
             }
 
             function onchange_jf_dp() {
                 $("#long_pipeop_dp").val($("#longitudinal_jf_dp").val().split(",")[1]);
-                //cleanOut_dp();
+                cleanOut_dp();
             }
 
             function onchange_df_dp() {
                 $("#temp_pipeop_dp").val($("#td_sel_dp").val().split(",")[1]);
-                //cleanOut_dp();
+                cleanOut_dp();
             }
 
             function onchange_defa_dp() {
                 $("#fact_pipeop_dp").val($("#design_factor_sel_dp").val().split(",")[1]);
-                // cleanOut_dp();
+                cleanOut_dp();
             }
-            
+
             function cleanOut_dp() {
                 $("#despress_pipeop_dp").val("");
             }
-            
+
             function cleanIn_dp() {
                 $("#nom_pipeop_dp").val("");
                 $("#nomout_pipeop_dp").val("");
@@ -733,7 +841,7 @@
                 $("#long_pipeop_dp").val("");
                 $("#temp_pipeop_dp").val("");
             }
-            
+
             function cleanAll_dp() {
                 cleanOut_dp();
                 cleanIn_dp();
