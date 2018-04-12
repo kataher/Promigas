@@ -6631,7 +6631,7 @@ function installment_pipe_opera_form(vari) {
 
 }
 // 3.11
-function internal_pressure_form(vari) {
+function internal_pressure_form(vari, uni) {
     /*
      * ENTRADA
      * F14 = Tamaño nominal de la tubería
@@ -6650,6 +6650,10 @@ function internal_pressure_form(vari) {
     var F18 = parseFloat(vari.min_yield_ipsmys);
     var F19 = parseFloat(vari.porc_SMYS_ipsmys);
 
+    F14 = get_Long(F14, uni.nom_pipe_sel_ipsmys, "in");
+    F15 = get_Long(F15, uni.nomout_sel_ipsmys, "in");
+    F16 = get_Long(F16, uni.nom_wall_sel_ipsmys, "in");
+    
     var F22 = (F19 / 100) * F18 * 2 * F16 / F15;
     /*
      * Salida

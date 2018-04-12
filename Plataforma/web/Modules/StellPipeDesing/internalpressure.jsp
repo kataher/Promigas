@@ -77,7 +77,7 @@
                                                 <div id="div_nomps_sel_ipsmys">
                                                     <select class="form-control" id="nominal_sel_ipsmys" name="nominal_sel_ipsmys"> </select>
                                                 </div>
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="col-lg-12">  
                                             <div class="col-lg-5">                      
@@ -118,18 +118,76 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal pipe size:</label>
-                                <input type="text" name="nom_pipe_ipsmys" id="nom_pipe_ipsmys" class="form-control">
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_ipsmys" name="nomout_ipsmys"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_ipsmys" name="nom_wall_ipsmys">                  
-                                <label>Grade: </label>            
-                                <input type="text" name="grade_ipsmys" id="grade_ipsmys" class="form-control">
-                                <label>Specified Minimun Yield Strength [psi]: </label>
-                                <input type="text" name="min_yield_ipsmys" id="min_yield_ipsmys" class="form-control">
-                                <label>Porcent of SMYS [%]: </label>
-                                <input type="text" name="porc_SMYS_ipsmys" id="porc_SMYS_ipsmys" class="form-control">                  
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal pipe size:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_pipe_ipsmys" name="nom_pipe_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_pipe_sel_ipsmys">
+                                        <select class="form-control" id="nom_pipe_sel_ipsmys" name="nom_pipe_sel_ipsmys" onchange='cleanOut_ipsmys()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Outside Diameter [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomout_ipsmys" name="nomout_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomout_sel_ipsmys">
+                                        <select class="form-control" id="nomout_sel_ipsmys" name="nomout_sel_ipsmys" onchange='cleanOut_ipsmys()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Wall Thickness [in.]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_wall_ipsmys" name="nom_wall_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_wall_sel_ipsmys">
+                                        <select class="form-control" id="nom_wall_sel_ipsmys" name="nom_wall_sel_ipsmys" onchange='cleanOut_ipsmys()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Grade:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="grade_ipsmys" name="grade_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Specified Minimun Yield Strength [psi]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="min_yield_ipsmys" name="min_yield_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_min_yield_sel_ipsmys">
+                                        <select class="form-control" id="min_yield_sel_ipsmys" name="min_yield_sel_ipsmys" onchange='cleanOut_ipsmys()'> 
+                                            <option>psi</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Percent of SMYS [%]:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="porc_SMYS_ipsmys" name="porc_SMYS_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                    </div>
+                                </div>
                             </div> 
                         </div>
                     </div>
@@ -147,7 +205,7 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Internal Pressure [psi]:</label>
-                                <input type="text" name="int_press" id="int_press" class="form-control"> 
+                                <input type="text" name="int_press" id="int_press" class="form-control" readonly> 
                                 <BR>                                                                                                
                                 <div>    
                                     <input type="button" id="calculateBtn_ip" name="calculateBtn_ip" value="Calculate" onclick="calculate_ipsmys()" class="btn btn-info btn-block">
@@ -184,7 +242,41 @@
                 load_np_sel_ipsmys("npsn");
                 load_grade_sel_ipsmys("gra5l", 0);
                 onchange_gra_ipsmys();
+                load_in_sel_ipsmys();
             });
+
+            function load_in_sel_ipsmys() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='nom_wall_sel_ipsmys' id='nom_wall_sel_ipsmys' onchange='cleanOut_ipsmys()'>" + data;
+                        $("#div_nom_wall_sel_ipsmys").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nomout_sel_ipsmys' id='nomout_sel_ipsmys' onchange='cleanOut_ipsmys()'>" + data;
+                        $("#div_nomout_sel_ipsmys").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='nom_pipe_sel_ipsmys' id='nom_pipe_sel_ipsmys' onchange='cleanOut_ipsmys()'>" + data;
+                        $("#div_nom_pipe_sel_ipsmys").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_ipsmys"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
             function calculate_ipsmys() {
                 var variables = {
                     "nom_pipe_ipsmys": $("#nom_pipe_ipsmys").val(),
@@ -195,7 +287,13 @@
                     "porc_SMYS_ipsmys": $("#porc_SMYS_ipsmys").val()
                 };
 
-                var res = internal_pressure_form(variables);
+                var unidades = {
+                    "nom_wall_sel_ipsmys": $("#nom_wall_sel_ipsmys").val().split(",")[1],
+                    "nomout_sel_ipsmys": $("#nomout_sel_ipsmys").val().split(",")[1],
+                    "nom_pipe_sel_ipsmys": $("#nom_pipe_sel_ipsmys").val().split(",")[1]
+                };
+
+                var res = internal_pressure_form(variables, unidades);
 
                 $("#int_press").val(res[0]);
                 show_OkDialog($("#calculate_Dialog_ipsmys"), "Proceso satisfactorio");
@@ -320,14 +418,14 @@
                 });
             }
             function onchange_nps_ipsmys() {
-                //cleanOut_ipsmys();
+                cleanOut_ipsmys();
                 var po = $("#nomps_sel_ipsmys").val();
                 $("#nom_pipe_ipsmys").val(po);
                 $("#nomout_ipsmys").val(po);
                 load_wt_sel_ipsmys();
             }
             function onchange_wt_ipsmys() {
-                //cleanOut_ipsmys();
+                cleanOut_ipsmys();
                 var val = $("#wthi_sel_ipsmys").val().trim().split(",");
                 $("#nom_wall_ipsmys").val(val[1]);
             }
@@ -337,6 +435,7 @@
 
                 $("#grade_ipsmys").val(ind);
                 $("#min_yield_ipsmys").val(x.split(",")[1]);
+                cleanOut_ipsmys();
             }
 
             function cleanOut_ipsmys() {
@@ -355,6 +454,18 @@
             function cleanAll_ipsmys() {
                 cleanOut_ipsmys();
                 cleanIn_ipsmys();
+            }
+
+            function onchange_Input_ipsmys(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_ipsmys();
             }
         </script>      
     </body>
