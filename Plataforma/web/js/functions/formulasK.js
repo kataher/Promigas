@@ -6663,7 +6663,7 @@ function internal_pressure_form(vari, uni) {
     return [F22.toFixed(3)];
 }
 //3.12
-function linear_thermal_form(vari) {
+function linear_thermal_form(vari, uni) {
     /*
      * ENTRADA
      * F14 = Pipe Lenght
@@ -6676,6 +6676,8 @@ function linear_thermal_form(vari) {
     var F15 = parseFloat(vari.coeff_exp_lther);
     var F16 = parseFloat(vari.temp_chan_lther);
     var F17 = parseFloat(vari.mod_elas_lther);
+    
+    F14 = get_Long(F14, uni.pipe_lenght_sel_lther, "in");
 
     var F20 = (F15 * 12) * F14 * F16;
     var F21 = F17 * F15 * F16;

@@ -58,38 +58,58 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                               
-                            <div class="col-lg-6">
-                                <label>Pipe Lenght:</label>
-                            </div> 
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" id="pipe_lenght_lther" name="pipe_lenght_lther"><br>
-                            </div> 
-                            <div class="col-lg-6">                      
-                                <label>Coefficient of Linear Expansion [in./in.°F]:</label>
-                            </div> 
-                            <div class="col-lg-3">
-                                <div id="div_cole_sel_lther">
-                                    <select class="form-control" id="cole_sel_coef_lther" name="cole_sel_coef_lther"> </select>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pipe Length:</label>
                                 </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="pipe_lenght_lther" name="pipe_lenght_lther" onchange='onchange_Input_lther(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_pipe_lenght_sel_lther">
+                                    <select class="form-control" id="pipe_lenght_sel_lther" name="pipe_lenght_sel_lther" onchange='cleanOut_lther()'> 
+                                    </select>
+                                </div>
+                            </div>
 
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Coefficient of Linear Expansion [in./in.°F]:</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <div id="div_cole_sel_lther">
+                                        <select class="form-control" id="cole_sel_coef_lther" name="cole_sel_coef_lther" onchange='cleanOut_lther()'> </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-8">
+                                    <input class="form-control" type="text" id="coeff_exp_lther" name="coeff_exp_lther" onchange='onchange_Input_lther(this)' required><br>                  
+                                </div>
                             </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" id="coeff_exp_lther" name="coeff_exp_lther"><br>                  
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Temperature Change [°F]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="temp_chan_lther" name="temp_chan_lther" onchange='onchange_Input_lther(this)' required> 
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <label>Temperature Change [°F]:</label>
-                            </div> 
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" id="temp_chan_lther" name="temp_chan_lther"><br>
-                            </div> 
-                            <div class="col-lg-6">
-                                <label>Modulus of Elasticity [psi]:</label>
-                            </div> 
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" id="mod_elas_lther" name="mod_elas_lther"><br>
-                            </div>                                                                       
-                        </div> 
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Modulus of Elasticity [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="mod_elas_lther" name="mod_elas_lther" onchange='onchange_Input_lther(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_mod_elas_sel_lther">
+                                    <select class="form-control" id="mod_elas_sel_lther" name="mod_elas_sel_lther" onchange='cleanOut_lther()'>
+                                        <option>psi</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>                          
             </div>
@@ -105,10 +125,10 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">        
                                 <label>Pipe Linear Elongation [in.]:</label>
-                                <input type="text" name="pipe_linear_lther" id="pipe_linear_lther" class="form-control">
+                                <input type="text" name="pipe_linear_lther" id="pipe_linear_lther" class="form-control" readonly>
                                 <BR>
                                 <label>Longitudinal Stress Due to Temperature Change [psi]:</label>
-                                <input type="text" name="long_temp_lther" id="long_temp_lther" class="form-control">
+                                <input type="text" name="long_temp_lther" id="long_temp_lther" class="form-control" readonly>
                                 <BR>                                                           
                                 <div>    
                                     <input type="button" id="calculateBtn_lther" name="calculateBtn_lther" value="Calculate" onclick="calculate_lther()" class="btn btn-info btn-block">
@@ -143,8 +163,35 @@
                         $("#error_Dialog_lther"));
                 $("#opt_lther").val("1");
                 load_np_sel_lther("ltpe");
-
+                load_in_sel_lther();
             });
+
+            function load_in_sel_lther() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='pipe_lenght_sel_lther' id='pipe_lenght_sel_lther' onchange='cleanOut_lther()'>" + data;
+                        $("#div_pipe_lenght_sel_lther").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_lther"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
             function calculate_lther() {
                 var variables = {
                     "pipe_lenght_lther": $("#pipe_lenght_lther").val(),
@@ -153,7 +200,11 @@
                     "mod_elas_lther": $("#mod_elas_lther").val()
                 };
 
-                var res = linear_thermal_form(variables);
+                var unidades = {
+                    "pipe_lenght_sel_lther": $("#pipe_lenght_sel_lther").val().split(",")[1]
+                };
+
+                var res = linear_thermal_form(variables, unidades);
 
                 $("#pipe_linear_lther").val(res[0]);
                 $("#long_temp_lther").val(res[1]);
@@ -193,6 +244,7 @@
             function onchange_nps_lther() {
                 var po = $("#cole_sel_coef_lther").val();
                 $("#coeff_exp_lther").val(po.split(",")[1]);
+                cleanOut_lther();
             }
 
             function cleanOut_lther() {
@@ -210,6 +262,18 @@
             function cleanAll_lther() {
                 cleanOut_lther();
                 cleanIn_lther();
+            }
+
+            function onchange_Input_lther(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_lther();
             }
         </script>      
     </body>
