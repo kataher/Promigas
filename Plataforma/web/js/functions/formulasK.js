@@ -6748,7 +6748,7 @@ function maximunallowable(vari) {
 
 }
 //3.14
-function longitudinal_Stress_Form(vari) {
+function longitudinal_Stress_Form(vari, uni) {
     /*
      * ENTRADA
      *  TextBox5 = Tamaño nominal de la tubería
@@ -6781,6 +6781,15 @@ function longitudinal_Stress_Form(vari) {
     var ComboBox4 = parseFloat(vari.ComboBox4);
     var TextBox17 = parseFloat(vari.TextBox17);
 
+    TextBox5 = get_Long(TextBox5, uni.nom_pipe_sel_lostre, "in");
+    TextBox6 = get_Long(TextBox6, uni.pipe_dia_sel_lostre, "in");
+    TextBox7 = get_Long(TextBox7, uni.pipe_wall_sel_lostre, "in");
+    TextBox8 = get_Long(TextBox8, uni.out_pipe_dia_sel_lostre, "in");
+    TextBox12 = get_Long(TextBox12, uni.des_ver_sel_lostre, "ft");
+    
+    TextBox14 = get_Temp(TextBox14, uni.inst_temp_sel_lostre, "F");
+    TextBox15 = get_Temp(TextBox15, uni.oper_temp_pip_sel_lostre, "F");
+    
     var TextBox18 = (TextBox6 * TextBox13 * TextBox11) / (2 * TextBox7);
     var TextBox19 = (TextBox10 * 0.0000065) * (TextBox14 - TextBox15);
 //alert(TextBox10+" "+TextBox14+" "+TextBox15);

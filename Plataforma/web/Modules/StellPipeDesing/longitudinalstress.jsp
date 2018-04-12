@@ -109,41 +109,94 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <label>Nominal pipe size:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Nominal pipe size:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="nom_pipe_lostre" name="nom_pipe_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_nom_pipe_sel_lostre">
+                                                <select class="form-control" id="nom_pipe_sel_lostre" name="nom_pipe_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="nom_pipe_lostre" id="nom_pipe_lostre" class="form-control">
-                                        </div>                     
-                                        <div class="col-lg-12">
-                                            <label>Outside Pipe Diameter [in.]:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Outside Pipe Diameter [in.]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="pipe_dia_lostre" name="pipe_dia_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_pipe_dia_sel_lostre">
+                                                <select class="form-control" id="pipe_dia_sel_lostre" name="pipe_dia_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="pipe_dia_lostre" id="pipe_dia_lostre" class="form-control">
-                                        </div>                       
-                                        <div class="col-lg-12">
-                                            <label>Wall Thickness [in.]:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Wall Thickness [in.]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="pipe_wall_lostre" name="pipe_wall_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_pipe_wall_sel_lostre">
+                                                <select class="form-control" id="pipe_wall_sel_lostre" name="pipe_wall_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="pipe_wall_lostre" id="pipe_wall_lostre" class="form-control">
-                                        </div> 
-                                        <div class="col-lg-12">
-                                            <label>Inside Pipe Diameter [in.]:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Inside Pipe Diameter [in.]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="out_pipe_dia_lostre" name="out_pipe_dia_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_out_pipe_dia_sel_lostre">
+                                                <select class="form-control" id="out_pipe_dia_sel_lostre" name="out_pipe_dia_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="out_pipe_dia_lostre" id="out_pipe_dia_lostre" class="form-control">
-                                        </div>                   
-                                        <div class="col-lg-12">
-                                            <label>Specified Minimun Yield Strength [psi]:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Specified Minimun Yield Strength [psi]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="min_yield_lostre" name="min_yield_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_min_yield_sel_lostre">
+                                                <select class="form-control" id="min_yield_sel_lostre" name="min_yield_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                    <option>psi</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="min_yield_lostre" id="min_yield_lostre" class="form-control">
-                                        </div>  
-                                        <div class="col-lg-12">
-                                            <label>Modulus of Elasticity of Steel [psi]:</label>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Modulus of Elasticity of Steel [psi]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input value="29000000" type="text" class="form-control" id="mod_elast_lostre" name="mod_elast_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_mod_elast_sel_lostre">
+                                                <select class="form-control" id="mod_elast_sel_lostre" name="mod_elast_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                    <option>psi</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <input type="text" name="mod_elast_lostre" id="mod_elast_lostre" class="form-control" value="29000000">
-                                        </div>                     
-                                        <div class="col-lg-12">
-                                            <label>Poisson's Ratio for Steel:</label>
-
-                                            <input type="text" name="poi_rat_lostre" id="poi_rat_lostre" class="form-control" value="0.3">
-                                        </div>                        
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Poisson's Ratio for Steel:</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <input value="0.3" type="text" class="form-control" id="poi_rat_lostre" name="poi_rat_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                        </div>
                                     </div> 
                                 </div>
                             </div>
@@ -160,48 +213,94 @@
                             <div class="row">
                                 <div class="col-lg-12">                                    
                                     <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <label>Desired Vertical Deflection of the Pipe [ft]:</label>
-
-                                            <input type="text" name="des_ver_lostre" id="des_ver_lostre" class="form-control">
-                                        </div>                     
-                                        <div class="col-lg-12">
-                                            <label>Maximun Operating Pressure [psi]:</label>
-
-                                            <input type="text" name="max_oper_lostre" id="max_oper_lostre" class="form-control">
-                                        </div>                        
-                                        <div class="col-lg-12">
-                                            <label>Installation Temperature of the Pipe [°F]:</label>
-
-                                            <input type="text" name="inst_temp_lostre" id="inst_temp_lostre" class="form-control">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Desired Vertical Deflection of the Pipe [ft]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="des_ver_lostre" name="des_ver_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_des_ver_sel_lostre">
+                                                <select class="form-control" id="des_ver_sel_lostre" name="des_ver_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <label>Operating Temperature of the Pipe [°F]:</label>
 
-                                            <input type="text" name="oper_temp_pip_lostre" id="oper_temp_pip_lostre" class="form-control">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Maximun Operating Pressure [psi]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="max_oper_lostre" name="max_oper_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_max_oper_sel_lostre">
+                                                <select class="form-control" id="max_oper_sel_lostre" name="max_oper_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                    <option>psi</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <label>Pipe Design Factor:</label>
-                                            <select class="form-control" name="sel_pipe_desig_lostre" id="sel_pipe_desig_lostre">
-                                                <option value="0.1" >0.1</option>
-                                                <option value="0.2" >0.2</option>
-                                                <option value="0.3" >0.3</option>
-                                                <option value="0.4" >0.4</option>
-                                                <option value="0.5" >0.5</option>
-                                                <option value="0.6" >0.6</option>
-                                                <option value="0.7" >0.7</option>
-                                                <option value="0.8" >0.8</option>
-                                                <option value="0.9" >0.9</option>
-                                                <option value="1" >1</option>
 
-                                            </select>
-
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Installation Temperature of the Pipe [°F]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="inst_temp_lostre" name="inst_temp_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_inst_temp_sel_lostre">
+                                                <select class="form-control" id="inst_temp_sel_lostre" name="inst_temp_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
                                         </div>
-                                        <div class="col-lg-12">
-                                            <label>Sc - Longitudinal Stress due to Pipe Elast. Curvature [psi]:</label>
 
-                                            <input type="text" name="long_stress_elast_lostre" id="long_stress_elast_lostre" class="form-control">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Operating Temperature of the Pipe [°F]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="oper_temp_pip_lostre" name="oper_temp_pip_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_oper_temp_pip_sel_lostre">
+                                                <select class="form-control" id="oper_temp_pip_sel_lostre" name="oper_temp_pip_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                </select>
+                                            </div>
                                         </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Pipe Design Factor:</label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="sel_pipe_desig_lostre" id="sel_pipe_desig_lostre" onchange="cleanOut_lostre()">
+                                                    <option value="0.1" >0.1</option>
+                                                    <option value="0.2" >0.2</option>
+                                                    <option value="0.3" >0.3</option>
+                                                    <option value="0.4" >0.4</option>
+                                                    <option value="0.5" >0.5</option>
+                                                    <option value="0.6" >0.6</option>
+                                                    <option value="0.7" >0.7</option>
+                                                    <option value="0.8" >0.8</option>
+                                                    <option value="0.9" >0.9</option>
+                                                    <option value="1" >1</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Sc - Longitudinal Stress due to Pipe Elast. Curvature [psi]:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="long_stress_elast_lostre" name="long_stress_elast_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                            </div>
+                                            <div class="col-md-4" id = "div_long_stress_elast_sel_lostre">
+                                                <select class="form-control" id="long_stress_elast_sel_lostre" name="long_stress_elast_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                    <option>psi</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
                                         <div class="col-lg-12">&nbsp;</div>
                                         <div>    
                                             <BR>                    
@@ -230,37 +329,37 @@
                                         <div class="col-lg-12">
                                             <label>Sp- Esfuerzo Longitudinal por Presión Interna [Psi]::</label>
 
-                                            <input type="text" name="Sp_ELPI" id="Sp_ELPI" class="form-control">
+                                            <input type="text" name="Sp_ELPI" id="Sp_ELPI" class="form-control" readonly>
                                         </div>                     
                                         <div class="col-lg-12">
                                             <label>Sr-Esfuerzo Longitudinal por Temperatura [Psi]:</label>
 
-                                            <input type="text" name="Sr_ELT" id="Sr_ELT" class="form-control">
+                                            <input type="text" name="Sr_ELT" id="Sr_ELT" class="form-control" readonly>
                                         </div>                       
                                         <div class="col-lg-12">
                                             <label>Se- Esfuerzo Longitudinal Existente [Psi]:</label>
 
-                                            <input type="text" name="Se_ELE" id="Se_ELE" class="form-control">
+                                            <input type="text" name="Se_ELE" id="Se_ELE" class="form-control" readonly>
                                         </div> 
                                         <div class="col-lg-12">
                                             <label>L- Longitud Mínima Requerida de la Zanja [ft]:</label>
 
-                                            <input type="text" name="L_LRZ" id="L_LRZ" class="form-control">
+                                            <input type="text" name="L_LRZ" id="L_LRZ" class="form-control" readonly>
                                         </div>                   
                                         <div class="col-lg-12">
                                             <label>Ss- Esfuerzo Longitudinal por Elongación [Psi]:</label>
 
-                                            <input type="text" name="Ss_ELE" id="Ss_ELE" class="form-control">
+                                            <input type="text" name="Ss_ELE" id="Ss_ELE" class="form-control" readonly>
                                         </div>  
                                         <div class="col-lg-12">
                                             <label>Sa- Esfuerzo Longitudinal por Flexión Admisible [Psi]:</label>
 
-                                            <input type="text" name="Sa_ELFA" id="Sa_ELFA" class="form-control" value="">
+                                            <input type="text" name="Sa_ELFA" id="Sa_ELFA" class="form-control" value="" readonly>
                                         </div>                     
                                         <div class="col-lg-12">
                                             <label>Ls- Distancia Máxima permitida entre Apoyos [ft]:</label>
 
-                                            <input type="text" name="Ls_DMPA" id="Ls_DMPA" class="form-control" value="">
+                                            <input type="text" name="Ls_DMPA" id="Ls_DMPA" class="form-control" value="" readonly>
                                         </div>                        
                                     </div> 
                                 </div>
@@ -314,9 +413,77 @@
                 $("#opt_lostre").val("1");
                 load_grade_sel_lostre("gra5l", 0);
                 load_np_sel_lostre("npsn");
-
-
+                load_in_sel_lostre();
+                load_temp_sel_lostre();
             });
+
+            function load_temp_sel_lostre() {
+                var parametros = {
+                    "combo": "temp",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='inst_temp_sel_lostre' id='inst_temp_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_inst_temp_sel_lostre").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='oper_temp_pip_sel_lostre' id='oper_temp_pip_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_oper_temp_pip_sel_lostre").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_lostre"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
+            function load_in_sel_lostre() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='nom_pipe_sel_lostre' id='nom_pipe_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_nom_pipe_sel_lostre").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='pipe_dia_sel_lostre' id='pipe_dia_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_pipe_dia_sel_lostre").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='pipe_wall_sel_lostre' id='pipe_wall_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_pipe_wall_sel_lostre").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='out_pipe_dia_sel_lostre' id='out_pipe_dia_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_out_pipe_dia_sel_lostre").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='des_ver_sel_lostre' id='des_ver_sel_lostre' onchange='cleanOut_lostre()'>" + data;
+                        $("#div_des_ver_sel_lostre").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_lostre"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
             function onchange_defa_lostre() {
                 $("#df_lostre").val($("#df_sel_lostre").val().split(",")[1]);
             }
@@ -367,11 +534,11 @@
 
             function onchange_jf_lostre() {
                 $("#ljf_lostre").val($("#longitudinal_jf_lostre").val().split(",")[1]);
-                //cleanOut_ppw();
+                cleanOut_lostre();
             }
             function onchange_jf1_lostre() {
                 $("#ljf1_lostre").val($("#longitudinal_jf1_lostre").val().split(",")[1]);
-                //cleanOut_ppw();
+                cleanOut_lostre();
             }
 
             function load_grade_sel_lostre(idcombo, opcion) {
@@ -484,7 +651,7 @@
             }
 
             function onchange_nps_lostre() {
-                //cleanOut_lostre();
+                cleanOut_lostre();
                 var po = $("#nominalps_sel_lostre").val();
                 $("#nom_pipe_lostre").val(po);
                 $("#pipe_dia_lostre").val(po);
@@ -492,7 +659,7 @@
             }
 
             function onchange_wt_lostre() {
-                //cleanOut_lostre();
+                cleanOut_lostre();
                 var val = $("#wthi_sel_lostre").val().trim().split(",");
                 var po = $("#nominalps_sel_lostre").val();
                 $("#out_pipe_dia_lostre").val(po - (val[1] * 2));
@@ -502,9 +669,8 @@
             function onchange_gra_lostre() {
                 var po = $("#grade_sel_lostre").val().trim().split(",");
                 $("#min_yield_lostre").val(po[1]);
+                cleanOut_lostre();
             }
-
-
 
             function cleanOut_lostre() {
                 $("#Sp_ELPI").val("");
@@ -537,14 +703,15 @@
             }
 
             function onchange_Input_lostre(inp) {
+
                 var sw = validateDecimal(inp.value);
 
-                if (sw != true) {
+                if (sw !== true) {
                     inp.value = "";
-                    cleanOut_lostre();
                 }
 
                 onchange_Input_zero(inp);
+                cleanOut_lostre();
             }
 
             function calculate_ls() {
@@ -571,7 +738,14 @@
                     alert("Debe diligenciar todos los campos");
                 } else {
                     var unidades = {
-
+                        "nom_pipe_sel_lostre": $("#nom_pipe_sel_lostre").val().split(",")[1],
+                        "pipe_dia_sel_lostre": $("#pipe_dia_sel_lostre").val().split(",")[1],
+                        "pipe_wall_sel_lostre": $("#pipe_wall_sel_lostre").val().split(",")[1],
+                        "out_pipe_dia_sel_lostre": $("#out_pipe_dia_sel_lostre").val().split(",")[1],
+                        "des_ver_sel_lostre": $("#des_ver_sel_lostre").val().split(",")[1],
+                        
+                        "inst_temp_sel_lostre": $("#inst_temp_sel_lostre").val().split(",")[1],
+                        "oper_temp_pip_sel_lostre": $("#oper_temp_pip_sel_lostre").val().split(",")[1]
                     };
 
                     var res = longitudinal_Stress_Form(variables, unidades);
