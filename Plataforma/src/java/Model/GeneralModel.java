@@ -49,9 +49,9 @@ public class GeneralModel extends Model{
         values.put("date", date);
         
         String des = values.get("description_" + from);
-        String id_proyect = values.get("id_proyect");
+        String id_proyect = values.get("proyects_sel_" + from);
         
-        String where = "id_proyect = " + id_proyect + " and description_" + from + " = " + des; //OJO VALIDAR QUE NO SE INGRESEN '
+        String where = "proyects_sel_" + from + " = " + id_proyect + " and description_" + from + " = " + des; //OJO VALIDAR QUE NO SE INGRESEN '
         Vector<Map> data = consultar(tabla, "*", where);
         
         if(data.isEmpty() == false){
@@ -63,24 +63,21 @@ public class GeneralModel extends Model{
     }
      
     public void edit(Map<String, String> values, String id) throws Exception{
+        values.remove("id");
         String where = "id = " + id;
         
-        String sqlCons = "SELECT id_user\n" +
+        String idrg = values.get("iduser").trim();
+
+        String sqlCons = "SELECT iduser\n" +
                 "  FROM [" +  bd + "].[dbo].[" + tabla + "]\n" +
-                "  WHERE id = " + id; 
+                "  WHERE id = " + id + " AND iduser = " + idrg; 
         
         Vector<Map> data = consultar(sqlCons);
         
         if(data.isEmpty()){
             throw new Exception("No existe un registro para este còdigo");   
         }else{
-            String idbd = data.get(0).get("id_user").toString().trim();
-            String idrg = values.get("id_user").trim()+"";
-            if(idbd.equals(idrg)){
-                edit(tabla, values, where);
-            }else{
-               throw new Exception("No es posible editar el registro, debe ser el propietario");    
-            }
+            edit(tabla, values, where);
         }
         
         
@@ -89,7 +86,7 @@ public class GeneralModel extends Model{
     public void delete(String id, int id_user) throws Exception{
         String where = "id = " + id;
         
-        String sqlCons = "SELECT id_user\n" +
+        String sqlCons = "SELECT iduser\n" +
                 "  FROM [" +  bd + "].[dbo].[" + tabla + "]\n" +
                 "  WHERE id = " + id; 
         
@@ -98,7 +95,7 @@ public class GeneralModel extends Model{
         if(data.isEmpty()){
             throw new Exception("No existe un registro para este còdigo");   
         }else{
-            if(data.get(0).get("id_user").toString().equals(id_user+"")){
+            if(data.get(0).get("iduser").toString().equals(id_user+"")){
                 delete(tabla, where);
             }else{
                throw new Exception("No es posible borrar el registro, debe ser el propietario");    
@@ -134,7 +131,7 @@ public class GeneralModel extends Model{
     }
     
     public JSONObject loadHMedidores(String iduser,String nombre, String type) throws Exception{
-        String where = "id_user = "+iduser + " and type = " + stringToBD(type);
+        String where = "iduser = "+iduser + " and type = " + stringToBD(type);
         Vector<Map> data;
         data = consultar(tabla, "*", where);
         JSONObject json = new JSONObject();

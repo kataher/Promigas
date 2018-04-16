@@ -23,6 +23,8 @@ public class AdiabaticHeadController extends Controller.Controller  {
 
     public  Map<String, String> getValues(HttpServletRequest request) throws Exception{
         
+        Map<String, String[]> val = request.getParameterMap();
+        
          //Input Data
         String description_ah = request.getParameter("description_ah");
         String enteree_ah = request.getParameter("enteree_ah");
