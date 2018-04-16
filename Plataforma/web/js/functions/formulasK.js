@@ -1057,11 +1057,7 @@ function hotTapSizing_Form(vari, uni){
 //Tubería Hidrostática 6.1
 function pipelinehydrostatic_Form(vari, uni){
     
-    //es un excel
-    //Validado excel
-    //Vbo de Julio
-    
-    var fwt = -1;
+    var Fwt = -1;
     var tt = get_Temp(parseFloat(vari.testt_phy), uni.tt_sel_phy, "F"); //Temperatura de prueba
     var ttc = get_Temp(tt, "F", "C");
     
@@ -1082,7 +1078,11 @@ function pipelinehydrostatic_Form(vari, uni){
             block("Cargando...");
         },
         success: function(data, status, request){ 
-            fwt = data.row.fwt;
+            if(data == null){
+                Fwt = 0; // Pendiente solucionar esto cuando la data es null
+            }else{
+                Fwt = parseFloat(data.row.fwt); //Cambio térmico en el volúmen específico de agua 
+            }
         },
         complete: function(){
             unBlock();
@@ -1091,29 +1091,37 @@ function pipelinehydrostatic_Form(vari, uni){
     
     
     var elev = get_Long(parseFloat(vari.enteree_phy), uni.h_sel_phy, "ft");
-    var po =  get_Long(parseFloat(vari.pipeo_phy), uni.po_sel_phy, "in"); //Diametro externo de la tubería
-    var pw = parseFloat(vari.pipew_phy); //Espesor de pared
-    var pi = get_Long(parseFloat(vari.pipei_phy), uni.pi_sel_phy, "in"); // Diametro interno de la tuberia
+    var D =  get_Long(parseFloat(vari.pipeo_phy), uni.po_sel_phy, "in"); //Diametro externo de la tubería
+    var t = parseFloat(vari.pipew_phy); //Espesor de pared
+    var di = get_Long(parseFloat(vari.pipei_phy), uni.pi_sel_phy, "in"); // Diametro interno de la tuberia
     var tp = get_Pres(parseFloat(vari.testp_phy), elev, uni.tp_sel_phy, "psig");//Presión de prueba
     var pl = get_Long(parseFloat(vari.pipelinel_phy), uni.pl_sel_phy, "ft"); //Longitud de la tubería
     
-    var cw = comprensibilidad(ttc); //(1/(1-(4.5*Math.pow(10,(-5)))*(tp/14.73))); //Compresibilidad del agua debido al aumento de la presión
-    var cvi = 1+((po/pw)*(0.91*tp/(30*Math.pow(10,6))))+((3.6*Math.pow(10,-6))*(tt-60)); //Cambio de volúmen debido al aumento de la presión
-    var cvt = 1+((tt-60)*18.2*Math.pow(10,-6)); //Cambio de volúmen de acuerdo al cambio de temperatura
-    var ct = parseFloat(fwt);//Cambio térmico en el volúmen específico de agua   
+    var pat = localAtmosphericPressure_Form(elev);
+    var Fwp = (1/(1-(4.5*Math.pow(10,(-5)))*(tp/pat))); //Compresibilidad del agua debido al aumento de la presión
+    var Fpp = 1+((D/t)*(0.91*tp/(30*Math.pow(10,6))))+((3.6*Math.pow(10,-6))*(tt-60)); //Cambio de volúmen debido al aumento de la presión
+    var Fpt = 1+((tt-60)*18.2*Math.pow(10,-6)); //Cambio de volúmen de acuerdo al cambio de temperatura
+    var Fpwt = Fpt/Fwt; 
    
-    var vllt = 0.0408*pl*Math.pow(pi,2); //Volúmen de llenado de la tubería [Galones]
+    var V = 0.0408 * Math.pow(di,2) * pl;//Volúmen de llenado de la tubería [Galones]
     
-    var crta = cvt/ct; //Cambio del volúmen de acuerdo a la relación Tubería/Agua
-    var vr = vllt*cw*cvi*cvt;  //Volúmen requerido para la prueba hidrostática [Galones]
-    var iv = vr-vllt; //Volúmen incremental requerido para la prueba histrostatica [Galones]
-    var fc = 0.0003*Math.pow(tt, 2)-0.0224*tt+3.3465; //Factor de compresibilidad para el agua  [in3/in3/Psig]X 10-6
-    var aux = -64.268+17.0105*tt-0.20369*Math.pow(tt,2)+0.0016048*Math.pow(tt,3);   
-    var cp = ((aux/Math.pow(10,6))-2*1.116*(Math.pow(10,-5)))/((tt*(1-Math.pow(0.3,2)))/((30*Math.pow(10,6))*pw+fc*Math.pow(10,-6))); //Cambio de presión  [Psi/°F]
+    var crta = Fpt/Fwt; //Cambio del volúmen de acuerdo a la relación Tubería/Agua
+    var Vtp = V*Fwp*Fpp*Fpwt;  //Volúmen requerido para la prueba hidrostática [Galones]
+    var Vi = Vtp-V; //Volúmen incremental requerido para la prueba histrostatica [Galones]
     
-    var res = [cw.toFixed(8),cvi.toFixed(6),cvt.toFixed(6),
-        ct.toFixed(6),crta.toFixed(6),vllt.toFixed(1),
-        vr.toFixed(1),iv.toFixed(1),fc.toFixed(2),
+    var C = comprensibilidad(ttc); //Factor de compresibilidad para el agua  [in3/in3/Psig]X 10-6
+    
+    //var fc = 0.0003*Math.pow(tt, 2)-0.0224*tt+3.3465; 
+    var B = -64.268+17.0105*ttc-0.20369*Math.pow(ttc,2)+0.0016048*Math.pow(ttc,3); 
+    var B = B * Math.pow(10,-6);
+    var alfa = 1.116*(Math.pow(10,-5));
+    var v = 0.3;
+    var E = 30*Math.pow(10,6);
+    var cp = ((B-2*alfa)/(((D*(1-Math.pow(v,2)))/(E * t) + C)))/1.8; //Cambio de presión  [Psi/°F]
+    
+    var res = [Fwp.toFixed(8),Fpp.toFixed(6),Fpt.toFixed(6),
+        Fwt.toFixed(6),crta.toFixed(6),V.toFixed(1),
+        Vtp.toFixed(1),Vi.toFixed(1),(C*Math.pow(10,6)).toFixed(2),
         cp.toFixed(1)];
     changeToDecimal(res);
     
@@ -1157,13 +1165,12 @@ function comprensibilidad(xo){
 //  Prueba de presión de la tubería de gas 6.2
 function gaspipelineMod6_Form(vari, uni){
         
-    //Validado Vbo Julio
     var h = get_Long(parseFloat(vari.enteree_gp), uni.h_sel_gp, "ft"); //Altura [ft]
     var P1 = get_Pres(parseFloat(vari.initialt_gp), h, uni.it_sel_gp, "psig"); //Initial Test Pressure 
-    var t = get_Time(parseFloat(vari.shut_gp), uni.shut_sel_gp, "seg"); // Shut-in Time
+    var t = get_Time(parseFloat(vari.shut_gp), uni.shut_sel_gp, "min"); // Shut-in Time
     
     var D = get_Long(parseFloat(vari.internalpd_gp), uni.ipd_sel_gp, "in"); //Internal Pipe Diameter
-    var A = 949; //Tomado de un despeje del formulario de toolbox
+    var A = (949)*60; //Tomado de un despeje del formulario de toolbox
     
     var res = (t*P1)/(A*D); //Acceptable Pressure Loss
     
@@ -1177,9 +1184,6 @@ function pipelineTime_Form(vari, uni){
 }
 
 function packPipeline_Form(vari, uni){
-    
-    //Vbo Julio
-    //Consultar con Manuel
     
     var elev = get_Long(parseFloat(vari.h_pap), uni.h_sel_pap, "ft");; // Altura al nivel del mar
     var Mair = 28.96443;    //Mair=28.96443 g/mole (molecular weight of standard air - CRC, 1983).
@@ -1288,9 +1292,6 @@ function purginCalculations_Form(vari, uni){
 //MAOP 7.1
 function maop_Form(vari, uni){
     
-    //Validado Excel Julio
-    //Validado BD
-    
     var T = parseFloat(vari.tempu_ma); //Temperature Derating Factor
     var D = get_Long(parseFloat(vari.nomps_ma), uni.pipeo_sel_ma, "in"); //Diametro externo de la tubería 
     var t = get_Long(parseFloat(vari.wallt_ma), uni.np_sel_ma, "in"); //Espesor de la pared nominal de la tubería
@@ -1309,31 +1310,32 @@ function maop_Form(vari, uni){
     {
          //If the measured maximum depth of the corroded area is greater than 10 % of the nominal wall thickness,
          //and the measured longitudinal extent of the corroded area is greater than the value determined by Equation (2)
-         A = 0.893 * (L /Math.sqrt(D*t));
-    }else{
         A = 0.893 * (L /Math.sqrt(D*t));
-    }
-    
-    var aux = (2*S*t*F*T)/D;    
-    var P = Math.max(MAOP, aux);   //Desing Pressure - ANSI B.31.8: 
-   
-    var Pp = 1; //Maximun Safe Pressure - Corroded Area:
-    
-    if(A <= 4){
-        Pp = 1.1 * P * ((1-(2*d/(3*t)))/(1-((2*d)/(3*t*Math.pow((Math.pow(A,2)+1),0.5))))); //Maximun Safe Pressure - Corroded Area
+        
+        var aux = (2*S*t*F*T)/D;    
+        var P = Math.max(MAOP, aux);   //Desing Pressure - ANSI B.31.8: 
+
+        var Pp = 1; //Maximun Safe Pressure - Corroded Area:
+
+        if(A <= 4){
+            Pp = 1.1 * P * ((1-(2*d/(3*t)))/(1-((2*d)/(3*t*Math.pow((Math.pow(A,2)+1),0.5))))); //Maximun Safe Pressure - Corroded Area
+        }else{
+            Pp = 1.1 * P * (1-d/t); //Maximun Safe Pressure - Corroded Area
+        }
+        
+        var res = [Pp.toFixed(1),P.toFixed(2),A.toFixed(2)];
+        changeToDecimal(res);
     }else{
-        Pp = 1.1 * P * (1-d/t); //Maximun Safe Pressure - Corroded Area
+        alert("Unrealistic value for Maximun depth of corroded area!");
+        var res = ["","",""];
     }
     
-    var res = [Pp.toFixed(1),P.toFixed(2),A.toFixed(2)];
-    changeToDecimal(res);
     return res;
 }
 
 //Maximun Allowable Longitudinal Extent of Corrosion 7.2
 function maximunAllowable_Form(vari, uni){
-    //Validado Excel Julio
-    //Validado BD
+    
     var d = get_Long(parseFloat(vari.maximund_mal), uni.md_sel_mal, "in");//Maximun Depth of corroded area
     var D = get_Long(parseFloat(vari.pipeo_mal), uni.po_sel_mal, "in");  // Diametro externo de la tubería
     var t = get_Long(parseFloat(vari.nomip_mal), uni.np_sel_mal, "in"); // Espesor de la pared nominal de la tubería
@@ -1343,9 +1345,11 @@ function maximunAllowable_Form(vari, uni){
     var Pd = (d / t); //Corrosion Depth
     var B;
     
-    if(Pd > 0.1 && Pd < 0.8){
+    if(Pd > 0.1 && Pd < 0.175){
         B = 4;
+        alert("Value of B: 4");
     }else{
+        alert("Maximum depth of the corroded area must be between 10% and 17.5%");
         B = Math.pow((Math.pow(((d / t) / (1.1 * (d / t) - 0.15)),2) - 1), 0.5);
     }
 
@@ -1357,9 +1361,6 @@ function maximunAllowable_Form(vari, uni){
 }
 
 function rateElectrical_Form(vari){
-    
-    //Validado Julio
-    //Validado BD
     
     var Ec = parseFloat(vari.potentialc_re); //Potential of the cathode with respect to a reference electrode
     var Ea = parseFloat(vari.potentiala_re); //Potential of the anode with respect to the same reference electrode
@@ -1399,9 +1400,6 @@ function electroyleResistance_Form(vari, uni){
 }
 
 function electricalResistance_Form(vari, uni){
-    
-    //Validado Julio
-    //Validado BD
     
     var L = get_Long(parseFloat(vari.length_elr), uni.le_sel_elr, "cm"); //Length of the Conductor
     var A = get_Long_Cuadrada(parseFloat(vari.cross_elr), uni.cs_sel_elr, "cm"); //Cross Sectional Area of the Conductor
@@ -1524,8 +1522,7 @@ function resistanceEarthSHA_Form(vari, uni){
     var d = get_Long(parseFloat(vari.anoded_rsha), uni.ad_sel_rsha, "ft"); //Anode Diameter ft
     var h = get_Long(parseFloat(vari.distancee_rsha), uni.di_sel_rsha, "ft"); //Distance Earth of a Single Horizontal Anode: ft
     
-    var R = ((0.052*p)/(L))*(2.303*Math.log10((4*L)/d) + ((2*h)/L) - 2); //Resistance to Earth of a Single Horizontal Anode [Ohm]
-    //var R = ((0.00521*p)/(L))*(2.3*Math.log10((8*L)/d) - 1 ); //Resistance to Earth of a Single Horizontal Anode [Ohm]
+    var R = ((0.0052*p)/(L))*(2.303*Math.log((4*L)/d) + ((2*h)/L) - 2); //Resistance to Earth of a Single Horizontal Anode [Ohm]
     var res = [R.toFixed(2)];
     changeToDecimal(res);
     return res;
@@ -2627,8 +2624,8 @@ function reinforcementwelded_Form(vari, uni) {
     }
     var a2eaibo = 2 * etitb * lheight;
     var a2cea = a2eaibo * (smys2 / smys);
-    var a3ra = arrr - a1rr - a2cea;
-    var appa = tar * (mrod - bodh);
+    var a3ra = arrr - a1rr - a2cea; //area
+    var appa = tar * (mrod - bodh); //area
     var eerr = a3ra / (2 * bodh);
     var lmrr = a3ra / tar;
     var dmrr = bodh + lmrr;
@@ -2637,13 +2634,26 @@ function reinforcementwelded_Form(vari, uni) {
     etithw = etithw.toFixed(3);
     rwtotb = rwtotb.toFixed(3);
     etitb = etitb.toFixed(3);
-    arrr = arrr.toFixed(3);
-    a1rr = a1rr.toFixed(3);
+    arrr = arrr.toFixed(3); //area
+    a1rr = a1rr.toFixed(3); //area
     lheight = lheight.toFixed(3);
-    a2eaibo = a2eaibo.toFixed(3);
-    a2cea = a2cea.toFixed(3);
+    a2eaibo = a2eaibo.toFixed(3); //area
+    a2cea = a2cea.toFixed(3); //area
+    
+    var sw = false;
+    
+    if(a3ra < 0){a3ra = 0; sw = true}    
+    if(appa < 0){appa = 0; sw = true}
+    if(arrr < 0){arrr = 0; sw = true}
+    if(a1rr < 0){a1rr = 0; sw = true}
+    if(a2eaibo < 0){a2eaibo = 0; sw = true}
+    if(a2cea < 0){a2cea = 0; sw = true}
+    
+    if(sw === true){
+        alert("Revisar los datos de entrada, ningún área debe ser negativa");
+    }
 
-    a3ra = a3ra.toFixed(3);
+    a3ra = a3ra.toFixed(3); 
     appa = appa.toFixed(3);
     eerr = eerr.toFixed(3);
     lmrr = lmrr.toFixed(3);
@@ -5514,7 +5524,7 @@ function erf_Form(vari, uni) {
     var dianoex_erf = get_Long(parseFloat(vari.dianoex_erf), uni.dn_sel_erf, "in");
     var esnotu_erf = get_Long(parseFloat(vari.esnotu_erf), uni.en_sel_erf, "in");
     var smys_erf = parseFloat(vari.smys_erf); //psi
-    var maop_erf = get_Pres(parseFloat(vari.maop_erf), 0, uni.maop_sel_erf, "psig"); //psi
+    var maop_erf = parseFloat(vari.maop_erf); //psi
     var fdiseno = parseFloat(vari.cllocalidad_erf);
     
     var L = longacor_erf/25.4;
@@ -5567,14 +5577,15 @@ function erf_Form(vari, uni) {
     var Pf = 2 * Gf * esnotu_erf / dianoex_erf;
     Pf = parseInt(Pf);
     var Psegura = Pf * fdiseno;
-    Psegura = Psegura.toFixed(4);
+    Psegura = Psegura.toFixed(0);
+    
     var pfp  = maop_erf / Psegura ;
     pfp = pfp.toFixed(3);
     var fos = Pf / maop_erf ;
     fos = fos.toFixed(3);
     
     //var res = [Pfalla.toFixed(4), P1.toFixed(4), (maop_erf/P1).toFixed(4), Pf, Psegura, pfp, fos];
-    var res=[Pfalla.toFixed(4), P1.toFixed(4), (maop_erf/P1).toFixed(4), (Pf)+"", Psegura, pfp, fos];
+    var res=[Pfalla.toFixed(0), P1.toFixed(0), (maop_erf/P1).toFixed(3), (Pf)+"", Psegura, pfp, fos];
     changeToDecimal(res);
     return res;
     

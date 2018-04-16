@@ -66,7 +66,7 @@
                                     <label>Potential of the cathode with respect to a reference electrode:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="potentialc_re" name="potentialc_re" onchange="onchange_Input_re(this)" required>
+                                    <input class="form-control" value = "15" type="text" id="potentialc_re" name="potentialc_re" onchange="onchange_Input_re(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_pc_sel_re">
                                     <select class="form-control" id="pc_sel_re" name="pc_sel_re" onchange="cleanOut_re()"> </select>
@@ -77,7 +77,7 @@
                                     <label>Potential of the anode with respect to the same reference electrode:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="potentiala_re" name="potentiala_re" onchange="onchange_Input_re(this)" required>
+                                    <input class="form-control"  value = "33" type="text" id="potentiala_re" name="potentiala_re" onchange="onchange_Input_re(this)" required>
 
                                 </div>
                                 <div class="col-md-4" id = "div_pa_sel_re">
@@ -90,7 +90,7 @@
                                     <label>Total resistance to electrical current flow thugh the cell:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="totalr_re" name="totalr_re" onchange="onchange_Input_re(this)" required>            
+                                    <input class="form-control"  value = "23" type="text" id="totalr_re" name="totalr_re" onchange="onchange_Input_re(this)" required>            
                                 </div>
                                 <div class="col-md-4" id = "div_tr_sel_re">
                                     <select class="form-control" id="tr_sel_re" name="tr_sel_re" onchange="cleanOut_re()"> </select>

@@ -110,7 +110,7 @@
                                                                     <label>Desing Factor:</label>
                                                                 </div>
                                                                 <div class="col-md-8" id="div_df_sel_rwb">
-                                                                    <select class="form-control" id="df_sel_rwb" name="df_sel_rwb" onchange="onchanche_df_rwb()"></select> 
+                                                                    <select class="form-control" id="df_sel_rwb" name="df_sel_rwb"></select> 
                                                                 </div>
                                                                 <div class="col-md-4">
                                                                     <input class="form-control" type="text" id="df_rwb" name="df_rwb"  onchange="onchange_Input_rwb(this)" required>
@@ -243,7 +243,7 @@
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
                                                                             In Accordance with ASME B31.8 value of M >=0.25[in.]
-                                                                            <input class="form-control" value="0.25" type="text" id="tar_rwb" name="tar_rwb"  onchange="onchangeDb_rwb()" required>
+                                                                            <input class="form-control" value="0.25" type="text" id="tar_rwb" onchange="onchange_Input_rwb(this)" name="tar_rwb" required>
                                                                         </div>
                                                                     </div>                                 
                                                                 </div>
@@ -274,7 +274,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>D - Outside Diameter of the Header [in.]:</label>
-                                            <input type="text" id="odh_rwb" name="odh_rwb" required class="form-control">
+                                            <input type="text" id="odh_rwb" name="odh_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                         </div>
                                     </div>
                                </div>
@@ -282,7 +282,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>H - Nominal Wall Thickness of the  Branch [in.]:</label>
-                                            <input type="text" id="nwtb_rwb" name="nwtb_rwb" required class="form-control">
+                                            <input type="text" id="nwtb_rwb" name="nwtb_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                         </div>
                                     </div>
                                </div>
@@ -290,7 +290,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Specified Minimum Yield Strength [psi.]:</label>
-                                            <input type="text" id="smys_rwb" name="smys_rwb" required class="form-control">
+                                            <input type="text" id="smys_rwb" name="smys_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                         </div>
                                     </div>
                                </div>
@@ -298,7 +298,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>E - Longitudinal Joint Factor:</label>
-                                            <input type="text" id="ljf_rwb" name="ljf_rwb" required class="form-control">
+                                            <input type="text" id="ljf_rwb" name="ljf_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                         </div>
                                     </div>
                                </div>
@@ -409,7 +409,7 @@
                                     <div class="col-lg-12">
                                      <div class="form-group">
                                     <label>Db - Outside Diameter of the Header [in.]:</label>
-                                    <input type="text" id="bodh_rwb" name="bodh_rwb" onchange="onchangeDb_rwb(this)" required class="form-control">
+                                    <input type="text" id="bodh_rwb" name="bodh_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                     </div>
                                     </div>
                                </div>
@@ -417,7 +417,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>B - Nominal Wall Thickness of the  Branch [in.]:</label>
-                                        <input type="text" id="bnwtb_rwb" name="bnwtb_rwb" required class="form-control">
+                                        <input type="text" id="bnwtb_rwb" name="bnwtb_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                     </div>
                                 </div>
                            </div>
@@ -425,7 +425,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>Specified Minimum Yield Strength [psi]:</label>
-                                        <input type="text" id="smys2_rwb" name="smys2_rwb" required class="form-control">
+                                        <input type="text" id="smys2_rwb" name="smys2_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                     </div>
                                 </div>
                            </div>
@@ -433,7 +433,7 @@
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label>E - Longitudinal Joint Factor:</label>
-                                        <input type="text" id="ljf1_rwb" name="ljf1_rwb" required class="form-control">
+                                        <input type="text" id="ljf1_rwb" name="ljf1_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                     </div>
                                 </div>
                            </div>
@@ -474,7 +474,7 @@
                                                                       <label>Reinforcement SMYS[psi]:</label> 
                                                                     </div>
                                                                     <div class="col-md-12">
-                                                                       <input type="text" value="25000" id="rsmys_rwb" name="rsmys_rwb" required class="form-control">
+                                                                        <input type="text" value="25000" id="rsmys_rwb" name="rsmys_rwb" onchange="onchange_Input_rwb(this)" required class="form-control">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -647,7 +647,6 @@
         
         <script>
                 $(document).ready(function() {  
-                      
                       $("#opt_rwb").val("1");
                       $('#api5l1_rwb').attr('checked', 'checked');
                       $('#api5l2_rwb').attr('checked', 'checked');
@@ -664,10 +663,78 @@
                       getproyectos(<%=session.getAttribute("idusu") %>,
                                 $("#proyects_sel_rwb"),
                                 $("#error_Dialog_rwb"));
+                                
+                      onchangeDb_rwb();
                 });
                 
                 function onchangeDb_rwb(){
-                    //alert("cambiar");
+                    var variables = {
+                            "df_rwb" : $("#df_rwb").val(),
+                            "temp_rwb" : $("#temp_rwb").val(),
+                            "p1_rwb" : $("#p1_rwb").val(),
+                            "odh_rwb" : $("#odh_rwb").val(),
+                            "nwtb_rwb" : $("#nwtb_rwb").val(),
+                            "smys_rwb" : $("#smys_rwb").val(),
+                            "ljf_rwb" : $("#ljf_rwb").val(),
+                            "bodh_rwb" : $("#bodh_rwb").val(),
+                            "bnwtb_rwb" : $("#bnwtb_rwb").val(),
+                            "smys2_rwb" : $("#smys2_rwb").val(),
+                            "ljf1_rwb" : $("#ljf1_rwb").val(),
+                            "tar_rwb" : $("#tar_rwb").val(),
+                            "h_rwb" : $("#h_rwb").val(),
+                            "h_sel_rwb" : $("#h_sel_rwb").val(),
+                            "p1_sel_rwb" : $("#p1_sel_rwb").val()
+                            
+                    };
+                    
+                    var isOk = validate(variables);
+                    
+                    alert(isOk);
+                    
+                    if(isOk !== false){
+                        
+                        var elev = get_Long(parseFloat($("#h_rwb").val()), $("#h_sel_rwb").val().split(",")[1], "ft");
+                        var bodh = parseFloat(parseFloat($("#bodh_rwb").val()));
+                        var tar = parseFloat(parseFloat($("#tar_rwb").val()));
+                        var smys2 = parseFloat(parseFloat($("#smys2_rwb").val()));
+                        var smys = parseFloat(parseFloat($("#smys_rwb").val()));
+                        var nwtb = parseFloat(parseFloat($("#nwtb_rwb").val()));
+                        var bnwtb = parseFloat(parseFloat($("#bnwtb_rwb").val()));
+                        var p1 = get_Pres(parseFloat($("#p1_rwb").val()), elev, $("#p1_sel_rwb").val().split(",")[1], "psig");
+                        var odh = parseFloat(parseFloat($("#odh_rwb").val()));
+                        var temp = parseFloat(parseFloat($("#temp_rwb").val()));
+                        var df = parseFloat(parseFloat($("#df_rwb").val()));
+                        var ljf1 = parseFloat(parseFloat($("#ljf1_rwb").val()));
+                        var ljf = parseFloat(parseFloat($("#ljf_rwb").val()));
+
+                        var d = (bodh - 2 * bnwtb); 
+                        var rwtotb = p1 * bodh / (2 * temp * ljf1 * df * smys2);
+                        var rwtoth = p1 * odh / (2 * df * temp * ljf * smys);
+
+                        var etitb = bnwtb - rwtotb;
+
+                        var lheight = 0;
+                        if ((2.5 * nwtb) < (2.5 * bnwtb + 0.38)) {
+                            lheight = 2.5 * nwtb;
+                        } else {
+                            lheight = 2.5 * bnwtb + 0.38;
+                        }
+                        var a2eaibo = 2 * etitb * lheight;
+                        var a1rr = (nwtb - rwtoth) * d;
+                        var arrr = d * rwtoth;
+                        var a2cea = a2eaibo * (smys2 / smys);
+
+                        var a3ra = arrr - a1rr - a2cea;
+                        var lmrr = a3ra / tar;
+
+
+                        var dmrr = bodh + lmrr;
+            
+                        $("#mrod_sel_rwb").val("121,in");
+                        $("#mrod_rwb").val(dmrr);
+                    }else{                        
+                        $("#mrod_rwb").val("");
+                    }
                 }
                 
                 function load_history_rwb(){
@@ -744,9 +811,11 @@
                 
                 function onchange_defa_rwb(){
                   $("#df_rwb").val($("#df_sel_rwb").val().split(",")[1]);
+                  onchangeDb_rwb();
                 }
                 function onchanche_temp_rwb(){
                   $("#temp_rwb").val($("#temp_sel_rwb").val().split(",")[1]);
+                  onchangeDb_rwb();
                 }
                 function load_joinf_sel_rwb(idcombo,opcion){
                     var parametros = {
@@ -793,11 +862,13 @@
                 function onchange_jf_rwb(){
                     $("#ljf_rwb").val($("#longitudinal_jf_rwb").val().split(",")[1]);
                     cleanOut_rwb();
+                    onchangeDb_rwb();
                 }
                 
                 function onchange_jf1_rwb(){
                     $("#ljf1_rwb").val($("#longitudinal_jf1_rwb").val().split(",")[1]);
                     cleanOut_rwb();
+                    onchangeDb_rwb();
                 }
                 
                 function load_grade_sel_rwb(idcombo,opcion){
@@ -840,11 +911,15 @@
                 function onchange_gra_rwb(){
                     var x = $("#grade_sel_rwb").val();
                             $("#smys_rwb").val(x.split(",")[1]);
+                            
+                    onchangeDb_rwb();
                 }
                 
                 function onchange_gra_rwb1(){
                     var x = $("#grade_sel_rwb1").val();
                             $("#smys2_rwb").val(x.split(",")[1]);
+                            
+                    onchangeDb_rwb();
                 }
                  
                 function load_deratingf_sel_rwb(){
@@ -1046,6 +1121,10 @@
                         cleanOut_rwb();
                     }
                     
+                    if(inp.id !== "mrod_rwb"){
+                        onchangeDb_rwb();
+                    }
+                    
                     onchange_Input_zero(inp);
                 }
                 
@@ -1066,8 +1145,6 @@
                             "tar_rwb" : $("#tar_rwb").val(),
                             "rsmys_rwb" : $("#rsmys_rwb").val(),
                             "h_rwb" : $("#h_rwb").val()
-                            
-                            
                     };
                     
                     var isOk = validate(variables);
@@ -1266,7 +1343,7 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class='form-control' name='p1_sel_rwb' id= 'p1_sel_rwb' >" + data;
+                            var newHtml = "<select class='form-control' name='p1_sel_rwb' id= 'p1_sel_rwb' onchange='onchangeDb_rwb()'>" + data;
                             $("#div_p1_sel_rwb").html(newHtml);
                             
                         },
@@ -1320,7 +1397,7 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class='form-control' name='mrod_sel_rwb' id= 'mrod_sel_rwb' >" + data;
+                            var newHtml = "<select class='form-control' name='mrod_sel_rwb' id= 'mrod_sel_rwb' onchange='cleanOut_rwb()'>" + data;
                             $("#div_mrod_sel_rwb").html(newHtml);
                         },
                         error: function (xhr, ajaxOptions, err) {
@@ -1346,7 +1423,7 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class='form-control' name='h_sel_rwb' id= 'h_sel_rwb' >" + data;
+                            var newHtml = "<select class='form-control' name='h_sel_rwb' id= 'h_sel_rwb' onchange='onchangeDb_rwb()' >" + data;
                             $("#div_h_sel_rwb").html(newHtml);
                         },
                         error: function (xhr, ajaxOptions, err) {
@@ -1442,28 +1519,32 @@
                     var po = $("#nominalps_sel_rwb").val();
                     $("#odh_rwb").val(po);
                     load_wt_sel_rwb();
+                    onchangeDb_rwb();
                 }
                 
                 function onchange_nps1_rwb(){
                     cleanOut_rwb();
                     load_wt_sel1_rwb();
                     var po = $("#nominalps_sel_rwb1").val();
-                    $("#bodh_rwb").val(po);
+                    $("#bodh_rwb").val(po); 
                     
                     onchangeDb_rwb();
-                    
                 }
                 
                 function onchange_wt_rwb(){
                     cleanOut_rwb();
                     var val = $("#wthi_sel_rwb").val().trim().split(",");
                               $("#nwtb_rwb").val(val[1]);
+                    
+                    onchangeDb_rwb();
                 }
                 
                 function onchange_wt1_rwb(){
-                   cleanOut_rwb();
-                   var val = $("#wthi_sel1_rwb").val().trim().split(",");
+                    cleanOut_rwb();
+                    var val = $("#wthi_sel1_rwb").val().trim().split(",");
                               $("#bnwtb_rwb").val(val[1]);
+                    
+                    onchangeDb_rwb();
                 }
                 
                 function load_nps_sel_rwb(type){

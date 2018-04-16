@@ -239,6 +239,7 @@
 
         <script>
             $(document).ready(function () {
+                
                 $('#pipe1_phy').attr('checked', 'checked');
                 $("#opt_phy").val("1");
 
@@ -843,7 +844,7 @@
                 var di = de - 2 * esp;
                 $("#pipei_phy").val(di);
 
-                clecleanOut_phy();
+                cleanOut_phy();
 
 
             }

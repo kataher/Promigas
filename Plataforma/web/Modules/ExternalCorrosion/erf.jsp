@@ -105,12 +105,9 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="col-md-12"> <label>MAOP:</label></div> 
-                                <div class="col-md-8">
+                                <div class="col-md-12"> <label>MAOP [psi]:</label></div> 
+                                <div class="col-md-12">
                                     <input class="form-control" value="1,200" type="text" id="maop_erf" name="maop_erf" onchange="onchange_Input_erf(this)" required>
-                                </div>
-                                <div class="col-md-4" id = "div_erfop_sel_erf">
-                                    <select class="form-control" id="maop_sel_erf" name="maop_sel_erf"> </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -206,7 +203,6 @@
 
             $(document).ready(function () {
                 load_len_sel_erf();
-                load_press_sel_erf();
                 load_desingf_sel_erf();
                 
                 getproyectos(<%=session.getAttribute("idusu")%>,
@@ -329,8 +325,7 @@
                 var unidades = {
                     "de_sel_erf": $("#de_sel_erf").val().split(",")[1],
                     "dn_sel_erf": $("#dn_sel_erf").val().split(",")[1],
-                    "en_sel_erf": $("#en_sel_erf").val().split(",")[1],
-                    "maop_sel_erf": $("#maop_sel_erf").val().split(",")[1]
+                    "en_sel_erf": $("#en_sel_erf").val().split(",")[1]
                 };
 
                 var res = erf_Form(variables, unidades);
@@ -471,32 +466,6 @@
                         var newHtml = "<select class='form-control' name='en_sel_erf' id= 'en_sel_erf' >" + data;
                         $("#div_en_sel_erf").html(newHtml);
 
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_erf"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
-            function load_press_sel_erf() {
-                var parametros = {
-                    "combo": "pres",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='maop_sel_erf' id= 'maop_sel_erf' >" + data;
-                        $("#div_erfop_sel_erf").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_erf"), "Error");

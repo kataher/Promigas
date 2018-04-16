@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Pipeline Corrosion:</strong> 7.5. Electrolyte Resistance From The Surface of an Elecctrode to any Distance</h2>
+                <h2><strong>Pipeline Corrosion:</strong> 7.5. Electrolyte Resistance From The Surface of an Electrode to any Distance</h2>
             </div>
             <div class="col-lg-3"> 
 

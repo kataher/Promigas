@@ -208,7 +208,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Maximun Operating Pressure - MOP [psi]:</label>
+                                    <label>Maximun Operating Pressure - MOP [psig]:</label>
                                 </div>
                                 <div class="col-md-12">
                                     <input class="form-control" type="text" id="mop_ma" name="mop_ma" onchange="onchange_Input_ma(this)" required>

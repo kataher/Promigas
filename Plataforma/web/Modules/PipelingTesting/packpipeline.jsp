@@ -103,7 +103,7 @@
                                     <label>Heigth:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="h_pap" name="h_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="0" type="text" id="h_pap" name="h_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_h_sel_pap">
                                     <select class="form-control" id="h_sel_pap" name="h_sel_pap"> </select>
@@ -115,7 +115,7 @@
                                     <label>Gas Average Temperature:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="gasavetemp_pap" name="gasavetemp_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="26.6667" type="text" id="gasavetemp_pap" name="gasavetemp_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_gat_sel_pap">
                                     <select class="form-control" id="gat_sel_pap" name="gat_sel_pap"> </select>
@@ -128,7 +128,7 @@
                                     <label>Base Pressure:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="basep_pap" name="basep_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="14.65" type="text" id="basep_pap" name="basep_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_bp_sel_pap">
                                     <select class="form-control" id="bp_sel_pap" name="bp_sel_pap"> </select>
@@ -140,7 +140,7 @@
                                     <label>Upstream Pressure:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="upstreamp_pap" name="upstreamp_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="800" type="text" id="upstreamp_pap" name="upstreamp_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_up_sel_pap">
                                     <select class="form-control" id="up_sel_pap" name="up_sel_pap"> </select>
@@ -151,7 +151,7 @@
                                     <label>Downstream Pressure:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="downstreamp_pap" name="downstreamp_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="300" type="text" id="downstreamp_pap" name="downstreamp_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_dp_sel_pap">
                                     <select class="form-control" id="dp_sel_pap" name="dp_sel_pap"> </select>
@@ -163,7 +163,7 @@
                                     <label>Internal Pipe Diameter:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="internalp_pap" name="internalp_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="12" type="text" id="internalp_pap" name="internalp_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_ip_sel_pap">
                                     <select class="form-control" id="ip_sel_pap" name="ip_sel_pap"> </select>
@@ -174,7 +174,7 @@
                                     <label>Length of pipeline:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="lenghtp_pap" name="lenghtp_pap" onchange="onchange_Input_pap(this)" required>
+                                    <input class="form-control" value="10" type="text" id="lenghtp_pap" name="lenghtp_pap" onchange="onchange_Input_pap(this)" required>
                                 </div>
                                 <div class="col-md-4" id="div_lp_sel_pap">
                                     <select class="form-control" id="lp_sel_pap" name="lp_sel_pap" onchange="cleanOut_pap()"> </select>

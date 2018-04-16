@@ -66,7 +66,7 @@
                                     <label>Maximun Depth of corroded area:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="maximund_mal" name="maximund_mal" onchange="onchange_Input_mal(this)" required>
+                                    <input class="form-control" type="text" value = "0.06" id="maximund_mal" name="maximund_mal" onchange="onchange_Input_mal(this)" required>
                                 </div>
                                 <div class="col-md-4" id = "div_md_sel_mal">
                                     <select class="form-control" id="md_sel_mal" name="md_sel_mal" onchange="cleanOut_mal()"> </select>
@@ -77,7 +77,7 @@
                                     <label>External Diameter of Pipe:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="pipeo_mal" name="pipeo_mal" onchange="onchange_Input_mal(this)" required>
+                                    <input class="form-control" type="text" value = "14" id="pipeo_mal" name="pipeo_mal" onchange="onchange_Input_mal(this)" required>
 
                                 </div>
                                 <div class="col-md-4" id = "div_po_sel_mal">
@@ -90,7 +90,7 @@
                                     <label>Nominal Wall Thickness of Pipe:</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input class="form-control" type="text" id="nomip_mal" name="nomip_mal" onchange="onchange_Input_mal(this)" required>            
+                                    <input class="form-control" type="text" value = "0.5" id="nomip_mal" name="nomip_mal" onchange="onchange_Input_mal(this)" required>            
                                 </div>
                                 <div class="col-md-4" id = "div_np_sel_mal">
                                     <select class="form-control" id="np_sel_mal" name="np_sel_mal" onchange="cleanOut_mal()"> </select>
