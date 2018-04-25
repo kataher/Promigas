@@ -155,7 +155,7 @@
                                     <div class="col-md-12" id="flowrate">
                                         <div class="col-md-12"><label>Flow Rate</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="flowrate_aga" name="flowrate_aga" required onchange="onchange_Input_aga(this)">
+                                            <input class="form-control" type="text" id="flowrate_aga" name="flowrate_aga" value="0" required onchange="onchange_Input_aga(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_if_sel_aga">
                                             <select class="form-control" id="if_sel_aga" name="if_sel_aga" onchange="cleanOut_aga()"> </select>
@@ -262,8 +262,8 @@
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_aga()" class="btn btn-warning btn-block"-->
         </div> 
 
-        <input type="hidden" id="opcion_aga" name="opcion_aga"> 
-        <input type="hidden" id="id_aga" name="opcion_aga">      
+        <input type="hidden" id="opt_aga" name="opt_aga" value="1"> 
+        <input type="hidden" id="id_aga" name="id_aga" value="-1">      
 
         <script>
             function hide(form) {
@@ -411,60 +411,61 @@
 
             function save_aga() {
 
-                var parametros = {
-                    "basetemperature_pha": $("#basetemperature_aga").val(),
-                    "basepressure_pha": $("#basepressure_aga").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_aga").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_aga").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_aga").val(),
-                    "upstreampressure_pha": $("#upstreampressure_aga").val(),
-                    "flowrate_pha": $("#flowrate_aga").val(),
-                    "internalpipe_pha": $("#internalpipe_aga").val(),
-                    "lengthof_pha": $("#lengthof_aga").val(),
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
-                    "upstreamelevation_pha": $("#upstreamelevation_aga").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_aga").val(),
-                    "downstreampressure_pha": $("#downstreampressure_aga").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_aga").val(),
-                    "velocity_pha": $("#velocity_aga").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "2",
-                    "opcion": $("#opcion_aga").val()
+                var parametros = {
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "aga"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_aga").val(data);
-                        show_OkDialog($("#save_Dialog_aga"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_aga"), "Error");
-
-                        $("#basetemperature_aga").val(parametros.basetemperature_pha);
-                        $("#basepressure_aga").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_aga").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_aga").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_aga").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_aga").val(parametros.upstreampressure_pha);
-                        $("#flowrate_aga").val(parametros.flowrate_pha);
-                        $("#internalpipe_aga").val(parametros.internalpipe_pha);
-                        $("#lengthof_aga").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_aga").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_aga").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_aga").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_aga").val(parametros.transmissionfactor_pha);
-                        $("#velocity_aga").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_aga").val(data.row.id);
+                            $("#opt_aga").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_aga"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_aga"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_aga() {

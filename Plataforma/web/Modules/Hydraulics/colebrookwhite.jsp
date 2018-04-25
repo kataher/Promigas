@@ -263,8 +263,8 @@
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_cfr()" class="btn btn-warning btn-block" -->
         </div> 
 
-        <input type="hidden" id="opt_cfr" name="opt_cfr"> 
-        <input type="hidden" id="id_cfr" name="id_cfr">      
+        <input type="hidden" id="opt_cfr" name="opt_cfr" value="1"> 
+        <input type="hidden" id="id_cfr" name="id_cfr" value="-1">      
 
         <script>
             function hide(form) {
@@ -494,53 +494,51 @@
 
             function save_cfr() {
 
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
+
                 var parametros = {
-                    "basetemperature_cfr": $("#basetemperature_cfr").val(),
-                    "basepressure_cfr": $("#basepressure_cfr").val(),
-                    "unknown_cfr": $("#unknown_cfr").val(),
-                    "gasflowingtemp_cfr": $("#gasflowingtemp_cfr").val(),
-                    "gasspecificgra_cfr": $("#gasspecificgra_cfr").val(),
-                    "roughness_cfr": $("#roughness_cfr").val(),
-                    "pipelineroughness_cfr": $("#pipelineroughness_cfr").val(),
-                    "pipelineefficiency_cfr": $("#pipelineefficiency_cfr").val(),
-                    "flowrate_cfr": $("#flowrate_cfr").val(),
-                    "upstreampressure_cfr": $("#upstreampressure_cfr").val(),
-                    "downstreampressure_cfr": $("#downstreampressure_cfr").val(),
-                    "internalpipe_cfr": $("#internalpipe_cfr").val(),
-                    "lengthof_cfr": $("#lengthof_cfr").val(),
-                    "upstreamelevation_cfr": $("#upstreamelevation_cfr").val(),
-                    "downstreamelevation_cfr": $("#downstreamelevation_cfr").val(),
-                    "resultado_cfr": $("#resultado_cfr").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
                     "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "opcion": $("#opt_cfr").val(),
-                    "id_cfr": 1,
-                    "description_cfr": $("#description_cfr").val(),
                     "from": "cfr"
                 };
 
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                    }
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
                 var isOk = validate(parametros);
 
                 if (isOk === false) {
-                    alert("Debe realizar el cálculo y diligenciar la descripción");
+                    alert("You must perform the calculation and fill out the description");
                 } else {
-
-                    if ($("#opt_cfr").val() == 2) {
-                        parametros.id_cfr = $("#id_cfr").val();
-                    }
 
                     $.ajax({
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        dataType: "json",
+                        dataType: 'json',
                         beforeSend: function (xhr) {
                             block("Cargando...");
                         },
                         success: function (data, status, request) {
                             $("#id_cfr").val(data.row.id);
-                            $("#opt_cfr").val("2");
-                            show_OkDialog($("#save_Dialog_cfr"), "Proceso satisfactorio");
+                            $("#opt_cfr").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_cfr"), "Satisfactory process");
                         },
                         error: function (xhr, ajaxOptions, err) {
                             alert(err);

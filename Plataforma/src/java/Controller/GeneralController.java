@@ -118,12 +118,42 @@ public class GeneralController{
                 break;
                 
             //Modulo 2
+            case "adp":
+                controller = new PanhandleAController();
+                model = new GeneralModel(((PanhandleAController)controller).getModel(), from);   
+                break;
+            case "bdp":
+                controller = new PanhandleBController();
+                model = new GeneralModel(((PanhandleBController)controller).getModel(), from);   
+                break;
             case "cfr":
                 controller = new ColebrookWhiteController();   
                 model = new GeneralModel(((ColebrookWhiteController)controller).getModel(), from);   
-                
                 break;
-               
+            case "wdp":
+                controller = new WeymouthController();
+                model = new GeneralModel(((WeymouthController)controller).getModel(), from);   
+                break; 
+            case "aga":
+                controller = new AgaController();
+                model = new GeneralModel(((AgaController)controller).getModel(), from);   
+                break;   
+            case "igt":
+                controller = new IGTController();
+                model = new GeneralModel(((IGTController)controller).getModel(), from);   
+                break;   
+            case "mll":
+                controller = new MullerController();
+                model = new GeneralModel(((MullerController)controller).getModel(), from);   
+                break;   
+            case "fri":
+                controller = new FritzcheController();
+                model = new GeneralModel(((FritzcheController)controller).getModel(), from);   
+                break;   
+            case "spi":
+                controller = new SpitzglassController();
+                model = new GeneralModel(((SpitzglassController)controller).getModel(), from);   
+                break;   
                 
             //Modulo 3
             case "bds":

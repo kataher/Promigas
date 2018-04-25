@@ -238,8 +238,8 @@
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_fri()" class="btn btn-warning btn-block">
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_fri()" class="btn btn-warning btn-block" -->
         </div>
-        <input type="hidden" id="opcion_fri" name="opcion_fri"> 
-        <input type="hidden" id="id_fri" name="opcion_fri">      
+        <input type="hidden" id="opt_fri" name="opt_fri" value="1"> 
+        <input type="hidden" id="id_fri" name="id_fri" value="-1">
 
         <script>
             function hide(form) {
@@ -352,60 +352,61 @@
 
             function save_fri() {
 
-                var parametros = {
-                    "basetemperature_pha": $("#basetemperature_fri").val(),
-                    "basepressure_pha": $("#basepressure_fri").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_fri").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_fri").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_fri").val(),
-                    "upstreampressure_pha": $("#upstreampressure_fri").val(),
-                    "flowrate_pha": $("#flowrate_fri").val(),
-                    "internalpipe_pha": $("#internalpipe_fri").val(),
-                    "lengthof_pha": $("#lengthof_fri").val(),
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
-                    "upstreamelevation_pha": $("#upstreamelevation_fri").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_fri").val(),
-                    "downstreampressure_pha": $("#downstreampressure_fri").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_fri").val(),
-                    "velocity_pha": $("#velocity_fri").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "1",
-                    "opcion": $("#opcion_fri").val()
+                var parametros = {
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "fri"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_fri").val(data);
-                        show_OkDialog($("#save_Dialog_fri"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_fri"), "Error");
-
-                        $("#basetemperature_fri").val(parametros.basetemperature_pha);
-                        $("#basepressure_fri").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_fri").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_fri").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_fri").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_fri").val(parametros.upstreampressure_pha);
-                        $("#flowrate_fri").val(parametros.flowrate_pha);
-                        $("#internalpipe_fri").val(parametros.internalpipe_pha);
-                        $("#lengthof_fri").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_fri").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_fri").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_fri").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_fri").val(parametros.transmissionfactor_pha);
-                        $("#velocity_fri").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_fri").val(data.row.id);
+                            $("#opt_fri").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_fri"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_fri"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_fri() {

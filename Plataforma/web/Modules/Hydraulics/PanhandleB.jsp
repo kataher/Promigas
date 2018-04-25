@@ -237,8 +237,8 @@
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_bdp()" class="btn btn-warning btn-block">
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_bdp()" class="btn btn-warning btn-block" -->
         </div>
-        <input type="hidden" id="opcion_bdp" name="opcion_bdp"> 
-        <input type="hidden" id="id_bdp" name="opcion_bdp">      
+        <input type="hidden" id="opt_bdp" name="opt_bdp" value="1"> 
+        <input type="hidden" id="id_bdp" name="id_bdp" value="-1">      
 
         <script>
             function hide(form) {
@@ -353,60 +353,61 @@
 
             function save_bdp() {
 
-                var parametros = {
-                    "basetemperature_pha": $("#basetemperature_bdp").val(),
-                    "basepressure_pha": $("#basepressure_bdp").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_bdp").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_bdp").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_bdp").val(),
-                    "upstreampressure_pha": $("#upstreampressure_bdp").val(),
-                    "flowrate_pha": $("#flowrate_bdp").val(),
-                    "internalpipe_pha": $("#internalpipe_bdp").val(),
-                    "lengthof_pha": $("#lengthof_bdp").val(),
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
-                    "upstreamelevation_pha": $("#upstreamelevation_bdp").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_bdp").val(),
-                    "downstreampressure_pha": $("#downstreampressure_bdp").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_bdp").val(),
-                    "velocity_pha": $("#velocity_bdp").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "1",
-                    "opcion": $("#opcion_bdp").val()
+                var parametros = {
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "bdp"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_bdp").val(data);
-                        show_OkDialog($("#save_Dialog_bdp"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_bdp"), "Error");
-
-                        $("#basetemperature_bdp").val(parametros.basetemperature_pha);
-                        $("#basepressure_bdp").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_bdp").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_bdp").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_bdp").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_bdp").val(parametros.upstreampressure_pha);
-                        $("#flowrate_bdp").val(parametros.flowrate_pha);
-                        $("#internalpipe_bdp").val(parametros.internalpipe_pha);
-                        $("#lengthof_bdp").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_bdp").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_bdp").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_bdp").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_bdp").val(parametros.transmissionfactor_pha);
-                        $("#velocity_bdp").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_bdp").val(data.row.id);
+                            $("#opt_bdp").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_bdp"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_bdp"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_bdp() {

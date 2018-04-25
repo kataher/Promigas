@@ -238,8 +238,8 @@
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_igt()" class="btn btn-warning btn-block">
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_igt()" class="btn btn-warning btn-block" -->
         </div>
-        <input type="hidden" id="opcion_igt" name="opcion_igt"> 
-        <input type="hidden" id="id_igt" name="opcion_igt">      
+        <input type="hidden" id="opt_igt" name="opt_igt" value="1"> 
+        <input type="hidden" id="id_igt" name="id_igt" value="-1">
 
         <script>
             function hide(form) {
@@ -253,7 +253,7 @@
                 var y = document.getElementById("unknown_igt").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
             }
-            
+
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_igt"),
@@ -354,60 +354,61 @@
 
             function save_igt() {
 
-                var parametros = {
-                    "basetemperature_pha": $("#basetemperature_igt").val(),
-                    "basepressure_pha": $("#basepressure_igt").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_igt").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_igt").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_igt").val(),
-                    "upstreampressure_pha": $("#upstreampressure_igt").val(),
-                    "flowrate_pha": $("#flowrate_igt").val(),
-                    "internalpipe_pha": $("#internalpipe_igt").val(),
-                    "lengthof_pha": $("#lengthof_igt").val(),
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
-                    "upstreamelevation_pha": $("#upstreamelevation_igt").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_igt").val(),
-                    "downstreampressure_pha": $("#downstreampressure_igt").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_igt").val(),
-                    "velocity_pha": $("#velocity_igt").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "1",
-                    "opcion": $("#opcion_igt").val()
+                var parametros = {
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "igt"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_igt").val(data);
-                        show_OkDialog($("#save_Dialog_igt"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_igt"), "Error");
-
-                        $("#basetemperature_igt").val(parametros.basetemperature_pha);
-                        $("#basepressure_igt").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_igt").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_igt").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_igt").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_igt").val(parametros.upstreampressure_pha);
-                        $("#flowrate_igt").val(parametros.flowrate_pha);
-                        $("#internalpipe_igt").val(parametros.internalpipe_pha);
-                        $("#lengthof_igt").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_igt").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_igt").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_igt").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_igt").val(parametros.transmissionfactor_pha);
-                        $("#velocity_igt").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_igt").val(data.row.id);
+                            $("#opt_igt").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_igt"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_igt"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_igt() {
@@ -695,7 +696,7 @@
                     }
                 });
             }
-            
+
             function onchange_Input_igt(inp) {
 
                 var sw = validateDecimal(inp.value);

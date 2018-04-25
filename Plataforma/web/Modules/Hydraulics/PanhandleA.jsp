@@ -237,8 +237,8 @@
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_adp()" class="btn btn-warning btn-block">
             <!--input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_adp()" class="btn btn-warning btn-block"-->
         </div>
-        <input type="hidden" id="opcion_adp" name="opcion_adp"> 
-        <input type="hidden" id="id_adp" name="opcion_adp">      
+        <input type="hidden" id="opt_adp" name="opt_adp" value="1"> 
+        <input type="hidden" id="id_adp" name="id_adp" value="-1">      
 
         <script>
             function hide(form) {
@@ -304,59 +304,61 @@
 
             function save_adp() {
 
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
+
                 var parametros = {
-                    "basetemperature_pha": $("#basetemperature_adp").val(),
-                    "basepressure_pha": $("#basepressure_adp").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_adp").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_adp").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_adp").val(),
-                    "upstreampressure_pha": $("#upstreampressure_adp").val(),
-                    "flowrate_pha": $("#flowrate_adp").val(),
-                    "internalpipe_pha": $("#internalpipe_adp").val(),
-                    "lengthof_pha": $("#lengthof_adp").val(),
-                    "upstreamelevation_pha": $("#upstreamelevation_adp").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_adp").val(),
-                    "downstreampressure_pha": $("#downstreampressure_adp").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_adp").val(),
-                    "velocity_pha": $("#velocity_adp").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "1",
-                    "opcion": $("#opcion_adp").val()
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "adp"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_adp").val(data);
-                        show_OkDialog($("#save_Dialog_adp"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_adp"), "Error");
-
-                        $("#basetemperature_adp").val(parametros.basetemperature_pha);
-                        $("#basepressure_adp").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_adp").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_adp").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_adp").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_adp").val(parametros.upstreampressure_pha);
-                        $("#flowrate_adp").val(parametros.flowrate_pha);
-                        $("#internalpipe_adp").val(parametros.internalpipe_pha);
-                        $("#lengthof_adp").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_adp").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_adp").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_adp").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_adp").val(parametros.transmissionfactor_pha);
-                        $("#velocity_adp").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_adp").val(data.row.id);
+                            $("#opt_adp").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_adp"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_adp"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_adp() {

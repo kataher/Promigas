@@ -241,8 +241,8 @@
             <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_wdp()" class="btn btn-warning btn-block">
             <!-- input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_wdp()" class="btn btn-warning btn-block"-->
         </div>
-        <input type="hidden" id="opcion_wdp" name="opcion_wdp"> 
-        <input type="hidden" id="id_wdp" name="opcion_wdp">      
+        <input type="hidden" id="opt_wdp" name="opt_wdp" value="1"> 
+        <input type="hidden" id="id_wdp" name="id_wdp" value="-1">      
 
         <script>
             function hide(form) {
@@ -354,60 +354,61 @@
 
             function save_wdp() {
 
-                var parametros = {
-                    "basetemperature_pha": $("#basetemperature_wdp").val(),
-                    "basepressure_pha": $("#basepressure_wdp").val(),
-                    "gasflowingtemp_pha": $("#gasflowingtemp_wdp").val(),
-                    "gasspecificgra_pha": $("#gasspecificgra_wdp").val(),
-                    "pipelineefficiency_pha": $("#pipelineefficiency_wdp").val(),
-                    "upstreampressure_pha": $("#upstreampressure_wdp").val(),
-                    "flowrate_pha": $("#flowrate_wdp").val(),
-                    "internalpipe_pha": $("#internalpipe_wdp").val(),
-                    "lengthof_pha": $("#lengthof_wdp").val(),
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
-                    "upstreamelevation_pha": $("#upstreamelevation_wdp").val(),
-                    "downstreamelevation_pha": $("#downstreamelevation_wdp").val(),
-                    "downstreampressure_pha": $("#downstreampressure_wdp").val(),
-                    "transmissionfactor_pha": $("#transmissionfactor_wdp").val(),
-                    "velocity_pha": $("#velocity_wdp").val(),
-                    "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                    "form": "1",
-                    "opcion": $("#opcion_wdp").val()
+                var parametros = {
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "wdp"
                 };
 
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_wdp").val(data);
-                        show_OkDialog($("#save_Dialog_wdp"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_wdp"), "Error");
-
-                        $("#basetemperature_wdp").val(parametros.basetemperature_pha);
-                        $("#basepressure_wdp").val(parametros.basepressure_pha);
-                        $("#gasflowingtemp_wdp").val(parametros.gasflowingtemp_pha);
-                        $("#gasspecificgra_wdp").val(parametros.gasspecificgra_pha);
-                        $("#pipelineefficiency_wdp").val(parametros.pipelineefficiency_pha);
-                        $("#upstreampressure_wdp").val(parametros.upstreampressure_pha);
-                        $("#flowrate_wdp").val(parametros.flowrate_pha);
-                        $("#internalpipe_wdp").val(parametros.internalpipe_pha);
-                        $("#lengthof_wdp").val(parametros.lengthof_pha);
-                        $("#upstreamelevation_wdp").val(parametros.upstreamelevation_pha);
-                        $("#downstreamelevation_wdp").val(parametros.downstreamelevation_pha);
-                        $("#downstreampressure_wdp").val(parametros.downstreampressure_pha);
-                        $("#transmissionfactor_wdp").val(parametros.transmissionfactor_pha);
-                        $("#velocity_wdp").val(parametros.velocity_pha);
-                    },
-                    complete: function () {
-                        unBlock();
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
-                });
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+                console.log(parametros);
+                var isOk = validate(parametros);
+
+                if (isOk === false) {
+                    alert("You must perform the calculation and fill out the description");
+                } else {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Modules/manager.jsp",
+                        data: parametros,
+                        dataType: 'json',
+                        beforeSend: function (xhr) {
+                            block("Cargando...");
+                        },
+                        success: function (data, status, request) {
+                            $("#id_wdp").val(data.row.id);
+                            $("#opt_wdp").val("2"); //opcion editar
+                            show_OkDialog($("#save_Dialog_wdp"), "Satisfactory process");
+                        },
+                        error: function (xhr, ajaxOptions, err) {
+                            alert(err);
+                            show_OkDialog($("#error_Dialog_wdp"), "Error");
+                        },
+                        complete: function () {
+                            unBlock();
+                        }
+                    });
+                }
             }
 
             function calculate_wdp() {

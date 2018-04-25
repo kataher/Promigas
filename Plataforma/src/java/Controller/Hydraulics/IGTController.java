@@ -5,7 +5,7 @@
  */
 package Controller.Hydraulics;
 
-import Model.Hydraulics.PanhandleAModel;
+import Model.Hydraulics.IGTModel;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -14,11 +14,11 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author kata__000
  */
-public class PanhandleAController extends Controller.Controller {
+public class IGTController extends Controller.Controller {
 
-    private final PanhandleAModel model = new PanhandleAModel();
+    private final IGTModel model = new IGTModel();
 
-    public PanhandleAModel getModel() {
+    public IGTModel getModel() {
         return model;
     }
     
@@ -40,10 +40,5 @@ public class PanhandleAController extends Controller.Controller {
         }
 
         return values;
-    }
-
-    public String loadSuggested(HttpServletRequest request) throws Exception {
-        String idProyect = request.getParameter("idproyect").trim();
-        return model.loadSuggested(idProyect);
     }
 }
