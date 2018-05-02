@@ -3047,7 +3047,7 @@ function downstreampressureB_Form(vari, uni) {
     var h2 = parseFloat(vari.downstreamelevation_bdp);
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3133,7 +3133,7 @@ function flowrateB_Form(vari, uni) {
     var h2 = parseFloat(vari.downstreamelevation_bdp);
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3142,25 +3142,16 @@ function flowrateB_Form(vari, uni) {
     
     D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
+    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
 
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
-
-
-    /*L =   L / 1609;
-     Tb = Tb + 460;
-     Tf = Tf + 460;*/
-
-    h1 = h1 * 3.28;
-    h2 = h2 * 3.28;
     var Z = 1;
     var e = Math.E;
     var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
 
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+    var s = 0.0375 * G * ((h2 - h1) / Z) / Tf;
     var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
     var P1a = P1 + Pa1;
     var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
@@ -3171,6 +3162,16 @@ function flowrateB_Form(vari, uni) {
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
+    console.log(Z);
+    console.log(Ef);
+    console.log(Tb);
+    console.log(Pb);
+    console.log(P1a);
+    console.log(P2a);
+    console.log(s);
+    console.log(Tf);
+    console.log(Le);
+    console.log(D);
     var Q = 737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.961) * Tf * Le)), 0.51) * Math.pow(D, 2.53);
     Q = puntos(Q, 0);
     //Salida
@@ -3206,23 +3207,21 @@ function internalpipediameterB_Form(vari, uni) {
 
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
 
     var Le;
 
-    h1 = h1 * 3.28;
-    h2 = h2 * 3.28;
     var Z = 1;
     var e = Math.E;
 
@@ -3270,26 +3269,25 @@ function upstreampressureB_Form(vari, uni) {
     var h2 = parseFloat(vari.downstreamelevation_bdp);
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
 //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_bdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
 
     var sw = 20;
     var Le;
     var Z = 1;
     var e = Math.E;
-    L = L / 1609;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
     var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
     var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
