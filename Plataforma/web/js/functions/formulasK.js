@@ -2672,354 +2672,6 @@ function reinforcementwelded_Form(vari, uni) {
 
 //PamhandleA - Downstreampressure
 
-function downstreampressure_Form(vari, uni) {
-    /*
-     Tb = Temperatura base
-     Pb = Presión base
-     Tf = Gas Temperatura de flujo
-     G  = Gas Specific Gravity
-     Ef = Pipeline Efficiency Factor
-     P1 = Upstream Pressure
-     Q  = Flow rate
-     D  = Internal Pipe Diameter
-     L  = Length of Pipeline
-     h1 = Upstream Elevation
-     h2 = Downstream Elevation
-    h = Height
-     */
-
-    var Tb = parseFloat(vari.basetemperature_adp);
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp);
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var Ef = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var D = parseFloat(vari.internalpipe_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var h1 = parseFloat(vari.upstreamelevation_adp);
-    var h2 = parseFloat(vari.downstreamelevation_adp);
-    var h = get_Long(parseFloat(vari.enteree_adp), uni.ee_sel_adp, "ft"); 
-
-    var ok = 1;
-    var P2 = 0;
-    var Le;
-
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
-
-    Pb = get_Pres(parseFloat(Pb), h, uni.bte_sel_adp, "psia"); //Presión base: preguntar por elevación
-    //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h, uni.up_sel_adp, "psia");
-    // P2 = get_Pres(parseFloat(P2),h, uni.bp_sel_adp, "psia");
-
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "MMSCFD");
-
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_apd, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_apd, "mt");
-
-    /* L =   L / 1609;
-     Tb = Tb + 460;
-     Tf = Tf + 460;*/
-//alert(Tb+"-"+Pb+"-"+Tf+"-"+G+"-"+Ef+"-"+P1+"-"+Q+"-"+P2+"-"+L+"-"+h1+"-"+h2);
-    h1 = h1 * 3.28;
-    h2 = h2 * 3.28;
-    var Z = 1;
-    var e = Math.E;
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var sw = 10;
-
-    if (s === 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-
-    while (sw > 0) {
-        if (((-Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(D, 2.6182))), 1.8539) * (Z * Math.pow(G, 0.8539) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
-        } else {
-            var P2a = Math.pow(((-Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(D, 2.6182))), 1.8539) * (Z * Math.pow(G, 0.8539) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            P2 = P2a - Pa2;
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-            s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-            if (s === 0) {
-                Le = L;
-            } else {
-                Le = L * (Math.pow(e, s) - 1) / s;
-            }
-        }
-        sw = sw - 1;
-    }
-    P2 = puntos(P2, 1);
-    //P2 = get_Pres(parseFloat(P2),h, uni.bp_sel_adp, "psia");
-    //Salida
-    // Downstream Pressure
-    var res = [P2];
-    return  res;
-}
-function flowrate_Form(vari, uni) {
-   
-    /*
-     Tb = Temperatura base
-     Pb = Presión base
-     Tf = Gas Temperatura de flujo
-     G  = Gas Specific Gravity
-     Ef = Pipeline Efficiency Factor
-     P1 = Upstream Pressure
-     P2 = Downstream Pressure
-     D  = Internal Pipe Diameter
-     L  = Length of Pipeline
-     h1 = Upstream Elevation
-     h2 = Downstream Elevation
-     h = Height
-     */
-    
-
-    var Tb = parseFloat(vari.basetemperature_adp); // *
-    var Pb = parseFloat(vari.basepressure_adp);   //*
-    var Tf = parseFloat(vari.gasflowingtemp_adp); // *
-    var G = parseFloat(vari.gasspecificgra_adp);  // *
-    var E = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp); // *
-    var D = parseFloat(vari.internalpipe_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var H1 = parseFloat(vari.upstreamelevation_adp);
-    var H2 = parseFloat(vari.downstreamelevation_adp);
-    
-    
-    
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base Base Temperature
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Gas flow temperature 
-
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
-    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_adp, "psia");
-    P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_adp, "psia");
-
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
-    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
-    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
-    D = get_Long(parseFloat(D), uni.de_sel_apd, "in");
-    
-    var sw = true;
-    
-    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
-    
-    var Z = 1 / (1 + ((Pavg * 344400 * Math.pow(10,1.785) * G) / (Math.pow(Tf,3.825))));
-    var Le, S;
-    if(H1 != 0 || H2 != 0){
-       S = 0.0375 * G * (H2 - H1) / (Tf * Z);
-       Le = L * (Math.pow(Math.E, S) - 1) / S;
-    }
-    else{
-       Le = L;
-       S = 0 ;
-    }
-    
-    var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
-    //alert((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)));
-    
-    var res = [Q/1000];
-    
-    //changeToDecimal(res);
-    
-    return  res;
-
-    
-    /*
-    
-    var Le = 0;
-
-    var Z = 1;
-    var e = Math.E;
-
-    var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
-    if (s === 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-    //
-    var op1 = 435.87 * Ef * Math.pow((Tb / Pb), 1.0788);
-    var op2 = (Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2));
-    var op3 = (Z * Math.pow(G, 0.8539) * Tf * Le);
-    var Q = op1 * Math.pow((op2 / op3), 0.5394) * Math.pow(D, 2.6182);
-    Q = puntos(Q, 0);
-    var res = [Q];
-    //Salida
-    // Flow Rate
-    return  res;*/
-}
-function internalpipediameter_Form(vari, uni) {
-    /*
-     Tb = Temperatura base
-     Pb = Presión base
-     Tf = Gas Temperatura de flujo
-     G  = Gas Specific Gravity
-     Ef = Pipeline Efficiency Factor
-     P1 = Upstream Pressure
-     P2 = Downstream Pressure
-     Q  = Tasa de flujo
-     L  = Length of Pipeline
-     h1 = Upstream Elevation
-     h2 = Downstream Elevation
-    h = Height
-     */
-    var Tb = parseFloat(vari.basetemperature_adp) + 460;
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp) + 460;
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var Ef = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var h1 = parseFloat(vari.upstreamelevation_adp);
-    var h2 = parseFloat(vari.downstreamelevation_adp); 
-    var h = get_Long(parseFloat(vari.enteree_adp), uni.ee_sel_adp, "ft"); 
-    var sw = true;
-    //alert(Tb+"-"+Pb+"-"+Tf+"-"+G+"-"+Ef+"-"+P1+"-"+Q+"-"+P2+"-"+L+"-"+h1+"-"+h2);
-    var D = 0.1;
-    var Z = 1;
-    var e = Math.E;
-
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
-
-    Pb = get_Pres(parseFloat(Pb), h, uni.bte_sel_adp, "psia"); //Presión base: preguntar por elevación
-    //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h, uni.up_sel_adp, "psia");
-    P2 = get_Pres(parseFloat(P2), h, uni.bp_sel_adp, "psia");
-
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "MMSCFD");
-
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_apd, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_apd, "mt");
-
-    //L =   L / 1609;
-    var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-
-    var Le;
-    var P2a = P2 + Pa2;
-    if (s === 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-
-
-    var D = Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.8539) * Tf * Le)), 0.5394))), (1 / 2.6182));
-    D = puntos(D, 3);
-    //Salida
-    //  D  = Internal Pipe Diameter
-    var res = [D];
-    return  res;
-}
-function upstreampressure_Form(vari, uni) {
-    /*
-     Tb = Temperatura base
-     Pb = Presión base
-     Tf = Gas Temperatura de flujo
-     G  = Gas Specific Gravity
-     Ef = Pipeline Efficiency Factor
-     P2 = Downstream Pressure
-     D  = Internal Pipe Diameter
-     Q  = Tasa de flujo
-     L  = Length of Pipeline
-     h1 = Upstream Elevation
-     h2 = Downstream Elevation
-     h = Height
-     */
-    var Tb = parseFloat(vari.basetemperature_adp) + 460;
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp) + 460;
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var Ef = parseFloat(vari.pipelineefficiency_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var D = parseFloat(vari.internalpipe_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var h1 = parseFloat(vari.upstreamelevation_adp);
-    var h2 = parseFloat(vari.downstreamelevation_adp);
-    var sw = 10;
-    var Le;
-    var Z = 1;
-    var e = Math.E;
-//L =   L / 1609;
-
-    var h = get_Long(parseFloat(vari.enteree_adp), uni.ee_sel_adp, "ft"); 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
-
-    Pb = get_Pres(parseFloat(Pb), h, uni.bte_sel_adp, "psia"); //Presión base: preguntar por elevación
-    //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-//P1 = get_Pres(parseFloat(P1),0, uni.up_sel_adp, "psia");
-    P2 = get_Pres(parseFloat(P2), h, uni.bp_sel_adp, "psia");
-
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "MMSCFD");
-
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_apd, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_apd, "mt");
-
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
-
-    if (s === 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-
-//alert(s+" "+Pa1+" "+Pa2+" "+P2a+" "+Math.pow(e , s));
-    while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(D, 2.6182))), 1.8539) * (Z * Math.pow(G, 0.8539) * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        // alert(P1a);
-        var P1 = P1a - Pa1;
-        //alert(P1);
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-        var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-        if (s == 0) {
-            Le = L;
-        } else {
-            Le = L * (Math.pow(e, s) - 1) / s;
-        }
-        sw = sw - 1;
-    }
-    //Salida
-    //Upstream Pressure
-    P1 = puntos(P1, 1);
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_adp, "psia");
-    var res = [P1];
-    return  res;
-}
-
-// PamhandleB - Downstream 
 function downstreampressureB_Form(vari, uni) {
     /*
      Tb = Temperatura base
@@ -3032,8 +2684,8 @@ function downstreampressureB_Form(vari, uni) {
      Q  = Tasa de flujo
      L  = Length of Pipeline
      h1 = Upstream Elevation
-     h2 = Downstream Elevation
-     */
+     h2 = Downstream Elevation*/
+     
     var Tb = parseFloat(vari.basetemperature_bdp);
     var Pb = parseFloat(vari.basepressure_bdp);
     var Tf = parseFloat(vari.gasflowingtemp_bdp);
@@ -3047,7 +2699,7 @@ function downstreampressureB_Form(vari, uni) {
     var h2 = parseFloat(vari.downstreamelevation_bdp);
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo
+    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3105,6 +2757,398 @@ function downstreampressureB_Form(vari, uni) {
     P2 = puntos(P2, 1);
     var res = [P2];
     return  res;
+}
+function flowrate_Form(vari, uni) {
+   
+    /*
+     Tb = Temperatura base
+     Pb = Presión base
+     Tf = Gas Temperatura de flujo
+     G  = Gas Specific Gravity
+     Ef = Pipeline Efficiency Factor
+     P1 = Upstream Pressure
+     P2 = Downstream Pressure
+     D  = Internal Pipe Diameter
+     L  = Length of Pipeline
+     h1 = Upstream Elevation
+     h2 = Downstream Elevation
+     h = Height
+     */
+    
+
+    var Tb = parseFloat(vari.basetemperature_adp); // *
+    var Pb = parseFloat(vari.basepressure_adp);   //*
+    var Tf = parseFloat(vari.gasflowingtemp_adp); // *
+    var G = parseFloat(vari.gasspecificgra_adp);  // *
+    var E = parseFloat(vari.pipelineefficiency_adp);
+    var P1 = parseFloat(vari.upstreampressure_adp); // *
+    var D = parseFloat(vari.internalpipe_adp);
+    var P2 = parseFloat(vari.downstreampressure_adp);
+    var L = parseFloat(vari.lengthof_adp);
+    var H1 = parseFloat(vari.upstreamelevation_adp);
+    var H2 = parseFloat(vari.downstreamelevation_adp);
+    
+    
+    
+    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base Base Temperature
+    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Gas flow temperature 
+
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_adp, "psia"); //Upstream Pressure
+    P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_adp, "psia"); // Downstream Pressure
+
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil"); // Length of Pipeline
+    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft"); // Upstream Elevation
+    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft"); //Downstream Elevation
+    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+    
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (H1+H2)/2); //1 / (1 + ((Pavg * 344400 * Math.pow(10,1.785) * G) / (Math.pow(Tf,3.825))));
+    var Le, S;
+    if(H1 != H2){
+       S = 0.0375 * G * ((H2 - H1) / (Tf * Z));
+       Le = L * (Math.pow(Math.E, S) - 1) / S;
+    }
+    else{
+       Le = L;
+       S = 0 ;
+    }
+    
+    var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
+    //alert((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)));
+    
+    //var res = [Q/1000];
+    var res = [Q]; //Pie3/dia SCFD
+    
+    //changeToDecimal(res);
+    
+    return  res;
+
+    
+    /*
+    
+    var Le = 0;
+
+    var Z = 1;
+    var e = Math.E;
+
+    var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
+    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
+
+    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
+    var P1a = P1 + Pa1;
+    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    P1a = P1 + Pa1;
+    var P2a = P2 + Pa2;
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+    //
+    var op1 = 435.87 * Ef * Math.pow((Tb / Pb), 1.0788);
+    var op2 = (Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2));
+    var op3 = (Z * Math.pow(G, 0.8539) * Tf * Le);
+    var Q = op1 * Math.pow((op2 / op3), 0.5394) * Math.pow(D, 2.6182);
+    Q = puntos(Q, 0);
+    var res = [Q];
+    //Salida
+    // Flow Rate
+    return  res;*/
+}
+function internalpipediameter_Form(vari, uni) {
+    /*
+     Tb = Temperatura base
+     Pb = Presión base
+     Tf = Gas Temperatura de flujo
+     G  = Gas Specific Gravity
+     Ef = Pipeline Efficiency Factor
+     P1 = Upstream Pressure
+     P2 = Downstream Pressure
+     Q  = Tasa de flujo
+     L  = Length of Pipeline
+     h1 = Upstream Elevation
+     h2 = Downstream Elevation
+    h = Height
+     */
+    var Tb = parseFloat(vari.basetemperature_adp);
+    var Pb = parseFloat(vari.basepressure_adp);
+    var Tf = parseFloat(vari.gasflowingtemp_adp);
+    var G = parseFloat(vari.gasspecificgra_adp);
+    var E = parseFloat(vari.pipelineefficiency_adp);
+    var P1 = parseFloat(vari.upstreampressure_adp);
+    var Q = parseFloat(vari.flowrate_adp);
+    var P2 = parseFloat(vari.downstreampressure_adp);
+    var L = parseFloat(vari.lengthof_adp);
+    var H1 = parseFloat(vari.upstreamelevation_adp);
+    var H2 = parseFloat(vari.downstreamelevation_adp); 
+
+    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura flujo
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_adp, "psia");
+    P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_adp, "psia");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
+    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+    
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (H1+H2)/2);
+    
+    var Le, S;
+    if(H1 != H2){
+       S = 0.0375 * G * ((H2 - H1) / (Tf * Z));
+       Le = L * (Math.pow(Math.E, S) - 1) / S;
+    }
+    else{
+       Le = L;
+       S = 0 ;
+    }
+    
+    var D = Q/((435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394));
+    D = Math.pow(D, 1/2.6182);
+    var res = [D.toFixed(3)]; //in    
+    return  res;
+    
+}
+function upstreampressure_Form(vari, uni) {
+    /*
+     Tb = Temperatura base
+     Pb = Presión base
+     Tf = Gas Temperatura de flujo
+     G  = Gas Specific Gravity
+     Ef = Pipeline Efficiency Factor
+     P2 = Downstream Pressure
+     D  = Internal Pipe Diameter
+     Q  = Tasa de flujo
+     L  = Length of Pipeline
+     h1 = Upstream Elevation
+     h2 = Downstream Elevation
+     h = Height
+     */
+    var Tb = parseFloat(vari.basetemperature_adp);
+    var Pb = parseFloat(vari.basepressure_adp);
+    var Tf = parseFloat(vari.gasflowingtemp_adp);
+    var G = parseFloat(vari.gasspecificgra_adp);
+    var Ef = parseFloat(vari.pipelineefficiency_adp);
+    var P2 = parseFloat(vari.downstreampressure_adp);
+    var Q = parseFloat(vari.flowrate_adp);
+    var D = parseFloat(vari.internalpipe_adp);
+    var L = parseFloat(vari.lengthof_adp);
+    var H1 = parseFloat(vari.upstreamelevation_adp);
+    var H2 = parseFloat(vari.downstreamelevation_adp);
+    var sw = 10;
+    var Le;
+    var P1 = 0; // 
+    var Z = 1;
+    var e = Math.E;
+
+    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
+    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
+    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia"); //Downstream psia
+
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
+    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+
+
+    var s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf; 
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+    
+    var Pavg; //psia
+    P1 = P2;
+    
+    while (sw > 0) {
+        P1 = Math.pow(((Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(D, 2.6182))), (1/0.5394)) * (Z * Math.pow(G, 0.8539) * Tf * Le) + Math.pow(e, s) * Math.pow(P2, 2))), 0.5); //presion en psia
+        Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf;
+        if (s == 0) {
+            Le = L;
+        } else {
+            Le = L * (Math.pow(e, s) - 1) / s;
+        }
+        sw = sw - 1;
+    }
+    
+    P1 = puntos(P1, 1);//Upstream Pressure psia
+    var res = [P1];
+    return  res;
+}
+
+// PamhandleB - Downstream 
+function downstreampressure_Form(vari, uni) {
+    
+    /*
+     Tb = Temperatura base
+     Pb = Presión base
+     Tf = Gas Temperatura de flujo
+     G  = Gas Specific Gravity
+     Ef = Pipeline Efficiency Factor
+     P2 = Downstream Pressure
+     D  = Internal Pipe Diameter
+     Q  = Tasa de flujo
+     L  = Length of Pipeline
+     h1 = Upstream Elevation
+     h2 = Downstream Elevation
+     h = Height
+     */
+    var Tb = parseFloat(vari.basetemperature_adp);
+    var Pb = parseFloat(vari.basepressure_adp);
+    var Tf = parseFloat(vari.gasflowingtemp_adp);
+    var G = parseFloat(vari.gasspecificgra_adp);
+    var Ef = parseFloat(vari.pipelineefficiency_adp);
+    var P1 = parseFloat(vari.upstreampressure_adp);
+    var Q = parseFloat(vari.flowrate_adp);
+    var D = parseFloat(vari.internalpipe_adp);
+    var L = parseFloat(vari.lengthof_adp);
+    var H1 = parseFloat(vari.upstreamelevation_adp);
+    var H2 = parseFloat(vari.downstreamelevation_adp);
+    var sw = 10;
+    var Le;
+    var P2 = 0; // 
+    var Z = 1;
+    var e = Math.E;
+
+    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
+    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
+    P1 = get_Pres(parseFloat(P1), H1, uni.bp_sel_adp, "psia"); //Downstream psia
+
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
+    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+
+
+    var s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf; 
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+    
+    var Pavg; //psia
+    P2 = P1;
+    
+    while (sw > 0) {
+        P2 = Math.pow((-1)*((Math.pow((Q / (435.87 * Ef * Math.pow((Tb / Pb), 1.0788) * Math.pow(D, 2.6182))), (1/0.5394)) * (Z * Math.pow(G, 0.8539) * Tf * Le) - Math.pow(P1, 2)))/(Math.pow(e,s)), 0.5); //presion en psia
+        Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf;
+        if (s == 0) {
+            Le = L;
+        } else {
+            Le = L * (Math.pow(e, s) - 1) / s;
+        }
+        sw = sw - 1;
+    }
+    
+    alert(P1);
+    alert(P2);
+    
+    P2 = puntos(P2, 1);//Upstream Pressure psia
+    var res = [P2];
+    return  res;
+    
+    /*
+     Tb = Temperatura base
+     Pb = Presión base
+     Tf = Gas Temperatura de flujo
+     G  = Gas Specific Gravity
+     Ef = Pipeline Efficiency Factor
+     P1 = Upstream Pressure
+     D  = Internal Pipe Diameter
+     Q  = Tasa de flujo
+     L  = Length of Pipeline
+     h1 = Upstream Elevation
+     h2 = Downstream Elevation
+     
+    var Tb = parseFloat(vari.basetemperature_bdp);
+    var Pb = parseFloat(vari.basepressure_bdp);
+    var Tf = parseFloat(vari.gasflowingtemp_bdp);
+    var G = parseFloat(vari.gasspecificgra_bdp);
+    var Ef = parseFloat(vari.pipelineefficiency_bdp);
+    var P1 = parseFloat(vari.upstreampressure_bdp);
+    var Q = parseFloat(vari.flowrate_bdp);
+    var D = parseFloat(vari.internalpipe_bdp);
+    var L = parseFloat(vari.lengthof_bdp);
+    var h1 = parseFloat(vari.upstreamelevation_bdp);
+    var h2 = parseFloat(vari.downstreamelevation_bdp);
+
+    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo
+
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
+    //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
+    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
+//P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_bdp, "psia");
+
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
+
+
+    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
+    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
+
+
+    /*L =   L / 1609;
+     Tb = Tb + 460;
+     Tf = Tf + 460;
+
+    h1 = h1 * 3.28;
+    h2 = h2 * 3.28;
+    var Z = 1;
+    var e = Math.E;
+
+    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
+    var P1a = P1 + Pa1;
+    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var Le;
+    if (s == 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+    var sw = 20;
+    while (sw > 0) {
+        if (((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
+            //Label17.Visible = True
+        } else {
+            var P2a = Math.pow(((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
+            var P2 = P2a - Pa2;
+            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+            if (s == 0) {
+                Le = L;
+            } else {
+                Le = L * (Math.pow(e, s) - 1) / s;
+            }
+        }
+        sw = sw - 1;
+    }
+//Salida
+    //Downstream Pressure
+    P2 = puntos(P2, 1);
+    var res = [P2];
+    return  res;*/
 }
 function flowrateB_Form(vari, uni) {
     /*

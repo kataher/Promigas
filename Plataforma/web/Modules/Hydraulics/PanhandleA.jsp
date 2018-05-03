@@ -139,7 +139,7 @@
                                 <div class="col-md-12" id="flowrate">
                                     <div class="col-md-12"><label>Flow Rate</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" value="100000" type="text" id="flowrate_adp" name="flowrate_adp" required onchange="onchange_Input_adp(this)">
+                                        <input class="form-control" value="490933664.96811527" type="text" id="flowrate_adp" name="flowrate_adp" required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_if_sel_adp">
                                         <select class="form-control" id="if_sel_adp" name="if_sel_adp" onchange="cleanOut_adp()"> </select>
@@ -150,7 +150,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" value="0" type="text" id="upstreampressure_adp" name="upstreampressure_adp" onchange="onchange_Input_adp(this)"  required>
+                                        <input class="form-control" value="900" type="text" id="upstreampressure_adp" name="upstreampressure_adp" onchange="onchange_Input_adp(this)"  required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_adp">
                                         <select class="form-control" id="up_sel_adp" name="up_sel_adp"> </select>
@@ -160,7 +160,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" value="985.27" type="text" id="downstreampressure_adp" name="downstreampressure_adp" onchange="onchange_Input_adp(this)" required>
+                                        <input class="form-control" value="600" type="text" id="downstreampressure_adp" name="downstreampressure_adp" onchange="onchange_Input_adp(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_adp">
                                         <select class="form-control" id="bp_sel_adp" name="bp_sel_adp"> </select>
@@ -169,7 +169,7 @@
                                 <div class="col-md-12" id="internal">
                                     <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" value="954.4" type="text" id="internalpipe_adp" name="internalpipe_adp"  required onchange="onchange_Input_adp(this)">
+                                        <input class="form-control" value="19" type="text" id="internalpipe_adp" name="internalpipe_adp"  required onchange="onchange_Input_adp(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ipd_sel_apd">
                                         <select class="form-control" id="ipd_sel_apd" name="ipd_sel_apd"> </select>
@@ -254,7 +254,7 @@
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
 
                 if (y[x].text == "Flow rate") {
-                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [MSCFD]";
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [SCFD]";
                 }
             }
             $(document).ready(function () {
@@ -393,7 +393,8 @@
                         "bp_sel_adp": $("#bp_sel_adp").val().split(",")[1],
                         "le_sel_apd": $("#le_sel_apd").val().split(",")[1],
                         "ue_sel_apd": $("#ue_sel_apd").val().split(",")[1],
-                        "de_sel_apd": $("#de_sel_apd").val().split(",")[1]
+                        "de_sel_apd": $("#de_sel_apd").val().split(",")[1],
+                        "ipd_sel_apd": $("#ipd_sel_apd").val().split(",")[1]
                     };
                 }
 
@@ -531,6 +532,7 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class=\"form-control\" name=\"up_sel_adp\" id= \"up_sel_adp\" onchange=\"onchange_pres_adp(this)\">" + data;
                         $("#div_up_sel_adp").html(newHtml);
+                        //$("#up_sel_adp").val("65,psig");
 
                         newHtml = "<select class=\"form-control\" name=\"dp_sel_adp\" id= \"dp_sel_adp\" onchange=\"onchange_pres_adp(this)\">" + data;
                         $("#div_dp_sel_adp").html(newHtml);

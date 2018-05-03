@@ -293,8 +293,7 @@
                 
                 $(document).ready(function() {  
                     $("#opt_mer").val("1");
-                    load_serie_mer();                  
-                    load_fluE_sel_mer();
+                    load_serie_mer();  
                     load_press_sel_mer();
                     load_temp_sel_mer();
                     
@@ -436,7 +435,6 @@
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function (xhr) {                            
                             block("Cargando...");
                         },
@@ -469,7 +467,6 @@
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function (xhr) {                            
                             block("Cargando...");
                         },
@@ -477,14 +474,9 @@
                             var newHtml = "<select class=\"form-control\" name=\"se_sel_mer\" id= \"se_sel_mer\" onchange=\"onchange_serie_mer(true)\">" + data;
                             $("#div_se_sel_mer").html(newHtml);  
                             
-                            if($("#se_sel_mer").val().split(",")[1] == "imperial"){
-                               $("#fmin_sel_mer").val("1284,SCFH");
-                               $("#fmax_sel_mer").val("1284,SCFH");
-                            }else{
-                               $("#fmin_sel_mer").val("1285,SCMH");
-                               $("#fmax_sel_mer").val("1285,SCMH");
-                            }
+                            //llamar al llenar Minimum Flow of Operation
                             
+                            load_fluE_sel_mer();
                             onchange_serie_mer(false);
                         },
                         error: function (xhr, ajaxOptions, err) {
@@ -512,7 +504,6 @@
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function (xhr) {                            
                             block("Cargando...");
                         },
@@ -520,12 +511,12 @@
                             var newHtml = "<select class=\"form-control\" name=\"mo_sel_mer\" id=\"mo_sel_mer\" onchange=\"cleanOut_mer()\">" + data;
                             $("#div_mo_sel_mer").html(newHtml);
                             
-                            if($("#se_sel_mer").val().split(",")[1] == "imperial"){
-                               $("#fmin_sel_mer").val("1284,SCFH");
-                               $("#fmax_sel_mer").val("1284,SCFH");
+                            if($("#se_sel_mer").val().split(",")[1] === "imperial1"){
+                                $("#fmin_sel_mer").val("1284,SCFH");
+                                $("#fmax_sel_mer").val("1284,SCFH");               
                             }else{
-                               $("#fmin_sel_mer").val("1285,SCMH");
-                               $("#fmax_sel_mer").val("1285,SCMH");
+                                $("#fmin_sel_mer").val("1285,SCMH");
+                                $("#fmax_sel_mer").val("1285,SCMH");   
                             }
                             
                         },
@@ -553,7 +544,6 @@
                         url: "Modules/manager.jsp",
                         data: parametros,
                         dataType: 'json',
-                        async : false,
                         beforeSend: function (xhr) {
                             $("#opt_mer").val("1");
                             $("#id_mer").val("");
@@ -618,7 +608,6 @@
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function (xhr) {                            
                             block("Cargando...");
                         },
@@ -628,6 +617,14 @@
                             
                             newHtml = "<select class=\"form-control\" name=\"fmax_sel_mer\" id= \"fmax_sel_mer\" onchange=\"cleanOut_mer()\">" + data;
                             $("#div_fmax_sel_mer").html(newHtml);
+                            
+                            if($("#se_sel_mer").val().split(",")[1] === "imperial1"){
+                               $("#fmin_sel_mer").val("1284,SCFH");
+                               $("#fmax_sel_mer").val("1284,SCFH");
+                            }else{
+                               $("#fmin_sel_mer").val("1285,SCMH");
+                               $("#fmax_sel_mer").val("1285,SCMH");
+                            }
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_mer"), "Error");
@@ -648,7 +645,6 @@
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function (xhr) {                            
                             block("Cargando...");
                         },
