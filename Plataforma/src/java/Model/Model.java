@@ -41,7 +41,7 @@ public class Model {
             //dbManager = new DBManager(DBManager.SQLSERVER, "TAGUA\\SQLEXPRESS", "Plataforma", "sa", "promigas", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "DESKTOP-49A22JB\\SQLSERVER", "Plataforma", "sa", "123456", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "097699-DOCENT-P\\PROMIGAS", "Plataforma", "sa", "123", "1433");
-            dbManager = new DBManager(DBManager.SQLSERVER, "SEBAS-PC\\SQLEXPRESS", "Plataforma", "sa", "sebas2112", "1433");
+            dbManager = new DBManager(DBManager.SQLSERVER, "SEBAS-PC\\SQLEXPRESS", "Plataforma", "sa", "12345", "1433");
           
         } catch (IOException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);

@@ -118,7 +118,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                         <div class="col-md-8">                                              
-                                            <input class="form-control" type="text" id="gasflowingtemp_cfr" name="gasflowingtemp_cfr" onchange="onchange_Input_cfr(this)" required>
+                                            <input class="form-control" type="text" value="80" id="gasflowingtemp_cfr" name="gasflowingtemp_cfr" onchange="onchange_Input_cfr(this)" required>
                                         </div>   
                                         <div class="col-md-4" id = "div_ee_sel_cfr">
                                             <select class="form-control" id="ee_sel_cfr" name="ee_sel_cfr"> </select>
@@ -128,7 +128,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12"> <label>Gas Specific Gravity:</label></div>
                                         <div class="col-md-12">                                              
-                                            <input class="form-control" type="text" id="gasspecificgra_cfr" name="gasspecificgra_cfr" onchange="onchange_Input_cfr(this)" required>
+                                            <input class="form-control" type="text" value="0.6" id="gasspecificgra_cfr" name="gasspecificgra_cfr" onchange="onchange_Input_cfr(this)" required>
                                         </div>  
                                     </div>
                                     <div class="col-md-12">
@@ -147,7 +147,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12">
                                             <label>Pipeline Efficiency Factor</label>
-                                            <input class="form-control" type="text" id="pipelineefficiency_cfr" name="pipelineefficiency_cfr"  onchange="onchange_Input_cfr(this)"  required>
+                                            <input class="form-control" value="0.92" type="text" id="pipelineefficiency_cfr" name="pipelineefficiency_cfr"  onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                     </div>
                                     <!-- Desaparece opción 1-->
@@ -166,7 +166,7 @@
                                     <div class="col-md-12"  id="upstream">
                                         <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="upstreampressure_cfr" name="upstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
+                                            <input class="form-control" type="text" value="900" id="upstreampressure_cfr" name="upstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                         <div class="col-md-4" id="div_up_sel_cfr">
                                             <select class="form-control" id="up_sel_cfr" name="up_sel_cfr"> </select>
@@ -176,7 +176,7 @@
                                     <div class="col-md-12 success"  id="downstream">
                                         <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                         <div class="col-md-8">                                            
-                                            <input class="form-control" type="text" id="downstreampressure_cfr" name="downstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
+                                            <input class="form-control" value="600" type="text" id="downstreampressure_cfr" name="downstreampressure_cfr" onchange="onchange_Input_cfr(this)"  required>
                                         </div>
                                         <div class="col-md-4" id="div_bp_sel_cfr">
                                             <select class="form-control" id="bp_sel_cfr" name="bp_sel_cfr"> </select>
@@ -185,7 +185,7 @@
                                     <div class="col-md-12" id="internal">
                                         <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" value="954.4" type="text" id="internalpipe_cfr" name="internalpipe_cfr"  required onchange="onchange_Input_cfr(this)">
+                                            <input class="form-control" value="19" type="text" id="internalpipe_cfr" name="internalpipe_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_diam_sel_cfr">
                                             <select class="form-control" id="diam_sel_cfr" name="diam_sel_cfr" onchange='cleanOut_cfr()'> </select>
@@ -194,7 +194,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Length of Pipeline</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="lengthof_cfr" name="lengthof_cfr"  required onchange="onchange_Input_cfr(this)">
+                                            <input class="form-control" value="15" type="text" id="lengthof_cfr" name="lengthof_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_le_sel_cfr">
                                             <select class="form-control" id="le_sel_cfr" name="le_sel_cfr" onchange='cleanOut_cfr()'> </select>
@@ -203,7 +203,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="upstreamelevation_cfr" name="upstreamelevation_cfr" required onchange="onchange_Input_cfr(this)">
+                                            <input class="form-control" value="0" type="text" id="upstreamelevation_cfr" name="upstreamelevation_cfr" required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_ue_sel_cfr">
                                             <select class="form-control" id="ue_sel_cfr" name="ue_sel_cfr" onchange='cleanOut_cfr()'> </select>
@@ -212,7 +212,7 @@
                                     <div class="col-md-12">
                                         <div class="col-md-12"><label>Downstream Elevation</label></div>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" id="downstreamelevation_cfr" name="downstreamelevation_cfr"  required onchange="onchange_Input_cfr(this)">
+                                            <input class="form-control" value="0" type="text" id="downstreamelevation_cfr" name="downstreamelevation_cfr"  required onchange="onchange_Input_cfr(this)">
                                         </div>
                                         <div class="col-md-4" id = "div_de_sel_cfr">
                                             <select class="form-control" id="de_sel_cfr" name="de_sel_cfr" onchange='cleanOut_cfr()'> </select>
