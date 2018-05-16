@@ -1961,8 +1961,10 @@ function capacidadMedidores_Form(vari, uni){
         var aux2 = (uni.pb_sel.split(",")[1] === "psig" ? 1 : 14.504); 
         
         var cap_ref = parseFloat(medidores[cont].split(",")[1]);
-        medi[4] = ((presop*aux1+presba*aux2)/(presba*aux2)*cap_ref).toFixed(2); //capa_maxima
-        medi[0] = (fmax / medi[4]).toFixed(2); //porcentaje
+        medi[4] = ((presop*aux1+presba*aux2)/(presba*aux2)*cap_ref); //capa_maxima
+        //medi[0] = (fmin / medi[4]); //porcentaje
+        //alert(fmin/medi[4]);
+        medi[0] = (fmax / medi[4]); //porcentaje
         
         medi[1] = por - medi[0];
         
@@ -1997,8 +1999,8 @@ function capacidadMedidores_Form(vari, uni){
     }
     
     var capminev = ((fmin/maxcapEv)*100).toFixed(2);
-    
-    var res = [mediOpt, maxcapPor*100, maxcap, modEva, maxcapPorEv*100, maxcapEv, capminev, capaopt];
+   
+    var res = [mediOpt, (maxcapPor*100).toFixed(2), maxcap.toFixed(4), modEva, (maxcapPorEv*100).toFixed(2), maxcapEv.toFixed(4), capminev, capaopt];
     return res;
     
     
@@ -2244,7 +2246,7 @@ function valvulas_Form(vari, uni){
     var flujorecpor =  parseFloat(vari.flujomax_val) / flujorecom;
    
    
-    var res = [z, tipoflujo, areares, c, orirecom, orimin, flujorecom, "MMSCFD", modelo, flujorecpor, temp, flujo];
+    var res = [z, tipoflujo, areares.toFixed(4), c.toFixed(2), orirecom, orimin, flujorecom, "MMSCFD", modelo, flujorecpor, temp, flujo];
     
     return res;
 }
@@ -2792,14 +2794,14 @@ function flowrate_Form(vari, uni) {
     
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base Base Temperature
     Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Gas flow temperature 
-
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
-    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_adp, "psia"); //Upstream Pressure
-    P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_adp, "psia"); // Downstream Pressure
-
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil"); // Length of Pipeline
     H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft"); // Upstream Elevation
     H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft"); //Downstream Elevation
+    
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloat(P1), H1, uni.up_sel_adp, "psia"); //Upstream Pressure
+    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia"); // Downstream Pressure
+
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil"); // Length of Pipeline    
     D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
     
     var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
@@ -2815,48 +2817,14 @@ function flowrate_Form(vari, uni) {
     }
     
     var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
-    //alert((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)));
-    
-    //var res = [Q/1000];
     var res = [Q]; //Pie3/dia SCFD
     
-    //changeToDecimal(res);
+    changeToDecimal(res);
     
     return  res;
 
-    
-    /*
-    
-    var Le = 0;
-
-    var Z = 1;
-    var e = Math.E;
-
-    var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
-    if (s === 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-    //
-    var op1 = 435.87 * Ef * Math.pow((Tb / Pb), 1.0788);
-    var op2 = (Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2));
-    var op3 = (Z * Math.pow(G, 0.8539) * Tf * Le);
-    var Q = op1 * Math.pow((op2 / op3), 0.5394) * Math.pow(D, 2.6182);
-    Q = puntos(Q, 0);
-    var res = [Q];
-    //Salida
-    // Flow Rate
-    return  res;*/
 }
+
 function internalpipediameter_Form(vari, uni) {
     /*
      Tb = Temperatura base
@@ -2886,13 +2854,14 @@ function internalpipediameter_Form(vari, uni) {
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
     Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura flujo
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
-    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_adp, "psia");
-    P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_adp, "psia");
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
     H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
     H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloat(P1), H1, uni.up_sel_adp, "psia");
+    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
+    
     
     var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
     var Z = getZ(Tf, Pavg, G,  "psia", (H1+H2)/2);
@@ -2910,9 +2879,11 @@ function internalpipediameter_Form(vari, uni) {
     var D = Q/((435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394));
     D = Math.pow(D, 1/2.6182);
     var res = [D.toFixed(3)]; //in    
+    changeToDecimal(res);
     return  res;
     
 }
+
 function upstreampressure_Form(vari, uni) {
     /*
      Tb = Temperatura base
@@ -2984,10 +2955,10 @@ function upstreampressure_Form(vari, uni) {
     
     P1 = puntos(P1, 1);//Upstream Pressure psia
     var res = [P1];
+    changeToDecimal(res);
     return  res;
 }
 
-// PamhandleB - Downstream 
 function downstreampressure_Form(vari, uni) {
     
     /*
@@ -3058,98 +3029,13 @@ function downstreampressure_Form(vari, uni) {
         sw = sw - 1;
     }
     
-    alert(P1);
-    alert(P2);
-    
     P2 = puntos(P2, 1);//Upstream Pressure psia
     var res = [P2];
+    changeToDecimal(res);
     return  res;
-    
-    /*
-     Tb = Temperatura base
-     Pb = Presión base
-     Tf = Gas Temperatura de flujo
-     G  = Gas Specific Gravity
-     Ef = Pipeline Efficiency Factor
-     P1 = Upstream Pressure
-     D  = Internal Pipe Diameter
-     Q  = Tasa de flujo
-     L  = Length of Pipeline
-     h1 = Upstream Elevation
-     h2 = Downstream Elevation
-     
-    var Tb = parseFloat(vari.basetemperature_bdp);
-    var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp);
-    var G = parseFloat(vari.gasspecificgra_bdp);
-    var Ef = parseFloat(vari.pipelineefficiency_bdp);
-    var P1 = parseFloat(vari.upstreampressure_bdp);
-    var Q = parseFloat(vari.flowrate_bdp);
-    var D = parseFloat(vari.internalpipe_bdp);
-    var L = parseFloat(vari.lengthof_bdp);
-    var h1 = parseFloat(vari.upstreamelevation_bdp);
-    var h2 = parseFloat(vari.downstreamelevation_bdp);
-
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo
-
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
-    //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
-//P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_bdp, "psia");
-
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
-
-
-    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
-
-
-    /*L =   L / 1609;
-     Tb = Tb + 460;
-     Tf = Tf + 460;
-
-    h1 = h1 * 3.28;
-    h2 = h2 * 3.28;
-    var Z = 1;
-    var e = Math.E;
-
-    var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var Le;
-    if (s == 0) {
-        Le = L;
-    } else {
-        Le = L * (Math.pow(e, s) - 1) / s;
-    }
-    var sw = 20;
-    while (sw > 0) {
-        if (((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
-            //Label17.Visible = True
-        } else {
-            var P2a = Math.pow(((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            var P2 = P2a - Pa2;
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-            s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-            if (s == 0) {
-                Le = L;
-            } else {
-                Le = L * (Math.pow(e, s) - 1) / s;
-            }
-        }
-        sw = sw - 1;
-    }
-//Salida
-    //Downstream Pressure
-    P2 = puntos(P2, 1);
-    var res = [P2];
-    return  res;*/
 }
+// PamhandleB - Downstream 
+
 function flowrateB_Form(vari, uni) {
     /*
      Tb = Temperatura base

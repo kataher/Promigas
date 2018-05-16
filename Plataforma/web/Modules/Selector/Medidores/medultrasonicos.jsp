@@ -140,6 +140,13 @@
             </div>
             </div>
                                     
+                                    <div class="form-group col-lg-12">
+            <div>
+            <label>Capacity:</label>
+            </div>
+            <input class="form-control" type="text" id="capa_meu" name="capa_meu" onchange="onchange_Input_meu(this)" disabled>
+            </div>
+                                    
                                      
             <div class="form-group">
                 <div class="col-md-12">
@@ -241,7 +248,7 @@
             <input type="text" id="trabajoop_meu" name="trabajoop_meu" readonly required class="form-control">
             </div> 
             <div class="form-group">
-            <label>>Maximum Capacity of Measurement (Optimum):</label>            
+            <label id="lbl_capa_meu">Maximum Capacity of Measurement (Optimum):</label>            
             <input type="text" id="maxcapaop_meu" name="maxcapaop_meu" readonly required class="form-control">
             </div>
                                     <div class="form-group">
@@ -253,7 +260,7 @@
             <input type="text" id="trabajoev_meu" name="trabajoev_meu" readonly required class="form-control">
             </div> 
             <div class="form-group">
-            <label>Maximum Capacity of Measurement(Evaluated):</label>            
+            <label id="lbl_mcapae_meu">Maximum Capacity of Measurement(Evaluated):</label>            
             <input type="text" id="maxcapaev_meu" name="maxcapaev_meu" readonly required class="form-control">
             </div>
               <div class="form-group">
@@ -502,6 +509,22 @@
                         cleanOut_meu();
                     }
                     
+                    var op = $("#se_sel_meu").val().split(",")[1];
+                            
+                    if(op === "imperial"){
+                        $("#fmin_sel_meu").val("1284,SCFH");
+                        $("#fmax_sel_meu").val("1284,SCFH"); 
+                        
+                        $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCFH]: ");
+                        $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCFH]: ");
+                    }else{
+                        $("#fmin_sel_meu").val("1285,SCMH");
+                        $("#fmax_sel_meu").val("1285,SCMH"); 
+                        
+                        $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCMH]: ");
+                        $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCMH]: ");
+                    }
+                    
                     var parametros = {
                             "combo": "modelo",
                             "serie": $("#se_sel_meu").val().split(",")[1],
@@ -517,17 +540,11 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class=\"form-control\" name=\"mo_sel_meu\" id=\"mo_sel_meu\" onchange=\"cleanOut_meu()\">" + data;
+                            var newHtml = "<select class=\"form-control\" name=\"mo_sel_meu\" id=\"mo_sel_meu\" onchange=\"onchange_mod_meu()\">" + data;
                             $("#div_mo_sel_meu").html(newHtml);
                             
-                            if($("#se_sel_meu").val().split(",")[1] == "imperial"){
-                               $("#fmin_sel_meu").val("1284,SCFH");
-                               $("#fmax_sel_meu").val("1284,SCFH");
-                            }else{
-                               $("#fmin_sel_meu").val("1285,SCMH");
-                               $("#fmax_sel_meu").val("1285,SCMH");
-                            }
-                            
+                            var opc = $("#mo_sel_meu").val().split(",")[1];
+                            $("#capa_meu").val(opc);
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_meu"), "Error");
@@ -536,6 +553,13 @@
                             unBlock();
                         }
                      });
+                }
+                
+                function onchange_mod_meu()
+                {
+                    cleanOut_mem();
+                    var opc = $("#mo_sel_meu").val().split(",")[1];
+                    $("#capa_meu").val(opc);
                 }
                 
                 function load_history_meu(){

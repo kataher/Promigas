@@ -185,6 +185,7 @@
                 <li><a href="#" onClick="cargarFormula('Modules/Selector/Medidores/medrotatorios.jsp', this);">10.1.2. Rotary Meters</a> </li>
                 <li><a href="#" onClick="cargarFormula('Modules/Selector/Medidores/medultrasonicos.jsp', this);">10.1.3. Ultrasonic Meters</a> </li>
                 <li><a href="#" onClick="cargarFormula('Modules/Selector/Medidores/turbina.jsp', this);">10.1.4. Turbine Type Meters</a> </li>
+                <li><a href="#" onClick="cargarFormula('Modules/Selector/platina.jsp', this);">10.1.5. Limiting Platina</a> </li>
             </ul>
         </li>
         <li><a href="#" onClick="cargarFormula('Modules/Selector/computadores.jsp', this);">10.2. Computers</a> </li>
@@ -199,7 +200,6 @@
         <li><a href="#" onClick="cargarFormula('Modules/Selector/valslamshut.jsp', this);">10.5. Slam Shut Valves</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/Selector/mototized.jsp', this);">10.6. Motorized Valves</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/Selector/transmisores.jsp', this);">10.7. Transmitters</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/Selector/platina.jsp', this);">10.8. Platina</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/Selector/reguladores.jsp', this);">10.9. Fisher Regulators</a> </li>
 
 

@@ -142,6 +142,13 @@
             </div>
             </div>
                                     
+                                    <div class="form-group col-lg-12">
+            <div>
+            <label>Capacity:</label>
+            </div>
+            <input class="form-control" type="text" id="capa_mem" name="capa_mem" onchange="onchange_Input_mem(this)" disabled>
+            </div>
+                                    
                                      
             <div class="form-group">
                 <div class="col-md-12">
@@ -589,8 +596,12 @@
                             block("Cargando...");
                         },
                         success: function(data, status, request){ 
-                            var newHtml = "<select class=\"form-control\" name=\"mo_sel_mem\" id=\"mo_sel_mem\" onchange=\"cleanOut_mem()\">" + data;
+                            var newHtml = "<select class=\"form-control\" name=\"mo_sel_mem\" id=\"mo_sel_mem\" onchange=\"onchange_mod_mem()\">" + data;
                             $("#div_mo_sel_mem").html(newHtml);
+                            
+                            var opc = $("#mo_sel_mem").val().split(",")[1];
+                            $("#capa_mem").val(opc);
+                    
                             
                             if($("#se_sel_mem").val().split(",")[1] == "imperial"){
                                $("#fmin_sel_mem").val("1284,SCFH");
@@ -608,6 +619,13 @@
                             unBlock();
                         }
                      });
+                }
+                
+                function onchange_mod_mem()
+                {
+                    cleanOut_mem();
+                    var opc = $("#mo_sel_mem").val().split(",")[1];
+                    $("#capa_mem").val(opc);
                 }
                 
                 function load_history_mem(){

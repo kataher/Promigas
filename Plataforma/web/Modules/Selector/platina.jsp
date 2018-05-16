@@ -91,7 +91,7 @@
                                     
                                     <div class="form-group">
                                             <div class="col-md-12">
-                                            <label>Maximum Flow [Am3/h]:</label>
+                                            <label>Meter Capacity [ACMH]:</label>
                                             </div>
                                             <div class="col-md-12">
                                             <input class="form-control" value="160" type="text" id="flujo1_pla" name="flujo1_pla" onchange="reCalculateFlujo_pla(this)" required>
@@ -100,7 +100,7 @@
                                     
                                     <div class="form-group">
                                             <div class="col-md-12">
-                                            <label>Maximum Flow [ACFH]:</label>
+                                            <label>Meter Capacity [ACFH]:</label>
                                             </div>
                                             <div class="col-md-12">
                                             <input class="form-control" readonly value="5650.35" type="text" id="flujo2_pla" name="flujo2_pla" required>
@@ -112,7 +112,7 @@
                                             <label>Design Flow [ACFH]:</label>
                                             </div>
                                             <div class="col-md-12">
-                                            <input class="form-control" readonly value="6780.416006" type="text" id="flujo3_pla" name="flujo3_pla" required>
+                                            <input class="form-control" readonly value="6780.42" type="text" id="flujo3_pla" name="flujo3_pla" required>
                                             </div>
                                     </div>
                                     
@@ -156,36 +156,24 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <div class="form-group">
+                                   <label>Handle width – A [in]: </label>
+                                   <input type="text" id="a_pla" name="a_pla"  required readonly class="form-control">
+                                   </div>
                                      <div class="form-group">
-                                   <label>Thickness:</label>
+                                   <label>Thickness  - t [in]: </label>
                                    <input type="text" id="espesor_pla" name="espesor_pla"  required readonly class="form-control">
                                    </div>
                                     <div class="form-group">
-                                   <label>d [in]:</label>
+                                   <label>Orifice diameter – d [in]:</label>
                                    <input type="text" id="orifice_pla" name="orifice_pla"  required readonly class="form-control">
                                    </div>
                                     <div class="form-group">
-                                   <label>d/8 [in]:</label>
-                                   <input type="text" id="orifice8_pla" name="orifice8_pla"  readonly required class="form-control">
-                                   </div> 
-                                    <div class="form-group">
-                                    <label>Diameter of bolt circle [in]:</label>
-                                    <input type="text" id="dbc_pla" name="dbc_pla" readonly required class="form-control">
-                                    </div>
-                                   <div class="form-group">
-                                   <label>Diameter of bolts [in]:</label>
-                                   <input type="text" id="db_pla" name="db_pla" readonly required class="form-control">
-                                   </div> 
-                                    <div class="form-group">
-                                   <label>Outside diameter of flange [in]:</label>
-                                   <input type="text" id="dext_pla" name="dext_pla" readonly required class="form-control">
-                                   </div>
-                                    <div class="form-group">
-                                   <label>D [in]:</label>
+                                   <label>Outer diameter of the plate - D [in]:</label>
                                    <input type="text" id="d_pla" name="d_pla" readonly required class="form-control">
                                    </div>
                                     <div class="form-group">
-                                   <label>L [in]:</label>
+                                   <label>Handle length – L [in]:</label>
                                    <input type="text" id="l_pla" name="l_pla" readonly required class="form-control">
                                    </div>
                                     
@@ -230,8 +218,8 @@
                     
                     var flujo = parseFloat($("#flujo1_pla").val());
                     
-                    $("#flujo2_pla").val(flujo * 35.3146667);
-                    $("#flujo3_pla").val((flujo * 35.3146667)*1.2);
+                    $("#flujo2_pla").val((flujo * 35.3146667).toFixed(2));
+                    $("#flujo3_pla").val(((flujo * 35.3146667)*1.2).toFixed(2));
                     
                     
                 }
@@ -384,13 +372,10 @@
                 
                 function cleanOut_pla(){
                     $("#espesor_pla").val("");
-                    $("#orifice_pla").val("");
-                    $("#orifice8_pla").val("");
-                    $("#dbc_pla").val("");
-                    $("#db_pla").val("");
-                    $("#dext_pla").val("");                    
+                    $("#orifice_pla").val("");           
                     $("#d_pla").val("");                    
-                    $("#l_pla").val("");
+                    $("#l_pla").val("");                   
+                    $("#a_pla").val("");
                 }
         
                 function cleanIn_pla(){
@@ -435,13 +420,10 @@
                         var res = platina_Form(variables);                        
                         
                         $("#espesor_pla").val(res[0]);
-                        $("#orifice_pla").val(res[1]);                        
-                        $("#orifice8_pla").val(res[2]);                        
-                        $("#dbc_pla").val(res[3]);
-                        $("#db_pla").val(res[4]);
-                        $("#dext_pla").val(res[5]);
+                        $("#orifice_pla").val(res[1]);  
                         $("#d_pla").val(res[6]);
                         $("#l_pla").val(res[7]);
+                        $("#a_pla").val("0.75");
                      
                         show_OkDialog($("#calculate_Dialog_pla"), "Satisfactory process");
                         
@@ -458,10 +440,6 @@
                             "flujo3_pla": $("#flujo3_pla").val(),
                             "espesor_pla": $("#espesor_pla").val(),
                             "orifice_pla": $("#orifice_pla").val(),
-                            "orifice8_pla": $("#orifice8_pla").val(),
-                            "dbc_pla": $("#dbc_pla").val(),
-                            "db_pla": $("#db_pla").val(),
-                            "dext_pla": $("#dext_pla").val(),
                             "d_pla": $("#d_pla").val(),
                             "l_pla": $("#l_pla").val(),
                             
