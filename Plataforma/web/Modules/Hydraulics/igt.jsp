@@ -117,7 +117,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12"> <label>Gas flow temperature</label></div>
                                     <div class="col-md-8">                                              
-                                        <input class="form-control" type="text" id="gasflowingtemp_igt" name="gasflowingtemp_igt" onchange="onchange_Input_igt(this)" required>
+                                        <input class="form-control" value="80" type="text" id="gasflowingtemp_igt" name="gasflowingtemp_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>   
                                     <div class="col-md-4" id = "div_gft_sel_igt">
                                         <select class="form-control" id="gft_sel_igt" name="gft_sel_igt"> </select>
@@ -126,13 +126,13 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Gas Specific Gravity:</label>
-                                        <input class="form-control" type="text" id="gasspecificgra_igt" name="gasspecificgra_igt" onchange="onchange_Input_igt(this)" required>
+                                        <input class="form-control" value="0.6" type="text" id="gasspecificgra_igt" name="gasspecificgra_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="col-md-12 form-group">
                                         <label>Pipeline Efficiency Factor</label>
-                                        <input class="form-control" type="text" id="pipelineefficiency_igt" name="pipelineefficiency_igt"  onchange="onchange_Input_igt(this)" required>
+                                        <input class="form-control" value="0.92" type="text" id="pipelineefficiency_igt" name="pipelineefficiency_igt"  onchange="onchange_Input_igt(this)" required>
                                     </div>
                                 </div>
                                 <!-- Desaparece opción 1-->
@@ -151,7 +151,7 @@
                                 <div class="col-md-12"  id="upstream">
                                     <div class="col-md-12"> <label> Upstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="upstreampressure_igt" name="upstreampressure_igt" onchange="onchange_Input_igt(this)" required>
+                                        <input class="form-control" value="900" type="text" id="upstreampressure_igt" name="upstreampressure_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_up_sel_igt">
                                         <select class="form-control" id="up_sel_igt" name="up_sel_igt"> </select>
@@ -161,7 +161,7 @@
                                 <div class="col-md-12 success"  id="downstream">
                                     <div class="col-md-12"> <label>Downstream Pressure</label></div>
                                     <div class="col-md-8">                                            
-                                        <input class="form-control" type="text" id="downstreampressure_igt" name="downstreampressure_igt" onchange="onchange_Input_igt(this)" required>
+                                        <input class="form-control" value="600" type="text" id="downstreampressure_igt" name="downstreampressure_igt" onchange="onchange_Input_igt(this)" required>
                                     </div>
                                     <div class="col-md-4" id="div_bp_sel_igt">
                                         <select class="form-control" id="bp_sel_igt" name="bp_sel_igt"> </select>
@@ -170,7 +170,7 @@
                                 <div class="col-md-12" id="internal">
                                     <div class="col-md-12"><label>Internal Pipe Diameter</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" value="954.4" type="text" id="internalpipe_igt" name="internalpipe_igt"  required onchange="onchange_Input_igt(this)">
+                                        <input class="form-control" value="19" type="text" id="internalpipe_igt" name="internalpipe_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_diam_sel_igt">
                                         <select class="form-control" id="diam_sel_igt" name="diam_sel_igt" onchange='cleanOut_igt()'> </select>
@@ -179,7 +179,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Length of Pipeline</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="lengthof_igt" name="lengthof_igt"  required onchange="onchange_Input_igt(this)">
+                                        <input class="form-control" value="15" type="text" id="lengthof_igt" name="lengthof_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_le_sel_igt">
                                         <select class="form-control" id="le_sel_igt" name="le_sel_igt" onchange='cleanOut_igt()'> </select>
@@ -188,7 +188,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12">  <label>Upstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="upstreamelevation_igt" name="upstreamelevation_igt" required onchange="onchange_Input_igt(this)">
+                                        <input class="form-control" value="0" type="text" id="upstreamelevation_igt" name="upstreamelevation_igt" required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_ue_sel_igt">
                                         <select class="form-control" id="ue_sel_igt" name="ue_sel_igt" onchange='cleanOut_igt()'> </select>
@@ -197,7 +197,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12"><label>Downstream Elevation</label></div>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="text" id="downstreamelevation_igt" name="downstreamelevation_igt"  required onchange="onchange_Input_igt(this)">
+                                        <input class="form-control" value="0" type="text" id="downstreamelevation_igt" name="downstreamelevation_igt"  required onchange="onchange_Input_igt(this)">
                                     </div>
                                     <div class="col-md-4" id = "div_de_sel_igt">
                                         <select class="form-control" id="de_sel_igt" name="de_sel_igt" onchange='cleanOut_igt()'> </select>

@@ -2701,7 +2701,7 @@ function downstreampressureB_Form(vari, uni) {
     var h2 = parseFloat(vari.downstreamelevation_bdp);
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -2737,12 +2737,13 @@ function downstreampressureB_Form(vari, uni) {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
     var sw = 20;
+    var P2 = 0;
     while (sw > 0) {
         if (((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
             //Label17.Visible = True
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            var P2 = P2a - Pa2;
+            P2 = P2a - Pa2;
             var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
             Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
@@ -3479,6 +3480,15 @@ function upstream_cl_form(vari, uni) {
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
 
+    console.log(Tb);
+    console.log(Tf);
+    console.log(Pb);
+    console.log(P2);
+    console.log(Q);
+    console.log(D);
+    console.log(L);
+    console.log(h1);
+    console.log(h2);
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
@@ -3499,11 +3509,12 @@ function upstream_cl_form(vari, uni) {
 
     Z = 1;
     sw = 10;
+    var P1 = 0;
     // alert("2."+F+" "+Q+" "+Ef+" "+Tb+" "+Pb+" "+D+" "+Z+" "+G+" "+Tf+" "+Le);
     while (sw > 0) {
         var P1a = Math.pow(((Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
         // alert("3."+P1a);
-        var P1 = P1a - Pa1;
+        P1 = P1a - Pa1;
         //  alert("4."+P1+" "+P2+" "+(Math.pow(P1 , 3) - Math.pow(P2 , 3))+" "+(Math.pow(P1 , 2) - Math.pow(P2 , 2)));
         var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
         // alert("5."+Pavg);
@@ -3633,7 +3644,7 @@ function flowrate_wdp_form(vari, uni) {
     var Le = 0;
 
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3703,7 +3714,7 @@ function internal_wdp_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3768,7 +3779,7 @@ function downstream_wdp_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3857,7 +3868,7 @@ function upstream_wdp_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -3934,7 +3945,7 @@ function flowrate_aga_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4011,7 +4022,7 @@ function internal_aga_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4085,7 +4096,7 @@ function downstream_aga_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4174,7 +4185,7 @@ function upstream_aga_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4251,7 +4262,7 @@ function flowrate_igt_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4321,7 +4332,7 @@ function internal_igt_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4389,7 +4400,7 @@ function downstream_igt_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4475,7 +4486,7 @@ function upstream_igt_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
