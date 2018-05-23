@@ -26,7 +26,7 @@ function get_Pres(pres, E, unie, unis){
 function localAtmosphericPressure_Form(E){
     
     var res = (14.54)*((55096-E+361)/(55096+E-361));
-    return  res.toFixed(1);
+    return  res.toFixed(2);
 }
 
 function getZ(tem, pres, G, uniP, E){
@@ -2703,43 +2703,34 @@ function downstreampressureB_Form(vari, uni) {
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
     Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
 
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
 //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
 
-
-    /*L =   L / 1609;
-     Tb = Tb + 460;
-     Tf = Tf + 460;*/
-
-    h1 = h1 * 3.28;
-    h2 = h2 * 3.28;
     var Z = 1;
     var e = Math.E;
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     var Le;
-    if (s == 0) {
+    if (s === 0) {
         Le = L;
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
-    var sw = 20;
+    var sw = 30;
     var P2 = 0;
     while (sw > 0) {
-        if (((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
+        /*if (((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
             //Label17.Visible = True
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
@@ -2753,8 +2744,38 @@ function downstreampressureB_Form(vari, uni) {
                 Le = L * (Math.pow(e, s) - 1) / s;
             }
         }
+        sw = sw - 1;*/
+        
+        P2 = Math.pow(((-Math.pow((Q / (737.0 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.0 / 0.51) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
+        var Pavg = (2.0 / 3.0) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = 1.0 / (1.0 + (Pavg * 344400.0 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+        console.log("Iteracion " + sw);
+        console.log(P1);
+        console.log(P2);
+        console.log(Pavg);
+        console.log(Z);
+        console.log(s);
+        if (s === 0) {
+            Le = L;
+        } else {
+            Le = L * (Math.pow(e, s) - 1) / s;
+        }
         sw = sw - 1;
     }
+    
+    console.log(P2);
+    console.log(Z);
+    console.log(Q);
+    console.log(Ef);
+    console.log(Tb);
+    console.log(Pb);
+    console.log(D);
+    console.log(G);
+    console.log(Tf);
+    console.log(Le);
+    console.log(P1a);
+    console.log(s);
 //Salida
     //Downstream Pressure
     P2 = puntos(P2, 1);
@@ -2807,6 +2828,9 @@ function flowrate_Form(vari, uni) {
     
     var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
     var Z = getZ(Tf, Pavg, G,  "psia", (H1+H2)/2); //1 / (1 + ((Pavg * 344400 * Math.pow(10,1.785) * G) / (Math.pow(Tf,3.825))));
+    
+    
+    
     var Le, S;
     if(H1 != H2){
        S = 0.0375 * G * ((H2 - H1) / (Tf * Z));
@@ -2816,6 +2840,13 @@ function flowrate_Form(vari, uni) {
        Le = L;
        S = 0 ;
     }
+    
+    console.log(S);
+    console.log(P1);
+    console.log(P2);
+    console.log(Pavg);
+    console.log(Z);
+    console.log(Tf);
     
     var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
     var res = [Q]; //Pie3/dia SCFD
@@ -3068,9 +3099,14 @@ function flowrateB_Form(vari, uni) {
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
+    console.log("Presiones antes");
+    console.log(P1);
+    console.log(P2);
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_bdp, "psia");
-    
+    console.log("Presiones despues");
+    console.log(P1);
+    console.log(P2);
     D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
 
     L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
@@ -3079,32 +3115,38 @@ function flowrateB_Form(vari, uni) {
 
     var Z = 1;
     var e = Math.E;
-    var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
+    /*var Pavg = 2 / 3 * ((Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G))) / Math.pow(Tf, 3.825));
-
+    */
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
     var s = 0.0375 * G * ((h2 - h1) / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     var Le;
     if (s === 0) {
         Le = L;
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
+    console.log(P1);
+    console.log(P2);
+    console.log(Pavg);
     console.log(Z);
+    console.log(Tf);
     console.log(Ef);
     console.log(Tb);
     console.log(Pb);
     console.log(P1a);
     console.log(P2a);
     console.log(s);
-    console.log(Tf);
+    
     console.log(Le);
     console.log(D);
     var Q = 737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.961) * Tf * Le)), 0.51) * Math.pow(D, 2.53);
-    Q = puntos(Q, 0);
+    console.log(Q);
+    Q = puntos(Q, 0); // SCFD
     //Salida
     //Flow Rate
     var res = [Q];
@@ -3153,19 +3195,19 @@ function internalpipediameterB_Form(vari, uni) {
 
     var Le;
 
-    var Z = 1;
     var e = Math.E;
 
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
     if (s === 0) {
         Le = L;
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     var D = Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.961) * Tf * Le)), 0.51))), (1 / 2.53));
     D = puntos(D, 3);
     var res = [D];
@@ -3187,9 +3229,9 @@ function upstreampressureB_Form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_bdp) + 460;
+    var Tb = parseFloat(vari.basetemperature_bdp);
     var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp) + 460;
+    var Tf = parseFloat(vari.gasflowingtemp_bdp);
     var G = parseFloat(vari.gasspecificgra_bdp);
     var Ef = parseFloat(vari.pipelineefficiency_bdp);
     var P2 = parseFloat(vari.downstreampressure_bdp);
@@ -3220,18 +3262,18 @@ function upstreampressureB_Form(vari, uni) {
     var Z = 1;
     var e = Math.E;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
+    
+    var Pavg; //psia
+    var P1 = 0;
     while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1.961) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+        P1 = Math.pow(((Math.pow((Q / (737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(D, 2.53))), 1 / 0.51) * (Z * Math.pow(G, 0.961) * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
+        Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
         Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
@@ -3240,6 +3282,17 @@ function upstreampressureB_Form(vari, uni) {
             Le = L * (Math.pow(e, s) - 1) / s;
         }
         sw = sw - 1;
+        
+        /*var P1 = P1a - Pa1;
+        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+        if (s === 0) {
+            Le = L;
+        } else {
+            Le = L * (Math.pow(e, s) - 1) / s;
+        }
+        sw = sw - 1;*/
     }
     P1 = puntos(P1, 1);
 //Salida
