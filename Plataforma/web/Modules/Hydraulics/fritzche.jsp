@@ -252,6 +252,19 @@
                 var x = document.getElementById("unknown_fri").selectedIndex;
                 var y = document.getElementById("unknown_fri").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
+                
+                if (y[x].text == "Flow rate") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [SCFD]";
+                }
+                if (y[x].text == "Internal Pipe Diameter") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [in]";
+                }
+                if (y[x].text == "Upstream Pressure") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [psia]";
+                }
+                if (y[x].text == "Downstream Pressure") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [psia]";
+                }
             }
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,

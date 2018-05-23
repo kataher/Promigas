@@ -3344,7 +3344,7 @@ function flowrate_cl_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
@@ -3369,15 +3369,19 @@ function flowrate_cl_form(vari, uni) {
 
     var Re = 1000;
     var F = 10;
-    var F = -4 * Math.log(u / 3.7 / D + 1.4125 * F / Re) / Math.log(10);
+    var F = -4 * Math.log((u / (3.7 * D)) + 1.4125 * F / Re) / Math.log(10);
     var sw = 10;
     var V = 0.0000069;
 
     while (sw > 1) {
+        console.log("Iteracion");
+        console.log(F);
+        console.log(Re);
+        console.log(Q);
         var op1 = Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5);
         Q = 38.77 * F * Ef * (Tb / Pb) * op1 * Math.pow(D, 1 / 0.4);
         Re = 0.0004778 * Pb / Tb * (G * Q / V / D);
-        F = -4 * Math.log(u / 3.7 / D + 1.4125 * F / Re) / Math.log(10);
+        F = -4 * Math.log((u / (3.7 * D)) + 1.4125 * F / Re) / Math.log(10);
         sw = sw - 1;
     }
     Q = puntos(Q, 0);
@@ -3427,7 +3431,7 @@ function downstream_cl_form(vari, uni) {
     Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
@@ -3457,6 +3461,7 @@ function downstream_cl_form(vari, uni) {
     var P2 = 0;
 
     while (sw > 1) {
+        console.log(Z);
         if (((-Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
             // Presión arriba insuficiente
             P2 = 0;
@@ -3478,6 +3483,7 @@ function downstream_cl_form(vari, uni) {
         }
         sw = sw - 1;
     }
+    console.log(Z);
     if (P2 === 0) {
         alert("Presión Aguas Arriba insuficiente ");
     }
@@ -3529,7 +3535,7 @@ function upstream_cl_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
@@ -3642,7 +3648,7 @@ function internal_cl_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
@@ -3720,7 +3726,7 @@ function flowrate_wdp_form(vari, uni) {
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_wdp,"MMSCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
 
@@ -3786,7 +3792,7 @@ function internal_wdp_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
@@ -3849,7 +3855,7 @@ function downstream_wdp_form(vari, uni) {
     Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
@@ -3936,7 +3942,7 @@ function upstream_wdp_form(vari, uni) {
     Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
@@ -4010,8 +4016,7 @@ function flowrate_aga_form(vari, uni) {
 
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_aga,"MMSCFD");
 
-    L = get_Long(parseFloat(L), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
@@ -4036,6 +4041,20 @@ function flowrate_aga_form(vari, uni) {
     var V = 0.0000069;
     // while(sw > 1 ){
     F = 4 * Math.log(3.7 * D / u) / Math.log(10);
+    console.log(F);
+    console.log(Z);
+    console.log(Tb);
+    
+    console.log(Pb);
+    
+    console.log(P2a);
+    console.log(P1a);
+    
+    console.log(G);
+    console.log(Le);
+    console.log(Tf);
+    console.log(e);
+    console.log(s);
     //sw = sw - 1 ;
     //}
     var Q = 38.77 * F * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5) * Math.pow(D, 2.5);
@@ -4084,7 +4103,7 @@ function internal_aga_form(vari, uni) {
 
     Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
@@ -4106,7 +4125,7 @@ function internal_aga_form(vari, uni) {
     var F = 4 * Math.log(3.7 * D / u) / Math.log(10);
     var sw = 10;
     while (sw > 0) {
-        var D = Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5))), 0.4);
+        var D = Math.pow((Q / (38.77 * F * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5))), 0.4);
         F = 4 * Math.log(3.7 * D / u) / Math.log(10);
         sw = sw - 1;
     }
@@ -4157,7 +4176,7 @@ function downstream_aga_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
@@ -4176,12 +4195,12 @@ function downstream_aga_form(vari, uni) {
     var sw = 10;
     var P2 = 0;
     while (sw > 1) {
-        if (((-Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
+        if (((-Math.pow((Q / (38.77 * F * Ef * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
             //Label17.Visible = True
 
             sw = 0;
         } else {
-            var P2a = Math.pow(((-Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
+            var P2a = Math.pow(((-Math.pow((Q / (38.77 * F * Ef * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
             P2 = P2a;
             console.log(P2);
             var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
@@ -4247,7 +4266,7 @@ function upstream_aga_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
     h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
     var Z = 1;
@@ -4268,7 +4287,7 @@ function upstream_aga_form(vari, uni) {
     var sw = 10;
     var P1 = 0;
     while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
+        var P1a = Math.pow(((Math.pow((Q / (38.77 * F * Ef * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
         P1 = P1a;
         var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
         Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
@@ -4329,20 +4348,20 @@ function flowrate_igt_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
-    var Z = 1;
+    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
     var e = Math.E;
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-
+    /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+    
+    var Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+*/
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4351,7 +4370,7 @@ function flowrate_igt_form(vari, uni) {
 
     var V = 0.0000069;
 
-    var Q = 136.9 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (/* Z * */  Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2))), 0.555) * Math.pow(D, 2.667);
+    var Q = 136.9 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2))), 0.555) * Math.pow(D, 2.667);
     Q = puntos(Q, 0);
     /* Salida
      Q  = Tasa de flujo
@@ -4395,22 +4414,23 @@ function internal_igt_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_igt, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
-    var Z = 1;
-    var e = Math.E;
+    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
+  /*  var Z = 1;
     var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+*/
 
+    var e = Math.E;
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4418,7 +4438,7 @@ function internal_igt_form(vari, uni) {
     }
 
     var V = 0.0000069;
-    var D = Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (/* Z * */ Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2))), 0.555))), (1 / 2.667));
+    var D = Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2))), 0.555))), (1 / 2.667));
 
     D = puntos(D, 3);
     /*  Salida
@@ -4463,20 +4483,18 @@ function downstream_igt_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_igt, "psia");
     //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -4490,10 +4508,14 @@ function downstream_igt_form(vari, uni) {
             //Label17.Visible = True
             sw = 0;
         } else {
-            var P2a = Math.pow(((-Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), (1 / 0.555)) * (/* Z * */ Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2)) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            P2 = P2a - Pa2;
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            var P2a = Math.pow(((-Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), (1 / 0.555)) * (Z * Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2)) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
+            P2 = P2a;
+            /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
+            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+            
+            var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+            Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
             if (s === 0) {
                 Le = L;
@@ -4549,20 +4571,18 @@ function upstream_igt_form(vari, uni) {
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_igt, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4571,10 +4591,12 @@ function upstream_igt_form(vari, uni) {
     Z = 1; //'Z1 asumido
     var sw = 10;
     while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), (1 / 0.555)) * (/* Z * */ Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2)) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
-        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        var P1a = Math.pow(((Math.pow((Q / (136.9 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), (1 / 0.555)) * (Z * Math.pow(G, 0.8) * Tf * Le * Math.pow(V, 0.2)) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
+        var P1 = P1a;
+        /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+        var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
             Le = L;
@@ -4620,7 +4642,7 @@ function flowrate_mll_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura flujo
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4630,20 +4652,31 @@ function flowrate_mll_form(vari, uni) {
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_mll,"MMSCFD");
     
     D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
-    var Z = 1;
-    var e = Math.E;
+    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
+    
+    /*var Z = 1;
     var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-
+*/
+    var e = Math.E;
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
+    console.log(Tb);
+    console.log(Tf);
+    console.log(Pb);
+    console.log(P1);
+    console.log(P2);
+    console.log(D);
+    console.log(L);
+    console.log(h1);
+    console.log(h2);
+    console.log(Z);
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4653,7 +4686,7 @@ function flowrate_mll_form(vari, uni) {
     var V = 0.0000069;
     //var Re = 0.0004778 * Pb / Tb * (G * Q / V / D);// 'fórmula de Re
 
-    var Q = 85.7368 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (/* Z  * */ Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609))), 0.575) * Math.pow(D, 2.725);
+    var Q = 85.7368 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609))), 0.575) * Math.pow(D, 2.725);
     Q = puntos(Q, 0);
     /* Salida
      Q  = Tasa de flujo
@@ -4690,29 +4723,29 @@ function internal_mll_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_mll, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
-    var Z = 1;
+    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
     var e = Math.E;
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+    /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+    */
+   
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4720,7 +4753,7 @@ function internal_mll_form(vari, uni) {
     }
 
     var V = 0.0000069;
-    var D = Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (/*Z * */ Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609))), 0.575))), 0.36697);
+    var D = Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609))), 0.575))), 0.36697);
     /* Salida
      D  = Internal Pipe Diameter
      */
@@ -4757,26 +4790,24 @@ function downstream_mll_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_mll, "psia");
     //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -4787,16 +4818,20 @@ function downstream_mll_form(vari, uni) {
     var sw = 20;
     //alert(Q+" "+Ef+" "+Tb+" "+Pb+" "+D+" "+Z+" "+G+" "+Tf+" "+Le+" "+V+" "+P1a+" "+e+" "+s);
     while (sw > 0) {
-        if (((-Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1.739) * (Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
+        if (((-Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1 / 0.575) * (Z * Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(P1a, 2)) / Math.pow(e, s)) < 0) {
             // Label17.Visible = True
         } else {
-            var P2a = Math.pow(((-Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1.739) * (Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
+            var P2a = Math.pow(((-Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1 / 0.575) * (Z * Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
             // alert(P2a);
-            var P2 = P2a - Pa2;
+            var P2 = P2a;
             // alert(P2);
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
+            /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
             // alert(Pavg);
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+            
+            var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+            Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+            
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
             if (s === 0) {
                 Le = L;
@@ -4843,26 +4878,24 @@ function upstream_mll_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_mll, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4871,10 +4904,13 @@ function upstream_mll_form(vari, uni) {
     var Z = 1; //'Z1 asumido
     var sw = 20;
     while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1.739) * (Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
-        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        var P1a = Math.pow(((Math.pow((Q / (85.7368 * Ef * (Tb / Pb) * Math.pow(D, 2.725))), 1 / 0.575) * (Z * Math.pow(G, 0.7391) * Tf * Le * Math.pow(V, 0.2609)) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
+        var P1 = P1a;
+        /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+        
+        var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
             Le = L;
@@ -4920,7 +4956,7 @@ function flowrate_spi_form(vari, uni) {
     //alert(Tb+" "+Pb+" "+Tf+" "+G+" "+Ef+" "+P1+" "+D+" "+P2+" "+L+" "+h1+" "+h2);
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -4930,22 +4966,19 @@ function flowrate_spi_form(vari, uni) {
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_spi,"MMSCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
     var Z = 1;
     var e = Math.E;
 
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
 
     //alert(L+" "+Tb+" "+Tf+" "+Z+" "+e);
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4992,29 +5025,27 @@ function internal_spi_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_spi, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
     var Z = 1;
     var e = Math.E;
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+    
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -5066,26 +5097,24 @@ function downstream_spi_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_spi, "psia");
     //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -5100,9 +5129,9 @@ function downstream_spi_form(vari, uni) {
             sw = 0;
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (729.6087 * Ef * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le * (1 + 3.6 / D + 0.03 * D)) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            var P2 = P2a - Pa2;
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            var P2 = P2a;
+            var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+            Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
             if (s === 0) {
                 Le = L;
@@ -5151,26 +5180,24 @@ function upstream_spi_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_spi, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -5180,9 +5207,12 @@ function upstream_spi_form(vari, uni) {
     var sw = 10;
     while (sw > 0) {
         var P1a = Math.pow(((Math.pow((Q / (729.6087 * Ef * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le * (1 + 3.6 / D + 0.03 * D)) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
-        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        var P1 = P1a;
+        /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+        
+        var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+        Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
             Le = L;
@@ -5228,7 +5258,7 @@ function flowrate_fri_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
@@ -5238,21 +5268,18 @@ function flowrate_fri_form(vari, uni) {
     // Q = get_Flujo(parseFloat(Q),uni.if_sel_fri,"MMSCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
-    var Z = 1;
+    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
     var e = Math.E;
 
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2));
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -5260,8 +5287,14 @@ function flowrate_fri_form(vari, uni) {
     }
 
     var V = 0.0000069;
+    
+    console.log(P1);
+    console.log(P2);
+    console.log(Z);
+    console.log(s);
+    console.log(Le);
 
-    var Q = 410.1688 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - /* Math.pow(e , s) * */ Math.pow(P2a, 2)) / (/* Z * */  Math.pow(G, 0.8587) * Tf * Le)), 0.538) * Math.pow(D, 2.69);
+    var Q = 410.1688 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e , s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.8587) * Tf * Le)), 0.538) * Math.pow(D, 2.69);
     /*  Salida
      Q  = Tasa de flujo
      */
@@ -5298,30 +5331,27 @@ function internal_fri_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_fri, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
     var Z = 1;
     var e = Math.E;
 
-    var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
-    Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
-
+    var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+    var Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+    
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -5330,7 +5360,7 @@ function internal_fri_form(vari, uni) {
 
     var V = 0.0000069;
     var D = 1;// 'D asumido
-    D = Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(P2a, 2)) / (Math.pow(G, 0.8587) * Tf * Le)), 0.538))), 0.37174);
+    D = Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.8587) * Tf * Le)), 0.538))), 1 / 2.69);
     /*  Salida
      Q  = Tasa de flujo
      */
@@ -5367,27 +5397,25 @@ function downstream_fri_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_fri, "psia");
     //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -5396,13 +5424,18 @@ function downstream_fri_form(vari, uni) {
     var Z = 1; //'Z2 asumido
     var sw = 10;
     while (sw > 0) {
-        if (((-Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1.8587) * (Math.pow(G, 0.8587) * Tf * Le) + Math.pow(P1a, 2))) < 0) {
-            //Label17.Visible = True
+        if (((-Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1 / 0.538) * (Z * Math.pow(G, 0.8587) * Tf * Le) + Math.pow(P1a, 2))) < 0) {
+            sw = 0;
+            P2 = 0;
         } else {
-            var P2a = Math.pow(((-Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1.8587) * (Math.pow(G, 0.8587) * Tf * Le) + Math.pow(P1a, 2))), 0.5);
-            var P2 = P2a - Pa2;
-            var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));//'presión promedio
-            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            var P2a = Math.pow(((-Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1 / 0.538) * (Z * Math.pow(G, 0.8587) * Tf * Le) + Math.pow(P1a, 2))), 0.5);
+            var P2 = P2a;
+            /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));//'presión promedio
+            Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+            
+            var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+            Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
+            
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
             if (s === 0) {
                 Le = L;
@@ -5411,6 +5444,10 @@ function downstream_fri_form(vari, uni) {
             }
         }
         sw = sw - 1;
+    }
+    
+    if (P2 === 0) {
+        alert("Presion aguas arriba insuficiente");
     }
 
     P2 = puntos(P2, 1);
@@ -5449,26 +5486,24 @@ function upstream_fri_form(vari, uni) {
 
     var Le = 0;
     Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_fri, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -5477,10 +5512,13 @@ function upstream_fri_form(vari, uni) {
     Z = 1;// 'Z1 asumido
     var sw = 10;
     while (sw > 0) {
-        var P1a = Math.pow(((Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1.8587) * (Math.pow(G, 0.8587) * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
-        var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
-        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        var P1a = Math.pow(((Math.pow((Q / (410.1688 * Ef * (Tb / Pb) * Math.pow(D, 2.69))), 1 / 0.538) * (Z * Math.pow(G, 0.8587) * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
+        var P1 = P1a;
+        /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
+        Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));*/
+        
+        var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
+        Z = getZ(Tf, Pavg, G,  "psia", (h1+h2)/2);
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
             Le = L;

@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Hydraulics:</strong> Muller High Pressure</h2>
+                <h2><strong>Hydraulics:</strong> Mueller High Pressure</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -251,6 +251,19 @@
                 var x = document.getElementById("unknown_mll").selectedIndex;
                 var y = document.getElementById("unknown_mll").options;
                 document.getElementById('lbltipAddedComment').innerHTML = y[x].text;
+                
+                if (y[x].text == "Flow rate") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [SCFD]";
+                }
+                if (y[x].text == "Internal Pipe Diameter") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [in]";
+                }
+                if (y[x].text == "Upstream Pressure") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [psia]";
+                }
+                if (y[x].text == "Downstream Pressure") {
+                    document.getElementById('lbltipAddedComment').innerHTML = y[x].text + " [psia]";
+                }
             }
 
             $(document).ready(function () {
