@@ -3291,9 +3291,9 @@ function flowrate_cl_form(vari, uni) {
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
     /*L =   L / 1609;
      Tb = Tb + 460;
@@ -3306,11 +3306,8 @@ function flowrate_cl_form(vari, uni) {
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -3325,7 +3322,7 @@ function flowrate_cl_form(vari, uni) {
 
     while (sw > 1) {
         var op1 = Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5);
-        Q = 38.77 * F * Ef * (Tb / Pb) * op1 * Math.pow(D, 2.5);
+        Q = 38.77 * F * Ef * (Tb / Pb) * op1 * Math.pow(D, 1 / 0.4);
         Re = 0.0004778 * Pb / Tb * (G * Q / V / D);
         F = -4 * Math.log(u / 3.7 / D + 1.4125 * F / Re) / Math.log(10);
         sw = sw - 1;
@@ -3374,21 +3371,24 @@ function downstream_cl_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_cfr, "psia");
     // P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
-    Le = L;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+    var P1a = P1;
 
     //alert(Pb+" "+Tb+" "+G+" "+Q+" "+V+" "+D);
     var Re = 0.0004778 * Pb / Tb * (G * Q / V / D);
@@ -3411,7 +3411,7 @@ function downstream_cl_form(vari, uni) {
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
 
-            P2 = P2a - Pa2;
+            P2 = P2a;
             var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
 
             Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
@@ -3425,7 +3425,7 @@ function downstream_cl_form(vari, uni) {
         }
         sw = sw - 1;
     }
-    if (P2 == 0) {
+    if (P2 === 0) {
         alert("Presión Aguas Arriba insuficiente ");
     }
     P2 = puntos(P2, 1);
@@ -3472,13 +3472,13 @@ function upstream_cl_form(vari, uni) {
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_cfr, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
     console.log(Tb);
     console.log(Tf);
@@ -3493,32 +3493,48 @@ function upstream_cl_form(vari, uni) {
     var e = Math.E;
     var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+    
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
 
     var F = 10;
     var Re = 0.0004778 * Pb / Tb * (G * Q / V / D);
     var sw = 10;
 
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     //  alert("1."+u+" "+D+" "+F+" "+Re);
     while (sw > 1) {
         F = -4 * Math.log(u / 3.7 / D + 1.4125 * F / Re) / Math.log(10);
         sw = sw - 1;
     }
-
+    console.log(F);
     Z = 1;
     sw = 10;
     var P1 = 0;
     // alert("2."+F+" "+Q+" "+Ef+" "+Tb+" "+Pb+" "+D+" "+Z+" "+G+" "+Tf+" "+Le);
     while (sw > 0) {
+        console.log("Start iter");
+        console.log((Z * G * Tf * Le) + Math.pow(e, s));
+        console.log(Math.pow(e, s));
+        console.log((Z * G * Tf * Le));
+        console.log(Z);
+        console.log(G);
+        console.log(Tf);
+        console.log(Le);
+        console.log(Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2));
         var P1a = Math.pow(((Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
         // alert("3."+P1a);
-        P1 = P1a - Pa1;
+        P1 = P1a;
+        console.log(P1);
         //  alert("4."+P1+" "+P2+" "+(Math.pow(P1 , 3) - Math.pow(P2 , 3))+" "+(Math.pow(P1 , 2) - Math.pow(P2 , 2)));
         var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
+        console.log(Pavg);
         // alert("5."+Pavg);
         Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+        console.log(Z);
         // alert("6."+Z);
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
         if (s === 0) {
@@ -3571,11 +3587,11 @@ function internal_cl_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_cfr, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_cfr, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
     var Z = 1;
     var e = Math.E;
@@ -3584,11 +3600,8 @@ function internal_cl_form(vari, uni) {
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -3654,9 +3667,9 @@ function flowrate_wdp_form(vari, uni) {
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_wdp,"MMSCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
 
     var Z = 1;
     var e = Math.E;
@@ -3666,11 +3679,8 @@ function flowrate_wdp_form(vari, uni) {
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -3721,28 +3731,25 @@ function internal_wdp_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_wdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
     var e = Math.E;
     var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
-    var D = Math.pow((Q / (433.5 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5))), 0.375);
+    var D = Math.pow((Q / (433.5 * Ef * (Tb / Pb) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5))), 1 / 2.667);
     D = puntos(D, 3);
     /* salida
      D  = Internal Pipe Diameter
@@ -3786,20 +3793,18 @@ function downstream_wdp_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_wdp, "psia");
     // P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
     var e = Math.E;
     var P2 = 0;
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -3814,7 +3819,7 @@ function downstream_wdp_form(vari, uni) {
             sw = 0;
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (433.5 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            P2 = P2a - Pa2;
+            P2 = P2a;
             var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
             Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
@@ -3827,7 +3832,7 @@ function downstream_wdp_form(vari, uni) {
         sw = sw - 1;
     }
     if (P2 == 0) {
-        alert("Presión Arriba  ");
+        alert("Presión Arriba insuficiente");
     } else {
         P2 = puntos(P2, 1);
 
@@ -3875,19 +3880,17 @@ function upstream_wdp_form(vari, uni) {
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_wdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
 
     D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_wdp, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
     var Z = 1;
     var e = Math.E;
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -3897,7 +3900,7 @@ function upstream_wdp_form(vari, uni) {
     var sw = 10;
     while (sw > 0) {
         var P1a = Math.pow(((Math.pow((Q / (433.5 * Ef * (Tb / Pb) * Math.pow(D, 2.667))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
+        var P1 = P1a;
         var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
         Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
@@ -3955,9 +3958,9 @@ function flowrate_aga_form(vari, uni) {
     //Q = get_Flujo(parseFloat(Q),uni.if_sel_aga,"MMSCFD");
 
     L = get_Long(parseFloat(L), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
     var Z = 1;
     var e = Math.E;
@@ -3965,11 +3968,8 @@ function flowrate_aga_form(vari, uni) {
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4029,11 +4029,11 @@ function internal_aga_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_aga, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
     var Z = 1;
     var e = Math.E;
@@ -4042,11 +4042,8 @@ function internal_aga_form(vari, uni) {
     Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    P1a = P1 + Pa1;
-    var P2a = P2 + Pa2;
+    var P1a = P1;
+    var P2a = P2;
     if (s === 0) {
         Le = L;
     } else {
@@ -4103,21 +4100,19 @@ function downstream_aga_form(vari, uni) {
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_aga, "psia");
     //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
 
     var Z = 1;
     var e = Math.E;
 
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var P1a = P1 + Pa1;
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
+    var P1a = P1;
     if (s === 0) {
         Le = L;
     } else {
@@ -4134,10 +4129,13 @@ function downstream_aga_form(vari, uni) {
             sw = 0;
         } else {
             var P2a = Math.pow(((-Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(P1a, 2)) / Math.pow(e, s)), 0.5);
-            P2 = P2a - Pa2;
+            P2 = P2a;
+            console.log(P2);
             var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2)); //'presión promedio
             Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
+            console.log(Z);
             s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
+            console.log(s);
             if (s === 0) {
                 Le = L;
             } else {
@@ -4146,7 +4144,7 @@ function downstream_aga_form(vari, uni) {
         }
         sw = sw - 1;
     }
-    if (P2 == 0) {
+    if (P2 === 0) {
         alert("Presión Aguas Arriba insuficiente ");
     }
     P2 = puntos(P2, 1);
@@ -4192,28 +4190,33 @@ function upstream_aga_form(vari, uni) {
     //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_aga, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "MMSCFD");
+    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
 
 
     D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mt");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "mt");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "mt");
+    L = get_Long(parseFloat(L), uni.le_sel_aga, "ft");
+    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
     var Z = 1;
     var e = Math.E;
     // var V = 0.0000069;
     var s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
 
+    if (s === 0) {
+        Le = L;
+    } else {
+        Le = L * (Math.pow(e, s) - 1) / s;
+    }
+        
     var F = 10;
-    var Pa1 = 14.54 * (55096 - (h1 - 361)) / (55096 + (h1 - 361));
-    var Pa2 = 14.54 * (55096 - (h2 - 361)) / (55096 + (h2 - 361));
-    var P2a = P2 + Pa2;
+    var P2a = P2;
     F = 4 * Math.log(3.7 * D / u) / Math.log(10);// 'fórmula de F
     var Z = 1;// 'Z1 asumido
     var sw = 10;
+    var P1 = 0;
     while (sw > 0) {
         var P1a = Math.pow(((Math.pow((Q / (38.77 * F * (Tb / Pb) * Math.pow(D, 2.5))), 2) * (Z * G * Tf * Le) + Math.pow(e, s) * Math.pow(P2a, 2))), 0.5);
-        var P1 = P1a - Pa1;
+        P1 = P1a;
         var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));// 'presión promedio
         Z = 1 / (1 + (Pavg * 344400 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
