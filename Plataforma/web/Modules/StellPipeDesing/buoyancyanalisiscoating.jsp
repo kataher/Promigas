@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Buoyancy Analysis & Concrete Coating Requeriments</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Buoyancy Analysis & Concrete Coating Requeriments</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -91,7 +91,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Water Density [lbs/ft<sup>3</sup>]:</label>
+                                    <label>Water Density:</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" value="62.40" id="water_dens" name="water_dens" onchange='onchange_Input_basc(this)' required> 
@@ -105,7 +105,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Concrete Coating Density [lbs/ft<sup>3</sup>]:</label>
+                                    <label>Concrete Coating Density:</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" value="143" id="conc_water_dens" name="conc_water_dens" onchange='onchange_Input_basc(this)' required> 
@@ -119,7 +119,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Corrosion Coating Density [lbs/ft<sup>3</sup>]:</label>
+                                    <label>Corrosion Coating Density:</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" value="71.80" id="corr_coa" name="corr_coa" onchange='onchange_Input_basc(this)' required> 
@@ -147,7 +147,7 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Outside Diameter [in.]:</label>
+                                        <label>Nominal Outside Diameter:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nomout_basc" name="nomout_basc" onchange='onchange_Input_basc(this)' required> 
@@ -160,7 +160,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Wall Thickness [in.]:</label>
+                                        <label>Nominal Wall Thickness:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nom_wall_basc" name="nom_wall_basc" onchange='onchange_Input_basc(this)' required> 
@@ -182,7 +182,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Corrosion Coating Thickness [MIL.]:</label>
+                                        <label>Corrosion Coating Thickness:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="corr_coa_thick_basc" name="corr_coa_thick_basc" onchange='onchange_Input_basc(this)' required> 
@@ -196,7 +196,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Pipe Length [ft./Join]:</label>
+                                        <label>Pipe Length between joins:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="pipe_lenght_basc" name="pipe_lenght_basc" onchange='onchange_Input_basc(this)' required> 
@@ -288,7 +288,7 @@
 
             function load_in_sel_basc() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -433,9 +433,9 @@
             }
 
             function onchange_nps_basc() {
-                var po = $("#nomps_sel_basc").val();
-                $("#nom_pipe_basc").val(po);
-                $("#nomout_basc").val(po);
+                var po = $("#nomps_sel_basc option:selected");
+                $("#nom_pipe_basc").val(po.html());
+                $("#nomout_basc").val(po.val());
                 load_wt_sel_basc();
                 cleanOut_basc();
             }

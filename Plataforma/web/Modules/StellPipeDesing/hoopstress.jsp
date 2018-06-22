@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Hoop Stress & Longitudinal Stress </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Hoop Stress & Longitudinal Stress </h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -113,7 +113,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Outside Diameter [in.]:</label>
+                                        <label>Nominal Outside Diameter:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nomout_hoop" name="nomout_hoop" onchange='onchange_Input_hoop(this)' required> 
@@ -126,7 +126,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Wall Thickness [in.]:</label>
+                                        <label>Nominal Wall Thickness:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nom_wall_hoop" name="nom_wall_hoop" onchange='onchange_Input_hoop(this)' required> 
@@ -139,7 +139,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Internal Pressure [psig]:</label>
+                                        <label>Internal Pressure:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="int_press_hoop" name="int_press_hoop" onchange='onchange_Input_hoop(this)' required> 
@@ -210,7 +210,7 @@
             
             function load_in_sel_hoop() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -361,9 +361,9 @@
 
             function onchange_nps_hoop() {
                 cleanOut_hoop();
-                var po = $("#nomps_sel_hoop").val();
-                $("#nom_pipe_hoop").val(po);
-                $("#nomout_hoop").val(po);
+                var po = $("#nomps_sel_hoop option:selected");
+                $("#nom_pipe_hoop").val(po.html());
+                $("#nomout_hoop").val(po.val());
                 load_wt_sel_hoop();
             }
             function onchange_wt_hoop() {

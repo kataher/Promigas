@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Bending Stress & Deflection </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Bending Stress & Deflection </h2>
             </div>
             <div class="col-lg-3"> 
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_bds()">
