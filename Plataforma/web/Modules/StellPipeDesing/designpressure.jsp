@@ -249,7 +249,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Specified Minimun Yield Strength:</label>
+                                        <label>Specified Minimum Yield Strength:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="yield_pipeop_dp" name="yield_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
@@ -411,7 +411,7 @@
 
             function load_pres_sel_dp() {
                 var parametros = {
-                    "combo": "pres",
+                    "combo": "presf",
                     "opcion": "5"
                 };
                 $.ajax({

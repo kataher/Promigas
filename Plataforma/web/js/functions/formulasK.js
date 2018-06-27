@@ -29,6 +29,30 @@ function localAtmosphericPressure_Form(E){
     return  res.toFixed(2);
 }
 
+function get_Presf(pres, unie, unis){
+    //Para convertir psi en MPa, 14.7psi = 0.101MPa
+    var presS = null;
+    
+    if(unis === unie){
+        return pres;
+    }
+    
+    if(unie === "psi"){
+        if(unis === "MPa"){
+            presS = parseFloat(pres) * 0.101 / 14.7;
+        }
+    }else if(unie === "MPa"){
+        if(unis === "psi"){
+            presS = parseFloat(pres) * 14.7 / 0.101;
+        }
+    }else if(unie === "ksi"){
+        if(unis === "psi"){
+            presS = parseFloat(pres) * 1000;
+        }
+    }
+    return presS;    
+}
+
 function getZ(tem, pres, G, uniP, E){
     
     //Z1 = getZ(T1, P1, GasG, "psia", elev); //Z succiòn calculado
@@ -5976,7 +6000,8 @@ function design_pressure_form(vari, uni) {
     D = get_Long(D, uni.nomout_pipeop_sel_dp, "in");
     t = get_Long(t, uni.nomwall_pipeop_sel_dp, "in");
     
-    //S = get_Pres(S, uni.yield_pipeop_sel_dp, "psig");
+    S = get_Presf(S, uni.yield_pipeop_sel_dp, "psi");
+    
     var P = (2 * S * t * F * E * T)/ D;
     var res = [P];
     changeToDecimal(res);
@@ -6116,12 +6141,14 @@ function hoop_longitudinal_form(vari, uni) {
     var F16 = parseFloat(vari.nomout_hoop);
     var F17 = parseFloat(vari.nom_wall_hoop);
     var F18 = parseFloat(vari.int_press_hoop);
+    var height = parseFloat(vari.height_hoop);
     
     F15 = get_Long(F15, uni.nom_pipe_sel_hoop, "in");
     F16 = get_Long(F16, uni.nomout_sel_hoop, "in");
     F17 = get_Long(F17, uni.nom_wall_sel_hoop, "in");
+    height = get_Long(height, uni.height_sel_hoop, "ft");
     
-    //F18 = get_Pres(F18, uni.int_press_sel_hoop, "psig");
+    F18 = get_Pres(F18, height, uni.int_press_sel_hoop, "psig");
     
     var F21 = F18 * F16 / (2 * F17);
     var F22 = F18 * F16 / (4 * F17);
@@ -6708,6 +6735,7 @@ function internal_pressure_form(vari, uni) {
     F14 = get_Long(F14, uni.nom_pipe_sel_ipsmys, "in");
     F15 = get_Long(F15, uni.nomout_sel_ipsmys, "in");
     F16 = get_Long(F16, uni.nom_wall_sel_ipsmys, "in");
+    F18 = get_Presf(F18, uni.min_yield_sel_ipsmys, "psi");
     
     var F22 = (F19 / 100) * F18 * 2 * F16 / F15;
     var res = [F22];
@@ -6736,7 +6764,8 @@ function linear_thermal_form(vari, uni) {
     var F17 = parseFloat(vari.mod_elas_lther);
     
     F14 = get_Long(F14, uni.pipe_lenght_sel_lther, "in");
-
+    F17 = get_Presf(F17, uni.mod_elas_sel_lther, "psi");
+    
     var F20 = F15 * F14 * F16;
     var F21 = F17 * F15 * F16;
     

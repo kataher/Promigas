@@ -243,8 +243,35 @@
                 load_grade_sel_ipsmys("gra5l", 0);
                 onchange_gra_ipsmys();
                 load_in_sel_ipsmys();
+                load_pres_sel_ipsmys();
             });
 
+            function load_pres_sel_ipsmys() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='min_yield_sel_ipsmys' id='min_yield_sel_ipsmys' onchange='cleanOut_ipsmys()'>" + data;
+                        $("#div_min_yield_sel_ipsmys").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_ipsmys"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function load_in_sel_ipsmys() {
                 var parametros = {
                     "combo": "in2",
@@ -290,7 +317,8 @@
                 var unidades = {
                     "nom_wall_sel_ipsmys": $("#nom_wall_sel_ipsmys").val().split(",")[1],
                     "nomout_sel_ipsmys": $("#nomout_sel_ipsmys").val().split(",")[1],
-                    "nom_pipe_sel_ipsmys": $("#nom_pipe_sel_ipsmys").val().split(",")[1]
+                    "nom_pipe_sel_ipsmys": $("#nom_pipe_sel_ipsmys").val().split(",")[1],
+                    "min_yield_sel_ipsmys": $("#min_yield_sel_ipsmys").val().split(",")[1]
                 };
 
                 var res = internal_pressure_form(variables, unidades);
