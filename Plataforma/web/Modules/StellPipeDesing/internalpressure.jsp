@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Internal Pressure - % SMYS </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Internal Pressure - % SMYS </h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -133,7 +133,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Outside Diameter [in.]:</label>
+                                        <label>Nominal Outside Diameter:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nomout_ipsmys" name="nomout_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
@@ -146,7 +146,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Wall Thickness [in.]:</label>
+                                        <label>Nominal Wall Thickness:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nom_wall_ipsmys" name="nom_wall_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
@@ -168,7 +168,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Specified Minimun Yield Strength [psi]:</label>
+                                        <label>Specified Minimum Yield Strength:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="min_yield_ipsmys" name="min_yield_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
@@ -204,7 +204,7 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Internal Pressure [psi]:</label>
+                                <label>Internal Pressure [psig]:</label>
                                 <input type="text" name="int_press" id="int_press" class="form-control" readonly> 
                                 <BR>                                                                                                
                                 <div>    
@@ -243,11 +243,38 @@
                 load_grade_sel_ipsmys("gra5l", 0);
                 onchange_gra_ipsmys();
                 load_in_sel_ipsmys();
+                load_pres_sel_ipsmys();
             });
 
+            function load_pres_sel_ipsmys() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='min_yield_sel_ipsmys' id='min_yield_sel_ipsmys' onchange='cleanOut_ipsmys()'>" + data;
+                        $("#div_min_yield_sel_ipsmys").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_ipsmys"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function load_in_sel_ipsmys() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -290,7 +317,8 @@
                 var unidades = {
                     "nom_wall_sel_ipsmys": $("#nom_wall_sel_ipsmys").val().split(",")[1],
                     "nomout_sel_ipsmys": $("#nomout_sel_ipsmys").val().split(",")[1],
-                    "nom_pipe_sel_ipsmys": $("#nom_pipe_sel_ipsmys").val().split(",")[1]
+                    "nom_pipe_sel_ipsmys": $("#nom_pipe_sel_ipsmys").val().split(",")[1],
+                    "min_yield_sel_ipsmys": $("#min_yield_sel_ipsmys").val().split(",")[1]
                 };
 
                 var res = internal_pressure_form(variables, unidades);
@@ -419,9 +447,9 @@
             }
             function onchange_nps_ipsmys() {
                 cleanOut_ipsmys();
-                var po = $("#nomps_sel_ipsmys").val();
-                $("#nom_pipe_ipsmys").val(po);
-                $("#nomout_ipsmys").val(po);
+                var po = $("#nomps_sel_ipsmys option:selected");
+                $("#nom_pipe_ipsmys").val(po.html());
+                $("#nomout_ipsmys").val(po.val());
                 load_wt_sel_ipsmys();
             }
             function onchange_wt_ipsmys() {

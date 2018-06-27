@@ -29,6 +29,30 @@ function localAtmosphericPressure_Form(E){
     return  res.toFixed(2);
 }
 
+function get_Presf(pres, unie, unis){
+    //Para convertir psi en MPa, 14.7psi = 0.101MPa
+    var presS = null;
+    
+    if(unis === unie){
+        return pres;
+    }
+    
+    if(unie === "psi"){
+        if(unis === "MPa"){
+            presS = parseFloat(pres) * 0.101 / 14.7;
+        }
+    }else if(unie === "MPa"){
+        if(unis === "psi"){
+            presS = parseFloat(pres) * 14.7 / 0.101;
+        }
+    }else if(unie === "ksi"){
+        if(unis === "psi"){
+            presS = parseFloat(pres) * 1000;
+        }
+    }
+    return presS;    
+}
+
 function getZ(tem, pres, G, uniP, E){
     
     //Z1 = getZ(T1, P1, GasG, "psia", elev); //Z succiòn calculado
@@ -5866,6 +5890,11 @@ function buoyancy_analisis_form(vari, uni) {
     var F33 = F28 * F21;
     var F34 = F32 - F33;
     var F35 = F34 * F20;
+    
+    var res = [F27.toFixed(2), F28.toFixed(2), F29.toFixed(2), F30.toFixed(2), F31.toFixed(2), F32.toFixed(2), F33.toFixed(2), F34.toFixed(2), F35.toFixed(2)];
+    
+    changeToDecimal(res);
+    
     /*
      * SALIDA
      * F27 = Pipe Weight 
@@ -5880,7 +5909,7 @@ function buoyancy_analisis_form(vari, uni) {
      * 
      */
 
-    return [F27.toFixed(2), F28.toFixed(2), F29.toFixed(2), F30.toFixed(2), F31.toFixed(2), F32.toFixed(2), F33.toFixed(2), F34.toFixed(2), F35.toFixed(2)];
+    return res;
 
 
 
@@ -5961,7 +5990,7 @@ function design_pressure_form(vari, uni) {
     var nom_pipeop_dp = parseFloat(vari.nom_pipeop_dp);
     var D = parseFloat(vari.nomout_pipeop_dp);
     var t = parseFloat(vari.nomwall_pipeop_dp);
-    var gra_pipeop_dp = parseFloat(vari.gra_pipeop_dp);
+    //var gra_pipeop_dp = parseFloat(vari.gra_pipeop_dp);
     var S = parseFloat(vari.yield_pipeop_dp);
     var F = parseFloat(vari.fact_pipeop_dp);
     var E = parseFloat(vari.long_pipeop_dp);
@@ -5971,14 +6000,17 @@ function design_pressure_form(vari, uni) {
     D = get_Long(D, uni.nomout_pipeop_sel_dp, "in");
     t = get_Long(t, uni.nomwall_pipeop_sel_dp, "in");
     
-    //S = get_Pres(S, uni.yield_pipeop_sel_dp, "psig");
+    S = get_Presf(S, uni.yield_pipeop_sel_dp, "psi");
     
-    var P = 2 * S * t * F * E * T / D;
+    var P = (2 * S * t * F * E * T)/ D;
+    var res = [P];
+    changeToDecimal(res);
+    
     /*
      * Salida
      * P = Design Pressure 
      */
-    return [P.toFixed(3)];
+    return res;
 }
 //3.6
 function desing_pressure_polyethylene_form(vari, uni) {
@@ -6109,22 +6141,28 @@ function hoop_longitudinal_form(vari, uni) {
     var F16 = parseFloat(vari.nomout_hoop);
     var F17 = parseFloat(vari.nom_wall_hoop);
     var F18 = parseFloat(vari.int_press_hoop);
+    var height = parseFloat(vari.height_hoop);
     
     F15 = get_Long(F15, uni.nom_pipe_sel_hoop, "in");
     F16 = get_Long(F16, uni.nomout_sel_hoop, "in");
     F17 = get_Long(F17, uni.nom_wall_sel_hoop, "in");
+    height = get_Long(height, uni.height_sel_hoop, "ft");
     
-    //F18 = get_Pres(F18, uni.int_press_sel_hoop, "psig");
+    F18 = get_Pres(F18, height, uni.int_press_sel_hoop, "psig");
     
     var F21 = F18 * F16 / (2 * F17);
     var F22 = F18 * F16 / (4 * F17);
+    
+    var res = [F21, F22];
+    
+    changeToDecimal(res);
     /*
      * Salida
      * F21 = Hoop Stress
      * F22 = Logitudinal Stress
      */
 
-    return [F21.toFixed(1), F22.toFixed(1)];
+    return res;
 }
 //3.9
 function install_pipelines_Form(vari) {
@@ -6697,14 +6735,18 @@ function internal_pressure_form(vari, uni) {
     F14 = get_Long(F14, uni.nom_pipe_sel_ipsmys, "in");
     F15 = get_Long(F15, uni.nomout_sel_ipsmys, "in");
     F16 = get_Long(F16, uni.nom_wall_sel_ipsmys, "in");
+    F18 = get_Presf(F18, uni.min_yield_sel_ipsmys, "psi");
     
     var F22 = (F19 / 100) * F18 * 2 * F16 / F15;
+    var res = [F22];
+    
+    changeToDecimal(res);
     /*
      * Salida
      * F22 = Internal Pressure
      * 
      */
-    return [F22.toFixed(3)];
+    return res;
 }
 //3.12
 function linear_thermal_form(vari, uni) {
@@ -6722,9 +6764,14 @@ function linear_thermal_form(vari, uni) {
     var F17 = parseFloat(vari.mod_elas_lther);
     
     F14 = get_Long(F14, uni.pipe_lenght_sel_lther, "in");
-
-    var F20 = (F15 * 12) * F14 * F16;
+    F17 = get_Presf(F17, uni.mod_elas_sel_lther, "psi");
+    
+    var F20 = F15 * F14 * F16;
     var F21 = F17 * F15 * F16;
+    
+    var res = [F20.toFixed(3), F21.toFixed(3)];
+    
+    changeToDecimal(res);
 
     /*
      * SALIDA
@@ -6732,7 +6779,7 @@ function linear_thermal_form(vari, uni) {
      * F21 = Longitudinal Stress Due to Temperature Change
      * 
      */
-    return [F20.toFixed(3), F21.toFixed(3)];
+    return res;
 }
 //3.13
 function maximunallowable(vari) {

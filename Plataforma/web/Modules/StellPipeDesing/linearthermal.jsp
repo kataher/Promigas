@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Linear Thermal Pipeline Expansion </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Linear Thermal Pipeline Expansion </h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -98,14 +98,14 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <label>Modulus of Elasticity [psi]:</label>
+                                    <label>Modulus of Elasticity:</label>
                                 </div>
                                 <div class="col-md-8">
                                     <input type="text" class="form-control" id="mod_elas_lther" name="mod_elas_lther" onchange='onchange_Input_lther(this)' required> 
                                 </div>
                                 <div class="col-md-4" id = "div_mod_elas_sel_lther">
                                     <select class="form-control" id="mod_elas_sel_lther" name="mod_elas_sel_lther" onchange='cleanOut_lther()'>
-                                        <option>psi</option>
+                                        <option>ksi</option>
                                     </select>
                                 </div>
                             </div>
@@ -164,11 +164,12 @@
                 $("#opt_lther").val("1");
                 load_np_sel_lther("ltpe");
                 load_in_sel_lther();
+                load_pres_sel_lther();
             });
 
             function load_in_sel_lther() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "len",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -191,6 +192,32 @@
                     }
                 });
             }
+            
+            function load_pres_sel_lther() {
+                var parametros = {
+                    "combo": "presf2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='mod_elas_sel_lther' id='mod_elas_sel_lther' onchange='cleanOut_lther()'>" + data;
+                        $("#div_mod_elas_sel_lther").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_lther"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
 
             function calculate_lther() {
                 var variables = {
@@ -201,7 +228,8 @@
                 };
 
                 var unidades = {
-                    "pipe_lenght_sel_lther": $("#pipe_lenght_sel_lther").val().split(",")[1]
+                    "pipe_lenght_sel_lther": $("#pipe_lenght_sel_lther").val().split(",")[1],
+                    "mod_elas_sel_lther": $("#mod_elas_sel_lther").val().split(",")[1]
                 };
 
                 var res = linear_thermal_form(variables, unidades);

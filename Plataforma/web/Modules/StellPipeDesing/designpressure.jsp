@@ -214,7 +214,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Outside Diameter [in.]:</label>
+                                        <label>Nominal Outside Diameter:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nomout_pipeop_dp" name="nomout_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
@@ -227,7 +227,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Nominal Wall Thickness [in.]:</label>
+                                        <label>Nominal Wall Thickness:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="nomwall_pipeop_dp" name="nomwall_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
@@ -249,7 +249,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Specified Minimun Yield Strength [psi]:</label>
+                                        <label>Specified Minimum Yield Strength:</label>
                                     </div>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control" id="yield_pipeop_dp" name="yield_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
@@ -339,7 +339,7 @@
                     "nomout_pipeop_dp": $("#nomout_pipeop_dp").val(),
                     "nomwall_pipeop_dp": $("#nomwall_pipeop_dp").val(),
                     "gasspecificgra_dp": $("#gasspecificgra_dp").val(),
-                    "gra_pipeop_dp": $("#gra_pipeop_dp").val(),
+                    //"gra_pipeop_dp": $("#gra_pipeop_dp").val(),
                     "yield_pipeop_dp": $("#yield_pipeop_dp").val(),
                     "fact_pipeop_dp": $("#fact_pipeop_dp").val(),
                     "long_pipeop_dp": $("#long_pipeop_dp").val(),
@@ -379,7 +379,7 @@
 
             function load_in_sel_dp() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -411,7 +411,7 @@
 
             function load_pres_sel_dp() {
                 var parametros = {
-                    "combo": "pres",
+                    "combo": "presf",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -801,7 +801,9 @@
                 var x = $("#grade_sel_dp").val();
                 $("#specifiedmys_dp").val(x.split(",")[1]);
                 var res = $("#grade_sel_dp option:selected").html();
-                $("#gra_pipeop_dp").val(x.split(",")[1]);
+                //$("#gra_pipeop_dp").val(x.split(",")[1]);
+                $("#gra_pipeop_dp").val(res);
+                $("#yield_pipeop_dp").val(x.split(",")[1]);
                 cleanOut_dp();
             }
 

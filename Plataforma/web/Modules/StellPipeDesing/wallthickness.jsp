@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Wall Thickness - Straight Steel Pipe</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Wall Thickness - Straight Steel Pipe</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -119,7 +119,7 @@
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    About thickness corroding:
+                                    About thickness corrosion:
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-lg-6">
@@ -151,7 +151,7 @@
                                 <input type="text" class="form-control" id="despress_pipeop_wts" name="despress_pipeop_wts"> 
                                 <label>Grade: </label>            
                                 <input type="text" name="gra_pipeop_wts" id="gra_pipeop_wts" class="form-control">
-                                <label>Specified Minimun Yield Strength [psi]: </label>
+                                <label>Specified Minimum Yield Strength [psi]: </label>
                                 <input type="text" name="yield_pipeop_wts" id="yield_pipeop_wts" class="form-control">
                                 <label>Design Factor:</label>
                                 <input type="text" name="fact_pipeop_wts" id="fact_pipeop_wts" class="form-control">
@@ -160,7 +160,7 @@
                                 <label>Temperature Derating Factor:</label>
                                 <input type="text" name="temp_pipeop_wts" id="temp_pipeop_wts" class="form-control">
                                 <div id="aboutthi" name="aboutthi" style="display:none;">
-                                    <label>About thickness corroding:</label>
+                                    <label>About thickness corrosion:</label>
                                     <input type="text" name="about_thick_wts" id="about_thick_wts" class="form-control" value="0">
                                 </div>
                             </div> 
@@ -180,7 +180,7 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Espesor mínimo de la pared de la tubería [in.]:</label>
-                                <input type="text" name="minpipe_wts" id="minpipe_wts" class="form-control"> 
+                                <input type="text" name="minpipe_wts" id="minpipe_wts" class="form-control" readonly> 
                                 <BR>
                                 <div>    
                                     <input type="button" id="calculateBtn_wt" name="calculateBtn_wts" value="Calculate" onclick="calculate_wts()" class="btn btn-info btn-block">
