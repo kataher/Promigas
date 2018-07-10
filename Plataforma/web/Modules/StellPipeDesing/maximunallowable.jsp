@@ -15,7 +15,7 @@
   <body>
     <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Maximun Allowable Pipe Span Length </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Maximum Allowable Pipe Span Length </h2>
             </div>
             <div class="col-lg-3"> 
 

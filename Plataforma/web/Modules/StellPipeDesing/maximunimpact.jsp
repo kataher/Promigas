@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Maximum Impact Load & Penetration Depth</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Maximum Impact Load & Penetration Depth</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -61,7 +61,70 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                              
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Weight of Falling Object:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="weight_fall_milpd" id="weight_fall_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_weight_fall_sel_milpd">
+                                    <select class="form-control" id="weight_fall_sel_milpd" name="weight_fall_sel_milpd" onchange='cleanOut_milpd()'> </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Drop Height:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="drop_height_milpd" id="drop_height_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_drop_height_sel_milpd">
+                                    <select class="form-control" id="drop_height_sel_milpd" name="drop_height_sel_milpd" onchange='cleanOut_milpd()'> </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Impact Area Diameter:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="imp_area_milpd" id="imp_area_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_imp_area_sel_milpd">
+                                    <select class="form-control" id="imp_area_sel_milpd" name="imp_area_sel_milpd" onchange='cleanOut_milpd()'> </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Unit Weight of Soil [lbs/ft<sup>3</sup>]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="weight_soil_milpd" id="weight_soil_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Poisson's Ratio for Soil:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="poi_soil_milpd" id="poi_soil_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Shear Wave Velocity of Near Surface Soil [in./sec]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="wave_vel_milpd" id="wave_vel_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
+                                </div>
+                            </div>
+                            
                             <div class="col-lg-7">
                                 <label>Weight of Falling Object [lbs]</label>                    
                             </div>
@@ -135,27 +198,27 @@
                             <div class="form-group">
                                 <div class="col-lg-12">     
                                     <label>Soil Shear Modulus [psi]:</label>
-                                    <input type="text" name="soil_mod_milpd" id="soil_mod_milpd" class="form-control"> 
+                                    <input type="text" name="soil_mod_milpd" id="soil_mod_milpd" class="form-control" readonly> 
                                 </div>
                                 <div class="col-lg-12">   
                                     <label>Maximun Load at the Soil Surface [lbs]:</label>
-                                    <input type="text" name="max_soil_milpd" id="max_soil_milpd" class="form-control"> 
+                                    <input type="text" name="max_soil_milpd" id="max_soil_milpd" class="form-control" readonly> 
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Impact Velocity [ft/sec>]:</label>
-                                    <input type="text" name="imp_vel_milpd" id="imp_vel_milpd" class="form-control"> 
+                                    <input type="text" name="imp_vel_milpd" id="imp_vel_milpd" class="form-control" readonly> 
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Impact Pressure [psi>]:</label>
-                                    <input type="text" name="imp_press_milpd" id="imp_press_milpd" class="form-control"> 
+                                    <input type="text" name="imp_press_milpd" id="imp_press_milpd" class="form-control" readonly> 
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Weight per Unit of Impact Area [psi]:</label>
-                                    <input type="text" name="weight_imparea_milpd" id="weight_imparea_milpd" class="form-control"> 
+                                    <input type="text" name="weight_imparea_milpd" id="weight_imparea_milpd" class="form-control" readonly> 
                                 </div>
                                 <div class="col-lg-12">                                      
                                     <label>Penetration Depth [ft.]:</label>
-                                    <input type="text" name="pen_depth_milpd" id="pen_depth_milpd" class="form-control"> 
+                                    <input type="text" name="pen_depth_milpd" id="pen_depth_milpd" class="form-control" readonly> 
                                 </div>                                                                                               
                                 <div>    
                                     <input type="button" id="calculateBtn_milpd" name="calculateBtn_milpd" value="Calculate" onclick="calculate_milpd()" class="btn btn-info btn-block">
@@ -190,8 +253,65 @@
                         $("#error_Dialog_milpd"));
                 $("#opt_milpd").val("1");
                 load_np_sel_milpd("mcip");
-
+                load_peso_sel_milpd();
+                load_in_sel_milpd();
             });
+            
+            function load_peso_sel_milpd() {
+                var parametros = {
+                    "combo": "peso",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='weight_fall_sel_milpd' name='weight_fall_sel_milpd' onchange='cleanOut_milpd()'>" + data;
+                        $("#div_weight_fall_sel_milpd").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_milpd"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in_sel_milpd() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='drop_height_sel_milpd' name='drop_height_sel_milpd' onchange='cleanOut_milpd()'>" + data;
+                        $("#div_drop_height_sel_milpd").html(newHtml);
+                        
+                        var newHtml = "<select class='form-control' id='imp_area_sel_milpd' name='imp_area_sel_milpd' onchange='cleanOut_milpd()'>" + data;
+                        $("#div_imp_area_sel_milpd").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_milpd"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+                
             function calculate_milpd() {
                 var variables = {
                     "weight_fall_milpd": $("#weight_fall_milpd").val(),
