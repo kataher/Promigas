@@ -32,23 +32,26 @@ function localAtmosphericPressure_Form(E){
 function get_Presf(pres, unie, unis){
     //Para convertir psi en MPa, 14.7psi = 0.101MPa
     var presS = null;
+    var psi = null;
     
     if(unis === unie){
         return pres;
     }
     
     if(unie === "psi"){
-        if(unis === "MPa"){
-            presS = parseFloat(pres) * 0.101 / 14.7;
-        }
+        psi = parseFloat(pres);
     }else if(unie === "MPa"){
-        if(unis === "psi"){
-            presS = parseFloat(pres) * 14.7 / 0.101;
-        }
+        psi = parseFloat(pres) * 14.7 / 0.101;
     }else if(unie === "ksi"){
-        if(unis === "psi"){
-            presS = parseFloat(pres) * 1000;
-        }
+        psi = parseFloat(pres) * 1000;
+    }
+    
+    if(unis === "MPa"){
+        presS = parseFloat(psi) * 0.101 / 14.7;
+    } else if (unis === "ksi") {
+        presS = parseFloat(psi) / 1000.0;
+    } else if (unis === "psi") {
+        presS = parseFloat(psi);
     }
     return presS;    
 }
@@ -6651,12 +6654,12 @@ function mayorQue(C, D) {
 
 }
 //3.10
-function installment_pipe_opera_form(vari) {
+function installment_pipe_opera_form(vari, uni) {
 
     /*
      * ENTRADA
      * F13 = Operating Pressure
-     * F14 =  Diametro externo de la tubería
+     * F14 = Diametro externo de la tubería
      * F15 = Espesor de la pared de la tubería 
      * F16 = Specified Minimun Yield Strength
      * F17 = Installation Temperature
@@ -6669,6 +6672,7 @@ function installment_pipe_opera_form(vari) {
      * F24 = Coefficient of Thermal Expansion
      * 
      */
+    var height = parseFloat(vari.height_ippo);
     var F13 = parseFloat(vari.oper_press_ippo);
     var F14 = parseFloat(vari.pipe_dia_ippo);
     var F15 = parseFloat(vari.pipe_wall_ippo);
@@ -6682,6 +6686,23 @@ function installment_pipe_opera_form(vari) {
     var F23 = parseFloat(vari.youn_steel_ippo);
     var F24 = parseFloat(vari.coeff_therm_ippo);
 
+    console.log(uni);
+    console.log(vari);
+    
+    height = get_Long(height, uni.height_sel_ippo, 'ft');
+    F14 = get_Long(F14, uni.pipe_dia_sel_ippo, 'in');
+    F15 = get_Long(F15, uni.pipe_wall_sel_ippo, 'in');
+    F19 = get_Long(F19, uni.depth_pipe_sel_ippo, 'ft');
+    F20 = get_Long(F20, uni.ground_table_sel_ippo, 'ft');
+    F21 = get_Long(F21, uni.short_rad_sel_ippo, 'ft');
+    
+    F13 = get_Pres(F13, height, uni.oper_press_sel_ippo, 'psig');
+    
+    F17 = get_Temp(F17, uni.inst_temp_sel_ippo, "F");
+    F18 = get_Temp(F18, uni.oper_temp_sel_ippo, "F");
+    
+    F16 = get_Presf(F16, uni.min_yield_sel_ippo, "psi");
+    F23 = get_Presf(F23, uni.youn_steel_sel_ippo, "ksi");
 
     var F27 = F23 * F14 / (24 * F21);
     var F28 = (F13 - (F19 - F20) * 0.4333) * F14 / (2 * F15);
