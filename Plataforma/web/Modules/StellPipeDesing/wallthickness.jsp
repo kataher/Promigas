@@ -166,7 +166,7 @@
                                     <div class="col-lg-6">
                                         <input type="radio" id = "espesor_wts" name="oppl_wts" onchange="onchange_esp_wts(1)" required> Si<br> 
                                         <input type="radio" id = "espesor_wts" name="oppl_wts" onchange="onchange_esp_wts(0)" required checked> No <br>                   
-                                    </div>                      
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -184,25 +184,114 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Nominal pipe size:</label>
-                                <input type="text" class="form-control" id="nom_pipeop_wts" name="nom_pipeop_wts"> 
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_pipeop_wts" name="nomout_pipeop_wts"> 
-                                <label>Design Pressure [psig.]:</label>
-                                <input type="text" class="form-control" id="despress_pipeop_wts" name="despress_pipeop_wts"> 
-                                <label>Grade: </label>            
-                                <input type="text" name="gra_pipeop_wts" id="gra_pipeop_wts" class="form-control">
-                                <label>Specified Minimum Yield Strength [psi]: </label>
-                                <input type="text" name="yield_pipeop_wts" id="yield_pipeop_wts" class="form-control">
-                                <label>Design Factor:</label>
-                                <input type="text" name="fact_pipeop_wts" id="fact_pipeop_wts" class="form-control">
-                                <label>Longitudinal Join Factor:</label>
-                                <input type="text" name="long_pipeop_wts" id="long_pipeop_wts" class="form-control">
-                                <label>Temperature Derating Factor:</label>
-                                <input type="text" name="temp_pipeop_wts" id="temp_pipeop_wts" class="form-control">
-                                <div id="aboutthi" name="aboutthi" style="display:none;">
-                                    <label>About thickness corrosion:</label>
-                                    <input type="text" name="about_thick_wts" id="about_thick_wts" class="form-control" value="0">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal pipe size:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nom_pipeop_wts" name="nom_pipeop_wts" required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nom_pipeop_sel_wts">
+                                        <select class="form-control" id="nom_pipeop_sel_wts" name="nom_pipeop_sel_wts" onchange='cleanOut_wts()'> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Nominal Outside Diameter:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="nomout_pipeop_wts" name="nomout_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_nomout_pipeop_sel_wts">
+                                        <select class="form-control" id="nomout_pipeop_sel_wts" name="nomout_pipeop_sel_wts" onchange='cleanOut_wts()'> 
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Height:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="height_wts" name="height_wts" required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_height_sel_wts">
+                                        <select class="form-control" id="height_sel_wts" name="height_sel_wts" onchange='cleanOut_wts()'> 
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Design Pressure:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="despress_pipeop_wts" name="despress_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_despress_pipeop_sel_wts">
+                                        <select class="form-control" id="despress_pipeop_sel_wts" name="despress_pipeop_sel_wts" onchange='cleanOut_wts()'> 
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Grade:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="gra_pipeop_wts" name="gra_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Specified Minimum Yield Strength [psi]:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="yield_pipeop_wts" name="yield_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                    <div class="col-md-4" id = "div_yield_pipeop_sel_wts">
+                                        <select class="form-control" id="yield_pipeop_sel_wts" name="yield_pipeop_sel_wts" onchange='cleanOut_wts()'> 
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Design Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="fact_pipeop_wts" name="fact_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Longitudinal Join Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="long_pipeop_wts" name="long_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Temperature Derating Factor:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="temp_pipeop_wts" name="temp_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" id="aboutthi" name="aboutthi" style="display:none">
+                                    <div class="col-md-12">
+                                        <label>About thickness corrosion:</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" id="about_thick_wts" value="0" name="about_thick_wts" onchange='onchange_Input_wts(this)' required> 
+                                    </div>
                                 </div>
                             </div> 
                         </div>
@@ -261,8 +350,95 @@
                 load_grade_sel_wts("gra5l");
                 load_joinf_sel_wts("jointf5l");
                 load_desingf_sel_wts();
+                load_in_sel_wts();
+                load_pres_sel_wts();
+                load_presf_sel_wts();
             });
 
+            function load_in_sel_wts() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='nom_pipeop_sel_wts' name='nom_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_nom_pipeop_sel_wts").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='nomout_pipeop_sel_wts' name='nomout_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_nomout_pipeop_sel_wts").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='height_sel_wts' name='height_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_height_sel_wts").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_wts"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_presf_sel_wts() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='yield_pipeop_sel_wts' name='yield_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_yield_pipeop_sel_wts").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_wts"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_pres_sel_wts() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='despress_pipeop_sel_wts' name='despress_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_despress_pipeop_sel_wts").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_wts"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function onchange_esp_wts(val) {
                 if (val === 1) {
                     document.getElementById("aboutthi").style.display = "block";
@@ -447,23 +623,26 @@
             function calculate_wts() {
 
                 var variables = {
-                    "nom_pipeop_wt": $("#nom_pipeop_wts").val(),
-                    "nomout_pipeop_wt": $("#nomout_pipeop_wts").val(),
-                    "despress_pipeop_wt": $("#despress_pipeop_wts").val(),
+                    "nomout_pipeop_wts": $("#nomout_pipeop_wts").val(),
+                    "height_wts": $("#height_wts").val(),
+                    "despress_pipeop_wts": $("#despress_pipeop_wts").val(),
                     "gra_pipeop_wts": $("#gra_pipeop_wts").val(),
                     "yield_pipeop_wts": $("#yield_pipeop_wts").val(),
                     "fact_pipeop_wts": $("#fact_pipeop_wts").val(),
                     "long_pipeop_wts": $("#long_pipeop_wts").val(),
                     "temp_pipeop_wts": $("#temp_pipeop_wts").val(),
                     "about_thick_wts": $("#about_thick_wts").val()
-
-
                 };
-                //alert(variables);
-                var res = wallthickness_ssp(variables);
+                
+                var unidades = {
+                    "nomout_pipeop_sel_wts": $("#nomout_pipeop_sel_wts").val().split(",")[1],
+                    "height_sel_wts": $("#height_sel_wts").val().split(",")[1],
+                    "despress_pipeop_sel_wts": $("#despress_pipeop_sel_wts").val().split(",")[1],
+                    "yield_pipeop_sel_wts": $("#yield_pipeop_sel_wts").val().split(",")[1]
+                };
+                var res = wallthickness_ssp(variables, unidades);
 
                 $("#minpipe_wts").val(res[0]);
-
 
                 show_OkDialog($("#calculate_Dialog_wdp"), "Proceso satisfactorio");
             }
@@ -510,6 +689,18 @@
 
             function onchange_df_wts() {
                 $("#temp_pipeop_wts").val($("#td_sel_wts").val().split(",")[1]);
+                cleanOut_wts();
+            }
+            
+            function onchange_Input_wts(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
                 cleanOut_wts();
             }
         </script>            

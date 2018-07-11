@@ -7179,7 +7179,7 @@ function UnRestrained_form(vari) {
 
 }
 //3.20
-function wallthickness_ssp(vari) {
+function wallthickness_ssp(vari, uni) {
     /*
      * ENTRADA
      * E18= Tamaño nominal de la tubería
@@ -7194,23 +7194,34 @@ function wallthickness_ssp(vari) {
      * 
      * 
      */
-    var E18 = parseFloat(vari.nom_pipeop_wt);
-    var E19 = parseFloat(vari.nomout_pipeop_wt);
-    var E20 = parseFloat(vari.despress_pipeop_wt);
-    var E21 = (vari.gra_pipeop_wts);
+    var E19 = parseFloat(vari.nomout_pipeop_wts);
+    var height = parseFloat(vari.height_wts);
+    var E20 = parseFloat(vari.despress_pipeop_wts);
     var E22 = parseFloat(vari.yield_pipeop_wts);
     var E23 = parseFloat(vari.fact_pipeop_wts);
     var E24 = parseFloat(vari.long_pipeop_wts);
     var E25 = parseFloat(vari.temp_pipeop_wts);
     var E26 = parseFloat(vari.about_thick_wts);
+    
+    E19 = get_Long(E19, uni.nomout_pipeop_sel_wts, 'in');
+    height = get_Long(height, uni.height_sel_wts, 'ft');
+    
+    E20 = get_Pres(E20, height, uni.despress_pipeop_sel_wts, 'psig');
+    
+    E22 = get_Presf(E22, uni.yield_pipeop_sel_wts, 'psi');
+    
     // alert(E18+" "+E19+" "+E20+" "+E21+" "+E22+" "+E23+" "+E24+" "+E25+" "+E26);
-    var r = (E18 * E20) / (2 * E22 * E23 * E24 * E25);
+    var r = (E19 * E20) / (2 * E22 * E23 * E24 * E25);
     r = r + E26;
     /*
      * Salida
      *  r = Espesor mínimo de la pared de la tubería
      */
-    return [r.toFixed(3)];
+    var res = [r.toFixed(3)];
+    
+    changeToDecimal(res);
+    
+    return res;
 }
 //3.21
 function wall_poly_lene_form(vari, uni) {

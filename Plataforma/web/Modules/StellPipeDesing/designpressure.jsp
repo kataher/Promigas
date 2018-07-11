@@ -203,7 +203,7 @@
                                         <label>Nominal pipe size:</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" id="nom_pipeop_dp" name="nom_pipeop_dp" onchange='onchange_Input_dp(this)' required> 
+                                        <input type="text" class="form-control" id="nom_pipeop_dp" name="nom_pipeop_dp" required> 
                                     </div>
                                     <div class="col-md-4" id = "div_nom_pipeop_sel_dp">
                                         <select class="form-control" id="nom_pipeop_sel_dp" name="nom_pipeop_sel_dp" onchange='cleanOut_dp()'> 
