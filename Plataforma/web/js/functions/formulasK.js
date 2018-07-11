@@ -7213,15 +7213,27 @@ function wallthickness_ssp(vari) {
     return [r.toFixed(3)];
 }
 //3.21
-function wall_poly_lene_form(vari) {
+function wall_poly_lene_form(vari, uni) {
 
     var D = parseFloat(vari.nom_pipeop_wtpe);
     var OD = parseFloat(vari.out_pipeop_wtpe);
     var P = parseFloat(vari.despress_pipeop_wtpe);
     var HDB = parseFloat(vari.hyd_pipeop_wtpe);
     var F = parseFloat(vari.fact_pipeop_wtpe);
+    
+    D = get_Long(D, uni.nom_pipeop_sel_wtpe, 'in');
+    OD = get_Long(OD, uni.out_pipeop_sel_wtpe, 'in');
+    
+    P = get_Presf(P, uni.despress_pipeop_sel_wtpe, 'psi');
+    HDB = get_Presf(HDB, uni.hyd_pipeop_sel_wtpe, 'psi');
+    
     var t = P * OD / (2 * HDB * F + P);
-    return [t.toFixed(3)];
+    
+    var res = [t.toFixed(3)];
+    
+    changeToDecimal(res);
+    
+    return res;
 }
 
 //=============MODULO 4=============================
