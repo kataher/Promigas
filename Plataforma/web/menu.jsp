@@ -78,7 +78,7 @@
         <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/weymouth.jsp', this);">2.4. Weymouth</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/aga.jsp', this);">2.5. A.G.A.FullyTurbulent</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/igt.jsp', this);">2.6. IGT Distribution</a> </li>    
-        <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/mueller.jsp', this);">2.7. Muller High Pressure</a> </li>   
+        <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/mueller.jsp', this);">2.7. Mueller High Pressure</a> </li>   
         <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/fritzche.jsp', this);">2.8. Fritzche</a> </li> 
         <li><a href="#" onClick="cargarFormula('Modules/Hydraulics/spitzglass.jsp', this);">2.9 Spitzglass</a> </li>
     </ul>
@@ -88,7 +88,7 @@
     <ul class="nav nav-third-level"> 
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/bendingstress.jsp', this);">3.1. Bending Stress & Deflection</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/bendingstressfluid.jsp', this);">3.2. Bending Stress Caused by Fluid Flowing Around Pipeline</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/buoyancyanalisiscoating.jsp', this);">3.3. Buoyancy Analysis & Concrete Coating Requeriments</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/buoyancyanalisiscoating.jsp', this);">3.3. Buoyancy Analysis & Concrete Coating Requirements</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/buoyancyanalisisweights.jsp', this);">3.4. Buoyancy Analysis & Concrete Weights Spacing</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/designpressure.jsp', this);">3.5. Design Pressure</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/desingpressurepolyethylene.jsp', this);">3.6. Design Pressure Polyethylene Pipe</a> </li>
@@ -99,14 +99,14 @@
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/internalpressure.jsp', this);">3.11. Internal Pressure - % SMYS</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/linearthermal.jsp', this);">3.12. Linear Thermal Pipeline Expansion</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/longitudinalstress.jsp', this);">3.13. Longitudinal Stress in Movement of in-Service Pipelines</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunallowable.jsp', this);">3.14. Maximun Allowable Pipe Span Lenght</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunimpact.jsp', this);">3.16. Maximun Impact Load & Penetration Depth</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/pipeanchorforce.jsp', this);">3.15. Pipe Anchor Force Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/restrainedpl.jsp', this);">3.16. Restrained PL Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unpressuredpipe.jsp', this);">3.17. Requeriments to move Unpressure Pipe</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unrestrainedpl.jsp', this);">3.18. Unrestrained PL Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthickness.jsp', this);">3.19. Espesor de pared - Straight Steel Pipe</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthicknesspolyethylene.jsp', this);">3.20. Wall Thickness Polyethylene Pipe</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunallowable.jsp', this);">3.14. Maximum Allowable Pipe Span Length</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunimpact.jsp', this);">3.15. Maximum, Impact Load & Penetration Depth</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/pipeanchorforce.jsp', this);">3.16. Pipe Anchor Force Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/restrainedpl.jsp', this);">3.17. Restrained PL Stress Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unpressuredpipe.jsp', this);">3.18. Requirements to move Unpressured Pipe</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unrestrainedpl.jsp', this);">3.19. Unrestrained PL Stress Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthickness.jsp', this);">3.20. Wall Thickness - Straight Steel Pipe</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthicknesspolyethylene.jsp', this);">3.21. Wall Thickness Polyethylene Pipe</a> </li>
 
     </ul>
 </li>
@@ -142,10 +142,10 @@
     <a href="#">7. Pipeline Corrosion <span class="fa arrow"></span></a>
     <ul class="nav nav-third-level">
         <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/maop.jsp', this);">7.1. MAOP</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/maximunallowable.jsp', this);">7.2. Maximun Allowable Longitudinal Extent of Corrosion </a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/rateofelectrical.jsp', this);">7.3. Rate of Electrical Current Flow Througth the Corrosion Cell</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/maximunallowable.jsp', this);">7.2. Maximum Allowable Longitudinal Extent of Corrosion </a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/rateofelectrical.jsp', this);">7.3. Rate of Electrical Current Flow Through the Corrosion Cell</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/relationship.jsp', this);">7.4. Relationship Between Resistance and Resistivity</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/electrolyteresistance.jsp', this);">7.5. Electrolyte Resistnce From The Surface of an Elecctrode to any Distance</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/electrolyteresistance.jsp', this);">7.5. Electrolyte Resistance From The Surface of an Electrode to any Distance</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/ohm.jsp', this);">7.6. Ohm´s Law For Corrosion Current</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/PipelineCorrosion/electrialresistance.jsp', this);">7.7. Electrical Resistance of a Conductor</a> </li>
 
