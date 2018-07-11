@@ -7127,6 +7127,31 @@ function Restrained_form(vari) {
     }
     return [Sh, Sp, Sr, Sl, MSl, Sc, MSc];
 }
+//3.18
+function unpressured_pipe_form(vari, uni) {
+    var young_modulus = parseFloat(vari.you_elast_urpp);
+    var max_defl = parseFloat(vari.max_defl_urpp);
+    var nomout = parseFloat(vari.nomout_urpp);
+    var nomwall = parseFloat(vari.nom_wall_urpp);
+    var smys = parseFloat(vari.min_yield_urpp);
+    var perc_smys = parseFloat(vari.porc_SMYS_urpp);
+
+    max_defl = get_Long(max_defl, uni.max_defl_sel_urpp, 'in');
+    nomout = get_Long(nomout, uni.nomout_sel_urpp, 'in');
+    nomwall = get_Long(nomwall, uni.nom_wall_sel_urpp, 'in');
+    
+    smys = get_Presf(smys, uni.min_yield_sel_urpp, 'psi');
+    
+    var max_stress = 0;
+    var tot_exp = 0;
+    var max_load = 0;
+    var section_mod = 0;
+    var mom_inert = 0;
+    var moment = 0;
+
+    return [max_stress, tot_exp, max_load, section_mod, mom_inert, moment];
+
+}
 //3.19
 function UnRestrained_form(vari) {
     var Spoisson = parseFloat(vari.Spoisson);
