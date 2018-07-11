@@ -215,7 +215,7 @@
                                         <label>Height:</label>
                                     </div>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control" id="height_wts" name="height_wts" required> 
+                                        <input type="text" class="form-control" id="height_wts" name="height_wts" onchange='onchange_Input_wts(this)' required> 
                                     </div>
                                     <div class="col-md-4" id = "div_height_sel_wts">
                                         <select class="form-control" id="height_sel_wts" name="height_sel_wts" onchange='cleanOut_wts()'> 
@@ -241,7 +241,7 @@
                                         <label>Grade:</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="gra_pipeop_wts" name="gra_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                        <input type="text" class="form-control" id="gra_pipeop_wts" name="gra_pipeop_wts" required> 
                                     </div>
                                 </div>
                                 
