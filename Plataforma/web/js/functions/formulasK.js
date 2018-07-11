@@ -7153,10 +7153,11 @@ function unpressured_pipe_form(vari, uni) {
 
 }
 //3.19
-function UnRestrained_form(vari) {
+function UnRestrained_form(vari, uni) {
     var Spoisson = parseFloat(vari.Spoisson);
     var E = parseFloat(vari.E);
     var alpha = parseFloat(vari.alpha);
+    var height = parseFloat(vari.height);
     var P = parseFloat(vari.P);
     var D = parseFloat(vari.D);
     var t = parseFloat(vari.t);
@@ -7166,6 +7167,16 @@ function UnRestrained_form(vari) {
     var Sb = parseFloat(vari.Sb);
     var Sx = parseFloat(vari.Sx);
 
+    height = get_Long(height, uni.height_sel_unrpl, 'ft');
+    D = get_Long(D, uni.nomout_sel_unrpl, 'in');
+    t = get_Long(t, uni.nom_wall_sel_unrpl, 'in');
+    
+    P = get_Pres(P, height, uni.pip_int_sel_unrpl, 'psig');
+    
+    S = get_Presf(S, uni.min_yield_sel_unrpl, 'psi');
+    Sb = get_Presf(Sb, uni.nom_stress_sel_unrpl, 'psi');
+    Sx = get_Presf(Sx, uni.stress_axial_sel_unrpl, 'psi');
+    
     //Hoop Stress
     var Sh = (P * D) / (2 * t);
     // Longitudinal Stress due to Internal Pressure
@@ -7175,7 +7186,11 @@ function UnRestrained_form(vari) {
     //Maximun Permitted Longitudinal Stress
     var MSl = 0.75 * S * T;
 
-    return [Sh, Sp, Sl, MSl];
+    var res = [Sh, Sp, Sl, MSl];
+    
+    changeToDecimal(res);
+    
+    return res;
 
 }
 //3.20
