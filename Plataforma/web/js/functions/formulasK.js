@@ -6954,7 +6954,7 @@ function longitudinal_Stress_Form(vari, uni) {
     return [TextBox18, TextBox19, TextBox20, TextBox21, TextBox22, TextBox23, TextBox24, Station, Deflection];
 }
 //3.15
-function maximun_impact_form(vari) {
+function maximun_impact_form(vari, uni) {
     /*
      * 
      * ENTRADA
@@ -6975,6 +6975,12 @@ function maximun_impact_form(vari) {
     var F20 = parseFloat(vari.wave_vel_milpd);
     var F21 = parseFloat(vari.emp_coef);
 
+    console.log(vari);
+    console.log(uni);
+    
+    F16 = get_Long(F16, uni.drop_height_sel_milpd, 'ft');
+    F17 = get_Long(F17, uni.imp_area_sel_milpd, 'ft');
+    
     var F24 = (F18 / Math.pow(12, 3)) / (32 * 12) * Math.pow(F20, 2) / 10;
     F24 = F24.toFixed(0);
     var F25 = Math.sqrt((32 * F15 * (F16 * 12) * F24 * (F17 * 6)) / ((Math.pow(Math.PI, 2)) * (1 - F19)));

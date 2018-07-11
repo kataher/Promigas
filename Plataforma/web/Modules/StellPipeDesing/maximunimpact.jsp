@@ -124,45 +124,8 @@
                                     <input type="text" name="wave_vel_milpd" id="wave_vel_milpd" class="form-control" onchange="onchange_Input_milpd(this)" required>
                                 </div>
                             </div>
-                            
-                            <div class="col-lg-7">
-                                <label>Weight of Falling Object [lbs]</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="weight_fall_milpd" name="weight_fall_milpd">
-                            </div>  
-                            <div class="col-lg-7">
-                                <label>Drop Height [ft.]</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="drop_height_milpd" name="drop_height_milpd">
-                            </div>
-                            <div class="col-lg-7">
-                                <label>Impact Area Diameter [ft.]</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="imp_area_milpd" name="imp_area_milpd">
-                            </div> 
-                            <div class="col-lg-7">
-                                <label>Unit Weight of Soil [lbs/ft<sup>3</sup>]</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="weight_soil_milpd" name="weight_soil_milpd">
-                            </div> 
-                            <div class="col-lg-7">
-                                <label>Poisson's Ratio for Soil</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="poi_soil_milpd" name="poi_soil_milpd">
-                            </div> 
-                            <div class="col-lg-7">
-                                <label>Shear Wave Velocity of Near Surface Soil [in./sec]</label>                    
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="wave_vel_milpd" name="wave_vel_milpd">
-                            </div>
                             <div class="col-lg-12">
-                                <BR>
+                                <br>
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Empirical Coefficient of Penetration:
@@ -322,8 +285,14 @@
                     "wave_vel_milpd": $("#wave_vel_milpd").val(),
                     "emp_coef": $("#emp_coef").val()
                 };
+                
+                var unidades = {
+                    "weight_fall_sel_milpd": $("#weight_fall_sel_milpd").val().split(",")[1],
+                    "drop_height_sel_milpd": $("#drop_height_sel_milpd").val().split(",")[1],
+                    "imp_area_sel_milpd": $("#imp_area_sel_milpd").val().split(",")[1]
+                }; 
 
-                var res = maximun_impact_form(variables);
+                var res = maximun_impact_form(variables, unidades);
 
                 $("#soil_mod_milpd").val(res[0]);
                 $("#max_soil_milpd").val(res[1]);
