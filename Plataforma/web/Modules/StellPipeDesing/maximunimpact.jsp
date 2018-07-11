@@ -220,6 +220,18 @@
                 load_in_sel_milpd();
             });
             
+            function onchange_Input_milpd(inp) {
+
+                var sw = validateDecimal(inp.value);
+
+                if (sw !== true) {
+                    inp.value = "";
+                }
+
+                onchange_Input_zero(inp);
+                cleanOut_milpd();
+            }
+            
             function load_peso_sel_milpd() {
                 var parametros = {
                     "combo": "peso",

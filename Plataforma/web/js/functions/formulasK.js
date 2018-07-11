@@ -7006,7 +7006,7 @@ function maximun_impact_form(vari, uni) {
 
 }
 //3.16
-function pipeanchorforce_form(vari) {
+function pipeanchorforce_form(vari, uni) {
     /*
      * ENTRADA
      * u = Poisson's Ratio
@@ -7023,12 +7023,24 @@ function pipeanchorforce_form(vari) {
     var u = parseFloat(vari.poi_paf);
     var E = parseFloat(vari.you_elas_paf);
     var thermal = parseFloat(vari.ther_exp_paf);
+    var height = parseFloat(vari.height_paf);
     var P = parseFloat(vari.design_press_paf);
     var D = parseFloat(vari.nomout_paf);
     var t = parseFloat(vari.nom_wall_paf);
     var Ti = parseFloat(vari.temp_paf);
     var To = parseFloat(vari.oper_temp_paf);
     var d = parseFloat(vari.nomin_paf);
+    
+    height = get_Long(height, uni.height_sel_paf, 'ft');
+    D = get_Long(D, uni.nomout_sel_paf, 'in');
+    t = get_Long(t, uni.nom_wall_sel_paf, 'in');
+    d = get_Long(d, uni.nomin_sel_paf, 'in');
+    
+    P = get_Pres(P, height, uni.design_press_sel_paf, 'psig');
+    
+    Ti = get_Temp(Ti, uni.temp_sel_paf, 'F');
+    To = get_Temp(To, uni.oper_temp_sel_paf, 'F');
+    
     var Sh = (P * d) / (2 * t);
     var Spoisson = u * Sh;
     var DT = To - Ti;
