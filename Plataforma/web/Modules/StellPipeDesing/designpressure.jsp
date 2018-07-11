@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Design Pressure</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Design Pressure</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -135,7 +135,8 @@
                                 <div class="form-group">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            Longintudinal Joint Factor - E                      </div>
+                                            Longitudinal Joint Factor - E     
+                                        </div>
                                         <div class="panel-body">
                                             <div class="row">
                                                 <div class="col-lg-12">
@@ -147,8 +148,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>  
@@ -768,10 +767,9 @@
                     load_nps_sel_dp("astm");
                 }
 
-                //  cleanOut_dp();
-
+                cleanOut_dp();
             }
-            
+
             function onchange_Input_dp(inp) {
 
                 var sw = validateDecimal(inp.value);
