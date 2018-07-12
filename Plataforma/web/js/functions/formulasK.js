@@ -7088,11 +7088,12 @@ function pipeanchorforce_form(vari, uni) {
 
 }
 //3.17
-function Restrained_form(vari) {
+function Restrained_form(vari, uni) {
 
     var Spoisson = parseFloat(vari.Spoisson);
     var E = parseFloat(vari.E);
     var alpha = parseFloat(vari.alpha);
+    var height = parseFloat(vari.height);
     var P = parseFloat(vari.P);
     var D = parseFloat(vari.D);
     var t = parseFloat(vari.t);
@@ -7104,6 +7105,19 @@ function Restrained_form(vari) {
     var Sb = parseFloat(vari.Sb);
     var Sx = parseFloat(vari.Sx);
     var Kfactor = parseFloat(vari.Kfactor);
+    
+    height = get_Long(height, uni.height_sel_rpls, 'ft');
+    D = get_Long(D, uni.nomout_sel_rpls, 'in');
+    t = get_Long(t, uni.nom_wall_sel_rpls, 'in');
+    
+    P = get_Pres(P, height, uni.pip_int_sel_rpls, 'psig');
+    
+    S = get_Presf(S, uni.min_yield_sel_rpls, 'psi');
+    Sb = get_Presf(Sb, uni.nom_stress_sel_rpls, 'psi');
+    Sx = get_Presf(Sx, uni.stress_axial_sel_rpls, 'psi');
+    
+    T1 = get_Temp(T1, uni.pipe_temp_sel_rpls, 'F');
+    T2 = get_Temp(T2, uni.pipeoper_temp_sel_rpls, 'F');
 
     // hoop stress
     var Sh = (P * D) / (2 * t);

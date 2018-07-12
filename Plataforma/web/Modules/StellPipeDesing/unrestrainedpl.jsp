@@ -165,7 +165,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Pipe Internal Pressure [psig]:</label>
@@ -178,7 +178,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Nominal Outside Diameter [in.]:</label>
@@ -191,7 +191,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Nominal Wall Thickness [in.]:</label>
@@ -204,7 +204,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Grade:</label>
@@ -213,7 +213,7 @@
                                     <input type="text" class="form-control" id="gra_pipeop_wt_unrpl" name="gra_pipeop_wt_unrpl" required> 
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Specified Minimum Yield Strength [psi]:</label>
@@ -226,7 +226,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Temperature Derating Factor:</label>
@@ -235,7 +235,7 @@
                                     <input type="text" class="form-control" id="temp_unrpl" name="temp_unrpl" onchange='onchange_Input_unrpl(this)' required> 
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Nominal Bending Stress [psi]:</label>
@@ -248,7 +248,7 @@
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <label>Stress Due to Axial Loading [psi]:</label>
@@ -330,7 +330,7 @@
                 load_in_sel_unrpl();
                 load_pres_sel_unrpl();
             });
-            
+
             function load_in_sel_unrpl() {
                 var parametros = {
                     "combo": "in",
@@ -362,7 +362,7 @@
                     }
                 });
             }
-            
+
             function load_presf_sel_unrpl() {
                 var parametros = {
                     "combo": "presf",
@@ -394,7 +394,7 @@
                     }
                 });
             }
-            
+
             function load_pres_sel_unrpl() {
                 var parametros = {
                     "combo": "pres",
@@ -420,7 +420,7 @@
                     }
                 });
             }
-            
+
             function calculate_unrpl() {
                 //alert("Entro");
                 var variables = {
@@ -437,7 +437,7 @@
                     "Sb": $("#nom_stress_unrpl").val(),
                     "Sx": $("#stress_axial_unrpl").val()
                 };
-                
+
                 var unidades = {
                     "height_sel_unrpl": $("#height_sel_unrpl").val().split(",")[1],
                     "pip_int_sel_unrpl": $("#pip_int_sel_unrpl").val().split(",")[1],
@@ -650,7 +650,7 @@
                         var newHtml = "<select class=\"form-control\" name=\"grade_sel_unrpl\" id=\"grade_sel_unrpl\" onchange=\"onchange_gra_unrpl()\">" + data;
                         $("#div_grade_sel_unrpl").html(newHtml);
                         var x = $("#grade_sel_unrpl").val();
-                        
+
                         var res = $("#grade_sel_unrpl option:selected").html();
                         $("#min_yield_unrpl").val(x.split(",")[1]);
                         $("#gra_pipeop_wt_unrpl").val(res);
@@ -708,7 +708,7 @@
 
                 cleanOut_unrpl();
             }
-            
+
             function onchange_Input_unrpl(inp) {
 
                 var sw = validateDecimal(inp.value);

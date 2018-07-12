@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Restrained PL Stress Analysis</h2>
+                <h2><strong>Steel Pipe Design:</strong> Restrained PL Stress Analysis</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -125,19 +125,19 @@
                                 <label>Poisson's Ratio:</label>
                             </div>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" id="poi_ratio_rpls" name="poi_ratio_rpls">
+                                <input type="text" class="form-control" id="poi_ratio_rpls" onchange='onchange_Input_rpls(this)' name="poi_ratio_rpls">
                             </div>                
                             <div class="col-lg-7">
                                 <label>Young's Modulus of Elasticity [psi]:</label>
                             </div>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" id="young_modul_rpls" name="young_modul_rpls">
+                                <input type="text" class="form-control" id="young_modul_rpls" onchange='onchange_Input_rpls(this)' name="young_modul_rpls">
                             </div> 
                             <div class="col-lg-7">
                                 <label>Thermal Expansion Coefficient [1/°F]:</label>
                             </div>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" id="thermal_exp_rpls" name="thermal_exp_rpls">
+                                <input type="text" class="form-control" id="thermal_exp_rpls" onchange='onchange_Input_rpls(this)' name="thermal_exp_rpls">
                             </div>                   
                         </div>
                     </div>
@@ -152,31 +152,150 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                                    
+                        <div class="col-lg-12">     
                             <div class="form-group">
-                                <label>Pipe Internal Pressure [psig]:</label>
-                                <input type="text" class="form-control" id="pip_int_rpls" name="pip_int_rpls"> 
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_rpls" name="nomout_rpls"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_rpls" name="nom_wall_rpls">                  
-                                <label>Grade: </label>            
-                                <input type="text" name="gra_pipeop_wt_rpls" id="gra_pipeop_wt_rpls" class="form-control">
-                                <label>Specified Minimun Yield Strength [psi]: </label>
-                                <input type="text" name="min_yield_rpls" id="min_yield_rpls" class="form-control">
-                                <label>Temperature Derating Factor:</label>
-                                <input type="text" name="temp_rpls" id="temp_rpls" class="form-control">
-                                <label>Pipe Installation Temperature [°F]:</label>
-                                <input type="text" name="pipe_temp_rpls" id="pipe_temp_rpls" class="form-control">                  
-                                <label>Pipe Operating Temperature [°F]:</label>
-                                <input type="text" name="pipeoper_temp_rpls" id="pipeoper_temp_rpls" class="form-control">                   
-                                <label>Nominal Bending Stress [psi]:</label>
-                                <input type="text" name="nom_stress_rpls" id="nom_stress_rpls" class="form-control">
-                                <label>Stress Due to Axial Loading [psi]:</label>
-                                <input type="text" class="form-control" id="stress_axial_rpls" name="stress_axial_rpls">
-                                <label>k - Load Factor:</label>
-                                <input type="text" name="k_factor_rpls" id="k_factor_rpls" class="form-control">
-                            </div> 
+                                <div class="col-md-12">
+                                    <label>Height:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="height_rpls" name="height_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_height_sel_rpls">
+                                    <select class="form-control" id="height_sel_rpls" name="height_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pipe Internal Pressure [psig]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="pip_int_rpls" name="pip_int_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_pip_int_sel_rpls">
+                                    <select class="form-control" id="pip_int_sel_rpls" name="pip_int_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Outside Diameter [in.]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nomout_rpls" name="nomout_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nomout_sel_rpls">
+                                    <select class="form-control" id="nomout_sel_rpls" name="nomout_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Wall Thickness [in.]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nom_wall_rpls" name="nom_wall_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nom_wall_sel_rpls">
+                                    <select class="form-control" id="nom_wall_sel_rpls" name="nom_wall_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Grade:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="gra_pipeop_wt_rpls" name="gra_pipeop_wt_rpls" required> 
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Specified Minimum Yield Strength [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="min_yield_rpls" name="min_yield_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_min_yield_sel_rpls">
+                                    <select class="form-control" id="min_yield_sel_rpls" name="min_yield_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Temperature Derating Factor:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="temp_rpls" name="temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pipe Installation Temperature [°F]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="pipe_temp_rpls" name="pipe_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_pipe_temp_sel_rpls">
+                                    <select class="form-control" id="pipe_temp_sel_rpls" name="pipe_temp_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pipe Operating Temperature [°F]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="pipeoper_temp_rpls" name="pipeoper_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_pipeoper_temp_sel_rpls">
+                                    <select class="form-control" id="pipeoper_temp_sel_rpls" name="pipeoper_temp_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Bending Stress [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nom_stress_rpls" name="nom_stress_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nom_stress_sel_rpls">
+                                    <select class="form-control" id="nom_stress_sel_rpls" name="nom_stress_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Stress Due to Axial Loading [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="stress_axial_rpls" name="stress_axial_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_stress_axial_sel_rpls">
+                                    <select class="form-control" id="stress_axial_sel_rpls" name="stress_axial_sel_rpls" onchange='cleanOut_rpls()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>k - Load Factor:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="k_factor_rpls" name="k_factor_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,28 +309,28 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                                    
+                        <div class="col-lg-12">    
                             <div class="form-group">
                                 <label>Hoop Stress [psi]:</label>
-                                <input type="text" name="hoop_stress_rpls" id="hoop_stress_rpls" class="form-control"> 
+                                <input type="text" name="hoop_stress_rpls" id="hoop_stress_rpls" class="form-control" readonly> 
                                 <BR>
                                 <label>Longitudinal Stress Due to Internal Pressure [psi]:</label>
-                                <input type="text" name="long_int_rpls" id="long_int_rpls" class="form-control"> 
+                                <input type="text" name="long_int_rpls" id="long_int_rpls" class="form-control" readonly> 
                                 <BR>
                                 <label>Longitudinal Stress Due to Thermal Expansion [psi]:</label>
-                                <input type="text" name="long_ther_rpls" id="long_ther_rpls" class="form-control"> 
+                                <input type="text" name="long_ther_rpls" id="long_ther_rpls" class="form-control" readonly> 
                                 <BR>
                                 <label>Net Longitudinal Stress [psi]:</label>
-                                <input type="text" name="net_stress_rpls" id="net_stress_rpls" class="form-control"> 
+                                <input type="text" name="net_stress_rpls" id="net_stress_rpls" class="form-control" readonly> 
                                 <BR>
-                                <label>Maximun Permitted Longitudinal Stress [psi]:</label>
-                                <input type="text" name="max_stress_rpls" id="max_stress_rpls" class="form-control"> 
+                                <label>Maximum Permitted Longitudinal Stress [psi]:</label>
+                                <input type="text" name="max_stress_rpls" id="max_stress_rpls" class="form-control" readonly> 
                                 <BR>
                                 <label>Combined Biaxial Stress [psi]:</label>
-                                <input type="text" name="comb_stress_rpls" id="comb_stress_rpls" class="form-control"> 
+                                <input type="text" name="comb_stress_rpls" id="comb_stress_rpls" class="form-control" readonly> 
                                 <BR>
-                                <label>Maximun Permitted Combined Biaxial Stress [psi]:</label>
-                                <input type="text" name="max_comb_stress_rpls" id="max_comb_stress_rpls" class="form-control"> 
+                                <label>Maximum Permitted Combined Biaxial Stress [psi]:</label>
+                                <input type="text" name="max_comb_stress_rpls" id="max_comb_stress_rpls" class="form-control" readonly> 
                                 <BR>
 
                                 <div>    
@@ -251,15 +370,138 @@
                 load_nps_sel_rpls("5l");
                 load_grade_sel_rpls("gra5l");
                 load_deratingf_sel_rpls();
-
-
+                load_presf_sel_rpls();
+                load_temp_sel_rpls();
+                load_in_sel_rpls();
+                load_pres_sel_rpls();
             });
+            
+            function load_temp_sel_rpls() {
+                var parametros = {
+                    "combo": "temp",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='pipe_temp_sel_rpls' name='pipe_temp_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_pipe_temp_sel_rpls").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='pipeoper_temp_sel_rpls' name='pipeoper_temp_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_pipeoper_temp_sel_rpls").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_rpls"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_presf_sel_rpls() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='min_yield_sel_rpls' name='min_yield_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_min_yield_sel_rpls").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='nom_stress_sel_rpls' name='nom_stress_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_nom_stress_sel_rpls").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='stress_axial_sel_rpls' name='stress_axial_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_stress_axial_sel_rpls").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_rpls"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_pres_sel_rpls() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='pip_int_sel_rpls' name='pip_int_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_pip_int_sel_rpls").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_rpls"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in_sel_rpls() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='height_sel_rpls' name='height_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_height_sel_rpls").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='nomout_sel_rpls' name='nomout_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_nomout_sel_rpls").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='nom_wall_sel_rpls' name='nom_wall_sel_rpls' onchange='cleanOut_rpls()'> " + data;
+                        $("#div_nom_wall_sel_rpls").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_rpls"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function calculate_rpl() {
 
                 var variables = {
                     "Spoisson": $("#poi_ratio_rpls").val(),
                     "E": $("#young_modul_rpls").val(),
                     "alpha": $("#thermal_exp_rpls").val(),
+                    "height": $("#height_rpls").val(),
                     "P": $("#pip_int_rpls").val(),
                     "D": $("#nomout_rpls").val(),
                     "t": $("#nom_wall_rpls").val(),
@@ -272,8 +514,20 @@
                     "Sx": $("#stress_axial_rpls").val(),
                     "Kfactor": $("#k_factor_rpls").val()
                 };
+                
+                var unidades = {
+                    "height_sel_rpls": $("#height_sel_rpls").val().split(",")[1],
+                    "pip_int_sel_rpls": $("#pip_int_sel_rpls").val().split(",")[1],
+                    "nomout_sel_rpls": $("#nomout_sel_rpls").val().split(",")[1],
+                    "nom_wall_sel_rpls": $("#nom_wall_sel_rpls").val().split(",")[1],
+                    "min_yield_sel_rpls": $("#min_yield_sel_rpls").val().split(",")[1],
+                    "pipe_temp_sel_rpls": $("#pipe_temp_sel_rpls").val().split(",")[1],
+                    "pipeoper_temp_sel_rpls": $("#pipeoper_temp_sel_rpls").val().split(",")[1],
+                    "nom_stress_sel_rpls": $("#nom_stress_sel_rpls").val().split(",")[1],
+                    "stress_axial_sel_rpls": $("#stress_axial_sel_rpls").val().split(",")[1]
+                };
 
-                var res = Restrained_form(variables);
+                var res = Restrained_form(variables, unidades);
 
                 $("#hoop_stress_rpls").val(res[0]);
                 $("#long_int_rpls").val(res[1]);
@@ -341,32 +595,6 @@
                     },
                     error: function (xhr, ajaxOptions, err) {
                         $("#opt_rpls").val("1");
-                        show_OkDialog($("#error_Dialog_rpls"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function load_temp_sel_rpls() {
-                var parametros = {
-                    "combo": "temp",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"tempd_sel_rpls\" id= \"tempd_sel_rpls\" onchange=\"cleanOut_rpls()\">" + data;
-                        $("#div_tempd_sel_rpls").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_rpls"), "Error");
                     },
                     complete: function () {
@@ -479,9 +707,9 @@
                         var newHtml = "<select class=\"form-control\" name=\"grade_sel_rpls\" id=\"grade_sel_rpls\" onchange=\"onchange_gra_rpls()\">" + data;
                         $("#div_grade_sel_rpls").html(newHtml);
                         var x = $("#grade_sel_rpls").val();
-                        //$("#min_yield").val(x.split(",")[1]);
                         var res = $("#grade_sel_rpls option:selected").html();
-                        $("#gra_pipeop_wt_rpls").val(x.split(",")[1]);
+                        $("#min_yield_rpls").val(x.split(",")[1]);
+                        $("#gra_pipeop_wt_rpls").val(res);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_rpls"), "Error");
@@ -534,19 +762,19 @@
                     load_nps_sel_rpls("astm");
                 }
 
-                //  cleanOut_rpls();
-
+                cleanOut_rpls();
             }
+            
             function onchange_Input_rpls(inp) {
 
                 var sw = validateDecimal(inp.value);
 
-                if (sw != true) {
+                if (sw !== true) {
                     inp.value = "";
                 }
-                onchange_Input_zero(inp);
-                // cleanOut_rpls();
 
+                onchange_Input_zero(inp);
+                cleanOut_rpls();
             }
 
             function onchange_nps_rpls() {
@@ -554,33 +782,36 @@
                 $("#nomout_rpls").val(res);
                 $("#nomout_rpls").val($("#nominalps_sel_rpls").val());
                 load_wt_sel_rpls();
+                cleanOut_rpls();
             }
 
             function onchange_wt_rpls() {
                 $("#nom_wall_rpls").val($("#wt_sel_rpls").val().split(",")[1]);
+                cleanOut_rpls();
             }
 
             function onchange_gra_rpls() {
                 var x = $("#grade_sel_rpls").val();
                 $("#specifiedmys_rpls").val(x.split(",")[1]);
                 var res = $("#grade_sel_rpls option:selected").html();
-                $("#gra_pipeop_wt_rpls").val(x.split(",")[1]);
-                // cleanOut_rpls();
+                $("#min_yield_rpls").val(x.split(",")[1]);
+                $("#gra_pipeop_wt_rpls").val(res);
+                cleanOut_rpls();
             }
 
             function onchange_jf_rpls() {
                 $("#long_pipeop_rpls").val($("#longitudinal_jf_rpls").val().split(",")[1]);
-                //cleanOut_rpls();
+                cleanOut_rpls();
             }
 
             function onchange_df_rpls() {
                 $("#temp_rpls").val($("#td_sel_rpls").val().split(",")[1]);
-                //cleanOut_rpls();
+                cleanOut_rpls();
             }
 
             function onchange_defa_rpls() {
                 $("#fact_pipeop_rpls").val($("#design_factor_sel_rpls").val().split(",")[1]);
-                // cleanOut_rpls();
+                cleanOut_rpls();
             }
 
             function cleanOut_rpls() {
