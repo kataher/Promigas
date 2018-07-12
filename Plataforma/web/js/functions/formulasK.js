@@ -7278,7 +7278,7 @@ function wall_poly_lene_form(vari, uni) {
 
 //=============MODULO 4=============================
 //4.1
-function designuncascro(vari) {
+function designuncascro(vari, uni) {
     var D = parseFloat(vari.D);
     var t = parseFloat(vari.t);
     var E = parseFloat(vari.E);
@@ -7292,6 +7292,13 @@ function designuncascro(vari) {
     var H = parseFloat(vari.H);
     var Cd = parseFloat(vari.Cd);
 
+    D = get_Long(D, uni.nominalOutsideDiameter_sel_duc, 'in');
+    t = get_Long(t, uni.nominalWallThickness_sel_duc, 'in');
+    Bd = get_Long(Bd, uni.widthOfPipeTrenchOrDiameterOfBore_sel_duc, 'in');
+    H = get_Long(H, uni.heightOfSoilOverPipe_sel_duc, 'ft');
+    
+    E = get_Presf(E, uni.modulusOfElasticityForSteel_sel_duc, 'psi');
+    
     //prompt("Cd:"+Cd+" G:"+g+" Bd:"+Bd+" L:"+L+" D:"+D+" I:"+I+" H:"+H);
 
 
