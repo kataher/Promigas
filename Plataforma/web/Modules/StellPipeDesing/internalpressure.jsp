@@ -162,7 +162,7 @@
                                         <label>Grade:</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control" id="grade_ipsmys" name="grade_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 
+                                        <input type="text" class="form-control" id="grade_ipsmys" name="grade_ipsmys" required> 
                                     </div>
                                 </div>
 

@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Pipe Anchor Force Analysis</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Pipe Anchor Force Analysis</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -114,21 +114,96 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                                    
+                        <div class="col-lg-12">
                             <div class="form-group">
-                                <label>Design Pressure [psig]:</label>
-                                <input type="text" name="design_press_paf" id="design_press_paf" class="form-control" >
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_paf" name="nomout_paf"> 
-                                <label>Nominal Inside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomin_paf" name="nomin_paf"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_paf" name="nom_wall_paf">                  
-                                <label>Installation Temperature [°F]: </label>            
-                                <input type="text" name="temp_paf" id="temp_paf" class="form-control">
-                                <label>Operating Temperature [°F]: </label>
-                                <input type="text" name="oper_temp_paf" id="oper_temp_paf" class="form-control">
-                            </div> 
+                                <div class="col-md-12">
+                                    <label>Height:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="height_paf" name="height_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_height_sel_paf">
+                                    <select class="form-control" id="height_sel_paf" name="height_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Design Pressure:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="design_press_paf" name="design_press_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_design_press_sel_paf">
+                                    <select class="form-control" id="design_press_sel_paf" name="design_press_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Outside Diameter:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nomout_paf" name="nomout_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nomout_sel_paf">
+                                    <select class="form-control" id="nomout_sel_paf" name="nomout_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Inside Diameter:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nomin_paf" name="nomin_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nomin_sel_paf">
+                                    <select class="form-control" id="nomin_sel_paf" name="nomin_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Wall Thickness:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nom_wall_paf" name="nom_wall_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nom_wall_sel_paf">
+                                    <select class="form-control" id="nom_wall_sel_paf" name="nom_wall_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Installation Temperature:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="temp_paf" name="temp_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_temp_sel_paf">
+                                    <select class="form-control" id="temp_sel_paf" name="temp_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Operating Temperature:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="oper_temp_paf" name="oper_temp_paf" onchange='onchange_Input_paf(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_oper_temp_sel_paf">
+                                    <select class="form-control" id="oper_temp_sel_paf" name="oper_temp_sel_paf" onchange='cleanOut_paf()'> 
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,31 +220,31 @@
                         <div class="col-lg-12">                                    
                             <div class="form-group">
                                 <label>Hoop Stress [psi]:</label>
-                                <input type="text" name="hoop_stress_paf" id="hoop_stress_paf" class="form-control"> 
+                                <input type="text" name="hoop_stress_paf" id="hoop_stress_paf" class="form-control" readonly> 
                                 <BR>
                                 <label>Compressive Stress Due to Temperature Change [psi]:</label>
-                                <input type="text" name="comp_stress_paf" id="comp_stress_paf" class="form-control"> 
+                                <input type="text" name="comp_stress_paf" id="comp_stress_paf" class="form-control" readonly> 
                                 <BR>
                                 <label>Net Longitudinal Stress at Point A [psi>]:</label>
-                                <input type="text" name="netA_paf" id="netA_paf" class="form-control"> 
+                                <input type="text" name="netA_paf" id="netA_paf" class="form-control" readonly> 
                                 <BR>
                                 <label>Net Longitudinal Stress at Point B [psi>]:</label>
-                                <input type="text" name="netB_paf" id="netB_paf" class="form-control"> 
+                                <input type="text" name="netB_paf" id="netB_paf" class="form-control" readonly> 
                                 <BR>
                                 <label>Net Longitudinal Strain at Point B [in./in.]:</label>
-                                <input type="text" name="net_strain_A_paf" id="net_strain_A_paf" class="form-control"> 
+                                <input type="text" name="net_strain_A_paf" id="net_strain_A_paf" class="form-control" readonly> 
                                 <BR>                                      
                                 <label>Soil Resistance [lb./ft]:</label>
-                                <input type="text" name="soil_res_paf" id="soil_res_paf" class="form-control"> 
+                                <input type="text" name="soil_res_paf" id="soil_res_paf" class="form-control" readonly> 
                                 <BR>                      
-                                <label>Lenght of the Transition Zone A-B [ft.]:</label>
-                                <input type="text" name="lenght_zone_paf" id="lenght_zone_paf" class="form-control"> 
+                                <label>Length of the Transition Zone A-B [ft.]:</label>
+                                <input type="text" name="lenght_zone_paf" id="lenght_zone_paf" class="form-control" readonly> 
                                 <BR>
                                 <label>Total Pipe Movement at Point B [in.]:</label>
-                                <input type="text" name="total_pipe_paf" id="total_pipe_paf" class="form-control"> 
+                                <input type="text" name="total_pipe_paf" id="total_pipe_paf" class="form-control" readonly> 
                                 <BR>    
                                 <label>Anchor Force [lbs.]:</label>
-                                <input type="text" name="anchor_force_paf" id="anchor_force_paf" class="form-control"> 
+                                <input type="text" name="anchor_force_paf" id="anchor_force_paf" class="form-control" readonly> 
                                 <BR>                                                                                                
                                 <div>    
                                     <input type="button" id="calculateBtn_paf" name="calculateBtn_paf" value="Calculate" onclick="calculate_paf()" class="btn btn-info btn-block">
@@ -205,13 +280,107 @@
 
                 $("#opt_paf").val("1");
                 load_np_sel_paf("npsn");
-
+                load_in_sel_paf();
+                load_temp_sel_paf();
+                load_pres_sel_paf();
             });
+            
+            function load_in_sel_paf() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='nomout_sel_paf' name='nomout_sel_paf' onchange='cleanOut_paf()'>" + data;
+                        $("#div_nomout_sel_paf").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='nomin_sel_paf' name='nomin_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_nomin_sel_paf").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='nom_wall_sel_paf' name='nom_wall_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_nom_wall_sel_paf").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='height_sel_paf' name='height_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_height_sel_paf").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_paf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_temp_sel_paf() {
+                var parametros = {
+                    "combo": "temp",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='temp_sel_paf' name='temp_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_temp_sel_paf").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='oper_temp_sel_paf' name='oper_temp_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_oper_temp_sel_paf").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_paf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_pres_sel_paf() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='design_press_sel_paf' name='design_press_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_design_press_sel_paf").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_paf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function calculate_paf() {
                 var variables = {
                     "poi_paf": $("#poi_paf").val(),
                     "you_elas_paf": $("#you_elas_paf").val(),
                     "ther_exp_paf": $("#ther_exp_paf").val(),
+                    "height_paf": $("#height_paf").val(),
                     "design_press_paf": $("#design_press_paf").val(),
                     "nomout_paf": $("#nomout_paf").val(),
                     "nomin_paf": $("#nomin_paf").val(),
@@ -219,8 +388,18 @@
                     "temp_paf": $("#temp_paf").val(),
                     "oper_temp_paf": $("#oper_temp_paf").val()
                 };
+                
+                var unidades = {
+                    "height_sel_paf": $("#height_sel_paf").val().split(",")[1],
+                    "design_press_sel_paf": $("#design_press_sel_paf").val().split(",")[1],
+                    "nomout_sel_paf": $("#nomout_sel_paf").val().split(",")[1],
+                    "nomin_sel_paf": $("#nomin_sel_paf").val().split(",")[1],
+                    "nom_wall_sel_paf": $("#nom_wall_sel_paf").val().split(",")[1],
+                    "temp_sel_paf": $("#temp_sel_paf").val().split(",")[1],
+                    "oper_temp_sel_paf": $("#oper_temp_sel_paf").val().split(",")[1]
+                };
 
-                var res = pipeanchorforce_form(variables);
+                var res = pipeanchorforce_form(variables, unidades);
 
                 $("#hoop_stress_paf").val(res[0]);
                 $("#comp_stress_paf").val(res[1]);

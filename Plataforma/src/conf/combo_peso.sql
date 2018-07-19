@@ -1,0 +1,1 @@
+INSERT INTO [ComboBox] (name, value, id_combo, codigo) VALUES ('lbs', 'lbs', 'peso', 3593);

@@ -376,7 +376,7 @@
 
             function load_pres_sel_bds() {
                 var parametros = {
-                    "combo": "pres",
+                    "combo": "presf",
                     "opcion": "5"
                 };
                 $.ajax({

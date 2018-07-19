@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Requirements to move Unpressured Pipe </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Requirements to move Unpressured Pipe </h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -109,7 +109,7 @@
                                 <label>Young's Modulus of Elasticity [psi]:</label>
                             </div>
                             <div class="col-lg-5">
-                                <input type="text" name="you_elast_urpp" id="you_elast_urpp" class="form-control">
+                                <input type="text" name="you_elast_urpp" id="you_elast_urpp" class="form-control" onchange='onchange_Input_urpp(this)'>
                             </div>                
                         </div>
                     </div>
@@ -124,19 +124,67 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                                    
+                        <div class="col-lg-12">  
                             <div class="form-group">
-                                <label>Maximun Deflection at the Pipe End [.in]:</label>
-                                <input type="text" name="max_defl_urpp" id="max_defl_urpp" class="form-control">
-                                <label>Nominal Outside Diameter [in.]:</label>
-                                <input type="text" class="form-control" id="nomout_urpp" name="nomout_urpp"> 
-                                <label>Nominal Wall Thickness [in.]:</label>
-                                <input type="text" class="form-control" id="nom_wall_urpp" name="nom_wall_urpp">                  
-                                <label>Specified Minimun Yield Strenght [psi]: </label>            
-                                <input type="text" name="min_yield_urpp" id="min_yield_urpp" class="form-control">                
-                                <label>Porcentaje of SMYS [%]: </label>            
-                                <input type="text" name="porc_SMYS_urpp" id="porc_SMYS_urpp" class="form-control">                       
-                            </div> 
+                                <div class="col-md-12">
+                                    <label>Maximum Deflection at the Pipe End [.in]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="max_defl_urpp" name="max_defl_urpp" onchange='onchange_Input_urpp(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_max_defl_sel_urpp">
+                                    <select class="form-control" id="max_defl_sel_urpp" name="max_defl_sel_urpp" onchange='cleanOut_urpp()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Outside Diameter [in.]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nomout_urpp" name="nomout_urpp" onchange='onchange_Input_urpp(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nomout_sel_urpp">
+                                    <select class="form-control" id="nomout_sel_urpp" name="nomout_sel_urpp" onchange='cleanOut_urpp()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Nominal Wall Thickness [in.]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="nom_wall_urpp" name="nom_wall_urpp" onchange='onchange_Input_urpp(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_nom_wall_sel_urpp">
+                                    <select class="form-control" id="nom_wall_sel_urpp" name="nom_wall_sel_urpp" onchange='cleanOut_urpp()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Specified Minimum Yield Strength [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" id="min_yield_urpp" name="min_yield_urpp" onchange='onchange_Input_urpp(this)' required> 
+                                </div>
+                                <div class="col-md-4" id = "div_min_yield_sel_urpp">
+                                    <select class="form-control" id="min_yield_sel_urpp" name="min_yield_sel_urpp" onchange='cleanOut_urpp()'> 
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Percent of SMYS [%]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" id="porc_SMYS_urpp" name="porc_SMYS_urpp" onchange='onchange_Input_urpp(this)' required> 
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,28 +200,28 @@
                     <div class="row">
                         <div class="col-lg-12">                                    
                             <div class="form-group">
-                                <label>Maximun Stress Allowed [psi]:</label>
-                                <input type="text" name="max_stress_urpp" id="max_stress_urpp" class="form-control"> 
+                                <label>Maximum Stress Allowed [psi]:</label>
+                                <input type="text" name="max_stress_urpp" id="max_stress_urpp" class="form-control" readonly> 
                                 <BR>
                                 <label>Total Exposed Pipe Required [ft.]:</label>
-                                <input type="text" name="tot_exp_urpp" id="tot_exp_urpp" class="form-control"> 
+                                <input type="text" name="tot_exp_urpp" id="tot_exp_urpp" class="form-control" readonly> 
                                 <BR>
-                                <label>Maximun Load at the Pipe End [lbs]:</label>
-                                <input type="text" name="max_pipe_urpp" id="max_pipe_urpp" class="form-control"> 
+                                <label>Maximum Load at the Pipe End [lbs]:</label>
+                                <input type="text" name="max_pipe_urpp" id="max_pipe_urpp" class="form-control" readonly> 
                                 <BR>
                                 <label>Section Modulus:</label>
-                                <input type="text" name="sect_mod_urpp" id="sect_mod_urpp" class="form-control"> 
+                                <input type="text" name="sect_mod_urpp" id="sect_mod_urpp" class="form-control" readonly> 
                                 <BR>
                                 <label>Moment of Inertia:</label>
-                                <input type="text" name="mom_inert_urpp" id="mom_inert_urpp" class="form-control"> 
+                                <input type="text" name="mom_inert_urpp" id="mom_inert_urpp" class="form-control" readonly> 
                                 <BR>
                                 <label>Moment [lb-ft.]:</label>
-                                <input type="text" name="moment_urpp" id="moment_urpp" class="form-control"> 
+                                <input type="text" name="moment_urpp" id="moment_urpp" class="form-control" readonly> 
                                 <BR>                                      
                                 <div>    
-                                    <input type="button" id="calculateBtn_up" name="calculateBtn_up" value="Calculate" onclick="calculate_up()" class="btn btn-info btn-block">
-                                    <input type="button" id="saveBtn_up" name="saveBtn_up" value="Save" onclick="save_up()" class="btn btn-success btn-block">   
-                                    <input type="button" id="reportBtn_up" name="reportBtn_up" value="Delete" onclick="reportReg_up()" class="btn btn-danger btn-block">          
+                                    <input type="button" id="calculateBtn_urpp" name="calculateBtn_urpp" value="Calculate" onclick="calculate_urpp()" class="btn btn-info btn-block">
+                                    <input type="button" id="saveBtn_urpp" name="saveBtn_urpp" value="Save" onclick="save_urpp()" class="btn btn-success btn-block">   
+                                    <input type="button" id="reportBtn_urpp" name="reportBtn_urpp" value="Delete" onclick="reportReg_urpp()" class="btn btn-danger btn-block">          
                                 </div>                              
                             </div>  
                         </div> 
@@ -184,18 +232,18 @@
 
         <div class="col-lg-12">
             <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_up" name="cleanBtn_up" value="Clean All" onclick="cleanAll_up()" class="btn btn-warning btn-block">
+                <input type="button" id="cleanAllBtn_urpp" name="cleanBtn_urpp" value="Clean All" onclick="cleanAll_urpp()" class="btn btn-warning btn-block">
             </div>
             <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_up" name="cleanBtn_up" value="Clean Input Data" onclick="cleanIn_up()" class="btn btn-warning btn-block">
+                <input type="button" id="cleanInputBtn_urpp" name="cleanBtn_urpp" value="Clean Input Data" onclick="cleanIn_urpp()" class="btn btn-warning btn-block">
             </div>
             <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_up" name="cleanBtn_up" value="Clean Output Data" onclick="cleanOut_up()" class="btn btn-warning btn-block">
+                <input type="button" id="cleanOutputBtn_urpp" name="cleanBtn_urpp" value="Clean Output Data" onclick="cleanOut_urpp()" class="btn btn-warning btn-block">
             </div>    
         </div>
 
-        <input type="hidden" id="opt_up" name="opt_up"> 
-        <input type="hidden" id="id_up" name="id_up">   
+        <input type="hidden" id="opt_urpp" name="opt_urpp"> 
+        <input type="hidden" id="id_urpp" name="id_urpp">   
         <script>
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
@@ -206,9 +254,68 @@
                 load_nps_sel_urpp("5l");
                 load_grade_sel_urpp("gra5l");
                 //load_deratingf_sel_urpp();
-
-
+                load_in_sel_urpp();
+                load_presf_sel_urpp();
             });
+            
+            function load_in_sel_urpp() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='max_defl_sel_urpp' name='max_defl_sel_urpp' onchange='cleanOut_urpp()'> " + data;
+                        $("#div_max_defl_sel_urpp").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='nomout_sel_urpp' name='nomout_sel_urpp' onchange='cleanOut_urpp()'> " + data;
+                        $("#div_nomout_sel_urpp").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='nom_wall_sel_urpp' name='nom_wall_sel_urpp' onchange='cleanOut_urpp()'> " + data;
+                        $("#div_nom_wall_sel_urpp").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_urpp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_presf_sel_urpp() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='min_yield_sel_urpp' name='min_yield_sel_urpp' onchange='cleanOut_urpp()'> " + data;
+                        $("#div_min_yield_sel_urpp").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_urpp"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function load_form_urpp(id) {
 
                 var parametros = {
@@ -459,16 +566,17 @@
                 //  cleanOut_urpp();
 
             }
+            
             function onchange_Input_urpp(inp) {
 
                 var sw = validateDecimal(inp.value);
 
-                if (sw != true) {
+                if (sw !== true) {
                     inp.value = "";
                 }
-                onchange_Input_zero(inp);
-                // cleanOut_urpp();
 
+                onchange_Input_zero(inp);
+                cleanOut_urpp();
             }
 
             function onchange_nps_urpp() {
@@ -476,10 +584,12 @@
                 $("#nomout_urpp").val(res);
                 $("#nomout_urpp").val($("#nominalps_sel_urpp").val());
                 load_wt_sel_urpp();
+                cleanOut_urpp();
             }
 
             function onchange_wt_urpp() {
                 $("#nom_wall_urpp").val($("#wt_sel_urpp").val().split(",")[1]);
+                cleanOut_urpp();
             }
 
             function onchange_gra_urpp() {
@@ -487,7 +597,7 @@
                 $("#specifiedmys_urpp").val(x.split(",")[1]);
                 var res = $("#grade_sel_urpp option:selected").html();
                 $("#gra_pipeop_wt_urpp").val(x.split(",")[1]);
-                // cleanOut_urpp();
+                cleanOut_urpp();
             }
 
             function onchange_jf_urpp() {
@@ -505,7 +615,7 @@
                 // cleanOut_urpp();
             }
 
-            function cleanOut_up() {
+            function cleanOut_urpp() {
                 $("#max_stress_urpp").val("");
                 $("#tot_exp_urpp").val("");
                 $("#max_pipe_urpp").val("");
@@ -514,7 +624,7 @@
                 $("#moment_urpp").val("");
             }
 
-            function cleanIn_up() {
+            function cleanIn_urpp() {
                 $("#you_elast_urpp").val("");
                 $("#max_defl_urpp").val("");
                 $("#nomout_urpp").val("");
@@ -523,9 +633,36 @@
                 $("#porc_SMYS_urpp").val("");
             }
 
-            function cleanAll_up() {
-                cleanOut_up();
-                cleanIn_up();
+            function cleanAll_urpp() {
+                cleanOut_urpp();
+                cleanIn_urpp();
+            }
+            
+            function calculate_urpp() {
+                var variables = {
+                    "you_elast_urpp": $("#you_elast_urpp").val(),
+                    "max_defl_urpp": $("#max_defl_urpp").val(),
+                    "nomout_urpp": $("#nomout_urpp").val(),
+                    "nom_wall_urpp": $("#nom_wall_urpp").val(),
+                    "min_yield_urpp": $("#min_yield_urpp").val(),
+                    "porc_SMYS_urpp": $("#porc_SMYS_urpp").val()
+                };
+
+                var unidades = {
+                    "max_defl_sel_urpp": $("#max_defl_sel_urpp").val().split(",")[1],
+                    "nomout_sel_urpp": $("#nomout_sel_urpp").val().split(",")[1],
+                    "nom_wall_sel_urpp": $("#nom_wall_sel_urpp").val().split(",")[1],
+                    "min_yield_sel_urpp": $("#min_yield_sel_urpp").val().split(",")[1]
+                };
+
+                var res = unpressured_pipe_form(variables, unidades);
+
+                $("#max_stress_urpp").val(res[0]);
+                $("#tot_exp_urpp").val(res[1]);
+                $("#max_pipe_urpp").val(res[2]);
+                $("#sect_mod_urpp").val(res[3]);
+                $("#mom_inert_urpp").val(res[4]);
+                $("#moment_urpp").val(res[5]);
             }
         </script>         
     </body>
