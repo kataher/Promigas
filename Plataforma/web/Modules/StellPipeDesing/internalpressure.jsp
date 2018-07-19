@@ -182,7 +182,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Percent of SMYS [%]:</label>
+                                        <label>Percent of SMYS [0-100%]:</label>
                                     </div>
                                     <div class="col-md-12">
                                         <input type="text" class="form-control" id="porc_SMYS_ipsmys" name="porc_SMYS_ipsmys" onchange='onchange_Input_ipsmys(this)' required> 

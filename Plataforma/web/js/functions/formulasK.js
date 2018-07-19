@@ -5,6 +5,7 @@
 function get_Pres(pres, E, unie, unis){
     //Para convertir PSIG en PSIA,  sumarle a la primera 14,7 (la presion atmosferica)
     var presAt = localAtmosphericPressure_Form(E);
+    console.log(presAt);
     var presS = null; 
     
     if(unis === unie){
@@ -39,11 +40,11 @@ function get_Presf(pres, unie, unis){
     
     if(unie === "psi"){
         if(unis === "MPa"){
-            presS = parseFloat(pres) * 0.101 / 14.7;
+            presS = parseFloat(pres) * 0.1013529 / 14.7;
         }
     }else if(unie === "MPa"){
         if(unis === "psi"){
-            presS = parseFloat(pres) * 14.7 / 0.101;
+            presS = parseFloat(pres) * 14.7 / 0.1013529;
         }
     }else if(unie === "ksi"){
         if(unis === "psi"){
@@ -2774,12 +2775,6 @@ function downstreampressureB_Form(vari, uni) {
         var Pavg = (2.0 / 3.0) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
         Z = 1.0 / (1.0 + (Pavg * 344400.0 * Math.pow(10, (1.785 * G)) / Math.pow(Tf, 3.825)));
         s = 0.0375 * G * (h2 / Z - h1 / Z) / Tf;
-        console.log("Iteracion " + sw);
-        console.log(P1);
-        console.log(P2);
-        console.log(Pavg);
-        console.log(Z);
-        console.log(s);
         if (s === 0) {
             Le = L;
         } else {
@@ -2788,18 +2783,6 @@ function downstreampressureB_Form(vari, uni) {
         sw = sw - 1;
     }
     
-    console.log(P2);
-    console.log(Z);
-    console.log(Q);
-    console.log(Ef);
-    console.log(Tb);
-    console.log(Pb);
-    console.log(D);
-    console.log(G);
-    console.log(Tf);
-    console.log(Le);
-    console.log(P1a);
-    console.log(s);
 //Salida
     //Downstream Pressure
     P2 = puntos(P2, 1);
@@ -2864,13 +2847,6 @@ function flowrate_Form(vari, uni) {
        Le = L;
        S = 0 ;
     }
-    
-    console.log(S);
-    console.log(P1);
-    console.log(P2);
-    console.log(Pavg);
-    console.log(Z);
-    console.log(Tf);
     
     var Q = (435.87 * E * Math.pow(Tb / Pb, 1.0788)) * Math.pow((Math.pow(P1,2) - Math.pow(Math.E, S) * Math.pow(P2,2)) / (Tf * Le * Z * Math.pow(G,0.8539)), 0.5394) * Math.pow(D,2.6182);
     var res = [Q]; //Pie3/dia SCFD
@@ -3123,14 +3099,10 @@ function flowrateB_Form(vari, uni) {
 
     Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    console.log("Presiones antes");
-    console.log(P1);
-    console.log(P2);
+    
     P1 = get_Pres(parseFloat(P1), 0, uni.up_sel_bdp, "psia");
     P2 = get_Pres(parseFloat(P2), 0, uni.bp_sel_bdp, "psia");
-    console.log("Presiones despues");
-    console.log(P1);
-    console.log(P2);
+   
     D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
 
     L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
@@ -3154,22 +3126,7 @@ function flowrateB_Form(vari, uni) {
     } else {
         Le = L * (Math.pow(e, s) - 1) / s;
     }
-    console.log(P1);
-    console.log(P2);
-    console.log(Pavg);
-    console.log(Z);
-    console.log(Tf);
-    console.log(Ef);
-    console.log(Tb);
-    console.log(Pb);
-    console.log(P1a);
-    console.log(P2a);
-    console.log(s);
-    
-    console.log(Le);
-    console.log(D);
     var Q = 737 * Ef * Math.pow((Tb / Pb), 1.02) * Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * Math.pow(G, 0.961) * Tf * Le)), 0.51) * Math.pow(D, 2.53);
-    console.log(Q);
     Q = puntos(Q, 0); // SCFD
     //Salida
     //Flow Rate
@@ -3398,10 +3355,6 @@ function flowrate_cl_form(vari, uni) {
     var V = 0.0000069;
 
     while (sw > 1) {
-        console.log("Iteracion");
-        console.log(F);
-        console.log(Re);
-        console.log(Q);
         var op1 = Math.pow(((Math.pow(P1a, 2) - Math.pow(e, s) * Math.pow(P2a, 2)) / (Z * G * Tf * Le)), 0.5);
         Q = 38.77 * F * Ef * (Tb / Pb) * op1 * Math.pow(D, 1 / 0.4);
         Re = 0.0004778 * Pb / Tb * (G * Q / V / D);
@@ -3563,15 +3516,6 @@ function upstream_cl_form(vari, uni) {
     h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
     h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
 
-    console.log(Tb);
-    console.log(Tf);
-    console.log(Pb);
-    console.log(P2);
-    console.log(Q);
-    console.log(D);
-    console.log(L);
-    console.log(h1);
-    console.log(h2);
     var Z = 1;
     var e = Math.E;
     var V = 0.0000069;
@@ -6150,6 +6094,8 @@ function hoop_longitudinal_form(vari, uni) {
     
     F18 = get_Pres(F18, height, uni.int_press_sel_hoop, "psig");
     
+    console.log(F18);
+    
     var F21 = F18 * F16 / (2 * F17);
     var F22 = F18 * F16 / (4 * F17);
     
@@ -6738,7 +6684,8 @@ function internal_pressure_form(vari, uni) {
     F18 = get_Presf(F18, uni.min_yield_sel_ipsmys, "psi");
     
     var F22 = (F19 / 100) * F18 * 2 * F16 / F15;
-    var res = [F22];
+    //var F22 = (2 * F16 * F18 * F19)/ F15;
+    var res = [F22.toFixed(1)];
     
     changeToDecimal(res);
     /*
@@ -7107,7 +7054,7 @@ function UnRestrained_form(vari) {
 
 }
 //3.20
-function wallthickness_ssp(vari) {
+function wallthickness_ssp(vari, uni) {
     /*
      * ENTRADA
      * E18= Tamaño nominal de la tubería
@@ -7122,17 +7069,32 @@ function wallthickness_ssp(vari) {
      * 
      * 
      */
-    var E18 = parseFloat(vari.nom_pipeop_wt);
-    var E19 = parseFloat(vari.nomout_pipeop_wt);
-    var E20 = parseFloat(vari.despress_pipeop_wt);
+    var E18 = parseFloat(vari.nom_pipeop_wts);
+    var E19 = parseFloat(vari.nomout_pipeop_wts);
+    var E20 = parseFloat(vari.despress_pipeop_wts);
     var E21 = (vari.gra_pipeop_wts);
     var E22 = parseFloat(vari.yield_pipeop_wts);
     var E23 = parseFloat(vari.fact_pipeop_wts);
     var E24 = parseFloat(vari.long_pipeop_wts);
     var E25 = parseFloat(vari.temp_pipeop_wts);
-    var E26 = parseFloat(vari.about_thick_wts);
+    var E26 = parseFloat(vari.about_thick_wts); //debe ser in
+    
+    E19 = get_Long(E19, uni.nomout_sel_wts, "in");
+    E20 = get_Pres(E20, 0, uni.despress_sel_wts, "psig");
+    E22 = get_Presf(E22, uni.yield_sel_wts, "psi");
+    
+    console.log(E18);
+    console.log(E19);
+    console.log(E20);
+    console.log(E21);
+    console.log(E22);
+    console.log(E23);
+    console.log(E24);
+    console.log(E25);
+    console.log(E26);
+    
     // alert(E18+" "+E19+" "+E20+" "+E21+" "+E22+" "+E23+" "+E24+" "+E25+" "+E26);
-    var r = (E18 * E20) / (2 * E22 * E23 * E24 * E25);
+    var r = (E19 * E20) / (2 * E22 * E23 * E24 * E25);
     r = r + E26;
     /*
      * Salida
