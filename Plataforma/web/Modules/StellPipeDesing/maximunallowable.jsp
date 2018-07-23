@@ -186,40 +186,124 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-lg-12">                                    
-                            <div class="form-group">      
-                                <label>Operating Pressure [psi]:</label>
-                                <input type="text" name="oper_press_max" id="oper_press_max" class="form-control">
-                                <label>Pipe outside diameter [in]:</label>
-                                <input type="text" class="form-control" id="pipe_dia_max" name="pipe_dia_max">
-                                <label>Wall Thickness [in]:</label>
-                                <input type="text" name="pipe_wt_max" id="pipe_wt_max" class="form-control">
-                                <label>Specified Minimum Yield Stress [psi]:</label>
-                                <input type="text" class="form-control" id="min_yield_max" name="min_yield_max">               
-                                <label>Design Factor:</label>
-                                <input type="text" name="fact_pipeop_max" id="fact_pipeop_max" class="form-control">
-                                <label>Longitudinal Join Factor:</label>
-                                <input type="text" class="form-control" id="long_fact_max" name="long_fact_max">
-                                <label>Temperature Derating Factor:</label>
-                                <input type="text" name="temp_fact_max" id="temp_fact_max" class="form-control">
-                                <label>Additional Uniform Load and Pipe [lb/ft]:</label>
-                                <input type="text" class="form-control" id="add_maxallo_max" name="add_maxallo_max">
-                                <label>Deflection Limited to: </label>   
-                                <div class="col-lg-12">                
-                                    <div class="col-lg-6">
-                                        <div id="div_defli_sel_max">
-                                            <select class="form-control" id="defli_sel_max" name="defli_sel_max"> </select>
-                                        </div>
+                        <div class="col-lg-12">         
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Height:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="height_max" id="height_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_height_sel_max">
+                                    <select class="form-control" id="height_sel_max" name="height_sel_max" onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Operating Pressure [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="oper_press_max" id="oper_press_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_oper_press_sel_max">
+                                    <select class="form-control" id="oper_press_sel_max" name="oper_press_sel_max" onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Pipe outside diameter [in]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="pipe_dia_max" id="pipe_dia_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_pipe_dia_sel_max">
+                                    <select class='form-control' id='pipe_dia_sel_max' name='pipe_dia_sel_max' onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Wall Thickness [in]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="pipe_wt_max" id="pipe_wt_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_pipe_wt_sel_max">
+                                    <select class='form-control' id='pipe_wt_sel_max' name='pipe_wt_sel_max' onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Specified Minimum Yield Stress [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="min_yield_max" id="min_yield_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_min_yield_sel_max">
+                                    <select class='form-control' id='min_yield_sel_max' name='min_yield_sel_max' onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Design Factor:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="fact_pipeop_max" id="fact_pipeop_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Longitudinal Join Factor:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="long_fact_max" id="long_fact_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Temperature Derating Factor:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="temp_fact_max" id="temp_fact_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Additional Uniform Load and Pipe [lb/ft]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="add_maxallo_max" id="add_maxallo_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label>Deflection Limited to [TB]:</label>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control" id="defl_lim_max" name="defl_lim_max">
+                                    <div class="col-md-6">
+                                        <input type="text" name="defl_lim_max" id="defl_lim_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                    </div>
+                                    <div class="col-md-6" id = "div_defl_lim_sel_max">
+                                        <select class="form-control" id="defl_lim_sel_max" name="defl_lim_sel_max" onchange='cleanOut_max()'> </select>
                                     </div>
                                 </div>
-                                <label>Maximum Test Pressure [psi]:</label>
-                                <input type="text" name="max_press_max" id="max_press_max" class="form-control">
-                                <label>Maximum Allowable % of SMYS for Testing [%]:</label>
-                                <input type="text" class="form-control" id="max_SMYS_max" name="max_SMYS_max">                  
-                            </div> 
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Maximum Test Pressure [psi]:</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="text" name="max_press_max" id="max_press_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                                <div class="col-md-4" id = "div_max_press_sel_max">
+                                    <select class='form-control' id='max_press_sel_max' name='max_press_sel_max' onchange='cleanOut_max()'> </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label>Maximum Allowable % of SMYS for Testing [%]:</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="text" name="max_SMYS_max" id="max_SMYS_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -317,6 +401,7 @@
                  * 
                  */
                 var variables = {
+                    "height": $("#height_max").val(),
                     "D": $("#pipe_dia_max").val(),
                     "W": $("#ave_weight_max").val(),
                     "MOP": $("#oper_press_max").val(),
@@ -332,7 +417,16 @@
                     "F": $("#fact_pipeop_max").val(),
                     "Pmod": $("#pipehydSel").val()
                 };
-                var res = maximunallowable(variables);
+                
+                var unidades = {
+                    "height_sel_max": $("#height_sel_max").val().split(",")[1],
+                    "pipe_dia_sel_max": $("#pipe_dia_sel_max").val().split(",")[1],
+                    "oper_press_sel_max": $("#oper_press_sel_max").val().split(",")[1],
+                    "min_yield_sel_max": $("#min_yield_sel_max").val().split(",")[1],
+                    "pipe_wt_sel_max": $("#pipe_wt_sel_max").val().split(",")[1],
+                    "max_press_sel_max": $("#max_press_sel_max").val().split(",")[1]
+                };
+                var res = maximunallowable(variables, unidades);
 
                 $("#max_allow").val(res[0]);
                 $("#hoop_bar").val(res[1]);
@@ -344,7 +438,7 @@
                 $("#defl_msb").val(res[7]);
                 $("#max_span_defl").val(res[8]);
                 $("#defl_msd").val(res[9]);
-                $("#defl_msd").val(res[10]);
+                $("#max_allow_span_length").val(res[10]);
                 //  show_OkDialog($("#calculate_Dialog_ipsmys"), "Proceso satisfactorio");
 
 
@@ -358,13 +452,102 @@
                 $('#api5l_max').attr('checked', 'checked');
                 load_nps_sel_max("5l");
                 load_grade_sel_max("gra5l");
-                //load_defli_sel_max("dlt");
+                load_defli_sel_max("dlt");
                 load_deratingf_sel_max();
                 load_joinf_sel_max("jointf5l");
                 load_desingf_sel_max();
-
+                load_pres_sel_max();
+                load_presf_sel_max();
+                load_in_sel_max();
             });
 
+            function load_in_sel_max() {
+                var parametros = {
+                    "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='height_sel_max' name='height_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_height_sel_max").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='pipe_dia_sel_max' name='pipe_dia_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_pipe_dia_sel_max").html(newHtml);
+                        
+                        newHtml = "<select class='form-control' id='pipe_wt_sel_max' name='pipe_wt_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_pipe_wt_sel_max").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_max"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_pres_sel_max() {
+                var parametros = {
+                    "combo": "pres",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='oper_press_sel_max' name='oper_press_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_oper_press_sel_max").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='max_press_sel_max' name='max_press_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_max_press_sel_max").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_max"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_presf_sel_max() {
+                var parametros = {
+                    "combo": "presf",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='min_yield_sel_max' name='min_yield_sel_max' onchange='cleanOut_max()'>" + data;
+                        $("#div_min_yield_sel_max").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_max"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
             function load_deratingf_sel_max() {
                 var parametros = {
                     "combo": "deratingf",
@@ -454,43 +637,7 @@
                 });
             }
 
-            function load_in_sel_max() {
-                var parametros = {
-                    "combo": "in",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "Modules/manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"md_sel_max\" id= \"md_sel_max\" onchange=\"cleanOut_max()\">" + data;
-                        $("#div_md_sel_max").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"pipeo_sel_max\" id= \"pipeo_sel_max\" onchange=\"cleanOut_max()\">" + data;
-                        $("#div_pipeo_sel_max").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"np_sel_max\" id= \"np_sel_max\" onchange=\"cleanOut_max()\">" + data;
-                        $("#div_np_sel_max").html(newHtml);
-
-                        newHtml = "<select class=\"form-control\" name=\"le_sel_max\" id= \"le_sel_max\" onchange=\"cleanOut_max()\">" + data;
-                        $("#div_le_sel_max").html(newHtml);
-
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_max"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
+           
             function load_temp_sel_max() {
                 var parametros = {
                     "combo": "temp",
@@ -650,10 +797,10 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"defli_sel_max\" id=\"defli_sel_max\" onchange=\"onchange_defli_max()\">" + data;
-                        $("#div_defli_sel_max").html(newHtml);
+                        var newHtml = "<select class='form-control' id='defl_lim_sel_max' name='defl_lim_sel_max' onchange='onchange_defli_max()'>" + data;
+                        $("#div_defl_lim_sel_max").html(newHtml);
 
-                        var x = $("#defli_sel_max").val();
+                        var x = $("#defl_lim_sel_max").val();
                         $("#defl_lim_max").val(x.split(",")[1]);
 
                     },
@@ -728,12 +875,12 @@
 
                 var sw = validateDecimal(inp.value);
 
-                if (sw != true) {
+                if (sw !== true) {
                     inp.value = "";
                 }
-                onchange_Input_zero(inp);
-                // cleanOut_max();
 
+                onchange_Input_zero(inp);
+                cleanOut_max();
             }
 
             function onchange_nps_max() {
@@ -754,11 +901,9 @@
                 // cleanOut_max();
             }
             function onchange_defli_max() {
-                var x = $("#defli_sel_max").val();
+                var x = $("#defl_lim_sel_max").val();
                 $("#defl_lim_max").val(x.split(",")[1]);
-                /* var res =  $("#grade_sel_max option:selected").html();
-                 $("#gra_pipeop_max").val(x.split(",")[1]); */
-                // cleanOut_max();
+                cleanOut_max();
             }
 
             function onchange_jf_max() {

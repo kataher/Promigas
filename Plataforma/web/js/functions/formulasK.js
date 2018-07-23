@@ -6756,7 +6756,8 @@ function linear_thermal_form(vari, uni) {
     return res;
 }
 //3.13
-function maximunallowable(vari) {
+function maximunallowable(vari, uni) {
+    var height = parseFloat(vari.height);
     var D = parseFloat(vari.D);
     var W = parseFloat(vari.W);
     var MOP = parseFloat(vari.MOP);
@@ -6771,6 +6772,17 @@ function maximunallowable(vari) {
     var maSMYS = parseFloat(vari.maSMYS);
     var F = parseFloat(vari.F);
     var Pmod = parseFloat(vari.Pmod);
+    
+    height = get_Long(height, uni.height_sel_max, 'ft');
+    D = get_Long(D, uni.pipe_dia_sel_max, 'in');
+    t = get_Long(t, uni.pipe_wt_sel_max, 'in');
+    
+    
+    MOP = get_Pres(MOP, height, uni.oper_press_sel_max, 'psia');
+    mtp = get_Pres(mtp, height, uni.max_press_sel_max, 'psia');
+
+    SMYS = get_Presf(SMYS, uni.min_yield_sel_max, 'psi');
+    
     //STEP 2
     if (Pmod == 0) {
         var H = (MOP * D) / (2 * t);
@@ -6801,7 +6813,6 @@ function maximunallowable(vari) {
     // STEP 5 
     var M1 = (W * Math.pow(L, 2)) / 8;
     var L1 = Math.sqrt((8 * (Bmo * 12)) / W);
-    alert(E + " " + I + " " + W);
     // STEP 6 
     var d1 = (5 * W * Math.pow(L, 4)) / (384 * E * I);
     var Md = L / 360;
