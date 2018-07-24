@@ -6009,7 +6009,7 @@ function desing_pressure_polyethylene_form(vari, uni) {
 
 }
 //3.7
-function gaspipeline_form(vari) {
+function gaspipeline_form(vari, uni) {
     /*
      * ENTRADA
      * Dp   = Diametro externo de la tubería [in]
@@ -6021,15 +6021,25 @@ function gaspipeline_form(vari) {
      * a2   = Alpha 2 - Creater Wall Angle at Half Depht [°]
      * Psoil= w Soil Parameter
      */
+    var height = parseFloat(vari.height);
     var Dp = parseFloat(vari.Dp);
     var P0 = parseFloat(vari.P0);
     var Dc = parseFloat(vari.Dc);
-    var Y = parseFloat(vari.Y);
+    var Y = parseFloat(vari.y);
     var w = parseFloat(vari.w);
     var a1 = parseFloat(vari.alpha1);
     var a2 = parseFloat(vari.alpha2);
     var Psoil = parseFloat(vari.Psoil);
 
+    console.log(vari);
+    console.log(uni);
+    
+    Dp = get_Long(Dp, uni.pipe_out_diam_sel_gp, 'in');
+    Dc = get_Long(Dc, uni.depth_cover_sel_gp, 'ft');
+    height = get_Long(height, uni.height_sel_gp, 'ft');
+    
+    P0 = get_Pres(P0, height, uni.pipe_press_sel_gp, 'psig');
+    
     Psoil = Psoil * 16;
 
     var Rw = 0.28 + 0.62 * (5 - w) - 0.07 * (25 - Math.pow(w, 2));
