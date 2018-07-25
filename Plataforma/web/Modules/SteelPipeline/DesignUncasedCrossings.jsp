@@ -109,7 +109,7 @@
                                         <hr/>
                                     </div>    
 
-                                    <label>Uniform Support Under-Pipe and Crossing Condition:</label>
+                                    <!-- label>Uniform Support Under-Pipe and Crossing Condition:</label>
                                     <div  id="div_temperature_sel_duc">                    
                                         <select class="form-control" id="uniform_duc" name="uniform_duc"> </select>
                                     </div>
@@ -120,7 +120,7 @@
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
-                                    </select>
+                                    </select-->
                                 </div>
                             </form>
                         </div>
@@ -152,7 +152,7 @@
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Datos Operacionales y de la Tuberia
+                    Operational pipe data
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -314,6 +314,17 @@
                             <form role="form">
                                 <div class="form-group">
                                     <div class="col-md-12">
+                                        <label>Height:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" name="height_duc" id="height_duc" class="form-control" onchange="onchange_Input_duc(this)" required>
+                                    </div>
+                                    <div class="col-md-4" id = "div_height_sel_duc">
+                                        <select class="form-control" id="height_sel_duc" name="height_sel_duc" onchange='cleanOut_duc()'> </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
                                         <label>Pipe Internal Pressure:</label>
                                     </div>
                                     <div class="col-md-8">
@@ -332,7 +343,9 @@
                                         <input type="text" name="wheelLoad_duc" id="wheelLoad_duc" class="form-control" onchange="onchange_Input_duc(this)" required>
                                     </div>
                                     <div class="col-md-4" id = "div_wheelLoad_sel_duc">
-                                        <select class="form-control" id="wheelLoad_sel_duc" name="wheelLoad_sel_duc" onchange='cleanOut_duc()'> </select>
+                                        <select class="form-control" id="wheelLoad_sel_duc" name="wheelLoad_sel_duc" onchange='cleanOut_duc()'>
+                                            <option>lbs</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -437,6 +450,9 @@
                         var newHtml = "<select class='form-control' id='nominalPipeSize_sel_duc' name='nominalPipeSize_sel_duc' onchange='cleanOut_duc()'>" + data;
                         $("#div_nominalPipeSize_sel_duc").html(newHtml);
 
+                        newHtml = "<select class='form-control' id='height_sel_duc' name='height_sel_duc' onchange='cleanOut_duc()'>" + data;
+                        $("#div_height_sel_duc").html(newHtml);
+                        
                         newHtml = "<select class='form-control' id='nominalOutsideDiameter_sel_duc' name='nominalOutsideDiameter_sel_duc' onchange='cleanOut_duc()'>" + data;
                         $("#div_nominalOutsideDiameter_sel_duc").html(newHtml);
 
@@ -460,6 +476,7 @@
 
             function calculatebtn_duc1() {
                 var parameter = {
+                    "height": $("#height_duc").val(),
                     "D": $("#nominalOutsideDiameter_duc").val(),
                     "t": $("#nominalWallThickness_duc").val(),
                     "SMYS": $("#specifiedMinimumYieldStrength_duc").val(),
@@ -476,13 +493,14 @@
                 };
 
                 var unidades = {
-                    "nominalOutsideDiameter_sel_duc": $("#nominalOutsideDiameter_sel_duc").val(),
-                    "nominalWallThickness_sel_duc": $("#nominalWallThickness_sel_duc").val(),
-                    "specifiedMinimumYieldStrength_sel_duc": $("#specifiedMinimumYieldStrength_sel_duc").val(),
-                    "modulusOfElasticityForSteel_sel_duc": $("#modulusOfElasticityForSteel_sel_duc").val(),
-                    "pipeInternalPressure_sel_duc": $("#pipeInternalPressure_sel_duc").val(),
-                    "widthOfPipeTrenchOrDiameterOfBore_sel_duc": $("#widthOfPipeTrenchOrDiameterOfBore_sel_duc").val(),
-                    "heightOfSoilOverPipe_sel_duc": $("#heightOfSoilOverPipe_sel_duc").val()
+                    "height_sel_duc": $("#height_sel_duc").val().split(",")[1],
+                    "nominalOutsideDiameter_sel_duc": $("#nominalOutsideDiameter_sel_duc").val().split(",")[1],
+                    "nominalWallThickness_sel_duc": $("#nominalWallThickness_sel_duc").val().split(",")[1],
+                    "specifiedMinimumYieldStrength_sel_duc": $("#specifiedMinimumYieldStrength_sel_duc").val().split(",")[1],
+                    "modulusOfElasticityForSteel_sel_duc": $("#modulusOfElasticityForSteel_sel_duc").val().split(",")[1],
+                    "pipeInternalPressure_sel_duc": $("#pipeInternalPressure_sel_duc").val().split(",")[1],
+                    "widthOfPipeTrenchOrDiameterOfBore_sel_duc": $("#widthOfPipeTrenchOrDiameterOfBore_sel_duc").val().split(",")[1],
+                    "heightOfSoilOverPipe_sel_duc": $("#heightOfSoilOverPipe_sel_duc").val().split(",")[1]
                 };
 
                 var res = designuncascro(parameter, unidades);
