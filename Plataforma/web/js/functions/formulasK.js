@@ -6015,11 +6015,11 @@ function gaspipeline_form(vari, uni) {
      * Dp   = Diametro externo de la tubería [in]
      * P0   = Pipe Internal Pressure [psig]
      * Dc   = Depth of Cover [ft]
-     * Y    = Average Unit Weight of Soil 
+     * Y    = Specific heat ratio
      * w    = Natural Gas Specific Heat Radio
      * a1   = Alpha 1 - Creater Wall Angle at Ground Level [°]
      * a2   = Alpha 2 - Creater Wall Angle at Half Depht [°]
-     * Psoil= w Soil Parameter
+     * Psoil= Soil density
      */
     var height = parseFloat(vari.height);
     var Dp = parseFloat(vari.Dp);
@@ -6034,14 +6034,26 @@ function gaspipeline_form(vari, uni) {
     console.log(vari);
     console.log(uni);
     
-    Dp = get_Long(Dp, uni.pipe_out_diam_sel_gp, 'in');
-    Dc = get_Long(Dc, uni.depth_cover_sel_gp, 'ft');
+    Dp = get_Long(Dp, uni.pipe_out_diam_sel_gp, 'mt');
+    Dc = get_Long(Dc, uni.depth_cover_sel_gp, 'mt');
     height = get_Long(height, uni.height_sel_gp, 'ft');
     
     P0 = get_Pres(P0, height, uni.pipe_press_sel_gp, 'psig');
     
-    Psoil = Psoil * 16;
-
+    // Convert from psi to bar
+    var P0bar = P0 * 0.0689476;
+    
+    // Convert from psi to pascal
+    P0 = P0 * 6894.76;
+    
+    // Convert from lb/ft3 to kg/m3
+    Psoil = Psoil * 16.018463;
+    
+    console.log("dp", Dp);
+    console.log("dc", Dc);
+    console.log("p0", P0);
+    console.log("rho", Psoil);
+    
     var Rw = 0.28 + 0.62 * (5 - w) - 0.07 * (25 - Math.pow(w, 2));
     var D = 0;
     var W = 0; // COMO SACO A Y B EN LA FORMULA
@@ -6062,12 +6074,12 @@ function gaspipeline_form(vari, uni) {
     }
     W = 2 * a * Math.pow((1 - Math.pow(b - D, 2) / Math.pow(b, 2)), 0.5);
 
-    var op1 = 0.64 * Math.pow(Math.pow(Dp, 3) * P0, 0.67);
-    var op2 = 0.65 * Math.pow(Math.pow(Dp, 3) * P0, 0.33);
+    var op1 = 0.64 * Math.pow(Math.pow(Dp, 3) * P0bar, 2.0/3.0);
+    var op2 = 0.65 * Math.pow(Math.pow(Dp, 3) * P0bar, 1.0/3.0);
     var op3 = 0.83 * Math.pow(Dc, 2);
 
     var RW = Math.sqrt(op1 + op2 - op3);
-    var Rp = Dp / 2;
+    var Rp = Dp / 2.0;
     var ww = Dc + Rp;
     var Uky = 2.54;
 
@@ -6078,17 +6090,17 @@ function gaspipeline_form(vari, uni) {
     /*
      * SALIDA 
      *  Rw = R Soil Parameter Funcion
-     *  D = Depth of Crater 
-     *  W = Width of Crater 
-     *  RW = Radius of Crater 
-     *  Ux = Velocity of Explosive Gases 
-     *  (D*3.2) = Depth of Crater 
-     *  W1 =Width of Crater 
+     *  (D*3.28) = Depth of Crater in ft
+     *  W*3.28 = Width of Crater in ft
+     *  RW*3.28 = Radius of Crater in ft
+     *  Ux*3.28 = Velocity of Explosive Gases in ft/s
+     *  (D*3.28) = Depth of Crater in ft
+     *  W1*2.38 =Width of Crater in ft
      * 
      * 
      */
 
-    return [Rw, D, W, RW, Ux, (D * 3.2), W1];
+    return [Rw, D * 3.28, W* 3.28, RW * 3.28, Ux * 3.28, D * 3.28, W1 * 3.28];
 }
 //3.8
 function hoop_longitudinal_form(vari, uni) {
