@@ -211,6 +211,7 @@
                 load_nps_sel_bds();
 
                 load_in_sel_bds();
+                load_meters_sel_bds();
                 load_pres_sel_bds();
 
                 getproyectos(<%=session.getAttribute("idusu")%>,
@@ -344,7 +345,36 @@
 
             function load_in_sel_bds() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='pipe_out_diam_sel_bds' id= 'pipe_out_diam_sel_bds' onchange='cleanOut_bds()'>" + data;
+                        $("#div_pipe_out_diam_sel_bds").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='wall_thick_sel_bds' id= 'wall_thick_sel_bds' onchange='cleanOut_bds()'>" + data;
+                        $("#div_wall_thick_sel_bds").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_bds"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_meters_sel_bds() {
+                var parametros = {
+                    "combo": "len",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -358,12 +388,6 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' name='pipe_lenght_sel_bds' id= 'pipe_lenght_sel_bds' onchange='cleanOut_bds()'>" + data;
                         $("#div_pipe_lenght_sel_bds").html(newHtml);
-
-                        newHtml = "<select class='form-control' name='pipe_out_diam_sel_bds' id= 'pipe_out_diam_sel_bds' onchange='cleanOut_bds()'>" + data;
-                        $("#div_pipe_out_diam_sel_bds").html(newHtml);
-
-                        newHtml = "<select class='form-control' name='wall_thick_sel_bds' id= 'wall_thick_sel_bds' onchange='cleanOut_bds()'>" + data;
-                        $("#div_wall_thick_sel_bds").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_bds"), "Error");

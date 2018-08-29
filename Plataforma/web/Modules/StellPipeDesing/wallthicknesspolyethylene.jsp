@@ -226,7 +226,7 @@
             
             function load_in_sel_wtpe() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({

@@ -448,7 +448,7 @@
 
             function load_in_sel_lostre() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({

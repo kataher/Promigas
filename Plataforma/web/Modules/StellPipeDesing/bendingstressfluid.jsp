@@ -215,6 +215,7 @@
                 $("#opt_bdsf").val("1");
                 load_nps_sel_bdsf();
                 load_in_sel_bdsf();
+                load_meters_sel_bdsf();
 
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_bdsf"),
@@ -243,7 +244,36 @@
 
             function load_in_sel_bdsf() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' name='pipe_in_diam_sel_bdsf' id= 'pipe_in_diam_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
+                        $("#div_pipe_in_diam_sel_bdsf").html(newHtml);
+
+                        newHtml = "<select class='form-control' name='pipe_diam_sel_bdsf' id= 'pipe_diam_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
+                        $("#div_pipe_diam_sel_bdsf").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_bdsf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_meters_sel_bdsf() {
+                var parametros = {
+                    "combo": "len",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -257,12 +287,6 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' name='lenght_pipe_sel_bdsf' id= 'lenght_pipe_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
                         $("#div_lenght_pipe_sel_bdsf").html(newHtml);
-
-                        newHtml = "<select class='form-control' name='pipe_in_diam_sel_bdsf' id= 'pipe_in_diam_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
-                        $("#div_pipe_in_diam_sel_bdsf").html(newHtml);
-
-                        newHtml = "<select class='form-control' name='pipe_diam_sel_bdsf' id= 'pipe_diam_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
-                        $("#div_pipe_diam_sel_bdsf").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_bdsf"), "Error");

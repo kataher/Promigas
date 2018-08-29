@@ -271,6 +271,7 @@
                 $("#opt_ippo").val("1");
                 //load_np_sel_ippo("npsn");
                 load_in_sel_ippo();
+                load_in2_sel_ippo();
                 load_presf_sel_ippo();
                 load_pres_sel_ippo();
                 load_temp_sel_ippo();
@@ -305,12 +306,6 @@
                         var newHtml = "<select class='form-control' id='height_sel_ippo' name='height_sel_ippo' onchange='cleanOut_ippo()'>" + data;
                         $("#div_height_sel_ippo").html(newHtml);
                         
-                        var newHtml = "<select class='form-control' id='pipe_dia_sel_ippo' name='pipe_dia_sel_ippo' onchange='cleanOut_ippo()'>" + data;
-                        $("#div_pipe_dia_sel_ippo").html(newHtml);
-
-                        newHtml = "<select class='form-control' id='pipe_wall_sel_ippo' name='pipe_wall_sel_ippo' onchange='cleanOut_ippo()'>" + data;
-                        $("#div_pipe_wall_sel_ippo").html(newHtml);
-                        
                         newHtml = "<select class='form-control' id='depth_pipe_sel_ippo' name='depth_pipe_sel_ippo' onchange='cleanOut_ippo()'>" + data;
                         $("#div_depth_pipe_sel_ippo").html(newHtml);
                         
@@ -319,6 +314,35 @@
                         
                         newHtml = "<select class='form-control' id='short_rad_sel_ippo' name='short_rad_sel_ippo' onchange='cleanOut_ippo()'>" + data;
                         $("#div_short_rad_sel_ippo").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_ippo"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in2_sel_ippo() {
+                var parametros = {
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='pipe_dia_sel_ippo' name='pipe_dia_sel_ippo' onchange='cleanOut_ippo()'>" + data;
+                        $("#div_pipe_dia_sel_ippo").html(newHtml);
+
+                        newHtml = "<select class='form-control' id='pipe_wall_sel_ippo' name='pipe_wall_sel_ippo' onchange='cleanOut_ippo()'>" + data;
+                        $("#div_pipe_wall_sel_ippo").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_ippo"), "Error");

@@ -356,6 +356,7 @@
                 load_joinf_sel_wts("jointf5l");
                 load_desingf_sel_wts();
                 load_in_sel_wts();
+                load_in2_sel_wts();
                 load_pres_sel_wts();
                 load_presf_sel_wts();
             });
@@ -452,14 +453,37 @@
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='height_sel_wts' name='height_sel_wts' onchange='cleanOut_wts()'> " + data;
+                        $("#div_height_sel_wts").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_wts"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in2_sel_wts() {
+                var parametros = {
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
                         var newHtml = "<select class='form-control' id='nom_pipeop_sel_wts' name='nom_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
                         $("#div_nom_pipeop_sel_wts").html(newHtml);
 
                         newHtml = "<select class='form-control' id='nomout_pipeop_sel_wts' name='nomout_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
                         $("#div_nomout_pipeop_sel_wts").html(newHtml);
-
-                        newHtml = "<select class='form-control' id='height_sel_wts' name='height_sel_wts' onchange='cleanOut_wts()'> " + data;
-                        $("#div_height_sel_wts").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_wts"), "Error");

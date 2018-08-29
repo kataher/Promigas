@@ -328,6 +328,7 @@
                 load_deratingf_sel_unrpl();
                 load_presf_sel_unrpl();
                 load_in_sel_unrpl();
+                load_in2_sel_unrpl();
                 load_pres_sel_unrpl();
             });
 
@@ -347,8 +348,31 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' id='height_sel_unrpl' name='height_sel_unrpl' onchange='cleanOut_unrpl()'> " + data;
                         $("#div_height_sel_unrpl").html(newHtml);
-
-                        newHtml = "<select class='form-control' id='nomout_sel_unrpl' name='nomout_sel_unrpl' onchange='cleanOut_unrpl()'> " + data;
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_unrpl"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in2_sel_unrpl() {
+                var parametros = {
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='nomout_sel_unrpl' name='nomout_sel_unrpl' onchange='cleanOut_unrpl()'> " + data;
                         $("#div_nomout_sel_unrpl").html(newHtml);
 
                         newHtml = "<select class='form-control'id='nom_wall_sel_unrpl' name='nom_wall_sel_unrpl' onchange='cleanOut_unrpl()'> " + data;

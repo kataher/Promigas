@@ -301,7 +301,7 @@
 
             function load_in_sel_baw() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({

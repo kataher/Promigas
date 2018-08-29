@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Design Pressure Polyethylene Pipe</h2>
+                <h2><strong>Steel Pipe Design:</strong>  Design Pressure Polyethylene Pipe</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -238,7 +238,7 @@
             
             function load_in_sel_dpp() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({

@@ -276,7 +276,7 @@
                             </div>
                             <div class="form-group">
                                     <div class="col-md-12">
-                                        <label>Deflection Limited to [TB]:</label>
+                                        <label>Deflection Limited to:</label>
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" name="defl_lim_max" id="defl_lim_max" class="form-control" onchange="onchange_Input_max(this)" required>
@@ -459,6 +459,7 @@
                 load_pres_sel_max();
                 load_presf_sel_max();
                 load_in_sel_max();
+                load_in2_sel_max();
             });
 
             function load_in_sel_max() {
@@ -477,8 +478,31 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' id='height_sel_max' name='height_sel_max' onchange='cleanOut_max()'>" + data;
                         $("#div_height_sel_max").html(newHtml);
-
-                        newHtml = "<select class='form-control' id='pipe_dia_sel_max' name='pipe_dia_sel_max' onchange='cleanOut_max()'>" + data;
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_max"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in2_sel_max() {
+                var parametros = {
+                    "combo": "in2",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: true,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='pipe_dia_sel_max' name='pipe_dia_sel_max' onchange='cleanOut_max()'>" + data;
                         $("#div_pipe_dia_sel_max").html(newHtml);
                         
                         newHtml = "<select class='form-control' id='pipe_wt_sel_max' name='pipe_wt_sel_max' onchange='cleanOut_max()'>" + data;

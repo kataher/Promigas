@@ -281,6 +281,7 @@
                 $("#opt_paf").val("1");
                 load_np_sel_paf("npsn");
                 load_in_sel_paf();
+                load_in2_sel_paf();
                 load_temp_sel_paf();
                 load_pres_sel_paf();
             });
@@ -288,6 +289,32 @@
             function load_in_sel_paf() {
                 var parametros = {
                     "combo": "in",
+                    "opcion": "5"
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        var newHtml = "<select class='form-control' id='height_sel_paf' name='height_sel_paf' onchange='cleanOut_paf()'> " + data;
+                        $("#div_height_sel_paf").html(newHtml);
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_paf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+            
+            function load_in2_sel_paf() {
+                var parametros = {
+                    "combo": "in2",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -307,9 +334,6 @@
                         
                         newHtml = "<select class='form-control' id='nom_wall_sel_paf' name='nom_wall_sel_paf' onchange='cleanOut_paf()'> " + data;
                         $("#div_nom_wall_sel_paf").html(newHtml);
-                        
-                        newHtml = "<select class='form-control' id='height_sel_paf' name='height_sel_paf' onchange='cleanOut_paf()'> " + data;
-                        $("#div_height_sel_paf").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_paf"), "Error");
