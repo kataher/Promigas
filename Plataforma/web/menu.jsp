@@ -92,21 +92,21 @@
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/buoyancyanalisisweights.jsp', this);">3.4. Buoyancy Analysis & Concrete Weights Spacing</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/designpressure.jsp', this);">3.5. Design Pressure</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/desingpressurepolyethylene.jsp', this);">3.6. Design Pressure Polyethylene Pipe</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/gaspipeline.jsp', this);">3.7. Gas Pipeline Rupture Analysis Depth, Radius and Width of Crater</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/hoopstress.jsp', this);">3.8. Hoop Stress & Longitudinal Stress</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/installmentpipelines.jsp', this);">3.9. Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/installmentpipelinesoperating.jsp', this);">3.10. Installment of Pipelines by Horizontal Directional Drilling - Operation Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/internalpressure.jsp', this);">3.11. Internal Pressure - % SMYS</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/linearthermal.jsp', this);">3.12. Linear Thermal Pipeline Expansion</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/longitudinalstress.jsp', this);">3.13. Longitudinal Stress in Movement of in-Service Pipelines</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunallowable.jsp', this);">3.14. Maximum Allowable Pipe Span Length</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunimpact.jsp', this);">3.15. Maximum, Impact Load & Penetration Depth</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/pipeanchorforce.jsp', this);">3.16. Pipe Anchor Force Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/restrainedpl.jsp', this);">3.17. Restrained PL Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unpressuredpipe.jsp', this);">3.18. Requirements to move Unpressured Pipe</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unrestrainedpl.jsp', this);">3.19. Unrestrained PL Stress Analysis</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthickness.jsp', this);">3.20. Wall Thickness - Straight Steel Pipe</a> </li>
-        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthicknesspolyethylene.jsp', this);">3.21. Wall Thickness Polyethylene Pipe</a> </li>
+        <!--li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/gaspipeline.jsp', this);">3.7. Gas Pipeline Rupture Analysis Depth, Radius and Width of Crater</a> </li-->
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/hoopstress.jsp', this);">3.7. Hoop Stress & Longitudinal Stress</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/installmentpipelines.jsp', this);">3.8. Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/installmentpipelinesoperating.jsp', this);">3.9. Installment of Pipelines by Horizontal Directional Drilling - Operation Stress Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/internalpressure.jsp', this);">3.10. Internal Pressure - % SMYS</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/linearthermal.jsp', this);">3.11. Linear Thermal Pipeline Expansion</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/longitudinalstress.jsp', this);">3.12. Longitudinal Stress in Movement of in-Service Pipelines</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunallowable.jsp', this);">3.13. Maximum Allowable Pipe Span Length</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/maximunimpact.jsp', this);">3.14. Maximum, Impact Load & Penetration Depth</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/pipeanchorforce.jsp', this);">3.15. Pipe Anchor Force Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/restrainedpl.jsp', this);">3.16. Restrained PL Stress Analysis</a> </li>
+        <!--li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unpressuredpipe.jsp', this);">3.18. Requirements to move Unpressured Pipe</a> </li-->
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/unrestrainedpl.jsp', this);">3.17. Unrestrained PL Stress Analysis</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthickness.jsp', this);">3.18. Wall Thickness - Straight Steel Pipe</a> </li>
+        <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/wallthicknesspolyethylene.jsp', this);">3.19. Wall Thickness Polyethylene Pipe</a> </li>
 
     </ul>
 </li>
