@@ -542,8 +542,10 @@ public class GeneralController{
                 type = (type == null ? "5l" : type.trim());
                 return cModel.load_Cmbo_NPS(type);
             case("wtn"):
+                type = request.getParameter("type");
+                type = (type == null ? "5l" : type.trim());
                 String nps = request.getParameter("nps").trim();
-                return cModel.load_Cmbo_WT(nps);  
+                return cModel.load_Cmbo_WT(nps, type);  
             case("refeact"):
                 marca = request.getParameter("marca").trim();
                 return cModel.load_Cmbo_Ref(marca);    

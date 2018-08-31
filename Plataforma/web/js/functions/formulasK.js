@@ -5989,7 +5989,7 @@ function desing_pressure_polyethylene_form(vari, uni) {
     TextBox6 = get_Long(TextBox6, uni.out_pipeop_sel_dpp, "in");
     TextBox7 = get_Long(TextBox7, uni.wall_pipeop_sel_dpp, "in");
     
-    //TextBox8 = get_Pres(TextBox8, uni.hyd_pipeop_sel_dpp, "psig");
+    TextBox8 = get_Presf(TextBox8, uni.hyd_pipeop_sel_dpp, "psi");
     
     
     //ComboBox2 = 21; // coregir cuando se carge el combo

@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Steel Pipe Design:</strong>  Design Pressure Polyethylene Pipe</h2>
+                <h2><strong>Pipe Design:</strong>  Design Pressure Polyethylene Pipe</h2>
             </div>
             <div class="col-lg-3"> 
 
@@ -77,7 +77,7 @@
 
                                     </div>                      
                                     <div class="col-lg-7">
-                                        <label>SDR</label>                        
+                                        <label>Wall Thickness</label>                        
                                     </div>
                                     <div class="col-lg-5">
                                         <div id="div_wallt_sel_dpp">
@@ -270,7 +270,7 @@
 
             function load_pres_sel_dpp() {
                 var parametros = {
-                    "combo": "pres",
+                    "combo": "presf",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -323,6 +323,7 @@
             function load_np_sel_dpp(idcombo) {
                 var parametros = {
                     "combo": idcombo,
+                    "type": "polyet",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -369,6 +370,7 @@
                 var parametros = {
                     "combo": "wtn",
                     "nps": idOp,
+                    "type": "polyet",
                     "opcion": "5"
 
                 };

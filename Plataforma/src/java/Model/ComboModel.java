@@ -63,11 +63,12 @@ public class  ComboModel extends Model{
         
     }
     
-    public String load_Cmbo_WT(String nps) throws Exception{
+    public String load_Cmbo_WT(String nps, String type) throws Exception{
         nps = stringToBD(nps);
+        type = stringToBD(type);
         
         String columns = "wall_thickness, NPS";
-        String where = "diameter = "+nps;
+        String where = "diameter = "+nps + " AND typec = " + type;
         Vector<Map> data= consultar("ComboBoxNPS", columns, where);
         
         if(data.isEmpty()){

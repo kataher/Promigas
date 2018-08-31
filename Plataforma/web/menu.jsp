@@ -84,7 +84,7 @@
     </ul>
 </li>
 <li>
-    <a href="#">3. Steel Pipe Design & Stress Analysis  <span class="fa arrow"></span></a> 
+    <a href="#">3. Pipe Design & Stress Analysis  <span class="fa arrow"></span></a> 
     <ul class="nav nav-third-level"> 
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/bendingstress.jsp', this);">3.1. Bending Stress & Deflection</a> </li>
         <li><a href="#" onClick="cargarFormula('Modules/StellPipeDesing/bendingstressfluid.jsp', this);">3.2. Bending Stress Caused by Fluid Flowing Around Pipeline</a> </li>
