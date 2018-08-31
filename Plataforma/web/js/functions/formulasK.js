@@ -5829,16 +5829,16 @@ function buoyancy_analisis_form(vari, uni) {
 
     var F27 = 10.68 * (F16 - F17) * F17;
     var F30 = (-F18 - (F16 / 3) * (F16 - 32 * F17)) * (48 / (F16 * (63 - F22)));
-    var F28 = (Math.PI / 4) * ((F16 / 12) + 2 * ((F30 / 12) + F19 * (8.33 * Math.pow(10, (-5)))));
+    var F28 = (Math.PI / 4) * (F16 + 2 * (F30 + F19 * (8.33 * Math.pow(10, (-5)))));
 
     var B40 = (F16 / 12) + (2 * (F19 * 8.33 * Math.pow(10, (-5))));
     var B41 = Math.pow(B40, 2);
-    var B42 = Math.pow((F16 / 12), 2);
+    var B42 = Math.pow(F16, 2);
     // alert(B40+" "+B41+" "+B42);
 
     var F29 = 3.1416 * (B41 - B42) / 4;
     F29 = roundToTwo(F29);
-    var F31 = F28 - ((Math.PI / 4) * ((F16 / 12) + 2 * (F19 * 8.33 * Math.pow(10, (-5)))));
+    var F31 = F28 - ((Math.PI / 4) * (F16 + 2 * (F19 * 8.33 * Math.pow(10, (-5)))));
     var F32 = F27 + F29 * F23 + F31 * F22;
     var F33 = F28 * F21;
     var F34 = F32 - F33;
@@ -5956,7 +5956,7 @@ function design_pressure_form(vari, uni) {
     S = get_Presf(S, uni.yield_pipeop_sel_dp, "psi");
     
     var P = (2 * S * t * F * E * T)/ D;
-    var res = [P];
+    var res = [P.toFixed(0)];
     changeToDecimal(res);
     
     /*
