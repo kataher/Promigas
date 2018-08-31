@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Longitudinal Stress in Movement of in-Service Pipelines </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Longitudinal Stress in Movement of in-Service Pipelines </h2>
             </div>
             <div class="col-lg-3"> 
 

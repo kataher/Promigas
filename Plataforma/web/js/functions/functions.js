@@ -21,7 +21,7 @@ function show_OkDialog(div, title){
 }
 
 function validateDecimal(value){
-    var expreg = /^[0-9]*(\.[0-9]+)?$/;
+    var expreg = /^-?[0-9]*(\.[0-9]+)?$/;
     if(expreg.test(value))
         return true;
     else 

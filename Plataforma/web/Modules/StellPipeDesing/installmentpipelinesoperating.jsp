@@ -291,7 +291,7 @@
             
             function load_in_sel_ippo() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in5",
                     "opcion": "5"
                 };
                 $.ajax({

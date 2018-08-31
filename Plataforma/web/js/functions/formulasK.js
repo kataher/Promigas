@@ -6676,7 +6676,7 @@ function installment_pipe_opera_form(vari, uni) {
     F18 = get_Temp(F18, uni.oper_temp_sel_ippo, "F");
     
     F16 = get_Presf(F16, uni.min_yield_sel_ippo, "psi");
-    F23 = get_Presf(F23, uni.youn_steel_sel_ippo, "ksi");
+    F23 = get_Presf(F23, uni.youn_steel_sel_ippo, "psi");
 
     var F27 = F23 * F14 / (24 * F21);
     var F28 = (F13 - (F19 - F20) * 0.4333) * F14 / (2 * F15);
@@ -6703,8 +6703,12 @@ function installment_pipe_opera_form(vari, uni) {
      * 
      */
 
-    return [F27, F28, F29, F30, F31, F32, F33];
-
+    var res = [F27, F28, F29, F30, F31, F32];
+    console.log(res);
+    changeToDecimal(res);
+    console.log(res);
+    res.push(F33);
+    return res;
 
 }
 // 3.11
@@ -6921,9 +6925,18 @@ function longitudinal_Stress_Form(vari, uni) {
     while (cont < TextBox21) {
         Station = cont + "&" + Station;
         cal = -((16 * Math.pow(cont, 2)) * TextBox12 * (Math.pow((TextBox21 - cont), 2))) / (Math.pow((TextBox21), 4));
-        Deflection = cal + "&" + Deflection;
+        Deflection = cal.toFixed(2) + "&" + Deflection;
         i = i + 1;
         cont = cont + 5;
+    }
+    
+    if (cont > TextBox21) {
+        // Añadir el último valor si se pasa
+        cont = TextBox21;
+        Station = cont.toFixed(1) + "&" + Station;
+        cal = -((16 * Math.pow(cont, 2)) * TextBox12 * (Math.pow((TextBox21 - cont), 2))) / (Math.pow((TextBox21), 4));
+        Deflection = cal.toFixed(2) + "&" + Deflection;
+        i = i + 1;
     }
     /*
      * Salida
@@ -6937,7 +6950,11 @@ function longitudinal_Stress_Form(vari, uni) {
      * 
      */
 
-    return [TextBox18, TextBox19, TextBox20, TextBox21, TextBox22, TextBox23, TextBox24, Station, Deflection];
+    var res = [TextBox18, TextBox19, TextBox20, TextBox21.toFixed(1), TextBox22.toFixed(1), TextBox23.toFixed(1), TextBox24.toFixed(1)];
+    changeToDecimal(res);
+    res.push(Station);
+    res.push(Deflection);
+    return res;
 }
 //3.15
 function maximun_impact_form(vari, uni) {
