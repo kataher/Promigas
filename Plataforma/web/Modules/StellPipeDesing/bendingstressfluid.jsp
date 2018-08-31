@@ -15,7 +15,7 @@
     <body>
         <div class="row">
             <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Bending Stress Caused by Fluid Flowing Around Pipeline </h2>
+                <h2><strong>Steel Pipe Design:</strong>  Bending Stress Caused by Fluid Flowing Around Pipeline </h2>
             </div>
             <div class="col-lg-3"> 
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_bdsf()">
@@ -476,7 +476,7 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class=\"form-control\" name=\"wt_sel_bdsf\" id= \"wt_sel_bdsf\" onchange=\"onchange_wt_bdsf()\">" + data;
                         $("#div_wt_sel_bdsf").html(newHtml);
-                        $("#pipe_in_dia_bdsf").val($("#wt_sel_bdsf").val().split(",")[1]);
+                        onchange_wt_bdsf();
 
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -489,7 +489,9 @@
             }
 
             function onchange_wt_bdsf() {
-                $("#pipe_in_dia_bdsf").val($("#wt_sel_bdsf").val().split(",")[1]);
+                var thickness = parseFloat($("#wt_sel_bdsf").val().split(",")[1]);
+                var outside_diam = parseFloat($("#pipe_dia_bdsf").val());
+                $("#pipe_in_dia_bdsf").val((outside_diam - 2 * thickness).toFixed(3));
                 cleanOut_bdsf();
             }
 
