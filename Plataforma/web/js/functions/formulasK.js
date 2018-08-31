@@ -6130,7 +6130,7 @@ function hoop_longitudinal_form(vari, uni) {
     var F21 = F18 * F16 / (2 * F17);
     var F22 = F18 * F16 / (4 * F17);
     
-    var res = [F21, F22];
+    var res = [F21.toFixed(1), F22.toFixed(1)];
     
     changeToDecimal(res);
     /*
