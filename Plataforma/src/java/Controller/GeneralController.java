@@ -674,7 +674,8 @@ public class GeneralController{
         return ((ActuadoresController)controller).getMaximos_Act(request);
     }  
     
-    public JSONObject getDataSheet(HttpServletRequest request) throws Exception{         
+    public JSONObject getDataSheet(HttpServletRequest request) throws Exception{   
+        
         String rutads = model.getRutaDataSheet();   
         String iduser = request.getParameter("iduser").trim();        
         String username = UsuariosModel.getUsername(iduser);

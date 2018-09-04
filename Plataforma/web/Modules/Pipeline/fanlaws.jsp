@@ -17,11 +17,11 @@
             <div class="col-lg-9">
                 <h2><strong>Pipe Installation:</strong> 1.1.4. Centrifugal Compressor-Fan Laws</h2>
             </div>
-            <div class="col-lg-3"> 
-
+            <div class="col-lg-3">
+                <br>
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_fl()">
-                    Record
+                    Records
                 </button>
 
                 <!-- MODAL -->
@@ -44,116 +44,141 @@
                 </div>
                 <!-- FIN MODAL -->
             </div>
+        </div>
 
-            <div class="col-lg-9">
+        <div class="row">
+            <div class="col-lg-12">
                 Description: 
                 <input  class="form-control" type="text" id="description_fl" name="description_fl"><br>
                 Projects:
                 <select class="form-control" id="proyects_sel_fl" name="proyects_sel_fl"> </select>
             </div>
         </div>
-        <hr>        
-        <div class="col-lg-9">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Input Parameters
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Initial Flow Rate:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" id="initialflowrate_fl" name="initialflowrate_fl" onchange="onchange_Input_fl(this)" required>
-                                </div>
-                                <div class="col-md-4" id = "div_if_sel_fl">
-                                    <select class="form-control" id="if_sel_fl" name="if_sel_fl" onchange="onchange_fr_fl(this)"> </select>
-                                </div>
+
+        <hr>  
+
+        <div class="row">
+
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Data
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+
+                                <form role="form">
+                                    <div class="form-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading"> Input Parameters </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <label>Initial Flow Rate:</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="initialflowrate_fl" name="initialflowrate_fl" onchange="onchange_Input_fl(this)" required>
+                                                            </div>
+                                                            <div class="col-md-4" id = "div_if_sel_fl">
+                                                                <select class="form-control" id="if_sel_fl" name="if_sel_fl" onchange="onchange_fr_fl(this)"> </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <label>Initial Compressor Head [ft * lbf/lbm]:</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="initialcompressorhead_fl" name="initialcompressorhead_fl" onchange="onchange_Input_fl(this)" required>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <label>Initial Shaft Horsepower [HP]:</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="initialshafthorsepower_fl" name="initialshafthorsepower_fl" onchange="onchange_Input_fl(this)" required>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <label>Initial Impeller Rotational Speed [rpm]:</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="initialimpellerrotational_fl" name="initialimpellerrotational_fl" onchange="onchange_Input_fl(this)" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-md-12">
+                                                                <label>Final Impeller Rotational Speed [rpm]:</label>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input class="form-control" type="text" id="finalimpellerrotational_fl" name="finalimpellerrotational_fl" onchange="onchange_Input_fl(this)" required ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div></div>
+                                    <div class="form-group">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                Results                        </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-group">
+                                                                <label id="lb_fr_fl">Final Flow Rate [MMSCFD]:</label>
+                                                                <input type="text" id="finalflowrate_fl" name="finalflowrate_fl" readonly required class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Final Compressor Head [ft * lbf/lbm]:</label>
+                                                                <input type="text" id="finalcompressorhead_fl" name="finalcompressorhead_fl" readonly required class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Final Shaft Horsepower [HP]:</label>            
+                                                                <input type="text" id="finalshafthorsepower_fl" name="finalshafthorsepower_fl" readonly required class="form-control">
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                        </div> 
+                                    </div>
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Initial Compressor Head [ft * lbf/lbm]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" id="initialcompressorhead_fl" name="initialcompressorhead_fl" onchange="onchange_Input_fl(this)" required>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Initial Shaft Horsepower [HP]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" id="initialshafthorsepower_fl" name="initialshafthorsepower_fl" onchange="onchange_Input_fl(this)" required>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Initial Impeller Rotational Speed [rpm]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" id="initialimpellerrotational_fl" name="initialimpellerrotational_fl" onchange="onchange_Input_fl(this)" required>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Final Impeller Rotational Speed [rpm]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input class="form-control" type="text" id="finalimpellerrotational_fl" name="finalimpellerrotational_fl" onchange="onchange_Input_fl(this)" required ></div>
+                        </div>
+                    </div>  
+                </div>   
+            </div>            
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Actions
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input type="button" id="calculateBtn_fl" name="calculateBtn_fl" value="Calculate" onclick="calculate_fl()" class="btn btn-info btn-block">
+                                <input type="button" id="saveBtn_fl" name="saveBtn_fl" value="Save" onclick="save_fl()" class="btn btn-success btn-block">   
+                                <input type="button" id="delteBtn_fl" name="delteBtn_fl" value="Delete" onclick="delete_fl()" class="btn btn-danger btn-block">
+                                <input type="button" id="cleanAllBtn_fl" name="cleanAllBtn_fl" value="Clean All Data" onclick="cleanAll_fl()" class="btn btn-warning btn-block">
+                                <input type="button" id="cleanInputBtn_fl" name="cleanInputBtn_fl" value="Clean Input Data" onclick="cleanIn_fl()" class="btn btn-warning btn-block">
+                                <input type="button" id="cleanOutputBtn_fl" name="cleanOutputBtn_fl" value="Clean Output Data" onclick="cleanOut_fl()" class="btn btn-warning btn-block">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Results
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label id="lb_fr_fl">Final Flow Rate [MMSCFD]:</label>
-                                <input type="text" id="finalflowrate_fl" name="finalflowrate_fl" readonly required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Final Compressor Head [ft * lbf/lbm]:</label>
-                                <input type="text" id="finalcompressorhead_fl" name="finalcompressorhead_fl" readonly required class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Final Shaft Horsepower [HP]:</label>            
-                                <input type="text" id="finalshafthorsepower_fl" name="finalshafthorsepower_fl" readonly required class="form-control">
-                            </div>          
-                            <input type="button" id="calculateBtn_fl" name="calculateBtn_fl" value="Calculate" onclick="calculate_fl()" class="btn btn-info btn-block">
-                            <input type="button" id="saveBtn_fl" name="saveBtn_fl" value="Save" onclick="save_fl()" class="btn btn-success btn-block">   
-                            <input type="button" id="delteBtn_fl" name="delteBtn_fl" value="Delete" onclick="delete_fl()" class="btn btn-danger btn-block">
+            <input type="hidden" id="id_fl" name="id_fl" value="-1">  
+            <input type="hidden" id="opt_fl" name="opt_fl" value="1"> 
 
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="col-lg-12">
-            <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_fl" name="cleanAllBtn_fl" value="Clean All Data" onclick="cleanAll_fl()" class="btn btn-warning btn-block"></div>
-            <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_fl" name="cleanInputBtn_fl" value="Clean Input Data" onclick="cleanIn_fl()" class="btn btn-warning btn-block"></div>
-            <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_fl" name="cleanOutputBtn_fl" value="Clean Output Data" onclick="cleanOut_fl()" class="btn btn-warning btn-block"></div>
-        </div>
-
-        <input type="hidden" id="id_fl" name="id_fl" value="-1">  
-        <input type="hidden" id="opt_fl" name="opt_fl" value="1"> 
 
         <script>
 
@@ -289,6 +314,7 @@
                             var tags = Object.keys(data.row);
 
                             for (var i = 0; i < tags.length; i++) {
+
                                 if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user")
                                 {
                                     $("#" + tags[i]).val(data.row[tags[i]]);
@@ -297,15 +323,12 @@
 
                             $("#opt_fl").val("2");
                             $("#id_fl").val(data.row.id);
-                            $("#proyects_sel_fl").val(data.row.id_proyect);
+                            $("#proyects_sel_fl").val(data.row.proyects_sel_fl);
+
+                            alert("Successfully uploaded data");
                         } else {
                             $("#opt_fl").val("1");
                         }
-
-                        //unBlock();
-                        //$('#myModal').hide("hide");
-                        //$('#myModal').removeClass('fade in');
-                        //$('#myModal').addClass('fade out');
                     },
                     error: function (xhr, ajaxOptions, err) {
                         $("#opt_fl").val("1");
@@ -350,36 +373,36 @@
             }
 
             function save_fl() {
-                
+
                 //Todos inputs y select que no tengan readonly
                 var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
-                var selects = $("#page-wrapper select");                
+                var selects = $("#page-wrapper select");
                 var resultados = $("#page-wrapper input[type='text'][readonly]");
-                
-                var parametros = {                    
+
+                var parametros = {
                     "iduser": <% out.print(session.getAttribute("idusu"));%>,
                     "from": "fl"
                 };
-                
-                for(var i = 0; i < inputs.size(); i++){
-                    if(!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
                     {
                         parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
                     }
                 }
-                
-                for(var i = 0; i < selects.size(); i++){
+
+                for (var i = 0; i < selects.size(); i++) {
                     parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
                 }
-                
-                for(var i = 0; i < resultados.size(); i++){
+
+                for (var i = 0; i < resultados.size(); i++) {
                     parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
                 }
-                
+
                 parametros["opcion"] = parametros["opt_" + parametros["from"]];
-                
+
                 var isOk = validate(parametros);
-                
+
                 if (isOk === false) {
                     alert("You must perform the calculation and fill out the description");
                 } else {
@@ -480,7 +503,7 @@
                     },
                     success: function (data, status, request) {
                         cleanAll_fl();
-                        $("#id_fl").val("");
+                        $("#id_fl").val("-1");
                         $("#opt_fl").val("1");
                         show_OkDialog($("#delete_Dialog_fl"), "Satisfactory process");
                     },
@@ -497,10 +520,6 @@
 
 
         </script>
-
-        <div id="load_Dialog_fl" title="Basic dialog" style='display:none;'>
-            <p>Successfully uploaded data</p>
-        </div>
 
         <div id="save_Dialog_fl" title="Basic dialog" style='display:none;'>
             <p>Data saved successfully</p>
