@@ -51,12 +51,12 @@ public class GeneralModel extends Model{
         String des = values.get("description_" + from);
         String id_proyect = values.get("proyects_sel_" + from);
         
-        String where = "proyects_sel_" + from + " = " + id_proyect + " and description_" + from + " = " + des; //OJO VALIDAR QUE NO SE INGRESEN '
+        /*String where = "proyects_sel_" + from + " = " + id_proyect + " and description_" + from + " = " + des; //OJO VALIDAR QUE NO SE INGRESEN '
         Vector<Map> data = consultar(tabla, "*", where);
         
         if(data.isEmpty() == false){
             throw new Exception("Ya existen registros con la descripción diligenciada");
-        }
+        }*/
         
         this.add(tabla, values);
         return  date;

@@ -377,8 +377,10 @@
                     success: function (data, status, request) {
 
                         alert("Successfully generated file");
+                        console.log(data);
                         var file = data.row.file;
                         var path = data.row.path;
+                        console.log("RUTA: " + path);
                         window.location = "bajar.jsp?filename=" + file + "&path=" + path;
 
                     },

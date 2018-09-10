@@ -6,6 +6,7 @@
 package Datasheets;
 
 
+import java.io.Console;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -39,6 +40,8 @@ public class Datasheet {
     
     public static JSONObject genDSMedidores(HttpServletRequest request, String ruta, String username){
         
+        System.out.println("archivo a generarse");
+        
         JSONObject json = new JSONObject();       
         
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
@@ -51,16 +54,12 @@ public class Datasheet {
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
-            //Este datasheet modifica las filas de la 10 a la 51 de la columna I
-            
-            HSSFCell cell;
-            
+            //Este datasheet modifica las filas de la 10 a la 51 de la columna I           
+            HSSFCell cell;            
             cell = sheet.getRow(4).getCell(14);
-            cell.setCellValue(dt.format(d));
-            
+            cell.setCellValue(dt.format(d));            
             cell = sheet.getRow(8).getCell(11);
-            cell.setCellValue(username);
-            
+            cell.setCellValue(username);            
             cell = sheet.getRow(6).getCell(8);
             cell.setCellValue(request.getParameter("proyecto"));
             
@@ -97,6 +96,8 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "medidores_" + d.getTime();
             
+                    
+            
             FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
@@ -114,6 +115,8 @@ public class Datasheet {
         } catch (JSONException ex) {
             System.out.println("Error al construrir el json."); 
         }
+        
+        System.out.println("archivo generado");
         
         return json;
         
