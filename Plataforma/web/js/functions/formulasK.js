@@ -6785,7 +6785,7 @@ function linear_thermal_form(vari, uni) {
 function maximunallowable(vari, uni) {
     var height = parseFloat(vari.height);
     var D = parseFloat(vari.D);
-    var W = parseFloat(vari.W);
+    var steel_density = parseFloat(vari.W);
     var MOP = parseFloat(vari.MOP);
     var t = parseFloat(vari.t);
     var SMYS = parseFloat(vari.SMYS);
@@ -6804,34 +6804,39 @@ function maximunallowable(vari, uni) {
     t = get_Long(t, uni.pipe_wt_sel_max, 'in');
     
     
-    MOP = get_Pres(MOP, height, uni.oper_press_sel_max, 'psia');
-    mtp = get_Pres(mtp, height, uni.max_press_sel_max, 'psia');
+    MOP = get_Pres(MOP, height, uni.oper_press_sel_max, 'psig');
+    mtp = get_Pres(mtp, height, uni.max_press_sel_max, 'psig');
 
     SMYS = get_Presf(SMYS, uni.min_yield_sel_max, 'psi');
     
+    var W = 10.68 * (D * t - t * t) + aul;
+    
     //STEP 2
-    if (Pmod == 0) {
-        var H = (MOP * D) / (2 * t);
-    } else {
-        var H = (mtp * D) / (2 * t);
+    var H = (MOP * D) / (2 * t);
+    if (Pmod != 0) {
+        // Add water weight
+        W = W + (D - 2 * t) * 62.42;
     }
     // STEP 3 revisar Maximum Allowable Bending Stress
     var sm = 0;
     if (Pmod == 0) {
-        sm = F * SMYS;
+        sm = Math.pow(F * SMYS, 2);
     } else {
-        sm = (maSMYS / 100) * SMYS;
+        sm = Math.pow((maSMYS / 100) * SMYS, 2);
     }
 
-    var b1 = (-H + (Math.sqrt(Math.pow(H, 2) - 4 * (Math.pow(H, 2) - Math.pow(sm, 2))))) / 2;
+    var b1 = H / 2 + Math.sqrt(H * H - 4 * (H * H - sm)) / 2;
+    var b2 = H / 2 - Math.sqrt(H * H - 4 * (H * H - sm)) / 2;
+    console.log(b1);
+    console.log(b2);
     //var b2 = (-H - ( Math.sqrt( Math.pow( H , 2 ) - 4 * ( Math.pow( H , 2 ) -Math.pow( (F * SMYS) , 2 ) ) ) ) ) / 2;
     var B = b1;
     //STEP 4
     var Re = D / 2;
     var Ri = (D - 2 * t) / 2;
     // Moment of Inertia [in^4]
-    var I = (Math.PI / 4) * (Math.pow(Re, 4) - Math.pow(Ri, 4));
-    var c = D / 2;
+    var I = (Math.PI / 4.0) * (Math.pow(Re, 4) - Math.pow(Ri, 4));
+    var c = D / 2.0;
     // Section Modulus [in3]:
     var S = I / (c);
     //  Bending Moment [lb-ft]
@@ -6845,7 +6850,11 @@ function maximunallowable(vari, uni) {
 
     var MAOP = (F * SMYS * 2 * t) / D;
 
-    return [MAOP, H, B, I, S, Bmo, M1, L1, d1, Md];
+    var res = [MAOP.toFixed(0), H.toFixed(0), B.toFixed(0), I.toFixed(1), S.toFixed(2), Bmo.toFixed(0), M1.toFixed(2), L1.toFixed(2), d1.toFixed(2), Md.toFixed(2)];
+    
+    changeToDecimal(res);
+    
+    return res;
 
 
 }

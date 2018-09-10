@@ -464,7 +464,7 @@
 
             function load_in_sel_max() {
                 var parametros = {
-                    "combo": "in",
+                    "combo": "in5",
                     "opcion": "5"
                 };
                 $.ajax({
