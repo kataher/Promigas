@@ -12,6 +12,7 @@ import Controller.Administracion.ActividadesController;
 import Controller.Administracion.EspecialidadesController;
 import Controller.Administracion.FasesController;
 import Controller.Administracion.ProyectosController;
+import Controller.Administracion.RolesController;
 import Controller.Administracion.UsuariosController;
 import Controller.BuriedPipe.AllowableController;
 import Controller.BuriedPipe.InstallationController;
@@ -417,6 +418,10 @@ public class GeneralController{
             case "newp":
                 controller = new ProyectosController();    
                 model = new GeneralModel(((ProyectosController)controller).getModel(), from); 
+                break;
+            case "rol":
+                controller = new RolesController();    
+                model = new GeneralModel(((RolesController)controller).getModel(), from); 
                 break;
             default:
                 controller = null;
@@ -983,11 +988,17 @@ public class GeneralController{
     }
     
     public JSONObject getRolUser(HttpServletRequest request) throws Exception{  
-        setController(from); 
+        setController("usu"); 
         String user = request.getParameter("name").trim();
         
         return ((UsuariosController)controller).login(user, null);
     }
+    
+    public JSONObject getRoles(HttpServletRequest request) throws Exception{  
+        setController("rol");
+        return ((RolesController)controller).getRoles();
+    }
+    
     
     public JSONObject getActividadesUsu(HttpServletRequest request) throws Exception{  
         setController(from);        
