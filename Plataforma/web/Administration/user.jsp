@@ -40,12 +40,7 @@
                                     <option value="7">Diseñador</option>
                                 </select> -->
                                 <div id="roles">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Option 1</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Option 2</label>
-                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -73,6 +68,19 @@
                                 <input type="hidden" id="idedit_usu" name="idedit_usu"> 
                                 <label>Nombre</label>
                                 <input type="text" class="form-control" id="nombreedit_usu">
+                            </div>
+                            <div>
+                                <label>Roles</label>
+                                <!--<select id="tipousu_usu">
+                                    <option value="1">Administración del Sitio</option>
+                                    <option value="4">Lider de Area</option>
+                                    <option value="2">Lider de Proyecto/Especialidad/Fase</option>
+                                    <option value="6">Invitado</option>
+                                    <option value="7">Diseñador</option>
+                                </select> -->
+                                <div id="rolesEdit">
+
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -141,12 +149,14 @@
                         <tr>
                             <th>Código</th>
                             <th>Nombre</th>
+                            <th>Descripción</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>Código</th>
                             <th>Nombre</th>
+                            <th>Descripción</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -180,13 +190,13 @@
             var table_usu, table_roles, sw = false;
 
             $(document).ready(function () {
-                
+
                 loadRoles();
                 loadTable_usu();
             });
-            
-            function loadRoles(){
-                
+
+            function loadRoles() {
+
                 var parametros = {
                     "from": "rol",
                     "opcion": "306"
@@ -202,13 +212,13 @@
                     },
                     success: function (data, status, request) {
                         var html = "";
-                        if(data !== null){
-                            for(var i = 0; i < data.data.length; i++){
+                        if (data !== null) {
+                            for (var i = 0; i < data.data.length; i++) {
                                 html += "<div class='checkbox'> <label><input \n\
-                                        type='checkbox' value=''>"+data.data[i].nombre+"</label>\n\
+                                        type='checkbox' name='" + data.data[i].nombre + "' value='" + data.data[i].id + "'>" + data.data[i].nombre + "</label>\n\
                                         </div>";
                             }
-                            
+
                             $("#roles").html(html);
                         }
                     },
@@ -222,16 +232,17 @@
             }
 
             function loadTable_roles(name) {
-                if(sw == true){
-                    table_roles.destroy();                
+                if (sw == true) {
+                    table_roles.destroy();
                 }
-                var st = "Modules/manager.jsp?opcion=307&name="+name;
-                
+                var st = "Modules/manager.jsp?opcion=307&name=" + name;
+
                 table_roles = $('#dataTableRoles').DataTable({
                     "ajax": st,
                     "columns": [
                         {"data": "id"},
-                        {"data": "name"}
+                        {"data": "name"},
+                        {"data": "descripcion"}
                     ],
                     "scrollY": "300px",
                     "scrollCollapse": true,
@@ -243,30 +254,30 @@
                         "infoFiltered": "(filtrando de _MAX_ filas en total)"
                     }
                 });
-                
-                table_roles.one( 'xhr', function ( e, settings, json ) {
-                    if(json.data.length == 0){
+
+                table_roles.one('xhr', function (e, settings, json) {
+                    if (json.data.length == 0) {
                         alert("No existen roles asignados al usuario");
                     }
-                } );
-                
+                });
+
                 sw = true;
                 /*table_roles = $('#dataTableRoles').DataTable({
-                    "ajax": "Modules/manager.jsp?opcion=307&name="+name,
-                    "columns": [
-                        {"data": "id"},
-                        {"data": "name"}
-                    ],
-                    "scrollY": "300px",
-                    "scrollCollapse": true,
-                    "language": {
-                        "lengthMenu": "Mostrando _MENU_ filas por página",
-                        "zeroRecords": "No se han encontrado resultados",
-                        "info": "Mostrando página _PAGE_ de _PAGES_",
-                        "infoEmpty": "No existen filas disponibles",
-                        "infoFiltered": "(filtrando de _MAX_ filas en total)"
-                    }
-                });*/
+                 "ajax": "Modules/manager.jsp?opcion=307&name="+name,
+                 "columns": [
+                 {"data": "id"},
+                 {"data": "name"}
+                 ],
+                 "scrollY": "300px",
+                 "scrollCollapse": true,
+                 "language": {
+                 "lengthMenu": "Mostrando _MENU_ filas por página",
+                 "zeroRecords": "No se han encontrado resultados",
+                 "info": "Mostrando página _PAGE_ de _PAGES_",
+                 "infoEmpty": "No existen filas disponibles",
+                 "infoFiltered": "(filtrando de _MAX_ filas en total)"
+                 }
+                 });*/
             }
 
             function loadTable_usu() {
@@ -326,10 +337,18 @@
             }
 
             function adduser_usu() {
+                //roles
+                var stRoles = "";
 
+                $(":checkbox").each(function ()
+                {
+                    if ($(this).is(":checked")) {
+                        stRoles += this.value + ",";
+                    }
+                });
                 var parametros = {
                     "nombre": $("#nombrenew_usu").val(),
-                    "tipo": $("#tipousu_usu").val(),
+                    "roles": stRoles,
                     "opcion": 303,
                     "from": "usu"
                 };
@@ -365,6 +384,7 @@
                         }
                     });
                 }
+
             }
 
             function edit_usu() {

@@ -41,7 +41,7 @@ public class UsuariosController extends Controller.Controller{
         }
     }
     
-    public JSONObject addUsuario(String nombre, String tipo) throws Exception{  
+    public JSONObject addUsuario(String nombre, String roles) throws Exception{  
         Map<String, String> values1 = new HashMap<String, String>();
         JSONObject json = new JSONObject();
          
@@ -49,8 +49,9 @@ public class UsuariosController extends Controller.Controller{
         values1.put("password", stringToBD(nombre));
         values1.put("isadmsitio", "0");
         values1.put("isadmpro", "0");
+        values1.put("roles", roles);
         
-        switch(tipo){
+        /*switch(tipo){
             case "1":
                 values1.put("id_rol", "1");
                 values1.replace("isadmsitio", "1");
@@ -65,7 +66,7 @@ public class UsuariosController extends Controller.Controller{
             case "7":
                 values1.put("id_rol", "7");
                 break;
-        }
+        }*/
         
         
         Vector<Map> data = model.addUsuario(values1);

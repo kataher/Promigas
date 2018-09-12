@@ -116,6 +116,11 @@ public class Model {
         return ejecutarUpdate(sql, null);
     }
     
+    protected int add(String tabla, Map<String, String> values, Connection conn) throws Exception{
+        String sql = getSqlStatametAgregar(tabla, values);
+        return ejecutarUpdate(sql, conn);
+    }
+    
     protected int edit(String tabla, Map<String, String> info, String where) throws Exception{
         String sql = getSqlStatametEdit(tabla, info, where);
         return ejecutarUpdate(sql,null);
@@ -124,11 +129,6 @@ public class Model {
     protected int delete(String tabla, String where) throws Exception{
         String sql = getSqlStatametDelete(tabla, where);
         return ejecutarUpdate(sql, null);
-    }
-    
-    protected int add(String tabla, Map<String, String> values, Connection conn) throws Exception{
-        String sql = getSqlStatametAgregar(tabla, values);
-        return ejecutarUpdate(sql, conn);
     }
     
     protected int edit(String tabla, Map<String, String> info, String where, Connection conn) throws Exception{

@@ -271,6 +271,11 @@
             json = addEspecialidad(request, response, controller);
             out.print(json);
             break;
+        case 500:
+            json = new JSONObject();
+            json.put("r","r");
+            out.print(json);
+            break;
     }
 
 

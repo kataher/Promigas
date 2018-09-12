@@ -6,6 +6,7 @@
 package Model.Administracion;
 
 import Model.Model;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -37,13 +38,42 @@ public class UsuariosModel extends Model {
     }
 
     public Vector<Map> addUsuario(Map<String, String> values) throws Exception {
+        String[] roles = values.get("roles").split(",");
+        values.remove("roles");
 
         try {
-            this.add(tabla, values);
+
+            this.add(tabla, values);//, conn);
+
             Vector<Map> data = this.consultar(tabla, "id, name", "name = " + values.get("name"));
+            String idUser = data.get(0).get("id").toString();
+            addRolesToUser(idUser, roles);
+
             return data;
         } catch (Exception ex) {
             throw new Exception("El nombre de usuario ya existe");
+        }
+    }
+
+    public void addRolesToUser(String id_user, String[] id_rol) throws Exception {
+
+        String sql = "INSERT INTO [Plataforma].[dbo].[RolesUsuario]\n"
+                + "           ([id_rol]\n"
+                + "           ,[id_user])\n"
+                + "     VALUES\n";
+
+        for (int i = 0; i < id_rol.length; i++) {
+            if (i == id_rol.length - 1) {
+                sql += "(" + id_rol[i] + "," + id_user + ")";
+            } else {
+                sql += "(" + id_rol[i] + "," + id_user + "),";
+            }
+        }
+
+        try {
+            this.ejecutarUpdate(sql, null);
+        } catch (Exception ex) {
+            throw new Exception("Error al insertar roles a usuario");
         }
     }
 
@@ -123,9 +153,9 @@ public class UsuariosModel extends Model {
     }
 
     public Vector<Map> getUsuarioRoles(String name) throws Exception {
-        
+
         try {
-            String sql = "SELECT roluser.id, roles.nombre as name\n"
+            String sql = "SELECT roluser.id, roles.nombre as name, roles.descripcion\n"
                     + "  FROM [Plataforma].[dbo].[RolesUsuario] as roluser\n"
                     + "  INNER JOIN [Plataforma].[dbo].[Users] as users ON users.id = roluser.id_user\n"
                     + "  INNER JOIN [Plataforma].[dbo].[Roles2] as roles ON roluser.id_rol = roles.id\n"

@@ -960,8 +960,9 @@ public class GeneralController{
     public JSONObject addUsuario(HttpServletRequest request) throws Exception{  
         setController(from);  
         String name = request.getParameter("nombre").trim();
-        String tipo = request.getParameter("tipo").trim();
-        return ((UsuariosController)controller).addUsuario(name, tipo);
+        // tipo = request.getParameter("tipo").trim();
+        String roles = request.getParameter("roles").trim();
+        return ((UsuariosController)controller).addUsuario(name, roles);
     }
     
     public void editUsuario(HttpServletRequest request) throws Exception{  
