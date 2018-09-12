@@ -39,8 +39,6 @@ public class UsuariosController extends Controller.Controller{
         }else{
             return null;
         }
-        
-        
     }
     
     public JSONObject addUsuario(String nombre, String tipo) throws Exception{  
@@ -115,6 +113,16 @@ public class UsuariosController extends Controller.Controller{
        
     }
     
-    
-    
+    public JSONObject getUsuarioRoles(String user) throws Exception{  
+        JSONObject json = new JSONObject();
+        Vector<Map> data = model.getUsuarioRoles(user);
+        
+        if(data != null){        
+            json = json.put("data", data);
+            return json;
+        }else{
+            return null;
+        }
+       
+    }
 }

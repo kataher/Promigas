@@ -212,6 +212,10 @@
             json = getRoles(request, response, controller);
             out.print(json);
             break;
+        case 307:
+            json = getUsuarioRoles(request, response, controller);
+            out.print(json);
+            break;
 
         //Actividades
         case 310:
@@ -773,6 +777,18 @@
         JSONObject res = null;
         try {
             res = controller.getRoles(request);
+
+        } catch (Exception ex) {
+            response.sendError(1, ex.getMessage());
+        }
+
+        return res;
+    }
+
+    private JSONObject getUsuarioRoles(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
+        JSONObject res = null;
+        try {
+            res = controller.getUsuarioRoles(request);
 
         } catch (Exception ex) {
             response.sendError(1, ex.getMessage());

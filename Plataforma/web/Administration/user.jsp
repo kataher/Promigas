@@ -177,29 +177,40 @@
 
         <script>
 
-            var table_usu, table_roles;
+            var table_usu, table_roles, sw = false;
 
             $(document).ready(function () {
+                
+                loadRoles();
                 loadTable_usu();
             });
             
             function loadRoles(){
                 
                 var parametros = {
-                    "combo": "he",
-                    "opcion": "5"
+                    "from": "rol",
+                    "opcion": "306"
                 };
                 $.ajax({
                     type: "POST",
                     url: "Modules/manager.jsp",
                     data: parametros,
                     async: false,
+                    dataType: 'json',
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ee_sel_ahp' id= 'ee_sel_ahp'>" + data;
-                        $("#div_ee_sel_ahp").html(newHtml);
+                        var html = "";
+                        if(data !== null){
+                            for(var i = 0; i < data.data.length; i++){
+                                html += "<div class='checkbox'> <label><input \n\
+                                        type='checkbox' value=''>"+data.data[i].nombre+"</label>\n\
+                                        </div>";
+                            }
+                            
+                            $("#roles").html(html);
+                        }
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_ahp"), "Error");
@@ -211,8 +222,13 @@
             }
 
             function loadTable_roles(name) {
+                if(sw == true){
+                    table_roles.destroy();                
+                }
+                var st = "Modules/manager.jsp?opcion=307&name="+name;
+                
                 table_roles = $('#dataTableRoles').DataTable({
-                    "ajax": "Modules/manager.jsp?opcion=305&name=" + name,
+                    "ajax": st,
                     "columns": [
                         {"data": "id"},
                         {"data": "name"}
@@ -227,6 +243,30 @@
                         "infoFiltered": "(filtrando de _MAX_ filas en total)"
                     }
                 });
+                
+                table_roles.one( 'xhr', function ( e, settings, json ) {
+                    if(json.data.length == 0){
+                        alert("No existen roles asignados al usuario");
+                    }
+                } );
+                
+                sw = true;
+                /*table_roles = $('#dataTableRoles').DataTable({
+                    "ajax": "Modules/manager.jsp?opcion=307&name="+name,
+                    "columns": [
+                        {"data": "id"},
+                        {"data": "name"}
+                    ],
+                    "scrollY": "300px",
+                    "scrollCollapse": true,
+                    "language": {
+                        "lengthMenu": "Mostrando _MENU_ filas por página",
+                        "zeroRecords": "No se han encontrado resultados",
+                        "info": "Mostrando página _PAGE_ de _PAGES_",
+                        "infoEmpty": "No existen filas disponibles",
+                        "infoFiltered": "(filtrando de _MAX_ filas en total)"
+                    }
+                });*/
             }
 
             function loadTable_usu() {

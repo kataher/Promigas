@@ -999,6 +999,11 @@ public class GeneralController{
         return ((RolesController)controller).getRoles();
     }
     
+    public JSONObject getUsuarioRoles(HttpServletRequest request) throws Exception{  
+        setController("usu");
+        String user = request.getParameter("name").trim();
+        return ((UsuariosController)controller).getUsuarioRoles(user);
+    }
     
     public JSONObject getActividadesUsu(HttpServletRequest request) throws Exception{  
         setController(from);        
