@@ -12,10 +12,12 @@
     </head>
 
     <body>
-        <div class="col-lg-12">
-            <h1 class="page-header">Modulo de Especialidades</h1>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Modulo de Especialidades</h1>
+            </div>
         </div>
-        <hr>
+
 
         <!-- Modal Agregar -->
 
@@ -33,7 +35,7 @@
                         <input type="text" class="form-control" id="nombrenew_esp">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="cerrarAddtBtn_esp" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onClick="addespe_esp()">Crear</button>
                     </div>
                 </div>
@@ -42,8 +44,8 @@
         </div>
 
         <!-- Fin Modal Agregar -->
-        
-        
+
+
         <!-- Modal Editar-->        
         <div class="modal fade" id="modalEditarEspecialidad" role="dialog">
             <div class="modal-dialog">
@@ -60,7 +62,7 @@
                         <input type="text" class="form-control" id="nombreedit_esp">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" id="cerrarEditBtn_esp" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" onClick="edit_esp()">Editar</button>
                     </div>
                 </div>
@@ -69,22 +71,7 @@
         </div>
         <!-- Fin Modal Editar-->
 
-
-        <div class="col-lg-12">
-            <table id="dataTableEspecialidades" class="display" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th>Còdigo</th>
-                        <th>Nombre</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Còdigo</th>
-                        <th>Nombre</th>
-                    </tr>
-                </tfoot>
-            </table>
+        <div class="row">
             <div class="col-lg-12">
                 <div class="col-md-2">
                     <button type="button" id="nuevaBtn_esp" data-toggle="modal" class="btn btn-primary btn-block">Crear</button>
@@ -98,6 +85,28 @@
                 </div>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="dataTableEspecialidades" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Còdigo</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Còdigo</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+
+
 
         <div id="load_Dialog_esp" title="Basic dialog" style='display:none;'>
             <p>Successfully uploaded data</p>
@@ -130,7 +139,7 @@
                 $("#nuevaBtn_esp").click(function () {
                     $("#modalNuevaEspecialidad").modal();
                 });
-                
+
                 $("#editarBtn_esp").click(function () {
                     $("#modalEditarEspecialidad").modal();
                 });
@@ -140,7 +149,6 @@
 
 
             function addespe_esp() {
-
                 var parametros = {
                     "nombre": $("#nombrenew_esp").val(),
                     "opcion": 333,
@@ -206,9 +214,7 @@
                         success: function (response) {
                             $('.modal-backdrop').remove();
                             $('#cerrarEditBtn_esp').click();
-                            table_esp.destroy();
-                            $("#dataTableEspecialidades").html("");
-                            loadTable_esp();
+                            table_esp.ajax.reload();
                             show_OkDialog($("#save_Dialog_esp"), "Satisfactory process");
                             $("#nombreedit_esp").val("");
                             $("#idedit_esp").val("");
