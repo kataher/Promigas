@@ -51,24 +51,6 @@ public class UsuariosController extends Controller.Controller{
         values1.put("isadmpro", "0");
         values1.put("roles", roles);
         
-        /*switch(tipo){
-            case "1":
-                values1.put("id_rol", "1");
-                values1.replace("isadmsitio", "1");
-                break;
-            case "4":
-                values1.put("id_rol", "4");
-                values1.replace("isadmpro", "1");
-                break;
-            case "6":
-                values1.put("id_rol", "6");
-                break;
-            case "7":
-                values1.put("id_rol", "7");
-                break;
-        }*/
-        
-        
         Vector<Map> data = model.addUsuario(values1);
         
         if(data != null){
@@ -84,9 +66,10 @@ public class UsuariosController extends Controller.Controller{
         }
     }
     
-    public void editUsuario(String name, String iduser) throws Exception{  
+    public void editUsuario(String name, String iduser, String roles) throws Exception{  
         Map<String, String> values1 = new HashMap<String, String>();
         values1.put("name", stringToBD(name));
+        values1.put("roles", roles);
         
         model.editUsuario(values1, iduser);
     }

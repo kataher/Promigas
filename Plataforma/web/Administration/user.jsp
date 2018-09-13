@@ -16,81 +16,66 @@
 
 
     <body>
-        <!-- MODAL PARA CREAR USUARIOS-->
-        <div class="modal fade" id="modalCrearUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
+        <!-- CREACION DE USUARIO -->
+        <div class="modal fade" id="modalNuevoUsuario" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Crear Usuario</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Nuevo Usuario</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <label >Nombre</label>
-                                <input type="text" class="form-control" id="nombrenew_usu">
-                            </div>
-                            <div>
-                                <label>Roles</label>
-                                <!--<select id="tipousu_usu">
-                                    <option value="1">Administración del Sitio</option>
-                                    <option value="4">Lider de Area</option>
-                                    <option value="2">Lider de Proyecto/Especialidad/Fase</option>
-                                    <option value="6">Invitado</option>
-                                    <option value="7">Diseñador</option>
-                                </select> -->
-                                <div id="roles">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="nombrenew_usu">
+                        <div>
+                            <label>Roles</label>
+                            <div id="rolesNuevo">
 
-                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrarAddtBtn_usu">Cerrar</button>
-                        <button type="button" class="btn btn-primary" id="adduser_usu" onclick="adduser_usu()">Crear Usuario</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrarAddBtn_usu">Close</button>
+                        <button type="button" class="btn btn-primary" onClick="adduser_usu()">Crear</button>
                     </div>
                 </div>
-            </div>
+
+            </div> 
         </div>
         <!-- FIN DE CREACION DE USUARIO-->
 
-        <!-- EDITAR USUARIOS -->
-        <div class="modal fade" id="modalEditarUsuario"  tabindex="-1" role="dialog" aria-labelledby="myModalLabelEdit">
-            <div class="modal-dialog" role="document">
+        <!-- EDICION DE USUARIO -->
+        <div class="modal fade" id="modalEditarUsuario" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabelEdit">Editar Usuario</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Editar Usuario</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group">
-                                <input type="hidden" id="idedit_usu" name="idedit_usu"> 
-                                <label>Nombre</label>
-                                <input type="text" class="form-control" id="nombreedit_usu">
-                            </div>
-                            <div>
-                                <label>Roles</label>
-                                <!--<select id="tipousu_usu">
-                                    <option value="1">Administración del Sitio</option>
-                                    <option value="4">Lider de Area</option>
-                                    <option value="2">Lider de Proyecto/Especialidad/Fase</option>
-                                    <option value="6">Invitado</option>
-                                    <option value="7">Diseñador</option>
-                                </select> -->
-                                <div id="rolesEdit">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="nombreedit_usu">
+                        <input type="hidden" class="form-control" id="idedit_usu">
+                        <div>
+                            <label>Roles</label>
+                            <div id="rolesEditar">
 
-                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrarEditBtn_usu">Cerrar</button> <button type="button" class="btn btn-primary" onclick="edit_usu()">Editar Usuario</button>
-                    </div> 
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="cerrarEditBtn_usu">Close</button>
+                        <button type="button" class="btn btn-primary" onClick="edit_usu()">Editar</button>
+                    </div>
                 </div>
-            </div>
+
+            </div> 
         </div>
-        <!-- FIN EDITAR USUARIOS -->
+        <!-- FIN DE EDICION DE USUARIO-->
 
         <div class="row">
             <div class="col-lg-12">
@@ -99,12 +84,12 @@
             <!--botones-->
             <div class="col-lg-12">
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalCrearUsuario">Crear Usuario</button>                                
+                    <button type="button" id="nuevoUsuarioBtn_usu" class="btn btn-primary btn-block" data-toggle="modal">Crear Usuario</button>                                
                 </div>
                 <div class="col-md-2">
                     <button type="button" id="verRolesBtn_usu" class="btn btn-danger btn-block">Ver Roles</button></div>
                 <div class="col-md-2">
-                    <button type="button" id="editarBtn_usu" data-toggle="modal" data-target="#modalEditarUsuario"  class="btn btn-success btn-block">Editar</button>
+                    <button type="button" id="editarUsuarioBtn_usu" data-toggle="modal" class="btn btn-success btn-block">Editar</button>
                 </div>
                 <div class="col-md-2">
                     <button type="button" id="deleteBtn_usu" class="btn btn-danger btn-block">Eliminar</button>
@@ -190,9 +175,13 @@
             var table_usu, table_roles, sw = false;
 
             $(document).ready(function () {
-
                 loadRoles();
                 loadTable_usu();
+
+                $("#nuevoUsuarioBtn_usu").click(function () {
+                    $("#modalNuevoUsuario").modal();
+                });
+
             });
 
             function loadRoles() {
@@ -219,7 +208,8 @@
                                         </div>";
                             }
 
-                            $("#roles").html(html);
+                            $("#rolesNuevo").html(html);
+                            $("#rolesEditar").html(html);
                         }
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -262,22 +252,6 @@
                 });
 
                 sw = true;
-                /*table_roles = $('#dataTableRoles').DataTable({
-                 "ajax": "Modules/manager.jsp?opcion=307&name="+name,
-                 "columns": [
-                 {"data": "id"},
-                 {"data": "name"}
-                 ],
-                 "scrollY": "300px",
-                 "scrollCollapse": true,
-                 "language": {
-                 "lengthMenu": "Mostrando _MENU_ filas por página",
-                 "zeroRecords": "No se han encontrado resultados",
-                 "info": "Mostrando página _PAGE_ de _PAGES_",
-                 "infoEmpty": "No existen filas disponibles",
-                 "infoFiltered": "(filtrando de _MAX_ filas en total)"
-                 }
-                 });*/
             }
 
             function loadTable_usu() {
@@ -308,14 +282,19 @@
                     }
                 });
 
-                $('#editarBtn_usu').click(function () {
-
+                $('#editarUsuarioBtn_usu').click(function () {
                     if (table_usu.rows('.selected').data()[0] !== undefined) {
                         var id = table_usu.rows('.selected').data()[0].id;
                         var nombre = table_usu.rows('.selected').data()[0].name;
-
+                        
                         $("#nombreedit_usu").val(nombre);
                         $("#idedit_usu").val(id);
+                        $("#rolesEditar :checkbox").prop('checked', false);
+                        $("#modalEditarUsuario").modal();
+                        
+                        getRolesFn_usu(nombre);
+                    } else {
+                        alert("Debe seleccionar un usuario");
                     }
                 });
 
@@ -336,16 +315,47 @@
                 });
             }
 
+            function getRolesFn_usu(user) {
+                var parametros = {
+                    "name": user,
+                    "opcion": 307
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "Modules/manager.jsp",
+                    data: parametros,
+                    dataType: 'json',
+                    beforeSend: function () {
+                        block("Consultando roles...");
+                    },
+                    success: function (data, status, request) {
+                        //Check 
+                        if (data !== null) {
+                            for (var i = 0; i < data.data.length; i++) {
+                                $("#rolesEditar input[value='" + data.data[i].idrol + "']").prop('checked', true);
+                            }
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        show_OkDialog($("#error_Dialog_usu"), err);
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
             function adduser_usu() {
                 //roles
                 var stRoles = "";
-
-                $(":checkbox").each(function ()
+                $("#rolesNuevo :checkbox").each(function ()
                 {
                     if ($(this).is(":checked")) {
                         stRoles += this.value + ",";
                     }
                 });
+
                 var parametros = {
                     "nombre": $("#nombrenew_usu").val(),
                     "roles": stRoles,
@@ -372,7 +382,7 @@
                                 "id": data.row[0].id,
                                 "name": data.row[0].name}).draw(false);
                             $('.modal-backdrop').remove();
-                            $('#cerrarAddtBtn_usu').click();
+                            $('#cerrarAddBtn_usu').click();
                             $("#nombrenew_usu").val("");
                             show_OkDialog($("#save_Dialog_usu"), "Satisfactory process");
                         },
@@ -380,6 +390,7 @@
                             show_OkDialog($("#error_Dialog_usu"), err);
                         },
                         complete: function () {
+                            $(":checkbox").removeAttr('checked');
                             unBlock();
                         }
                     });
@@ -388,10 +399,20 @@
             }
 
             function edit_usu() {
-
+                
+                //roles
+                var stRoles = "";
+                $("#rolesEditar :checkbox").each(function ()
+                {
+                    if ($(this).is(":checked")) {
+                        stRoles += this.value + ",";
+                    }
+                });
+                
                 var parametros = {
                     "nombre": $("#nombreedit_usu").val(),
                     "opcion": 301,
+                    "roles": "1",
                     "id_user": $("#idedit_usu").val(),
                     "from": "usu"
                 };
@@ -401,11 +422,12 @@
                 if (isOk === false) {
                     alert("Debe diligenciar todos los datos del usuario");
                 } else {
+                    
+                    parametros.roles = stRoles;
                     $.ajax({
                         type: "POST",
                         url: "Modules/manager.jsp",
                         data: parametros,
-                        async: false,
                         beforeSend: function () {
                             block("Guardando...");
                         },
@@ -413,18 +435,23 @@
 
                             $('.modal-backdrop').remove();
                             $('#cerrarEditBtn_usu').click();
-                            table_usu.destroy();
-                            $("#dataTableUsuarios").html("");
-                            loadTable_usu();
+                            
                             show_OkDialog($("#save_Dialog_usu"), "Satisfactory process");
                             $("#nombreedit_usu").val("");
                             $("#idedit_usu").val("");
+                            
+                            table_usu.ajax.reload();
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_usu"), err);
                         },
                         complete: function () {
-                            unBlock();
+                            
+                            if(sw == true){
+                                table_roles.clear().draw();
+                            }
+                            
+                           unBlock();
                         }
                     });
                 }

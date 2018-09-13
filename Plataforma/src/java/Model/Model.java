@@ -188,9 +188,8 @@ public class Model {
                 st.close();
             }
             
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex, "Error al consultar la base de datos "+ex.getMessage(), JOptionPane.ERROR_MESSAGE);
-            throw new Exception("Error al conectar con la BD");
+        } catch (SQLException ex) {            
+            throw new Exception(ex.getMessage());
         }
          
          

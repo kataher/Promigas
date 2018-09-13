@@ -77,9 +77,30 @@ public class UsuariosModel extends Model {
         }
     }
 
+    public void deleteRolesToUser(String id_user) throws Exception {
+        String sql = "DELETE FROM [Plataforma].[dbo].[RolesUsuario]\n"
+                + " WHERE id_user=" + id_user;
+
+        try {
+            this.ejecutarUpdate(sql, null);
+        } catch (Exception ex) {
+            throw new Exception("Error al insertar roles a usuario");
+        }
+    }
+
     public void editUsuario(Map<String, String> values, String iduser) throws Exception {
 
         try {
+            //Eliminar Roles
+            deleteRolesToUser(iduser);
+
+            //Agregar Roles
+            if(!(values.get("roles").equals(""))){
+                String roles[] = values.get("roles").split(",");
+                addRolesToUser(iduser, roles);
+            }
+            values.remove("roles");
+
             this.edit(tabla, values, "id = " + iduser);
         } catch (Exception ex) {
             throw new Exception("Error al editar el usuario, posible nombre de usuario duplicado");
@@ -87,7 +108,19 @@ public class UsuariosModel extends Model {
     }
 
     public void deleteUsuario(String iduser) throws Exception {
-        this.delete(tabla, "id = " + iduser);
+        try {
+            this.delete(tabla, "id = " + iduser);
+        } catch (Exception ex) {
+            
+            if(ex.getMessage().contains("The DELETE statement conflicted with the REFERENCE constraint"))
+            {
+                throw new Exception("Este registro tiene dependencias");
+            }else{
+                throw new Exception("Error al eliminar el usuario");
+            }
+
+        }
+
     }
 
     public static String getUsername(String id) throws Exception {
@@ -155,7 +188,7 @@ public class UsuariosModel extends Model {
     public Vector<Map> getUsuarioRoles(String name) throws Exception {
 
         try {
-            String sql = "SELECT roluser.id, roles.nombre as name, roles.descripcion\n"
+            String sql = "SELECT roluser.id, roles.nombre as name, roles.descripcion, roles.id as idrol\n"
                     + "  FROM [Plataforma].[dbo].[RolesUsuario] as roluser\n"
                     + "  INNER JOIN [Plataforma].[dbo].[Users] as users ON users.id = roluser.id_user\n"
                     + "  INNER JOIN [Plataforma].[dbo].[Roles2] as roles ON roluser.id_rol = roles.id\n"

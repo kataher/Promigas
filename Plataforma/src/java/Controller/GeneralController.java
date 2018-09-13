@@ -969,8 +969,9 @@ public class GeneralController{
         setController(from); 
         String iduser = request.getParameter("id_user").trim();
         String name = request.getParameter("nombre").trim();
+        String roles = request.getParameter("roles").trim();
         
-        ((UsuariosController)controller).editUsuario(name, iduser);
+        ((UsuariosController)controller).editUsuario(name, iduser, roles);
     }
     
     public JSONObject deleteUsuario(HttpServletRequest request) throws Exception{  
