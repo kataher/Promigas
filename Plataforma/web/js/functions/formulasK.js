@@ -7757,7 +7757,7 @@ function SteelpipelinesCR(vari) {
 //       0    1    2   3  4  5   6  7   8   9   10 11 12  13   14 15 16 17 18   19    20     21    22     23    24     25    26
 }
 //4.4
-function trackliadanalysis(vari) {
+function trackliadanalysis(vari,uni) {
     /*
      * ENTRADA
      *  F14 = Pipe Outside Diameter
@@ -7799,6 +7799,18 @@ function trackliadanalysis(vari) {
     var F29 = parseFloat(vari.TextBox20);
     var F30 = parseFloat(vari.TextBox21);
     var F31 = parseFloat(vari.TextBox22);
+    
+    F14 = get_Long(F14, uni.pipeOutsideDiameter_sel_tl, 'in');
+    F15 = get_Long(F15, uni.pipeWallThickness_sel_tl, 'in');
+    F23 = get_Long(F23, uni.widthOfStandarTrackShoe_sel_tl, 'in');
+    F24 = get_Long(F24, uni.lengthOfTheTrackOnTheGround_sel_tl, 'in');
+    F28 = get_Long(F28, uni.verticaDepthOfTheSoilCover_sel_tl, 'in');
+    F29 = get_Long(F29, uni.trenchWidth_sel_tl, 'in');
+    
+    F16 = get_Presf(F16, uni.specificiedMinimunYieldStrenght_sel_tl, 'psi');
+    F17 = get_Presf(F17, uni.maximumAllowableInternalStress_sel_tl, 'psi');
+    F18 = get_Presf(F18, uni.maximumAllowableCombinedStress_sel_tl, 'psi');
+    
 
     var F34 = ((1 - Math.exp(-2 * F19 * (F28 / F29))) / (2 * F19));
     F34 = F34.toFixed(3);
