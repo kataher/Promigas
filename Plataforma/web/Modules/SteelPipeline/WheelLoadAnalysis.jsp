@@ -92,7 +92,7 @@
                                       </div>
                                     </div>
                                     </div>    
-                                    <div class="form-group">
+                                    <!--div class="form-group">
                                       <div class="col-md-12">
                                         <label>Design Class Location:</label> 
                                       </div>
@@ -157,7 +157,7 @@
                                         </select>
                                        </div>
                                       </div>
-                                    </div>       
+                                    </div-->       
                                 </div>
                             </form>
                         </div>
@@ -250,36 +250,36 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label>Load Coefficient:</label>
-                                    <input class="form-control" id="loadCoefficient_wl" name="loadCoefficient_wl" type="text" required/>
+                                    <input class="form-control" id="loadCoefficient_wl" name="loadCoefficient_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Load due to Overburden:</label>
-                                    <input class="form-control" id="loadDueToOverburden_wl" name="loadDueToOverburden_wl" type="text" required/>
+                                    <input class="form-control" id="loadDueToOverburden_wl" name="loadDueToOverburden_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Average Vehicular Load:</label>
-                                    <input class="form-control" id="averageVehicularLoad_wl" name="averageVehicularLoad_wl" type="text" required/>
+                                    <input class="form-control" id="averageVehicularLoad_wl" name="averageVehicularLoad_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Total Load:</label>
-                                    <input class="form-control" id="totalLoad_wl" name="totalLoad_wl" type="text" required/>
+                                    <input class="form-control" id="totalLoad_wl" name="totalLoad_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Logitudinal Bending Stress:</label>
-                                    <input class="form-control" id="longitudinalBendingStress_wl" name="longitudinalBendingStress_wl" type="text" required/>
+                                    <input class="form-control" id="longitudinalBendingStress_wl" name="longitudinalBendingStress_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Circumferential Stress:</label>
-                                    <input class="form-control" id="circumferentialStress_wl" name="circumferentialStress_wl" type="text" required/>
+                                    <input class="form-control" id="circumferentialStress_wl" name="circumferentialStress_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Hoop Stress:</label>
-                                    <input class="form-control" id="hoopStress_wl" name="hoopStress_wl" type="text" required/>
+                                    <input class="form-control" id="hoopStress_wl" name="hoopStress_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Total Circumferential Stress:</label>
-                                    <input class="form-control" id="totalCircumferentialStress_wl" name="totalCircumferentialStress_wl" type="text" required/>
+                                    <input class="form-control" id="totalCircumferentialStress_wl" name="totalCircumferentialStress_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Total Combined Stress:</label>
-                                    <input class="form-control" id="totalCombinedStress_wl" name="totalCombinedStress_wl" type="text" required/>
+                                    <input class="form-control" id="totalCombinedStress_wl" name="totalCombinedStress_wl" type="text" required readonly/>
                                     <br/>
                                     <label>Percent of SMYS:</label>
-                                    <input class="form-control" id="percentOfSYMS_wl" name="percentOfSYMS_wl" type="text" required/>
+                                    <input class="form-control" id="percentOfSYMS_wl" name="percentOfSYMS_wl" type="text" required readonly/>
                                     <br/>
-                                    <input class="form-control" id="isSafe_wl" name="isSafe_wl" type="text" required/>
+                                    <input class="form-control" id="isSafe_wl" name="isSafe_wl" type="text" required readonly/>
                                     <br/>
                                     <input type="button" value="Calculate" id="calculatebtn_wl" onclick="calculate_tl()" name="calculatebtn_wl" class="btn btn-info btn-block">
                                     <input type="button" value="Save" id="savebtn_wl" name="savebtn_wl" class="btn btn-success btn-block">   
@@ -301,11 +301,11 @@
                         
                     $("#opt_wl").val("1");
                     $('#api5l_wl').attr('checked', 'checked');
-                    //load_nps_sel_wl("5l");
+                    load_nps_sel_wl("5l");
                     //load_np_sel_wl("soiltype44");
                     //load_crocoty_sel_wl("kzdeco44");
                     //load_slayer_sel_wl("slayer45");
-                    //load_grade_sel_wl("gra5l");
+                    load_grade_sel_wl("gra5l");
                     //onchange_wt_wl(); 
                     //onchange_gra_wl();
                   
@@ -386,11 +386,7 @@
                             var newHtml = "<select class=\"form-control\" name=\"grade_sel_wl\" id=\"grade_sel_wl\" onchange=\"onchange_gra_wl()\">" + data;
                             $("#div_grade_sel_wl").html(newHtml); 
                             
-                            var x = $("#grade_sel_wl").val();
-                            $("#specifiedmys_wl").val(x.split(",")[1]);
-                            var res =  $("#grade_sel_wl option:selected").html();
-                             $("#gra_pipeop_wl").val(res); 
-                             $("#yield_pipeop_wl").val(x.split(",")[1]); 
+                            onchange_gra_wl();
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_wl"), "Error");

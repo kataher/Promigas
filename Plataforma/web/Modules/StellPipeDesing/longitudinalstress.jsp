@@ -272,17 +272,37 @@
                                             </div>
                                             <div class="col-md-12">
                                                 <select class="form-control" name="sel_pipe_desig_lostre" id="sel_pipe_desig_lostre" onchange="cleanOut_lostre()">
-                                                    <option value="0.1" >0.1</option>
-                                                    <option value="0.2" >0.2</option>
-                                                    <option value="0.3" >0.3</option>
-                                                    <option value="0.4" >0.4</option>
-                                                    <option value="0.5" >0.5</option>
-                                                    <option value="0.6" >0.6</option>
-                                                    <option value="0.7" >0.7</option>
-                                                    <option value="0.8" >0.8</option>
-                                                    <option value="0.9" >0.9</option>
-                                                    <option value="1" >1</option>
-
+                                                    <option value="0.90" >0.90</option>
+                                                    <option value="0.89" >0.89</option>
+                                                    <option value="0.88" >0.88</option>
+                                                    <option value="0.87" >0.87</option>
+                                                    <option value="0.86" >0.86</option>
+                                                    <option value="0.85" >0.85</option>
+                                                    <option value="0.84" >0.84</option>
+                                                    <option value="0.83" >0.83</option>
+                                                    <option value="0.82" >0.82</option>
+                                                    <option value="0.81" >0.81</option>
+                                                    <option value="0.80" >0.80</option>
+                                                    <option value="0.79" >0.79</option>
+                                                    <option value="0.78" >0.78</option>
+                                                    <option value="0.77" >0.77</option>
+                                                    <option value="0.76" >0.76</option>
+                                                    <option value="0.75" >0.75</option>
+                                                    <option value="0.74" >0.74</option>
+                                                    <option value="0.73" >0.73</option>
+                                                    <option value="0.72" >0.72</option>
+                                                    <option value="0.71" >0.71</option>
+                                                    <option value="0.70" >0.70</option>
+                                                    <option value="0.69" >0.69</option>
+                                                    <option value="0.68" >0.68</option>
+                                                    <option value="0.67" >0.67</option>
+                                                    <option value="0.66" >0.66</option>
+                                                    <option value="0.65" >0.65</option>
+                                                    <option value="0.64" >0.64</option>
+                                                    <option value="0.63" >0.63</option>
+                                                    <option value="0.62" >0.62</option>
+                                                    <option value="0.61" >0.61</option>
+                                                    <option value="0.60" >0.60</option>
                                                 </select>
                                             </div>
                                         </div>

@@ -53,6 +53,7 @@ function changeToDecimal(vec) {
     var tope = vec.length;
 
     for (var i = 0; i < tope; i++) {
+        var negativo = vec[i] < 0;
         vec[i] = vec[i].toString();
         if (vec[i].indexOf(".") > 0) {
             //Llamar a la funcion con la posicion desde 0 hasta la del punto        
@@ -62,7 +63,7 @@ function changeToDecimal(vec) {
             var pentera = vec[i];
             s = addComas(pentera);
         }
-        vec[i] = s;
+        vec[i] = negativo ? "-" + s : s;
     }
 
 }

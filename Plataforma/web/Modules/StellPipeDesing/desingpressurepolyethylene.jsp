@@ -323,7 +323,7 @@
             function load_np_sel_dpp(idcombo) {
                 var parametros = {
                     "combo": idcombo,
-                    "type": "polyet",
+                    "type": "polye",
                     "opcion": "5"
                 };
                 $.ajax({
@@ -370,7 +370,7 @@
                 var parametros = {
                     "combo": "wtn",
                     "nps": idOp,
-                    "type": "polyet",
+                    "type": "polye",
                     "opcion": "5"
 
                 };
