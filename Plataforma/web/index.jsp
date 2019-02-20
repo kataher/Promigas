@@ -478,14 +478,26 @@ $(function(){
                 },
                 success:  function(data, status, request){
                     var iduser = data.id; 
+                    var fullname = data.fullname; 
+                    var roles = ""; 
                     var url;
-                    if(data.type === "1"){
-                        url = "administration.jsp?type="+data.type+"&idusu="+iduser;
-                    }else{
-                        url = "myproject.jsp?type="+data.type+"&idusu="+iduser;
+                    
+                    /*for(var i = 0; i<data.roles.length; i++){
+                        roles += "-" + data.roles[i].id_rol + "-";
                     }
                     
-                    location.href =url;
+                    if(roles.includes("-1-")){ // es administrador no hay restriccion
+                        alert("es admin");
+                    }*/
+                    
+                                       
+                    if(data.type === "1"){
+                        url = "administration.jsp?type="+data.type+"&idusu="+iduser+"&name="+fullname;
+                    }else{
+                        url = "myproject.jsp?type="+data.type+"&idusu="+iduser+"&name="+fullname;
+                    }
+                    //url = "administration.jsp?type="+data.type+"&idusu="+iduser+"&name="+fullname;
+                    location.href = "home.jsp";
                 },
                 error: function (xhr, ajaxOptions, err) {
                     alert(err);

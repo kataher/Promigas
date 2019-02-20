@@ -1,317 +1,384 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Pipe Installation:</strong> 1.1.3. Centrifugal Compressor- Required Polytropic Horsepower</h2>
-            </div>
-            <div class="col-lg-3"> 
-                <br>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_php()">
-                    Record
-                </button>
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="div-table_php"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <div id="wrapper">
 
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Pipe Installation:</strong> 1.1.3. Centrifugal Compressor- Required Polytropic Horsepower</h2>
                             </div>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_php()">
+                                    Record
+                                </button>
+
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_php"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FIN MODAL -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_php" name="description_php"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_php" name="proyects_sel_php"> </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Comprenssibility Factor 
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <input type="radio" id = "compfactors1_php" name="opz_php" value="compfactors1_php" onchange="onchange_comf_php()" required>  Calculate <br>
+                                                                            <input type="radio" id = "compfactors2_php" name="opz_php" value="compfactors2_php" onchange="onchange_comf_php()" required> User Supplied
+                                                                        </div>
+                                                                    </div>                                    
+
+                                                                    <div class="form-group">
+                                                                        <label>Z1 - Comprenssibility Factor at Suction:</label>
+                                                                        <input type="text" id="z1s_php" name="z1s_php" readonly required class="form-control" value="0" onchange="onchange_Input_php(this)">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Z2 - Compressibility Factor at Discharge Conditions:</label>
+                                                                        <input type="text" id="z2d_php" name="z2d_php" readonly required class="form-control" value="0" onchange="onchange_Input_php(this)">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Input Parameters
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Height:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input value = "0" class="form-control" type="text" id="enteree_php" name="enteree_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_ee_sel_php">
+                                                                            <select class="form-control" id="ee_sel_php" name="ee_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Base Temperature:</label> 
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value="60" type="text" id="basetemperature_php" name="basetemperature_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id="div_bt_sel_php">
+                                                                            <select class="form-control" id="bt_sel_php" name="bt_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Base Pressure:</label> 
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input  value="14.65" class="form-control" type="text" id="basepressure_php" name="basepressure_php" onchange="onchange_Input_php(this)" required><br>
+                                                                        </div>
+                                                                        <div class="col-md-4" id="div_bp_sel_php">
+                                                                            <select class="form-control" id="bp_sel_php" name="bp_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Suction Pressure:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value="386" type="text" id="suctionp_php" name="suctionp_php" onchange="validate_pres_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_sp_sel_php">
+                                                                            <select class="form-control" id="sp_sel_php" name="sp_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Suction Temperature:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value="85" type="text" id="suctiont_php" name="suctiont_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4"  id="div_st_sel_php">
+                                                                            <select class="form-control" id="st_sel_php" name="st_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Discharge Pressure:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value = "936" type="text" id="dischargep_php" name="dischargep_php" onchange="validate_pres_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id="div_dp_sel_php">
+                                                                            <select class="form-control" id="dp_sel_php" name="dp_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Capacity/Required Flow Rate:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value = "500" type="text" id="capacityr_php" name="capacityr_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id="div_cr_sel_php">
+                                                                            <select class="form-control" id="cr_sel_php" name="cr_sel_php"> </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Gas Specific Heat Ratio:</label>
+
+                                                                            <input class="form-control" value="1.3" type="text" id="gass_php" name="gass_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Select Option:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8" id="div_gs_sel_php">
+                                                                            <select class="form-control" id="gs_sel_php" name="gs_sel_php" onchange="onchange_gravity_php()"></select> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <input class="form-control" type="text" id="gst_php" name="gst_php" onchange="onchange_Input_php(this)" required>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Adiabatic Efficiency:</label>
+
+                                                                            <input class="form-control" value = "0.7" type="text" id="adiabatice_php" name="adiabatice_php" onchange="onchange_Input_php(this)" required >
+                                                                        </div>            
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Mechanical Efficiency:</label>
+
+                                                                            <input class="form-control" value = "0.7" type="text" id="mechanicale_php" name="mechanicale_php" onchange="onchange_Input_php(this)" required >
+                                                                        </div>            
+
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Polytropic Efficience:</label>
+
+                                                                            <input class="form-control" value = "0.7" type="text" id="polytropice_php" name="polytropice_php" onchange="onchange_Input_php(this)" required >
+                                                                        </div>            
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label>Polytropic Exponent:</label>
+                                                                        <input type="text" id="polytropicex_php" name="polytropicex_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label id="lab_dt_php"> DIscharge Temperature [°F]:</label>
+                                                                        <input type="text" id="discharget_php" name="discharget_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Z1 - Compressibility Factor at Suction Conditions:</label>
+                                                                        <input type="text" id="z1_php" name="z1_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Z2 - Compressibility Factor at Discharge Conditions:</label>
+                                                                        <input type="text" id="z2_php" name="z2_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Zavg - Average Compressibility Factor:</label>
+                                                                        <input type="text" id="zavg_php" name="zavg_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Adiabatic Head [ft * lbf/lbm]:</label>            
+                                                                        <input type="text" id="adiabatich_php" name="adiabatich_php" readonly required class="form-control">
+                                                                    </div> 
+                                                                    <div class="form-group">
+                                                                        <label>Polytropic GHP per Unit of the Flowrate [HP/MMSCFD]:</label>            
+                                                                        <input type="text" id="adiabaticghp_php" name="adiabaticghp_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>GHP - Polytropic Gas Horsepower [HP]:</label>
+                                                                        <input type="text" id="ghp_php" name="ghp_php" readonly required class="form-control">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>BHP - Polytropic Brake Horsepower [HP]:</label>            
+                                                                        <input type="text" id="bhp_php" name="bhp_php" readonly required class="form-control">
+                                                                    </div> 
+                                                                    <div class="form-group">
+                                                                        <label>ACFM -Actual Flow Rate for Sizing [ft3/min]:</label>            
+                                                                        <input type="text" id="acfm_php" name="acfm_php" readonly required class="form-control">
+                                                                    </div>   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>   
+                            </div>  
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="calculateBtn_php" name="calculateBtn_php" value="Calculate" onclick="calculate_php()" class="btn btn-info btn-block">
+                                                <input type="button" id="saveBtn_php" name="saveBtn_php" value="Save" onclick="save_php()" class="btn btn-success btn-block">   
+                                                <input type="button" id="delteBtn_php" name="delteBtn_php" value="Delete" onclick="delete_php()" class="btn btn-danger btn-block">
+                                                <input type="button" id="cleanAllBtn_php" name="cleanBtn_php" value="Clean All Data" onclick="cleanAll_php()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_php" name="cleanBtn_php" value="Clean Input Data" onclick="cleanIn_php()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_php" name="cleanBtn_php" value="Clean Output Data" onclick="cleanOut_php()" class="btn btn-warning btn-block">
+                                            </div>                            </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="hidden" id="opt_php" name="opt_php" value="1"> 
+                            <input type="hidden" id="id_php" name="id_php" value="-1"> 
+                        </div>
+                        <div id="load_Dialog_php" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_php" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_php" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_php" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_php" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_php" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
                         </div>
                     </div>
                 </div>
-                <!-- FIN MODAL -->
+
             </div>
+            <!-- /#page-wrapper -->
+
         </div>
-        <div class="row">
-            <div class="col-lg-12">
-                Description: 
-                <input  class="form-control" type="text" id="description_php" name="description_php"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_php" name="proyects_sel_php"> </select>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-lg-9">
+        <!-- /#wrapper -->
+    </body>
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Data
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Comprenssibility Factor 
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="row">
-
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <input type="radio" id = "compfactors1_php" name="opz_php" value="compfactors1_php" onchange="onchange_comf_php()" required>  Calculate <br>
-                                                            <input type="radio" id = "compfactors2_php" name="opz_php" value="compfactors2_php" onchange="onchange_comf_php()" required> User Supplied
-                                                        </div>
-                                                    </div>                                    
-
-                                                    <div class="form-group">
-                                                        <label>Z1 - Comprenssibility Factor at Suction:</label>
-                                                        <input type="text" id="z1s_php" name="z1s_php" readonly required class="form-control" value="0" onchange="onchange_Input_php(this)">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Z2 - Compressibility Factor at Discharge Conditions:</label>
-                                                        <input type="text" id="z2d_php" name="z2d_php" readonly required class="form-control" value="0" onchange="onchange_Input_php(this)">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Input Parameters
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="row">
-
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Height:</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input value = "0" class="form-control" type="text" id="enteree_php" name="enteree_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4" id = "div_ee_sel_php">
-                                                            <select class="form-control" id="ee_sel_php" name="ee_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Base Temperature:</label> 
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="form-control" value="60" type="text" id="basetemperature_php" name="basetemperature_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4" id="div_bt_sel_php">
-                                                            <select class="form-control" id="bt_sel_php" name="bt_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Base Pressure:</label> 
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input  value="14.65" class="form-control" type="text" id="basepressure_php" name="basepressure_php" onchange="onchange_Input_php(this)" required><br>
-                                                        </div>
-                                                        <div class="col-md-4" id="div_bp_sel_php">
-                                                            <select class="form-control" id="bp_sel_php" name="bp_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Suction Pressure:</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="form-control" value="386" type="text" id="suctionp_php" name="suctionp_php" onchange="validate_pres_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4" id = "div_sp_sel_php">
-                                                            <select class="form-control" id="sp_sel_php" name="sp_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Suction Temperature:</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="form-control" value="85" type="text" id="suctiont_php" name="suctiont_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4"  id="div_st_sel_php">
-                                                            <select class="form-control" id="st_sel_php" name="st_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Discharge Pressure:</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="form-control" value = "936" type="text" id="dischargep_php" name="dischargep_php" onchange="validate_pres_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4" id="div_dp_sel_php">
-                                                            <select class="form-control" id="dp_sel_php" name="dp_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Capacity/Required Flow Rate:</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <input class="form-control" value = "500" type="text" id="capacityr_php" name="capacityr_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-                                                        <div class="col-md-4" id="div_cr_sel_php">
-                                                            <select class="form-control" id="cr_sel_php" name="cr_sel_php"> </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Gas Specific Heat Ratio:</label>
-
-                                                            <input class="form-control" value="1.3" type="text" id="gass_php" name="gass_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Select Option:</label>
-                                                        </div>
-                                                        <div class="col-md-8" id="div_gs_sel_php">
-                                                            <select class="form-control" id="gs_sel_php" name="gs_sel_php" onchange="onchange_gravity_php()"></select> 
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <input class="form-control" type="text" id="gst_php" name="gst_php" onchange="onchange_Input_php(this)" required>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Adiabatic Efficiency:</label>
-
-                                                            <input class="form-control" value = "0.7" type="text" id="adiabatice_php" name="adiabatice_php" onchange="onchange_Input_php(this)" required >
-                                                        </div>            
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Mechanical Efficiency:</label>
-
-                                                            <input class="form-control" value = "0.7" type="text" id="mechanicale_php" name="mechanicale_php" onchange="onchange_Input_php(this)" required >
-                                                        </div>            
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-12">
-                                                            <label>Polytropic Efficience:</label>
-
-                                                            <input class="form-control" value = "0.7" type="text" id="polytropice_php" name="polytropice_php" onchange="onchange_Input_php(this)" required >
-                                                        </div>            
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Results
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                    <div class="form-group">
-                                                        <label>Polytropic Exponent:</label>
-                                                        <input type="text" id="polytropicex_php" name="polytropicex_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label id="lab_dt_php"> DIscharge Temperature [°F]:</label>
-                                                        <input type="text" id="discharget_php" name="discharget_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Z1 - Compressibility Factor at Suction Conditions:</label>
-                                                        <input type="text" id="z1_php" name="z1_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Z2 - Compressibility Factor at Discharge Conditions:</label>
-                                                        <input type="text" id="z2_php" name="z2_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Zavg - Average Compressibility Factor:</label>
-                                                        <input type="text" id="zavg_php" name="zavg_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Adiabatic Head [ft * lbf/lbm]:</label>            
-                                                        <input type="text" id="adiabatich_php" name="adiabatich_php" readonly required class="form-control">
-                                                    </div> 
-                                                    <div class="form-group">
-                                                        <label>Polytropic GHP per Unit of the Flowrate [HP/MMSCFD]:</label>            
-                                                        <input type="text" id="adiabaticghp_php" name="adiabaticghp_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>GHP - Polytropic Gas Horsepower [HP]:</label>
-                                                        <input type="text" id="ghp_php" name="ghp_php" readonly required class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>BHP - Polytropic Brake Horsepower [HP]:</label>            
-                                                        <input type="text" id="bhp_php" name="bhp_php" readonly required class="form-control">
-                                                    </div> 
-                                                    <div class="form-group">
-                                                        <label>ACFM -Actual Flow Rate for Sizing [ft3/min]:</label>            
-                                                        <input type="text" id="acfm_php" name="acfm_php" readonly required class="form-control">
-                                                    </div>   
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Actions
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <input type="button" id="calculateBtn_php" name="calculateBtn_php" value="Calculate" onclick="calculate_php()" class="btn btn-info btn-block">
-                                <input type="button" id="saveBtn_php" name="saveBtn_php" value="Save" onclick="save_php()" class="btn btn-success btn-block">   
-                                <input type="button" id="delteBtn_php" name="delteBtn_php" value="Delete" onclick="delete_php()" class="btn btn-danger btn-block">
-                                <input type="button" id="cleanAllBtn_php" name="cleanBtn_php" value="Clean All Data" onclick="cleanAll_php()" class="btn btn-warning btn-block">
-                                <input type="button" id="cleanInputBtn_php" name="cleanBtn_php" value="Clean Input Data" onclick="cleanIn_php()" class="btn btn-warning btn-block">
-                                <input type="button" id="cleanOutputBtn_php" name="cleanBtn_php" value="Clean Output Data" onclick="cleanOut_php()" class="btn btn-warning btn-block">
-                            </div>                            </div>
-                    </div>
-                </div>
-            </div>
-
-            <input type="hidden" id="opt_php" name="opt_php" value="1"> 
-            <input type="hidden" id="id_php" name="id_php" value="-1"> 
-        </div>
-
-
-        <script>
+    <script>
             $(document).ready(function () {
 
                 load_gs_sel_php();
@@ -339,7 +406,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     async: false,
@@ -428,7 +495,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -457,7 +524,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -484,7 +551,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -512,7 +579,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -546,7 +613,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -607,7 +674,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -799,7 +866,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -857,7 +924,7 @@
                 if ($("#opt_php").val() == 2) {
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -887,30 +954,4 @@
 
         </script>
 
-        <div id="load_Dialog_php" title="Basic dialog" style='display:none;'>
-            <p>Successfully uploaded data</p>
-        </div>
-
-        <div id="save_Dialog_php" title="Basic dialog" style='display:none;'>
-            <p>Data saved successfully</p>
-        </div>
-
-        <div id="error_Dialog_php" title="Basic dialog" style='display:none;'>
-            <p>An error has occurred in the process</p>
-        </div>
-
-        <div id="calculate_Dialog_php" title="Basic dialog" style='display:none;'>
-            <p>Calculation done successfully</p>
-        </div>
-
-        <div id="delete_Dialog_php" title="Basic dialog" style='display:none;'>
-            <p>Successfully deleted record</p>
-        </div>
-
-        <div id="dialog-confirm_php" title="Delete record" style='display:none;'>
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-                Are you sure you want to permanently delete this record?
-            </p>
-        </div>
-    </body>
 </html>

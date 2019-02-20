@@ -23,6 +23,9 @@
         <li>
             <a href="#" onClick="cargarFormula('Administration/specialties.jsp');"><i class="fa fa-sitemap fa-fw"></i>Especialidades</a>
         </li>
+        <li>
+            <a href="#" onClick="cargarFormula('Administration/areas.jsp');"><i class="fa fa-sitemap fa-fw"></i>Areas</a>
+        </li>
     </ul>
 </li>
 <% }

@@ -1146,6 +1146,7 @@ function pipelinehydrostatic_Form(vari, uni){
     var v = 0.3;
     var E = 30*Math.pow(10,6);
     var cp = ((B-2*alfa)/(((D*(1-Math.pow(v,2)))/(E * t) + C)))/1.8; //Cambio de presión  [Psi/°F]
+    //Si la temperatura ingresa en Centrigrados, porque el resultado es Farenheit?
     
     var res = [Fwp.toFixed(8),Fpp.toFixed(6),Fpt.toFixed(6),
         Fwt.toFixed(6),crta.toFixed(6),V.toFixed(1),
@@ -1961,6 +1962,8 @@ function capacidadMedidores_Form(vari, uni){
     //Validado Johan
     //Validado BD
     
+   
+    
     var modelo = vari.mo_sel;
     var presop = parseFloat(vari.presionop);
     var presba = parseFloat(vari.preisonba);
@@ -1970,7 +1973,6 @@ function capacidadMedidores_Form(vari, uni){
     var medidores = vari.medidores.split("@");    
     var modEva = modEva = modelo.split(",")[0];
     var capaopt = 0;
-    
     var menor = null;
     var mediOpt = null;
     var maxcapPor = null;
@@ -1979,8 +1981,8 @@ function capacidadMedidores_Form(vari, uni){
     var maxcapEv = null;
     var sw = false;
     
+     
     for(var cont = 0; cont < medidores.length - 1; cont ++){
-       
         var medi = new Array(5);
         
         medi[3] = medidores[cont].split(",")[0];
@@ -2026,9 +2028,9 @@ function capacidadMedidores_Form(vari, uni){
         }
     }
     
+    
     var capminev = ((fmin/maxcapEv)*100).toFixed(2);
-   
-    var res = [mediOpt, (maxcapPor*100).toFixed(2), maxcap.toFixed(4), modEva, (maxcapPorEv*100).toFixed(2), maxcapEv.toFixed(4), capminev, capaopt];
+    var res = [mediOpt, (maxcapPor*100).toFixed(2), maxcap.toFixed(2), modEva, (maxcapPorEv*100).toFixed(2), maxcapEv.toFixed(2), capminev, capaopt.toFixed(2)];
     return res;
     
     
@@ -2127,17 +2129,17 @@ function valslamshut_Form(vari, uni){
 function valvulas_Form(vari, uni){
     //Validado excel Johan
     //Validado BD
-    
-    var setpresion = parseFloat(vari.presiondis_val);
-    var k = parseFloat(vari.relak_val);
-    var pb = parseFloat(vari.presionb_val);
-    var kd = parseFloat(vari.coefdes_val);
-    var faccor = parseFloat(vari.factcor_val);
-    var flujo = get_Flujo(parseFloat(vari.flujomax_val), uni.flujomax_sel_val, "MMSCFD") ;
-    var pesomol = parseFloat(vari.pesom_val);
-    var temp = get_Temp(parseFloat(vari.tempope_val), uni.tempope_sel_val, "R");
-    var min = parseFloat(vari.nivelsobmin_val);
-    var max = parseFloat(vari.nivelsobmax_val);
+   
+    var setpresion = parseFloat(vari.presiondis_val.replace(",",""));
+    var k = parseFloat(vari.relak_val.replace(",",""));
+    var pb = parseFloat(vari.presionb_val.replace(",",""));
+    var kd = parseFloat(vari.coefdes_val.replace(",",""));
+    var faccor = parseFloat(vari.factcor_val.replace(",",""));
+    var flujo = get_Flujo(parseFloat(vari.flujomax_val.replace(",","")), uni.flujomax_sel_val, "MMSCFD") ;
+    var pesomol = parseFloat(vari.pesom_val.replace(",",""));
+    var temp = get_Temp(parseFloat(vari.tempope_val.replace(",","")), uni.tempope_sel_val, "R");
+    var min = parseFloat(vari.nivelsobmin_val.replace(",",""));
+    var max = parseFloat(vari.nivelsobmax_val.replace(",",""));
     var p1 = setpresion + Math.max(min,max) + pb;
     var p2 = setpresion + pb;
     
@@ -2192,7 +2194,7 @@ function valvulas_Form(vari, uni){
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "/Plataforma/Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async : false,
@@ -2242,7 +2244,7 @@ function valvulas_Form(vari, uni){
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "/Plataforma/Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async : false,
@@ -2310,10 +2312,12 @@ function actuadores_Form(vari, uni){
         "opcion": "101",
         "from": "act"
     };
+    
+    //alert(JSON.stringify(parametros));
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "/Plataforma/Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async : false,

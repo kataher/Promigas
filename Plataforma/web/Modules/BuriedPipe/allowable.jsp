@@ -1,200 +1,262 @@
-
-<%--
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
-
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Surcharge Live Load on Buried PE Pipe & Pipeline Crossings: </strong> 9.2. HDD PE Pipe - ATL Allowable Tensile Load During Pull-In Installation</h2>
-            </div>
-            <div class="col-lg-3">
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_all()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Surcharge Live Load on Buried PE Pipe & Pipeline Crossings: </strong> 9.2. HDD PE Pipe - ATL Allowable Tensile Load During Pull-In Installation</h2>
                             </div>
-                            <div class="modal-body">
-                                <div id="div-table_all"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_all()">
+                                    Record
+                                </button>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>       
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_all" name="description_all"><br>
-                Projects:
-                <select class="form-control" id="proyects_sel_all" name="proyects_sel_all"> </select>
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_all"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-            </div>
-        </div>
-        <hr>
-        
-        <div class="col-lg-3">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Referencias
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form role="form">
-                                
-                                <p>Note: Reference from ASTM F 1804-08 for Gas Pipe</p>
-                                <p>1. Tensible Yield Design Safety Factor is usually 0.5 or less. If the value is not available form manufacter, a value of 0.4 is used</p>
-                                <p>2. Time Under Tension Design Safety Factor based on 5% strain, design factors: 1.00 for ties up to 1hr, 0.95 for times to 12 hr, and 0.91 for tiemes to 24 hr</p>
-                                <p>3. For installation temperature of 100ºF or less tensible yield is:</p>
-                                <p>-2600psi for PE2406, PE2606, and PE2708</p>
-                                <p>-300psi for PE3408, PE3608, PE3710, PE4608, and PE4710, or value from pipe manufacter. For installation temperature above 100ºF pipe manufacters` values for elevated tensible yield strength should be used</p>
-                            </form>
-                        </div>
-                    </div>
-                </div>  
-            </div>   
-        </div>
-
-        <div class="col-lg-9">
-
-            <div class="col-lg-8">
-
-
-                <form role="form">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Pipe Soil Envelope Data
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">      
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label>Pipe Outside Diameter [in]:</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control" value="4.5" type="text" id="do_all" name="do_all" onchange="onchange_Input_all(this)" required>
-                                        </div>
-                                        <div class="col-md-4" id="div_do_sel_all">
-                                            <select class="form-control" id="do_sel_all" name="do_sel_all" onchange="cleanOut_all()"> </select>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label>Pipe Dimension Ratio:</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input class="form-control" value= "11" type="text" id="pdr_all" name="pdr_all" onchange="onchange_Input_all(this)" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label>Tensible Yield Desing Safety Factor:</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input class="form-control" value="0.1" type="text" id="tyd_all" name="tyd_all" onchange="validate_atl_all(this)" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label>Time Under Tension Desing Safety Factor:</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input class="form-control" value="8" type="text" id="tut_all" name="tut_all" onchange="validate_atl_all(this)" required>
-                                        </div>
-                                    </div>                                  
-
-
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <label>Tensible Yield Strengh [psi]:</label>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <input class="form-control" value="1.2" type="text" id="tys_all" name="tys_all" onchange="validate_atl_all(this)" required>
-                                        </div>
-                                    </div>
-
-
                                 </div>
+                                <!-- FIN MODAL -->
                             </div>
-                        </div> 
-                    </div>
-                </form>
-
-            </div>
-
-
-            <div class="col-lg-4">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Results
-                    </div>
-                    <div class="panel-body">
+                        </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label> ATL - Allowable Tensible Load [lbf]:</label>
-                                    <input type="text" id="atl_all" name="atl_all" readonly required class="form-control">
-                                </div>
-
-                                <input type="button" id="calculateBtn_all" name="calculateBtn_all" value="Calculate" onclick="calculate_all()" class="btn btn-info btn-block">
-                                <input type="button" id="saveBtn_all" name="saveBtn_all" value="Save" onclick="save_all()" class="btn btn-success btn-block">  
-                                <input type="button" id="delteBtn_all" name="delteBtn_all" value="Delete" onclick="delete_all()" class="btn btn-danger btn-block">
-
+                                Description: 
+                                <input  class="form-control" type="text" id="description_all" name="description_all"><br>
+                                Projects:
+                                <select class="form-control" id="proyects_sel_all" name="proyects_sel_all"> </select>
                             </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> 
+                                                            References
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <form role="form">
+                                                                        <p>Note: Reference from ASTM F 1804-08 for Gas Pipe</p>
+                                                                        <p>1. Tensible Yield Design Safety Factor is usually 0.5 or less. If the value is not available form manufacter, a value of 0.4 is used</p>
+                                                                        <p>2. Time Under Tension Design Safety Factor based on 5% strain, design factors: 1.00 for ties up to 1hr, 0.95 for times to 12 hr, and 0.91 for tiemes to 24 hr</p>
+                                                                        <p>3. For installation temperature of 100ºF or less tensible yield is:</p>
+                                                                        <p>-2600psi for PE2406, PE2606, and PE2708</p>
+                                                                        <p>-300psi for PE3408, PE3608, PE3710, PE4608, and PE4710, or value from pipe manufacter. For installation temperature above 100ºF pipe manufacters` values for elevated tensible yield strength should be used</p>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> 
+                                                            Pipe Soil Envelope Data
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">      
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Outside Diameter [in]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value="4.5" type="text" id="do_all" name="do_all" onchange="onchange_Input_all(this)" required>
+                                                                        </div>
+                                                                        <div class="col-md-4" id="div_do_sel_all">
+                                                                            <select class="form-control" id="do_sel_all" name="do_sel_all" onchange="cleanOut_all()"> </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Dimension Ratio:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input class="form-control" value= "11" type="text" id="pdr_all" name="pdr_all" onchange="onchange_Input_all(this)" required>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Tensible Yield Desing Safety Factor:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input class="form-control" value="0.1" type="text" id="tyd_all" name="tyd_all" onchange="validate_atl_all(this)" required>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Time Under Tension Desing Safety Factor:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input class="form-control" value="8" type="text" id="tut_all" name="tut_all" onchange="validate_atl_all(this)" required>
+                                                                        </div>
+                                                                    </div>                                  
+
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Tensible Yield Strengh [psi]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input class="form-control" value="1.2" type="text" id="tys_all" name="tys_all" onchange="validate_atl_all(this)" required>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>  
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results                        
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <label> ATL - Allowable Tensible Load [lbf]:</label>
+                                                                        <input type="text" id="atl_all" name="atl_all" readonly required class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>  
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>   
+                            </div>  
+
+                            <div class="col-lg-3">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="calculateBtn_all" name="calculateBtn_all" value="Calculate" onclick="calculate_all()" class="btn btn-info btn-block">
+                                                <input type="button" id="saveBtn_all" name="saveBtn_all" value="Save" onclick="save_all()" class="btn btn-success btn-block">   
+                                                <input type="button" id="delteBtn_all" name="delteBtn_all" value="Delete" onclick="delete_all()" class="btn btn-danger btn-block">
+                                                <input type="button" id="cleanAllBtn_all" name="cleanBtn_all" value="Clean All Data" onclick="cleanAll_all()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_all" name="cleanBtn_all" value="Clean Input Data" onclick="cleanIn_all()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_all" name="cleanBtn_all" value="Clean Output Data" onclick="cleanOut_all()" class="btn btn-warning btn-block">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="id_all" name="id_all">  
+                            <input type="hidden" id="opt_all" name="opt_all" value="1">   
+                        </div>
+                        <div id="load_Dialog_all" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_all" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_all" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_all" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_all" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_all" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-12">
-
-                <div class="col-md-3">
-                    <input type="button" id="cleanAllBtn_all" name="cleanBtn_all" value="Clean All Data" onclick="cleanAll_all()" class="btn btn-warning btn-block">
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="cleanInputBtn_all" name="cleanBtn_all" value="Clean Input Data" onclick="cleanIn_all()" class="btn btn-warning btn-block">
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="cleanOutputBtn_all" name="cleanBtn_all" value="Clean Output Data" onclick="cleanOut_all()" class="btn btn-warning btn-block">
-                </div>
             </div>
+            <!-- /#page-wrapper -->
 
         </div>
-        <input type="hidden" id="id_all" name="id_all"> 
-        <input type="hidden" value="1" id="opt_all" name="opt_all">
+        <!-- /#wrapper -->
+    </body>
 
-        <script>
-
-
-
+       <script>
             $(document).ready(function () {
 
                 getproyectos(<%=session.getAttribute("idusu")%>,
@@ -217,7 +279,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     async: false,
@@ -309,7 +371,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     beforeSend: function (xhr) {
                         block("Cargando...");
@@ -337,7 +399,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -444,7 +506,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -501,7 +563,7 @@
                 if ($("#opt_all").val() == 2) {
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -528,31 +590,4 @@
             }
 
         </script>
-
-        <div id="load_Dialog_all" title="Basic dialog" style='display:none;'>
-            <p>Successfully uploaded data</p>
-        </div>
-
-        <div id="save_Dialog_all" title="Basic dialog" style='display:none;'>
-            <p>Data saved successfully</p>
-        </div>
-
-        <div id="error_Dialog_all" title="Basic dialog" style='display:none;'>
-            <p>An error has occurred in the process</p>
-        </div>
-
-        <div id="calculate_Dialog_all" title="Basic dialog" style='display:none;'>
-            <p>Calculation done successfully</p>
-        </div>
-
-        <div id="delete_Dialog_all" title="Basic dialog" style='display:none;'>
-            <p>Successfully deleted record</p>
-        </div>
-
-        <div id="dialog-confirm_all" title="Delete record" style='display:none;'>
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-                Are you sure you want to permanently delete this record?
-            </p>
-        </div>
-    </body>
 </html>

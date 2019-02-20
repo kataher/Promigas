@@ -41,15 +41,17 @@ public class UsuariosController extends Controller.Controller{
         }
     }
     
-    public JSONObject addUsuario(String nombre, String roles) throws Exception{  
+    public JSONObject addUsuario(String nombre, String alias, String roles, String areas) throws Exception{  
         Map<String, String> values1 = new HashMap<String, String>();
         JSONObject json = new JSONObject();
          
-        values1.put("name", stringToBD(nombre));
-        values1.put("password", stringToBD(nombre));
+        values1.put("name", stringToBD(alias));
+        values1.put("fullname", stringToBD(nombre));
+        values1.put("password", stringToBD(alias));
         values1.put("isadmsitio", "0");
         values1.put("isadmpro", "0");
         values1.put("roles", roles);
+        values1.put("areas", areas);
         
         Vector<Map> data = model.addUsuario(values1);
         
@@ -66,10 +68,11 @@ public class UsuariosController extends Controller.Controller{
         }
     }
     
-    public void editUsuario(String name, String iduser, String roles) throws Exception{  
+    public void editUsuario(String name, String iduser, String roles, String areas) throws Exception{  
         Map<String, String> values1 = new HashMap<String, String>();
-        values1.put("name", stringToBD(name));
+        values1.put("fullname", stringToBD(name));
         values1.put("roles", roles);
+        values1.put("areas", areas);
         
         model.editUsuario(values1, iduser);
     }
@@ -103,6 +106,36 @@ public class UsuariosController extends Controller.Controller{
         
         if(data != null){        
             json = json.put("data", data);
+            return json;
+        }else{
+            return null;
+        }
+       
+    }
+    
+     public JSONObject getUsuarioAreas(String user) throws Exception{  
+        JSONObject json = new JSONObject();
+        Vector<Map> data = model.getUsuarioAreas2(user);
+        
+        if(data != null){        
+            json = json.put("data", data);
+            return json;
+        }else{
+            return null;
+        }
+       
+    }
+    
+    public JSONObject getInfoUser(String user) throws Exception{  
+        JSONObject json = new JSONObject();
+        Vector<Map> info = model.getUserInfo(user);        
+        Vector<Map> roles = model.getUsuarioRoles(user);
+        Vector<Map> areas = model.getUsuarioAreas(user);
+        
+        if(roles != null && info != null){    
+            json = json.put("fullname", info.get(0).get("fullname").toString());
+            json = json.put("roles", roles);
+             json = json.put("areas", areas);
             return json;
         }else{
             return null;

@@ -52,7 +52,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Modulo Administrativo</a>
+                <a class="navbar-brand" href="index.html"><%=session.getAttribute("name")%></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -115,7 +115,7 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i>Perfil de Usuario</a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i><%=session.getAttribute("name")%></a>
                         </li>
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Opciones</a>
                         </li>

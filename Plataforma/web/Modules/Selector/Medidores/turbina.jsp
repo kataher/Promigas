@@ -7,292 +7,307 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>  
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-        <title>::PROMIGAS::</title>
-
-        <!-- Jquery JS -->
-        <script type="text/JavaScript" src="js/jquery.js"></script>
-        <!-- Jquery UI -->
-        <script src="js/jquery-ui/jquery-ui.js"></script>
-        <!-- Jquery Blockui Plugin -->
-        <script src="js/jquery-ui/external/blockui/jquery-blockui.js"></script>
-        <!-- Formula File JS -->
-        <script src="js/functions/formulasK.js"></script>
-        <!-- Formula File JS -->
-        <script src="js/functions/formulasM.js"></script>
-        <!-- General Functions File JS -->
-        <script src="js/functions/functions.js"></script>
-        <!-- Jspdf Plugin JS -->
-        <script type="text/JavaScript" src="js/jspdf/jspdf.min.js" > </script>
-        <!-- Jspdf Plugin JS -->
-        <script type="text/JavaScript" src="js/jspdf/autotable.min.js" > </script>
-        <!-- Morris Plugin JS -->
-        <script src="bower_components/morrisjs/morris.js"></script>
-        <!-- Custom Theme JavaScript -->
-        <!--<script src="dist/js/sb-admin-2.js"></script> -->
-        <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="bower_components/raphael/raphael-min.js"></script>
-        <script src="js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
-
-
-
-        <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
-        <!--<script type="text/javascript" src="js/highchart/highcharts.js"></script>-->
-        <!--<script type="text/javascript" src="js/highchart/exporting.js"></script>-->
-
-        <link rel="stylesheet" href="js/jquery-ui/jquery-ui.css">
-        <link rel="stylesheet" href="bower_components/morrisjs/morris.css">
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="bower_components/metisMenu/dist/metisMenu.min.css" />
-        <link href="dist/css/timeline.css" rel="stylesheet">
-        <link href="dist/css/sb-admin-2.css" rel="stylesheet">
-        <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-        <link href="css/dataTables/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/user-profiles-list-basic.css">
+        <title>::PROMIGAS::</title>  
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="../../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../../js/functions/formulasK.js"></script>
+        <script src="../../../js/functions/formulasM.js"></script>
+        <script src="../../../js/functions/functions.js"></script>
+        <script src="../../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../../dist/js/sb-admin-2.js"></script>
+        <script src="../../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../../css/menu.css">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
-
     </head>
 
     <body>
-        <div id="formula_met">
-            <div class="row">
-                <div class="col-lg-9">
-                    <h2>This module validates the capacity of the meters to be installed in natural gas transport or distribution applications: Turbine Type Meters</h2>
-                </div>
-                <div class="col-lg-3"> 
+        <div id="wrapper">
+            <jsp:include page="../../../allmenu.jsp"/>
+            <div id="page-wrapper">
+                <div id="content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2>This module validates the capacity of the meters to be installed in natural gas transport or distribution applications: Turbine Type Meters</h2>
+                        </div>
+                        <div class="col-lg-3"> 
 
-                    <!-- Button trigger modal -->
-                    <p>
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_met()">
-                            Record
-                        </button>
-                    </p>
+                            <!-- Button trigger modal -->
+                            <p>
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_met()">
+                                    Record
+                                </button>
+                            </p>
 
-                    <!-- MODAL -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Record</h4>
+                            <!-- MODAL -->
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Record</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div id="div-table_met"></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <div id="div-table_met"></div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                            <!-- FIN MODAL -->
+                        </div>
 
+                        <div class="col-lg-9">
+                            Description: 
+                            <input  class="form-control" type="text" id="description_met" name="description_met"><br>
+                            Projects:
+                            <select class="form-control" id="proyects_sel_met" name="proyects_sel_met"> </select>
+
+                        </div>
+                    </div>
+                    <hr>
+
+
+                    <div class="row">
+                    <div class="col-lg-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Input
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div class="form-group col-lg-12">
+                                            <div>
+                                                <label>Trademark:</label>
+                                            </div>
+                                            <div id = "div_ma_sel_met">
+                                                <input class="form-control" type="text" id="ma_sel_met" name="ma_sel_met" onchange="onchange_Input_met(this)" required value="Segun vendor list.">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <div>
+                                                <label>Serie:</label>
+                                            </div>
+                                            <div id = "div_se_sel_met">
+                                                <select class="form-control" id="se_sel_met" name="se_sel_met"> </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <div>
+                                                <label>Model:</label>
+                                            </div>
+                                            <div id = "div_mo_sel_met">
+                                                <select class="form-control" id="mo_sel_met" name="mo_sel_met"> </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <div>
+                                                <label>Capacity:</label>
+                                            </div>
+                                            <input class="form-control" type="text" id="capa_met" name="capa_met" onchange="onchange_Input_met(this)" disabled>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Operating Pressure:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input value="80"  class="form-control" type="text" id="presionop_met" name="presionop_met" onchange="onchange_Input_met(this)" required>
+                                            </div>
+                                            <div class="col-md-4" id = "div_po_sel_met">
+                                                <select class="form-control" id="po_sel_met" name="po_sel_met" onchange="cleanOut_met()"> </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Base Pressure:</label> 
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input  class="form-control" type="text" id="preisonba_met" name="preisonba_met" value="14.65" onchange="onchange_Input_met(this)" required><br>
+                                            </div>
+                                            <div class="col-md-4" id="div_pb_sel_met">
+                                                <select class="form-control" id="pb_sel_met" name="pb_sel_met" onchange="cleanOut_met()"> </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Minimum Flow of Operation:</label>
+                                            </div>
+
+                                            <div class="col-md-8">
+                                                <input value="37.5" class="form-control" type="text" id="flujomin_met" name="flujomin_met" onchange="onchange_Input_met(this)" required>
+                                            </div>
+                                            <div class="col-md-4" id="div_fmin_sel_met">
+                                                <select class="form-control" id="fmin_sel_met" name="fmin_sel_met" disabled></select> 
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Maximum Flow of Operation:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input value="188.8" class="form-control" type="text" id="flujomax_met" name="flujomax_met" onchange="onchange_Input_met(this)" required>
+                                            </div>
+                                            <div class="col-md-4" id="div_fmax_sel_met">
+                                                <select class="form-control" id="fmax_sel_met" name="fmax_sel_met"></select> 
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Temperature of Operation</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input value="85" class="form-control" type="text" id="temp_met" name="temp_met" onchange="onchange_Input_met(this)" required>
+                                            </div>
+                                            <div class="col-md-4" id="div_temp_sel_met">
+                                                <select class="form-control" id="temp_sel_met" name="temp_sel_met"></select> 
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- FIN MODAL -->
-                </div>
 
-                <div class="col-lg-9">
-                    Description: 
-                    <input  class="form-control" type="text" id="description_met" name="description_met"><br>
-                    Projects:
-                    <select class="form-control" id="proyects_sel_met" name="proyects_sel_met"> </select>
+                    <div class="col-lg-6">
 
-                </div>
-            </div>
-            <hr>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Results
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Optimum Model:</label>
+                                            <input type="text" id="modeloop_met" name="modeloop_met" readonly required class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>% Work with maximum capacity (Optimum):</label>
+                                            <input type="text" id="trabajoop_met" name="trabajoop_met" readonly required class="form-control">
+                                        </div> 
+                                        <div class="form-group">
+                                            <label id="lbl_capa_met" >Maximum Capacity of Measurement (Optimum)</label>            
+                                            <input type="text" id="maxcapaop_met" name="maxcapaop_met" readonly required class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Evaluated Model</label>
+                                            <input type="text" id="modeloev_met" name="modeloev_met" readonly required class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>% Work with maximum capacity (Evaluated):</label>
+                                            <input type="text" id="trabajoev_met" name="trabajoev_met" readonly required class="form-control">
+                                        </div> 
+                                        <div class="form-group">
+                                            <label id="lbl_mcapae_met">Maximum Capacity of Measurement(Evaluated):</label>            
+                                            <input type="text" id="maxcapaev_met" name="maxcapaev_met" readonly required class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>% Work with minimum conditions of operation (Evaluated):</label>
+                                            <input type="text" id="trabajocam_met" name="trabajocam_met" readonly required class="form-control">
+                                        </div>                      
+
+                                        <input type="button" id="calculateBtn_met" name="calculateBtn_met" value="Calculate" onclick="calculate_met()" class="btn btn-info btn-block">
+                                        <input type="button" id="saveBtn_met" name="saveBtn_met" value="Save" onclick="save_met()" class="btn btn-success btn-block">   
+                                        <input type="button" id="delteBtn_met" name="delteBtn_met" value="Delete" onclick="delete_met()" class="btn btn-danger btn-block">
+                                        <input type="button" id="datasheetgen_met" name="datasheetgen_met" value="Generate DataSheet" onclick="load_datasheet_met()" class="btn btn-success btn-block">   
 
 
-            <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Input
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-
-                                <div class="form-group col-lg-12">
-                                    <div>
-                                        <label>Trademark:</label>
-                                    </div>
-                                    <div id = "div_ma_sel_met">
-                                        <input class="form-control" type="text" id="ma_sel_met" name="ma_sel_met" onchange="onchange_Input_met(this)" required value="Segun vendor list.">
                                     </div>
                                 </div>
-                                <div class="form-group col-lg-12">
-                                    <div>
-                                        <label>Serie:</label>
-                                    </div>
-                                    <div id = "div_se_sel_met">
-                                        <select class="form-control" id="se_sel_met" name="se_sel_met"> </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-12">
-                                    <div>
-                                        <label>Model:</label>
-                                    </div>
-                                    <div id = "div_mo_sel_met">
-                                        <select class="form-control" id="mo_sel_met" name="mo_sel_met"> </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-lg-12">
-                                    <div>
-                                        <label>Capacity:</label>
-                                    </div>
-                                    <input class="form-control" type="text" id="capa_met" name="capa_met" onchange="onchange_Input_met(this)" disabled>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Operating Pressure:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value="80"  class="form-control" type="text" id="presionop_met" name="presionop_met" onchange="onchange_Input_met(this)" required>
-                                    </div>
-                                    <div class="col-md-4" id = "div_po_sel_met">
-                                        <select class="form-control" id="po_sel_met" name="po_sel_met" onchange="cleanOut_met()"> </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Base Pressure:</label> 
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input  class="form-control" type="text" id="preisonba_met" name="preisonba_met" value="14.65" onchange="onchange_Input_met(this)" required><br>
-                                    </div>
-                                    <div class="col-md-4" id="div_pb_sel_met">
-                                        <select class="form-control" id="pb_sel_met" name="pb_sel_met" onchange="cleanOut_met()"> </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Minimum Flow of Operation:</label>
-                                    </div>
-
-                                    <div class="col-md-8">
-                                        <input value="37.5" class="form-control" type="text" id="flujomin_met" name="flujomin_met" onchange="onchange_Input_met(this)" required>
-                                    </div>
-                                    <div class="col-md-4" id="div_fmin_sel_met">
-                                        <select class="form-control" id="fmin_sel_met" name="fmin_sel_met" disabled></select> 
-                                    </div>
-
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Maximum Flow of Operation:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value="188.8" class="form-control" type="text" id="flujomax_met" name="flujomax_met" onchange="onchange_Input_met(this)" required>
-                                    </div>
-                                    <div class="col-md-4" id="div_fmax_sel_met">
-                                        <select class="form-control" id="fmax_sel_met" name="fmax_sel_met"></select> 
-                                    </div>
-
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Temperature of Operation</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input value="85" class="form-control" type="text" id="temp_met" name="temp_met" onchange="onchange_Input_met(this)" required>
-                                    </div>
-                                    <div class="col-md-4" id="div_temp_sel_met">
-                                        <select class="form-control" id="temp_sel_met" name="temp_sel_met"></select> 
-                                    </div>
-
-                                </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Plot
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div id="graficaLineal_met"></div>
+                    
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Plot
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div id="graficaLineal_met"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Results
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Optimum Model:</label>
-                                    <input type="text" id="modeloop_met" name="modeloop_met" readonly required class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>% Work with maximum capacity (Optimum):</label>
-                                    <input type="text" id="trabajoop_met" name="trabajoop_met" readonly required class="form-control">
-                                </div> 
-                                <div class="form-group">
-                                    <label id="lbl_capa_met" >Maximum Capacity of Measurement (Optimum)</label>            
-                                    <input type="text" id="maxcapaop_met" name="maxcapaop_met" readonly required class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Evaluated Model</label>
-                                    <input type="text" id="modeloev_met" name="modeloev_met" readonly required class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>% Work with maximum capacity (Evaluated):</label>
-                                    <input type="text" id="trabajoev_met" name="trabajoev_met" readonly required class="form-control">
-                                </div> 
-                                <div class="form-group">
-                                    <label id="lbl_mcapae_met">Maximum Capacity of Measurement(Evaluated):</label>            
-                                    <input type="text" id="maxcapaev_met" name="maxcapaev_met" readonly required class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>% Work with minimum conditions of operation (Evaluated):</label>
-                                    <input type="text" id="trabajocam_met" name="trabajocam_met" readonly required class="form-control">
-                                </div>                      
-
-                                <input type="button" id="calculateBtn_met" name="calculateBtn_met" value="Calculate" onclick="calculate_met()" class="btn btn-info btn-block">
-                                <input type="button" id="saveBtn_met" name="saveBtn_met" value="Save" onclick="save_met()" class="btn btn-success btn-block">   
-                                <input type="button" id="delteBtn_met" name="delteBtn_met" value="Delete" onclick="delete_met()" class="btn btn-danger btn-block">
-                                <input type="button" id="datasheetgen_met" name="datasheetgen_met" value="Generate DataSheet" onclick="load_datasheet_met()" class="btn btn-success btn-block">   
-
-
-                            </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="col-md-3">
+                            <input type="button" id="cleanAllBtn_met" name="cleanBtn_met" value="Clean All" onclick="cleanAll_met()" class="btn btn-warning btn-block">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="col-md-3">
-                    <input type="button" id="cleanAllBtn_met" name="cleanBtn_met" value="Clean All" onclick="cleanAll_met()" class="btn btn-warning btn-block">
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="cleanInputBtn_met" name="cleanBtn_met" value="Clean Input Data" onclick="cleanIn_met()" class="btn btn-warning btn-block">
-                </div>
-                <div class="col-md-3">
-                    <input type="button" id="cleanOutputBtn_met" name="cleanBtn_met" value="Clean Output Data" onclick="cleanOut_met()" class="btn btn-warning btn-block">
-                </div>
+                        <div class="col-md-3">
+                            <input type="button" id="cleanInputBtn_met" name="cleanBtn_met" value="Clean Input Data" onclick="cleanIn_met()" class="btn btn-warning btn-block">
+                        </div>
+                        <div class="col-md-3">
+                            <input type="button" id="cleanOutputBtn_met" name="cleanBtn_met" value="Clean Output Data" onclick="cleanOut_met()" class="btn btn-warning btn-block">
+                        </div>
 
+                    </div>
+                    </div>
+                    <div id="load_Dialog_met" title="Basic dialog" style='display:none;'>
+                        <p>Successfully uploaded data</p>
+                    </div>
+
+                    <div id="save_Dialog_met" title="Basic dialog" style='display:none;'>
+                        <p>Data saved successfully</p>
+                    </div>
+
+                    <div id="error_Dialog_met" title="Basic dialog" style='display:none;'>
+                        <p>An error has occurred in the process</p>
+                    </div>
+
+                    <div id="calculate_Dialog_met" title="Basic dialog" style='display:none;'>
+                        <p>Calculation done successfully</p>
+                    </div>
+
+                    <div id="delete_Dialog_met" title="Basic dialog" style='display:none;'>
+                        <p>Successfully deleted record</p>
+                    </div>
+
+                    <div id="dialog-confirm_met" title="Delete record" style='display:none;'>
+                        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                            Are you sure you want to permanently delete this record?
+                        </p>
+                    </div>
+                    <input type="hidden" id="id_met" name="id_met">  
+                    <input type="hidden" id="opt_met" name="opt_met">
+                    <input type="hidden" id="capaopt_met" name="capaopt_met">
+                </div>
             </div>
-            <input type="hidden" id="id_met" name="id_met">  
-            <input type="hidden" id="opt_met" name="opt_met">
-            <input type="hidden" id="capaopt_met" name="capaopt_met">
         </div>
 
         <script>
@@ -325,9 +340,9 @@
                 var pres = 0;
 
                 if ($("#po_sel_met").val().split(",")[1] === "psig") {
-                    pres = Number($("#presionop_met").val());
+                    pres = Number($("#presionop_met").val().replace(",",""));
                 } else {
-                    pres = Number($("#presionop_met").val()) * 14.504;
+                    pres = Number($("#presionop_met").val().replace(",","")) * 14.504;
                 }
 
 
@@ -359,7 +374,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     dataType: "json",
@@ -372,7 +387,7 @@
                         var file = data.row.file;
                         var path = data.row.path;
                         //window.open(data, "nuevo", "");
-                        window.location = "bajar.jsp?filename=" + file + "&path=" + path;
+                        window.location = "/Plataforma/bajar.jsp?filename=" + file + "&path=" + path;
 
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -398,37 +413,58 @@
                 var enope = [];
                 var optimo = [];
                 var data = [];
-                var eve = Number($("#presionop_met").val());
-
                 var j = 0;
+                var fin = 470;
+                var inicio = 0;
+                var paso = 10;
+                var valX = [];
 
-                var fin = eve + 100;
-
-                for (var i = 0; i <= fin; i = i + 1) {
-                    evaluado[j] = (i + presb * aux) / (presb * aux) * caprefev;
-                    optimo[j] = (i + presb * aux) / (presb * aux) * caprefop;
-                    enope[j] = parseFloat($("#flujomax_met").val());
-
-                    data[j] = {x: i.toString(), a: evaluado[j].toFixed(0), b: optimo[j].toFixed(0), c: enope[j].toFixed(0)};
+                while(inicio <= fin){
+                    valX[j] = inicio;
+                    evaluado[j] = (inicio + presb * aux) / (presb * aux) * caprefev;
+                    optimo[j] = (inicio + presb * aux) / (presb * aux) * caprefop;
+                    enope[j] = parseFloat($("#presionop_met").val());
 
                     j += 1;
+                    inicio += paso;
                 }
+                
+                var max = Math.max(evaluado[evaluado.length - 1], optimo[optimo.length - 1]);
+                
+                var eval = {
+                    x: valX,
+                    y: evaluado,
+                    mode: 'lines',
+                    name: 'Evaluated'
+                };
+                
+                var opt = {
+                    x: valX,
+                    y: optimo,
+                    mode: 'lines',
+                    name: 'Optimun'
+                };
+                 
+                var pOpe = {
+                    x: [parseFloat($("#presionop_met").val().replace(",", "")), parseFloat($("#presionop_met").val().replace(",", ""))],
+                    y: [0, max],
+                    mode: 'lines',
+                    name: 'Evaluated Point'
+                };
 
                 $("#graficaLineal_met").html("");
 
-
-
-                Morris.Line({
-                    element: 'graficaLineal_met',
-                    data: data,
-                    xkey: 'x',
-                    ykeys: ['a', 'b', 'c'],
-                    labels: ['Medidor Evaluado', 'Medidor Optimo', 'Capacidad del Proceso'],
-                    events: [
-                        eve
-                    ],
-                    parseTime: false
-                });
+                var data = [eval, opt, pOpe];
+                var layout = {
+                    title: 'Capacity Turbine Meters',
+                    xaxis: {
+                        title: 'Capacity [SCFH]'
+                    },
+                    yaxis: {
+                        title: 'Operating Pressure [PSIG]'
+                    }
+                };
+                Plotly.newPlot('graficaLineal_met', data, layout);
 
             }
 
@@ -440,7 +476,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -473,7 +509,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -536,7 +572,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -577,7 +613,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     async: false,
@@ -643,7 +679,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -673,7 +709,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -705,7 +741,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -882,7 +918,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -940,7 +976,7 @@
                 if ($("#opt_met").val() == 2) {
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../../manager.jsp",
                         data: parametros,
                         dataType: 'json',
                         beforeSend: function (xhr) {
@@ -969,30 +1005,5 @@
 
         </script>
 
-        <div id="load_Dialog_met" title="Basic dialog" style='display:none;'>
-            <p>Successfully uploaded data</p>
-        </div>
-
-        <div id="save_Dialog_met" title="Basic dialog" style='display:none;'>
-            <p>Data saved successfully</p>
-        </div>
-
-        <div id="error_Dialog_met" title="Basic dialog" style='display:none;'>
-            <p>An error has occurred in the process</p>
-        </div>
-
-        <div id="calculate_Dialog_met" title="Basic dialog" style='display:none;'>
-            <p>Calculation done successfully</p>
-        </div>
-
-        <div id="delete_Dialog_met" title="Basic dialog" style='display:none;'>
-            <p>Successfully deleted record</p>
-        </div>
-
-        <div id="dialog-confirm_met" title="Delete record" style='display:none;'>
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-                Are you sure you want to permanently delete this record?
-            </p>
-        </div>
     </body>
 </html>

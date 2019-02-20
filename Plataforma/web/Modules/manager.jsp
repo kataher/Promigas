@@ -183,6 +183,10 @@
             json = getProyectosByUserIgnoringRol(request, response, controller);
             out.print(json);
             break;
+        case 219:
+            json = getAllProjects(request, response, controller);
+            out.print(json);
+            break;
 
         //Usuarios
         case 300:
@@ -214,6 +218,14 @@
             break;
         case 307:
             json = getUsuarioRoles(request, response, controller);
+            out.print(json);
+            break;
+        case 308:
+            json = getInfoUser(request, response, controller);
+            out.print(json);
+            break;
+        case 309:
+            json = getUsuarioAreas(request, response, controller);
             out.print(json);
             break;
 
@@ -271,9 +283,28 @@
             json = addEspecialidad(request, response, controller);
             out.print(json);
             break;
+
+        //Aras   
+        case 340:
+            json = getAreas(request, response, controller);
+            out.print(json);
+            break;
+        case 341:
+            json = editFases(request, response, controller);
+            out.print(json);
+            break;
+        case 342:
+            json = deleteFases(request, response, controller);
+            out.print(json);
+            break;
+        case 343:
+            json = addFase(request, response, controller);
+            out.print(json);
+            break;
+
         case 500:
             json = new JSONObject();
-            json.put("r","r");
+            json.put("r", "r");
             out.print(json);
             break;
     }
@@ -613,6 +644,18 @@
         return res;
     }
 
+    private JSONObject getAllProjects(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
+        JSONObject res = null;
+        try {
+            res = controller.getAllProjects(request);
+
+        } catch (Exception ex) {
+            response.sendError(1, ex.getMessage());
+        }
+
+        return res;
+    }
+
     private JSONObject setEstadoActvidad(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
         JSONObject res = null;
         try {
@@ -758,6 +801,12 @@
         JSONObject res = null;
         try {
             res = controller.login(request);
+            HttpSession session = request.getSession();
+            session.setAttribute("name", res.get("name"));
+            session.setAttribute("fullname", res.get("fullname"));
+            session.setAttribute("idusu", res.get("id"));
+            session.setAttribute("tipo", res.get("type"));
+            session.setAttribute("roles", res.get("roles"));
 
         } catch (Exception ex) {
             response.sendError(1, ex.getMessage());
@@ -794,6 +843,30 @@
         JSONObject res = null;
         try {
             res = controller.getUsuarioRoles(request);
+
+        } catch (Exception ex) {
+            response.sendError(1, ex.getMessage());
+        }
+
+        return res;
+    }
+
+    private JSONObject getUsuarioAreas(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
+        JSONObject res = null;
+        try {
+            res = controller.getUsuarioAreas(request);
+
+        } catch (Exception ex) {
+            response.sendError(1, ex.getMessage());
+        }
+
+        return res;
+    }
+
+    private JSONObject getInfoUser(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
+        JSONObject res = null;
+        try {
+            res = controller.getInfoUser(request);
 
         } catch (Exception ex) {
             response.sendError(1, ex.getMessage());
@@ -854,6 +927,18 @@
         JSONObject res = null;
         try {
             res = controller.getFasesAdm(request);
+
+        } catch (Exception ex) {
+            response.sendError(1, ex.getMessage());
+        }
+
+        return res;
+    }
+
+    private JSONObject getAreas(HttpServletRequest request, HttpServletResponse response, GeneralController controller) throws IOException {
+        JSONObject res = null;
+        try {
+            res = controller.getAreas(request);
 
         } catch (Exception ex) {
             response.sendError(1, ex.getMessage());

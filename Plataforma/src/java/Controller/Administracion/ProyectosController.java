@@ -118,6 +118,11 @@ public class ProyectosController extends Controller.Controller{
         return ((ProyectosModel)model).getProyectosByUserIgnoringRol(id_user);
     }
     
+     public JSONObject getAllProjects() throws Exception{
+        
+        return ((ProyectosModel)model).getAllProjects();
+    }
+    
     public JSONObject setEstadoActividad(String id_proyect, String id_especialidad, String id_fase, String id_actividad, String aprobado) throws Exception{ 
         
          return ((ProyectosModel)model).setEstadoActividad(id_proyect, id_especialidad, id_fase, id_actividad, aprobado);
@@ -230,12 +235,14 @@ public class ProyectosController extends Controller.Controller{
                 data = ((ProyectosModel)model).saveStep1(values1, espeJson.getJSONArray("info"), "1", id_proyect);
                 */
                 String name = request.getParameter("nombre");
+                String area = request.getParameter("area");
                 id_proyect = request.getParameter("id_proyect");      
                 String id_user = request.getParameter("id_user");                
                 String esp = request.getParameter("especialidades");                
                 update = request.getParameter("update");
                 
                 Map<String, String> values1 = new HashMap<String, String>();
+                values1.put("area", area);
                 values1.put("name", stringToBD(name));
                 values1.put("id_user", id_user);
                 values1.put("flag", "0");

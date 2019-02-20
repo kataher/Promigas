@@ -21,6 +21,8 @@
         response.setContentLength((int) file.length());
         ServletOutputStream sos = response.getOutputStream();
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+        //borrar archivo
+        
 
         int bytesR = bis.read();
         while (bytesR != -1) {
@@ -30,7 +32,8 @@
         sos.close();
         bis.close();
     } catch (Exception ex) {
-        System.out.println("Mesaje ES: " + ex.getMessage());
+        ex.printStackTrace();
+        //System.out.println("Mesaje ES: " + ex.getMessage());
 
     }
 

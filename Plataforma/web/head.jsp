@@ -4,6 +4,8 @@
       session.setAttribute("tipo", tipo );
       String idusu = request.getParameter("idusu");
       session.setAttribute("idusu", idusu );
+      String name = request.getParameter("name");
+      session.setAttribute("name", name );
       
      }else{
         //response.sendRedirect("index.jsp");

@@ -206,6 +206,7 @@ public class GeneralModel extends Model{
         return data.get(0).get("valor").toString();
     }
     
+    
     public String getRutaDataSheet() throws Exception{
         String sql = "Select valor From ["+bd+"].[dbo].[Parametros] Where nombre = 'rutads'";
         

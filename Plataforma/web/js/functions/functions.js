@@ -20,9 +20,9 @@ function show_OkDialog(div, title) {
     });
 }
 
-function validateDecimal(value){
+function validateDecimal(value) {
     var expreg = /^-?[0-9]*(\.[0-9]+)?$/;
-    if(expreg.test(value))
+    if (expreg.test(value))
         return true;
     else
         return false;
@@ -35,17 +35,17 @@ function onchange_Input_zero(inp) {
     if (pos == 0) {
         inp.value = "0" + str;
     }
-    /*var s = "";
-     
-     if(inp.value.indexOf(".") > 0){
-     //Llamar a la funcion con la posicion desde 0 hasta la del punto        
-     var pentera = inp.value.substr(0,inp.value.indexOf("."));
-     s = addComas(pentera) + inp.value.substr(inp.value.indexOf("."), inp.value.length);
-     }else{
-     var pentera = inp.value;
-     s = addComas(pentera);
-     }
-     inp.value = s;*/
+    var s = "";
+
+    if (inp.value.indexOf(".") > 0) {
+        //Llamar a la funcion con la posicion desde 0 hasta la del punto        
+        var pentera = inp.value.substr(0, inp.value.indexOf("."));
+        s = addComas(pentera) + inp.value.substr(inp.value.indexOf("."), inp.value.length);
+    } else {
+        var pentera = inp.value;
+        s = addComas(pentera);
+    }
+    inp.value = s;
 }
 
 function changeToDecimal(vec) {
@@ -116,11 +116,11 @@ function getproyectos(iduser, select, diverror) {
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "/Plataforma/Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async: false,
-        beforeSend: function (xhr) {            
+        beforeSend: function (xhr) {
             block("Cargado datos...");
         },
         success: function (data, status, request) {
