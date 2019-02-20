@@ -1,281 +1,365 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
-
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Steel Pipe Design:</strong>  Buoyancy Analysis & Concrete Coating Requeriments</h2>
-            </div>
-            <div class="col-lg-3"> 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_basc()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Steel Pipe Design:</strong>  Buoyancy Analysis & Concrete Coating Requeriments</h2>
                             </div>
-                            <div class="modal-body">
-                                <div id="div-table_basc"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_basc()">
+                                    Record
+                                </button>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>
-
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_basc" name="description_basc"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_basc" name="proyects_sel_basc"> </select>
-            </div>
-        </div>
-        <hr>
-
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Pipe and Operational Data
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Datos de Tubería
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-
-                                            <label>Nominal pipe size:</label>
-
-                                            <div id="div_nomps_sel_basc">
-                                                <select class="form-control" id="div_nomps_sel_basc" name="div_nomps_sel_basc"> </select>
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
                                             </div>
-
-                                        </div>
-                                        <div class="col-lg-12">
-
-                                            <label>Wall Thickness [.in]:</label>
-
-                                            <div id="div_wallt_sel_basc">
-                                                <select class="form-control" id="wthi_sel_basc" name="wthi_sel_basc"> </select>     
+                                            <div class="modal-body">
+                                                <div id="div-table_basc"></div>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
+                                            </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Water Density:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" value="62.40" id="water_dens" name="water_dens" onchange='onchange_Input_basc(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_water_dens_sel_basc">
-                                    <select class="form-control" id="water_dens_sel_basc" name="water_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                        <option>lbs/ft<sup>3</sup></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Concrete Coating Density:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" value="143" id="conc_water_dens" name="conc_water_dens" onchange='onchange_Input_basc(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_ccoat_dens_sel_basc">
-                                    <select class="form-control" id="ccoat_dens_sel_basc" name="ccoat_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                        <option>lbs/ft<sup>3</sup></option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Corrosion Coating Density:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" value="71.80" id="corr_coa" name="corr_coa" onchange='onchange_Input_basc(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_corr_dens_sel_basc">
-                                    <select class="form-control" id="corr_dens_sel_basc" name="corr_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                        <option>lbs/ft<sup>3</sup></option>
-                                    </select>
-                                </div>
+                                <!-- FIN MODAL -->
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Input Data:
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">                                    
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Nominal Outside Diameter:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="nomout_basc" name="nomout_basc" onchange='onchange_Input_basc(this)' required> 
-                                    </div>
-                                    <div class="col-md-4" id = "div_nomout_sel_basc">
-                                        <select class="form-control" id="nomout_sel_basc" name="nomout_sel_basc" onchange='cleanOut_basc()'> 
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Nominal Wall Thickness:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="nom_wall_basc" name="nom_wall_basc" onchange='onchange_Input_basc(this)' required> 
-                                    </div>
-                                    <div class="col-md-4" id = "div_nom_wall_sel_basc">
-                                        <select class="form-control" id="nom_wall_sel_basc" name="nom_wall_sel_basc" onchange='cleanOut_basc()'> 
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Design Specific Gravity Ratio:</label>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input type="text" class="form-control" id="spec_gra_basc" name="spec_gra_basc" onchange='onchange_Input_basc(this)' required> 
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Corrosion Coating Thickness:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="corr_coa_thick_basc" name="corr_coa_thick_basc" onchange='onchange_Input_basc(this)' required> 
-                                    </div>
-                                    <div class="col-md-4" id = "div_corr_coa_thick_sel_basc">
-                                        <select class="form-control" id="corr_coa_thick_sel_basc" name="corr_coa_thick_sel_basc" onchange='cleanOut_basc()'> 
-                                            <option>MIL</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-12">
-                                        <label>Pipe Length between joins:</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input type="text" class="form-control" id="pipe_lenght_basc" name="pipe_lenght_basc" onchange='onchange_Input_basc(this)' required> 
-                                    </div>
-                                    <div class="col-md-4" id = "div_pipe_len_sel_basc">
-                                        <select class="form-control" id="pipe_len_sel_basc" name="pipe_len_sel_basc" onchange='cleanOut_basc()'> 
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_basc" name="description_basc"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_basc" name="proyects_sel_basc"> </select>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Results
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">                                    
-                            <div class="form-group">
-                                <label>Pipe Weight [lbs/ft.]:</label>
-                                <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Total Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Corrosion Coating Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Concrete Coating Thickness [in.]:</label>
-                                <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Concrete Coating Volume [ft<sup>3</sup>]:</label>
-                                <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Weight of Pipe in Air [lbs/ft]:</label>
-                                <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Weight of Water Displaced [lbs/ft]:</label>
-                                <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control" readonly> 
-                                <BR>
-                                <label>Weight of Sugmerged Pipe [lbs/ft]:</label>
-                                <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control" readonly> 
-                                <BR>                      
-                                <label>Weight per Joint [lbs/Joint]:</label>
-                                <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control" readonly> 
-                                <BR>                                                                          
-                                <div>    
-                                    <input type="button" id="calculateBtn_basc" name="calculateBtn_basc" value="Calculate" onclick="calculate_basc()" class="btn btn-info btn-block">
-                                    <input type="button" id="saveBtn_basc" name="saveBtn_basc" value="Save" onclick="save_basc()" class="btn btn-success btn-block">   
-                                    <input type="button" id="reportBtn_basc" name="reportBtn_basc" value="Delete" onclick="reportReg_basc()" class="btn btn-danger btn-block">          
-                                </div>
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Pipe Properties
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Datos de Tubería
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-12">
+
+                                                                                    <label>Nominal pipe size:</label>
+
+                                                                                    <div id="div_nomps_sel_basc">
+                                                                                        <select class="form-control" id="div_nomps_sel_basc" name="div_nomps_sel_basc"> </select>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-lg-12">
+
+                                                                                    <label>Wall Thickness [.in]:</label>
+
+                                                                                    <div id="div_wallt_sel_basc">
+                                                                                        <select class="form-control" id="wthi_sel_basc" name="wthi_sel_basc"> </select>     
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Water Density:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" value="62.40" id="water_dens" name="water_dens" onchange='onchange_Input_basc(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_water_dens_sel_basc">
+                                                                            <select class="form-control" id="water_dens_sel_basc" name="water_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Concrete Coating Density:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" value="143" id="conc_water_dens" name="conc_water_dens" onchange='onchange_Input_basc(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_ccoat_dens_sel_basc">
+                                                                            <select class="form-control" id="ccoat_dens_sel_basc" name="ccoat_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Corrosion Coating Density:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" value="71.80" id="corr_coa" name="corr_coa" onchange='onchange_Input_basc(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_corr_dens_sel_basc">
+                                                                            <select class="form-control" id="corr_dens_sel_basc" name="corr_dens_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> Input Parameters </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">                                    
+                                                                    <div class="form-group">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Nominal Outside Diameter:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" class="form-control" id="nomout_basc" name="nomout_basc" onchange='onchange_Input_basc(this)' required> 
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_nomout_sel_basc">
+                                                                                <select class="form-control" id="nomout_sel_basc" name="nomout_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Nominal Wall Thickness:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" class="form-control" id="nom_wall_basc" name="nom_wall_basc" onchange='onchange_Input_basc(this)' required> 
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_nom_wall_sel_basc">
+                                                                                <select class="form-control" id="nom_wall_sel_basc" name="nom_wall_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Design Specific Gravity Ratio:</label>
+                                                                            </div>
+                                                                            <div class="col-md-12">
+                                                                                <input type="text" class="form-control" id="spec_gra_basc" name="spec_gra_basc" onchange='onchange_Input_basc(this)' required> 
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Corrosion Coating Thickness:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" class="form-control" id="corr_coa_thick_basc" name="corr_coa_thick_basc" onchange='onchange_Input_basc(this)' required> 
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_corr_coa_thick_sel_basc">
+                                                                                <select class="form-control" id="corr_coa_thick_sel_basc" name="corr_coa_thick_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                    <option>MIL</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Pipe Length between joins:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" class="form-control" id="pipe_lenght_basc" name="pipe_lenght_basc" onchange='onchange_Input_basc(this)' required> 
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_pipe_len_sel_basc">
+                                                                                <select class="form-control" id="pipe_len_sel_basc" name="pipe_len_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results                        
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">                                    
+                                                                    <div class="form-group">
+                                                                        <label>Pipe Weight [lbs/ft.]:</label>
+                                                                        <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Total Volume [ft<sup>3</sup>]:</label>
+                                                                        <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Corrosion Coating Volume [ft<sup>3</sup>]:</label>
+                                                                        <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Concrete Coating Thickness [in.]:</label>
+                                                                        <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Concrete Coating Volume [ft<sup>3</sup>]:</label>
+                                                                        <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Weight of Pipe in Air [lbs/ft]:</label>
+                                                                        <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Weight of Water Displaced [lbs/ft]:</label>
+                                                                        <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Weight of Sugmerged Pipe [lbs/ft]:</label>
+                                                                        <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control" readonly> 
+                                                                        <BR>                      
+                                                                        <label>Weight per Joint [lbs/Joint]:</label>
+                                                                        <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control" readonly> 
+
+                                                                    </div>    
+                                                                </div> 
+                                                            </div>    
+                                                        </div>  
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>   
                             </div>  
-                        </div> 
-                    </div>               
+
+                            <div class="col-lg-3">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <input type="button" id="calculateBtn_basc" name="calculateBtn_basc" value="Calculate" onclick="calculate_basc()" class="btn btn-info btn-block">
+                                                <input type="button" id="saveBtn_basc" name="saveBtn_basc" value="Save" onclick="save_basc()" class="btn btn-success btn-block">   
+                                                <input type="button" id="reportBtn_basc" name="reportBtn_basc" value="Delete" onclick="reportReg_basc()" class="btn btn-danger btn-block">          
+                                                <input type="button" id="cleanAllBtn_basc" name="cleanBtn_basc" value="Clean All" onclick="cleanAll_basc()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_basc" name="cleanBtn_basc" value="Clean Input Data" onclick="cleanIn_basc()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_basc" name="cleanBtn_basc" value="Clean Output Data" onclick="cleanOut_basc()" class="btn btn-warning btn-block">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="opt_basc" name="opt_basc"> 
+                            <input type="hidden" id="id_basc" name="id_basc">
+                        </div>
+                        <div id="load_Dialog_basc" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_basc" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_basc" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_basc" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_basc" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_basc" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div> 
 
-        <div class="col-lg-12">
-            <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_basc" name="cleanBtn_basc" value="Clean All" onclick="cleanAll_basc()" class="btn btn-warning btn-block">
             </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_basc" name="cleanBtn_basc" value="Clean Input Data" onclick="cleanIn_basc()" class="btn btn-warning btn-block">
-            </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_basc" name="cleanBtn_basc" value="Clean Output Data" onclick="cleanOut_basc()" class="btn btn-warning btn-block">
-            </div>    
+            <!-- /#page-wrapper -->
+
         </div>
+        <!-- /#wrapper -->
+    </body>
 
-        <input type="hidden" id="opt_basc" name="opt_basc"> 
-        <input type="hidden" id="id_basc" name="id_basc">   
-        <script>
+   <script>
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_basc"),
@@ -293,7 +377,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -369,7 +453,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -404,7 +488,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -484,6 +568,6 @@
                 onchange_Input_zero(inp);
                 cleanOut_basc();
             }
-        </script>        
-    </body>
+        </script> 
+
 </html>
