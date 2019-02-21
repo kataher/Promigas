@@ -1,217 +1,303 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
-
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Steel Pipe Design:</strong>  Wall Thickness Polyethylene Pipe</h2>
-            </div>
-            <div class="col-lg-3"> 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_wtpe()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Steel Pipe Design:</strong>  Wall Thickness Polyethylene Pipe</h2>
                             </div>
-                            <div class="modal-body">
-                                <div id="div-table_wtpe"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>
-
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_wtpe" name="description_wtpe"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_wtpe" name="proyects_sel_wtpe"> </select>
-            </div>
-        </div>
-        <hr>
-
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Pipe and Operational Properties:
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">                                                 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Polyethylene Line Pipe API 15LE:
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-lg-12">
-                                        <label>Tamaño nominal de la tubería</label>                        
-                                        <div id="div_cole_sel_wtpe">
-                                            <select class="form-control" id="cole_sel_coef_wtpe" name="cole_sel_coef_wtpe"> </select>    
-                                        </div>
-
-                                    </div>                      
-
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    HDB - 73°F
-                                </div>
-                                <div class="panel-body">
-                                    <div class="col-lg-12">
-                                        <label>Piping Material Designation:</label>                        
-                                        <div class="col-lg-12" id="div_material_sel_wtpe">
-                                            <select class="form-control" id="material_sel_wtpe" name="material_sel_wtpe"> </select>
-                                        </div> 
-
-                                    </div>                      
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-5">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Selected Data:
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">    
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Nominal pipe size:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="nom_pipeop_wtpe" name="nom_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_nom_pipeop_sel_wtpe">
-                                    <select class="form-control" id="nom_pipeop_sel_wtpe" name="nom_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Outside Diameter [in.]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="out_pipeop_wtpe" name="out_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_out_pipeop_sel_wtpe">
-                                    <select class="form-control" id="out_pipeop_sel_wtpe" name="out_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Design Pressure [psi.]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="despress_pipeop_wtpe" name="despress_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_despress_pipeop_sel_wtpe">
-                                    <select class="form-control" id="despress_pipeop_sel_wtpe" name="despress_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Hydrostatic Design Basis [psi]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="hyd_pipeop_wtpe" name="hyd_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_hyd_pipeop_sel_wtpe">
-                                    <select class="form-control" id="hyd_pipeop_sel_wtpe" name="hyd_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Design Factor:</label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="fact_pipeop_wtpe" name="fact_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Results
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">                                    
-                            <div class="form-group">
-                                <label>Espesor mínimo de la pared de la tubería [in]:</label>
-                                <input type="text" name="minimun_wallthick_wtpe" id="minimun_wallthick_wtpe" class="form-control" readonly> 
+                            <div class="col-lg-3"> 
                                 <br>
-                                <div>    
-                                    <input type="button" id="calculateBtn_wtpe" name="calculateBtn_wtpe" value="Calculate" onclick="calculate_wtpe()" class="btn btn-info btn-block">
-                                    <input type="button" id="saveBtn_wtpe" name="saveBtn_wtpe" value="Save" onclick="save_wtpe()" class="btn btn-success btn-block">   
-                                    <input type="button" id="delteBtn_wtpe" name="delteBtn_wtpe" value="Eliminar" onclick="deleteReg_wtpe()" class="btn btn-danger btn-block">          
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_wtpe()">
+                                    Record
+                                </button>
+
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_wtpe"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- FIN MODAL -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_wtpe" name="description_wtpe"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_wtpe" name="proyects_sel_wtpe"> </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> Select Pipe and Location Data </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">                                                 
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Polyethylene Line Pipe API 15LE:
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="col-lg-12">
+                                                                                <label>Tamaño nominal de la tubería</label>                        
+                                                                                <div id="div_cole_sel_wtpe">
+                                                                                    <select class="form-control" id="cole_sel_coef_wtpe" name="cole_sel_coef_wtpe"> </select>    
+                                                                                </div>
+
+                                                                            </div>                      
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            HDB - 73°F
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="col-lg-12">
+                                                                                <label>Piping Material Designation:</label>                        
+                                                                                <div class="col-lg-12" id="div_material_sel_wtpe">
+                                                                                    <select class="form-control" id="material_sel_wtpe" name="material_sel_wtpe"> </select>
+                                                                                </div> 
+
+                                                                            </div>                      
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> Input Parameters </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">    
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Nominal pipe size:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="nom_pipeop_wtpe" name="nom_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_nom_pipeop_sel_wtpe">
+                                                                            <select class="form-control" id="nom_pipeop_sel_wtpe" name="nom_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Outside Diameter [in.]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="out_pipeop_wtpe" name="out_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_out_pipeop_sel_wtpe">
+                                                                            <select class="form-control" id="out_pipeop_sel_wtpe" name="out_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Design Pressure [psi.]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="despress_pipeop_wtpe" name="despress_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_despress_pipeop_sel_wtpe">
+                                                                            <select class="form-control" id="despress_pipeop_sel_wtpe" name="despress_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Hydrostatic Design Basis [psi]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="hyd_pipeop_wtpe" name="hyd_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_hyd_pipeop_sel_wtpe">
+                                                                            <select class="form-control" id="hyd_pipeop_sel_wtpe" name="hyd_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Design Factor:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input type="text" class="form-control" id="fact_pipeop_wtpe" name="fact_pipeop_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results                        
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">                                    
+                                                                    <div class="form-group">
+                                                                        <label>Espesor mínimo de la pared de la tubería [in]:</label>
+                                                                        <input type="text" name="minimun_wallthick_wtpe" id="minimun_wallthick_wtpe" class="form-control" readonly> 
+
+                                                                    </div>  
+                                                                </div> 
+                                                            </div>               
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>   
                             </div>  
-                        </div> 
-                    </div>               
+
+                            <div class="col-lg-3">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="calculateBtn_wtpe" name="calculateBtn_wtpe" value="Calculate" onclick="calculate_wtpe()" class="btn btn-info btn-block">
+                                                <input type="button" id="saveBtn_wtpe" name="saveBtn_wtpe" value="Save" onclick="save_wtpe()" class="btn btn-success btn-block">   
+                                                <input type="button" id="delteBtn_wtpe" name="delteBtn_wtpe" value="Eliminar" onclick="deleteReg_wtpe()" class="btn btn-danger btn-block">          
+
+                                                <input type="button" id="cleanAllBtn_wtpe" name="cleanBtn_wtpe" value="Clean All" onclick="cleanAll_wtpe()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_wtpe" name="cleanBtn_wtpe" value="Clean Input Data" onclick="cleanIn_wtpe()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_wtpe" name="cleanBtn_wtpe" value="Clean Output Data" onclick="cleanOut_wtpe()" class="btn btn-warning btn-block">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="opt_wtpe" name="opt_wtpe"> 
+        <input type="hidden" id="id_wtpe" name="id_wtpe"> 
+                        </div>
+                        <div id="load_Dialog_wtpe" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_wtpe" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_wtpe" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_wtpe" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_wtpe" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_wtpe" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div> 
 
-        <div class="col-lg-12">
-            <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_wtpe" name="cleanBtn_wtpe" value="Clean All" onclick="cleanAll_wtpe()" class="btn btn-warning btn-block">
             </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_wtpe" name="cleanBtn_wtpe" value="Clean Input Data" onclick="cleanIn_wtpe()" class="btn btn-warning btn-block">
-            </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_wtpe" name="cleanBtn_wtpe" value="Clean Output Data" onclick="cleanOut_wtpe()" class="btn btn-warning btn-block">
-            </div>    
+            <!-- /#page-wrapper -->
+
         </div>
+        <!-- /#wrapper -->
+    </body>
 
-        <input type="hidden" id="opt_wtpe" name="opt_wtpe"> 
-        <input type="hidden" id="id_wtpe" name="id_wtpe">   
-        <script>
+    <script>
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_wtpe"),
@@ -231,7 +317,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -260,7 +346,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -312,7 +398,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -350,7 +436,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -408,6 +494,5 @@
                 onchange_Input_zero(inp);
                 cleanOut_wtpe();
             }
-        </script>           
-    </body>
+        </script>      
 </html>
