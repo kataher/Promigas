@@ -361,7 +361,7 @@
                                     </div>
                                 </div>
                             </div>
-                            input type="hidden" id="opt_unrpl" name="opt_unrpl"> 
+                            <input type="hidden" id="opt_unrpl" name="opt_unrpl"> 
                             <input type="hidden" id="id_unrpl" name="id_unrpl">  
                         </div>
                         <div id="load_Dialog_unrpl" title="Basic dialog" style='display:none;'>
