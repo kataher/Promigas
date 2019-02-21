@@ -1,902 +1,992 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
-
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Stell Pipe Design:</strong>  Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis </h2>
-            </div>
-            <div class="col-lg-3"> 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_inpp()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div id="div-table_inpp"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>
-
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_inpp" name="description_inpp"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_inpp" name="proyects_sel_inpp"> </select>
-            </div>
-        </div>
-        <hr>
-
-        <div class="col-lg-12" id="vista1">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Pipe and Operational Characteristics
-                </div>
-
-                <div class="panel-body  col-lg-6" >
-                    <div class="panel panel-default">
-
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Line Pipe API 5L
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-lg-6">
-                                                    <label>Nominal pipe size:</label>
-                                                </div> 
-                                                <div class="col-lg-6">
-                                                    <div id="div_nomps_sel_inpp">
-                                                        <select class="form-control" id="nominalps_sel_inpp" name="nominalps_sel_inpp"> </select>
-                                                    </div>
-                                                </div> <br>
-                                                <div class="col-lg-6">                      
-                                                    <label>Wall Thickness [.in]:</label>
-                                                </div> 
-                                                <div class="col-lg-6">
-                                                    <div id="div_wallt_sel_inpp">
-                                                        <select class="form-control" id="wthi_sel_inpp" name="wthi_sel_inpp"> </select>
-                                                    </div>
-                                                </div> <br>                      
-                                                <div class="col-lg-6">                      
-                                                    <label>Grade:</label>
-                                                </div> 
-                                                <div class="col-lg-6">
-                                                    <div id="div_grade_sel_inpp">
-                                                        <select class="form-control" id="grade_sel_inpp" name="grade_sel_inpp"> </select>
-                                                    </div>
-                                                </div>                        
-                                            </div> 
-                                        </div>
-                                    </div>                          
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body  col-lg-6" >
-                    <div class="panel panel-default">
-
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="panel panel-default ">
-                                                <div class="panel-body">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-7">
-                                                            <label>Pipe outside diameter [in.]:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="pipe_dia_inpp" id="pipe_dia_inpp" class="form-control" >
-                                                        </div>                       
-                                                        <div class="col-lg-7">
-                                                            <label>Wall Thickness [in.]:</label> 
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="pipe_wall_inpp" id="pipe_wall_inpp" class="form-control">
-                                                        </div> 
-                                                        <div class="col-lg-7">
-                                                            <label>Specified Minimun Yield Strength [psi]:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="min_yield_inpp" id="min_yield_inpp" class="form-control">
-                                                        </div> 
-                                                        <div class="col-lg-7">
-                                                            <label>Young's Modulus for Steel [ksi]:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="youn_steel_inpp" id="youn_steel_inpp" class="form-control" value="29000000">
-                                                        </div> 
-                                                        <div class="col-lg-7">
-                                                            <label>Poisson's Ratio for Steel:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="poi_rat_inpp" id="poi_rat_inpp" class="form-control" value="0.3">
-                                                        </div>                           
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                            <div class="panel panel-default">
-                                                <div class="panel-body">
-                                                    <div class="form-group">
-                                                        <div class="col-lg-7">
-                                                            <label>Mud Wight [lbs/ft<sup>3</sup>]:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="mud_weight_inpp" id="mud_weight_inpp" class="form-control" value="89.76">
-                                                        </div>                       
-                                                        <div class="col-lg-7">
-                                                            <label>Soil Friction Coefficient:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="soil_frict_inpp" id="soil_frict_inpp" class="form-control" value="0.3">
-                                                        </div> 
-                                                        <div class="col-lg-7">
-                                                            <label>Fluid Drag Coefficient [psi]:</label>
-                                                        </div> 
-                                                        <div class="col-lg-5">
-                                                            <input type="text" name="fluid_drag_inpp" id="fluid_drag_inpp" class="form-control" value="0.05">
-                                                        </div> 
-
-                                                        <div class="col-lg-12">
-                                                            <BR>                           
-
-                                                        </div>
-                                                    </div> 
-                                                </div>
-                                            </div>           
-                                        </div> 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <input type="button" id="next_inpp" name="next_inpp" value="Siguiente " onclick="showN()" class="btn btn-primary btn-block">
-                                    </div>                      
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-12"  id="vista2" name="vista2" style="display:none;">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Installation and Site Characteristics:
-                    </div>
-                    <div class="panel-body">
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
                         <div class="row">
-                            <div class="col-lg-6">                                    
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Straight Section "A - B" Downslope:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Measured Lenght [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="mea_length_en_inpp" id="mea_length_en_inpp" class="form-control">
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Angle of Inclination [°]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="ang_incl_en_inpp" id="ang_incl_en_inpp" class="form-control">
-                                            </div>                            
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Curved Section "B - C" Downslope:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Measured Lenght [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="mea_length_sl_inpp" id="mea_length_sl_inpp" class="form-control"> 
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Hall of Angle of Inclination [°]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="hall_ang_sl_inpp" id="hall_ang_sl_inpp" class="form-control">
-                                            </div>                            
-                                            <div class="col-lg-7">
-                                                <label>Radius of Curvature [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="rad_cur_sl_inpp" id="rad_cur_sl_inpp" class="form-control">
-                                            </div>                          
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Straight Section "C - D" Downslope:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Measured Lenght [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="mea_length_straight_inpp" id="mea_length_straight_inpp" class="form-control">
-                                            </div>                                              
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Curved Section "D - E" Upslope:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Measured Lenght [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="mea_length_up_inpp" id="mea_length_up_inpp" class="form-control">
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Hall of Angle of Inclination [°]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="hall_ang_incl_up_inpp" id="hall_ang_incl_up_inpp" class="form-control">
-                                            </div>                            
-                                            <div class="col-lg-7">
-                                                <label>Radius of Curvature [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="rad_cur_up_inpp" id="rad_cur_up_inpp" class="form-control">
-                                            </div>                          
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Straight Section "E - F" Upslope:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Measured Lenght [ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="mea_length_upEF_inpp" id="mea_length_upEF_inpp" class="form-control">
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Angle of Inclination [°]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="ang_incl_upEF_inpp" id="ang_incl_upEF_inpp" class="form-control">
-                                            </div>                            
-                                        </div> 
-                                    </div>
-                                </div>
-
+                            <div class="col-lg-9">
+                                <h2><strong>Stell Pipe Design:</strong>  Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis </h2>
                             </div>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_inpp()">
+                                    Record
+                                </button>
 
-                            <div class="col-lg-6">
-                                <div class="col-lg-12">                                    
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Determinción del perfil:
-                                        </div>                      
-                                        <div class="panel-body">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    Datos de Entrada-Punto F
-                                                </div>                      
-                                                <div class="panel-body">
-                                                    <div class="col-lg-12">
-                                                        <label>Abscisa de Entrada [ft]:</label>
-                                                        <input type="text" name="abs_entra_inpp" id="abs_entra_inpp" class="form-control">
-                                                    </div> 
-                                                    <div class="col-lg-12">
-                                                        <label> Cota de Entrada [ft]:</label>
-                                                        <input type="text" name="cota_entra_inpp" id="cota_entra_inpp" class="form-control">
-                                                    </div>  
-                                                    <div class="col-lg-12">
-                                                        <label>Ángulo de Entrada [°]:</label>
-                                                        <input type="text" name="ang_entra_inpp" id="ang_entra_inpp" class="form-control">
-                                                    </div>  
-                                                </div>
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
                                             </div>
-                                        </div>
-                                        <div class="panel-body">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    Datos de Salida-Punto A
-                                                </div>                      
-                                                <div class="panel-body">
-                                                    <div class="col-lg-12">
-                                                        <label>Abscisa de Salida [ft]:</label>
-                                                        <input type="text" name="abs_sali_inpp" id="abs_sali_inpp" class="form-control">
-                                                    </div> 
-                                                    <div class="col-lg-12">
-                                                        <label> Cota de Salida [ft]:</label>
-                                                        <input type="text" name="cota_sali_inpp" id="cota_sali_inpp" class="form-control">
-                                                    </div>  
-                                                    <div class="col-lg-12">
-                                                        <label>Ángulo de Salida [°]:</label>
-                                                        <input type="text" name="ang_sali_inpp" id="ang_sali_inpp" class="form-control">
-                                                    </div>  
-                                                </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_inpp"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-
-                                        </div>                      
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-lg-12">
-                                                    <label>Radio de Curvatura [ft]:</label>
-                                                    <input type="text" name="rad_curv_inpp" id="rad_curv_inpp" class="form-control">
-                                                </div> 
-                                                <div class="col-lg-12">
-                                                    <label>Cota más Baja [ft]:</label>
-                                                    <input type="text" name="cota_mbaja_inpp" id="cota_mbaja_inpp" class="form-control">
-                                                </div>  
-                                            </div> 
-                                        </div>
-                                    </div>
-
                                 </div>
+                                <!-- FIN MODAL -->
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Esquematico" onclick="calculate_inpp()" class="btn btn-info btn-block">
-                </div>
-
-                <div class="col-lg-4">
-                    <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Calculate" onclick="calculate_inpp()" class="btn btn-info btn-block">
-
-                </div>
-                <div class="col-lg-4">
-                    <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Determinar Perfil" onclick="calculate_perfil_inpp()" class="btn btn-info btn-block">
-                </div>
-                <br>
-            </div>
-
-        </div>
-
-        <div class="col-lg-12"  id="vista3" name="vista3" style="display:none;">
-            <div class="col-lg-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Resultados, Analisis de Fuerza de Tracción:
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-lg-6">                                    
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Peso de la Tubería en Aire[lbs/ft]</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="peso_tub_aire_inpp" id="peso_tub_aire_inpp" class="form-control" readonly>
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Volúmen Exterior de la Tubería [ft3/ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="vol_ext_tub_inpp" id="vol_ext_tub_inpp" class="form-control" readonly>
-                                            </div>  
-                                            <div class="col-lg-7">
-                                                <label>Volúmen Interior de la Tubería [ft3/ft]::</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="vol_int_tub_inpp" id="vol_int_tub_inpp" class="form-control" readonly>
-                                            </div> 
-                                            <div class="col-lg-7">
-                                                <label>Peso del Lodo Desplazado [lbs/ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="pes_lob_des_inpp" id="pes_lob_des_inpp" class="form-control" readonly>
-                                            </div> 
-                                            <div class="col-lg-7">
-                                                <label>Peso Efectivo de la Tubería [lbs/ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="pes_efe_tub_inpp" id="pes_efe_tub_inpp" class="form-control" readonly>
-                                            </div>                             
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Sección Recta "A-B" Pendiente Negativa:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Fricción del Suelo [lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="fri_suelAB_inpp" id="fri_suelAB_inpp" class="form-control" readonly> 
-                                            </div>                       
-                                            <div class="col-lg-7">
-                                                <label>Fuerza de arrastre del lodo[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="fue_arr_lodAB_inpp" id="fue_arr_lodAB_inpp" class="form-control" readonly>
-                                            </div>                            
-                                            <div class="col-lg-7">
-                                                <label>Tensión en la Sección[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="ten_secAB_inpp" id="ten_secAB_inpp" class="form-control" readonly>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="car_tra_acuAB_inpp" id="car_tra_acuAB_inpp" class="form-control" readonly>
-                                            </div>                           
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Sección Curva "B-C" Pendiente Negativa:
-                                    </div>                      
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="col-lg-7">
-                                                <label>Fuerza Normal[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="fue_nor_inpp" id="fue_nor_inpp" class="form-control" readonly>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <label>Fricción del Suelo[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="fri_del_suelBC_inpp" id="fri_del_suelBC_inpp" class="form-control" readonly>
-                                            </div> 
-                                            <div class="col-lg-7">
-                                                <label>Fuerza de Arrastre del lodo[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="fue_arr_lobBC_inpp" id="fue_arr_lobBC_inpp" class="form-control" readonly>
-                                            </div> 
-                                            <div class="col-lg-7">
-                                                <label>Tensión en la Sección[lbs]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="ten_secBC_inpp" id="ten_secBC_inpp" class="form-control" readonly>
-                                            </div> 
-                                            <div class="col-lg-7">
-                                                <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
-                                            </div> 
-                                            <div class="col-lg-5">
-                                                <input type="text" name="car_tra_acuBC_inpp" id="car_tra_acuBC_inpp" class="form-control" readonly>
-                                            </div>                                               
-                                        </div> 
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="col-lg-12">                                    
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Sección Recta "C-D":
-                                        </div>                      
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-lg-7">
-                                                    <label>Fricción del Suelo [lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fri_del_sueCD_inpp" id="fri_del_sueCD_inpp" class="form-control" readonly>
-                                                </div>                       
-                                                <div class="col-lg-7">
-                                                    <label>Fuerza de arrastre del lodo[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fue_arr_lobCD_inpp" id="fue_arr_lobCD_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Tensión en la Sección[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="ten_secCD_inpp" id="ten_secCD_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Carga de Tracción Acumulativa [lbs/ft]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="car_tra_acuCD_inpp" id="car_tra_acuCD_inpp" class="form-control" readonly>
-                                                </div>                    
-                                            </div> 
-                                        </div>
-                                    </div>
-
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Sección Curva "D-E" Pendiente Positiva:
-                                        </div>                      
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-lg-7">
-                                                    <label>Fuerza Normal[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fue_norDE_inpp" id="fue_norDE_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Fricción del Suelo[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fri_sueDE_inpp" id="fri_sueDE_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Fuerza de Arrastre del lodo[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fue_arr_lodDE_inpp" id="fue_arr_lodDE_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Tensión en la Sección[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="ten_secDE_inpp" id="ten_secDE_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="car_tra_acuDE_inpp" id="car_tra_acuDE_inpp" class="form-control" readonly>
-                                                </div>                            
-                                            </div> 
-                                        </div>
-                                    </div>
-
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            Sección Recta "E-F" Pendiente Positiva:
-                                        </div>                      
-                                        <div class="panel-body">
-                                            <div class="form-group">
-                                                <div class="col-lg-7">
-                                                    <label>Fricción del Suelo [lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fri_sueEF_inpp" id="fri_sueEF_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Fuerza de arrastre del lodo[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="fue_arr_lodEF_inpp" id="fue_arr_lodEF_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Tensión en la Sección[lbs]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="ten_secEF_inpp" id="ten_secEF_inpp" class="form-control" readonly>
-                                                </div> 
-                                                <div class="col-lg-7">
-                                                    <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
-                                                </div> 
-                                                <div class="col-lg-5">
-                                                    <input type="text" name="car_tra_acuEF_inpp" id="car_tra_acuEF_inpp" class="form-control" readonly>
-                                                </div>                            
-                                            </div> 
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-7">
-                                        <label>Carga de Tracción Total [lbs]:</label>
-                                    </div> 
-                                    <div class="col-lg-5">
-                                        <input type="text" name="car_tra_total_inpp" id="car_tra_total_inpp" class="form-control" readonly>
-                                    </div>   
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <input type="button" id="next_inpp" name="next_inpp" value="Siguiente " onclick="showN2()" class="btn btn-primary btn-block">
-                <br>
-            </div>
-
-        </div>
-
-        <div class="col-lg-12" name="vista4"  id="vista4" style="display:none;">  
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Results Stress Analysis
-                    </div>
-                    <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_inpp" name="description_inpp"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_inpp" name="proyects_sel_inpp"> </select>
+                            </div>
+                        </div>
 
-                                <div class="form-group">        
-                                    <table class="table table-hover">
-                                        <tr>
-                                            <th width="49%"><center>Point:"B"</center></th>
-                                        <th widht="17%"><center>This Project</center></th>
-                                        <th widht="17%"><center>Allowable</center></th>
-                                        <th widht="17%"><center>PASS/FAIL</center></th>                                            
-                                        </tr>
-                                        <tr>
-                                            <td><label>Tensile Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Bproject1" id="Bproject1"></td>
-                                            <td><input class="form-control" type="text" name="Ballow1" id="Ballow1"></td>
-                                            <td><input class="form-control" type="text" name="Bpass1" id="Bpass1"></td>
-                                        </tr>
-                                        <tr>  
-                                            <td><label>Bending Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Bproject2" id="Bproject2"></td>
-                                            <td><input class="form-control" type="text" name="Ballow2" id="Ballow2"></td>
-                                            <td><input class="form-control" type="text" name="Bpass2" id="Bpass2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>External Hoop Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Bproject3" id="Bproject3"></td>
-                                            <td><input class="form-control" type="text" name="Ballow3" id="Ballow3"></td>
-                                            <td><input class="form-control" type="text" name="Bpass3" id="Bpass3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile & Bending Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Bproject4" id="Bproject4"></td>
-                                            <td><input class="form-control" type="text" name="Ballow4" id="Ballow4"></td>
-                                            <td><input class="form-control" type="text" name="Bpass4" id="Bpass4"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Bproject5" id="Bproject5"></td>
-                                            <td><input class="form-control" type="text" name="Ballow5" id="Ballow5"></td>
-                                            <td><input class="form-control" type="text" name="Bpass5" id="Bpass5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>                        
-                                        </tr>                                                                  
-                                        <tr>
-                                            <th width="49%"><center>Point:"C"</center></th>
-                                        <th widht="17%"><center>This Project</center></th>
-                                        <th widht="17%"><center>Allowable</center></th>
-                                        <th widht="17%"><center>PASS/FAIL</center></th>                                            
-                                        </tr>                      
-                                        <tr>
-                                            <td><label>Tensile Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Cproject1" id="Cproject1"></td>
-                                            <td><input class="form-control" type="text" name="Callow1" id="Callow1"></td>
-                                            <td><input class="form-control" type="text" name="Cpass1" id="Cpass1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Bending Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Cproject2" id="Cproject2"></td>
-                                            <td><input class="form-control" type="text" name="Callow2" id="Callow2"></td>
-                                            <td><input class="form-control" type="text" name="Cpass2" id="Cpass2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>External Hoop Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Cproject3" id="Cproject3"></td>
-                                            <td><input class="form-control" type="text" name="Callow3" id="Callow3"></td>
-                                            <td><input class="form-control" type="text" name="Cpass3" id="Cpass3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile & Bending Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Cproject4" id="Cproject4"></td>
-                                            <td><input class="form-control" type="text" name="Callow4" id="Callow4"></td>
-                                            <td><input class="form-control" type="text" name="Cpass4" id="Cpass4"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Cproject5" id="Cproject5"></td>
-                                            <td><input class="form-control" type="text" name="Callow5" id="Callow5"></td>
-                                            <td><input class="form-control" type="text" name="Cpass5" id="Cpass5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>                        
-                                        </tr>                      
-                                        <tr>
-                                            <th width="49%"><center>Point:"D"</center></th>
-                                        <th widht="17%"><center>This Project</center></th>
-                                        <th widht="17%"><center>Allowable</center></th>
-                                        <th widht="17%"><center>PASS/FAIL</center></th>                                            
-                                        </tr>                      
-                                        <tr>
-                                            <td><label>Tensile Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Dproject1" id="Dproject1"></td>
-                                            <td><input class="form-control" type="text" name="Dallow1" id="Dallow1"></td>
-                                            <td><input class="form-control" type="text" name="Dpass1" id="Dpass1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Bending Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Dproject2" id="Dproject2"></td>
-                                            <td><input class="form-control" type="text" name="Dallow2" id="Dallow2"></td>
-                                            <td><input class="form-control" type="text" name="Dpass2" id="Dpass2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>External Hoop Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Dproject3" id="Dproject3"></td>
-                                            <td><input class="form-control" type="text" name="Dallow3" id="Dallow3"></td>
-                                            <td><input class="form-control" type="text" name="Dpass3" id="Dpass3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile & Bending Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Dproject4" id="Dproject4"></td>
-                                            <td><input class="form-control" type="text" name="Dallow4" id="Dallow4"></td>
-                                            <td><input class="form-control" type="text" name="Dpass4" id="Dpass4"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Dproject5" id="Dproject5"></td>
-                                            <td><input class="form-control" type="text" name="Dallow5" id="Dallow5"></td>
-                                            <td><input class="form-control" type="text" name="Dpass5" id="Dpass5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>                        
-                                        </tr>                      
-                                        <tr>
-                                            <th width="49%"><center>Point:"E"</center></th>
-                                        <th widht="17%"><center>This Project</center></th>
-                                        <th widht="17%"><center>Allowable</center></th>
-                                        <th widht="17%"><center>PASS/FAIL</center></th>                                            
-                                        </tr>                      
-                                        <tr>
-                                            <td><label>Tensile Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Eproject1" id="Eproject1"></td>
-                                            <td><input class="form-control" type="text" name="Eallow1" id="Eallow1"></td>
-                                            <td><input class="form-control" type="text" name="Epass1" id="Epass1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Bending Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Eproject2" id="Eproject2"></td>
-                                            <td><input class="form-control" type="text" name="Eallow2" id="Eallow2"></td>
-                                            <td><input class="form-control" type="text" name="Epass2" id="Epass2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>External Hoop Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Eproject3" id="Eproject3"></td>
-                                            <td><input class="form-control" type="text" name="Eallow3" id="Eallow3"></td>
-                                            <td><input class="form-control" type="text" name="Epass3" id="Epass3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile & Bending Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Eproject4" id="Eproject4"></td>
-                                            <td><input class="form-control" type="text" name="Eallow4" id="Eallow4"></td>
-                                            <td><input class="form-control" type="text" name="Epass4" id="Epass4"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Eproject5" id="Eproject5"></td>
-                                            <td><input class="form-control" type="text" name="Eallow5" id="Eallow5"></td>
-                                            <td><input class="form-control" type="text" name="Epass5" id="Epass5"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>
-                                            <td><div>&nbsp;</div></td>                        
-                                        </tr>                      
-                                        <tr>
-                                            <th width="49%"><center>Point:"F"</center></th>
-                                        <th widht="17%"><center>This Project</center></th>
-                                        <th widht="17%"><center>Allowable</center></th>
-                                        <th widht="17%"><center>PASS/FAIL</center></th>                                            
-                                        </tr>                      
-                                        <tr>
-                                            <td><label>Tensile Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Fproject1" id="Fproject1"></td>
-                                            <td><input class="form-control" type="text" name="Fallow1" id="Fallow1"></td>
-                                            <td><input class="form-control" type="text" name="Fpass1" id="Fpass1"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Bending Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Fproject2" id="Fproject2"></td>
-                                            <td><input class="form-control" type="text" name="Fallow2" id="Fallow2"></td>
-                                            <td><input class="form-control" type="text" name="Fpass2" id="Fpass2"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>External Hoop Stress [psi]</label></td>
-                                            <td><input class="form-control" type="text" name="Fproject3" id="Fproject3"></td>
-                                            <td><input class="form-control" type="text" name="Fallow3" id="Fallow3"></td>
-                                            <td><input class="form-control" type="text" name="Fpass3" id="Fpass3"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile & Bending Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Fproject4" id="Fproject4"></td>
-                                            <td><input class="form-control" type="text" name="Fallow4" id="Fallow4"></td>
-                                            <td><input class="form-control" type="text" name="Fpass4" id="Fpass4"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
-                                            <td><input class="form-control" type="text" name="Fproject5" id="Fproject5"></td>
-                                            <td><input class="form-control" type="text" name="Fallow5" id="Fallow5"></td>
-                                            <td><input class="form-control" type="text" name="Fpass5" id="Fpass5"></td>
-                                        </tr>                                                                                         
-                                    </table>
-                                </div>  
-                            </div> 
-                        </div>               
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12" id="vista1">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        Pipe and Operational Characteristics
+                                                    </div>
+
+                                                    <div class="panel-body  col-lg-6" >
+                                                        <div class="panel panel-default">
+
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                Line Pipe API 5L
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-lg-6">
+                                                                                        <label>Nominal pipe size:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-6">
+                                                                                        <div id="div_nomps_sel_inpp">
+                                                                                            <select class="form-control" id="nominalps_sel_inpp" name="nominalps_sel_inpp"> </select>
+                                                                                        </div>
+                                                                                    </div> <br>
+                                                                                    <div class="col-lg-6">                      
+                                                                                        <label>Wall Thickness [.in]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-6">
+                                                                                        <div id="div_wallt_sel_inpp">
+                                                                                            <select class="form-control" id="wthi_sel_inpp" name="wthi_sel_inpp"> </select>
+                                                                                        </div>
+                                                                                    </div> <br>                      
+                                                                                    <div class="col-lg-6">                      
+                                                                                        <label>Grade:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-6">
+                                                                                        <div id="div_grade_sel_inpp">
+                                                                                            <select class="form-control" id="grade_sel_inpp" name="grade_sel_inpp"> </select>
+                                                                                        </div>
+                                                                                    </div>                        
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>                          
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body  col-lg-6" >
+                                                        <div class="panel panel-default">
+
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="panel panel-default ">
+                                                                                    <div class="panel-body">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Pipe outside diameter [in.]:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="pipe_dia_inpp" id="pipe_dia_inpp" class="form-control" >
+                                                                                            </div>                       
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Wall Thickness [in.]:</label> 
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="pipe_wall_inpp" id="pipe_wall_inpp" class="form-control">
+                                                                                            </div> 
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Specified Minimun Yield Strength [psi]:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="min_yield_inpp" id="min_yield_inpp" class="form-control">
+                                                                                            </div> 
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Young's Modulus for Steel [ksi]:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="youn_steel_inpp" id="youn_steel_inpp" class="form-control" value="29000000">
+                                                                                            </div> 
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Poisson's Ratio for Steel:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="poi_rat_inpp" id="poi_rat_inpp" class="form-control" value="0.3">
+                                                                                            </div>                           
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-body">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Mud Wight [lbs/ft<sup>3</sup>]:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="mud_weight_inpp" id="mud_weight_inpp" class="form-control" value="89.76">
+                                                                                            </div>                       
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Soil Friction Coefficient:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="soil_frict_inpp" id="soil_frict_inpp" class="form-control" value="0.3">
+                                                                                            </div> 
+                                                                                            <div class="col-lg-7">
+                                                                                                <label>Fluid Drag Coefficient [psi]:</label>
+                                                                                            </div> 
+                                                                                            <div class="col-lg-5">
+                                                                                                <input type="text" name="fluid_drag_inpp" id="fluid_drag_inpp" class="form-control" value="0.05">
+                                                                                            </div> 
+
+                                                                                            <div class="col-lg-12">
+                                                                                                <BR>                           
+
+                                                                                            </div>
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>           
+                                                                            </div> 
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <input type="button" id="next_inpp" name="next_inpp" value="Siguiente " onclick="showN()" class="btn btn-primary btn-block">
+                                                                        </div>                      
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12"  id="vista2" name="vista2" style="display:none;">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Installation and Site Characteristics:
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">                                    
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Straight Section "A - B" Downslope:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Measured Lenght [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="mea_length_en_inpp" id="mea_length_en_inpp" class="form-control">
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Angle of Inclination [°]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="ang_incl_en_inpp" id="ang_incl_en_inpp" class="form-control">
+                                                                                </div>                            
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Curved Section "B - C" Downslope:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Measured Lenght [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="mea_length_sl_inpp" id="mea_length_sl_inpp" class="form-control"> 
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Hall of Angle of Inclination [°]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="hall_ang_sl_inpp" id="hall_ang_sl_inpp" class="form-control">
+                                                                                </div>                            
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Radius of Curvature [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="rad_cur_sl_inpp" id="rad_cur_sl_inpp" class="form-control">
+                                                                                </div>                          
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Straight Section "C - D" Downslope:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Measured Lenght [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="mea_length_straight_inpp" id="mea_length_straight_inpp" class="form-control">
+                                                                                </div>                                              
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Curved Section "D - E" Upslope:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Measured Lenght [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="mea_length_up_inpp" id="mea_length_up_inpp" class="form-control">
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Hall of Angle of Inclination [°]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="hall_ang_incl_up_inpp" id="hall_ang_incl_up_inpp" class="form-control">
+                                                                                </div>                            
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Radius of Curvature [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="rad_cur_up_inpp" id="rad_cur_up_inpp" class="form-control">
+                                                                                </div>                          
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Straight Section "E - F" Upslope:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Measured Lenght [ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="mea_length_upEF_inpp" id="mea_length_upEF_inpp" class="form-control">
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Angle of Inclination [°]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="ang_incl_upEF_inpp" id="ang_incl_upEF_inpp" class="form-control">
+                                                                                </div>                            
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="col-lg-12">                                    
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                Determinción del perfil:
+                                                                            </div>                      
+                                                                            <div class="panel-body">
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading">
+                                                                                        Datos de Entrada-Punto F
+                                                                                    </div>                      
+                                                                                    <div class="panel-body">
+                                                                                        <div class="col-lg-12">
+                                                                                            <label>Abscisa de Entrada [ft]:</label>
+                                                                                            <input type="text" name="abs_entra_inpp" id="abs_entra_inpp" class="form-control">
+                                                                                        </div> 
+                                                                                        <div class="col-lg-12">
+                                                                                            <label> Cota de Entrada [ft]:</label>
+                                                                                            <input type="text" name="cota_entra_inpp" id="cota_entra_inpp" class="form-control">
+                                                                                        </div>  
+                                                                                        <div class="col-lg-12">
+                                                                                            <label>Ángulo de Entrada [°]:</label>
+                                                                                            <input type="text" name="ang_entra_inpp" id="ang_entra_inpp" class="form-control">
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading">
+                                                                                        Datos de Salida-Punto A
+                                                                                    </div>                      
+                                                                                    <div class="panel-body">
+                                                                                        <div class="col-lg-12">
+                                                                                            <label>Abscisa de Salida [ft]:</label>
+                                                                                            <input type="text" name="abs_sali_inpp" id="abs_sali_inpp" class="form-control">
+                                                                                        </div> 
+                                                                                        <div class="col-lg-12">
+                                                                                            <label> Cota de Salida [ft]:</label>
+                                                                                            <input type="text" name="cota_sali_inpp" id="cota_sali_inpp" class="form-control">
+                                                                                        </div>  
+                                                                                        <div class="col-lg-12">
+                                                                                            <label>Ángulo de Salida [°]:</label>
+                                                                                            <input type="text" name="ang_sali_inpp" id="ang_sali_inpp" class="form-control">
+                                                                                        </div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+
+                                                                            </div>                      
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-lg-12">
+                                                                                        <label>Radio de Curvatura [ft]:</label>
+                                                                                        <input type="text" name="rad_curv_inpp" id="rad_curv_inpp" class="form-control">
+                                                                                    </div> 
+                                                                                    <div class="col-lg-12">
+                                                                                        <label>Cota más Baja [ft]:</label>
+                                                                                        <input type="text" name="cota_mbaja_inpp" id="cota_mbaja_inpp" class="form-control">
+                                                                                    </div>  
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Esquematico" onclick="calculate_inpp()" class="btn btn-info btn-block">
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Calculate" onclick="calculate_inpp()" class="btn btn-info btn-block">
+
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <input type="button" id="calculateBtn3_inpp" name="calculateBtn3_inpp" value="Determinar Perfil" onclick="calculate_perfil_inpp()" class="btn btn-info btn-block">
+                                                    </div>
+                                                    <br>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-12"  id="vista3" name="vista3" style="display:none;">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Resultados, Analisis de Fuerza de Tracción:
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-6">                                    
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Peso de la Tubería en Aire[lbs/ft]</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="peso_tub_aire_inpp" id="peso_tub_aire_inpp" class="form-control" readonly>
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Volúmen Exterior de la Tubería [ft3/ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="vol_ext_tub_inpp" id="vol_ext_tub_inpp" class="form-control" readonly>
+                                                                                </div>  
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Volúmen Interior de la Tubería [ft3/ft]::</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="vol_int_tub_inpp" id="vol_int_tub_inpp" class="form-control" readonly>
+                                                                                </div> 
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Peso del Lodo Desplazado [lbs/ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="pes_lob_des_inpp" id="pes_lob_des_inpp" class="form-control" readonly>
+                                                                                </div> 
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Peso Efectivo de la Tubería [lbs/ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="pes_efe_tub_inpp" id="pes_efe_tub_inpp" class="form-control" readonly>
+                                                                                </div>                             
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Sección Recta "A-B" Pendiente Negativa:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Fricción del Suelo [lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="fri_suelAB_inpp" id="fri_suelAB_inpp" class="form-control" readonly> 
+                                                                                </div>                       
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Fuerza de arrastre del lodo[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="fue_arr_lodAB_inpp" id="fue_arr_lodAB_inpp" class="form-control" readonly>
+                                                                                </div>                            
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Tensión en la Sección[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="ten_secAB_inpp" id="ten_secAB_inpp" class="form-control" readonly>
+                                                                                </div>
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="car_tra_acuAB_inpp" id="car_tra_acuAB_inpp" class="form-control" readonly>
+                                                                                </div>                           
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Sección Curva "B-C" Pendiente Negativa:
+                                                                        </div>                      
+                                                                        <div class="panel-body">
+                                                                            <div class="form-group">
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Fuerza Normal[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="fue_nor_inpp" id="fue_nor_inpp" class="form-control" readonly>
+                                                                                </div>
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Fricción del Suelo[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="fri_del_suelBC_inpp" id="fri_del_suelBC_inpp" class="form-control" readonly>
+                                                                                </div> 
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Fuerza de Arrastre del lodo[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="fue_arr_lobBC_inpp" id="fue_arr_lobBC_inpp" class="form-control" readonly>
+                                                                                </div> 
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Tensión en la Sección[lbs]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="ten_secBC_inpp" id="ten_secBC_inpp" class="form-control" readonly>
+                                                                                </div> 
+                                                                                <div class="col-lg-7">
+                                                                                    <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
+                                                                                </div> 
+                                                                                <div class="col-lg-5">
+                                                                                    <input type="text" name="car_tra_acuBC_inpp" id="car_tra_acuBC_inpp" class="form-control" readonly>
+                                                                                </div>                                               
+                                                                            </div> 
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <div class="col-lg-6">
+                                                                    <div class="col-lg-12">                                    
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                Sección Recta "C-D":
+                                                                            </div>                      
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fricción del Suelo [lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fri_del_sueCD_inpp" id="fri_del_sueCD_inpp" class="form-control" readonly>
+                                                                                    </div>                       
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fuerza de arrastre del lodo[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fue_arr_lobCD_inpp" id="fue_arr_lobCD_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Tensión en la Sección[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="ten_secCD_inpp" id="ten_secCD_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Carga de Tracción Acumulativa [lbs/ft]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="car_tra_acuCD_inpp" id="car_tra_acuCD_inpp" class="form-control" readonly>
+                                                                                    </div>                    
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                Sección Curva "D-E" Pendiente Positiva:
+                                                                            </div>                      
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fuerza Normal[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fue_norDE_inpp" id="fue_norDE_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fricción del Suelo[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fri_sueDE_inpp" id="fri_sueDE_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fuerza de Arrastre del lodo[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fue_arr_lodDE_inpp" id="fue_arr_lodDE_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Tensión en la Sección[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="ten_secDE_inpp" id="ten_secDE_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="car_tra_acuDE_inpp" id="car_tra_acuDE_inpp" class="form-control" readonly>
+                                                                                    </div>                            
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div class="panel panel-default">
+                                                                            <div class="panel-heading">
+                                                                                Sección Recta "E-F" Pendiente Positiva:
+                                                                            </div>                      
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fricción del Suelo [lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fri_sueEF_inpp" id="fri_sueEF_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Fuerza de arrastre del lodo[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="fue_arr_lodEF_inpp" id="fue_arr_lodEF_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Tensión en la Sección[lbs]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="ten_secEF_inpp" id="ten_secEF_inpp" class="form-control" readonly>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-7">
+                                                                                        <label>Carga de Tracción Acumulativa[lbs/ft]:</label>
+                                                                                    </div> 
+                                                                                    <div class="col-lg-5">
+                                                                                        <input type="text" name="car_tra_acuEF_inpp" id="car_tra_acuEF_inpp" class="form-control" readonly>
+                                                                                    </div>                            
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-7">
+                                                                            <label>Carga de Tracción Total [lbs]:</label>
+                                                                        </div> 
+                                                                        <div class="col-lg-5">
+                                                                            <input type="text" name="car_tra_total_inpp" id="car_tra_total_inpp" class="form-control" readonly>
+                                                                        </div>   
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="button" id="next_inpp" name="next_inpp" value="Siguiente " onclick="showN2()" class="btn btn-primary btn-block">
+                                                    <br>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-12" name="vista4"  id="vista4" style="display:none;">  
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results Stress Analysis
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+
+                                                                    <div class="form-group">        
+                                                                        <table class="table table-hover">
+                                                                            <tr>
+                                                                                <th width="49%"><center>Point:"B"</center></th>
+                                                                            <th widht="17%"><center>This Project</center></th>
+                                                                            <th widht="17%"><center>Allowable</center></th>
+                                                                            <th widht="17%"><center>PASS/FAIL</center></th>                                            
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Tensile Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Bproject1" id="Bproject1"></td>
+                                                                                <td><input class="form-control" type="text" name="Ballow1" id="Ballow1"></td>
+                                                                                <td><input class="form-control" type="text" name="Bpass1" id="Bpass1"></td>
+                                                                            </tr>
+                                                                            <tr>  
+                                                                                <td><label>Bending Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Bproject2" id="Bproject2"></td>
+                                                                                <td><input class="form-control" type="text" name="Ballow2" id="Ballow2"></td>
+                                                                                <td><input class="form-control" type="text" name="Bpass2" id="Bpass2"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>External Hoop Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Bproject3" id="Bproject3"></td>
+                                                                                <td><input class="form-control" type="text" name="Ballow3" id="Ballow3"></td>
+                                                                                <td><input class="form-control" type="text" name="Bpass3" id="Bpass3"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile & Bending Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Bproject4" id="Bproject4"></td>
+                                                                                <td><input class="form-control" type="text" name="Ballow4" id="Ballow4"></td>
+                                                                                <td><input class="form-control" type="text" name="Bpass4" id="Bpass4"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Bproject5" id="Bproject5"></td>
+                                                                                <td><input class="form-control" type="text" name="Ballow5" id="Ballow5"></td>
+                                                                                <td><input class="form-control" type="text" name="Bpass5" id="Bpass5"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>                        
+                                                                            </tr>                                                                  
+                                                                            <tr>
+                                                                                <th width="49%"><center>Point:"C"</center></th>
+                                                                            <th widht="17%"><center>This Project</center></th>
+                                                                            <th widht="17%"><center>Allowable</center></th>
+                                                                            <th widht="17%"><center>PASS/FAIL</center></th>                                            
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <td><label>Tensile Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Cproject1" id="Cproject1"></td>
+                                                                                <td><input class="form-control" type="text" name="Callow1" id="Callow1"></td>
+                                                                                <td><input class="form-control" type="text" name="Cpass1" id="Cpass1"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Bending Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Cproject2" id="Cproject2"></td>
+                                                                                <td><input class="form-control" type="text" name="Callow2" id="Callow2"></td>
+                                                                                <td><input class="form-control" type="text" name="Cpass2" id="Cpass2"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>External Hoop Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Cproject3" id="Cproject3"></td>
+                                                                                <td><input class="form-control" type="text" name="Callow3" id="Callow3"></td>
+                                                                                <td><input class="form-control" type="text" name="Cpass3" id="Cpass3"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile & Bending Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Cproject4" id="Cproject4"></td>
+                                                                                <td><input class="form-control" type="text" name="Callow4" id="Callow4"></td>
+                                                                                <td><input class="form-control" type="text" name="Cpass4" id="Cpass4"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Cproject5" id="Cproject5"></td>
+                                                                                <td><input class="form-control" type="text" name="Callow5" id="Callow5"></td>
+                                                                                <td><input class="form-control" type="text" name="Cpass5" id="Cpass5"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>                        
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <th width="49%"><center>Point:"D"</center></th>
+                                                                            <th widht="17%"><center>This Project</center></th>
+                                                                            <th widht="17%"><center>Allowable</center></th>
+                                                                            <th widht="17%"><center>PASS/FAIL</center></th>                                            
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <td><label>Tensile Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Dproject1" id="Dproject1"></td>
+                                                                                <td><input class="form-control" type="text" name="Dallow1" id="Dallow1"></td>
+                                                                                <td><input class="form-control" type="text" name="Dpass1" id="Dpass1"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Bending Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Dproject2" id="Dproject2"></td>
+                                                                                <td><input class="form-control" type="text" name="Dallow2" id="Dallow2"></td>
+                                                                                <td><input class="form-control" type="text" name="Dpass2" id="Dpass2"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>External Hoop Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Dproject3" id="Dproject3"></td>
+                                                                                <td><input class="form-control" type="text" name="Dallow3" id="Dallow3"></td>
+                                                                                <td><input class="form-control" type="text" name="Dpass3" id="Dpass3"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile & Bending Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Dproject4" id="Dproject4"></td>
+                                                                                <td><input class="form-control" type="text" name="Dallow4" id="Dallow4"></td>
+                                                                                <td><input class="form-control" type="text" name="Dpass4" id="Dpass4"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Dproject5" id="Dproject5"></td>
+                                                                                <td><input class="form-control" type="text" name="Dallow5" id="Dallow5"></td>
+                                                                                <td><input class="form-control" type="text" name="Dpass5" id="Dpass5"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>                        
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <th width="49%"><center>Point:"E"</center></th>
+                                                                            <th widht="17%"><center>This Project</center></th>
+                                                                            <th widht="17%"><center>Allowable</center></th>
+                                                                            <th widht="17%"><center>PASS/FAIL</center></th>                                            
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <td><label>Tensile Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Eproject1" id="Eproject1"></td>
+                                                                                <td><input class="form-control" type="text" name="Eallow1" id="Eallow1"></td>
+                                                                                <td><input class="form-control" type="text" name="Epass1" id="Epass1"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Bending Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Eproject2" id="Eproject2"></td>
+                                                                                <td><input class="form-control" type="text" name="Eallow2" id="Eallow2"></td>
+                                                                                <td><input class="form-control" type="text" name="Epass2" id="Epass2"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>External Hoop Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Eproject3" id="Eproject3"></td>
+                                                                                <td><input class="form-control" type="text" name="Eallow3" id="Eallow3"></td>
+                                                                                <td><input class="form-control" type="text" name="Epass3" id="Epass3"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile & Bending Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Eproject4" id="Eproject4"></td>
+                                                                                <td><input class="form-control" type="text" name="Eallow4" id="Eallow4"></td>
+                                                                                <td><input class="form-control" type="text" name="Epass4" id="Epass4"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Eproject5" id="Eproject5"></td>
+                                                                                <td><input class="form-control" type="text" name="Eallow5" id="Eallow5"></td>
+                                                                                <td><input class="form-control" type="text" name="Epass5" id="Epass5"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>
+                                                                                <td><div>&nbsp;</div></td>                        
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <th width="49%"><center>Point:"F"</center></th>
+                                                                            <th widht="17%"><center>This Project</center></th>
+                                                                            <th widht="17%"><center>Allowable</center></th>
+                                                                            <th widht="17%"><center>PASS/FAIL</center></th>                                            
+                                                                            </tr>                      
+                                                                            <tr>
+                                                                                <td><label>Tensile Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Fproject1" id="Fproject1"></td>
+                                                                                <td><input class="form-control" type="text" name="Fallow1" id="Fallow1"></td>
+                                                                                <td><input class="form-control" type="text" name="Fpass1" id="Fpass1"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Bending Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Fproject2" id="Fproject2"></td>
+                                                                                <td><input class="form-control" type="text" name="Fallow2" id="Fallow2"></td>
+                                                                                <td><input class="form-control" type="text" name="Fpass2" id="Fpass2"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>External Hoop Stress [psi]</label></td>
+                                                                                <td><input class="form-control" type="text" name="Fproject3" id="Fproject3"></td>
+                                                                                <td><input class="form-control" type="text" name="Fallow3" id="Fallow3"></td>
+                                                                                <td><input class="form-control" type="text" name="Fpass3" id="Fpass3"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile & Bending Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Fproject4" id="Fproject4"></td>
+                                                                                <td><input class="form-control" type="text" name="Fallow4" id="Fallow4"></td>
+                                                                                <td><input class="form-control" type="text" name="Fpass4" id="Fpass4"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Unity Check: Tensile, Bending & Hoop Stress</label></td>
+                                                                                <td><input class="form-control" type="text" name="Fproject5" id="Fproject5"></td>
+                                                                                <td><input class="form-control" type="text" name="Fallow5" id="Fallow5"></td>
+                                                                                <td><input class="form-control" type="text" name="Fpass5" id="Fpass5"></td>
+                                                                            </tr>                                                                                         
+                                                                        </table>
+                                                                    </div>  
+                                                                </div> 
+                                                            </div>               
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            </div>
+
+
+                                        </div>
+                                    </div>  
+                                </div>   
+                            </div>  
+
+                            <div class="col-lg-3">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="cleanAllBtn_inpp" name="cleanBtn_inpp" value="Clean All" onclick="cleanAll_inpp()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_inpp" name="cleanBtn_inpp" value="Clean Input Data" onclick="cleanIn_inpp()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_inpp" name="cleanBtn_inpp" value="Clean Output Data" onclick="cleanOut_inpp()" class="btn btn-warning btn-block">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="opt_inpp" name="opt_inpp"> 
+                            <input type="hidden" id="id_inpp" name="id_inpp">  
+                        </div>
+                        <div id="load_Dialog_inpp" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_inpp" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_inpp" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_inpp" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_inpp" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_inpp" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div> 
-        </div>
 
-        <div class="col-lg-12">
-            <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_inpp" name="cleanBtn_inpp" value="Clean All" onclick="cleanAll_inpp()" class="btn btn-warning btn-block">
             </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_inpp" name="cleanBtn_inpp" value="Clean Input Data" onclick="cleanIn_inpp()" class="btn btn-warning btn-block">
-            </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_inpp" name="cleanBtn_inpp" value="Clean Output Data" onclick="cleanOut_inpp()" class="btn btn-warning btn-block">
-            </div>    
-        </div>
+            <!-- /#page-wrapper -->
 
-        <input type="hidden" id="opt_inpp" name="opt_inpp"> 
-        <input type="hidden" id="id_inpp" name="id_inpp">   
-        <script>
+        </div>
+        <!-- /#wrapper -->
+    </body>
+
+    <script>
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_inpp"),
@@ -925,7 +1015,7 @@
                 // alert("Entro");
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     async: false,
                     data: parametros,
                     beforeSend: function (xhr) {
@@ -1257,7 +1347,7 @@
 
                             $.ajax({
                                 type: "POST",
-                                url: "Modules/manager.jsp",
+                                url: "../manager.jsp",
                                 data: parametros,
                                 beforeSend: function (xhr) {
                                     block("Cargando...");
@@ -1289,7 +1379,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     beforeSend: function (xhr) {
                         block("Cargando...");
@@ -1317,7 +1407,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -1360,7 +1450,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -1406,6 +1496,6 @@
 
 
 
-        </script>      
-    </body>
+        </script>  
+
 </html>
