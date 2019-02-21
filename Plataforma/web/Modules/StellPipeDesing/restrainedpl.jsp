@@ -1,365 +1,449 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-        <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
-
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Steel Pipe Design:</strong> Restrained PL Stress Analysis</h2>
-            </div>
-            <div class="col-lg-3"> 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_rpls()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Steel Pipe Design:</strong> Restrained PL Stress Analysis</h2>
                             </div>
-                            <div class="modal-body">
-                                <div id="div-table_rpls"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_rpls()">
+                                    Record
+                                </button>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>
-
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_rpls" name="description_rpls"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_rpls" name="proyects_sel_rpls"> </select>
-            </div>
-        </div>
-        <hr>
-
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Select Pipe Data
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <input type="radio" id = "api5l_rpls" name="linepipe_rpls" value="api5l_rpls" onchange="onchange_linepipe_rpls()" required> Tubería - especificación API 5L <br>
-                                <input type="radio" id = "astm_rpls" name="linepipe_rpls" value="astm_rpls" onchange="onchange_linepipe_rpls()" required> Standart Steel Pipe - ASTM - ANSI B36.10
-                            </div>                                    
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Line Pipe API 5L
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Nominal pipe size:</label> 
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div id="div_nominalps_sel_rpls">
-                                                        <select class="form-control" id="nominalps_sel_rpls" name="nominalps_sel_rpls"> </select></div>
-                                                </div>
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-lg-12">                      
-                                                    <label>Wall Thickness [.in]:</label>
-                                                </div> 
-                                                <div class="col-lg-12" id="div_wt_sel_rpls">
-                                                    <select class="form-control" id="wt_sel_rpls" name="wt_sel_rpls"> </select>
-                                                </div>
-                                            </div> 
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Grade:</label> 
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div id="div_grade_sel_rpls">
-                                                        <select class="form-control" id="grade_sel_rpls" name="grade_sel_rpls"> </select>
-                                                    </div>
-                                                </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_rpls"></div>
                                             </div>
-
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>  
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    T - Temperature Derating Factor:
                                 </div>
-                                <div class="panel-body">
-                                    <div class="col-lg-6">
-                                        <label>Temperature [*F]</label>                        
+                                <!-- FIN MODAL -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_rpls" name="description_rpls"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_rpls" name="proyects_sel_rpls"> </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-lg-9">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Data
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div  id="div_td_sel_rpls">                    
-                                            <select class="form-control" id="temperature_rpls" name="temperature_rpls"> </select>
-                                        </div>                      
-                                    </div>                      
-                                </div>
-                            </div>
-                            <div class="col-lg-7">
-                                <label>Poisson's Ratio:</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="poi_ratio_rpls" onchange='onchange_Input_rpls(this)' name="poi_ratio_rpls">
-                            </div>                
-                            <div class="col-lg-7">
-                                <label>Young's Modulus of Elasticity [psi]:</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="young_modul_rpls" onchange='onchange_Input_rpls(this)' name="young_modul_rpls">
-                            </div> 
-                            <div class="col-lg-7">
-                                <label>Thermal Expansion Coefficient [1/°F]:</label>
-                            </div>
-                            <div class="col-lg-5">
-                                <input type="text" class="form-control" id="thermal_exp_rpls" onchange='onchange_Input_rpls(this)' name="thermal_exp_rpls">
-                            </div>                   
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
 
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Pipe and Operational Data:
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">     
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Height:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="height_rpls" name="height_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_height_sel_rpls">
-                                    <select class="form-control" id="height_sel_rpls" name="height_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Pipe Internal Pressure [psig]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="pip_int_rpls" name="pip_int_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_pip_int_sel_rpls">
-                                    <select class="form-control" id="pip_int_sel_rpls" name="pip_int_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Nominal Outside Diameter [in.]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="nomout_rpls" name="nomout_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_nomout_sel_rpls">
-                                    <select class="form-control" id="nomout_sel_rpls" name="nomout_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Nominal Wall Thickness [in.]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="nom_wall_rpls" name="nom_wall_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_nom_wall_sel_rpls">
-                                    <select class="form-control" id="nom_wall_sel_rpls" name="nom_wall_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Grade:</label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="gra_pipeop_wt_rpls" name="gra_pipeop_wt_rpls" required> 
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Specified Minimum Yield Strength [psi]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="min_yield_rpls" name="min_yield_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_min_yield_sel_rpls">
-                                    <select class="form-control" id="min_yield_sel_rpls" name="min_yield_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Temperature Derating Factor:</label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="temp_rpls" name="temp_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Pipe Installation Temperature [°F]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="pipe_temp_rpls" name="pipe_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_pipe_temp_sel_rpls">
-                                    <select class="form-control" id="pipe_temp_sel_rpls" name="pipe_temp_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Pipe Operating Temperature [°F]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="pipeoper_temp_rpls" name="pipeoper_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_pipeoper_temp_sel_rpls">
-                                    <select class="form-control" id="pipeoper_temp_sel_rpls" name="pipeoper_temp_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Nominal Bending Stress [psi]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="nom_stress_rpls" name="nom_stress_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_nom_stress_sel_rpls">
-                                    <select class="form-control" id="nom_stress_sel_rpls" name="nom_stress_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>Stress Due to Axial Loading [psi]:</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="stress_axial_rpls" name="stress_axial_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                                <div class="col-md-4" id = "div_stress_axial_sel_rpls">
-                                    <select class="form-control" id="stress_axial_sel_rpls" name="stress_axial_sel_rpls" onchange='cleanOut_rpls()'> 
-                                    </select>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    <label>k - Load Factor:</label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" id="k_factor_rpls" name="k_factor_rpls" onchange='onchange_Input_rpls(this)' required> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> Select Pipe Data </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group">
+                                                                        <input type="radio" id = "api5l_rpls" name="linepipe_rpls" value="api5l_rpls" onchange="onchange_linepipe_rpls()" required> Tubería - especificación API 5L <br>
+                                                                        <input type="radio" id = "astm_rpls" name="linepipe_rpls" value="astm_rpls" onchange="onchange_linepipe_rpls()" required> Standart Steel Pipe - ASTM - ANSI B36.10
+                                                                    </div>                                    
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Results
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">    
-                            <div class="form-group">
-                                <label>Hoop Stress [psi]:</label>
-                                <input type="text" name="hoop_stress_rpls" id="hoop_stress_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Longitudinal Stress Due to Internal Pressure [psi]:</label>
-                                <input type="text" name="long_int_rpls" id="long_int_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Longitudinal Stress Due to Thermal Expansion [psi]:</label>
-                                <input type="text" name="long_ther_rpls" id="long_ther_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Net Longitudinal Stress [psi]:</label>
-                                <input type="text" name="net_stress_rpls" id="net_stress_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Maximum Permitted Longitudinal Stress [psi]:</label>
-                                <input type="text" name="max_stress_rpls" id="max_stress_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Combined Biaxial Stress [psi]:</label>
-                                <input type="text" name="comb_stress_rpls" id="comb_stress_rpls" class="form-control" readonly> 
-                                <BR>
-                                <label>Maximum Permitted Combined Biaxial Stress [psi]:</label>
-                                <input type="text" name="max_comb_stress_rpls" id="max_comb_stress_rpls" class="form-control" readonly> 
-                                <BR>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            Line Pipe API 5L
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-12">
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-12">
+                                                                                            <label>Nominal pipe size:</label> 
+                                                                                        </div>
+                                                                                        <div class="col-md-12">
+                                                                                            <div id="div_nominalps_sel_rpls">
+                                                                                                <select class="form-control" id="nominalps_sel_rpls" name="nominalps_sel_rpls"> </select></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-lg-12">                      
+                                                                                            <label>Wall Thickness [.in]:</label>
+                                                                                        </div> 
+                                                                                        <div class="col-lg-12" id="div_wt_sel_rpls">
+                                                                                            <select class="form-control" id="wt_sel_rpls" name="wt_sel_rpls"> </select>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-12">
+                                                                                            <label>Grade:</label> 
+                                                                                        </div>
+                                                                                        <div class="col-md-12">
+                                                                                            <div id="div_grade_sel_rpls">
+                                                                                                <select class="form-control" id="grade_sel_rpls" name="grade_sel_rpls"> </select>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
 
-                                <div>    
-                                    <input type="button" id="calculateBtn_rpl" name="calculateBtn_rpl" value="Calculate" onclick="calculate_rpl()" class="btn btn-info btn-block">
-                                    <input type="button" id="saveBtn_rpl" name="saveBtn_rpl" value="Save" onclick="save_rpl()" class="btn btn-success btn-block">   
-                                    <input type="button" id="reportBtn_rpl" name="reportBtn_rpl" value="Delete" onclick="reportReg_rpl()" class="btn btn-danger btn-block">          
-                                </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>  
+                                                                    </div>
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading">
+                                                                            T - Temperature Derating Factor:
+                                                                        </div>
+                                                                        <div class="panel-body">
+                                                                            <div class="col-lg-6">
+                                                                                <label>Temperature [*F]</label>                        
+                                                                            </div>
+                                                                            <div class="col-lg-6">
+                                                                                <div  id="div_td_sel_rpls">                    
+                                                                                    <select class="form-control" id="temperature_rpls" name="temperature_rpls"> </select>
+                                                                                </div>                      
+                                                                            </div>                      
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-7">
+                                                                        <label>Poisson's Ratio:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-5">
+                                                                        <input type="text" class="form-control" id="poi_ratio_rpls" onchange='onchange_Input_rpls(this)' name="poi_ratio_rpls">
+                                                                    </div>                
+                                                                    <div class="col-lg-7">
+                                                                        <label>Young's Modulus of Elasticity [psi]:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-5">
+                                                                        <input type="text" class="form-control" id="young_modul_rpls" onchange='onchange_Input_rpls(this)' name="young_modul_rpls">
+                                                                    </div> 
+                                                                    <div class="col-lg-7">
+                                                                        <label>Thermal Expansion Coefficient [1/°F]:</label>
+                                                                    </div>
+                                                                    <div class="col-lg-5">
+                                                                        <input type="text" class="form-control" id="thermal_exp_rpls" onchange='onchange_Input_rpls(this)' name="thermal_exp_rpls">
+                                                                    </div>                   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading"> Input Parameters </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">     
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Height:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="height_rpls" name="height_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_height_sel_rpls">
+                                                                            <select class="form-control" id="height_sel_rpls" name="height_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Internal Pressure [psig]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="pip_int_rpls" name="pip_int_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_pip_int_sel_rpls">
+                                                                            <select class="form-control" id="pip_int_sel_rpls" name="pip_int_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Nominal Outside Diameter [in.]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="nomout_rpls" name="nomout_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_nomout_sel_rpls">
+                                                                            <select class="form-control" id="nomout_sel_rpls" name="nomout_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Nominal Wall Thickness [in.]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="nom_wall_rpls" name="nom_wall_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_nom_wall_sel_rpls">
+                                                                            <select class="form-control" id="nom_wall_sel_rpls" name="nom_wall_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Grade:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input type="text" class="form-control" id="gra_pipeop_wt_rpls" name="gra_pipeop_wt_rpls" required> 
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Specified Minimum Yield Strength [psi]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="min_yield_rpls" name="min_yield_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_min_yield_sel_rpls">
+                                                                            <select class="form-control" id="min_yield_sel_rpls" name="min_yield_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Temperature Derating Factor:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input type="text" class="form-control" id="temp_rpls" name="temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Installation Temperature [°F]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="pipe_temp_rpls" name="pipe_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_pipe_temp_sel_rpls">
+                                                                            <select class="form-control" id="pipe_temp_sel_rpls" name="pipe_temp_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Operating Temperature [°F]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="pipeoper_temp_rpls" name="pipeoper_temp_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_pipeoper_temp_sel_rpls">
+                                                                            <select class="form-control" id="pipeoper_temp_sel_rpls" name="pipeoper_temp_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Nominal Bending Stress [psi]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="nom_stress_rpls" name="nom_stress_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_nom_stress_sel_rpls">
+                                                                            <select class="form-control" id="nom_stress_sel_rpls" name="nom_stress_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Stress Due to Axial Loading [psi]:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="stress_axial_rpls" name="stress_axial_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_stress_axial_sel_rpls">
+                                                                            <select class="form-control" id="stress_axial_sel_rpls" name="stress_axial_sel_rpls" onchange='cleanOut_rpls()'> 
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>k - Load Factor:</label>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <input type="text" class="form-control" id="k_factor_rpls" name="k_factor_rpls" onchange='onchange_Input_rpls(this)' required> 
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Results                        
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12">                                    
+                                                                    <div class="form-group">
+                                                                        <label>Hoop Stress [psi]:</label>
+                                                                        <input type="text" name="hoop_stress_rpls" id="hoop_stress_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Longitudinal Stress Due to Internal Pressure [psi]:</label>
+                                                                        <input type="text" name="long_int_rpls" id="long_int_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Longitudinal Stress Due to Thermal Expansion [psi]:</label>
+                                                                        <input type="text" name="long_ther_rpls" id="long_ther_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Net Longitudinal Stress [psi]:</label>
+                                                                        <input type="text" name="net_stress_rpls" id="net_stress_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Maximum Permitted Longitudinal Stress [psi]:</label>
+                                                                        <input type="text" name="max_stress_rpls" id="max_stress_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Combined Biaxial Stress [psi]:</label>
+                                                                        <input type="text" name="comb_stress_rpls" id="comb_stress_rpls" class="form-control" readonly> 
+                                                                        <BR>
+                                                                        <label>Maximum Permitted Combined Biaxial Stress [psi]:</label>
+                                                                        <input type="text" name="max_comb_stress_rpls" id="max_comb_stress_rpls" class="form-control" readonly> 
+
+                                                                    </div>  
+                                                                </div> 
+                                                            </div>               
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>   
                             </div>  
-                        </div> 
-                    </div>               
+
+                            <div class="col-lg-3">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Actions
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <input type="button" id="calculateBtn_rpl" name="calculateBtn_rpl" value="Calculate" onclick="calculate_rpl()" class="btn btn-info btn-block">
+                                                <input type="button" id="saveBtn_rpl" name="saveBtn_rpl" value="Save" onclick="save_rpl()" class="btn btn-success btn-block">   
+                                                <input type="button" id="reportBtn_rpl" name="reportBtn_rpl" value="Delete" onclick="reportReg_rpl()" class="btn btn-danger btn-block">          
+
+                                                <input type="button" id="cleanAllBtn_rpl" name="cleanBtn_rpl" value="Clean All" onclick="cleanAll_rpls()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanInputBtn_rpl" name="cleanBtn_rpl" value="Clean Input Data" onclick="cleanIn_rpls()" class="btn btn-warning btn-block">
+                                                <input type="button" id="cleanOutputBtn_rpl" name="cleanBtn_rpl" value="Clean Output Data" onclick="cleanOut_rpls()" class="btn btn-warning btn-block">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="opt_rpl" name="opt_rpl"> 
+                            <input type="hidden" id="id_rpl" name="id_rpl">   
+                        </div>
+                        <div id="load_Dialog_rpl" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_rpl" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_rpl" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_rpl" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_rpl" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_rpl" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div> 
 
-        <div class="col-lg-12">
-            <div class="col-md-3">
-                <input type="button" id="cleanAllBtn_rpl" name="cleanBtn_rpl" value="Clean All" onclick="cleanAll_rpls()" class="btn btn-warning btn-block">
             </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanInputBtn_rpl" name="cleanBtn_rpl" value="Clean Input Data" onclick="cleanIn_rpls()" class="btn btn-warning btn-block">
-            </div>
-            <div class="col-md-3">
-                <input type="button" id="cleanOutputBtn_rpl" name="cleanBtn_rpl" value="Clean Output Data" onclick="cleanOut_rpls()" class="btn btn-warning btn-block">
-            </div>    
+            <!-- /#page-wrapper -->
+
         </div>
+        <!-- /#wrapper -->
+    </body>
 
-        <input type="hidden" id="opt_rpl" name="opt_rpl"> 
-        <input type="hidden" id="id_rpl" name="id_rpl">   
-        <script>
+    <script>
             $(document).ready(function () {
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_rpls"),
@@ -384,7 +468,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -413,7 +497,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -445,7 +529,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -471,7 +555,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -497,7 +581,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -575,7 +659,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -635,7 +719,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -665,7 +749,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -694,7 +778,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -721,7 +805,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     async: false,
                     data: parametros,
                     beforeSend: function (xhr) {
@@ -752,7 +836,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -869,6 +953,5 @@
                 cleanOut_rpls();
                 cleanIn_rpls();
             }
-        </script>    
-    </body>
+        </script>       
 </html>
