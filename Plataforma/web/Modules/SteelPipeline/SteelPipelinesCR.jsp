@@ -1,58 +1,94 @@
-<%-- 
-    Document   : index
-    Created on : 03-mar-2016, 17:02:38
-    Author     : kata__000
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page session="true"%>
 <!DOCTYPE html>
-<html>
-    <jsp:include page="../../head.jsp" />
-    <head>
-      <%@include file="../../includehead2.html" %>
+
+<html lang="en">
+    <head>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>::PROMIGAS::</title>  
+        <script src="../../js/jquery.js" type="text/JavaScript" ></script>
+        <script src="../../js/jquery-ui/jquery-ui.js"></script>
+        <script src="../../js/jquery-ui/external/blockui/jquery-blockui.js"></script>
+        <script src="../../js/functions/formulasK.js"></script>
+        <script src="../../js/functions/formulasM.js"></script>
+        <script src="../../js/functions/functions.js"></script>
+        <script src="../../js/jspdf/jspdf.min.js" type="text/JavaScript" > </script>
+        <script src="../../js/jspdf/autotable.min.js" type="text/JavaScript" > </script>
+        <script src="../../bower_components/morrisjs/morris.js"></script>
+        <script src="../../dist/js/sb-admin-2.js"></script>
+        <script src="../../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+        <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../../bower_components/raphael/raphael-min.js"></script>
+        <script src="../../js/dataTables/jquery.dataTables.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="../../js/jquery-ui/jquery-ui.css">
+        <link rel="stylesheet" href="../../bower_components/morrisjs/morris.css">
+        <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../bower_components/metisMenu/dist/metisMenu.min.css" />
+        <link rel="stylesheet" href="../../dist/css/timeline.css" >
+        <link rel="stylesheet" href="../../dist/css/sb-admin-2.css" >
+        <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/dataTables/jquery.dataTables.min.css" type="text/css">
+        <link rel="stylesheet" href="../../css/user-profiles-list-basic.css">
+        <link rel="stylesheet" href="../../css/menu.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.1/css/select.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
     </head>
     <body>
-        <div class="row">
-            <div class="col-lg-9">
-                <h2><strong>Steel Pipeline Crossings:</strong> API 1102 - Gas Pipeline Crossing Railroad</h2>
-            </div>
-            <div class="col-lg-3"> 
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_spcr()">
-                    Record
-                </button>
+        <div id="wrapper">
 
-                <!-- MODAL -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+            <!-- Navigation -->
+            <jsp:include page="../../allmenu.jsp"/>
+
+            <div id="page-wrapper">
+                <div class="row">
+                    <div id="content">
+                        <div class="row">
+                            <div class="col-lg-9">
+                                <h2><strong>Steel Pipeline Crossings:</strong> API 1102 - Gas Pipeline Crossing Railroad</h2>
                             </div>
-                            <div class="modal-body">
-                                <div id="div-table_spcr"></div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <div class="col-lg-3"> 
+                                <br>
+                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_spcr()">
+                                    Record
+                                </button>
 
+                                <!-- MODAL -->
+                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">Record</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div id="div-table_spcr"></div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- FIN MODAL -->
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- FIN MODAL -->
-            </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                Description: 
+                                <input  class="form-control" type="text" id="description_spcr" name="description_spcr"><br>
+                                Projects: 
+                                <select class="form-control" id="proyects_sel_spcr" name="proyects_sel_spcr"> </select>
+                            </div>
+                        </div>
 
-            <div class="col-lg-9">
-                Description: 
-                <input  class="form-control" type="text" id="description_spcr" name="description_spcr"><br>
-                Projects: 
-                <select class="form-control" id="proyects_sel_spcr" name="proyects_sel_spcr"> </select>
-            </div>
-        </div>
-        <hr>
-        <div class ="form-group">
+                        <hr>
+                        <div class="row">
+
+                            <div class ="form-group">
             <ul class="nav nav-tabs nav-justified" role="tablist">
                 <li role="presentation" class="active"><a href="#PaOC" aria-controls="PaOC" role="tab" data-toggle="tab">Pipe and Operational Characteristics</a></li>
                 <li role="presentation"><a href="#IaSC" aria-controls="IaSC" role="tab" data-toggle="tab">Installation and Site Characteristics</a></li>
@@ -489,7 +525,7 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <input type="button" value="Calcular" onclick="calculatebtn_spcr1()" id="savebtn_spch" name="savebtn_spch" class="btn btn-success btn-block">   
+                                            <input type="button" value="Calcular" onclick="calculatebtn_spcr1()" id="savebtn_spcr" name="savebtn_spcr" class="btn btn-success btn-block">   
                                             <input type="button" value="Reportar" id="reportbtn_spcr" name="reportbtn_spcr" class="btn btn-info btn-block">
                                         </div>
                                     </div>
@@ -499,8 +535,44 @@
                     </div>
                 </div>
             </div>
-        </div>            
+        </div> 
+
+                        </div>
+                        <div id="load_Dialog_spcr" title="Basic dialog" style='display:none;'>
+                            <p>Successfully uploaded data</p>
+                        </div>
+
+                        <div id="save_Dialog_spcr" title="Basic dialog" style='display:none;'>
+                            <p>Data saved successfully</p>
+                        </div>
+
+                        <div id="error_Dialog_spcr" title="Basic dialog" style='display:none;'>
+                            <p>An error has occurred in the process</p>
+                        </div>
+
+                        <div id="calculate_Dialog_spcr" title="Basic dialog" style='display:none;'>
+                            <p>Calculation done successfully</p>
+                        </div>
+
+                        <div id="delete_Dialog_spcr" title="Basic dialog" style='display:none;'>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_spcr" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
     </body>
+
     <script>
         $(document).ready(function() {  
             getproyectos(<%=session.getAttribute("idusu")%>,
@@ -609,7 +681,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -637,7 +709,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -674,7 +746,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -701,7 +773,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -732,7 +804,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -765,7 +837,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {                            
@@ -792,7 +864,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -822,7 +894,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -849,7 +921,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         async: false,
                         data: parametros,
                         beforeSend: function (xhr) {                            
@@ -882,7 +954,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         async: false,
                         data: parametros,
                         beforeSend: function (xhr) {                            
@@ -912,7 +984,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -940,7 +1012,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -972,7 +1044,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         async: false,
                         beforeSend: function (xhr) {                            
@@ -1069,5 +1141,5 @@
                 }
         
         
-    </script>
+    </script>   
 </html>
