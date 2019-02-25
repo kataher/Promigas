@@ -48,16 +48,6 @@ public class GeneralModel extends Model{
         String date = "'" + this.getDateTime() + "'";
         values.put("date", date);
         
-        String des = values.get("description_" + from);
-        String id_proyect = values.get("proyects_sel_" + from);
-        
-        /*String where = "proyects_sel_" + from + " = " + id_proyect + " and description_" + from + " = " + des; //OJO VALIDAR QUE NO SE INGRESEN '
-        Vector<Map> data = consultar(tabla, "*", where);
-        
-        if(data.isEmpty() == false){
-            throw new Exception("Ya existen registros con la descripción diligenciada");
-        }*/
-        
         this.add(tabla, values);
         return  date;
     }
@@ -66,11 +56,11 @@ public class GeneralModel extends Model{
         values.remove("id");
         String where = "id = " + id;
         
-        String idrg = values.get("iduser").trim();
+        String idrg = values.get("id_user").trim();
 
-        String sqlCons = "SELECT iduser\n" +
+        String sqlCons = "SELECT id_user\n" +
                 "  FROM [" +  bd + "].[dbo].[" + tabla + "]\n" +
-                "  WHERE id = " + id + " AND iduser = " + idrg; 
+                "  WHERE id = " + id + " AND id_user = " + idrg; 
         
         Vector<Map> data = consultar(sqlCons);
         
@@ -86,19 +76,19 @@ public class GeneralModel extends Model{
     public void delete(String id, int id_user) throws Exception{
         String where = "id = " + id;
         
-        String sqlCons = "SELECT iduser\n" +
+        String sqlCons = "SELECT id_user\n" +
                 "  FROM [" +  bd + "].[dbo].[" + tabla + "]\n" +
                 "  WHERE id = " + id; 
         
         Vector<Map> data = consultar(sqlCons);
         
         if(data.isEmpty()){
-            throw new Exception("No existe un registro para este còdigo");   
+            throw new Exception("There is no record for this code");   
         }else{
-            if(data.get(0).get("iduser").toString().equals(id_user+"")){
+            if(data.get(0).get("id_user").toString().equals(id_user+"")){
                 delete(tabla, where);
             }else{
-               throw new Exception("No es posible borrar el registro, debe ser el propietario");    
+               throw new Exception("It is not possible to delete the record, it must be the owner");    
             }
         }
     }

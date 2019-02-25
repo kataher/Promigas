@@ -96,12 +96,25 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
-                                            <div class="col-lg-12">
+                                            <div class="col-lg-12" style='display:none;'>
+                                                <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <label>Code:</label>
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <input class="form-control" type="text" id="code_fl" name="code_fl" readonly>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                            </div>
 
+                                            <div class="col-lg-12">                                                
                                                 <div class="form-group">
                                                     <div class="panel panel-default">
-                                                        <div class="panel-heading"> Input Parameters </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-heading"> 
+                                                            Input Parameters 
+                                                        </div>
+                                                        <div class="panel-body" id="input_fl">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
@@ -151,12 +164,14 @@
                                                                 </div>
                                                             </div>
                                                         </div>  
-                                                    </div></div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             Results                        </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="results_fl">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-12">
@@ -177,7 +192,7 @@
                                                             </div>
                                                         </div>  
                                                     </div> 
-                                                </div>
+                                                </div>                                                
                                             </div>
                                         </div>
                                     </div>  
@@ -366,6 +381,7 @@
                     block("Cargado datos...");
                 },
                 success: function (data, status, request) {
+
                     if (data !== null)
                     {
                         var tags = Object.keys(data.row);
@@ -380,7 +396,8 @@
 
                         $("#opt_fl").val("2");
                         $("#id_fl").val(data.row.id);
-                        $("#proyects_sel_fl").val(data.row.proyects_sel_fl);
+                        $("#code_fl").val(data.row.id);
+                        $("#proyects_sel_fl").val(data.row.id_proyect);
 
                         alert("Successfully uploaded data");
                     } else {
@@ -409,23 +426,16 @@
         }
 
         function cleanOut_fl() {
-            $("#finalflowrate_fl").val("");
-            $("#finalcompressorhead_fl").val("");
-            $("#finalshafthorsepower_fl").val("");
+            $("#results_fl input[type='text'][readonly]").val("");
         }
 
         function cleanIn_fl() {
-            $("#initialcompressorhead_fl").val("");
-            $("#initialflowrate_fl").val("");
-            $("#initialshafthorsepower_fl").val("");
-            $("#initialimpellerrotational_fl").val("");
-            $("#finalimpellerrotational_fl").val("");
+            $("#input_fl input[type='text']").val("");
         }
 
         function cleanAll_fl() {
             cleanIn_fl();
             cleanOut_fl();
-
             $("#description_fl").val("");
         }
 
@@ -437,7 +447,7 @@
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "fl"
             };
 
@@ -457,13 +467,13 @@
             }
 
             parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            delete parametros.code_fl;
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
@@ -474,6 +484,7 @@
                     },
                     success: function (data, status, request) {
                         $("#id_fl").val(data.row.id);
+                        $("#code_fl").val(data.row.id);
                         $("#opt_fl").val("2"); //opcion editar
                         show_OkDialog($("#save_Dialog_fl"), "Satisfactory process");
                     },
@@ -520,9 +531,8 @@
         }
 
         function delete_fl() {
-
             //Confirmacion
-            if ($("#opt_fl").val() == 2) {
+            if ($("#opt_fl").val() === "2") {
                 $("#dialog-confirm_fl").dialog({
                     resizable: false,
                     height: "auto",
@@ -561,6 +571,7 @@
                 success: function (data, status, request) {
                     cleanAll_fl();
                     $("#id_fl").val("-1");
+                    $("#code_fl").val("");
                     $("#opt_fl").val("1");
                     show_OkDialog($("#delete_Dialog_fl"), "Satisfactory process");
                 },

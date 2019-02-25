@@ -36,6 +36,8 @@ public class Model {
             miConexion = null;
             this.bd = "Plataforma"; //OJO corregir
             
+            //En tagua es plataforma2
+            
             //dbManager = new DBManager(DBManager.SQLSERVER, "MARTIN\\SQLEXPRESS", "Plataforma", "sa", "promigas2016", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "096834-DOCENT-O\\SQLEXPRESS", "Plataforma", "sa", "promigas2016", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "TAGUA\\SQLEXPRESS", this.bd, "sa", "promigas", "1433");

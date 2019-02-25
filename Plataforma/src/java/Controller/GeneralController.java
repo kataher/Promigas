@@ -466,7 +466,10 @@ public class GeneralController {
             return json;
 
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage());
+            if(ex.getMessage().contains("Violation of UNIQUE KEY constraint 'uni_ProDes"))
+                throw new Exception("This description already exists for the selected project");
+            else            
+                throw new Exception(ex.getMessage());
         }
     }
 

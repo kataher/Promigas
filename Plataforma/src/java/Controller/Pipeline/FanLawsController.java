@@ -32,6 +32,8 @@ public class FanLawsController extends Controller.Controller{
             if(!key.equals("opcion") && !key.equals("from") && !key.equals("opt_" + vals.get("from")[0])) {
                 if(key.equals("id_" + vals.get("from")[0]))
                     values.put("id", stringToBD(vals.get(key)[0].trim()));
+                else if (key.equals("proyects_sel_" + vals.get("from")[0]))
+                    values.put("id_proyect", stringToBD(vals.get(key)[0].trim()));
                 else
                     values.put(key, stringToBD(vals.get(key)[0].trim()));
             }
