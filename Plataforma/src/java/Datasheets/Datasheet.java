@@ -151,10 +151,10 @@ public class Datasheet {
             cell = sheet.getRow(10).getCell(9);
             cell.setCellValue(request.getParameter("tag_com"));
             
-            cell = sheet.getRow(25).getCell(9);
+            cell = sheet.getRow(24).getCell(9);
             cell.setCellValue(request.getParameter("protocols"));
             
-            cell = sheet.getRow(24).getCell(9);
+            cell = sheet.getRow(25).getCell(9);
             cell.setCellValue(request.getParameter("connec"));
             
             String vecc[] = request.getParameter("connec").split("/");
@@ -167,7 +167,7 @@ public class Datasheet {
             cell = sheet.getRow(14).getCell(9);
             cell.setCellValue(request.getParameter("linep"));
             
-            int pres = Integer.parseInt(request.getParameter("linep"));
+            double pres = Double.parseDouble(request.getParameter("linep"));
             cell = sheet.getRow(35).getCell(9);
             if(pres > 1000){
                cell.setCellValue("0-1500 Psig"); 
@@ -180,7 +180,7 @@ public class Datasheet {
             cell = sheet.getRow(18).getCell(9);
             cell.setCellValue(request.getParameter("flujo"));
             
-            cell = sheet.getRow(18).getCell(10);
+            cell = sheet.getRow(18).getCell(12);
             cell.setCellValue(request.getParameter("flujo_uni"));
             
             cell = sheet.getRow(44).getCell(9);
@@ -192,30 +192,82 @@ public class Datasheet {
             cell = sheet.getRow(53).getCell(9);
             cell.setCellValue(request.getParameter("cable"));
             
-            String vec[] = new String[4];
-            vec[0] = "NO"; vec[1] = "NO"; vec[2] = "NO"; vec[3] = "NO";
-            
-            String vecp[] = request.getParameter("pulsos").split("-");
-            
-            for(int i = 1; i < vecp.length; i++){
-                int varin = Integer.parseInt(vecp[i]);
-                vec[varin] = "YES";
-            }
-            cell = sheet.getRow(54).getCell(9);
-            cell.setCellValue(vec[0]);
-            cell = sheet.getRow(55).getCell(9);
-            cell.setCellValue(vec[1]);
-            cell = sheet.getRow(56).getCell(9);
-            cell.setCellValue(vec[2]);
-            cell = sheet.getRow(57).getCell(9);
-            cell.setCellValue(vec[3]);
-            
             cell = sheet.getRow(49).getCell(9);
             cell.setCellValue(request.getParameter("modelo"));
             
             cell = sheet.getRow(52).getCell(9);
             cell.setCellValue(request.getParameter("programa"));
-            String s = request.getParameter("programa");
+            
+            cell = sheet.getRow(68).getCell(3);
+            cell.setCellValue("MVT Wet End: " + request.getParameter("mvt"));
+            
+            String s = request.getParameter("powers");            
+            cell = sheet.getRow(32).getCell(9);
+            String ss[] = s.split(",");
+            if(ss.length == 2 || ss.length > 2){                
+                cell.setCellValue(ss[0] + ", " + ss[1]);
+            }
+            
+            if(ss.length > 2){    
+                cell = sheet.getRow(33).getCell(9);
+                cell.setCellValue(ss[2] + ", " + ss[3]);
+            }
+                        
+            cell = sheet.getRow(27).getCell(9);
+            cell.setCellValue(request.getParameter("hazardous"));
+            
+            cell = sheet.getRow(70).getCell(3);
+            cell.setCellValue("Chassis, Processor and Control System: " + request.getParameter("chassis"));
+            
+            if(request.getParameter("rtd").equals("1327,0")){
+                cell = sheet.getRow(25+12).getCell(9);
+                cell.setCellValue("None");
+                cell = sheet.getRow(25+12).getCell(12);
+                cell.setCellValue("None");
+            }
+            
+            cell = sheet.getRow(48).getCell(9);
+            cell.setCellValue(request.getParameter("trtd"));
+            
+            cell = sheet.getRow(61).getCell(3);
+            cell.setCellValue("Configuración de I/O: " + request.getParameter("ioconf"));
+            
+            cell = sheet.getRow(27).getCell(9);
+            cell.setCellValue(request.getParameter("rcable"));
+            
+            cell = sheet.getRow(72).getCell(3);
+            cell.setCellValue("Proximity Sesnor and board interface: " + request.getParameter("prox"));
+            
+            cell = sheet.getRow(66).getCell(3);
+            cell.setCellValue("Opción de Radio o Modem: " + request.getParameter("rmodem"));
+            
+            cell = sheet.getRow(55).getCell(9);
+            cell.setCellValue(request.getParameter("tkit"));
+            
+            cell = sheet.getRow(70).getCell(3);
+            cell.setCellValue("Telecounter blank digits: " + request.getParameter("tblank"));
+            
+            cell = sheet.getRow(56).getCell(9);
+            cell.setCellValue(request.getParameter("meterf"));
+            
+            cell = sheet.getRow(51).getCell(9);
+            cell.setCellValue(request.getParameter("snetwork"));
+            
+            cell = sheet.getRow(58).getCell(9);
+            cell.setCellValue(request.getParameter("producer"));
+      
+            cell = sheet.getRow(59).getCell(9);
+            cell.setCellValue(request.getParameter("model"));
+            
+            if(request.getParameter("optmodel").equals("1297,efm")){
+                cell = sheet.getRow(61).getCell(3);
+                cell.setCellValue(request.getParameter("ioefm"));
+                
+                cell = sheet.getRow(54).getCell(9);
+                cell.setCellValue(request.getParameter("integral"));
+            }
+            
+            
             
             //Guardar el archivo modificado            
             String nuevoNombre = "compflujo_" + d.getTime();

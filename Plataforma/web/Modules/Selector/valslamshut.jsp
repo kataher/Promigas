@@ -753,7 +753,7 @@
                             alert("Successfully generated file");
                             var file = data.row.file;
                             var path = data.row.path;
-                            window.location = "bajar.jsp?filename=" + file + "&path=" + path;
+                            window.location = "/Plataforma/bajar.jsp?filename=" + file + "&path=" + path;
                         },
                         error: function (xhr, ajaxOptions, err) {
                             show_OkDialog($("#error_Dialog_sh"), "Error");

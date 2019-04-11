@@ -97,192 +97,200 @@
                         </div>
                         <hr>
 
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-9">
 
-                        <div class="col-lg-6">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Input
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Input
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+
+                                                    <div class="form-group col-lg-12">
+                                                        <div>
+                                                            <label>Trademark:</label>
+                                                        </div>
+                                                        <div id = "div_ma_sel_mem">
+                                                            <input class="form-control" type="text" id="ma_sel_mem" name="ma_sel_mem" onchange="onchange_Input_mem(this)" required value="Segun vendor list.">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-12" id="div_serie_mem" style="display:none">
+                                                        <div>
+                                                            <label>Serie:</label>
+                                                        </div>
+                                                        <div id = "div_se_sel_mem">
+                                                            <select class="form-control" id="se_sel_mem" name="se_sel_mem"> </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group col-lg-12">
+                                                        <div>
+                                                            <label>Model:</label>
+                                                        </div>
+                                                        <div id = "div_mo_sel_mem">
+                                                            <select class="form-control" id="mo_sel_mem" name="mo_sel_mem"> </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-lg-12">
+                                                        <div>
+                                                            <label>Capacity:</label>
+                                                        </div>
+                                                        <input class="form-control" type="text" id="capa_mem" name="capa_mem" onchange="onchange_Input_mem(this)" disabled>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Operating Pressure:</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value="100"  class="form-control" type="text" id="presionop_mem" name="presionop_mem" onchange="onchange_Input_mem(this)" required>
+                                                        </div>
+                                                        <div class="col-md-4" id = "div_po_sel_mem">
+                                                            <select class="form-control" id="po_sel_mem" name="po_sel_mem" onchange="cleanOut_mem()"> </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Base Pressure:</label> 
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input  class="form-control" type="text" id="preisonba_mem" name="preisonba_mem" value="14.65" onchange="onchange_Input_mem(this)" required><br>
+                                                        </div>
+                                                        <div class="col-md-4" id="div_pb_sel_mem">
+                                                            <select class="form-control" id="pb_sel_mem" name="pb_sel_mem" onchange="cleanOut_mem()"> </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Minimum Flow of Operation:</label>
+                                                        </div>
+
+                                                        <div class="col-md-8">
+                                                            <input value="100000" class="form-control" type="text" id="flujomin_mem" name="flujomin_mem" onchange="onchange_Input_mem(this)" required>
+                                                        </div>
+                                                        <div class="col-md-4" id="div_fmin_sel_mem">
+                                                            <select class="form-control" id="fmin_sel_mem" name="fmin_sel_mem" disabled></select> 
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Maximum Flow of Operation:</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value="500000" class="form-control" type="text" id="flujomax_mem" name="flujomax_mem" onchange="onchange_Input_mem(this)" required>
+                                                        </div>
+                                                        <div class="col-md-4" id="div_fmax_sel_mem">
+                                                            <select class="form-control" id="fmax_sel_mem" name="fmax_sel_mem"></select> 
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Temperature of Operation</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value="85" class="form-control" type="text" id="temp_mem" name="temp_mem" onchange="onchange_Input_mem(this)" required>
+                                                        </div>
+                                                        <div class="col-md-4" id="div_temp_sel_mem">
+                                                            <select class="form-control" id="temp_sel_mem" name="temp_sel_mem"></select> 
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Results
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <label>Optimum Model:</label>
+                                                        <input type="text" id="modeloop_mem" name="modeloop_mem" readonly required class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>% Work with maximum capacity (Optimum):</label>
+                                                        <input type="text" id="trabajoop_mem" name="trabajoop_mem" readonly required class="form-control">
+                                                    </div> 
+                                                    <div class="form-group">
+                                                        <label>Maximum Capacity of Measurement (Optimum) [SCFH]:</label>            
+                                                        <input type="text" id="maxcapaop_mem" name="maxcapaop_mem" readonly required class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Evaluated Model</label>
+                                                        <input type="text" id="modeloev_mem" name="modeloev_mem" readonly required class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>% Work with maximum capacity (Evaluated):</label>
+                                                        <input type="text" id="trabajoev_mem" name="trabajoev_mem" readonly required class="form-control">
+                                                    </div> 
+                                                    <div class="form-group">
+                                                        <label>Maximum Capacity of Measurement(Evaluated) [SCFH]:</label>            
+                                                        <input type="text" id="maxcapaev_mem" name="maxcapaev_mem" readonly required class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>% Work with minimum conditions of operation (Evaluated):</label>
+                                                        <input type="text" id="trabajocam_mem" name="trabajocam_mem" readonly required class="form-control">
+                                                    </div>                      
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div> 
                                 </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-
-                                            <div class="form-group col-lg-12">
-                                                <div>
-                                                    <label>Trademark:</label>
-                                                </div>
-                                                <div id = "div_ma_sel_mem">
-                                                    <input class="form-control" type="text" id="ma_sel_mem" name="ma_sel_mem" onchange="onchange_Input_mem(this)" required value="Segun vendor list.">
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12" id="div_serie_mem" style="display:none">
-                                                <div>
-                                                    <label>Serie:</label>
-                                                </div>
-                                                <div id = "div_se_sel_mem">
-                                                    <select class="form-control" id="se_sel_mem" name="se_sel_mem"> </select>
+                                <div class="col-lg-3">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Actions
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <input type="button" id="calculateBtn_mem" name="calculateBtn_mem" value="Calculate" onclick="calculate_mem()" class="btn btn-info btn-block">
+                                                    <input type="button" id="saveBtn_mem" name="saveBtn_mem" value="Save" onclick="save_mem()" class="btn btn-success btn-block">   
+                                                    <input type="button" id="delteBtn_mem" name="delteBtn_mem" value="Delete" onclick="delete_mem()" class="btn btn-danger btn-block">
+                                                    <input type="button" id="datasheetgen_mem" name="datasheetgen_mem" value="Generate DataSheet" onclick="load_datasheet_mem()" class="btn btn-success btn-block">   
+                                                    <input type="button" id="cleanAllBtn_mem" name="cleanBtn_mem" value="Clean All" onclick="cleanAll_mem()" class="btn btn-warning btn-block">
+                                                    <input type="button" id="cleanInputBtn_mem" name="cleanBtn_mem" value="Clean Input Data" onclick="cleanIn_mem()" class="btn btn-warning btn-block">
+                                                    <input type="button" id="cleanOutputBtn_mem" name="cleanBtn_mem" value="Clean Output Data" onclick="cleanOut_mem()" class="btn btn-warning btn-block">
                                                 </div>
                                             </div>
-                                            <div class="form-group col-lg-12">
-                                                <div>
-                                                    <label>Model:</label>
-                                                </div>
-                                                <div id = "div_mo_sel_mem">
-                                                    <select class="form-control" id="mo_sel_mem" name="mo_sel_mem"> </select>
-                                                </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Plot
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="graficaLineal_mem"></div>
                                             </div>
-
-                                            <div class="form-group col-lg-12">
-                                                <div>
-                                                    <label>Capacity:</label>
-                                                </div>
-                                                <input class="form-control" type="text" id="capa_mem" name="capa_mem" onchange="onchange_Input_mem(this)" disabled>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Operating Pressure:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input value="100"  class="form-control" type="text" id="presionop_mem" name="presionop_mem" onchange="onchange_Input_mem(this)" required>
-                                                </div>
-                                                <div class="col-md-4" id = "div_po_sel_mem">
-                                                    <select class="form-control" id="po_sel_mem" name="po_sel_mem" onchange="cleanOut_mem()"> </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Base Pressure:</label> 
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input  class="form-control" type="text" id="preisonba_mem" name="preisonba_mem" value="14.65" onchange="onchange_Input_mem(this)" required><br>
-                                                </div>
-                                                <div class="col-md-4" id="div_pb_sel_mem">
-                                                    <select class="form-control" id="pb_sel_mem" name="pb_sel_mem" onchange="cleanOut_mem()"> </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Minimum Flow of Operation:</label>
-                                                </div>
-
-                                                <div class="col-md-8">
-                                                    <input value="100000" class="form-control" type="text" id="flujomin_mem" name="flujomin_mem" onchange="onchange_Input_mem(this)" required>
-                                                </div>
-                                                <div class="col-md-4" id="div_fmin_sel_mem">
-                                                    <select class="form-control" id="fmin_sel_mem" name="fmin_sel_mem" disabled></select> 
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Maximum Flow of Operation:</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input value="500000" class="form-control" type="text" id="flujomax_mem" name="flujomax_mem" onchange="onchange_Input_mem(this)" required>
-                                                </div>
-                                                <div class="col-md-4" id="div_fmax_sel_mem">
-                                                    <select class="form-control" id="fmax_sel_mem" name="fmax_sel_mem"></select> 
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <label>Temperature of Operation</label>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <input value="85" class="form-control" type="text" id="temp_mem" name="temp_mem" onchange="onchange_Input_mem(this)" required>
-                                                </div>
-                                                <div class="col-md-4" id="div_temp_sel_mem">
-                                                    <select class="form-control" id="temp_sel_mem" name="temp_sel_mem"></select> 
-                                                </div>
-
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Results
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label>Optimum Model:</label>
-                                                <input type="text" id="modeloop_mem" name="modeloop_mem" readonly required class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>% Work with maximum capacity (Optimum):</label>
-                                                <input type="text" id="trabajoop_mem" name="trabajoop_mem" readonly required class="form-control">
-                                            </div> 
-                                            <div class="form-group">
-                                                <label>Maximum Capacity of Measurement (Optimum) [SCFH]:</label>            
-                                                <input type="text" id="maxcapaop_mem" name="maxcapaop_mem" readonly required class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Evaluated Model</label>
-                                                <input type="text" id="modeloev_mem" name="modeloev_mem" readonly required class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>% Work with maximum capacity (Evaluated):</label>
-                                                <input type="text" id="trabajoev_mem" name="trabajoev_mem" readonly required class="form-control">
-                                            </div> 
-                                            <div class="form-group">
-                                                <label>Maximum Capacity of Measurement(Evaluated) [SCFH]:</label>            
-                                                <input type="text" id="maxcapaev_mem" name="maxcapaev_mem" readonly required class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>% Work with minimum conditions of operation (Evaluated):</label>
-                                                <input type="text" id="trabajocam_mem" name="trabajocam_mem" readonly required class="form-control">
-                                            </div>                      
-
-                                            <input type="button" id="calculateBtn_mem" name="calculateBtn_mem" value="Calculate" onclick="calculate_mem()" class="btn btn-info btn-block">
-                                            <input type="button" id="saveBtn_mem" name="saveBtn_mem" value="Save" onclick="save_mem()" class="btn btn-success btn-block">   
-                                            <input type="button" id="delteBtn_mem" name="delteBtn_mem" value="Delete" onclick="delete_mem()" class="btn btn-danger btn-block">
-                                            <input type="button" id="datasheetgen_mem" name="datasheetgen_mem" value="Generate DataSheet" onclick="load_datasheet_mem()" class="btn btn-success btn-block">   
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    Plot
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div id="graficaLineal_mem"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="col-md-3">
-                                <input type="button" id="cleanAllBtn_mem" name="cleanBtn_mem" value="Clean All" onclick="cleanAll_mem()" class="btn btn-warning btn-block">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="button" id="cleanInputBtn_mem" name="cleanBtn_mem" value="Clean Input Data" onclick="cleanIn_mem()" class="btn btn-warning btn-block">
-                            </div>
-                            <div class="col-md-3">
-                                <input type="button" id="cleanOutputBtn_mem" name="cleanBtn_mem" value="Clean Output Data" onclick="cleanOut_mem()" class="btn btn-warning btn-block">
-                            </div>
-
-                        </div>
                         <div id="load_Dialog_mem" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
                         </div>
@@ -350,9 +358,9 @@
                 var pres = 0;
 
                 if ($("#po_sel_mem").val().split(",")[1] === "psig") {
-                    pres = Number($("#presionop_mem").val().replace(",",""));
+                    pres = Number($("#presionop_mem").val().replace(",", ""));
                 } else {
-                    pres = Number($("#presionop_mem").val().replace(",","")) * 14.504;
+                    pres = Number($("#presionop_mem").val().replace(",", "")) * 14.504;
                 }
 
 
@@ -421,20 +429,20 @@
                 var tope = 1200;
                 var paso = 50;
                 var capaSel = parseFloat($("#capa_mem").val());
-                var aux = (500+14.7)/14.7;
+                var aux = (500 + 14.7) / 14.7;
                 var tam = 0;
                 while (inicio <= tope) {
                     valX[tam] = inicio;
-                    valY[tam] = (capaSel)/aux*((valX[tam]+14.7)/14.7);
+                    valY[tam] = (capaSel) / aux * ((valX[tam] + 14.7) / 14.7);
                     inicio += paso;
                     tam++;
                 }
-                
+
                 var pOp = parseFloat($("#presionop_mem").val());
 
                 var pOpe = {
                     x: [pOp],
-                    y: [capaSel/aux*((pOp+14.7)/14.7)],
+                    y: [capaSel / aux * ((pOp + 14.7) / 14.7)],
                     mode: 'markers',
                     name: 'Operating Point'
                 };
@@ -455,7 +463,7 @@
 
                 var lOpera = {
                     x: [pOp, pOp],
-                    y: [0, capaSel/aux*((pOp+14.7)/14.7)],
+                    y: [0, capaSel / aux * ((pOp + 14.7) / 14.7)],
                     mode: 'lines',
                     name: 'Operation Line'
                 };

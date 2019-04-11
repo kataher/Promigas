@@ -208,26 +208,14 @@
                                         <input  class="form-control" type="text" id="long_com" name="long_com">
                                     </div>
                                     <div class="col-md-4" id = "div_long_sel_com">
-                                        <select class="form-control" id="long_sel_com" name="long_sel_com" onchange="cleanOut_com()"> </select>
+                                        <select class="form-control" id="long_sel_com" name="long_sel_com" onchange="cleanOut_com()"> 
+                                            <option value="ft">ft</option>
+                                        </select>
                                     </div>
                                 </div>
 
 
-                                <div class="form-group col-lg-12">
-                                    <label>Pulse counter</label>
-                                    <div class="checkbox col-lg-12">
-                                        <label><input id="checkpul_1_com" name ="checkpul_1_com" type="checkbox" value="0">With index type</label>
-                                    </div>
-                                    <div class="checkbox col-lg-12">
-                                        <label><input id="checkpul_2_com" name ="checkpul_2_com" type="checkbox" value="1">With mounting kit</label>
-                                    </div>
-                                    <div class="checkbox col-lg-12">
-                                        <label><input id="checkpul_3_com" name ="checkpul_3_com" type="checkbox" value="2">With meter index rate</label>
-                                    </div>
-                                    <div class="checkbox col-lg-12">
-                                        <label><input id="checkpul_4_com" name ="checkpul_4_com" type="checkbox" value="3">With digit blanking</label>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -318,12 +306,6 @@
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-12">
-                                                <label>21 V dc/dc Loop Power Supply:</label>                            
-                                                <div id = "div_sav_sel_com">
-                                                    <select class="form-control" id="sav_sel_com" name="sav_sel_com" > </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12">
                                                 <label>I/O Slot 3:</label>                            
                                                 <div id = "div_s3_sel_com">
                                                     <select class="form-control" id="s3_sel_com" name="s3_sel_com" > </select>
@@ -360,33 +342,9 @@
                                                 </div>
                                             </div>
                                             <div class="form-group col-lg-12">
-                                                <label>Power Distribution Board:</label>                            
-                                                <div id = "div_tde_sel_com">
-                                                    <select class="form-control" id="tde_sel_com" name="tde_sel_com" > </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12">
-                                                <label>Relay Board :</label>                            
-                                                <div id = "div_tr_sel_com">
-                                                    <select class="form-control" id="tr_sel_com" name="tr_sel_com" > </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12">
                                                 <label>Switched Network Modem -- On Comm Expansion Module :</label>                            
                                                 <div id = "div_mr_sel_com">
                                                     <select class="form-control" id="mr_sel_com" name="mr_sel_com" > </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12">
-                                                <label>Polyphaser Option for Radio:</label>                            
-                                                <div id = "div_pr_sel_com">
-                                                    <select class="form-control" id="pr_sel_com" name="pr_sel_com" > </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-12">
-                                                <label> Radio Option:</label>                            
-                                                <div id = "div_opr_sel_com">
-                                                    <select class="form-control" id="opr_sel_com" name="opr_sel_com" > </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -886,8 +844,8 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                                 <div class="row">
 
                                     <div class="col-lg-12">
-                                        <input type="button" id="volverBtn_com" name="volverBtn_com" value="Volver" onclick="volver_com()" class="btn btn-info btn-block">                           
-                                        <input type="button" id="descargar_com" name="descargar_com" value="Descargar" onclick="gen_datasheet_com()" class="btn btn-success btn-block">    
+                                        <input type="button" id="volverBtn_com" name="volverBtn_com" value="Go Back" onclick="volver_com()" class="btn btn-info btn-block">                           
+                                        <input type="button" id="descargar_com" name="descargar_com" value="Download" onclick="gen_datasheet_com()" class="btn btn-success btn-block">    
 
 
                                     </div>
@@ -938,18 +896,13 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                 load_cap_com();
                 load_srtd_com();
                 load_trtd_com();
-                load_sa_com();
                 load_s3_com();
                 load_s4_com();
                 load_s5_com();
                 load_s6_com();
                 load_s7_com();
                 load_s8_com();
-                load_tde_com();
                 load_mr_com();
-                load_pr_com();
-                load_tr_com();
-                load_opr_com();
 
                 load_sie_com();
                 load_us_com();
@@ -963,8 +916,6 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                 load_cio_com();
                 load_oppr_com();
                 load_oprm_com();
-
-                load_in_sel_com();
                 load_flowr_sel_com();
                 load_press_sel_com();
 
@@ -1333,93 +1284,7 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
             }
 
-            function load_tr_com() {
-                var parametros = {
-                    "combo": 'tdrcom',
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-
-                        var newHtml = "<select class=\"form-control\" name=\"tr_sel_com\" id= \"tr_sel_com\" >" + data;
-                        $("#div_tr_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_com"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-
-
-            }
-
-            function load_opr_com() {
-                var parametros = {
-                    "combo": 'orcom',
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-
-                        var newHtml = "<select class=\"form-control\" name=\"opr_sel_com\" id= \"opr_sel_com\" >" + data;
-                        $("#div_opr_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_com"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-
-
-            }
-
-            function load_pr_com() {
-                var parametros = {
-                    "combo": 'opcom',
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-
-                        var newHtml = "<select class=\"form-control\" name=\"pr_sel_com\" id= \"pr_sel_com\" >" + data;
-                        $("#div_pr_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_com"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-
-
-            }
-
+            
             function load_mr_com() {
                 var parametros = {
                     "combo": 'mrcom',
@@ -1449,34 +1314,6 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
             }
 
-            function load_tde_com() {
-                var parametros = {
-                    "combo": 'tdecom',
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-
-                        var newHtml = "<select class=\"form-control\" name=\"tde_sel_com\" id= \"tde_sel_com\" >" + data;
-                        $("#div_tde_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_com"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-
-
-            }
 
             function load_s3_com() {
                 var parametros = {
@@ -1652,35 +1489,7 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
             }
 
-            function load_sa_com() {
-                var parametros = {
-                    "combo": 'sacom',
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-
-                        var newHtml = "<select class=\"form-control\" name=\"sav_sel_com\" id= \"sav_sel_com\" >" + data;
-                        $("#div_sav_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_com"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-
-
-            }
-
+            
             function load_trtd_com() {
                 var parametros = {
                     "combo": 'trtdcom',
@@ -2111,6 +1920,15 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
                 return res;
             }
+            
+            function get_ioefm_com(){
+                return $('#s3_sel_com option:selected').html() + " / " + 
+                       $('#s4_sel_com option:selected').html() + " / " + 
+                       $('#s5_sel_com option:selected').html() + " / " + 
+                       $('#s6_sel_com option:selected').html() + " / " + 
+                       $('#s7_sel_com option:selected').html() + " / " + 
+                       $('#s8_sel_com option:selected').html();
+            }
 
             function get_connec_com() {
 
@@ -2137,9 +1955,6 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                     }
                 });
 
-                if (document.getElementById("checkmed_5_com").checked === true) {
-                    res += " / " + $("#otromed_com").val();
-                }
 
                 return res;
             }
@@ -2147,14 +1962,16 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
             function get_linep_com() {
 
                 var value = parseFloat($("#presion_com").val());
-                var med = $("#presion_sel_com").val();
-
-                var res = get_Pres(value, med, "psig");
+                var med = $("#presion_sel_com").val().split(",")[1];
+                
+                var res = get_Pres(value, 0, med, "psig");
+                
 
                 if (res == null) {
                     return 0;
                 }
-
+                
+                
                 return res;
             }
 
@@ -2170,24 +1987,7 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                 return res;
             }
 
-            function get_long_com() {
-
-                var value = parseFloat($("#long_com").val());
-                var med = $("#long_sel_com").val();
-
-                return get_Long(value, med, "ft");
-            }
-
-            function get_pulsos_com() {
-                var res = "";
-                $("input[name^='checkpul']").each(function () {
-                    if ($(this).prop('checked')) {
-                        res += "-" + $(this).val();
-                    }
-                });
-
-                return res;
-            }
+            
 
             function get_cable_com() {
 
@@ -2202,8 +2002,6 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
                 if ($("#modelo_sel_com").val() == "1296,gfc") {
                     return $("#oppr_sel_com option:selected").text();
-                } else if ($("#modelo_sel_com").val() == "1297,efm") {
-                    return $("#pr_sel_com option:selected").text();
                 } else { //1298,gfcc
                     return $("#cr_sel_com option:selected").text();
                 }
@@ -2286,17 +2084,46 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                     "medidores": get_medidores_com(),
                     "linep": get_linep_com(),
                     "flujo": $("#flujo_com").val(),
-                    "flujo_uni": $("#flujo_sel_com").val(),
+                    "flujo_uni": $("#flujo_sel_com").val().split(",")[1],
                     "aga": get_aga_com(),
-                    "long": get_long_com(),
-                    "pulsos": get_pulsos_com(),
+                    "long": $("#long_com").val(),
                     "tag_com": $("#tag_com").val(),
                     "cable": get_cable_com(),
                     "modelo": get_modelo_com(),
                     "programa": get_aprog_com(),
+                    "mvt": $('#ubtrans_sel_com option:selected').html(),
+                    "powers": $('#sa_sel_com option:selected').html(),
+                    "hazardous": $('#cap_sel_com option:selected').html(),
+                    "chassis": $('#cha_sel_com option:selected').html(),
+                    "rtd": $("#rtd_sel_com").val(),    
+                    
+                    "trtd": $('#tpg_sel_com option:selected').html(),
+                    "ioconf": $('#cio_sel_com option:selected').html(),
+                    "rcable": $('#cr_sel_com option:selected').html(),
+                    "prox": $('#sp_sel_com option:selected').html(),
+                    "rmodem": $('#oprm_sel_com option:selected').html(),                    
+                    "tkit": $('#kit_sel_com option:selected').html(),                   
+                    "tblank": $('#db_sel_com option:selected').html(),                 
+                    "meterf": $('#ir_sel_com option:selected').html(),                 
+                    "snetwork": $('#mr_sel_com option:selected').html(),
+                    
+                    "producer": $('#fabricante_sel_com option:selected').html(),
+                    "model": $('#modelo_sel_com option:selected').html(),
+                    "optmodel": $('#modelo_sel_com').val(),
+                    
+                    "integral": $('#gbp_sel_com option:selected').html(),
+                    
+                    "ioefm": get_ioefm_com(),
+                    
+                    
+                    
+                    
+            
+                    
                     "from": "com"
 
                 };
+                
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
@@ -2355,18 +2182,13 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
                     "cap_sel_com": $("#cap_sel_com").val(),
                     "rtd_sel_com": $("#rtd_sel_com").val(),
                     "tp_sel_com": $("#tp_sel_com").val(),
-                    "sav_sel_com": $("#sav_sel_com").val(),
                     "s3_sel_com": $("#s3_sel_com").val(),
                     "s4_sel_com": $("#s4_sel_com").val(),
                     "s5_sel_com": $("#s5_sel_com").val(),
                     "s6_sel_com": $("#s6_sel_com").val(),
                     "s7_sel_com": $("#s7_sel_com").val(),
                     "s8_sel_com": $("#s8_sel_com").val(),
-                    "tde_sel_com": $("#tde_sel_com").val(),
-                    "tr_sel_com": $("#tr_sel_com").val(),
                     "mr_sel_com": $("#mr_sel_com").val(),
-                    "pr_sel_com": $("#pr_sel_com").val(),
-                    "opr_sel_com": $("#opr_sel_com").val(),
                     "sie_sel_com": $("#sie_sel_com").val(),
                     "us_sel_com": $("#us_sel_com").val(),
                     "gpt_sel_com": $("#gpt_sel_com").val(),
@@ -2502,33 +2324,7 @@ Dos conectores de 50 posiciones proporcionan acceso a todas las líneas de Entra
 
 
 
-            function load_in_sel_com() {
-                var parametros = {
-                    "combo": "in",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='long_sel_com' id='long_sel_com'>" + data;
-                        $("#div_long_sel_com").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_chp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function load_press_sel_com() {
+           function load_press_sel_com() {
                 var parametros = {
                     "combo": "pres",
                     "opcion": "5"

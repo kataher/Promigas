@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="form-group col-lg-12">
                                                 <div>
-                                                    <label>Size [in]:</label>
+                                                    <label>Orifice Size [in]:</label>
                                                 </div>
                                                 <div id = "div_tam_sel_reg">
                                                     <select class="form-control" id="tam_sel_reg" name="tam_sel_reg"> </select>
@@ -520,6 +520,12 @@
 
                         newHtml = "<select class='form-control' name='pb_sel_reg' id= 'pb_sel_reg' onchange='cleanOut_reg()'>" + data;
                         $("#div_pb_sel_reg").html(newHtml);
+                        
+                        //eliminar psia
+                        $("#pb_sel_reg option[value='5,psia']").remove();
+                        $("#presionr_sel_reg option[value='5,psia']").remove();
+                        $("#rangomin_sel_reg option[value='5,psia']").remove();
+                        $("#rangomax_sel_reg option[value='5,psia']").remove();
 
                     },
                     error: function (xhr, ajaxOptions, err) {
@@ -773,7 +779,7 @@
                         alert("Successfully generated file");
                         var file = data.row.file;
                         var path = data.row.path;
-                        window.location = "bajar.jsp?filename=" + file + "&path=" + path;
+                        window.location = "/Plataforma/bajar.jsp?filename=" + file + "&path=" + path;
 
                     },
                     error: function (xhr, ajaxOptions, err) {

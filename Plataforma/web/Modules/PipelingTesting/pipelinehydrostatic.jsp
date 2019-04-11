@@ -787,7 +787,7 @@
                 $("#volumer_phy").val(res[6]);
                 $("#incrementalv_phy").val(res[7]);
                 $("#compf_phy").val(res[8]);
-                $("#pressurec_phy").val(res[9]);
+                $("#pressurec_phy").val(res[9]); //En que unidades se retorna?
 
 
                 show_OkDialog($("#calculate_Dialog_phy"), "Satisfactory process");

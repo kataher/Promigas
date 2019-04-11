@@ -88,152 +88,149 @@
                     </div>
                     <hr>
 
-
                     <div class="row">
-                    <div class="col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Specified Equipment Data
-                            </div>
-                            <div class="panel-body">
+                        <div class="col-lg-9">
 
-                                <div class="row">
-                                    <div class="col-lg-12">
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Specified Equipment Data
+                                    </div>
+                                    <div class="panel-body">
 
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label>Select:</label>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Select:</label>
+                                                    </div>
+                                                    <div class="col-md-12" id = "div_type_sel_pla">
+                                                        <select class="form-control" id="type_sel_pla" name="type_sel_pla" onchange="load_nps_com(this.value)"> 
+                                                            <option value="150">150 lb. Welding Neck Flanges</option>
+                                                            <option value="300">300 lb. Welding Neck Flanges</option>
+                                                            <option value="600">600 lb. Welding Neck Flanges</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Nominal flange Size [in]:</label>
+                                                    </div>
+                                                    <div class="col-md-12" id = "div_nps_sel_pla">
+                                                        <select class="form-control" id="nps_sel_pla" name="nps_sel_pla"></select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Meter Capacity [ACMH]:</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input class="form-control" value="160" type="text" id="flujo1_pla" name="flujo1_pla" onchange="reCalculateFlujo_pla(this)" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Meter Capacity [ACFH]:</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input class="form-control" readonly value="5650.35" type="text" id="flujo2_pla" name="flujo2_pla" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Design Flow [ACFH]:</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <input class="form-control" readonly value="6780.42" type="text" id="flujo3_pla" name="flujo3_pla" required>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
-                                            <div class="col-md-12" id = "div_type_sel_pla">
-                                                <select class="form-control" id="type_sel_pla" name="type_sel_pla" onchange="load_nps_com(this.value)"> 
-                                                    <option value="150">150 lb. Welding Neck Flanges</option>
-                                                    <option value="300">300 lb. Welding Neck Flanges</option>
-                                                    <option value="600">600 lb. Welding Neck Flanges</option>
 
-                                                </select>
-                                            </div>
+
                                         </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label>Nominal flange Size [in]:</label>
-                                            </div>
-                                            <div class="col-md-12" id = "div_nps_sel_pla">
-                                                <select class="form-control" id="nps_sel_pla" name="nps_sel_pla"></select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label>Meter Capacity [ACMH]:</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input class="form-control" value="160" type="text" id="flujo1_pla" name="flujo1_pla" onchange="reCalculateFlujo_pla(this)" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label>Meter Capacity [ACFH]:</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input class="form-control" readonly value="5650.35" type="text" id="flujo2_pla" name="flujo2_pla" required>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <div class="col-md-12">
-                                                <label>Design Flow [ACFH]:</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input class="form-control" readonly value="6780.42" type="text" id="flujo3_pla" name="flujo3_pla" required>
-                                            </div>
-                                        </div>
-
-
 
                                     </div>
 
+                                </div>   
 
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Images
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div id="graficaLineal_pla">
+                                                    <img src="../../img/platina.png" class="img-rounded" width="304" height="300">
+                                                    <img src="../../img/platina2.png" class="img-rounded" width="600" height="300">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
 
-                        </div>   
+                        </div>
 
-                    </div>
+                        <div class="col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Results
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label>Handle width – A [in]: </label>
+                                                <input type="text" id="a_pla" name="a_pla"  required readonly class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Thickness  - t [in]: </label>
+                                                <input type="text" id="espesor_pla" name="espesor_pla"  required readonly class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Orifice diameter – d [in]:</label>
+                                                <input type="text" id="orifice_pla" name="orifice_pla"  required readonly class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Outer diameter of the plate - D [in]:</label>
+                                                <input type="text" id="d_pla" name="d_pla" readonly required class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Handle length – L [in]:</label>
+                                                <input type="text" id="l_pla" name="l_pla" readonly required class="form-control">
+                                            </div>
 
-                    <div class="col-lg-5">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Images
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div id="graficaLineal_pla">
-                                            <img src="img/platina.png" class="img-rounded" alt="Cinque Terre" width="304" height="300">
-                                            <img src="img/platina2.png" class="img-rounded" alt="Cinque Terre" width="600" height="300">
+                                            <input type="button" id="calculateBtn_pla" name="calculateBtn_pla" value="Calculate" onclick="calculate_pla()" class="btn btn-info btn-block">
+                                            <input type="button" id="saveBtn_pla" name="saveBtn_pla" value="Save" onclick="save_pla()" class="btn btn-success btn-block">   
+                                            <input type="button" id="delteBtn_pla" name="delteBtn_pla" value="Delete" onclick="delete_pla()" class="btn btn-danger btn-block">
+                                            <input type="button" id="datasheetgen_pla" name="datasheetgen_pla" value="Generate Datasheet" onclick="load_datasheet_pla()" class="btn btn-success btn-block">
+                                            <input type="button" id="cleanAllBtn_pla" name="cleanBtn_pla" value="Clean All Data" onclick="cleanAll_pla()" class="btn btn-warning btn-block">
+                                            <input type="button" id="cleanInputBtn_pla" name="cleanBtn_pla" value="Clean Input Data" onclick="cleanIn_pla()" class="btn btn-warning btn-block">
+
+                                            <input type="button" id="cleanOutputBtn_pla" name="cleanBtn_pla" value="Clean Output Data" onclick="cleanOut_pla()" class="btn btn-warning btn-block">
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="col-lg-3">
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Results
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label>Handle width – A [in]: </label>
-                                            <input type="text" id="a_pla" name="a_pla"  required readonly class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Thickness  - t [in]: </label>
-                                            <input type="text" id="espesor_pla" name="espesor_pla"  required readonly class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Orifice diameter – d [in]:</label>
-                                            <input type="text" id="orifice_pla" name="orifice_pla"  required readonly class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Outer diameter of the plate - D [in]:</label>
-                                            <input type="text" id="d_pla" name="d_pla" readonly required class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Handle length – L [in]:</label>
-                                            <input type="text" id="l_pla" name="l_pla" readonly required class="form-control">
-                                        </div>
-
-                                        <input type="button" id="calculateBtn_pla" name="calculateBtn_pla" value="Calculate" onclick="calculate_pla()" class="btn btn-info btn-block">
-                                        <input type="button" id="saveBtn_pla" name="saveBtn_pla" value="Save" onclick="save_pla()" class="btn btn-success btn-block">   
-                                        <input type="button" id="delteBtn_pla" name="delteBtn_pla" value="Delete" onclick="delete_pla()" class="btn btn-danger btn-block">
-                                        <input type="button" id="datasheetgen_pla" name="datasheetgen_pla" value="Generate Datasheet" onclick="load_datasheet_pla()" class="btn btn-success btn-block">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="col-md-3">
-                            <input type="button" id="cleanAllBtn_pla" name="cleanBtn_pla" value="Clean All Data" onclick="cleanAll_pla()" class="btn btn-warning btn-block">
-                        </div>
-                        <div class="col-md-3">
-                            <input type="button" id="cleanInputBtn_pla" name="cleanBtn_pla" value="Clean Input Data" onclick="cleanIn_pla()" class="btn btn-warning btn-block">
-                        </div>
-                        <div class="col-md-3">
-                            <input type="button" id="cleanOutputBtn_pla" name="cleanBtn_pla" value="Clean Output Data" onclick="cleanOut_pla()" class="btn btn-warning btn-block">
-                        </div>
 
                     </div>
-                    </div>
+
+
 
                     <div id="load_Dialog_pla" title="Basic dialog" style='display:none;'>
                         <p>Successfully uploaded data</p>

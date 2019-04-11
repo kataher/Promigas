@@ -1148,11 +1148,22 @@ function pipelinehydrostatic_Form(vari, uni){
     var cp = ((B-2*alfa)/(((D*(1-Math.pow(v,2)))/(E * t) + C)))/1.8; //Cambio de presión  [Psi/°F]
     //Si la temperatura ingresa en Centrigrados, porque el resultado es Farenheit?
     
+    //convertir cp de acuerdo a unidad de entrada
+    if(uni.tt_sel_phy == "C"){
+        cp = cp * 33.8;     //Cambio de presión en [Psi/°C]
+    }else{
+        if(uni.tt_sel_phy == "R"){
+            cp = cp / 460.67; //Cambio de presión en [Psi/°R]
+        }
+    }
+    
     var res = [Fwp.toFixed(8),Fpp.toFixed(6),Fpt.toFixed(6),
         Fwt.toFixed(6),crta.toFixed(6),V.toFixed(1),
         Vtp.toFixed(1),Vi.toFixed(1),(C*Math.pow(10,6)).toFixed(2),
         cp.toFixed(1)];
     changeToDecimal(res);
+    
+    
     
     return res;
 }
@@ -2041,13 +2052,17 @@ function valslamshut_Form(vari, uni){
     //Validado Johan
     //Validado BD
     
+    
+    
     var fun = vari.tam_sel_sh.split(",");
     var prest = get_Pres(parseFloat(vari.prest_sh), 0, uni.prest_sel_sh, "psig");
     var pmin = get_Pres(parseFloat(vari.pmin_sh), 0, uni.pmin_sel_sh, "psig");
     var pmax = get_Pres(parseFloat(vari.pmax_sh), 0, uni.pmax_sel_sh, "psig");
     
+    
     var min = Math.min(prest, pmin, pmax);
     var max = Math.max(prest, pmin, pmax);
+    
     
     var x0 = parseFloat(fun[0]);
     var x1 = parseFloat(fun[1]);
@@ -2069,7 +2084,7 @@ function valslamshut_Form(vari, uni){
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "../../Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async : false,
@@ -2475,7 +2490,7 @@ function reguladores_Form(vari, uni){
 
     $.ajax({
         type: "POST",
-        url: "Modules/manager.jsp",
+        url: "../../Modules/manager.jsp",
         data: parametros,
         dataType: 'json',
         async : false,
@@ -2561,7 +2576,7 @@ function reguladores_Form(vari, uni){
         }
     });
     alert(modS);*/
-    return [porT, cMR];
+    return [porT.toFixed(2), cMR.toFixed(4)];
     
 }
           

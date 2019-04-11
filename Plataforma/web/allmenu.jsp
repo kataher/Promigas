@@ -242,7 +242,7 @@
                                 <li><a href="/Plataforma/Modules/Selector/valslamshut.jsp">10.5. Slam Shut Valves</a> </li>
                                 <li><a href="/Plataforma/Modules/Selector/mototized.jsp">10.6. Motorized Valves</a> </li>
                                 <li><a href="/Plataforma/Modules/Selector/transmisores.jsp">10.7. Transmitters</a> </li>
-                                <li><a href="/Plataforma/Modules/Selector/reguladores.jsp">10.9. Fisher Regulators</a> </li>
+                                <li><a href="/Plataforma/Modules/Selector/reguladores.jsp">10.9. Regulators</a> </li>
                             </ul>
                         </li>
 
