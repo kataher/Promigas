@@ -50,7 +50,7 @@
                     if (roles.contains("-3-") || roles.contains("-1-") ) {
                 %>
                 <li>
-                    <a href="createproject.jsp"><i class="fa fa-dashboard fa-fw"></i> Crear Proyecto</a>
+                    <a href="/Plataforma/createproject.jsp"><i class="fa fa-dashboard fa-fw"></i> Crear Proyecto</a>
                 </li>
                 <%
                     }

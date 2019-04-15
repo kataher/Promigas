@@ -293,9 +293,9 @@ public class UsuariosModel extends Model {
 
         try {
             String sql = "SELECT areas.name, areas.descripcion\n" +
-            " FROM Plataforma.[dbo].[AreasUsuario] as auser\n" +
-            " INNER JOIN Plataforma.[dbo].[Users] as users ON users.id = auser.id_user\n" +
-            " INNER JOIN Plataforma.[dbo].[Areas] as areas ON auser.id_area = areas.id\n" +
+            " FROM " + bd + ".[dbo].[AreasUsuario] as auser\n" +
+            " INNER JOIN " + bd + ".[dbo].[Users] as users ON users.id = auser.id_user\n" +
+            " INNER JOIN " + bd + ".[dbo].[Areas] as areas ON auser.id_area = areas.id\n" +
             " WHERE users.name = '"+ name +"'";
 
             Vector<Map> data = this.consultar(sql);
@@ -315,7 +315,7 @@ public class UsuariosModel extends Model {
 
         try {
             String sql = "SELECT areas.id, areas.name\n"
-                    + " FROM [Plataforma].[dbo].[AreasUsuario] as auser\n"
+                    + " FROM [" + bd + "].[dbo].[AreasUsuario] as auser\n"
                     + " INNER JOIN ["+this.bd+"].[dbo].[Users] as users ON users.id = auser.id_user\n"
                     + " INNER JOIN ["+this.bd+"].[dbo].[Areas] as areas ON auser.id_area = areas.id\n"
                     + " WHERE users.name = '" + name + "'";

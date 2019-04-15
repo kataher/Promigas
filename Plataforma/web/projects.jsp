@@ -85,11 +85,7 @@
                 loadProyectos_pro();
             });
 
-            function goConfiguracion_pro() {
-
-
-            }
-
+            
             function loadProyectos_pro() {
                 table_pro = $('#dataTableProyectos').DataTable({
                     "ajax": "/Plataforma/Modules/manager.jsp?opcion=219&from=newp",
@@ -126,6 +122,22 @@
                             window.location = "/Plataforma/infoproyect.jsp?idpro=" + idpro;
                         }else{
                             window.location = "/Plataforma/createproject.jsp"+"?idpro="+idpro;
+                        }
+                        
+                        
+                    } else {
+                        alert("Debe seleccionar un proyecto");
+                    }
+                });
+                
+                $('#seguimiento_pro').click(function () {
+                    if (table_pro.rows('.selected').data()[0] !== undefined) {
+                        var idpro = table_pro.rows('.selected').data()[0].id;
+                        var flag = table_pro.rows('.selected').data()[0].flag;
+                        if(flag == "1"){
+                            window.location = "/Plataforma/projects1.jsp?idpro=" + idpro;
+                        }else{
+                            alert("Debe terminarse la configuracion del proyecto");
                         }
                         
                         

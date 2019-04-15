@@ -757,8 +757,8 @@ public class ProyectosModel extends Model.Model {
                 + "      ,pro.[name]  as proname \n"
                 + "      ,[flag]\n"
                 + "	  ,users.name\n"
-                + "  FROM [Plataforma].[dbo].[ProyectsTemp] pro\n"
-                + "  inner join [Plataforma].[dbo].[Users] users \n"
+                + "  FROM [ " + bd + " ].[dbo].[ProyectsTemp] pro\n"
+                + "  inner join [" + bd + "].[dbo].[Users] users \n"
                 + "  On pro.id_user = users.id";
 
         Vector<Map> data = this.consultar(sql);
@@ -873,8 +873,8 @@ public class ProyectosModel extends Model.Model {
 
             for (int j = 0; j < dataFases.size(); j++) {
 
-                sql = "SELECT acti.id, nombre, aprobado, fileUpload, fecha_inicio, tiempo   FROM Plataforma.dbo.EspecialidadFaseActPro acti\n"
-                        + "inner join Plataforma.dbo.Actividades actiall\n"
+                sql = "SELECT acti.id, nombre, aprobado, fileUpload, fecha_inicio, tiempo   FROM " + bd + ".dbo.EspecialidadFaseActPro acti\n"
+                        + "inner join " + bd + ".dbo.Actividades actiall\n"
                         + "on acti.id_actividad = actiall.id\n"
                         + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id").toString() + "  and id_fase = " + dataFases.get(j).get("id").toString();
 
@@ -921,9 +921,9 @@ public class ProyectosModel extends Model.Model {
 
         String sql = "SELECT esp.id, esp.nombre, users.name lider, esppro.fileupload "
                 + "  FROM [" + bd + "].[dbo].[EspecialidadProyects] esppro "
-                + "  inner join Plataforma.dbo.Especialidades esp "
+                + "  inner join " + bd + ".dbo.Especialidades esp "
                 + "  on esp.id = esppro.id_especialidad "
-                + "  inner join Plataforma.dbo.Users users "
+                + "  inner join " + bd + ".dbo.Users users "
                 + "  on users.id = esppro.lider "
                 + "  where id_proyect = " + id_proyect + " and esppro.lider=" + id_user;
 
@@ -933,10 +933,10 @@ public class ProyectosModel extends Model.Model {
         for (int i = 0; i < dataEspe.size(); i++) {
 
             sql = "SELECT fases.id, fases.nombre, users.name lider\n"
-                    + "  FROM Plataforma.dbo.EspecialidadFase espfa\n"
-                    + "  inner join Plataforma.dbo.Fases fases\n "
+                    + "  FROM " + bd + ".dbo.EspecialidadFase espfa\n"
+                    + "  inner join " + bd + ".dbo.Fases fases\n "
                     + "  on espfa.id_fase = fases.id\n"
-                    + "  inner join Plataforma.dbo.Users users\n"
+                    + "  inner join " + bd + ".dbo.Users users\n"
                     + "  on users.id = espfa.lider"
                     + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id");
 
@@ -946,8 +946,8 @@ public class ProyectosModel extends Model.Model {
             for (int j = 0; j < dataFases.size(); j++) {
 
                 sql = "SELECT allacti.id, allacti.nombre, acti.id as idactipro, acti.peso, acti.aprobado, acti.fecha_inicio, acti.fecha_final, acti.fileupload"
-                        + "  FROM Plataforma.dbo.EspecialidadFaseActPro acti\n"
-                        + "  inner join Plataforma.dbo.Actividades allacti\n"
+                        + "  FROM " + bd + ".dbo.EspecialidadFaseActPro acti\n"
+                        + "  inner join " + bd + ".dbo.Actividades allacti\n"
                         + "  on allacti.id = acti.id_actividad\n"
                         + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id") + " and id_fase = " + dataFases.get(j).get("id");
 
@@ -957,10 +957,10 @@ public class ProyectosModel extends Model.Model {
                 for (int k = 0; k < dataActi.size(); k++) {
 
                     sql = "SELECT modu.id, modu.nombre\n"
-                            + "  FROM Plataforma.dbo.EspecialidadFaseActPro acti\n"
-                            + "  inner join Plataforma.dbo.ActividadModulo moduacti\n"
+                            + "  FROM " + bd + ".dbo.EspecialidadFaseActPro acti\n"
+                            + "  inner join " + bd + ".dbo.ActividadModulo moduacti\n"
                             + "  on moduacti.id_actividadpro = acti.id\n"
-                            + "  inner join Plataforma.dbo.Modulos modu\n"
+                            + "  inner join " + bd + ".dbo.Modulos modu\n"
                             + "  on modu.id = moduacti.id_modulo\n"
                             + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id") + " and id_fase = " + dataFases.get(j).get("id");
 
@@ -1002,7 +1002,7 @@ public class ProyectosModel extends Model.Model {
         }
 
         sql = "select prot.name  FROM \n"
-                + "Plataforma.dbo.ProyectsTemp prot\n"
+                +  bd + ".dbo.ProyectsTemp prot\n"
                 + "where prot.id = " + id_proyect;
 
         Vector<Map> data = this.consultar(sql);
@@ -1010,10 +1010,10 @@ public class ProyectosModel extends Model.Model {
         info.put("info", jsonEspe);
         info.put("nombrep", data.get(0).get("name"));
         sql = "select users.name  FROM \n"
-                + "Plataforma.dbo.ProyectsTemp prot\n"
-                + "inner join Plataforma.dbo.RolesUsuPro rol\n"
+                + bd + ".dbo.ProyectsTemp prot\n"
+                + "inner join " + bd + ".dbo.RolesUsuPro rol\n"
                 + "on rol.id_proyecto = prot.id\n"
-                + "inner join Plataforma.dbo.Users users\n"
+                + "inner join " + bd + ".dbo.Users users\n"
                 + "on users.id = rol.id_user\n"
                 + "where prot.id = " + id_proyect + " and rol.id_rol = 5";
 
@@ -1259,9 +1259,9 @@ public class ProyectosModel extends Model.Model {
 
             String sql = "SELECT esp.id, esp.nombre, users.name lider, esppro.fileupload\n"
                     + "  FROM [" + bd + "].[dbo].[EspecialidadProyects] esppro\n"
-                    + "  inner join Plataforma.dbo.Especialidades esp\n"
+                    + "  inner join " + bd + ".dbo.Especialidades esp\n"
                     + "  on esp.id = esppro.id_especialidad\n"
-                    + "  left join Plataforma.dbo.Users users\n"
+                    + "  left join " + bd + ".dbo.Users users\n"
                     + "  on users.id = esppro.lider\n"
                     + "  where id_proyect = " + id_proyect;
 
@@ -1271,10 +1271,10 @@ public class ProyectosModel extends Model.Model {
             for (int i = 0; i < dataEspe.size(); i++) {
 
                 sql = "SELECT fases.id, fases.nombre, users.name lider, peso\n"
-                        + "  FROM Plataforma.dbo.EspecialidadFase espfa\n"
-                        + "  inner join Plataforma.dbo.Fases fases\n "
+                        + "  FROM " + bd + ".dbo.EspecialidadFase espfa\n"
+                        + "  inner join " + bd + ".dbo.Fases fases\n "
                         + "  on espfa.id_fase = fases.id\n"
-                        + "  left join Plataforma.dbo.Users users\n"
+                        + "  left join " + bd + ".dbo.Users users\n"
                         + "  on users.id = espfa.lider"
                         + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id");
 
@@ -1284,8 +1284,8 @@ public class ProyectosModel extends Model.Model {
                 for (int j = 0; j < dataFases.size(); j++) {
 
                     sql = "SELECT allacti.id, allacti.nombre, acti.id as idactipro, acti.peso, acti.aprobado, acti.fecha_inicio, acti.fecha_final, acti.fileupload, acti.tiempo , acti.tiempoTotal \n"
-                            + "  FROM Plataforma.dbo.EspecialidadFaseActPro acti\n"
-                            + "  inner join Plataforma.dbo.Actividades allacti\n"
+                            + "  FROM " + bd + ".dbo.EspecialidadFaseActPro acti\n"
+                            + "  inner join " + bd + ".dbo.Actividades allacti\n"
                             + "  on allacti.id = acti.id_actividad\n"
                             + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id") + " and id_fase = " + dataFases.get(j).get("id");
 
@@ -1295,10 +1295,10 @@ public class ProyectosModel extends Model.Model {
                     for (int k = 0; k < dataActi.size(); k++) {
 
                         sql = "SELECT modu.id, modu.nombre\n"
-                                + "  FROM Plataforma.dbo.EspecialidadFaseActPro acti\n"
-                                + "  inner join Plataforma.dbo.ActividadModulo moduacti\n"
+                                + "  FROM " + bd + ".dbo.EspecialidadFaseActPro acti\n"
+                                + "  inner join " + bd + ".dbo.ActividadModulo moduacti\n"
                                 + "  on moduacti.id_actividadpro = acti.id\n"
-                                + "  inner join Plataforma.dbo.Modulos modu\n"
+                                + "  inner join " + bd + ".dbo.Modulos modu\n"
                                 + "  on modu.id = moduacti.id_modulo\n"
                                 + "  where id_proyect = " + id_proyect + " and id_especialidad = " + dataEspe.get(i).get("id")
                                 + " and id_fase = " + dataFases.get(j).get("id") + " and id_actividad = " + dataActi.get(k).get("id");
@@ -1349,7 +1349,7 @@ public class ProyectosModel extends Model.Model {
             }
 
             sql = "select prot.name, prot.area, areas.descripcion  FROM \n" +
-                    "Plataforma.dbo.ProyectsTemp prot\n" +
+                     bd + ".dbo.ProyectsTemp prot\n" +
                     "INNER JOIN " + this.bd + ".dbo.Areas areas\n" +
                     "On areas.id = prot.area\n" +
                     "where prot.id = " + id_proyect;
@@ -1361,10 +1361,10 @@ public class ProyectosModel extends Model.Model {
             info.put("area", data.get(0).get("area"));
             info.put("darea", data.get(0).get("descripcion"));
             sql = "select users.name  FROM \n"
-                    + "Plataforma.dbo.ProyectsTemp prot\n"
-                    + "inner join Plataforma.dbo.RolesUsuPro rol\n"
+                    + bd + ".dbo.ProyectsTemp prot\n"
+                    + "inner join " + bd + ".dbo.RolesUsuPro rol\n"
                     + "on rol.id_proyecto = prot.id\n"
-                    + "inner join Plataforma.dbo.Users users\n"
+                    + "inner join " + bd + ".dbo.Users users\n"
                     + "on users.id = rol.id_user\n"
                     + "where prot.id = " + id_proyect + " and rol.id_rol = 5";
 

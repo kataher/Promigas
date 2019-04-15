@@ -29,7 +29,7 @@ public class ValslamshutModel extends Model.Model {
         JSONObject res = new JSONObject();
         
         String sql = "select TOP 1 *\n" +
-                        "from Plataforma.dbo.ValvulasSS\n" +
+                        "from "+ bd +".dbo.ValvulasSS\n" +
                         "where maximo > "+min+"\n" +
                         "order by minimo";
         
@@ -37,7 +37,7 @@ public class ValslamshutModel extends Model.Model {
         res.put("minimo", data1);
          
         sql = "select TOP 1 *\n" +
-                "from Plataforma.dbo.ValvulasSS\n" +
+                "from "+ bd +".dbo.ValvulasSS\n" +
                 "where maximo > "+max+"\n" +
                 "order by maximo";
         

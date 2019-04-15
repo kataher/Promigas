@@ -42,7 +42,6 @@
         <script>
      $(function(){
         var idpro = <%= request.getParameter("idpro")%>;
-        alert(idpro);
         getInfoProyect(idpro);
     });
      function getInfoProyect(idpro){
