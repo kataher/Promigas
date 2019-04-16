@@ -98,139 +98,141 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-lg-12">
+                                                <div id="input_ah">                                                   
 
-                                                <div class="form-group">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            Compressibility Factor
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <input type="radio" id = "compfactors1_ah" name="opz_ah" value="compfactors1_ah" onchange="onchange_comf_ah()" required>  Calculate <br>
-                                                                            <input type="radio" id = "compfactors2_ah" name="opz_ah" value="compfactors2_ah" onchange="onchange_comf_ah()" required> User Supplied
+                                                    <div class="form-group">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                Compressibility Factor
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <input type="radio" id = "compfactors1_ah" name="opz_ah" value="compfactors1_ah" onchange="onchange_comf_ah()" required>  Calculate <br>
+                                                                                <input type="radio" id = "compfactors2_ah" name="opz_ah" value="compfactors2_ah" onchange="onchange_comf_ah()" required> User Supplied
+                                                                            </div>
+                                                                        </div>                                    
+
+                                                                        <div class="form-group">
+                                                                            <label>Z1 - Compressibility Factor at Suction Conditions:</label>
+                                                                            <input type="text" id="z1s_ah" name="z1s_ah" readonly required class="form-control" value="0" onchange="onchange_Input_ah(this)">
                                                                         </div>
-                                                                    </div>                                    
 
-                                                                    <div class="form-group">
-                                                                        <label>Z1 - Compressibility Factor at Suction Conditions:</label>
-                                                                        <input type="text" id="z1s_ah" name="z1s_ah" readonly required class="form-control" value="0" onchange="onchange_Input_ah(this)">
                                                                     </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading"> Input Parameters </div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Height:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value = "0" class="form-control" type="text" id="enteree_ah" name="enteree_ah" onchange="onchange_Input_ah(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_ee_sel_ah">
-                                                                            <select class="form-control" id="ee_sel_ah" name="ee_sel_ah"> </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Base Temperature:</label> 
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input class="form-control" value="60" type="text" id="basetemperature_ah" name="basetemperature_ah" onchange="onchange_Input_ah(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id="div_bt_sel_ah">
-                                                                            <select class="form-control" id="bt_sel_ah" name="bt_sel_ah" onchange="cleanOut_ah()"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Base Pressure:</label> 
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input  class="form-control" value="14.65" type="text" id="basepressure_ah" name="basepressure_ah" onchange="onchange_Input_ah(this)" required><br>
-                                                                        </div>
-                                                                        <div class="col-md-4" id="div_bp_sel_ah">
-                                                                            <select class="form-control" id="bp_sel_ah" name="bp_sel_ah" onchange="cleanOut_ah()"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Suction Pressure:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value = "386" class="form-control" type="text" id="suctionp_ah" name="suctionp_ah" onchange="validate_pres_ah(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_sp_sel_ah">
-                                                                            <select class="form-control" id="sp_sel_ah" name="sp_sel_ah" onchange="cleanOut_ah()"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Suction Temperature:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input class="form-control" value = "85" type="text" id="suctiont_ah" name="suctiont_ah" onchange="onchange_Input_ah(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4"  id="div_st_sel_ah">
-                                                                            <select class="form-control" id="st_sel_ah" name="st_sel_ah"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Discharge Pressure:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value = "936" class="form-control" type="text" id="dischargep_ah" name="dischargep_ah" onchange="validate_pres_ah(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id="div_dp_sel_ah">
-                                                                            <select class="form-control" id="dp_sel_ah" name="dp_sel_ah" onchange="cleanOut_ah()"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Gas Specific Heat Ratio:</label>
-                                                                            <input value="1.3" class="form-control" type="text" id="gass_ah" name="gass_ah" onchange="onchange_Input_ah(this)" required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Select Option:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8" id="div_gs_sel_ah">
-                                                                            <select class="form-control" id="gs_sel_ah" name="gs_sel_ah" onchange="onchange_gravity_ah()"></select> 
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <input  class="form-control" type="text" id="gst_ah" name="gst_ah" onchange="onchange_Input_ah(this)" required>
+                                                    <div class="form-group">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading"> Input Parameters </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Height:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value = "0" class="form-control" type="text" id="enteree_ah" name="enteree_ah" onchange="onchange_Input_ah(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_ee_sel_ah">
+                                                                                <select class="form-control" id="ee_sel_ah" name="ee_sel_ah"> </select>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Adiabatic Efficiency:</label>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Base Temperature:</label> 
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input class="form-control" value="60" type="text" id="basetemperature_ah" name="basetemperature_ah" onchange="onchange_Input_ah(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="div_bt_sel_ah">
+                                                                                <select class="form-control" id="bt_sel_ah" name="bt_sel_ah" onchange="cleanOut_ah()"> </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Base Pressure:</label> 
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input  class="form-control" value="14.65" type="text" id="basepressure_ah" name="basepressure_ah" onchange="onchange_Input_ah(this)" required><br>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="div_bp_sel_ah">
+                                                                                <select class="form-control" id="bp_sel_ah" name="bp_sel_ah" onchange="cleanOut_ah()"> </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Suction Pressure:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value = "386" class="form-control" type="text" id="suctionp_ah" name="suctionp_ah" onchange="validate_pres_ah(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_sp_sel_ah">
+                                                                                <select class="form-control" id="sp_sel_ah" name="sp_sel_ah" onchange="cleanOut_ah()"> </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Suction Temperature:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input class="form-control" value = "85" type="text" id="suctiont_ah" name="suctiont_ah" onchange="onchange_Input_ah(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4"  id="div_st_sel_ah">
+                                                                                <select class="form-control" id="st_sel_ah" name="st_sel_ah"> </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Discharge Pressure:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value = "936" class="form-control" type="text" id="dischargep_ah" name="dischargep_ah" onchange="validate_pres_ah(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="div_dp_sel_ah">
+                                                                                <select class="form-control" id="dp_sel_ah" name="dp_sel_ah" onchange="cleanOut_ah()"> </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Gas Specific Heat Ratio:</label>
+                                                                                <input value="1.3" class="form-control" type="text" id="gass_ah" name="gass_ah" onchange="onchange_Input_ah(this)" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Select Option:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8" id="div_gs_sel_ah">
+                                                                                <select class="form-control" id="gs_sel_ah" name="gs_sel_ah" onchange="onchange_gravity_ah()"></select> 
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input  class="form-control" type="text" id="gst_ah" name="gst_ah" onchange="onchange_Input_ah(this)" required>
+                                                                            </div>
 
-                                                                            <input value = "0.7" class="form-control" type="text" id="adiabatice_ah" name="adiabatice_ah" onchange="onchange_Input_ah(this)" required ></div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Adiabatic Efficiency:</label>
+
+                                                                                <input value = "0.7" class="form-control" type="text" id="adiabatice_ah" name="adiabatice_ah" onchange="onchange_Input_ah(this)" required ></div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>  
+                                                            </div>  
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             Results                        </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="results_ah">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="col-lg-12">
@@ -340,9 +342,9 @@
             load_press_sel_ah();
             load_in_sel_ah();
 
-            /*getproyectos(<%=session.getAttribute("idusu")%>,
+            getproyectos(<%=session.getAttribute("idusu")%>,
                     $("#proyects_sel_ah"),
-                    $("#error_Dialog_ah"));*/
+                    $("#error_Dialog_ah"));
 
         });
 
@@ -639,23 +641,11 @@
         }
 
         function cleanOut_ah() {
-            $("#discharget_ah").val("");
-            $("#z1_ah").val("");
-            $("#z2_ah").val("");
-            $("#adiabatich_ah").val("");
-            $("#adiabaticghp_ah").val("");
-            $("#na_ah").val("");
+            $("#results_ah input[type='text'][readonly]").val("");
         }
 
         function cleanIn_ah() {
-            $("#enteree_ah").val("");
-            $("#suctionp_ah").val("");
-            $("#suctiont_ah").val("");
-            $("#dischargep_ah").val("");
-            $("#gass_ah").val("");
-            $("#adiabatice_ah").val("");
-            $("#basepressure_ah").val("");
-            $("#basetemperature_ah").val("");
+            $("#input_ah input[type='text']").val("");
         }
 
         function cleanAll_ah() {
@@ -732,13 +722,12 @@
 
         function save_ah() {
             var sel = $("input[type='radio'][name='opz_ah']:checked");
-
             var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
             var selects = $("#page-wrapper select");
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "ah"
             };
 

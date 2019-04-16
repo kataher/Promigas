@@ -97,6 +97,8 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-lg-12">
+                                                
+                                                <div id="input_php">
 
                                                 <div class="form-group">
                                                     <div class="panel panel-default">
@@ -261,12 +263,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             Results
                                                         </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="results_php">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
@@ -724,31 +727,11 @@
             }
 
             function cleanOut_php() {
-                $("#polytropicex_php").val("");
-                $("#discharget_php").val("");
-                $("#zavg_php").val("");
-                $("#z1_php").val("");
-                $("#z2_php").val("");
-                $("#adiabatich_php").val("");
-                $("#adiabaticghp_php").val("");
-                $("#ghp_php").val("");
-                $("#bhp_php").val("");
-                $("#acfm_php").val("");
+                $("#results_php input[type='text'][readonly]").val("");
             }
 
             function cleanIn_php() {
-                $("#basepressure_php").val("");
-                $("#basetemperature_php").val("");
-                $("#z1s_php").val("");
-                $("#z2d_php").val("");
-                $("#suctionp_php").val("");
-                $("#suctiont_php").val("");
-                $("#dischargep_php").val("");
-                $("#gass_php").val("");
-                $("#adiabatice_php").val("");
-                $("#capacityr_php").val("");
-                $("#mechanicale_php").val("");
-                $("#polytropice_php").val("");
+                $("#input_php input[type='text']").val("");
             }
 
             function cleanAll_php() {
@@ -837,7 +820,7 @@
                 var resultados = $("#page-wrapper input[type='text'][readonly]");
 
                 var parametros = {
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "id_user": <% out.print(session.getAttribute("idusu"));%>,
                     "from": "php"
                 };
 

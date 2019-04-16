@@ -98,215 +98,218 @@
                                         <div class="row">
                                             <div class="col-lg-12">
 
-                                                <div class="form-group">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            Compressibility Factor
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <input type="radio" id = "compfactors1_chp" name="opz_chp" value="compfactors1_chp" onchange="onchange_comf_chp()" required> Calculate <br>
-                                                                            <input type="radio" id = "compfactors2_chp" name="opz_chp" value="compfactors2_chp" onchange="onchange_comf_chp()" required> User Supplied
+                                                <div id="input_chp">
+
+                                                    <div class="form-group">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                Compressibility Factor
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <input type="radio" id = "compfactors1_chp" name="opz_chp" value="compfactors1_chp" onchange="onchange_comf_chp()" required> Calculate <br>
+                                                                                <input type="radio" id = "compfactors2_chp" name="opz_chp" value="compfactors2_chp" onchange="onchange_comf_chp()" required> User Supplied
+                                                                            </div>
+                                                                        </div>                                    
+
+                                                                        <div class="form-group">
+                                                                            <label>Z1 - Compressibility Factor ar Suction:</label>
+                                                                            <input type="text" id="z1s_chp" name="z1s_chp" readonly required class="form-control" value="0">
                                                                         </div>
-                                                                    </div>                                    
 
-                                                                    <div class="form-group">
-                                                                        <label>Z1 - Compressibility Factor ar Suction:</label>
-                                                                        <input type="text" id="z1s_chp" name="z1s_chp" readonly required class="form-control" value="0">
+                                                                        <div class="form-group">
+                                                                            <label>Z2 - Compressibility Factor at Discharge:</label>
+                                                                            <input type="text" id="z2d_chp" name="z2d_chp" readonly required class="form-control" value="0">
+                                                                        </div>
+
                                                                     </div>
-
-                                                                    <div class="form-group">
-                                                                        <label>Z2 - Compressibility Factor at Discharge:</label>
-                                                                        <input type="text" id="z2d_chp" name="z2d_chp" readonly required class="form-control" value="0">
-                                                                    </div>
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">
-                                                            Input Parameters
-                                                        </div>
-                                                        <div class="panel-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Height:</label>
+                                                    <div class="form-group">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading">
+                                                                Input Parameters
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Height:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value = "0" class="form-control" type="text" id="enteree_chp" name="enteree_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_ee_sel_chp">
+                                                                                <select class="form-control" id="ee_sel_chp" name="ee_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value = "0" class="form-control" type="text" id="enteree_chp" name="enteree_chp" onchange="onchange_Input_chp(this)" required>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Base Temperature:</label> 
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="60"  class="form-control" type="text" id="basetemperature_chp" name="basetemperature_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="div_bt_sel_chp">
+                                                                                <select class="form-control" id="bt_sel_chp" name="bt_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-4" id = "div_ee_sel_chp">
-                                                                            <select class="form-control" id="ee_sel_chp" name="ee_sel_chp"> </select>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Base Pressure:</label> 
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="14.65" class="form-control" type="text" id="basepressure_chp" name="basepressure_chp" onchange="onchange_Input_chp(this)" required><br>
+                                                                            </div>
+                                                                            <div class="col-md-4" id="div_bp_sel_chp">
+                                                                                <select class="form-control" id="bp_sel_chp" name="bp_sel_chp"> </select>
+                                                                            </div>
+                                                                        </div>                      
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Piston Acting Compression Type: </label>
+                                                                            </div>
+                                                                            <div class="col-md-12" id="div_pact_sel_chp">
+                                                                                <select class="form-control" id="pact_sel_chp" name="pact_sel_chp" onchange="onchangepact_chp(this)"></select> 
+                                                                            </div>
+
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Base Temperature:</label> 
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Bore/Cylinder Inside Diameter:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="3" class="form-control" type="text" id="borec_chp" name="borec_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_bc_sel_chp">
+                                                                                <select class="form-control" id="bc_sel_chp" name="bc_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="60"  class="form-control" type="text" id="basetemperature_chp" name="basetemperature_chp" onchange="onchange_Input_chp(this)" required>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Stroke/Travel Length of Piston:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="10" class="form-control" type="text" id="stroket_chp" name="stroket_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_str_sel_chp">
+                                                                                <select class="form-control" id="str_sel_chp" name="str_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-4" id="div_bt_sel_chp">
-                                                                            <select class="form-control" id="bt_sel_chp" name="bt_sel_chp"> </select>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Rotational Speed</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="3600" class="form-control" type="text" id="rotationals_chp" name="rotationals_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_rs_sel_chp">
+                                                                                <select class="form-control" id="rs_sel_chp" name="rs_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Base Pressure:</label> 
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Cylider Clearance (%)</label>
+                                                                                <input value="2" class="form-control" type="text" id="cylindercl_chp" name="cylindercl_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+
                                                                         </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="14.65" class="form-control" type="text" id="basepressure_chp" name="basepressure_chp" onchange="onchange_Input_chp(this)" required><br>
-                                                                        </div>
-                                                                        <div class="col-md-4" id="div_bp_sel_chp">
-                                                                            <select class="form-control" id="bp_sel_chp" name="bp_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>                      
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Piston Acting Compression Type: </label>
-                                                                        </div>
-                                                                        <div class="col-md-12" id="div_pact_sel_chp">
-                                                                            <select class="form-control" id="pact_sel_chp" name="pact_sel_chp" onchange="onchangepact_chp(this)"></select> 
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Piston Rod Diameter:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="1" class="form-control" type="text" id="pistonrd_chp" name="pistonrd_chp" onchange="onchange_Input_chp(this)" required >
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_prd_sel_chp">
+                                                                                <select class="form-control" id="prd_sel_chp" name="prd_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Bore/Cylinder Inside Diameter:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="3" class="form-control" type="text" id="borec_chp" name="borec_chp" onchange="onchange_Input_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_bc_sel_chp">
-                                                                            <select class="form-control" id="bc_sel_chp" name="bc_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Stroke/Travel Length of Piston:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="10" class="form-control" type="text" id="stroket_chp" name="stroket_chp" onchange="onchange_Input_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_str_sel_chp">
-                                                                            <select class="form-control" id="str_sel_chp" name="str_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Rotational Speed</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="3600" class="form-control" type="text" id="rotationals_chp" name="rotationals_chp" onchange="onchange_Input_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_rs_sel_chp">
-                                                                            <select class="form-control" id="rs_sel_chp" name="rs_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Cylider Clearance (%)</label>
-                                                                            <input value="2" class="form-control" type="text" id="cylindercl_chp" name="cylindercl_chp" onchange="onchange_Input_chp(this)" required>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Suction Pressure:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="336"  class="form-control" type="text" id="suctionp_chp" name="suctionp_chp" onchange="validate_pres_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_sp_sel_chp">
+                                                                                <select class="form-control" id="sp_sel_chp" name="sp_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Piston Rod Diameter:</label>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label> Discharge Pressure:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="936" class="form-control" type="text" id="dischargep_chp" name="dischargep_chp" onchange="validate_pres_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_dp_sel_chp">
+                                                                                <select class="form-control" id="dp_sel_chp" name="sp_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="1" class="form-control" type="text" id="pistonrd_chp" name="pistonrd_chp" onchange="onchange_Input_chp(this)" required >
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_prd_sel_chp">
-                                                                            <select class="form-control" id="prd_sel_chp" name="prd_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Suction Pressure:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="336"  class="form-control" type="text" id="suctionp_chp" name="suctionp_chp" onchange="validate_pres_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_sp_sel_chp">
-                                                                            <select class="form-control" id="sp_sel_chp" name="sp_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label> Discharge Pressure:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="936" class="form-control" type="text" id="dischargep_chp" name="dischargep_chp" onchange="validate_pres_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4" id = "div_dp_sel_chp">
-                                                                            <select class="form-control" id="dp_sel_chp" name="sp_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Suction Temperature:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8">
-                                                                            <input value="90" class="form-control" type="text" id="suctiont_chp" name="suctiont_chp" onchange="onchange_Input_chp(this)" required>
-                                                                        </div>
-                                                                        <div class="col-md-4"  id="div_st_sel_chp">
-                                                                            <select class="form-control" id="st_sel_chp" name="st_sel_chp"> </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Gas Specific Ratio:</label>
-
-                                                                            <input value="1.25" class="form-control" type="text" id="gass_chp" name="gass_chp" onchange="onchange_Input_chp(this)" required>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Select Option:</label>
-                                                                        </div>
-                                                                        <div class="col-md-8" id="div_gs_sel_chp">
-                                                                            <select class="form-control" id="gs_sel_chp" name="gs_sel_chp" onchange="onchange_gravity_chp()"></select> 
-                                                                        </div>
-                                                                        <div class="col-md-4">
-                                                                            <input class="form-control" type="text" id="gst_chp" name="gst_chp" onchange="onchange_Input_chp(this)" required>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Suction Temperature:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input value="90" class="form-control" type="text" id="suctiont_chp" name="suctiont_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                            <div class="col-md-4"  id="div_st_sel_chp">
+                                                                                <select class="form-control" id="st_sel_chp" name="st_sel_chp"> </select>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Compressor Mechanical Efficiency:</label>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Gas Specific Ratio:</label>
 
-                                                                            <input value="0.7" class="form-control" type="text" id="mechanicale_chp" name="mechanicale_chp" onchange="onchange_Input_chp(this)" required >
-                                                                        </div>            
+                                                                                <input value="1.25" class="form-control" type="text" id="gass_chp" name="gass_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Select Option:</label>
+                                                                            </div>
+                                                                            <div class="col-md-8" id="div_gs_sel_chp">
+                                                                                <select class="form-control" id="gs_sel_chp" name="gs_sel_chp" onchange="onchange_gravity_chp()"></select> 
+                                                                            </div>
+                                                                            <div class="col-md-4">
+                                                                                <input class="form-control" type="text" id="gst_chp" name="gst_chp" onchange="onchange_Input_chp(this)" required>
+                                                                            </div>
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Effect of leakage, Losses, etc [%]:</label>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Compressor Mechanical Efficiency:</label>
 
-                                                                            <input value="2" class="form-control" type="text" id="effect_chp" name="effect_chp" onchange="onchange_Input_chp(this)" required >
-                                                                        </div>            
+                                                                                <input value="0.7" class="form-control" type="text" id="mechanicale_chp" name="mechanicale_chp" onchange="onchange_Input_chp(this)" required >
+                                                                            </div>            
 
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12">
-                                                                            <label>Effect due to Lack of Lubrication [%]:</label>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Effect of leakage, Losses, etc [%]:</label>
 
-                                                                            <input value="2" class="form-control" type="text" id="effect2_chp" name="effect2_chp" onchange="onchange_Input_chp(this)" required >
-                                                                        </div>            
+                                                                                <input value="2" class="form-control" type="text" id="effect_chp" name="effect_chp" onchange="onchange_Input_chp(this)" required >
+                                                                            </div>            
 
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
+                                                                                <label>Effect due to Lack of Lubrication [%]:</label>
+
+                                                                                <input value="2" class="form-control" type="text" id="effect2_chp" name="effect2_chp" onchange="onchange_Input_chp(this)" required >
+                                                                            </div>            
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -318,7 +321,7 @@
                                                         <div class="panel-heading">
                                                             Results
                                                         </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="results_chp">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
@@ -428,9 +431,9 @@
             $("#opt_chp").val("1");
             $('#compfactors1_chp').attr('checked', 'checked');
 
-            /*getproyectos(<%=session.getAttribute("idusu")%>,
+            getproyectos(<%=session.getAttribute("idusu")%>,
                     $("#proyects_sel_chp"),
-                    $("#error_Dialog_chp"));*/
+                    $("#error_Dialog_chp"));
 
             load_gs_sel_chp();
             load_temp_sel_chp();
@@ -859,38 +862,11 @@
         }
 
         function cleanOut_chp() {
-            $("#pistond_chp").val("");
-            $("#discharget_chp").val("");
-            $("#z1_chp").val("");
-            $("#z2_chp").val("");
-            $("#volumetrice_chp").val("");
-            $("#cylinderc_chp").val("");
-            $("#equivalentc_chp").val("");
-            $("#cylinderb_chp").val("");
+            $("#results_chp input[type='text'][readonly]").val("");
         }
 
         function cleanIn_chp() {
-            $("#enteree_chp").val("");
-            $("#basetemperature_chp").val("");
-            $("#basepressure_chp").val("");
-            $("#z1s_chp").val("");
-            $("#z2d_chp").val("");
-
-            $("#borec_chp").val("");
-            $("#stroket_chp").val("");
-            $("#rotationals_chp").val("");
-            $("#cylindercl_chp").val("");
-            $("#pistonrd_chp").val("");
-
-            $("#suctionp_chp").val("");
-            $("#suctiont_chp").val("");
-            $("#dischargep_chp").val("");
-            $("#gass_chp").val("");
-            $("#capacityr_chp").val("");
-            $("#mechanicale_chp").val("");
-
-            $("#effect_chp").val("");
-            $("#effect2_chp").val("");
+            $("#input_chp input[type='text']").val("");
         }
 
         function cleanAll_chp() {
@@ -980,7 +956,7 @@
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "chp"
             };
 

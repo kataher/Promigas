@@ -88,226 +88,226 @@
 
                         <hr>
                         <div class="row">
-                            <div class="col-lg-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Select Pipe And Location Data
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="checkbox">
-
-                                                    <input type="radio" id = "api5l_ppw" name="linepipe_ppw" value="api5l_ppw" onchange="onchange_linepipe_ppw()" required> Line Pipe. API Specification 5L <br>
-                                                    <input type="radio" id = "astm_ppw" name="linepipe_ppw" value="astm_ppw" onchange="onchange_linepipe_ppw()" required> Standart Steel Pipe - ASTM - ANSI B36.10
-
-                                                </div>
-
-                                                <form role="form">
-                                                    <div class="form-group">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                <span id="tittle_ppw"> Line Pipe. API Specification 5L </span>
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-
-                                                                        <div class="form-group">
-                                                                            <div class="col-md-12">
-                                                                                <label>Nominal Pipe Size:</label> 
-                                                                            </div>
-                                                                            <div class="col-md-8">
-                                                                                <div id="div_nominalps_sel_ppw">
-                                                                                    <select class="form-control" id="nominalps_sel_ppw" name="nominalps_sel_ppw"> </select></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <div class="col-md-12">
-                                                                                <label>Grade:</label> 
-                                                                            </div>
-                                                                            <div class="col-md-8">
-                                                                                <div id="div_grade_sel_ppw">
-                                                                                    <select class="form-control" id="grade_sel_ppw" name="grade_sel_ppw"> </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>  
-                                                        </div></div>
-                                                    <div class="form-group">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                Design Factor -F                        </div>
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="form-group">
-
-                                                                            <div class="col-md-12">
-                                                                                <div id="div_df_sel_ppw">
-                                                                                    <select class="form-control" id="design_factor_sel_ppw" name="design_factor_sel_ppw"> </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>  
-                                                        </div> </div>
-                                                    <div class="form-group">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                Longintudinal Joint Factor - E                      </div>
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="form-group">
-
-                                                                            <div class="col-md-12">
-                                                                                <div id="div_jf_sel_ppw">
-                                                                                    <select class="form-control" id="longitudinal_jf_ppw" name="longitudinal_jf_ppw"> </select>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>  
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="panel panel-default">
-                                                            <div class="panel-heading">
-                                                                Temperature Derating Factor -E
-                                                            </div>
-                                                            <div class="panel-body">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12">
-                                                                        <div class="form-group">
-                                                                            <div class="col-md-12">
-                                                                                <label>Temperature [°F(°C)]:</label> 
-                                                                            </div>
-                                                                            <div class="col-md-12">
-                                                                                <div  id="div_td_sel_ppw">                    
-                                                                                    <select class="form-control" id="temperature_ppw" name="temperature_ppw"> </select>
-                                                                                </div>                  
-                                                                            </div>
-                                                                        </div>
-
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>  
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                            <div id="input_ppw">
+                                <div class="col-lg-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Select Pipe And Location Data
                                         </div>
-                                    </div>  
-                                </div>   
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Pipe and Operational Data:
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Height [ft]:</label>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="checkbox">
+                                                        <input type="radio" id = "api5l_ppw" name="linepipe_ppw" value="api5l_ppw" onchange="onchange_linepipe_ppw()" required> Line Pipe. API Specification 5L <br>
+                                                        <input type="radio" id = "astm_ppw" name="linepipe_ppw" value="astm_ppw" onchange="onchange_linepipe_ppw()" required> Standart Steel Pipe - ASTM - ANSI B36.10
                                                     </div>
-                                                    <div class="col-md-8">
-                                                        <input value = "0" class="form-control" type="text" id="enteree_ppw" name="enteree_ppw" onchange="onchange_Input_ppw(this)" required>
-                                                    </div>
-                                                    <div class="col-md-4" id="div_al_sel_ppw">
-                                                        <select class="form-control" id="al_sel_ppw" name="al_sel_ppw"> </select>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Nominal Pipe Size [in]</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="nominalps_ppw" name="nominalps_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <!--  Ventana 2 -->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Nominal Outside Diameter :</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input class="form-control" type="text" id="nominalos_ppw" name="nominalos_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                    <div class="col-md-4" id="div_nod_sel_ppw">
-                                                        <select class="form-control" id="nod_sel_ppw" name="nod_sel_ppw"> </select>
-                                                    </div>
-                                                </div>
-                                                <!--  Ventana 3 -->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Design Pressure [Psig]:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" value="1200" type="text" id="designp_ppw" name="designp_ppw"  required >
-                                                    </div>                
-                                                </div>
-                                                <!--  Ventana 4-->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Grade:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="grade_ppw" name="grade_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <!--  Ventana 5-->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Specified Minimum Yield Strenght [psi]:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="specifiedmys_ppw" name="specifiedmys_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <!--  Ventana 6-->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Design Factor:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="designf_ppw" name="designf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <!--  Ventana 7-->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Longitudinal Joint Factor:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="ljf_ppw" name="ljf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <!--  Ventana 8-->
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Temperature Derating Factor:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <input class="form-control" type="text" id="temperaturedf_ppw" name="temperaturedf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-md-12">
-                                                        <label>Allowed corrosion thickness:</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input value="0.04" class="form-control" type="text" id="especp_ppw" name="especp_ppw" onchange="onchange_Input_ppw(this)" required ></div>
-                                                    <div class="col-md-4" id="div_ac_sel_ppw">
-                                                        <select class="form-control" id="ac_sel_ppw" name="ac_sel_ppw"> </select>
-                                                    </div>
-                                                </div>
 
+                                                    <form role="form">
+                                                        <div class="form-group">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <span id="tittle_ppw"> Line Pipe. API Specification 5L </span>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12">
+                                                                                    <label>Nominal Pipe Size:</label> 
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <div id="div_nominalps_sel_ppw">
+                                                                                        <select class="form-control" id="nominalps_sel_ppw" name="nominalps_sel_ppw"> </select></div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12">
+                                                                                    <label>Grade:</label> 
+                                                                                </div>
+                                                                                <div class="col-md-8">
+                                                                                    <div id="div_grade_sel_ppw">
+                                                                                        <select class="form-control" id="grade_sel_ppw" name="grade_sel_ppw"> </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div></div>
+                                                        <div class="form-group">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Design Factor -F                        </div>
+                                                                <div class="panel-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+
+                                                                                <div class="col-md-12">
+                                                                                    <div id="div_df_sel_ppw">
+                                                                                        <select class="form-control" id="design_factor_sel_ppw" name="design_factor_sel_ppw"> </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div> </div>
+                                                        <div class="form-group">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Longintudinal Joint Factor - E                      </div>
+                                                                <div class="panel-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+
+                                                                                <div class="col-md-12">
+                                                                                    <div id="div_jf_sel_ppw">
+                                                                                        <select class="form-control" id="longitudinal_jf_ppw" name="longitudinal_jf_ppw"> </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    Temperature Derating Factor -E
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <div class="col-md-12">
+                                                                                    <label>Temperature [°F(°C)]:</label> 
+                                                                                </div>
+                                                                                <div class="col-md-12">
+                                                                                    <div  id="div_td_sel_ppw">                    
+                                                                                        <select class="form-control" id="temperature_ppw" name="temperature_ppw"> </select>
+                                                                                    </div>                  
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                    </div>   
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            Pipe and Operational Data:
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Height:</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value = "0" class="form-control" type="text" id="enteree_ppw" name="enteree_ppw" onchange="onchange_Input_ppw(this)" required>
+                                                        </div>
+                                                        <div class="col-md-4" id="div_al_sel_ppw">
+                                                            <select class="form-control" id="al_sel_ppw" name="al_sel_ppw"> </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Nominal Pipe Size [in]</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="nominalps_ppw" name="nominalps_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <!--  Ventana 2 -->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Nominal Outside Diameter :</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" id="nominalos_ppw" name="nominalos_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                        <div class="col-md-4" id="div_nod_sel_ppw">
+                                                            <select class="form-control" id="nod_sel_ppw" name="nod_sel_ppw"> </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  Ventana 3 -->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Design Pressure [Psig]:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" value="1200" type="text" id="designp_ppw" name="designp_ppw"  required >
+                                                        </div>                
+                                                    </div>
+                                                    <!--  Ventana 4-->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Grade:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="grade_ppw" name="grade_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <!--  Ventana 5-->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Specified Minimum Yield Strenght [psi]:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="specifiedmys_ppw" name="specifiedmys_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <!--  Ventana 6-->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Design Factor:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="designf_ppw" name="designf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <!--  Ventana 7-->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Longitudinal Joint Factor:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="ljf_ppw" name="ljf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <!--  Ventana 8-->
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Temperature Derating Factor:</label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <input class="form-control" type="text" id="temperaturedf_ppw" name="temperaturedf_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-12">
+                                                            <label>Allowed corrosion thickness:</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input value="0.04" class="form-control" type="text" id="especp_ppw" name="especp_ppw" onchange="onchange_Input_ppw(this)" required ></div>
+                                                        <div class="col-md-4" id="div_ac_sel_ppw">
+                                                            <select class="form-control" id="ac_sel_ppw" name="ac_sel_ppw"> </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -321,7 +321,7 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <div class="form-group">
+                                                <div class="form-group" id="results_ppw">
                                                     <label>Minimum Pipe Wall Thickness[in.]:</label>
                                                     <input type="text" id="minimum_ppw" name="minimum_ppw" readonly required class="form-control">
                                                 </div>
@@ -795,19 +795,11 @@
         }
 
         function cleanOut_ppw() {
-            $("#minimum_ppw").val("");
+            $("#results_ppw input[type='text'][readonly]").val("");
         }
 
         function cleanIn_ppw() {
-            $("#nominalps_ppw").val("");
-            $("#nominalos_ppw").val("");
-            $("#designp_ppw").val("");
-            $("#grade_ppw").val("");
-            $("#specifiedmys_ppw").val("");
-            $("#designf_ppw").val("");
-            $("#ljf_ppw").val("");
-            $("#temperaturedf_ppw").val("");
-            $("#especp_ppw").val("");
+            $("#input_ppw input[type='text']").val("");
         }
 
         function cleanAll_ppw() {
@@ -930,7 +922,7 @@
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "ppw"
             };
 

@@ -102,7 +102,7 @@
                                                     <div class="panel-heading">
                                                         Input Parameters
                                                     </div>
-                                                    <div class="panel-body">
+                                                    <div class="panel-body" id="input_dgv">
                                                         <div class="row">
                                                             <div class="col-lg-12">
 
@@ -216,7 +216,7 @@
                                                         <div class="panel-heading">
                                                             Results
                                                         </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="results_dgv">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group" id = "div_variableOUT_dgv">
@@ -625,27 +625,11 @@
         }
 
         function cleanOut_dgv() {
-            if ($("#tipo_sel_dgv").val() == 1) {
-                $("#gasv_dgv").val("");
-            } else {
-                $("#pipeinternald_dgv").val("");
-            }
-            $("#z_dgv").val("");
+            $("#results_dgv input[type='text'][readonly]").val("");
         }
 
         function cleanIn_dgv() {
-            $("#basepressure_dgv").val("");
-            $("#basetemperature_dgv").val("");
-            $("#flowingp_dgv").val("");
-            $("#flowingt_dgv").val("");
-            $("#flowr_dgv").val("");
-            $("#enteree_dgv").val("");
-
-            if ($("#tipo_sel_dgv").val() == 2) {
-                $("#gasv_dgv").val("");
-            } else {
-                $("#pipeinternald_dgv").val("");
-            }
+            $("#input_dgv input[type='text']").val("");
         }
 
         function cleanAll_dgv() {
@@ -731,7 +715,7 @@
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "dgv"
             };
 
@@ -749,6 +733,13 @@
             for (var i = 0; i < resultados.size(); i++) {
                 parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
             }
+            
+            if(parametros["tipo_sel_dgv"] == "1"){
+                alert("Gas");
+            }else{
+                alert("Vel");
+            }
+                
 
             parametros["opcion"] = parametros["opt_" + parametros["from"]];
 
@@ -854,7 +845,7 @@
                 //ES Diametro
 
                 htmlIN = '<div class="col-md-12">' +
-                        '<label>Diametro interno de la tuberia:</label>' +
+                        '<label>Pipe Internal Diameter:</label>' +
                         '</div>' +
                         '<div class="col-md-8">' +
                         '<input value="13" class="form-control" type="text" id="pipeinternald_dgv" name="pipeinternald_dgv" onchange="onchange_Input_dgv(this)" required>' +
@@ -871,7 +862,7 @@
                 //Es velocidad
 
                 htmlIN = '<div class="col-md-12">' +
-                        '<label>Velocidad del gas [ft/min]:</label>' +
+                        '<label>Gas Velocity [ft/min]:</label>' +
                         '</div>' +
                         '<div class="col-md-8">' +
                         '<input class="form-control" type="text" id="gasv_dgv" name="gasv_dgv" onchange="onchange_Input_dgv(this)" required>' +
