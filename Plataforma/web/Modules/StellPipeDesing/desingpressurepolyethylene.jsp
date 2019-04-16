@@ -313,7 +313,7 @@
                     $("#error_Dialog_dpp"));
 
             $("#opt_dpp").val("1");
-            //load_np_sel_dpp("npsn"); //Ojo que no esta cargando
+            load_np_sel_dpp("npsn"); //Ojo que no esta cargando
             load_hyd_sel_wtpe("HDB");
             load_in_sel_dpp();
             load_pres_sel_dpp();
