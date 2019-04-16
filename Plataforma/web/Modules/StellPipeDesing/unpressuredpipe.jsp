@@ -265,7 +265,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -297,7 +297,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -326,7 +326,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
@@ -385,7 +385,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -412,7 +412,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -442,7 +442,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -471,7 +471,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {
@@ -498,7 +498,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     async: false,
                     data: parametros,
                     beforeSend: function (xhr) {
@@ -529,7 +529,7 @@
                 };
                 $.ajax({
                     type: "POST",
-                    url: "Modules/manager.jsp",
+                    url: "../manager.jsp",
                     data: parametros,
                     async: false,
                     beforeSend: function (xhr) {

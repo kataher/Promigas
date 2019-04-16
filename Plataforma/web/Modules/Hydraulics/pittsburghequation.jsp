@@ -96,7 +96,7 @@
                     
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         beforeSend: function (xhr) {
                             cleanAll_pe();
@@ -205,7 +205,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         beforeSend: function (xhr) {
                             block("Cargando...");
@@ -270,7 +270,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         beforeSend: function (xhr) {
                             cleanSugg_pe();
@@ -302,7 +302,7 @@
                     };
                     $.ajax({
                         type: "POST",
-                        url: "Modules/manager.jsp",
+                        url: "../manager.jsp",
                         data: parametros,
                         beforeSend: function (xhr) {
                             cleanSugg_pe();
