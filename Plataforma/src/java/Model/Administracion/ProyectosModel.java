@@ -757,7 +757,7 @@ public class ProyectosModel extends Model.Model {
                 + "      ,pro.[name]  as proname \n"
                 + "      ,[flag]\n"
                 + "	  ,users.name\n"
-                + "  FROM [ " + bd + " ].[dbo].[ProyectsTemp] pro\n"
+                + "  FROM [" + bd + "].[dbo].[ProyectsTemp] pro\n"
                 + "  inner join [" + bd + "].[dbo].[Users] users \n"
                 + "  On pro.id_user = users.id";
 
