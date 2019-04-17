@@ -110,7 +110,7 @@
                                                         <div class="row">
 
 
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="input1_rs">
                                                                 <div class="panel panel-default">
                                                                     <div class="panel-heading">
                                                                         Design Factor
@@ -257,21 +257,14 @@
                                                         </div>
                                                     </div>  
                                                 </div>
-                                                <div>
-                                                    <input type="button" id="cleanAllBtn1_rs" name="cleanAllBtn1_rs" value="Clean All Data" onclick="cleanAll1_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanInputBtn1_rs" name="cleanInputBtn1_rs" value="Clean Input Data" onclick="cleanIn1_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanOutputBtn1_rs" name="cleanOutputBtn1_rs" value="Clean Output Data" onclick="cleanOut1_rs()" class="btn btn-warning btn-block">
-                                                </div>
-                                            </div>
 
-                                            <div class="col-lg-4">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         Results
                                                     </div>
                                                     <div class="panel-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="results1_rs">
                                                                 <div class="form-group">
                                                                     <label>Cg- Gas Sizing Coefficient- Calculate:</label>
                                                                     <input type="text" id="gassizingc_rs" name="gassizingc_rs" readonly required class="form-control">
@@ -284,15 +277,31 @@
                                                                     <label>Flow Conditions:</label>            
                                                                     <input type="text" id="flowc_rs" name="flowc_rs" readonly required class="form-control">
                                                                 </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        Actions
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
                                                                 <input type="button" id="calculateBtn_rs" name="calculateBtn_rs" value="Calculate" onclick="calculates1_rs()" class="btn btn-info btn-block">
-
-
+                                                                <input type="button" id="cleanAllBtn1_rs" name="cleanAllBtn1_rs" value="Clean All Data" onclick="cleanAll1_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanInputBtn1_rs" name="cleanInputBtn1_rs" value="Clean Input Data" onclick="cleanIn1_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanOutputBtn1_rs" name="cleanOutputBtn1_rs" value="Clean Output Data" onclick="cleanOut1_rs()" class="btn btn-warning btn-block">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="tab-pane" id="regulatoru_rs">
 
@@ -303,7 +312,7 @@
                                                     </div>
                                                     <div class="panel-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="input2_rs">
                                                                 <form role="form">
                                                                     <div class="form-group">
                                                                         <div class="form-group">
@@ -393,15 +402,6 @@
                                                         </div>
                                                     </div>  
                                                 </div>
-
-                                                <div>
-                                                    <input type="button" id="cleanAllBtn2_rs" name="cleanAllBtn2_rs" value="Clean All Data" onclick="cleanAll2_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanInputBtn2_rs" name="cleanInputBtn2_rs" value="Clean Input Data" onclick="cleanIn2_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanOutputBtn2_rs" name="cleanOutputBtn2_rs" value="Clean Output Data" onclick="cleanOut2_rs()" class="btn btn-warning btn-block">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         Results
@@ -409,7 +409,7 @@
 
                                                     <div class="panel-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="results2_rs">
                                                                 <div class="form-group">
                                                                     <label>ID1- Calculated Inside Diameter [in]:</label>
                                                                     <input type="text" id="calculatedi_rs" name="calculatedi_rs" readonly required class="form-control">
@@ -422,12 +422,31 @@
                                                                     <label>OD1- Calculated Outside Diameter [in]:</label>            
                                                                     <input type="text" id="calculatedo_rs" name="calculatedo_rs" readonly required class="form-control">
                                                                 </div> 
-
-                                                                <input type="button" id="calculateBtn2_rs" name="calculateBtn2_rs" value="Calculate" onclick="calculates2_rs()" class="btn btn-info btn-block">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        Actions
+                                                    </div>
+
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <input type="button" id="calculateBtn2_rs" name="calculateBtn2_rs" value="Calculate" onclick="calculates2_rs()" class="btn btn-info btn-block">
+                                                                <input type="button" id="cleanAllBtn2_rs" name="cleanAllBtn2_rs" value="Clean All Data" onclick="cleanAll2_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanInputBtn2_rs" name="cleanInputBtn2_rs" value="Clean Input Data" onclick="cleanIn2_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanOutputBtn2_rs" name="cleanOutputBtn2_rs" value="Clean Output Data" onclick="cleanOut2_rs()" class="btn btn-warning btn-block">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="tab-pane" id="regulatord_rs">
@@ -439,7 +458,7 @@
                                                     </div>
                                                     <div class="panel-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="input3_rs">
                                                                 <form role="form">
                                                                     <div class="form-group">
                                                                         <div class="form-group">
@@ -529,21 +548,13 @@
                                                     </div>  
                                                 </div>
 
-                                                <div>
-                                                    <input type="button" id="cleanAllBtn3_rs" name="cleanAllBtn3_rs" value="Clean All Data" onclick="cleanAll3_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanInputBtn3_rs" name="cleanInputBtn3_rs" value="Clean Input Data" onclick="cleanIn3_rs()" class="btn btn-warning btn-block">
-                                                    <input type="button" id="cleanOutputBtn3_rs" name="cleanOutputBtn3_rs" value="Clean Output Data" onclick="cleanOut3_rs()" class="btn btn-warning btn-block">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-4">
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         Results
                                                     </div>
                                                     <div class="panel-body">
                                                         <div class="row">
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12" id="results3_rs">
                                                                 <div class="form-group">
                                                                     <label>ID2- Calculated Inside Diameter:</label>
                                                                     <input type="text" id="calculatedid_rs" name="calculatedid_rs" readonly required class="form-control">
@@ -556,10 +567,27 @@
                                                                     <label>OD2- Calculated Outside Diameter:</label>            
                                                                     <input type="text" id="calculatedod_rs" name="calculatedod_rs" readonly required class="form-control">
                                                                 </div> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        Actions
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
                                                                 <input type="button" id="calculateBtn3_rs" name="calculateBtn3_rs" value="Calculate" onclick="calculates3_rs()" class="btn btn-info btn-block">
                                                                 <input type="button" id="saveBtn_rs" name="saveBtn_rs" value="Save" onclick="save_rs()" class="btn btn-success btn-block">   
                                                                 <input type="button" id="delteBtn_rs" name="delteBtn_rs" value="Delete" onclick="delete_rs()" class="btn btn-danger btn-block">
+                                                                <input type="button" id="cleanAllBtn3_rs" name="cleanAllBtn3_rs" value="Clean All Data" onclick="cleanAll3_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanInputBtn3_rs" name="cleanInputBtn3_rs" value="Clean Input Data" onclick="cleanIn3_rs()" class="btn btn-warning btn-block">
+                                                                <input type="button" id="cleanOutputBtn3_rs" name="cleanOutputBtn3_rs" value="Clean Output Data" onclick="cleanOut3_rs()" class="btn btn-warning btn-block">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -569,8 +597,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rs" name="id_rs">  
-                            <input type="hidden" id="opt_rs" name="opt_rs"> 
+                            <input type="hidden" id="id_rs" name="id_rs" value="-1">  
+                            <input type="hidden" id="opt_rs" name="opt_rs" value="-1"> 
                         </div>
                         <div id="load_Dialog_rs" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -653,6 +681,8 @@
                 dataType: 'json',
                 async: false,
                 beforeSend: function (xhr) {
+                    $("#opt_rs").val("1");
+                    $("#id_rs").val("-1");
                     cleanAll1_rs();
                     cleanAll2_rs();
                     cleanAll3_rs();
@@ -774,6 +804,8 @@
                         $("#proyects_sel_rs").val(data.row.id_proyect);
                         $("#opt_rs").val("2");
                         $("#id_rs").val(data.row.id);
+                        
+                        alert("Successfully uploaded data");
                     } else {
                         $("#opt_rs").val("1");
                     }
@@ -1207,68 +1239,47 @@
             var obj = [$("#p1_sel_rs"), $("#p2_sel_rs"), $("#p1opu_sel_rs"), $("#p2op_sel_rs")];
             onchageGeneral(obj, imp.value);
         }
+        
+        function cleanIn1_rs() {
+            $("#input1_rs input[type='text']").val("");
+        }
 
         function cleanOut1_rs() {
-            $("#gassizingc_rs").val("");
-            $("#gassizingr_rs").val("");
-            $("#flowc_rs").val("");
+            $("#results1_rs input[type='text'][readonly]").val("");
+        }
+        
+        function cleanIn2_rs() {
+            $("#input2_rs input[type='text']").val("");
         }
 
         function cleanOut2_rs() {
-            $("#calculatedi_rs").val("");
-            $("#minimunr_rs").val("");
-            $("#calculatedo_rs").val("");
+            $("#results2_rs input[type='text'][readonly]").val("");
+        }
+        
+        function cleanIn3_rs() {
+           $("#input3_rs input[type='text']").val("");
         }
 
         function cleanOut3_rs() {
-            $("#calculatedid_rs").val("");
-            $("#minimunrd_rs").val("");
-            $("#calculatedod_rs").val("");
-        }
-
-        function cleanIn1_rs() {
-            $("#df_rs").val("");
-            $("#gs_rs").val("");
-            $("#p1_rs").val("");
-            $("#p2_rs").val("");
-            $("#flowrate_rs").val("");
-            $("#flowingg_rs").val("");
-            $("#c1_rs").val("");
-            $("#capacityr_rs").val("");
-        }
-
-        function cleanIn2_rs() {
-            $("#p1opu_rs").val("");
-            $("#flowrateu_rs").val("");
-            $("#ag_rs").val("");
-            $("#tempu_rs").val("");
-            $("#smys_rs").val("");
-            $("#jfu_rs").val("");
-
-        }
-
-        function cleanIn3_rs() {
-            $("#p2op_rs").val("");
-            $("#flowrated_rs").val("");
-            $("#agd_rs").val("");
-            $("#smysd_rs").val("");
-            $("#jfdp_rs").val("");
-
+            $("#results3_rs input[type='text'][readonly]").val("");
         }
 
         function cleanAll1_rs() {
             cleanIn1_rs();
             cleanOut1_rs();
+            $("#description_rs").val("");
         }
 
         function cleanAll2_rs() {
             cleanIn2_rs();
             cleanOut2_rs();
+            $("#description_rs").val("");
         }
 
         function cleanAll3_rs() {
             cleanIn3_rs();
             cleanOut3_rs();
+            $("#description_rs").val("");
         }
 
         function onchange_Input_rs(inp, op) {
@@ -1468,73 +1479,41 @@
         function save_rs() {
 
             var sel1 = $("input[type='radio'][name='linepipe_rs']:checked");
-            var sel2 = $("input[type='radio'][name='linepiped_rs']:checked");
+            var sel2 = $("input[type='radio'][name='linepiped_rs']:checked"); 
+            
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "df_rs": $("#df_rs").val(),
-                "gs_rs": $("#gs_rs").val(),
-                "p1_rs": $("#p1_rs").val(),
-                "p2_rs": $("#p2_rs").val(),
-                "flowrate_rs": $("#flowrate_rs").val(),
-                "flowingg_rs": $("#flowingg_rs").val(),
-                "c1_rs": $("#c1_rs").val(),
-                "capacityr_rs": $("#capacityr_rs").val(),
-                "df_sel_rs": $("#df_sel_rs").val(),
-                "temp_sel_rs": $("#temp_sel_rs").val(),
-                "gs_sel_rs": $("#gs_sel_rs").val(),
-                "p1_sel_rs": $("#p1_sel_rs").val(),
-                "p2_sel_rs": $("#p2_sel_rs").val(),
-                "fr_sel_rs": $("#fr_sel_rs").val(),
-                "fg_sel_rs": $("#fg_sel_rs").val(),
-                "linepipe_rs": sel1.val(),
-                "grade_sel_rs": $("#grade_sel_rs").val(),
-                "jf_sel_rs": $("#jf_sel_rs").val(),
-                "p1opu_rs": $("#p1opu_rs").val(),
-                "flowrateu_rs": $("#flowrateu_rs").val(),
-                "ag_rs": $("#ag_rs").val(),
-                "tempu_rs": $("#tempu_rs").val(),
-                "smys_rs": $("#smys_rs").val(),
-                "jfu_rs": $("#jfu_rs").val(),
-                "p1opu_sel_rs": $("#p1opu_sel_rs").val(),
-                "fru_sel_rs": $("#fru_sel_rs").val(),
-                "agu_sel_rs": $("#agu_sel_rs").val(),
-                "linepiped_rs": sel2.val(),
-                "graded_sel_rs": $("#graded_sel_rs").val(),
-                "jfd_sel_rs": $("#jfd_sel_rs").val(),
-                "p2op_rs": $("#p2op_rs").val(),
-                "flowrated_rs": $("#flowrated_rs").val(),
-                "agd_rs": $("#agd_rs").val(),
-                "smysd_rs": $("#smysd_rs").val(),
-                "jfdp_rs": $("#jfdp_rs").val(),
-                "p2op_sel_rs": $("#p2op_sel_rs").val(),
-                "frd_sel_rs": $("#frd_sel_rs").val(),
-                "agud_sel_rs": $("#agud_sel_rs").val(),
-                "gassizingc_rs": $("#gassizingc_rs").val(),
-                "gassizingr_rs": $("#gassizingr_rs").val(),
-                "flowc_rs": $("#flowc_rs").val(),
-                "calculatedi_rs": $("#calculatedi_rs").val(),
-                "minimunr_rs": $("#minimunr_rs").val(),
-                "calculatedo_rs": $("#calculatedo_rs").val(),
-                "calculatedid_rs": $("#calculatedid_rs").val(),
-                "minimunrd_rs": $("#minimunrd_rs").val(),
-                "calculatedod_rs": $("#calculatedod_rs").val(),
-                "idproyect": $("#proyects_sel_rs").val(),
-                "opcion": $("#opt_rs").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_rs": 1,
-                "description_rs": $("#description_rs").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rs"
             };
+            
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
 
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["linepipe_rs"] = sel1.val();
+            parametros["linepiped_rs"] = sel2.val();     
+            
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_rs").val() == 2) {
-                    parametros.id_rs = $("#id_rs").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -1561,8 +1540,6 @@
         }
 
         function delete_rs() {
-
-            alert("here");
 
             //Confirmacion
             if ($("#opt_rs").val() == 2) {
@@ -1609,10 +1586,8 @@
                         cleanAll2_rs();
                         cleanAll3_rs();
 
-                        $("#id_rs").val("");
+                        $("#id_rs").val("-1");
                         $("#opt_rs").val("1");
-                        $('#compfactors1_rs').attr('checked', 'checked');
-                        onchange_comf_rs();
                         show_OkDialog($("#delete_Dialog_rs"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
