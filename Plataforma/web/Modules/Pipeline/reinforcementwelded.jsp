@@ -80,9 +80,9 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 Description: 
-                                <input  class="form-control" type="text" id="description_php" name="description_php"><br>
+                                <input  class="form-control" type="text" id="description_rwb" name="description_rwb"><br>
                                 Projects: 
-                                <select class="form-control" id="proyects_sel_php" name="proyects_sel_php"> </select>
+                                <select class="form-control" id="proyects_sel_rwb" name="proyects_sel_rwb"> </select>
                             </div>
                         </div>
 
@@ -652,7 +652,7 @@
                                                             <br>
                                                             <input type="button" id="saveBtn_rwb" name="saveBtn_rwb" value="Save" onclick="save_rwb()" class="btn btn-success btn-block">   
                                                             <br>
-                                                            <input type="button" id="delteBtn_rwb" name="delteBtn_rwb" value="Delete" onclick="deleteReg_rwb()" class="btn btn-danger btn-block">
+                                                            <input type="button" id="delteBtn_rwb" name="delteBtn_rwb" value="Delete" onclick="delete_rwb()" class="btn btn-danger btn-block">
                                                             <br>
                                                             <input type="button" id="cleanAllBtn_rwb" name="cleanAllBtn_rwb" value="Clean All Data" onclick="cleanAll_rwb()" class="btn btn-warning btn-block">
                                                             <br>
@@ -690,6 +690,12 @@
 
                         <div id="delete_Dialog_rwb" title="Basic dialog" style='display:none;'>
                             <p>Successfully deleted record</p>
+                        </div>
+                        
+                        <div id="dialog-confirm_rwb" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1096,14 +1102,14 @@
                                 $("#" + tags[i]).val(data.row[tags[i]]);
                             }
                         }
-
-                        if (data.row["selh_rwb"] == "api5l_rwb") {
+                        
+                       if (data.row["pipe_rad_rwb"] == "api5l_rwb") {
                             document.getElementById("api5l1_rwb").checked = true;
                         } else {//astm_ppw
                             document.getElementById("astm1_rwb").checked = true;
                         }
 
-                        if (data.row["selb_rwb"] == "api5l_rwb") {
+                        if (data.row["pipe1_rad_rwb"] == "api5l_rwb") {
                             document.getElementById("api5l2_rwb").checked = true;
                         } else {//astm_ppw
                             document.getElementById("astm2_rwb").checked = true;
@@ -1138,43 +1144,19 @@
         }
 
         function cleanOut_rwb() {
-            $("#eerr_rwb").val("");
-            $("#lmrr_rwb").val("");
-            $("#dmrr_rwb").val("");
-            $("#rwtoth_rwb").val("");
-            $("#etithw_rwb").val("");
-            $("#rwtotb_rwb").val("");
-            $("#etitb_rwb").val("");
-            $("#arrr_rwb").val("");
-            $("#a1rr_rwb").val("");
-            $("#lheight_rwb").val("");
-            $("#a2eaibo_rwb").val("");
-            $("#a2cea_rwb").val("");
-            $("#a3ra_rwb").val("");
-            $("#appa_rwb").val("");
+            $("#results_rwb input[type='text'][readonly]").val("");
         }
 
         function cleanIn_rwb() {
-            $("#p1_rwb").val("");
-            $("#temp_rwb").val("");
-            $("#df_rwb").val("");
-            $("#h_rwb").val("");
-            $("#tar_rwb").val("");
-            $("#odh_rwb").val("");
-            $("#nwtb_rwb").val("");
-            $("#smys_rwb").val("");
-            $("#ljf_rwb").val("");
-            $("#bodh_rwb").val("");
-            $("#bnwtb_rwb").val("");
-            $("#smys2_rwb").val("");
-            $("#ljf1_rwb").val("");
-            $("#mrod_rwb").val("");
-            $("#rsmys_rwb").val("");
+            $("#sited_rwb input[type='text']").val("");
+            $("#regulatoru_rwb input[type='text']").val("");
+            $("#regulatord_rwb input[type='text']").val("");
         }
 
         function cleanAll_rwb() {
             cleanIn_rwb();
             cleanOut_rwb();
+            $("#description_rwb").val("");
         }
 
         function onchange_Input_rwb(inp) {
@@ -1253,7 +1235,7 @@
             var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rwb"
             };
 
@@ -1309,11 +1291,37 @@
 
 
         }
+        
+        function delete_rwb() {
+        
+        //Confirmacion
+            if ($("#opt_rwb").val() == 2) {
+                $("#dialog-confirm_rwb").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {
+                            deleteReg_rwb();
+                            $(this).dialog("close");
+                        },
+                        Cancelar: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            } else {
+                alert("You must load a record to be able to delete it");
+            }
+        }
 
         function deleteReg_rwb() {
+            alert($("#id_rwb").val());
             var parametros = {
                 "id_rwb": $("#id_rwb").val(),
                 "opcion": "3",
+                "iduser": <%=session.getAttribute("idusu")%>,
                 "from": "rwb"
             };
             $.ajax({
@@ -1325,7 +1333,6 @@
                 },
                 success: function (data, status, request) {
                     $("#id_rwb").val("-1");
-                    $("#description_rwb").val("");
                     cleanAll_rwb();
                     show_OkDialog($("#delete_Dialog_rwb"), "Satisfactory process");
                 },
