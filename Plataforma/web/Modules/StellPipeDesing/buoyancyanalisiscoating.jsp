@@ -141,7 +141,8 @@
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_water_dens_sel_basc">
                                                                             <select class="form-control" id="water_dens_sel_basc" name="water_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                                <option value="lbft3">lb/ft3</option>
+                                                                                <option value="kgm3">kg/m3</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -155,7 +156,8 @@
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_ccoat_dens_sel_basc">
                                                                             <select class="form-control" id="ccoat_dens_sel_basc" name="ccoat_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                                <option value="lbft3">lb/ft3</option>
+                                                                                <option value="kgm3">kg/m3</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -169,7 +171,8 @@
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_corr_dens_sel_basc">
                                                                             <select class="form-control" id="corr_dens_sel_basc" name="corr_dens_sel_basc" onchange='cleanOut_basc()'> 
-                                                                                <option>lbs/ft<sup>3</sup></option>
+                                                                                <option value="lbft3">lb/ft3</option>
+                                                                                <option value="kgm3">kg/m3</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -243,6 +246,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_pipe_len_sel_basc">
                                                                                 <select class="form-control" id="pipe_len_sel_basc" name="pipe_len_sel_basc" onchange='cleanOut_basc()'> 
+                                                                                    <option value="ft">ft</option>
+                                                                                    <option value="mt">m</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -261,33 +266,125 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>Pipe Weight [lbs/ft.]:</label>
-                                                                        <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Total Volume [ft<sup>3</sup>]:</label>
-                                                                        <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Corrosion Coating Volume [ft<sup>3</sup>]:</label>
-                                                                        <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Concrete Coating Thickness [in.]:</label>
-                                                                        <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Concrete Coating Volume [ft<sup>3</sup>]:</label>
-                                                                        <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Weight of Pipe in Air [lbs/ft]:</label>
-                                                                        <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Weight of Water Displaced [lbs/ft]:</label>
-                                                                        <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Weight of Sugmerged Pipe [lbs/ft]:</label>
-                                                                        <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control" readonly> 
-                                                                        <BR>                      
-                                                                        <label>Weight per Joint [lbs/Joint]:</label>
-                                                                        <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control" readonly> 
-
+                                                                        <div class="col-md-12">
+                                                                            <label>Pipe Weight:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="pipe_weight_basc" id="pipe_weight_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight_long" data-output-value="pipe_weight_basc" id="pipe_weight_sel_basc">
+                                                                                <option value="lbs/ft">lbs/ft</option>
+                                                                                <option value="kg/m">kg/m</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Total Volume:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="total_vol_basc" id="total_vol_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="volume" data-output-value="total_vol_basc" id="total_vol_sel_basc">
+                                                                                <option value="ft3">ft3</option>
+                                                                                <option value="m3">m3</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Corrosion Coating Volume:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="corr_coat_vol_basc" id="corr_coat_vol_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="volume" data-output-value="corr_coat_vol_basc">
+                                                                                <option value="ft3">ft3</option>
+                                                                                <option value="m3">m3</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Concrete Coating Thickness:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="conc_coat_thick_basc" id="conc_coat_thick_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="conc_coat_thick_basc">
+                                                                                <option value="in">in</option>
+                                                                                <option value="mm">mm</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Concrete Coating Volume:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="max_stress_basc" id="max_stress_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="volume" data-output-value="max_stress_basc">
+                                                                                <option value="ft3">ft3</option>
+                                                                                <option value="m3">m3</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Weight of Pipe in Air:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="weight_pipe_air_basc" id="weight_pipe_air_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight_long" data-output-value="weight_pipe_air_basc">
+                                                                                <option value="lbs/ft">lbs/ft</option>
+                                                                                <option value="kg/m">kg/m</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Weight of Water Displaced:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="weight_wat_dis_basc" id="weight_wat_dis_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight_long" data-output-value="weight_wat_dis_basc">
+                                                                                <option value="lbs/ft">lbs/ft</option>
+                                                                                <option value="kg/m">kg/m</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Weight of Submerged Pipe:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="weight_sugm_pipe_basc" id="weight_sugm_pipe_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight_long" data-output-value="weight_sugm_pipe_basc">
+                                                                                <option value="lbs/ft">lbs/ft</option>
+                                                                                <option value="kg/m">kg/m</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">                      
+                                                                            <label>Weight per Joint:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="weight_joint_basc" id="weight_joint_basc" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight" data-output-value="weight_joint_basc">
+                                                                                <option value="lbs">lbs/joint</option>
+                                                                                <option value="kg">kg/joint</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>    
                                                                 </div> 
                                                             </div>    
@@ -389,9 +486,6 @@
 
                         newHtml = "<select class='form-control' name='nomout_sel_basc' id= 'nomout_sel_basc' onchange='cleanOut_basc()'>" + data;
                         $("#div_nomout_sel_basc").html(newHtml);
-
-                        newHtml = "<select class='form-control' name='pipe_len_sel_basc' id= 'pipe_len_sel_basc' onchange='cleanOut_basc()'>" + data;
-                        $("#div_pipe_len_sel_basc").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_basc"), "Error");
@@ -416,9 +510,13 @@
                 };
                 
                 var unidades = {
-                    "pipe_len_sel_basc": $("#pipe_len_sel_basc").val().split(",")[1],
+                    "pipe_len_sel_basc": $("#pipe_len_sel_basc").val(),
                     "nom_wall_sel_basc": $("#nom_wall_sel_basc").val().split(",")[1],
-                    "nomout_sel_basc": $("#nomout_sel_basc").val().split(",")[1]
+                    "nomout_sel_basc": $("#nomout_sel_basc").val().split(",")[1],
+                    "water_dens_sel_basc": $("#water_dens_sel_basc").val(),
+                    "ccoat_dens_sel_basc": $("#ccoat_dens_sel_basc").val(),
+                    "corr_dens_sel_basc": $("#corr_dens_sel_basc").val()
+                    
                 };
                 
                 var res = buoyancy_analisis_form(variables, unidades);

@@ -140,7 +140,7 @@
                                                                 <div class="col-lg-12"> 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Pipe outside diameter [in.]:</label>
+                                                                            <label>Pipe outside diameter:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" name="pipe_dia_bds" id="pipe_dia_bds" class="form-control" onchange="onchange_Input_bds(this)" required>
@@ -152,7 +152,7 @@
 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Wall Thickness [in.]:</label>
+                                                                            <label>Wall Thickness:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" class="form-control" id="pipe_wt_bds" name="pipe_wt_bds" onchange="onchange_Input_bds(this)" required>
@@ -164,25 +164,31 @@
 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Pipe Length [ft]:</label>
+                                                                            <label>Pipe Length:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" name="pipe_lenght_bds" id="pipe_lenght_bds" class="form-control" onchange="onchange_Input_bds(this)" required>
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_pipe_lenght_sel_bds">
-                                                                            <select class="form-control" id="pipe_lenght_sel_bds" name="pipe_lenght_sel_bds"> </select>
+                                                                            <select class="form-control" id="pipe_lenght_sel_bds" name="pipe_lenght_sel_bds">
+                                                                                <option value="ft">ft</option>
+                                                                                <option value="mt">m</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Modulus of Elasticity [psi]:</label>
+                                                                            <label>Modulus of Elasticity:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" class="form-control" id="mod_elas_bds" name="mod_elas_bds" onchange="onchange_Input_bds(this)" required>   
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_mod_elast_sel_bds">
-                                                                            <select class="form-control" id="mod_elast_sel_bds" name="mod_elast_sel_bds"> </select>
+                                                                            <select class="form-control" id="mod_elast_sel_bds" name="mod_elast_sel_bds"> 
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="MPa">MPa</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -199,26 +205,96 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>FIXED ENDS SUPPORT :</label>
-                                                                        <div><BR></div>          
-                                                                        <label>Maximun Bending Stress [psi]:</label>
-                                                                        <input type="text" name="max_stress_bds" id="max_stress_bds" class="form-control" readonly>
-                                                                        <label>Maximun Deflection [ft.]:</label>
-                                                                        <input type="text" class="form-control" id="max_defl_bds" name="max_defl_bds" readonly>
-                                                                        <div><BR></div>          
-                                                                        <label>SIMPLE SUPPORT :</label>       
-                                                                        <div><BR></div>
-                                                                        <label>Maximun Bending Stress [psi]:</label>
-                                                                        <input type="text" name="max_stress2_bds" id="max_stress2_bds" class="form-control" readonly>
-                                                                        <label>Maximun Deflection [ft.]:</label>
-                                                                        <input type="text" class="form-control" id="max_defl2_bds" name="max_defl2_bds" readonly>                     
-                                                                        <div><BR></div>          
-                                                                        <label>CANTILEVER SUPPORT :</label>       
-                                                                        <div><BR></div>
-                                                                        <label>Maximun Bending Stress [psi]:</label>
-                                                                        <input type="text" name="max_stress3_bds" id="max_stress3_bds" class="form-control" readonly>
-                                                                        <label>Maximun Deflection [ft.]:</label>
-                                                                        <input type="text" class="form-control" id="max_defl3_bds" name="max_defl3_bds" readonly>
+                                                                        <div class="col-md-12">
+                                                                            <label>FIXED ENDS SUPPORT :</label>
+                                                                        </div>
+                                                                               
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Bending Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="max_stress_bds" id="max_stress_bds" class="form-control" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="max_stress_bds" id="bend_stress_sel_bdsf" name="bend_stress_sel_bdsf">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Deflection:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="max_defl_bds" name="max_defl_bds" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="max_defl_bds" id="bend_stress_sel_bdsf" name="bend_stress_sel_bdsf">
+                                                                                <option value="in">in</option>
+                                                                                <option value="mm">mm</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        
+                                                                        <div class="col-md-12">       
+                                                                            <label>SIMPLE SUPPORT :</label>       
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Bending Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="max_stress2_bds" id="max_stress2_bds" class="form-control" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="max_stress2_bds" id="max_stress2_sel_bds">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Deflection:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="max_defl2_bds" name="max_defl2_bds" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="max_defl2_bds" id="max_defl2_sel_bds">
+                                                                                <option value="in">in</option>
+                                                                                <option value="mm">mm</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">        
+                                                                            <label>CANTILEVER SUPPORT :</label>       
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Bending Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="max_stress3_bds" id="max_stress3_bds" class="form-control" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="max_stress3_bds" id="max_stress3_sel_bds">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Deflection:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="max_defl3_bds" name="max_defl3_bds" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="max_defl3_bds" id="max_defl3_sel_bds">
+                                                                                <option value="in">in</option>
+                                                                                <option value="mm">mm</option>
+                                                                            </select>
+                                                                        </div>
 
                                                                     </div>  
                                                                 </div> 
@@ -297,10 +373,8 @@
             load_nps_sel_bds();
 
             load_in_sel_bds();
-            load_meters_sel_bds();
-            load_pres_sel_bds();
 
-            getproyectos(<%=session.getAttribute("idusu")%>,
+        getproyectos(<%=session.getAttribute("idusu")%>,
                     $("#proyects_sel_bds"),
                     $("#error_Dialog_bds"));
         });
@@ -458,58 +532,6 @@
             });
         }
 
-        function load_meters_sel_bds() {
-            var parametros = {
-                "combo": "len",
-                "opcion": "5"
-            };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                async: true,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    var newHtml = "<select class='form-control' name='pipe_lenght_sel_bds' id= 'pipe_lenght_sel_bds' onchange='cleanOut_bds()'>" + data;
-                    $("#div_pipe_lenght_sel_bds").html(newHtml);
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_bds"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
-        }
-
-        function load_pres_sel_bds() {
-            var parametros = {
-                "combo": "presf",
-                "opcion": "5"
-            };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                async: true,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    var newHtml = "<select class='form-control' name='mod_elast_sel_bds' id= 'mod_elast_sel_bds' onchange='cleanOut_bds()'>" + data;
-                    $("#div_mod_elast_sel_bds").html(newHtml);
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_bds"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
-        }
-
         function calculate_bds() {
             var variables = {
                 "pipe_dia_bds": $("#pipe_dia_bds").val(),
@@ -521,8 +543,8 @@
             var unidades = {
                 "ee_sel_bds": $("#pipe_out_diam_sel_bds").val().split(",")[1],
                 "ee1_sel_bds": $("#wall_thick_sel_bds").val().split(",")[1],
-                "pipe_lenght_sel_bds": $("#pipe_lenght_sel_bds").val().split(",")[1],
-                "dp_sel_ppw": $("#mod_elast_sel_bds").val().split(",")[1]
+                "pipe_lenght_sel_bds": $("#pipe_lenght_sel_bds").val(),
+                "dp_sel_ppw": $("#mod_elast_sel_bds").val()
             };
 
             var res = bending_stress_form(variables, unidades);

@@ -140,21 +140,22 @@
                                                                     <div class="form-group">      
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Unit Weight of Fluid (Default Water) [lb/ft<sup>3</sup>]:</label>
+                                                                                <label>Unit Weight of Fluid (Default Water):</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="unit_weight_bdsf" name="unit_weight_bdsf" onchange='onchange_Input_bdsf(this)' required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_unit_weight_sel_bdsf">
-                                                                                <select class="form-control" id="unit_weight_sel_bdsf" name="unit_weight_sel_bdsf" onchange='cleanOut_bdsf()'>
-                                                                                    <option>lb/ft<sup>3</sup></option>
+                                                                                <select class="form-control units-select" id="unit_weight_sel_bdsf" name="unit_weight_sel_bdsf" onchange='cleanOut_bdsf()'>
+                                                                                    <option value="lbft3">lb/ft3</option>
+                                                                                    <option value="kgm3">kg/m3</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Pipe outside diameter [in.]:</label>
+                                                                                <label>Pipe outside diameter:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="pipe_dia_bdsf" name="pipe_dia_bdsf" onchange='onchange_Input_bdsf(this)' required> 
@@ -166,7 +167,7 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Pipe Inside Diameter [in.]:</label>
+                                                                                <label>Pipe Inside Diameter:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="pipe_in_dia_bdsf" name="pipe_in_dia_bdsf" onchange='onchange_Input_bdsf(this)' required> 
@@ -178,27 +179,31 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Velocity of Fluid [ft./sec]:</label>
+                                                                                <label>Velocity of Fluid:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="vel_fluid_bdsf" name="vel_fluid_bdsf" onchange='onchange_Input_bdsf(this)' required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_vel_fluid_sel_bdsf">
                                                                                 <select class="form-control" id="vel_fluid_sel_bdsf" name="vel_fluid_sel_bdsf" onchange='cleanOut_bdsf()'> 
-                                                                                    <option>ft./sec</option>
+                                                                                    <option value="ft/s">ft/sec</option>
+                                                                                    <option value="m/s">m/sec</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Length of Pipe [ft.]:</label>
+                                                                                <label>Length of Pipe:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="lenght_pipe_bdsf" name="lenght_pipe_bdsf" onchange='onchange_Input_bdsf(this)' required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_lenght_pipe_sel_bdsf">
-                                                                                <select class="form-control" id="lenght_pipe_sel_bdsf" name="lenght_pipe_sel_bdsf"> </select>
+                                                                                <select class="form-control" id="lenght_pipe_sel_bdsf" name="lenght_pipe_sel_bdsf">
+                                                                                    <option value="ft">ft</option>
+                                                                                    <option value="mt">m</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div> 
@@ -215,10 +220,19 @@
                                                         <div class="panel-body">
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
-                                                                    <div class="form-group">        
-                                                                        <label>Bending Stress [psi]:</label>
-                                                                        <input type="text" name="bend_stress_bdsf" id="bend_stress_bdsf" class="form-control" readonly>
-
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Bending Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="bend_stress_bdsf" id="bend_stress_bdsf" class="form-control" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="bend_stress_bdsf" id="bend_stress_sel_bdsf" name="bend_stress_sel_bdsf">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>   
                                                                 </div> 
                                                             </div>    
@@ -296,7 +310,6 @@
             $("#opt_bdsf").val("1");
             load_nps_sel_bdsf();
             load_in_sel_bdsf();
-            load_meters_sel_bdsf();
 
             getproyectos(<%=session.getAttribute("idusu")%>,
                     $("#proyects_sel_bdsf"),
@@ -351,33 +364,6 @@
                 }
             });
         }
-
-        function load_meters_sel_bdsf() {
-            var parametros = {
-                "combo": "len",
-                "opcion": "5"
-            };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                async: true,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    var newHtml = "<select class='form-control' name='lenght_pipe_sel_bdsf' id= 'lenght_pipe_sel_bdsf' onchange='cleanOut_bdsf()'>" + data;
-                    $("#div_lenght_pipe_sel_bdsf").html(newHtml);
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_bdsf"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
-        }
-
 
         function load_history_bdsf() {
             var parametros = {
@@ -588,7 +574,9 @@
             var unidades = {
                 "pipe_diam_sel_bdsf": $("#pipe_diam_sel_bdsf").val().split(",")[1],
                 "pipe_in_diam_sel_bdsf": $("#pipe_in_diam_sel_bdsf").val().split(",")[1],
-                "lenght_pipe_sel_bdsf": $("#lenght_pipe_sel_bdsf").val().split(",")[1]
+                "lenght_pipe_sel_bdsf": $("#lenght_pipe_sel_bdsf").val(),
+                "unit_weight_sel_bdsf": $("#unit_weight_sel_bdsf").val(),
+                "vel_fluid_sel_bdsf": $("#vel_fluid_sel_bdsf").val()
             };
 
             var res = bending_stress_fluid_form(variables, unidades);

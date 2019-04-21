@@ -195,7 +195,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_esp_capa_sel_baw">
                                                                                 <select class="form-control" id="esp_capa_sel_baw" name="esp_capa_sel_baw" onchange='cleanOut_baw()'> 
-                                                                                    <option>lbs/ft&sup3;</option>
+                                                                                    <option value="lbft3">lb/ft3</option>
+                                                                                    <option value="kgm3">kg/m3</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -209,7 +210,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_vol_agua_sel_baw">
                                                                                 <select class="form-control" id="vol_agua_sel_baw" name="vol_agua_sel_baw" onchange='cleanOut_baw()'> 
-                                                                                    <option>ft&sup3;</option>
+                                                                                    <option value="lbft3">lb/ft3</option>
+                                                                                    <option value="kgm3">kg/m3</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -223,7 +225,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_recu_dens_sel_baw">
                                                                                 <select class="form-control" id="recu_dens_sel_baw" name="recu_dens_sel_baw" onchange='cleanOut_baw()'> 
-                                                                                    <option>lbs/ft&sup3;</option>
+                                                                                    <option value="lbft3">lb/ft3</option>
+                                                                                    <option value="kgm3">kg/m3</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -251,7 +254,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_con_dens_sel_baw">
                                                                                 <select class="form-control" id="con_dens_sel_baw" name="con_dens_sel_baw" onchange='cleanOut_baw()'> 
-                                                                                    <option>lbs/ft&sup3;</option>
+                                                                                    <option value="lbft3">lb/ft3</option>
+                                                                                    <option value="kgm3">kg/m3</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -433,7 +437,11 @@
             var unidades = {
                 "corr_coa_sel_baw": $("#corr_coa_sel_baw").val().split(",")[1],
                 "nom_wall_sel_baw": $("#nom_wall_sel_baw").val().split(",")[1],
-                "nomout_sel_baw": $("#nomout_sel_baw").val().split(",")[1]
+                "nomout_sel_baw": $("#nomout_sel_baw").val().split(",")[1],
+                "vol_agua_sel_baw": $("#vol_agua_sel_baw").val(),
+                "esp_capa_sel_baw": $("#esp_capa_sel_baw").val(),
+                "recu_dens_sel_baw": $("#recu_dens_sel_baw").val(),
+                "con_dens_sel_baw": $("#con_dens_sel_baw").val()
             };
 
             var res = buyancy_weight_form(variables, unidades);

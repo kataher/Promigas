@@ -24,6 +24,106 @@ function get_Pres(pres, E, unie, unis){
     return presS;    
 }
 
+function get_Density(density, inputUnits, outputUnits) {
+    if (inputUnits === outputUnits) {
+        return density;
+    }
+    
+    var value = density; // in lbft3
+    
+    if (inputUnits === "kgm3") {
+        value = density / 16.018;
+    }
+    
+    if (outputUnits === "lbft3") {
+        return value;
+    }
+    
+    if (outputUnits === "kgm3") {
+        return value * 16.018;
+    }
+}
+
+function get_Weight(weight, inputUnits, outputUnits) {
+    if (inputUnits === outputUnits) {
+        return weight;
+    }
+    
+    var value = weight; // in lbs
+    
+    if (inputUnits === "kg") {
+        value = weight * 2.205;
+    }
+    
+    if (outputUnits === "lbs") {
+        return value;
+    }
+    
+    if (outputUnits === "kg") {
+        return value / 2.205;
+    }
+}
+
+function get_WeightLong(weight, inputUnits, outputUnits) {
+    if (inputUnits === outputUnits) {
+        return weight;
+    }
+    
+    var value = weight; // in lbs/ft
+    
+    if (inputUnits === "kg/m") {
+        value = weight * 7.233;
+    }
+    
+    if (outputUnits === "lbs/ft") {
+        return value;
+    }
+    
+    if (outputUnits === "kg/m") {
+        return value / 7.233;
+    }
+}
+
+function get_Volume(volume, inputUnits, outputUnits) {
+    if (inputUnits === outputUnits) {
+        return volume;
+    }
+    
+    var value = volume; // in ft3
+    
+    if (inputUnits === "m3") {
+        value = volume * 35.315;
+    }
+    
+    if (outputUnits === "ft3") {
+        return value;
+    }
+    
+    if (outputUnits === "m3") {
+        return value / 35.315;
+    }
+}
+
+function get_Speed(speed, inputUnits, outputUnits) {
+    if (inputUnits === outputUnits) {
+        return speed;
+    }
+    
+    var value = speed; // in ft/s
+    
+    if (inputUnits === "m/s") {
+        value = speed * 3.281;
+    }
+    
+    if (outputUnits === "ft/s") {
+        return value;
+    }
+    
+    if (outputUnits === "m/s") {
+        return value / 3.281;
+    }
+}
+
 function localAtmosphericPressure_Form(E){
     
     var res = (14.54)*((55096-E+361)/(55096+E-361));
@@ -45,6 +145,8 @@ function get_Presf(pres, unie, unis){
         psi = parseFloat(pres) * 14.7 / 0.1013529;
     }else if(unie === "ksi"){
         psi = parseFloat(pres) * 1000;
+    }else if(unie === "kpa"){
+        psi = parseFloat(pres) / 6.895;
     }
     
     if(unis === "MPa"){
@@ -53,6 +155,8 @@ function get_Presf(pres, unie, unis){
         presS = parseFloat(psi) / 1000.0;
     } else if (unis === "psi") {
         presS = parseFloat(psi);
+    } else if (unis === "kpa") {
+        presS = parseFloat(psi) * 6.895;
     }
     return presS;    
 }
@@ -405,7 +509,48 @@ function puntos(num, dec) {
 }
 
 
-
+$(document).ready(function() {
+  $(".output-unit-select").change(function() {
+      var sel = $(this);
+      var previousValue = sel.data("prev");
+      if (!previousValue)
+          previousValue = sel.find("option").val();
+      
+      var newValue = sel.find(":selected").val();
+      
+      var type = sel.attr("data-output-type")
+      
+      var field = $("#" + sel.attr("data-output-value"));
+      
+      var fieldValue = parseFloat(field.val());
+      sel.data("prev", newValue);
+      
+      if (type === "presf") {
+          var converted = get_Presf(fieldValue, previousValue, newValue);
+          field.val(converted);
+      }
+      
+      if (type === "long") {
+          var converted = get_Long(fieldValue, previousValue, newValue);
+          field.val(converted);
+      }
+      
+      if (type === "volume") {
+          var converted = get_Volume(fieldValue, previousValue, newValue);
+          field.val(converted);
+      }
+      
+      if (type === "weight") {
+          var converted = get_Weight(fieldValue, previousValue, newValue);
+          field.val(converted);
+      }
+      
+      if (type === "weight_long") {
+          var converted = get_WeightLong(fieldValue, previousValue, newValue);
+          field.val(converted);
+      }
+  });
+})
 
 //----------------------------------Modulo 1------------------------------------------
 
@@ -5802,14 +5947,16 @@ function bending_stress_fluid_form(vari,uni) {
     var F15 = parseFloat(vari.unit_weight_bdsf);
     var F16 = parseFloat(vari.pipe_dia_bdsf);
     var F17 = parseFloat(vari.pipe_in_dia_bdsf);
-    var F18 = F16 - 2 * F17;
     var F19 = parseFloat(vari.vel_fluid_bdsf);
     var F20 = parseFloat(vari.lenght_pipe_bdsf);
-    
+
+    F15 = get_Density(parseFloat(F15), uni.unit_weight_sel_bdsf, "lbft3");
     F16 = get_Long(parseFloat(F16), uni.pipe_diam_sel_bdsf, "in");
     F17 = get_Long(parseFloat(F17), uni.pipe_in_diam_sel_bdsf, "in");
+    F19 = get_Speed(parseFloat(F19), uni.vel_fluid_sel_bdsf, "ft/s");
     F20 = get_Long(parseFloat(F20), uni.lenght_pipe_sel_bdsf, "ft");
     
+    var F18 = F16 - 2 * F17;
     
     var ef = (F15 * (Math.pow(F16, 2)) * (Math.pow(F19, 2)) * (Math.pow(F20, 2))) / (58.4 * ((Math.pow(F16, 4)) - (Math.pow(F18, 4))));
     /*
@@ -5845,6 +5992,9 @@ function buoyancy_analisis_form(vari, uni) {
     F16 = get_Long(F16, uni.nomout_sel_basc, "in");
     F17 = get_Long(F17, uni.nom_wall_sel_basc, "in");
     F20 = get_Long(F20, uni.pipe_len_sel_basc, "ft");
+    F21 = get_Density(F21, uni.water_dens_sel_basc, "lbft3");
+    F22 = get_Density(F22, uni.ccoat_dens_sel_basc, "lbft3");
+    F23 = get_Density(F23, uni.corr_dens_sel_basc, "lbft3");
 
     var F27 = 10.68 * (F16 - F17) * F17;
     var F30 = (-F18 - (F16 / 3) * (F16 - 32 * F17)) * (48 / (F16 * (63 - F22)));
@@ -5919,6 +6069,10 @@ function buyancy_weight_form(vari, uni) {
     F14 = get_Long(F14, uni.nomout_sel_baw, "in");
     F15 = get_Long(F15, uni.nom_wall_sel_baw, "in");
     F16 = get_Long(F16, uni.corr_coa_sel_baw, "in");
+    F18 = get_Density(F18, uni.vol_agua_sel_baw, "lbft3");
+    F17 = get_Density(F17, uni.esp_capa_sel_baw, "lbft3");
+    F19 = get_Density(F19, uni.recu_dens_sel_baw, "lbft3");
+    F21 = get_Density(F21, uni.con_dens_sel_baw, "lbft3");
     
     var F26 = ((Math.PI / 4) * Math.pow(((F14 + 2 * F16) / 12), 2)) * F18;
     var F27 = 10.6802 * F15 * (F14 - F15);

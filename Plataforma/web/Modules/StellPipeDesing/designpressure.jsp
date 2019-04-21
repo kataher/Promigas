@@ -295,6 +295,8 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_yield_pipeop_sel_dp">
                                                                                 <select class="form-control" id="yield_pipeop_sel_dp" name="yield_pipeop_sel_dp" onchange='cleanOut_dp()'> 
+                                                                                    <option value="psi">psi</option>
+                                                                                    <option value="MPa">MPa</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -432,7 +434,7 @@
                 "nom_pipeop_sel_dp": $("#nom_pipeop_sel_dp").val().split(",")[1],
                 "nomwall_pipeop_sel_dp": $("#nomwall_pipeop_sel_dp").val().split(",")[1],
                 "nomout_pipeop_sel_dp": $("#nomout_pipeop_sel_dp").val().split(",")[1],
-                "yield_pipeop_sel_dp": $("#yield_pipeop_sel_dp").val().split(",")[1]
+                "yield_pipeop_sel_dp": $("#yield_pipeop_sel_dp").val()
             };
 
             var res = design_pressure_form(variables, unidades);
@@ -455,7 +457,6 @@
             load_grade_sel_dp("gra5l");
             load_joinf_sel_dp("jointf5l");
             load_desingf_sel_dp();
-            load_pres_sel_dp();
             load_in_sel_dp();
         });
 
@@ -481,32 +482,6 @@
 
                     newHtml = "<select class='form-control' name='nomwall_pipeop_sel_dp' id='nomwall_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
                     $("#div_nomwall_pipeop_sel_dp").html(newHtml);
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_dp"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
-        }
-
-        function load_pres_sel_dp() {
-            var parametros = {
-                "combo": "presf",
-                "opcion": "5"
-            };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                async: false,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    var newHtml = "<select class='form-control' name='yield_pipeop_sel_dp' id='yield_pipeop_sel_dp' onchange='cleanOut_dp()'>" + data;
-                    $("#div_yield_pipeop_sel_dp").html(newHtml);
                 },
                 error: function (xhr, ajaxOptions, err) {
                     show_OkDialog($("#error_Dialog_dp"), "Error");
