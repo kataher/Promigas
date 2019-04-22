@@ -6065,6 +6065,7 @@ function buyancy_weight_form(vari, uni) {
     var F20 = parseFloat(vari.dens_prod_baw);
     var F21 = parseFloat(vari.dens_conc_baw);
     var F22 = parseFloat(vari.safe_fact_baw);
+    var concrete_volume = parseFloat(vari.concrete_vol_baw);
 
     F14 = get_Long(F14, uni.nomout_sel_baw, "in");
     F15 = get_Long(F15, uni.nom_wall_sel_baw, "in");
@@ -6073,6 +6074,7 @@ function buyancy_weight_form(vari, uni) {
     F17 = get_Density(F17, uni.esp_capa_sel_baw, "lbft3");
     F19 = get_Density(F19, uni.recu_dens_sel_baw, "lbft3");
     F21 = get_Density(F21, uni.con_dens_sel_baw, "lbft3");
+    concrete_volume = get_Volume(concrete_volume, uni.concrete_vol_sel_baw, "ft3");
     
     var F26 = ((Math.PI / 4) * Math.pow(((F14 + 2 * F16) / 12), 2)) * F18;
     var F27 = 10.6802 * F15 * (F14 - F15);
@@ -6080,7 +6082,7 @@ function buyancy_weight_form(vari, uni) {
     var F29 = ((Math.PI / 4) * Math.pow(((F14 - 2 * F15) / 12), 2)) * F20;
     var F30 = F27 + F28 + F29;
     var F31 = (F26 - F30) * F22;
-    var F32 = (Math.PI / 4) * (Math.pow(((F14 + 2 * F16 + 2 * F17) / 12), 2) - Math.pow(((F14 + 2 * F16) / 12), 2)) * F21;
+    var F32 = concrete_volume * (F21 - F18);
     var F33 = F32 / F31;
 
     /*

@@ -47,7 +47,7 @@
                     <div id="content">
                         <div class="row">
                             <div class="col-lg-9">
-                                <h2><strong>Stell Pipe Design:</strong>  Buoyancy Analysis & Concrete Weights Spacing</h2>
+                                <h2><strong>Steel Pipe Design:</strong>  Buoyancy Analysis & Concrete Weights Spacing</h2>
                             </div>
                             <div class="col-lg-3"> 
                                 <br>
@@ -188,6 +188,21 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
+                                                                                <label>Concrete Volume</label>
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <input type="text" class="form-control" id="concrete_vol_baw" name="concrete_vol_baw" onchange='onchange_Input_baw(this)' required> 
+                                                                            </div>
+                                                                            <div class="col-md-4" id = "div_concrete_vol_sel_baw">
+                                                                                <select class="form-control" id="concrete_vol_sel_baw" name="concrete_vol_sel_baw" onchange='cleanOut_baw()'> 
+                                                                                    <option value="ft3">ft3</option>
+                                                                                    <option value="kg3">m3</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class="form-group">
+                                                                            <div class="col-md-12">
                                                                                 <label>Espesor de capa de concreto [lbs/ft<sup>3</sup>]</label>
                                                                             </div>
                                                                             <div class="col-md-8">
@@ -227,20 +242,6 @@
                                                                                 <select class="form-control" id="recu_dens_sel_baw" name="recu_dens_sel_baw" onchange='cleanOut_baw()'> 
                                                                                     <option value="lbft3">lb/ft3</option>
                                                                                     <option value="kgm3">kg/m3</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-group">
-                                                                            <div class="col-md-12">
-                                                                                <label>Densidad del Producto [lbs/ft<sup>3</sup>]</label>
-                                                                            </div>
-                                                                            <div class="col-md-8">
-                                                                                <input type="text" class="form-control" id="dens_prod_baw" name="dens_prod_baw" onchange='onchange_Input_baw(this)' required> 
-                                                                            </div>
-                                                                            <div class="col-md-4" id = "div_prod_dens_sel_baw">
-                                                                                <select class="form-control" id="prod_dens_sel_baw" name="prod_dens_sel_baw" onchange='cleanOut_baw()'> 
-                                                                                    <option>lbs/ft&sup3;</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -429,9 +430,10 @@
                 "esp_capa_baw": $("#esp_capa_baw").val(),
                 "vol_agua_baw": $("#vol_agua_baw").val(),
                 "dens_recu_baw": $("#dens_recu_baw").val(),
-                "dens_prod_baw": $("#dens_prod_baw").val(),
+                "dens_prod_baw": 0,
                 "dens_conc_baw": $("#dens_conc_baw").val(),
-                "safe_fact_baw": $("#safe_fact_baw").val()
+                "safe_fact_baw": $("#safe_fact_baw").val(),
+                "concrete_vol_baw": $("#concrete_vol_baw").val()
             };
 
             var unidades = {
@@ -441,7 +443,8 @@
                 "vol_agua_sel_baw": $("#vol_agua_sel_baw").val(),
                 "esp_capa_sel_baw": $("#esp_capa_sel_baw").val(),
                 "recu_dens_sel_baw": $("#recu_dens_sel_baw").val(),
-                "con_dens_sel_baw": $("#con_dens_sel_baw").val()
+                "con_dens_sel_baw": $("#con_dens_sel_baw").val(),
+                "concrete_vol_sel_baw": $("#concrete_vol_sel_baw").val()
             };
 
             var res = buyancy_weight_form(variables, unidades);
