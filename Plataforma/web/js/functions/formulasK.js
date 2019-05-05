@@ -522,8 +522,16 @@ $(document).ready(function() {
       
       var field = $("#" + sel.attr("data-output-value"));
       
-      var fieldValue = parseFloat(field.val());
+      var fieldText = field.val() || '';
+      
+      // Replace all commas with empty space
+      fieldText = fieldText.replace(/,/, '');
+      
+      var fieldValue = parseFloat(fieldText);
       sel.data("prev", newValue);
+      
+      if (fieldText === '')
+          return;
       
       if (type === "presf") {
           var converted = get_Presf(fieldValue, previousValue, newValue);

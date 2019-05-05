@@ -288,13 +288,15 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Specified Minimum Yield Strength [psi]:</label>
+                                                                                <label>Specified Minimum Yield Strength:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="yield_pipeop_wts" name="yield_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_yield_pipeop_sel_wts">
                                                                                 <select class="form-control" id="yield_pipeop_sel_wts" name="yield_pipeop_sel_wts" onchange='cleanOut_wts()'> 
+                                                                                    <option value="psi">psi</option>
+                                                                                    <option value="MPa">MPa</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -349,9 +351,18 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>Espesor mínimo de la pared de la tubería [in.]:</label>
-                                                                        <input type="text" name="minpipe_wts" id="minpipe_wts" class="form-control" readonly> 
-
+                                                                        <div class="col-md-12">
+                                                                            <label>Espesor mínimo de la pared de la tubería:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="minpipe_wts" id="minpipe_wts" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="minpipe_wts">
+                                                                                <option value="in">in</option>
+                                                                                <option value="mm">mm</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>  
                                                                 </div> 
                                                             </div>               
@@ -429,7 +440,6 @@
                 
                 load_in_sel_wts();
                 load_pres_sel_wts();
-                load_presf_sel_wts();
                 
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_wts"),
@@ -444,7 +454,6 @@
                 load_in_sel_wts();
                 load_in2_sel_wts();
                 load_pres_sel_wts();
-                load_presf_sel_wts();
             });
             
             function load_pres_sel_wts() {
@@ -463,32 +472,6 @@
                     success: function (data, status, request) {
                         var newHtml = "<select class='form-control' name='despress_sel_wts' id='despress_sel_wts' onchange='cleanOut_wts()'>" + data;
                         $("#div_despress_sel_wts").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_wts"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
-            function load_presf_sel_wts() {
-                var parametros = {
-                    "combo": "presf",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='yield_sel_wts' id='yield_sel_wts' onchange='cleanOut_wts()'>" + data;
-                        $("#div_yield_sel_wts").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_wts"), "Error");
@@ -570,32 +553,6 @@
 
                         newHtml = "<select class='form-control' id='nomout_pipeop_sel_wts' name='nomout_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
                         $("#div_nomout_pipeop_sel_wts").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_wts"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
-            function load_presf_sel_wts() {
-                var parametros = {
-                    "combo": "presf",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' id='yield_pipeop_sel_wts' name='yield_pipeop_sel_wts' onchange='cleanOut_wts()'> " + data;
-                        $("#div_yield_pipeop_sel_wts").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_wts"), "Error");
@@ -831,7 +788,7 @@
                     "nomout_pipeop_sel_wts": $("#nomout_pipeop_sel_wts").val().split(",")[1],
                     "height_sel_wts": $("#height_sel_wts").val().split(",")[1],
                     "despress_pipeop_sel_wts": $("#despress_pipeop_sel_wts").val().split(",")[1],
-                    "yield_pipeop_sel_wts": $("#yield_pipeop_sel_wts").val().split(",")[1]
+                    "yield_pipeop_sel_wts": $("#yield_pipeop_sel_wts").val()
                 };
                 
                 var res = wallthickness_ssp(variables, unidades);

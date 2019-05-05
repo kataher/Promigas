@@ -94,7 +94,7 @@
                         </ul>
                         <div class="row">
 
-                            <div class="col-lg-9">
+                            <div class="col-lg-12">
                                 <div class="tab-content">
                                     <br>
                                     <div class="tab-pane fade in active" id="sited_rwb">
@@ -102,7 +102,6 @@
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-
                                                         <div class="panel panel-default">
                                                             <div class="panel-heading">
                                                                 Line Pipe API 5L
@@ -160,7 +159,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Outside Pipe Diameter [in.]:</label>
+                                                                        <label>Outside Pipe Diameter:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="pipe_dia_lostre" name="pipe_dia_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -173,7 +172,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Wall Thickness [in.]:</label>
+                                                                        <label>Wall Thickness:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="pipe_wall_lostre" name="pipe_wall_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -186,7 +185,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Inside Pipe Diameter [in.]:</label>
+                                                                        <label>Inside Pipe Diameter:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="out_pipe_dia_lostre" name="out_pipe_dia_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -199,7 +198,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Specified Minimun Yield Strength [psi]:</label>
+                                                                        <label>Specified Minimum Yield Strength:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="min_yield_lostre" name="min_yield_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -213,7 +212,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Modulus of Elasticity of Steel [psi]:</label>
+                                                                        <label>Modulus of Elasticity of Steel:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input value="29000000" type="text" class="form-control" id="mod_elast_lostre" name="mod_elast_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -251,7 +250,7 @@
                                                             <div class="form-group">
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Desired Vertical Deflection of the Pipe [ft]:</label>
+                                                                        <label>Desired Vertical Deflection of the Pipe:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="des_ver_lostre" name="des_ver_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -264,7 +263,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Maximun Operating Pressure [psi]:</label>
+                                                                        <label>Maximum Operating Pressure:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="max_oper_lostre" name="max_oper_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -278,7 +277,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Installation Temperature of the Pipe [°F]:</label>
+                                                                        <label>Installation Temperature of the Pipe:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="inst_temp_lostre" name="inst_temp_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -291,7 +290,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Operating Temperature of the Pipe [°F]:</label>
+                                                                        <label>Operating Temperature of the Pipe:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="oper_temp_pip_lostre" name="oper_temp_pip_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -345,7 +344,7 @@
 
                                                                 <div class="form-group">
                                                                     <div class="col-md-12">
-                                                                        <label>Sc - Longitudinal Stress due to Pipe Elast. Curvature [psi]:</label>
+                                                                        <label>Sc - Longitudinal Stress due to Pipe Elast. Curvature:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
                                                                         <input type="text" class="form-control" id="long_stress_elast_lostre" name="long_stress_elast_lostre" onchange='onchange_Input_lostre(this)' required> 
@@ -365,6 +364,28 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <div class="col-lg-3">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    Actions
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+
+                                                            <input type="button" id="calculateBtn_ls" name="calculateBtn_ls" value="Calculate" onclick="calculate_ls()" href="#regulatoru_rwb" data-toggle="tab" class="btn btn-info btn-block">
+                                                            <input type="button" id="saveBtn_ls" name="saveBtn_ls" value="Save" onclick="save_ls()" class="btn btn-success btn-block">   
+                                                            <input type="button" id="reportBtn_ls" name="reportBtn_ls" value="Delete" onclick="reportReg_ls()" class="btn btn-danger btn-block">   
+
+                                                            <input type="button" id="cleanAllBtn_ls" name="cleanBtn_ls" value="Clean All" onclick="cleanAll_lostre()" class="btn btn-warning btn-block">
+                                                            <input type="button" id="cleanInputBtn_ls" name="cleanBtn_ls" value="Clean Input Data" onclick="cleanIn_lostre()" class="btn btn-warning btn-block">
+                                                            <input type="button" id="cleanOutputBtn_ls" name="cleanBtn_ls" value="Clean Output Data" onclick="cleanOut_lostre()" class="btn btn-warning btn-block">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>                                        
                                     <div class="tab-pane" id="regulatoru_rwb">
 
@@ -377,41 +398,96 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="form-group">
-                                                                <div class="col-lg-12">
-                                                                    <label>Sp- Esfuerzo Longitudinal por Presión Interna [Psi]::</label>
-
-                                                                    <input type="text" name="Sp_ELPI" id="Sp_ELPI" class="form-control" readonly>
-                                                                </div>                     
-                                                                <div class="col-lg-12">
-                                                                    <label>Sr-Esfuerzo Longitudinal por Temperatura [Psi]:</label>
-
-                                                                    <input type="text" name="Sr_ELT" id="Sr_ELT" class="form-control" readonly>
-                                                                </div>                       
-                                                                <div class="col-lg-12">
-                                                                    <label>Se- Esfuerzo Longitudinal Existente [Psi]:</label>
-
-                                                                    <input type="text" name="Se_ELE" id="Se_ELE" class="form-control" readonly>
-                                                                </div> 
-                                                                <div class="col-lg-12">
-                                                                    <label>L- Longitud Mínima Requerida de la Zanja [ft]:</label>
-
-                                                                    <input type="text" name="L_LRZ" id="L_LRZ" class="form-control" readonly>
-                                                                </div>                   
-                                                                <div class="col-lg-12">
-                                                                    <label>Ss- Esfuerzo Longitudinal por Elongación [Psi]:</label>
-
-                                                                    <input type="text" name="Ss_ELE" id="Ss_ELE" class="form-control" readonly>
-                                                                </div>  
-                                                                <div class="col-lg-12">
-                                                                    <label>Sa- Esfuerzo Longitudinal por Flexión Admisible [Psi]:</label>
-
-                                                                    <input type="text" name="Sa_ELFA" id="Sa_ELFA" class="form-control" value="" readonly>
-                                                                </div>                     
-                                                                <div class="col-lg-12">
-                                                                    <label>Ls- Distancia Máxima permitida entre Apoyos [ft]:</label>
-
-                                                                    <input type="text" name="Ls_DMPA" id="Ls_DMPA" class="form-control" value="" readonly>
-                                                                </div>                        
+                                                                <div class="col-md-12">
+                                                                    <label>Sp- Esfuerzo Longitudinal por Presión Interna:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Sp_ELPI" id="Sp_ELPI" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="presf" data-output-value="Sp_ELPI">
+                                                                        <option value="psi">psi</option>
+                                                                        <option value="kpa">kPa</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>Sr-Esfuerzo Longitudinal por Temperatura:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Sr_ELT" id="Sr_ELT" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="presf" data-output-value="Sr_ELT">
+                                                                        <option value="psi">psi</option>
+                                                                        <option value="kpa">kPa</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>Se- Esfuerzo Longitudinal Existente:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Se_ELE" id="Se_ELE" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="presf" data-output-value="Se_ELE">
+                                                                        <option value="psi">psi</option>
+                                                                        <option value="kpa">kPa</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>L- Longitud Mínima Requerida de la Zanja:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="L_LRZ" id="L_LRZ" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="long" data-output-value="L_LRZ">
+                                                                        <option value="ft">ft</option>
+                                                                        <option value="mt">m</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>Ss- Esfuerzo Longitudinal por Elongación:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Ss_ELE" id="Ss_ELE" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="presf" data-output-value="Ss_ELE">
+                                                                        <option value="psi">psi</option>
+                                                                        <option value="kpa">kPa</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>Sa- Esfuerzo Longitudinal por Flexión Admisible:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Sa_ELFA" id="Sa_ELFA" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="presf" data-output-value="Sa_ELFA">
+                                                                        <option value="psi">psi</option>
+                                                                        <option value="kpa">kPa</option>
+                                                                    </select>
+                                                                </div>
+                                                                
+                                                                <div class="col-md-12">
+                                                                    <label>Ls- Distancia Máxima permitida entre Apoyos:</label>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <input type="text" name="Ls_DMPA" id="Ls_DMPA" class="form-control" readonly> 
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <select class="form-control output-unit-select" data-output-type="long" data-output-value="Ls_DMPA">
+                                                                        <option value="ft">ft</option>
+                                                                        <option value="mt">m</option>
+                                                                    </select>
+                                                                </div>
                                                             </div> 
                                                         </div>
                                                     </div>
@@ -442,29 +518,6 @@
                                     </div>  
                                 </div>
                             </div>  
-
-                            <div class="col-lg-3">
-
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        Actions
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-
-                                                <input type="button" id="calculateBtn_ls" name="calculateBtn_ls" value="Calculate" onclick="calculate_ls()" href="#regulatoru_rwb" data-toggle="tab" class="btn btn-info btn-block">
-                                                <input type="button" id="saveBtn_ls" name="saveBtn_ls" value="Save" onclick="save_ls()" class="btn btn-success btn-block">   
-                                                <input type="button" id="reportBtn_ls" name="reportBtn_ls" value="Delete" onclick="reportReg_ls()" class="btn btn-danger btn-block">   
-
-                                                <input type="button" id="cleanAllBtn_ls" name="cleanBtn_ls" value="Clean All" onclick="cleanAll_lostre()" class="btn btn-warning btn-block">
-                                                <input type="button" id="cleanInputBtn_ls" name="cleanBtn_ls" value="Clean Input Data" onclick="cleanIn_lostre()" class="btn btn-warning btn-block">
-                                                <input type="button" id="cleanOutputBtn_ls" name="cleanBtn_ls" value="Clean Output Data" onclick="cleanOut_lostre()" class="btn btn-warning btn-block">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <input type="hidden" id="opt_ls" name="opt_ls"> 
                             <input type="hidden" id="id_ls" name="id_ls"> 
                         </div>

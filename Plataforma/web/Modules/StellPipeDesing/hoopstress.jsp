@@ -209,12 +209,31 @@
                                                             <div class="row">
                                                                 <div class="col-sm-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>Hoop Stress [psi]:</label>
-                                                                        <input type="text" name="hoop_press_hoop" id="hoop_press_hoop" class="form-control" readonly> 
-                                                                        <BR>
-                                                                        <label>Longitudinal Stress [psi]:</label>
-                                                                        <input type="text" name="long_press_hoop" id="long_press_hoop" class="form-control" readonly> 
-                                                                        <BR>                                                                                                
+                                                                        <div class="col-md-12">
+                                                                            <label>Hoop Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="hoop_press_hoop" id="hoop_press_hoop" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="hoop_press_hoop">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Longitudinal Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="long_press_hoop" id="long_press_hoop" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="long_press_hoop">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>  
                                                                 </div> 
                                                             </div>               

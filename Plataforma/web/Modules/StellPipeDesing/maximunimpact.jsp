@@ -200,30 +200,82 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <div class="col-lg-12">     
-                                                                            <label>Soil Shear Modulus [psi]:</label>
+                                                                        <div class="col-md-12">
+                                                                            <label>Soil Shear Modulus:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="soil_mod_milpd" id="soil_mod_milpd" class="form-control" readonly> 
                                                                         </div>
-                                                                        <div class="col-lg-12">   
-                                                                            <label>Maximun Load at the Soil Surface [lbs]:</label>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="soil_mod_milpd">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Load at the Soil Surface:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="max_soil_milpd" id="max_soil_milpd" class="form-control" readonly> 
                                                                         </div>
-                                                                        <div class="col-lg-12">
-                                                                            <label>Impact Velocity [ft/sec>]:</label>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="weight" data-output-value="max_soil_milpd">
+                                                                                <option value="lbs">lbs</option>
+                                                                                <option value="kg">kg</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Impact Velocity:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="imp_vel_milpd" id="imp_vel_milpd" class="form-control" readonly> 
                                                                         </div>
-                                                                        <div class="col-lg-12">
-                                                                            <label>Impact Pressure [psi>]:</label>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="speed" data-output-value="imp_vel_milpd">
+                                                                                <option value="ft/s">ft/s</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Impact Pressure:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="imp_press_milpd" id="imp_press_milpd" class="form-control" readonly> 
                                                                         </div>
-                                                                        <div class="col-lg-12">
-                                                                            <label>Weight per Unit of Impact Area [psi]:</label>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="imp_press_milpd">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Weight per Unit of Impact Area:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="weight_imparea_milpd" id="weight_imparea_milpd" class="form-control" readonly> 
                                                                         </div>
-                                                                        <div class="col-lg-12">                                      
-                                                                            <label>Penetration Depth [ft.]:</label>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="weight_imparea_milpd">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Penetration Depth:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="pen_depth_milpd" id="pen_depth_milpd" class="form-control" readonly> 
-                                                                        </div>  
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="long" data-output-value="pen_depth_milpd">
+                                                                                <option value="ft">ft</option>
+                                                                                <option value="mt">m</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>  
                                                                 </div> 
                                                             </div>               

@@ -151,7 +151,7 @@
 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Specified Minimun Yield Strength:</label>
+                                                                            <label>Specified Minimum Yield Strength:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" name="min_yield_ippo" id="min_yield_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
@@ -263,23 +263,90 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>Bending Stress [psi]:</label>
-                                                                        <input type="text" name="bend_stress_ippo" id="bend_stress_ippo" class="form-control" readonly>
-                                                                        <label>Hoop Stress [psi]:</label>
-                                                                        <input type="text" name="hoop_stress_ippo" id="hoop_stress_ippo" class="form-control" readonly>
-                                                                        <label>Thermal Stress [psi]:</label>
-                                                                        <input type="text" name="ther_stress_ippo" id="ther_stress_ippo" class="form-control" readonly>
-                                                                        <label>Total Longitudinal Compressive Stress [psi]:</label>
-                                                                        <input type="text" name="total_long_comp_ippo" id="total_long_comp_ippo" class="form-control" readonly>
-                                                                        <label>Maximun Shear Stress [psi]:</label>
-                                                                        <input type="text" name="max_shear_ippo" id="max_shear_ippo" class="form-control" readonly>
-                                                                        <label>Maximun Allowable Shear Stress (45% of SMYS) [psi]:</label>
-                                                                        <input type="text" name="total_pull_force_ippo" id="total_pull_force_ippo" class="form-control" readonly>
-                                                                        <label>Operating Conditions:</label>
-                                                                        <BR>
-                                                                        <input type="text" name="acceptablep_ippo" id="acceptablep_ippo" class="form-control" readonly="readonly">
-                                                                        <br>
-
+                                                                        <div class="col-md-12">
+                                                                            <label>Bending Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="bend_stress_ippo" id="bend_stress_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="bend_stress_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Hoop Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="hoop_stress_ippo" id="hoop_stress_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="hoop_stress_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Thermal Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="ther_stress_ippo" id="ther_stress_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="ther_stress_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Total Longitudinal Compressive Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="total_long_comp_ippo" id="total_long_comp_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="total_long_comp_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Shear Stress:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="max_shear_ippo" id="max_shear_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="max_shear_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Maximum Allowable Shear Stress (45% of SMYS):</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="total_pull_force_ippo" id="total_pull_force_ippo" class="form-control" readonly> 
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="presf" data-output-value="total_pull_force_ippo">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="kpa">kPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <label>Operating Conditions:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" name="acceptablep_ippo" id="acceptablep_ippo" class="form-control" readonly> 
+                                                                        </div>
                                                                     </div>  
                                                                 </div> 
                                                             </div>    
