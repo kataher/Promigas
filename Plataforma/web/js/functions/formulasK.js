@@ -7084,7 +7084,12 @@ function longitudinal_Stress_Form(vari, uni) {
     TextBox14 = get_Temp(TextBox14, uni.inst_temp_sel_lostre, "F");
     TextBox15 = get_Temp(TextBox15, uni.oper_temp_pip_sel_lostre, "F");
     
+    console.log('TextBox6', TextBox6);
+    console.log('TextBox13', TextBox13);
+    console.log('TextBox11', TextBox11);
+    console.log('TextBox7', TextBox7);
     var TextBox18 = (TextBox6 * TextBox13 * TextBox11) / (2 * TextBox7);
+    console.log('TextBox18', TextBox18);
     var TextBox19 = (TextBox10 * 0.0000065) * (TextBox14 - TextBox15);
 //alert(TextBox10+" "+TextBox14+" "+TextBox15);
     var A = TextBox18;
@@ -7113,11 +7118,15 @@ function longitudinal_Stress_Form(vari, uni) {
     var i = 2;
     var Station = "";
     var Deflection = "";
+    var StationData = [];
+    var DeflectionData = [];
     var cal = 0;
     while (cont < TextBox21) {
         Station = cont + "&" + Station;
+        StationData.push(cont);
         cal = -((16 * Math.pow(cont, 2)) * TextBox12 * (Math.pow((TextBox21 - cont), 2))) / (Math.pow((TextBox21), 4));
         Deflection = cal.toFixed(2) + "&" + Deflection;
+        DeflectionData.push(cal.toFixed(2));
         i = i + 1;
         cont = cont + 5;
     }
@@ -7126,8 +7135,10 @@ function longitudinal_Stress_Form(vari, uni) {
         // Añadir el último valor si se pasa
         cont = TextBox21;
         Station = cont.toFixed(1) + "&" + Station;
+        StationData.push(cont.toFixed(1));
         cal = -((16 * Math.pow(cont, 2)) * TextBox12 * (Math.pow((TextBox21 - cont), 2))) / (Math.pow((TextBox21), 4));
         Deflection = cal.toFixed(2) + "&" + Deflection;
+        DeflectionData.push(cal.toFixed(2));
         i = i + 1;
     }
     /*
@@ -7146,6 +7157,8 @@ function longitudinal_Stress_Form(vari, uni) {
     changeToDecimal(res);
     res.push(Station);
     res.push(Deflection);
+    res.push(StationData);
+    res.push(DeflectionData);
     return res;
 }
 //3.15

@@ -88,12 +88,10 @@
 
                         <hr>
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#sited_rwb" data-toggle="tab">Parametros de Diseño y Operación</a></li>
-                            <li><a href="#regulatoru_rwb" data-toggle="tab">Resultados, Tabla y Perfil de Bajado de Tubería</a></li>
-
+                            <li id="params_li" class="active"><a data-target="#sited_rwb" data-toggle="tab">Parametros de Diseño y Operación</a></li>
+                            <li id="results_li"><a data-target="#regulatoru_rwb" data-toggle="tab">Resultados, Tabla y Perfil de Bajado de Tubería</a></li>
                         </ul>
                         <div class="row">
-
                             <div class="col-lg-12">
                                 <div class="tab-content">
                                     <br>
@@ -266,7 +264,7 @@
                                                                         <label>Maximum Operating Pressure:</label>
                                                                     </div>
                                                                     <div class="col-md-8">
-                                                                        <input type="text" class="form-control" id="max_oper_lostre" name="max_oper_lostre" onchange='onchange_Input_lostre(this)' required> 
+                                                                        <input type="text" class="form-control" id="max_oper_lostre" name="max_oper_lostre" required> 
                                                                     </div>
                                                                     <div class="col-md-4" id = "div_max_oper_sel_lostre">
                                                                         <select class="form-control" id="max_oper_sel_lostre" name="max_oper_sel_lostre" onchange='cleanOut_lostre()'> 
@@ -374,7 +372,7 @@
                                                     <div class="row">
                                                         <div class="col-lg-12">
 
-                                                            <input type="button" id="calculateBtn_ls" name="calculateBtn_ls" value="Calculate" onclick="calculate_ls()" href="#regulatoru_rwb" data-toggle="tab" class="btn btn-info btn-block">
+                                                            <input type="button" id="calculateBtn_ls" name="calculateBtn_ls" value="Calculate" onclick="calculate_ls()" class="btn btn-info btn-block">
                                                             <input type="button" id="saveBtn_ls" name="saveBtn_ls" value="Save" onclick="save_ls()" class="btn btn-success btn-block">   
                                                             <input type="button" id="reportBtn_ls" name="reportBtn_ls" value="Delete" onclick="reportReg_ls()" class="btn btn-danger btn-block">   
 
@@ -503,12 +501,14 @@
                                         <div class="col-lg-12">
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    Gráfica
+                                                    Plot
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="row">
                                                         <div class="col-lg-12">
-                                                            <div id="graficaLineal_mem"></div>
+                                                            <div id="graficaLineal_mem">
+                                                                
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -900,6 +900,26 @@
                 };
 
                 var res = longitudinal_Stress_Form(variables, unidades);
+                
+                $('.nav-tabs a[data-target="#regulatoru_rwb"]').tab('show');
+                
+                $('.nav-tabs a[data-target="#regulatoru_rwb"]').on('shown.bs.tab', function (e) {
+                    if (window.chart_data != undefined) {
+                        var canvas = $("#graficaLineal_mem");
+                        canvas.empty();
+                
+                        var chart = Morris.Line({data: data,
+                        xkey: 'station',
+                        ykeys: ['deflection'],
+                        labels: ['Deflection'],
+                        hideHover: 'auto',
+                        resize: true,
+                        element: canvas,
+                        parseTime: false
+                    });
+                    }
+                });
+                
                 $("#Sp_ELPI").val(res[0]);
                 $("#Sr_ELT").val(res[1]);
                 $("#Se_ELE").val(res[2]);
@@ -909,6 +929,8 @@
                 $("#Ls_DMPA").val(res[6]);
                 var station = res[7];
                 var deflection = res[8];
+                var stationData = res[9];
+                var deflectionData = res[10];
                 var St = station.toString().split("&");
                 var Df = deflection.toString().split("&");
                 var tam = St.length;
@@ -928,36 +950,21 @@
                 ht1 = ht1 + ht + '</tbody></table>';
 
                 $("#tablaRes").html(ht1);
-                $("#graficaLineal_mem").html("");
-                var data = [
-                    {y: '2014', a: 50, b: 90},
-                    {y: '2015', a: 65, b: 75},
-                    {y: '2016', a: 50, b: 50},
-                    {y: '2017', a: 75, b: 60},
-                    {y: '2018', a: 80, b: 65},
-                    {y: '2019', a: 90, b: 70},
-                    {y: '2020', a: 100, b: 75},
-                    {y: '2021', a: 115, b: 75},
-                    {y: '2022', a: 120, b: 85},
-                    {y: '2023', a: 145, b: 85},
-                    {y: '2024', a: 160, b: 95}
-                ];
-                Morris.Line({data: data,
-                    xkey: 'y',
-                    ykeys: ['a', 'b'],
-                    labels: ['Total Income', 'Total Outcome'],
-                    hideHover: 'auto',
-                    //behaveLikeLine: true,
-                    resize: true,
-                    element: 'graficaLineal_mem',
-                    // pointFillColors:['#ffffff'],
-                    // pointStrokeColors: ['black'],
-                    // lineColors:['gray','red'],
-                    parseTime: false
-                            //events: [100]
-                });
-
-
+                
+                var canvas = $("#graficaLineal_mem");
+                canvas.empty();
+                
+                var data = [];
+                
+                for (var i = 0; i < stationData.length; ++i) {
+                    data.push({
+                        station: stationData[i],
+                        deflection: deflectionData[i]
+                    });
+                }
+                
+                window.chart_data = data;
+                
                 show_OkDialog($("#calculate_Dialog_lostre"), "Proceso satisfactorio");
             }
         }
