@@ -22,10 +22,28 @@ function get_Pres(pres, E, unie, unis){
         }
     }
     
-    if (unie === "psig" && unis == "kpag") {
+    if (unie === "psig" && unis === "kpag") {
         presS = parseFloat(pres) * 6.895;
-    } else if (unie == "kpag" && unis == "psig") {
+    } else if (unie === "kpag" && unis === "psig") {
         presS = parseFloat(pres) / 6.895;
+    }
+    
+    if (unie === "psig" && unis === "kpaa") {
+        presS = (parseFloat(pres) + parseFloat(presAt)) * 6.895;
+    }  else if (unie === "psia" && unis === "kpaa") {
+        presS = parseFloat(pres) / 6.895;
+    } else if (unie === "psia" && unis === "kpag") {
+        presS = (parseFloat(pres) - parseFloat(presAt)) * 6.895;
+    } else if (unie === "kpaa" && unis === "kpag") {
+        presS = parseFloat(pres) - parseFloat(presAt) * 6.895;
+    } else if (unie === "kpaa" && unis === "psia") {
+        presS = parseFloat(pres) / 6.895;
+    } else if (unie === "kpaa" && unis === "psig") {
+        presS = parseFloat(pres) / 6.895 - parseFloat(presAt);
+    } else if (unie === "kpag" && unis === "kpaa") {
+        presS = parseFloat(pres) + parseFloat(presAt) * 6.895;
+    } else if (unie === "kpag" && unis === "psia") {
+        presS = parseFloat(pres) / 6.895 + parseFloat(presAt);
     }
     return presS;    
 }
@@ -6993,6 +7011,7 @@ function maximunallowable(vari, uni) {
     var F = parseFloat(vari.F);
     var Pmod = parseFloat(vari.Pmod);
     
+    aul = get_WeightLong(aul, uni.add_maxallo_sel_max, 'lbs/ft');
     height = get_Long(height, uni.height_sel_max, 'ft');
     D = get_Long(D, uni.pipe_dia_sel_max, 'in');
     t = get_Long(t, uni.pipe_wt_sel_max, 'in');

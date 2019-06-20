@@ -174,7 +174,7 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Outside Diameter [in.]:</label>
+                                                                                <label>Outside Diameter:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="out_pipeop_dpp" name="out_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
@@ -187,7 +187,7 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Wall Thickness [in.]:</label>
+                                                                                <label>Wall Thickness:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="wall_pipeop_dpp" name="wall_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 
@@ -200,7 +200,7 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Hydrostatic Design Basis [psi]:</label>
+                                                                                <label>Hydrostatic Design Basis:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" class="form-control" id="hyd_pipeop_dpp" name="hyd_pipeop_dpp" onchange='onchange_Input_dpp(this)' required> 

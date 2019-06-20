@@ -247,7 +247,12 @@
                                                                             <input type="text" name="oper_press_max" id="oper_press_max" class="form-control" onchange="onchange_Input_max(this)" required>
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_oper_press_sel_max">
-                                                                            <select class="form-control" id="oper_press_sel_max" name="oper_press_sel_max" onchange='cleanOut_max()'> </select>
+                                                                            <select class="form-control" id="oper_press_sel_max" name="oper_press_sel_max" onchange='cleanOut_max()'>
+                                                                                <option value="psig">psig</option>
+                                                                                <option value="psia">psia</option>
+                                                                                <option value="kpag">kPa (g)</option>
+                                                                                <option value="kpaa">kPa (a)</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -309,10 +314,17 @@
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Additional Uniform Load and Pipe [lb/ft]:</label>
+                                                                            <label>Additional Uniform Load and Pipe:</label>
                                                                         </div>
-                                                                        <div class="col-md-12">
+                                                                        <div class="col-md-8">
                                                                             <input type="text" name="add_maxallo_max" id="add_maxallo_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                                                        </div>
+                                                                        
+                                                                        <div class="col-md-4" id = "div_add_maxallo_sel_max">
+                                                                            <select class="form-control" id="add_maxallo_sel_max" name="add_maxallo_sel_max">
+                                                                                <option value="lbs/ft">lb/ft</option>
+                                                                                <option value="kg/m">kg/m</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -320,10 +332,14 @@
                                                                             <label>Deflection Limited to:</label>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <input type="text" name="defl_lim_max" id="defl_lim_max" class="form-control" onchange="onchange_Input_max(this)" required>
+                                                                            <input type="text" value="360" name="defl_lim_max" id="defl_lim_max" class="form-control" onchange="onchange_Input_max(this)" required>
                                                                         </div>
                                                                         <div class="col-md-6" id = "div_defl_lim_sel_max">
-                                                                            <select class="form-control" id="defl_lim_sel_max" name="defl_lim_sel_max" onchange='cleanOut_max()'> </select>
+                                                                            <select class="form-control" id="defl_lim_sel_max" name="defl_lim_sel_max" onchange='changeDeflection()'>
+                                                                                <option value="360">L/360</option>
+                                                                                <option value="240">L/240</option>
+                                                                                <option value="">Otro</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -334,7 +350,12 @@
                                                                             <input type="text" name="max_press_max" id="max_press_max" class="form-control" onchange="onchange_Input_max(this)" required>
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_max_press_sel_max">
-                                                                            <select class='form-control' id='max_press_sel_max' name='max_press_sel_max' onchange='cleanOut_max()'> </select>
+                                                                            <select class='form-control' id='max_press_sel_max' name='max_press_sel_max' onchange='cleanOut_max()'>
+                                                                                <option value="psig">psig</option>
+                                                                                <option value="psia">psia</option>
+                                                                                <option value="kpag">kPa (g)</option>
+                                                                                <option value="kpaa">kPa (a)</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -504,10 +525,11 @@
                 var unidades = {
                     "height_sel_max": $("#height_sel_max").val().split(",")[1],
                     "pipe_dia_sel_max": $("#pipe_dia_sel_max").val().split(",")[1],
-                    "oper_press_sel_max": $("#oper_press_sel_max").val().split(",")[1],
+                    "oper_press_sel_max": $("#oper_press_sel_max").val(),
                     "min_yield_sel_max": $("#min_yield_sel_max").val().split(",")[1],
                     "pipe_wt_sel_max": $("#pipe_wt_sel_max").val().split(",")[1],
-                    "max_press_sel_max": $("#max_press_sel_max").val().split(",")[1]
+                    "max_press_sel_max": $("#max_press_sel_max").val(),
+                    "add_maxallo_sel_max": $("#add_maxallo_sel_max").val()
                 };
                 var res = maximunallowable(variables, unidades);
 
@@ -535,11 +557,9 @@
                 $('#api5l_max').attr('checked', 'checked');
                 load_nps_sel_max("5l");
                 load_grade_sel_max("gra5l");
-                /*load_defli_sel_max("dlt");*/
                 load_deratingf_sel_max();
                 load_joinf_sel_max("jointf5l");
                 load_desingf_sel_max();
-                load_pres_sel_max();
                 load_presf_sel_max();
                 load_in_sel_max();
                 load_in2_sel_max();
@@ -600,33 +620,11 @@
                 });
             }
             
-            function load_pres_sel_max() {
-                var parametros = {
-                    "combo": "pres",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: true,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' id='oper_press_sel_max' name='oper_press_sel_max' onchange='cleanOut_max()'>" + data;
-                        $("#div_oper_press_sel_max").html(newHtml);
-
-                        newHtml = "<select class='form-control' id='max_press_sel_max' name='max_press_sel_max' onchange='cleanOut_max()'>" + data;
-                        $("#div_max_press_sel_max").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_max"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
+            function changeDeflection() {
+                cleanOut_max();
+                
+                var newValue = $("#defl_lim_sel_max").val();
+                $("#defl_lim_max").val(newValue);
             }
             
             function load_presf_sel_max() {
@@ -890,36 +888,6 @@
                 });
             }
 
-            function load_defli_sel_max(idcombo) {
-                var parametros = {
-                    "combo": idcombo,
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    async: false,
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' id='defl_lim_sel_max' name='defl_lim_sel_max' onchange='onchange_defli_max()'>" + data;
-                        $("#div_defl_lim_sel_max").html(newHtml);
-
-                        var x = $("#defl_lim_sel_max").val();
-                        $("#defl_lim_max").val(x.split(",")[1]);
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_max"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
             function load_joinf_sel_max(idcombo) {
                 var parametros = {
                     "combo": idcombo,
@@ -1005,7 +973,7 @@
                 $("#min_yield_max").val(x.split(",")[1]);
                 /* var res =  $("#grade_sel_max option:selected").html();
                  $("#gra_pipeop_max").val(x.split(",")[1]); */
-                // cleanOut_max();
+                cleanOut_max();
             }
             function onchange_defli_max() {
                 var x = $("#defl_lim_sel_max").val();
@@ -1015,19 +983,22 @@
 
             function onchange_jf_max() {
                 $("#long_fact_max").val($("#longitudinal_jf_max").val().split(",")[1]);
-                //cleanOut_max();
+                cleanOut_max();
             }
 
             function onchange_df_max() {
                 $("#temp_fact_max").val($("#td_sel_max").val().split(",")[1]);
-                //cleanOut_max();
+                cleanOut_max();
             }
 
             function onchange_defa_max() {
                 $("#fact_pipeop_max").val($("#design_factor_sel_max").val().split(",")[1]);
-                // cleanOut_max();
+                cleanOut_max();
             }
 
+        function cleanOut_max() {
+            $("[readonly]").val("");
+        }
         </script>
 
 </html>

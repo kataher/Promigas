@@ -177,6 +177,10 @@
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_int_press_sel_hoop">
                                                                                 <select class="form-control" id="int_press_sel_hoop" name="int_press_sel_hoop" onchange='cleanOut_hoop()'> 
+                                                                                    <option value="psig">psig</option>
+                                                                                    <option value="psia">psia</option>
+                                                                                    <option value="kpag">kPa (g)</option>
+                                                                                    <option value="kpaa">kPa (a)</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -312,7 +316,6 @@
                 $("#opt_hoop").val("1");
                 load_np_sel_hoop("npsn");
                 load_in_sel_hoop();
-                load_pres_sel_hoop();
                 load_height_sel_hoop();
             });
             
@@ -348,32 +351,7 @@
                 });
             }
 
-            function load_pres_sel_hoop() {
-                var parametros = {
-                    "combo": "pres",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='int_press_sel_hoop' id='int_press_sel_hoop' onchange='cleanOut_hoop()'>" + data;
-                        $("#div_int_press_sel_hoop").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_hoop"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
+           
             function load_height_sel_hoop() {
                 var parametros = {
                     "combo": "in",
@@ -413,7 +391,7 @@
                     "nom_pipe_sel_hoop": $("#nom_pipe_sel_hoop").val().split(",")[1],
                     "nomout_sel_hoop": $("#nomout_sel_hoop").val().split(",")[1],
                     "nom_wall_sel_hoop": $("#nom_wall_sel_hoop").val().split(",")[1],
-                    "int_press_sel_hoop": $("#int_press_sel_hoop").val().split(",")[1],
+                    "int_press_sel_hoop": $("#int_press_sel_hoop").val(),
                     "height_sel_hoop": $("#height_sel_hoop").val().split(",")[1]
                 };
 
