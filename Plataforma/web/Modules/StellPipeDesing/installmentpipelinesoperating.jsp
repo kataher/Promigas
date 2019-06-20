@@ -225,7 +225,7 @@
                                                                             <label>Poisson's Ratio for Steel:</label>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <input type="text" name="poi_rat_ippo" id="poi_rat_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
+                                                                            <input type="text" value="0.3" name="poi_rat_ippo" id="poi_rat_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
                                                                         </div>
                                                                     </div>
 
@@ -234,7 +234,7 @@
                                                                             <label>Young's Modulus for Steel:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" name="youn_steel_ippo" id="youn_steel_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
+                                                                            <input type="text" value="30000" name="youn_steel_ippo" id="youn_steel_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_youn_steel_sel_ippo">
                                                                             <select class="form-control" id="youn_steel_sel_ippo" name="youn_steel_sel_ippo" onchange='cleanOut_ippo()'> </select>
@@ -246,7 +246,7 @@
                                                                             <label>Coefficient of Thermal Expansion [per°F]:</label>
                                                                         </div>
                                                                         <div class="col-md-12">
-                                                                            <input type="text" name="coeff_therm_ippo" id="coeff_therm_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
+                                                                            <input type="text" value="0.0000065" name="coeff_therm_ippo" id="coeff_therm_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
                                                                         </div>
                                                                     </div>
                                                                 </div>

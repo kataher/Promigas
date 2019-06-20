@@ -21,6 +21,12 @@ function get_Pres(pres, E, unie, unis){
             presS = parseFloat(pres) - parseFloat(presAt);
         }
     }
+    
+    if (unie === "psig" && unis == "kpag") {
+        presS = parseFloat(pres) * 6.895;
+    } else if (unie == "kpag" && unis == "psig") {
+        presS = parseFloat(pres) / 6.895;
+    }
     return presS;    
 }
 
@@ -532,6 +538,11 @@ $(document).ready(function() {
       
       if (fieldText === '')
           return;
+      
+      if (type === "pres") {
+          var converted = get_Pres(fieldValue, 0, previousValue, newValue);
+          field.val(converted);
+      }
       
       if (type === "presf") {
           var converted = get_Presf(fieldValue, previousValue, newValue);

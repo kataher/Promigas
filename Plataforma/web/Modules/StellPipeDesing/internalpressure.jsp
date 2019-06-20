@@ -243,9 +243,18 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
-                                                                        <label>Internal Pressure [psig]:</label>
-                                                                        <input type="text" name="int_press" id="int_press" class="form-control" readonly> 
-
+                                                                        <div class="col-md-12">
+                                                                            <label>Internal Pressure:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="int_press" name="int_press" readonly>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <select class="form-control output-unit-select" data-output-type="pres" data-output-value="int_press">
+                                                                                <option value="psig">psig</option>
+                                                                                <option value="kpag">kPa (g)</option>
+                                                                            </select>
+                                                                        </div>
                                                                     </div>  
                                                                 </div> 
                                                             </div>    

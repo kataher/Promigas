@@ -182,7 +182,7 @@
                                                                             <label>Modulus of Elasticity:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control" id="mod_elas_bds" name="mod_elas_bds" onchange="onchange_Input_bds(this)" required>   
+                                                                            <input type="text" value="30000000" class="form-control" id="mod_elas_bds" name="mod_elas_bds" onchange="onchange_Input_bds(this)" required>   
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_mod_elast_sel_bds">
                                                                             <select class="form-control" id="mod_elast_sel_bds" name="mod_elast_sel_bds"> 

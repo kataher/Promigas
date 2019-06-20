@@ -254,7 +254,9 @@
                                                                         <input type="text" class="form-control" id="des_ver_lostre" name="des_ver_lostre" onchange='onchange_Input_lostre(this)' required> 
                                                                     </div>
                                                                     <div class="col-md-4" id = "div_des_ver_sel_lostre">
-                                                                        <select class="form-control" id="des_ver_sel_lostre" name="des_ver_sel_lostre" onchange='cleanOut_lostre()'> 
+                                                                        <select class="form-control" id="des_ver_sel_lostre" name="des_ver_sel_lostre" onchange='cleanOut_lostre()'>
+                                                                            <option value="ft">ft</option>
+                                                                            <option value="mt">m</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -268,7 +270,7 @@
                                                                     </div>
                                                                     <div class="col-md-4" id = "div_max_oper_sel_lostre">
                                                                         <select class="form-control" id="max_oper_sel_lostre" name="max_oper_sel_lostre" onchange='cleanOut_lostre()'> 
-                                                                            <option>psi</option>
+                                                                            <option>psig</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -623,9 +625,6 @@
 
                     newHtml = "<select class='form-control' name='out_pipe_dia_sel_lostre' id='out_pipe_dia_sel_lostre' onchange='cleanOut_lostre()'>" + data;
                     $("#div_out_pipe_dia_sel_lostre").html(newHtml);
-
-                    newHtml = "<select class='form-control' name='des_ver_sel_lostre' id='des_ver_sel_lostre' onchange='cleanOut_lostre()'>" + data;
-                    $("#div_des_ver_sel_lostre").html(newHtml);
                 },
                 error: function (xhr, ajaxOptions, err) {
                     show_OkDialog($("#error_Dialog_lostre"), "Error");
@@ -787,7 +786,7 @@
                     if (data.trim() != "") {
                         var val = $("#wthi_sel_lostre").val().trim().split(",");
                         var po = $("#nominalps_sel_lostre").val();
-                        $("#out_pipe_dia_lostre").val(po - (val[1] * 2));
+                        $("#out_pipe_dia_lostre").val((po - (val[1] * 2)).toFixed(3));
                         $("#pipe_wall_lostre").val(val[1]);
 
                     }
@@ -814,7 +813,7 @@
             cleanOut_lostre();
             var val = $("#wthi_sel_lostre").val().trim().split(",");
             var po = $("#nominalps_sel_lostre").val();
-            $("#out_pipe_dia_lostre").val(po - (val[1] * 2));
+            $("#out_pipe_dia_lostre").val((po - (val[1] * 2)).toFixed(3));
             $("#pipe_wall_lostre").val(val[1]);
         }
 
@@ -894,7 +893,7 @@
                     "pipe_dia_sel_lostre": $("#pipe_dia_sel_lostre").val().split(",")[1],
                     "pipe_wall_sel_lostre": $("#pipe_wall_sel_lostre").val().split(",")[1],
                     "out_pipe_dia_sel_lostre": $("#out_pipe_dia_sel_lostre").val().split(",")[1],
-                    "des_ver_sel_lostre": $("#des_ver_sel_lostre").val().split(",")[1],
+                    "des_ver_sel_lostre": $("#des_ver_sel_lostre").val(),
                     "inst_temp_sel_lostre": $("#inst_temp_sel_lostre").val().split(",")[1],
                     "oper_temp_pip_sel_lostre": $("#oper_temp_pip_sel_lostre").val().split(",")[1]
                 };

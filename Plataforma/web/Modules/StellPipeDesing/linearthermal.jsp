@@ -148,7 +148,7 @@
                                                                             <label>Modulus of Elasticity:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
-                                                                            <input type="text" class="form-control" id="mod_elas_lther" name="mod_elas_lther" onchange='onchange_Input_lther(this)' required> 
+                                                                            <input type="text" value="30000" class="form-control" id="mod_elas_lther" name="mod_elas_lther" onchange='onchange_Input_lther(this)' required> 
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_mod_elas_sel_lther">
                                                                             <select class="form-control" id="mod_elas_sel_lther" name="mod_elas_sel_lther" onchange='cleanOut_lther()'> 
