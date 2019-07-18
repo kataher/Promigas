@@ -7212,6 +7212,9 @@ function maximun_impact_form(vari, uni) {
     var F19 = parseFloat(vari.poi_soil_milpd);
     var F20 = parseFloat(vari.wave_vel_milpd);
     var F21 = parseFloat(vari.emp_coef);
+    
+    // 0.0482 soil with vegetation
+    // 0.0732 soft soil
 
     console.log(vari);
     console.log(uni);
@@ -7219,12 +7222,9 @@ function maximun_impact_form(vari, uni) {
     F16 = get_Long(F16, uni.drop_height_sel_milpd, 'ft');
     F17 = get_Long(F17, uni.imp_area_sel_milpd, 'ft');
     
-    var F24 = (F18 / Math.pow(12, 3)) / (32 * 12) * Math.pow(F20, 2) / 10;
-    F24 = F24.toFixed(0);
+    var F24 = (F18 / (386 * Math.pow(12, 3))) * (Math.pow(F20, 2) / 10);
     var F25 = Math.sqrt((32 * F15 * (F16 * 12) * F24 * (F17 * 6)) / ((Math.pow(Math.PI, 2)) * (1 - F19)));
-    F25 = F25.toFixed(0);
     var F26 = Math.sqrt(2 * 32.2 * F16);
-    F26 = F26.toFixed(4);
     var F27 = F25 / (Math.PI * Math.pow((F17 * 6), 2));
 //F27 = F27.toFixed(0);
     var F28 = (F15 / (Math.PI * Math.pow((F17 * 6), 2)));
@@ -7240,7 +7240,7 @@ function maximun_impact_form(vari, uni) {
      * F28 = Weight per Unit of Impact Area
      * F30 = Penetration Depth
      */
-    return [F24, F25, F26, F27, F28, F30];
+    return [F24.toFixed(0), F25.toFixed(0), F26.toFixed(2), F27.toFixed(0), F28.toFixed(0), F30.toFixed(2)];
 
 }
 //3.16
@@ -7279,7 +7279,7 @@ function pipeanchorforce_form(vari, uni) {
     Ti = get_Temp(Ti, uni.temp_sel_paf, 'F');
     To = get_Temp(To, uni.oper_temp_sel_paf, 'F');
     
-    var Sh = (P * d) / (2 * t);
+    var Sh = (P * D) / (2 * t);
     var Spoisson = u * Sh;
     var DT = To - Ti;
     //Compressive stress
@@ -7352,7 +7352,7 @@ function Restrained_form(vari, uni) {
     // hoop stress
     var Sh = (P * D) / (2 * t);
     // Longitudinal Stress due to Internal Pressure
-    var Sp = 0.3 * Sh;
+    var Sp = Spoisson * Sh;
     // Longitudinal Stress due to Thermal Expansion
     var Sr = E * alpha * (T1 - T2);
     //Net Longitudinal Stresses
@@ -7362,7 +7362,7 @@ function Restrained_form(vari, uni) {
     //Combined Biaxial Stress
     var Sc = Math.sqrt(Math.pow(Sl, 2) - Sl * Sh + Math.pow(Sh, 2));
     //Maximun Permitted Combined Biaxial Stress 
-    var k = Sc / (S * T);
+    var k = T * Kfactor * S;
     var MSc = "";
     if (k === 1) {
         MSc = k + " - para carga de larga duración ";
@@ -7424,7 +7424,7 @@ function UnRestrained_form(vari, uni) {
     //Hoop Stress
     var Sh = (P * D) / (2 * t);
     // Longitudinal Stress due to Internal Pressure
-    var Sp = 0.3 * Sh;
+    var Sp = 0.5 * Sh;
     // Net Longitudinal Stresses
     var Sl = Sp + Sb + Sx;
     //Maximun Permitted Longitudinal Stress

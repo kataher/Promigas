@@ -123,7 +123,12 @@
                                                                             <input type="text" name="oper_press_ippo" id="oper_press_ippo" class="form-control" onchange="onchange_Input_ippo(this)" required>
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_oper_press_sel_ippo">
-                                                                            <select class="form-control" id="oper_press_sel_ippo" name="oper_press_sel_ippo" onchange='cleanOut_ippo()'> </select>
+                                                                            <select class="form-control" id="oper_press_sel_ippo" name="oper_press_sel_ippo" onchange='cleanOut_ippo()'>
+                                                                                <option value="psig">psig</option>
+                                                                                <option value="psia">psia</option>
+                                                                                <option value="kpag">kPa (g)</option>
+                                                                                <option value="kpaa">kPa (a)</option>
+                                                                            </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group">
@@ -431,7 +436,6 @@
                 load_in_sel_ippo();
                 load_in2_sel_ippo();
                 load_presf_sel_ippo();
-                load_pres_sel_ippo();
                 load_temp_sel_ippo();
             });
             
@@ -540,32 +544,6 @@
                 });
             }
             
-            function load_pres_sel_ippo() {
-                var parametros = {
-                    "combo": "pres",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: true,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' id='oper_press_sel_ippo' name='oper_press_sel_ippo' onchange='cleanOut_ippo()'>" + data;
-                        $("#div_oper_press_sel_ippo").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_ippo"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
             function load_temp_sel_ippo() {
                 var parametros = {
                     "combo": "temp",
@@ -614,7 +592,7 @@
                 
                 var unidades = {
                     "height_sel_ippo": $("#height_sel_ippo").val().split(",")[1],
-                    "oper_press_sel_ippo": $("#oper_press_sel_ippo").val().split(",")[1],
+                    "oper_press_sel_ippo": $("#oper_press_sel_ippo").val(),
                     "pipe_dia_sel_ippo": $("#pipe_dia_sel_ippo").val().split(",")[1],
                     "pipe_wall_sel_ippo": $("#pipe_wall_sel_ippo").val().split(",")[1],
                     "min_yield_sel_ippo": $("#min_yield_sel_ippo").val().split(",")[1],

@@ -166,19 +166,19 @@
                                                                         <label>Poisson's Ratio:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" id="poi_ratio_rpls" onchange='onchange_Input_rpls(this)' name="poi_ratio_rpls">
+                                                                        <input type="text" value="0.3" class="form-control" id="poi_ratio_rpls" onchange='onchange_Input_rpls(this)' name="poi_ratio_rpls">
                                                                     </div>                
                                                                     <div class="col-lg-7">
                                                                         <label>Young's Modulus of Elasticity [psi]:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" id="young_modul_rpls" onchange='onchange_Input_rpls(this)' name="young_modul_rpls">
+                                                                        <input type="text" class="form-control" value="30000000" id="young_modul_rpls" onchange='onchange_Input_rpls(this)' name="young_modul_rpls">
                                                                     </div> 
                                                                     <div class="col-lg-7">
                                                                         <label>Thermal Expansion Coefficient [1/°F]:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" id="thermal_exp_rpls" onchange='onchange_Input_rpls(this)' name="thermal_exp_rpls">
+                                                                        <input type="text" value="0.0000065" class="form-control" id="thermal_exp_rpls" onchange='onchange_Input_rpls(this)' name="thermal_exp_rpls">
                                                                     </div>                   
                                                                 </div>
                                                             </div>
@@ -643,7 +643,6 @@
                 $("#net_stress_rpls").val(res[3]);
                 $("#max_stress_rpls").val(res[4]);
                 $("#comb_stress_rpls").val(res[5]);
-                alert("Se debe revisar la formula de K en esta sección");
                 $("#max_comb_stress_rpls").val(res[6]);
 
 
@@ -881,7 +880,7 @@
                     inp.value = "";
                 }
 
-                onchange_Input_zero(inp);
+                //onchange_Input_zero(inp);
                 cleanOut_rpls();
             }
 

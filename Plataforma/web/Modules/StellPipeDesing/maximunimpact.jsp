@@ -176,11 +176,15 @@
                                                                                 <div class="form-group">
                                                                                     <div class="col-lg-8">
                                                                                         <div id="div_cole_sel_milpd" name="div_cole_sel_milpd">
-                                                                                            <select class="form-control" id="sel_emp_coef" name="sel_emp_coef_milpd"> </select>
+                                                                                            <select class="form-control" id="sel_emp_coef" name="sel_emp_coef_milpd" onchange="onchange_nps_milpd()">
+                                                                                                <option value=",0.0367">Sandy Soil</option>
+                                                                                                <option value=",0.0482">Soil with vegetation</option>
+                                                                                                <option value=",0.0732">Soft Soil</option>
+                                                                                            </select>
                                                                                         </div>
                                                                                     </div> 
                                                                                     <div class="col-lg-4">
-                                                                                        <input type="text" class="form-control" id="emp_coef" name="emp_coef_milpd">
+                                                                                        <input type="text" value="0.0367" class="form-control" id="emp_coef" name="emp_coef_milpd">
                                                                                     </div>                      
                                                                                 </div> 
                                                                             </div>
@@ -356,7 +360,6 @@
                     $("#proyects_sel_milpd"),
                     $("#error_Dialog_milpd"));
             $("#opt_milpd").val("1");
-            load_np_sel_milpd("mcip");
             load_peso_sel_milpd();
             load_in_sel_milpd();
         });
@@ -369,7 +372,7 @@
                 inp.value = "";
             }
 
-            onchange_Input_zero(inp);
+            // onchange_Input_zero(inp);
             cleanOut_milpd();
         }
 
@@ -457,37 +460,6 @@
             show_OkDialog($("#calculate_Dialog_milpd"), "Proceso satisfactorio");
         }
 
-        function load_np_sel_milpd(idcombo) {
-            var parametros = {
-                "combo": idcombo,
-                "type": "5l",
-                "opcion": "5"
-            };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                async: false,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    var newHtml = "<select class=\"form-control\" name=\"sel_emp_coef\" id= \"sel_emp_coef\" onchange=\"onchange_nps_milpd()\">" + data;
-
-                    $("#div_cole_sel_milpd").html(newHtml);
-                    var po = $("#sel_emp_coef").val().trim().split(",")[1];
-                    $("#emp_coef").val(po.split(",")[1]);
-                    onchange_nps_milpd();
-
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_milpd"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
-        }
         function onchange_nps_milpd() {
             var po = $("#sel_emp_coef").val();
             $("#emp_coef").val(po.split(",")[1]);

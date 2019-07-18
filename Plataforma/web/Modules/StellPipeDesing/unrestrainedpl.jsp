@@ -105,7 +105,7 @@
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="form-group">
-                                                                        <input type="radio" id = "api5l_unrpl" name="linepipe_unrpl" value="api5l_unrpl" onchange="onchange_linepipe_unrpl()" required> Tubería - especificación API 5L <br>
+                                                                        <input type="radio" id = "api5l_unrpl" name="linepipe_unrpl" value="api5l_unrpl" onchange="onchange_linepipe_unrpl()" required> Line Pipe - API Specification 5L <br>
                                                                         <input type="radio" id = "astm_unrpl" name="linepipe_unrpl" value="astm_unrpl" onchange="onchange_linepipe_unrpl()" required> Standart Steel Pipe - ASTM - ANSI B36.10
                                                                     </div>                                    
 
@@ -167,19 +167,19 @@
                                                                         <label>Poisson's Ratio:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" onchange='onchange_Input_unrpl(this)' id="poi_ratio_unrpl" name="poi_ratio_unrpl">
+                                                                        <input type="text" value="0.3" class="form-control" onchange='onchange_Input_unrpl(this)' id="poi_ratio_unrpl" name="poi_ratio_unrpl">
                                                                     </div>                
                                                                     <div class="col-lg-7">
                                                                         <label>Young's Modulus of Elasticity [psi]:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" onchange='onchange_Input_unrpl(this)' id="young_modul_unrpl" name="young_modul_unrpl">
+                                                                        <input type="text" value="30000000" class="form-control" onchange='onchange_Input_unrpl(this)' id="young_modul_unrpl" name="young_modul_unrpl">
                                                                     </div> 
                                                                     <div class="col-lg-7">
                                                                         <label>Thermal Expansion Coefficient [1/°F]:</label>
                                                                     </div>
                                                                     <div class="col-lg-5">
-                                                                        <input type="text" class="form-control" onchange='onchange_Input_unrpl(this)' id="thermal_exp_unrpl" name="thermal_exp_unrpl">
+                                                                        <input type="text" value="0.0000065" class="form-control" onchange='onchange_Input_unrpl(this)' id="thermal_exp_unrpl" name="thermal_exp_unrpl">
                                                                     </div>                   
                                                                 </div>
                                                             </div>
@@ -825,7 +825,7 @@
                 inp.value = "";
             }
 
-            onchange_Input_zero(inp);
+            //onchange_Input_zero(inp);
             cleanOut_unrpl();
         }
 

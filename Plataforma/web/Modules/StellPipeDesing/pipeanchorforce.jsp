@@ -600,14 +600,22 @@
             function onchange_nps_paf() {
                 //cleanOut_paf();
                 var po = $("#nomps_sel_paf").val();
-                $("#nom_pipe_paf").val(po);
                 $("#nomout_paf").val(po);
+                
+                var thickness = parseFloat($("#wthi_sel_paf").val().split(",")[1]);
+                var outside_diam = parseFloat($("#nomout_paf").val());
+                $("#nomin_paf").val((outside_diam - 2 * thickness).toFixed(3));
+            
                 load_wt_sel_paf();
             }
             function onchange_wt_paf() {
                 //cleanOut_paf();
                 var val = $("#wthi_sel_paf").val().trim().split(",");
                 $("#nom_wall_paf").val(val[1]);
+                
+                var thickness = parseFloat($("#wthi_sel_paf").val().split(",")[1]);
+                var outside_diam = parseFloat($("#nomout_paf").val());
+                $("#nomin_paf").val((outside_diam - 2 * thickness).toFixed(3));
             }
 
             function cleanOut_paf() {
