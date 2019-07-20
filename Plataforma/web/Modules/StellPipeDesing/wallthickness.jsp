@@ -202,7 +202,7 @@
                                                                     </div>
                                                                     <div class="panel panel-default">
                                                                         <div class="panel-heading">
-                                                                            About thickness corrosion:
+                                                                            Corrosion allowance:
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="col-lg-6">
@@ -259,7 +259,9 @@
                                                                                 <input type="text" class="form-control" id="height_wts" name="height_wts" onchange='onchange_Input_wts(this)' required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_height_sel_wts">
-                                                                                <select class="form-control" id="height_sel_wts" name="height_sel_wts" onchange='cleanOut_wts()'> 
+                                                                                <select class="form-control" id="height_sel_wts" name="height_sel_wts" onchange='cleanOut_wts()'>
+                                                                                    <option value="ft">ft</option>
+                                                                                    <option value="mt">m</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -269,7 +271,7 @@
                                                                                 <label>Design Pressure:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
-                                                                                <input type="text" class="form-control" id="despress_pipeop_wts" name="despress_pipeop_wts" onchange='onchange_Input_wts(this)' required> 
+                                                                                <input type="text" class="form-control" id="despress_pipeop_wts" name="despress_pipeop_wts" required> 
                                                                             </div>
                                                                             <div class="col-md-4" id = "div_despress_pipeop_sel_wts">
                                                                                 <select class="form-control" id="despress_pipeop_sel_wts" name="despress_pipeop_sel_wts" onchange='cleanOut_wts()'> 
@@ -330,7 +332,7 @@
 
                                                                         <div class="form-group" id="aboutthi" style="display:none">
                                                                             <div class="col-md-12">
-                                                                                <label>About thickness corrosion:</label>
+                                                                                <label>Corrosion allowance:</label>
                                                                             </div>
                                                                             <div class="col-md-12">
                                                                                 <input type="text" class="form-control" id="about_thick_wts" value="0" name="about_thick_wts" onchange='onchange_Input_wts(this)' required> 
@@ -352,7 +354,7 @@
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Espesor mínimo de la pared de la tubería:</label>
+                                                                            <label>Minimum pipe wall thickness:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" name="minpipe_wts" id="minpipe_wts" class="form-control" readonly> 
@@ -508,32 +510,6 @@
                 });
             }
 
-            function load_in_sel_wts() {
-                var parametros = {
-                    "combo": "in",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' id='height_sel_wts' name='height_sel_wts' onchange='cleanOut_wts()'> " + data;
-                        $("#div_height_sel_wts").html(newHtml);
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_wts"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            
             function load_in2_sel_wts() {
                 var parametros = {
                     "combo": "in2",
@@ -786,7 +762,7 @@
                 
                 var unidades = {
                     "nomout_pipeop_sel_wts": $("#nomout_pipeop_sel_wts").val().split(",")[1],
-                    "height_sel_wts": $("#height_sel_wts").val().split(",")[1],
+                    "height_sel_wts": $("#height_sel_wts").val(),
                     "despress_pipeop_sel_wts": $("#despress_pipeop_sel_wts").val().split(",")[1],
                     "yield_pipeop_sel_wts": $("#yield_pipeop_sel_wts").val()
                 };

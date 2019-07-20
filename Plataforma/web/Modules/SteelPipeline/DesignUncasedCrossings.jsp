@@ -977,7 +977,7 @@
             if (sw != true) {
                 inp.value = "";
             }
-            onchange_Input_zero(inp);
+            //onchange_Input_zero(inp);
             // cleanOut_duc();
 
         }

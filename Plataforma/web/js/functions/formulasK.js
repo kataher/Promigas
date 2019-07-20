@@ -6419,7 +6419,7 @@ function install_pipelines_Form(vari) {
     TextBox8 = TextBox8.toFixed(2);
 
 //alert(E11+" "+E12+" "+E13+" "+E14+" "+G11+" "+G12+" "+E18+" "+E19+" "+E22+" "+E23+" "+E27+" "+E30+" "+E31+" "+E32+" "+E35+" "+E36+" "+TextBox8);
-    var TextBox24 = (E11 - E12) * E12 * 10.69;
+    var TextBox24 = (E11 - E12) * E12 * 10.6802;
     var TextBox25 = (Math.PI / 4) * Math.pow((E11 / 12), 2);
     // (3.1416 / 4 ) * 80/12 Ele 2 = 0.7854 * 0.4356 = 0.342120
     var TextBox26 = (Math.PI / 4) * Math.pow(((E11 - (2 * E12)) / 12), 2);
@@ -7493,11 +7493,15 @@ function wall_poly_lene_form(vari, uni) {
     var P = parseFloat(vari.despress_pipeop_wtpe);
     var HDB = parseFloat(vari.hyd_pipeop_wtpe);
     var F = parseFloat(vari.fact_pipeop_wtpe);
+    var height = parseFloat(vari.height_wtpe);
+    
+    height = get_Long(height, uni.height_sel_wtpe, 'ft');
     
     D = get_Long(D, uni.nom_pipeop_sel_wtpe, 'in');
     OD = get_Long(OD, uni.out_pipeop_sel_wtpe, 'in');
     
-    P = get_Presf(P, uni.despress_pipeop_sel_wtpe, 'psi');
+    P = get_Pres(P, height, uni.height_sel_wtpe, 'psig');
+    
     HDB = get_Presf(HDB, uni.hyd_pipeop_sel_wtpe, 'psi');
     
     var t = P * OD / (2 * HDB * F + P);
@@ -7529,7 +7533,7 @@ function designuncascro(vari, uni) {
     height = get_Long(height, uni.height_sel_duc, 'ft');
     D = get_Long(D, uni.nominalOutsideDiameter_sel_duc, 'in');
     t = get_Long(t, uni.nominalWallThickness_sel_duc, 'in');
-    Bd = get_Long(Bd, uni.widthOfPipeTrenchOrDiameterOfBore_sel_duc, 'in');
+    Bd = get_Long(Bd, uni.widthOfPipeTrenchOrDiameterOfBore_sel_duc, 'ft');
     H = get_Long(H, uni.heightOfSoilOverPipe_sel_duc, 'ft');
     
     P = get_Pres(P, height, uni.pipeInternalPressure_sel_duc, 'psig');
@@ -7540,13 +7544,13 @@ function designuncascro(vari, uni) {
 
     var W = 83.3 * Cd * g * Math.pow(Bd, 2) * 0.001 + ((10.4 * L * D * I) / (Math.PI * Math.pow(H, 2) * 1000));
 
-    var Se = (3 * Kb * W * E * D * t) / (E * t + 3 * Kz * P * Math.pow(D, 3));
+    var Se = (3 * Kb * W * E * D * t) / (E * Math.pow(t, 3) + 3 * Kz * P * Math.pow(D, 3));
 
     var Sl = (P * D) / (2 * t);
 
     var Sr = Sl + Se;
 
-    return [Cd, W, Se, Sl, Sr];
+    return [Cd, W, Sl, Se, Sr];
 
 }
 //4.2

@@ -110,7 +110,7 @@
                                                                         </div>
                                                                         <div class="panel-body">
                                                                             <div class="col-lg-12">
-                                                                                <label>Tamaño nominal de la tubería</label>                        
+                                                                                <label>Nominal pipe size</label>                        
                                                                                 <div id="div_cole_sel_wtpe">
                                                                                     <select class="form-control" id="cole_sel_coef_wtpe" name="cole_sel_coef_wtpe"> </select>    
                                                                                 </div>
@@ -176,6 +176,21 @@
 
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
+                                                                            <label>Height:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="height_wtpe" name="height_wtpe" onchange='onchange_Input_wtpe(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_height_sel_wtpe">
+                                                                            <select class="form-control" id="height_sel_wtpe" name="height_sel_wtpe" onchange='cleanOut_wtpe()'>
+                                                                                <option value="ft">ft</option>
+                                                                                <option value="mt">m</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
                                                                             <label>Design Pressure:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
@@ -183,8 +198,8 @@
                                                                         </div>
                                                                         <div class="col-md-4" id = "div_despress_pipeop_sel_wtpe">
                                                                             <select class="form-control" id="despress_pipeop_sel_wtpe" name="despress_pipeop_sel_wtpe" onchange='cleanOut_wtpe()'> 
-                                                                                <option value="psi">psi</option>
-                                                                                <option value="MPa">MPa</option>
+                                                                                <option value="psig">psig</option>
+                                                                                <option value="psia">psia</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -227,7 +242,7 @@
                                                                 <div class="col-lg-12">                                    
                                                                     <div class="form-group">
                                                                         <div class="col-md-12">
-                                                                            <label>Espesor mínimo de la pared de la tubería:</label>
+                                                                            <label>Minimum pipe wall thickness:</label>
                                                                         </div>
                                                                         <div class="col-md-8">
                                                                             <input type="text" name="minimun_wallthick_wtpe" id="minimun_wallthick_wtpe" class="form-control" readonly> 
@@ -357,14 +372,16 @@
                     "out_pipeop_wtpe": $("#out_pipeop_wtpe").val(),
                     "despress_pipeop_wtpe": $("#despress_pipeop_wtpe").val(),
                     "hyd_pipeop_wtpe": $("#hyd_pipeop_wtpe").val(),
-                    "fact_pipeop_wtpe": $("#fact_pipeop_wtpe").val()
+                    "fact_pipeop_wtpe": $("#fact_pipeop_wtpe").val(),
+                    "height_wtpe": $("#height_wtpe").val()
                 };
                 
                 var unidades = {
                     "nom_pipeop_sel_wtpe": $("#nom_pipeop_sel_wtpe").val().split(",")[1],
                     "out_pipeop_sel_wtpe": $("#out_pipeop_sel_wtpe").val().split(",")[1],
                     "despress_pipeop_sel_wtpe": $("#despress_pipeop_sel_wtpe").val(),
-                    "hyd_pipeop_sel_wtpe": $("#hyd_pipeop_sel_wtpe").val()
+                    "hyd_pipeop_sel_wtpe": $("#hyd_pipeop_sel_wtpe").val(),
+                    "height_sel_wtpe": $("#height_sel_wtpe").val()
                 };
 
                 var res = wall_poly_lene_form(variables, unidades);

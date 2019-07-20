@@ -181,7 +181,7 @@
                                                                                                 <label>Young's Modulus for Steel [ksi]:</label>
                                                                                             </div> 
                                                                                             <div class="col-lg-5">
-                                                                                                <input type="text" name="youn_steel_inpp" id="youn_steel_inpp" class="form-control" value="29000000">
+                                                                                                <input type="text" name="youn_steel_inpp" id="youn_steel_inpp" class="form-control" value="29000">
                                                                                             </div> 
                                                                                             <div class="col-lg-7">
                                                                                                 <label>Poisson's Ratio for Steel:</label>
@@ -196,7 +196,7 @@
                                                                                     <div class="panel-body">
                                                                                         <div class="form-group">
                                                                                             <div class="col-lg-7">
-                                                                                                <label>Mud Wight [lbs/ft<sup>3</sup>]:</label>
+                                                                                                <label>Mud Weight [lbs/ft<sup>3</sup>]:</label>
                                                                                             </div> 
                                                                                             <div class="col-lg-5">
                                                                                                 <input type="text" name="mud_weight_inpp" id="mud_weight_inpp" class="form-control" value="89.76">
