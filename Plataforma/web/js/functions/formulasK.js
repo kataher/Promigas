@@ -7584,6 +7584,7 @@ function SteelpipelinesCH(vari) {
     var T2 = parseFloat(vari.T2);
     var soil = parseFloat(vari.soil);
 
+    console.log(vari);
     Y = Y / 1728;
     var OBd = Bd;
     Bd = Bd * 0.0833;
@@ -7599,6 +7600,7 @@ function SteelpipelinesCH(vari) {
     var F52 = tw / D;
     F52 = F52.toFixed(3); //  Math.round10(F52, -3);
     var G200 = H / Bd;
+    console.log('Valores, TS: ', TS, ' G200: ', G200);
     var Be = valorX0(G200, TS, 'Be').toFixed(2);//1.09; //MBe[(H/Bd),Esr]; 
     //alert(F52+" "+Esr);
     // revisar
@@ -7746,14 +7748,14 @@ function SteelpipelinesCH(vari) {
     }
     //-----------------------------------
 
-    alert("here");
-    alert(Klh);
-    alert(Glh);
-    alert(R);
-    alert(L);
-    alert(Fi);
-    alert(w);
-    alert("fin here");
+    //alert("here");
+    //alert(Klh);
+    //alert(Glh);
+    //alert(R);
+    //alert(L);
+    //alert(Fi);
+    //alert(w);
+    //alert("fin here");
 
 
     var Slh = Klh * Glh * R * L * Fi * w;
@@ -7792,37 +7794,42 @@ function SteelpipelinesCR(vari) {
     var lfs = parseFloat(vari.lfs);
     var grade = parseFloat(vari.grade);
     var soil = vari.soil;
+    
+    soil = soil || '';
+    soil = soil.trim();
 
     Y = Y / 1728;
     var OBd = Bd;
     Bd = Bd * 0.0833;
-    var Esr = '';
+    var Esr = 'A';
 // se debe poreguntar por el tipo de tierra para calcular el Be
 //alert("Select: "+soil);
-    if (soil == "Soft to medium clays and sits with high plasticities " || soil == "Soft to medium clays and sits with low/medium plasticities "
-            || soil == "Loose sands and gravels " || soil == "Medium dense sands and gravels ") {
+
+    console.log('Soil: |' + soil + '|');
+    if (soil == "Soft to medium clays and sits with high plasticities" || soil == "Soft to medium clays and sits with low/medium plasticities"
+            || soil == "Loose sands and gravels" || soil == "Medium dense sands and gravels") {
         Esr = 'A';
     }
-    if (soil == "Stiff to very stiff clays and silts " || soil == "Dense to very dense sands and gravels ") { //14.8/6
+    if (soil == "Stiff to very stiff clays and silts" || soil == "Dense to very dense sands and gravels") { //14.8/6
         Esr = 'B';
     }
 
     var G200 = H / Bd;
 
     var Be = valorX0(G200, Esr, 'Be');//1.09; //MBe[(H/Bd),Esr]; 
-    alert(Be + "be");
+    //alert(Be + "be");
     var F52 = tw / D;
-    alert(F52 + "tw/D");
+    //alert(F52 + "tw/D");
     F52 = F52.toFixed(3); //Math.round10(F52, -3);
     var Khe = valorX0(F52, Ep, 'Khe');
-    alert(Khe + "Khe");
+    //alert(Khe + "Khe");
     var Fi = fi(H, 1);//1.72 ; //MIF[Fi,H];
     var G298 = OBd / D;
     var Ee = valorX0(G298, '', 'Ee');
-    alert(Ee + "Ee");
+    //alert(Ee + "Ee");
 // Railroad Stiffness Factor for Cyclic Longitudinal Stress
     var KLr = valorX0(F52, Er, 'KLr');//MKL[(tw/D),H];
-    alert(KLr + "KLr");
+    //alert(KLr + "KLr");
 // Railroad Double Track Factor for Circumferential Stress
     var Nh = 0;
     if (Nt == 1) {
@@ -7841,9 +7848,9 @@ function SteelpipelinesCR(vari) {
 
     }
 // Railroad Geometry Factor for Cyclic Longitudinal Stress
-    alert(D + " " + H + " GLr");
+    //alert(D + " " + H + " GLr");
     var GLr = valorX0(D, H, 'GLr') //0.98 ;//MGLr[D,H];
-    alert(GLr + "GLr");
+    //alert(GLr + "GLr");
 // Railroad Double Track Factor For Longitudinal Stress
     var Nl = 1;
 // Number of Tracks (1 or 2)
@@ -7905,13 +7912,13 @@ function SteelpipelinesCR(vari) {
 // Impact Factor
     Fi;
 //Railroad Geometry Factor for Cyclic Circumferential Stress
-    alert("GHr");
+    //alert("GHr");
     var GHr = valorX0(D, H, 'GHr');//0.98; //MGHr[D,H] ;//KLr * GLr * Nl * Fi * w;
-    alert(GHr + "GHr");
+    //alert(GHr + "GHr");
 // Railroad Stiffness Factor for Cyclic Circumferential Stress
 //alert(F52+" "+Er);
     var KHr = valorX0(F52, Er, 'KHr');//332; //MKHr[(tw/D),Er];
-    alert(KHr + "KHr");
+    //alert(KHr + "KHr");
 //alert(KHr);
 //Railroad Cyclic Circumferential Stress 
     var SHr = KHr * GHr * Nh * Fi * w;
@@ -8038,15 +8045,12 @@ function trackliadanalysis(vari,uni) {
     F29 = get_Long(F29, uni.trenchWidth_sel_tl, 'in');
     
     F16 = get_Presf(F16, uni.specificiedMinimunYieldStrenght_sel_tl, 'psi');
-    F17 = get_Presf(F17, uni.maximumAllowableInternalStress_sel_tl, 'psi');
-    F18 = get_Presf(F18, uni.maximumAllowableCombinedStress_sel_tl, 'psi');
     
 
     var F34 = ((1 - Math.exp(-2 * F19 * (F28 / F29))) / (2 * F19));
     F34 = F34.toFixed(3);
 
     var F35 = F34 * F20 * Math.pow(F29, 2) * 0.0833;
-    F35 = F35.toFixed(2);
     //alert(F35);
     var F36 = 0;
 
@@ -8111,11 +8115,11 @@ function trackliadanalysis(vari,uni) {
     //------------------
     var switch1 = true;
     var switch2 = true;
-    var Columna = 1;
-    var fila = 1;
+    var Columna = 0;
+    var fila = 0;
     while (switch1 == true) {
         // alert(F36+" "+ m[0][Columna]);
-        if (F36 == m[0][Columna]) {
+        if (F37 == m[0][Columna]) {
             switch1 = false;
         } else {
             Columna = Columna + 1;
@@ -8126,7 +8130,7 @@ function trackliadanalysis(vari,uni) {
     }
 
     while (switch2 == true) {
-        if (F37 == m[fila][0]) {
+        if (F36 == m[fila][0]) {
             switch2 = false;
         } else {
             fila = fila + 1;
@@ -8147,6 +8151,8 @@ function trackliadanalysis(vari,uni) {
     var F40 = (F21 * F39 / 12) * (F14 / 12);
 
     var F41 = F35 + F40;
+    
+    console.log('F35', F35, 'F40', F40, 'F41', F41);
 
     var F42 = 29000000 * F14 * F31 / (48 * Math.pow(F30, 2));
 
@@ -8187,7 +8193,7 @@ function trackliadanalysis(vari,uni) {
      * 
      */
 
-    return [F34, F35, F36, F37, F38, F39, F40, F41, F42, F43, F44, F45, F46, F55, dec];
+    return [F34, F35.toFixed(2), F36, F37, F38, F39, F40, F41, F42, F43, F44, F45, F46, F55, dec];
 
 
 
@@ -8294,6 +8300,7 @@ function wheelLoadAnalysis(vari) {
 }
 
 function  valorX0(xo, h, val) {
+    console.log('valorX0 ', xo, h, val);
     var xo = xo;
     var x;
     var y;

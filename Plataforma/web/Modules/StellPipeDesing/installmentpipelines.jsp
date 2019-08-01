@@ -47,7 +47,7 @@
                     <div id="content">
                         <div class="row">
                             <div class="col-lg-9">
-                                <h2><strong>Stell Pipe Design:</strong>  Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis </h2>
+                                <h2><strong>Steel Pipe Design:</strong>  Installment of Pipelines by Horizontal Directional Drilling - Full Force and Installation Stress Analysis </h2>
                             </div>
                             <div class="col-lg-3"> 
                                 <br>
@@ -172,7 +172,7 @@
                                                                                                 <input type="text" name="pipe_wall_inpp" id="pipe_wall_inpp" class="form-control">
                                                                                             </div> 
                                                                                             <div class="col-lg-7">
-                                                                                                <label>Specified Minimun Yield Strength [psi]:</label>
+                                                                                                <label>Specified Minimum Yield Strength [psi]:</label>
                                                                                             </div> 
                                                                                             <div class="col-lg-5">
                                                                                                 <input type="text" name="min_yield_inpp" id="min_yield_inpp" class="form-control">
@@ -987,515 +987,515 @@
     </body>
 
     <script>
-            $(document).ready(function () {
-                getproyectos(<%=session.getAttribute("idusu")%>,
-                        $("#proyects_sel_inpp"),
-                        $("#error_Dialog_inpp"));
+        $(document).ready(function () {
+            getproyectos(<%=session.getAttribute("idusu")%>,
+                    $("#proyects_sel_inpp"),
+                    $("#error_Dialog_inpp"));
 
-                $("#opt_inpp").val("1");
-                load_grade_sel_inpp("gra5l", 0);
-                load_np_sel_inpp("npsn");
+            $("#opt_inpp").val("1");
+            load_grade_sel_inpp("gra5l", 0);
+            load_np_sel_inpp("npsn");
 
+        });
+        function showN(val) {
+            document.getElementById("vista1").style.display = "none";
+            document.getElementById("vista2").style.display = "block";
+        }
+        function showN2(val) {
+            document.getElementById("vista3").style.display = "none";
+            document.getElementById("vista4").style.display = "block";
+        }
+
+
+        function load_grade_sel_inpp(idcombo, opcion) {
+            var parametros = {
+                "combo": idcombo,
+                "opcion": "5"
+            };
+            // alert("Entro");
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                async: false,
+                data: parametros,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+
+                    var newHtml = "<select class=\"form-control\" name=\"grade_sel_inpp\" id=\"grade_sel_inpp\" onchange=\"onchange_gra_inpp()\">" + data;
+                    $("#div_grade_sel_inpp").html(newHtml);
+                    $("#min_yield_inpp").val($("#grade_sel_inpp").val().split(",")[1]);
+
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_inpp"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
             });
-            function showN(val) {
-                document.getElementById("vista1").style.display = "none";
-                document.getElementById("vista2").style.display = "block";
-            }
-            function showN2(val) {
-                document.getElementById("vista3").style.display = "none";
-                document.getElementById("vista4").style.display = "block";
-            }
+        }
 
+        function onchange_gra_inpp() {
+            var x = $("#grade_sel_inpp").val();
+            $("#min_yield_inpp").val(x.split(",")[1]);
+        }
+        function cleanOut_inpp() {
+            $("#waterc_inpp").val("");
+            $("#volumec_inpp").val("");
+            $("#volumect_inpp").val("");
+            $("#thermalc_inpp").val("");
+            $("#volumecr_inpp").val("");
+            $("#pipelinef_inpp").val("");
+            $("#volumer_inpp").val("");
+            $("#incrementalv_inpp").val("");
+            $("#compf_inpp").val("");
+            $("#pressurec_inpp").val("");
+        }
 
-            function load_grade_sel_inpp(idcombo, opcion) {
-                var parametros = {
-                    "combo": idcombo,
-                    "opcion": "5"
-                };
-                // alert("Entro");
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    async: false,
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
+        function cleanIn_inpp() {
+            $("#pipeo_inpp").val("");
+            $("#pipew_inpp").val("");
+            $("#pipei_inpp").val("");
+            $("#testp_inpp").val("");
+            $("#testt_inpp").val("");
+            $("#pipelinel_inpp").val("");
+        }
 
-                        var newHtml = "<select class=\"form-control\" name=\"grade_sel_inpp\" id=\"grade_sel_inpp\" onchange=\"onchange_gra_inpp()\">" + data;
-                        $("#div_grade_sel_inpp").html(newHtml);
-                        $("#min_yield_inpp").val($("#grade_sel_inpp").val().split(",")[1]);
+        function cleanAll_inpp() {
+            cleanIn_inpp();
+            cleanOut_inpp();
+        }
 
+        function onchange_Input_inpp(inp) {
+            var sw = validateDecimal(inp.value);
 
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_inpp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function onchange_gra_inpp() {
-                var x = $("#grade_sel_inpp").val();
-                $("#min_yield_inpp").val(x.split(",")[1]);
-            }
-            function cleanOut_inpp() {
-                $("#waterc_inpp").val("");
-                $("#volumec_inpp").val("");
-                $("#volumect_inpp").val("");
-                $("#thermalc_inpp").val("");
-                $("#volumecr_inpp").val("");
-                $("#pipelinef_inpp").val("");
-                $("#volumer_inpp").val("");
-                $("#incrementalv_inpp").val("");
-                $("#compf_inpp").val("");
-                $("#pressurec_inpp").val("");
-            }
-
-            function cleanIn_inpp() {
-                $("#pipeo_inpp").val("");
-                $("#pipew_inpp").val("");
-                $("#pipei_inpp").val("");
-                $("#testp_inpp").val("");
-                $("#testt_inpp").val("");
-                $("#pipelinel_inpp").val("");
-            }
-
-            function cleanAll_inpp() {
-                cleanIn_inpp();
+            if (sw != true) {
+                inp.value = "";
                 cleanOut_inpp();
             }
+            onchange_Input_zero(inp);
+        }
+        function calculate_perfil_inpp() {
+            var C12 = $("#abs_entra_inpp").val();
+            var C13 = $("#cota_entra_inpp").val();
+            var C14 = $("#ang_entra_inpp").val();
 
-            function onchange_Input_inpp(inp) {
-                var sw = validateDecimal(inp.value);
+            var I12 = $("#abs_sali_inpp").val();
+            var I13 = $("#cota_sali_inpp").val();
+            var I14 = $("#ang_sali_inpp").val();
 
-                if (sw != true) {
-                    inp.value = "";
-                    cleanOut_inpp();
-                }
-                onchange_Input_zero(inp);
+            var C16 = $("#rad_curv_inpp").val();
+            var C15 = $("#cota_mbaja_inpp").val();
+
+            var T57 = $("#ang_entra_inpp").val();
+            var T61 = $("#ang_sali_inpp").val();
+            var T63 = $("#rad_curv_inpp").val();
+
+            var a = (12 * 25.4 / 1000);
+
+            C12 = C12 * a;
+            C13 = C13 * a;
+
+            I12 = I12 * a;
+            I13 = I13 * a;
+
+            C16 = C16 * a;
+            C15 = C15 * a;
+
+            // parametros
+            var I37 = I12;
+            var E19 = (I13 - C15) / Math.tan(I14 * Math.PI / 180);
+            var E12 = 0;
+            if (C12 > I12) {
+                E12 = -1;
+            } else {
+                E12 = 1;
             }
-            function calculate_perfil_inpp() {
-                var C12 = $("#abs_entra_inpp").val();
-                var C13 = $("#cota_entra_inpp").val();
-                var C14 = $("#ang_entra_inpp").val();
-
-                var I12 = $("#abs_sali_inpp").val();
-                var I13 = $("#cota_sali_inpp").val();
-                var I14 = $("#ang_sali_inpp").val();
-
-                var C16 = $("#rad_curv_inpp").val();
-                var C15 = $("#cota_mbaja_inpp").val();
-
-                var T57 = $("#ang_entra_inpp").val();
-                var T61 = $("#ang_sali_inpp").val();
-                var T63 = $("#rad_curv_inpp").val();
-
-                var a = (12 * 25.4 / 1000);
-
-                C12 = C12 * a;
-                C13 = C13 * a;
-
-                I12 = I12 * a;
-                I13 = I13 * a;
-
-                C16 = C16 * a;
-                C15 = C15 * a;
-
-                // parametros
-                var I37 = I12;
-                var E19 = (I13 - C15) / Math.tan(I14 * Math.PI / 180);
-                var E12 = 0;
-                if (C12 > I12) {
-                    E12 = -1;
-                } else {
-                    E12 = 1;
-                }
-                var E20 = C16 * Math.tan(I14 / 2 * Math.PI / 180);
-                var E21 = C16 * Math.sin(I14 * Math.PI / 180);
-                var I45 = I12 - (E19 * E12 + E20 * E12) + E21 * E12;
-                var E13 = (C13 - C15) / Math.tan(C14 * Math.PI / 180);
-                var E14 = C16 * Math.tan(C14 / 2 * Math.PI / 180);
-                var G19 = C12 + E13 * E12 + E14 * E12;
-                var G20 = I12 - (E19 * E12 + E20 * E12);
-                var F48 = (G19 - G20) * -1 * E12;
-                var E15 = C16 * Math.sin(C14 * Math.PI / 180);
-                var B44 = C12 + E13 * E12 + E14 * E12 - E15 * E12;
-                var E16 = C16 * (1 - Math.cos(C14 * Math.PI / 180));
-                var B45 = E16 + C15;
-                // fin parametros
-                var T13 = 0;
-                if (C12 < I12) {
-                    T13 = (I37 - I45) * 3.28;
-                } else {
-                    T13 = (I45 - I37) * 3.28;
-                }
-                var J55 = 3.28 * C16 * I14 * Math.PI / 180;
-
-                var J56 = 3.28 * F48;
-
-                var J57 = 3.28 * C16 * C14 * Math.PI / 180;
-
-                var J58 = 0;
-
-                if (C12 < I12) {
-                    J58 = (B44 - C12) * 3.28;
-                } else {
-                    J58 = (C12 - B44) * 3.28;
-                }
-                //Salidas
-                $("#mea_length_en_inpp").val(T13);
-                $("#ang_incl_en_inpp").val(T61);
-
-                $("#mea_length_sl_inpp").val(J55);
-                $("#hall_ang_sl_inpp").val(T61 / 2);
-                $("#rad_cur_sl_inpp").val(T63);
-
-                $("#mea_length_straight_inpp").val(J56);
-
-                $("#mea_length_up_inpp").val(J57);
-                $("#hall_ang_incl_up_inpp").val(T57 / 2);
-                $("#rad_cur_up_inpp").val(T63);
-
-                $("#mea_length_upEF_inpp").val(J58);
-                $("#ang_incl_upEF_inpp").val(T57);
+            var E20 = C16 * Math.tan(I14 / 2 * Math.PI / 180);
+            var E21 = C16 * Math.sin(I14 * Math.PI / 180);
+            var I45 = I12 - (E19 * E12 + E20 * E12) + E21 * E12;
+            var E13 = (C13 - C15) / Math.tan(C14 * Math.PI / 180);
+            var E14 = C16 * Math.tan(C14 / 2 * Math.PI / 180);
+            var G19 = C12 + E13 * E12 + E14 * E12;
+            var G20 = I12 - (E19 * E12 + E20 * E12);
+            var F48 = (G19 - G20) * -1 * E12;
+            var E15 = C16 * Math.sin(C14 * Math.PI / 180);
+            var B44 = C12 + E13 * E12 + E14 * E12 - E15 * E12;
+            var E16 = C16 * (1 - Math.cos(C14 * Math.PI / 180));
+            var B45 = E16 + C15;
+            // fin parametros
+            var T13 = 0;
+            if (C12 < I12) {
+                T13 = (I37 - I45) * 3.28;
+            } else {
+                T13 = (I45 - I37) * 3.28;
             }
-            function calculate_inpp() {
-                document.getElementById("vista2").style.display = "none";
-                document.getElementById("vista3").style.display = "block";
+            var J55 = 3.28 * C16 * I14 * Math.PI / 180;
 
-                var variables = {
-                    "E11": $("#pipe_dia_inpp").val(),
-                    "E12": $("#pipe_wall_inpp").val(),
-                    "E13": $("#min_yield_inpp").val(),
-                    "E14": $("#mud_weight_inpp").val(),
-                    "G11": $("#soil_frict_inpp").val(),
-                    "G12": $("#fluid_drag_inpp").val(),
-                    "E18": $("#mea_length_en_inpp").val(),
-                    "E19": $("#ang_incl_en_inpp").val(),
-                    "E22": $("#mea_length_sl_inpp").val(),
-                    "E23": $("#hall_ang_sl_inpp").val(),
-                    "E24": $("#rad_cur_sl_inpp").val(),
-                    "E27": $("#mea_length_straight_inpp").val(),
-                    "E30": $("#mea_length_up_inpp").val(),
-                    "E31": $("#hall_ang_incl_up_inpp").val(),
-                    "E32": $("#rad_cur_up_inpp").val(),
-                    "E35": $("#mea_length_upEF_inpp").val(),
-                    "E36": $("#ang_incl_upEF_inpp").val(),
-                    "TextBox8": $("#youn_steel_inpp").val()
+            var J56 = 3.28 * F48;
 
+            var J57 = 3.28 * C16 * C14 * Math.PI / 180;
+
+            var J58 = 0;
+
+            if (C12 < I12) {
+                J58 = (B44 - C12) * 3.28;
+            } else {
+                J58 = (C12 - B44) * 3.28;
+            }
+            //Salidas
+            $("#mea_length_en_inpp").val(T13);
+            $("#ang_incl_en_inpp").val(T61);
+
+            $("#mea_length_sl_inpp").val(J55);
+            $("#hall_ang_sl_inpp").val(T61 / 2);
+            $("#rad_cur_sl_inpp").val(T63);
+
+            $("#mea_length_straight_inpp").val(J56);
+
+            $("#mea_length_up_inpp").val(J57);
+            $("#hall_ang_incl_up_inpp").val(T57 / 2);
+            $("#rad_cur_up_inpp").val(T63);
+
+            $("#mea_length_upEF_inpp").val(J58);
+            $("#ang_incl_upEF_inpp").val(T57);
+        }
+        function calculate_inpp() {
+            document.getElementById("vista2").style.display = "none";
+            document.getElementById("vista3").style.display = "block";
+
+            var variables = {
+                "E11": $("#pipe_dia_inpp").val(),
+                "E12": $("#pipe_wall_inpp").val(),
+                "E13": $("#min_yield_inpp").val(),
+                "E14": $("#mud_weight_inpp").val(),
+                "G11": $("#soil_frict_inpp").val(),
+                "G12": $("#fluid_drag_inpp").val(),
+                "E18": $("#mea_length_en_inpp").val(),
+                "E19": $("#ang_incl_en_inpp").val(),
+                "E22": $("#mea_length_sl_inpp").val(),
+                "E23": $("#hall_ang_sl_inpp").val(),
+                "E24": $("#rad_cur_sl_inpp").val(),
+                "E27": $("#mea_length_straight_inpp").val(),
+                "E30": $("#mea_length_up_inpp").val(),
+                "E31": $("#hall_ang_incl_up_inpp").val(),
+                "E32": $("#rad_cur_up_inpp").val(),
+                "E35": $("#mea_length_upEF_inpp").val(),
+                "E36": $("#ang_incl_upEF_inpp").val(),
+                "TextBox8": $("#youn_steel_inpp").val()
+
+
+            };
+
+            var isOk = validate(variables);
+
+            if (isOk === false) {
+                alert("Debe diligenciar todos los campos");
+            } else {
+                var unidades = {
 
                 };
+                var res = install_pipelines_Form(variables);
 
-                var isOk = validate(variables);
+                $("#peso_tub_aire_inpp").val(res[0]);
+                $("#vol_ext_tub_inpp").val(res[1]);
+                $("#vol_int_tub_inpp").val(res[2]);
+                $("#pes_lob_des_inpp").val(res[3]);
+                $("#pes_efe_tub_inpp").val(res[4]);
+                $("#fri_suelAB_inpp").val(res[5]);
+                $("#fue_arr_lodAB_inpp").val(res[6]);
+                $("#ten_secAB_inpp").val(res[7]);
+                $("#car_tra_acuAB_inpp").val(res[8]);
+                $("#fue_nor_inpp").val(res[9]);
+                $("#fri_del_suelBC_inpp").val(res[10]);
+                $("#fue_arr_lobBC_inpp").val(res[11]);
+                $("#ten_secBC_inpp").val(res[12]);
+                $("#car_tra_acuBC_inpp").val(res[13]);
+                $("#fri_del_sueCD_inpp").val(res[14]);
+                $("#fue_arr_lobCD_inpp").val(res[15]);
+                $("#ten_secCD_inpp").val(res[16]);
+                $("#car_tra_acuCD_inpp").val(res[17]);
+                $("#fue_norDE_inpp").val(res[18]);
+                $("#fri_sueDE_inpp").val(res[19]);
+                $("#fue_arr_lodDE_inpp").val(res[20]);
+                $("#ten_secDE_inpp").val(res[21]);
+                $("#car_tra_acuDE_inpp").val(res[22]);
+                $("#fri_sueEF_inpp").val(res[23]);
+                $("#fue_arr_lodEF_inpp").val(res[24]);
+                $("#ten_secEF_inpp").val(res[25]);
+                $("#car_tra_acuEF_inpp").val(res[26]);
+                $("#car_tra_total_inpp").val(res[27]);
+                $("#Bproject1").val(res[28]);
+                $("#Bproject2").val(res[29]);
+                $("#Bproject3").val(res[30]);
+                $("#Bproject4").val(res[31]);
+                $("#Bproject5").val(res[32]);
+                $("#Cproject1").val(res[33]);
+                $("#Cproject2").val(res[34]);
+                $("#Cproject3").val(res[35]);
+                $("#Cproject4").val(res[36]);
+                $("#Cproject5").val(res[37]);
+                $("#Dproject1").val(res[38]);
+                $("#Dproject2").val(res[39]);
+                $("#Dproject3").val(res[40]);
+                $("#Dproject4").val(res[41]);
+                $("#Dproject5").val(res[42]);
+                $("#Eproject1").val(res[43]);
+                $("#Eproject2").val(res[44]);
+                $("#Eproject3").val(res[45]);
+                $("#Eproject4").val(res[46]);
+                $("#Eproject5").val(res[47]);
+                $("#Fproject1").val(res[48]);
+                $("#Fproject2").val(res[49]);
+                $("#Fproject3").val(res[50]);
+                $("#Fproject4").val(res[51]);
+                $("#Fproject5").val(res[52]);
 
-                if (isOk === false) {
-                    alert("Debe diligenciar todos los campos");
-                } else {
-                    var unidades = {
+                $("#Ballow1").val(res[53]);
+                $("#Callow1").val(res[58]);
+                $("#Ballow2").val(res[54]);
+                $("#Callow2").val(res[59]);
+                $("#Ballow3").val(res[55]);
+                $("#Callow3").val(res[60]);
+                $("#Ballow4").val(res[56]);
+                $("#Callow4").val(res[61]);
+                $("#Ballow5").val(res[57]);
+                $("#Callow5").val(res[62]);
 
-                    };
-                    var res = install_pipelines_Form(variables);
+                $("#Dallow1").val(res[63]);
+                $("#Eallow1").val(res[68]);
+                $("#Dallow2").val(res[64]);
+                $("#Eallow2").val(res[69]);
+                $("#Dallow3").val(res[65]);
+                $("#Eallow3").val(res[70]);
+                $("#Dallow4").val(res[66]);
+                $("#Eallow4").val(res[71]);
+                $("#Dallow5").val(res[67]);
+                $("#Eallow5").val(res[72]);
 
-                    $("#peso_tub_aire_inpp").val(res[0]);
-                    $("#vol_ext_tub_inpp").val(res[1]);
-                    $("#vol_int_tub_inpp").val(res[2]);
-                    $("#pes_lob_des_inpp").val(res[3]);
-                    $("#pes_efe_tub_inpp").val(res[4]);
-                    $("#fri_suelAB_inpp").val(res[5]);
-                    $("#fue_arr_lodAB_inpp").val(res[6]);
-                    $("#ten_secAB_inpp").val(res[7]);
-                    $("#car_tra_acuAB_inpp").val(res[8]);
-                    $("#fue_nor_inpp").val(res[9]);
-                    $("#fri_del_suelBC_inpp").val(res[10]);
-                    $("#fue_arr_lobBC_inpp").val(res[11]);
-                    $("#ten_secBC_inpp").val(res[12]);
-                    $("#car_tra_acuBC_inpp").val(res[13]);
-                    $("#fri_del_sueCD_inpp").val(res[14]);
-                    $("#fue_arr_lobCD_inpp").val(res[15]);
-                    $("#ten_secCD_inpp").val(res[16]);
-                    $("#car_tra_acuCD_inpp").val(res[17]);
-                    $("#fue_norDE_inpp").val(res[18]);
-                    $("#fri_sueDE_inpp").val(res[19]);
-                    $("#fue_arr_lodDE_inpp").val(res[20]);
-                    $("#ten_secDE_inpp").val(res[21]);
-                    $("#car_tra_acuDE_inpp").val(res[22]);
-                    $("#fri_sueEF_inpp").val(res[23]);
-                    $("#fue_arr_lodEF_inpp").val(res[24]);
-                    $("#ten_secEF_inpp").val(res[25]);
-                    $("#car_tra_acuEF_inpp").val(res[26]);
-                    $("#car_tra_total_inpp").val(res[27]);
-                    $("#Bproject1").val(res[28]);
-                    $("#Bproject2").val(res[29]);
-                    $("#Bproject3").val(res[30]);
-                    $("#Bproject4").val(res[31]);
-                    $("#Bproject5").val(res[32]);
-                    $("#Cproject1").val(res[33]);
-                    $("#Cproject2").val(res[34]);
-                    $("#Cproject3").val(res[35]);
-                    $("#Cproject4").val(res[36]);
-                    $("#Cproject5").val(res[37]);
-                    $("#Dproject1").val(res[38]);
-                    $("#Dproject2").val(res[39]);
-                    $("#Dproject3").val(res[40]);
-                    $("#Dproject4").val(res[41]);
-                    $("#Dproject5").val(res[42]);
-                    $("#Eproject1").val(res[43]);
-                    $("#Eproject2").val(res[44]);
-                    $("#Eproject3").val(res[45]);
-                    $("#Eproject4").val(res[46]);
-                    $("#Eproject5").val(res[47]);
-                    $("#Fproject1").val(res[48]);
-                    $("#Fproject2").val(res[49]);
-                    $("#Fproject3").val(res[50]);
-                    $("#Fproject4").val(res[51]);
-                    $("#Fproject5").val(res[52]);
+                $("#Fallow1").val(res[73]);
+                $("#Bpass1").val(res[78]);
+                $("#Fallow2").val(res[74]);
+                $("#Bpass2").val(res[79]);
+                $("#Fallow3").val(res[75]);
+                $("#Bpass3").val(res[80]);
+                $("#Fallow4").val(res[76]);
+                $("#Bpass4").val(res[81]);
+                $("#Fallow5").val(res[77]);
+                $("#Bpass5").val(res[82]);
 
-                    $("#Ballow1").val(res[53]);
-                    $("#Callow1").val(res[58]);
-                    $("#Ballow2").val(res[54]);
-                    $("#Callow2").val(res[59]);
-                    $("#Ballow3").val(res[55]);
-                    $("#Callow3").val(res[60]);
-                    $("#Ballow4").val(res[56]);
-                    $("#Callow4").val(res[61]);
-                    $("#Ballow5").val(res[57]);
-                    $("#Callow5").val(res[62]);
+                $("#Cpass1").val(res[83]);
+                $("#Dpass1").val(res[88]);
+                $("#Cpass2").val(res[84]);
+                $("#Dpass2").val(res[89]);
+                $("#Cpass3").val(res[85]);
+                $("#Dpass3").val(res[90]);
+                $("#Cpass4").val(res[86]);
+                $("#Dpass4").val(res[91]);
+                $("#Cpass5").val(res[87]);
+                $("#Dpass5").val(res[92]);
 
-                    $("#Dallow1").val(res[63]);
-                    $("#Eallow1").val(res[68]);
-                    $("#Dallow2").val(res[64]);
-                    $("#Eallow2").val(res[69]);
-                    $("#Dallow3").val(res[65]);
-                    $("#Eallow3").val(res[70]);
-                    $("#Dallow4").val(res[66]);
-                    $("#Eallow4").val(res[71]);
-                    $("#Dallow5").val(res[67]);
-                    $("#Eallow5").val(res[72]);
+                $("#Epass1").val(res[93]);
+                $("#Fpass1").val(res[98]);
+                $("#Epass2").val(res[94]);
+                $("#Fpass2").val(res[99]);
+                $("#Epass3").val(res[95]);
+                $("#Fpass3").val(res[100]);
+                $("#Epass4").val(res[96]);
+                $("#Fpass4").val(res[101]);
+                $("#Epass5").val(res[97]);
+                $("#Fpass5").val(res[102]);
 
-                    $("#Fallow1").val(res[73]);
-                    $("#Bpass1").val(res[78]);
-                    $("#Fallow2").val(res[74]);
-                    $("#Bpass2").val(res[79]);
-                    $("#Fallow3").val(res[75]);
-                    $("#Bpass3").val(res[80]);
-                    $("#Fallow4").val(res[76]);
-                    $("#Bpass4").val(res[81]);
-                    $("#Fallow5").val(res[77]);
-                    $("#Bpass5").val(res[82]);
-
-                    $("#Cpass1").val(res[83]);
-                    $("#Dpass1").val(res[88]);
-                    $("#Cpass2").val(res[84]);
-                    $("#Dpass2").val(res[89]);
-                    $("#Cpass3").val(res[85]);
-                    $("#Dpass3").val(res[90]);
-                    $("#Cpass4").val(res[86]);
-                    $("#Dpass4").val(res[91]);
-                    $("#Cpass5").val(res[87]);
-                    $("#Dpass5").val(res[92]);
-
-                    $("#Epass1").val(res[93]);
-                    $("#Fpass1").val(res[98]);
-                    $("#Epass2").val(res[94]);
-                    $("#Fpass2").val(res[99]);
-                    $("#Epass3").val(res[95]);
-                    $("#Fpass3").val(res[100]);
-                    $("#Epass4").val(res[96]);
-                    $("#Fpass4").val(res[101]);
-                    $("#Epass5").val(res[97]);
-                    $("#Fpass5").val(res[102]);
-
-                    show_OkDialog($("#calculate_Dialog_inpp"), "Proceso satisfactorio");
-                }
+                show_OkDialog($("#calculate_Dialog_inpp"), "Proceso satisfactorio");
             }
+        }
 
-            function save_inpp() {
-                var sel = $("input[type='radio'][name='pipe_rad_inpp']:checked");
+        function save_inpp() {
+            var sel = $("input[type='radio'][name='pipe_rad_inpp']:checked");
 
-                var parametros = {
-                    "E11": $("#pipe_dia_inpp").val(),
-                    "E12": $("#pipe_wall_inpp").val(),
-                    "E13": $("#min_yield_inpp").val(),
-                    "E14": $("#mud_weight_inpp").val(),
-                    "G11": $("#soil_frict_inpp").val(),
-                    "G12": $("#fluid_drag_inpp").val(),
-                    "F10": $("#pipe_dia_inpp").val(),
+            var parametros = {
+                "E11": $("#pipe_dia_inpp").val(),
+                "E12": $("#pipe_wall_inpp").val(),
+                "E13": $("#min_yield_inpp").val(),
+                "E14": $("#mud_weight_inpp").val(),
+                "G11": $("#soil_frict_inpp").val(),
+                "G12": $("#fluid_drag_inpp").val(),
+                "F10": $("#pipe_dia_inpp").val(),
 
-                    "pip": $("#pip").val()
+                "pip": $("#pip").val()
 
 
 
-                };
+            };
 
-                var isOk = validate(parametros);
+            var isOk = validate(parametros);
 
-                if (isOk === false) {
-                    alert("Debe realizar el càlculo");
-                } else {
+            if (isOk === false) {
+                alert("Debe realizar el càlculo");
+            } else {
 
-                    var des = prompt("Digite la descripción del cálculo:", "");
+                var des = prompt("Digite la descripción del cálculo:", "");
 
-                    if (des != null) {
-                        if (des.trim() == "") {
-                            alert("Debe diligenciar una descripciòn");
-                        } else {
-                            parametros.description_inpp = des;
+                if (des != null) {
+                    if (des.trim() == "") {
+                        alert("Debe diligenciar una descripciòn");
+                    } else {
+                        parametros.description_inpp = des;
 
-                            $.ajax({
-                                type: "POST",
-                                url: "../manager.jsp",
-                                data: parametros,
-                                beforeSend: function (xhr) {
-                                    block("Cargando...");
-                                },
-                                success: function (data, status, request) {
-                                    $("#id_inpp").val(data);
-                                    $("#description_inpp").html(parametros.description_inpp);
-                                    show_OkDialog($("#save_Dialog_inpp"), "Proceso satisfactorio");
-                                },
-                                error: function (xhr, ajaxOptions, err) {
-                                    alert(err);
-                                    show_OkDialog($("#error_Dialog_inpp"), "Error");
-                                },
-                                complete: function () {
-                                    unBlock();
-                                }
-                            });
+                        $.ajax({
+                            type: "POST",
+                            url: "../manager.jsp",
+                            data: parametros,
+                            beforeSend: function (xhr) {
+                                block("Cargando...");
+                            },
+                            success: function (data, status, request) {
+                                $("#id_inpp").val(data);
+                                $("#description_inpp").html(parametros.description_inpp);
+                                show_OkDialog($("#save_Dialog_inpp"), "Proceso satisfactorio");
+                            },
+                            error: function (xhr, ajaxOptions, err) {
+                                alert(err);
+                                show_OkDialog($("#error_Dialog_inpp"), "Error");
+                            },
+                            complete: function () {
+                                unBlock();
+                            }
+                        });
 
-                        }
                     }
                 }
-
             }
 
-            function deleteReg_inpp() {
-                var parametros = {
-                    "id_inpp": $("#id_inpp").val(),
-                    "opcion": "3"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_inpp").val("");
-                        $("#description_inpp").val("");
-                        cleanAll_inpp();
-                        show_OkDialog($("#delete_Dialog_inpp"), "Proceso satisfactorio");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_inpp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
+        }
+
+        function deleteReg_inpp() {
+            var parametros = {
+                "id_inpp": $("#id_inpp").val(),
+                "opcion": "3"
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    $("#id_inpp").val("");
+                    $("#description_inpp").val("");
+                    cleanAll_inpp();
+                    show_OkDialog($("#delete_Dialog_inpp"), "Proceso satisfactorio");
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_inpp"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+        function load_np_sel_inpp(idcombo) {
+            var parametros = {
+                "combo": idcombo,
+                "type": "5l",
+                "opcion": "5"
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                async: false,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    var newHtml = "<select class=\"form-control\" name=\"nomps_sel_inpp\" id= \"nomps_sel_inpp\" onchange=\"onchange_nps_inpp()\">" + data;
+
+                    $("#div_nomps_sel_inpp").html(newHtml);
+                    // pipe_dia_inpp pipe_wall_inpp 
+
+                    var po = $("#nomps_sel_inpp").val();
+
+                    $("#pipe_dia_inpp").val(po);
+                    // $("#bodh_inpp").val(po1);
+
+                    load_wt_sel_inpp();
+                    onchange_nps_inpp();
+                    onchange_wt_inpp();
+                    onchange_gra_inpp();
+
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_inpp"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+        function load_wt_sel_inpp() {
+            var idOp = $("#nomps_sel_inpp").val();
+            //alert(idOp);
+            var parametros = {
+                "combo": "wtn",
+                "nps": idOp,
+                "opcion": "5"
+
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                async: false,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    //alert(data); wthi_sel_inpp1
+                    var newHtml = "<select class=\"form-control\" name=\"wthi_sel_inpp\" id= \"wthi_sel_inpp\" onchange=\"onchange_wt_inpp()\">" + data;
+
+                    $("#div_wallt_sel_inpp").html(newHtml);
+
+
+                    if (data.trim() != "") {
+                        var val = $("#wthi_sel_inpp").val().trim().split(",");
+                        $("#pipe_wall_inpp").val(val[1]);
+                        // $("#pipei_inpp").val(val[2]); 
                     }
-                });
-            }
 
-            function load_np_sel_inpp(idcombo) {
-                var parametros = {
-                    "combo": idcombo,
-                    "type": "5l",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class=\"form-control\" name=\"nomps_sel_inpp\" id= \"nomps_sel_inpp\" onchange=\"onchange_nps_inpp()\">" + data;
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_inpp"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
 
-                        $("#div_nomps_sel_inpp").html(newHtml);
-                        // pipe_dia_inpp pipe_wall_inpp 
-
-                        var po = $("#nomps_sel_inpp").val();
-
-                        $("#pipe_dia_inpp").val(po);
-                        // $("#bodh_inpp").val(po1);
-
-                        load_wt_sel_inpp();
-                        onchange_nps_inpp();
-                        onchange_wt_inpp();
-                        onchange_gra_inpp();
-
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_inpp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-            function load_wt_sel_inpp() {
-                var idOp = $("#nomps_sel_inpp").val();
-                //alert(idOp);
-                var parametros = {
-                    "combo": "wtn",
-                    "nps": idOp,
-                    "opcion": "5"
-
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        //alert(data); wthi_sel_inpp1
-                        var newHtml = "<select class=\"form-control\" name=\"wthi_sel_inpp\" id= \"wthi_sel_inpp\" onchange=\"onchange_wt_inpp()\">" + data;
-
-                        $("#div_wallt_sel_inpp").html(newHtml);
-
-
-                        if (data.trim() != "") {
-                            var val = $("#wthi_sel_inpp").val().trim().split(",");
-                            $("#pipe_wall_inpp").val(val[1]);
-                            // $("#pipei_inpp").val(val[2]); 
-                        }
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_inpp"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function onchange_nps_inpp() {
-                //cleanOut_inpp();
-                var po = $("#nomps_sel_inpp").val();
-                $("#pipe_dia_inpp").val(po);
-                load_wt_sel_inpp();
-            }
+        function onchange_nps_inpp() {
+            //cleanOut_inpp();
+            var po = $("#nomps_sel_inpp").val();
+            $("#pipe_dia_inpp").val(po);
+            load_wt_sel_inpp();
+        }
 
 
 
-            function onchange_wt_inpp() {
-                //cleanOut_inpp();
-                var val = $("#wthi_sel_inpp").val().trim().split(",");
-                $("#pipe_wall_inpp").val(val[1]);
-            }
+        function onchange_wt_inpp() {
+            //cleanOut_inpp();
+            var val = $("#wthi_sel_inpp").val().trim().split(",");
+            $("#pipe_wall_inpp").val(val[1]);
+        }
 
 
 
-        </script>  
+    </script>  
 
 </html>

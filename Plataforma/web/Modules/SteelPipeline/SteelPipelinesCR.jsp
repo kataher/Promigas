@@ -616,7 +616,7 @@
                     "w"    : $("#appliedDesignSurfacePressure_spcr").val(),
                     "lfs"  : $("#longitudinal_jf_spcr").val().split(",")[0],
                     "grade": $("#pipeGrade_spcr").val(),
-                    "soil" : $("#soil_Car_spcr").val()
+                    "soil" : $("#soil_Car_spcr option:selected").text()
 
                   };
                   

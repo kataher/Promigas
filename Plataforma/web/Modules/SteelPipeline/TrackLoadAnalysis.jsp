@@ -247,25 +247,19 @@
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Maximum Allowable Internal Stress:</label>
+                                                                                <label>Maximum Allowable Internal Stress %:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" name="maximumAllowableInternalStress_tl" id="maximumAllowableInternalStress_tl" class="form-control" required>
-                                                                            </div>
-                                                                            <div class="col-md-4" id = "div_maximumAllowableInternalStress_sel_tl">
-                                                                                <select class="form-control" id="maximumAllowableInternalStress_sel_tl" name="maximumAllowableInternalStress_sel_tl" onchange='cleanOut_tla()'> </select>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="form-group">
                                                                             <div class="col-md-12">
-                                                                                <label>Maximum Allowable Combined Stress:</label>
+                                                                                <label>Maximum Allowable Combined Stress %:</label>
                                                                             </div>
                                                                             <div class="col-md-8">
                                                                                 <input type="text" name="maximumAllowableCombinedStress_tl" id="maximumAllowableCombinedStress_tl" class="form-control" required>
-                                                                            </div>
-                                                                            <div class="col-md-4" id = "div_maximumAllowableCombinedStress_sel_tl">
-                                                                                <select class="form-control" id="maximumAllowableCombinedStress_sel_tl" name="maximumAllowableCombinedStress_sel_tl" onchange='cleanOut_tla()'> </select>
                                                                             </div>
                                                                         </div>
 
@@ -633,12 +627,6 @@
                     success: function (data, status, request) {
                         var newHtml = '<select class="form-control" id="specificiedMinimunYieldStrenght_sel_tl" name="specificiedMinimunYieldStrenght_sel_tl" onchange="cleanOut_tla()">' + data;
                         $("#div_specificiedMinimunYieldStrenght_sel_tl").html(newHtml);
-
-                        newHtml = '<select class="form-control" id="maximumAllowableInternalStress_sel_tl" name="maximumAllowableInternalStress_sel_tl" onchange="cleanOut_tla()">' + data;
-                        $("#div_maximumAllowableInternalStress_sel_tl").html(newHtml);
-                        
-                        newHtml = '<select class="form-control" id="maximumAllowableCombinedStress_sel_tl" name="maximumAllowableCombinedStress_sel_tl" onchange="cleanOut_tla()">' + data;
-                        $("#div_maximumAllowableCombinedStress_sel_tl").html(newHtml);
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_tl"), "Error");
@@ -675,8 +663,6 @@
                     "pipeOutsideDiameter_sel_tl": $("#pipeOutsideDiameter_sel_tl").val().split(",")[1],
                     "pipeWallThickness_sel_tl": $("#pipeWallThickness_sel_tl").val().split(",")[1],
                     "specificiedMinimunYieldStrenght_sel_tl": $("#specificiedMinimunYieldStrenght_sel_tl").val().split(",")[1],
-                    "maximumAllowableInternalStress_sel_tl": $("#maximumAllowableInternalStress_sel_tl").val().split(",")[1],
-                    "maximumAllowableCombinedStress_sel_tl": $("#maximumAllowableCombinedStress_sel_tl").val().split(",")[1],
                     "widthOfStandarTrackShoe_sel_tl": $("#widthOfStandarTrackShoe_sel_tl").val().split(",")[1],
                     "lengthOfTheTrackOnTheGround_sel_tl": $("#lengthOfTheTrackOnTheGround_sel_tl").val().split(",")[1],
                     "verticaDepthOfTheSoilCover_sel_tl": $("#verticaDepthOfTheSoilCover_sel_tl").val().split(",")[1],
