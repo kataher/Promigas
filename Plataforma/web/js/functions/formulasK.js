@@ -8025,7 +8025,7 @@ function trackliadanalysis(vari,uni) {
     var F18 = parseFloat(vari.TextBox9);
     var F19 = parseFloat(vari.TextBox10);
     var F20 = parseFloat(vari.TextBox11);
-    var F21 = parseFloat(vari.TextBox12);
+    var impactFactor = parseFloat(vari.TextBox12);
     var F22 = parseFloat(vari.TextBox13);
     var F23 = parseFloat(vari.TextBox14);
     var F24 = parseFloat(vari.TextBox15);
@@ -8040,9 +8040,9 @@ function trackliadanalysis(vari,uni) {
     F14 = get_Long(F14, uni.pipeOutsideDiameter_sel_tl, 'in');
     F15 = get_Long(F15, uni.pipeWallThickness_sel_tl, 'in');
     F23 = get_Long(F23, uni.widthOfStandarTrackShoe_sel_tl, 'in');
-    F24 = get_Long(F24, uni.lengthOfTheTrackOnTheGround_sel_tl, 'in');
-    F28 = get_Long(F28, uni.verticaDepthOfTheSoilCover_sel_tl, 'in');
-    F29 = get_Long(F29, uni.trenchWidth_sel_tl, 'in');
+    F24 = get_Long(F24, uni.lengthOfTheTrackOnTheGround_sel_tl, 'ft');
+    F28 = get_Long(F28, uni.verticaDepthOfTheSoilCover_sel_tl, 'ft');
+    F29 = get_Long(F29, uni.trenchWidth_sel_tl, 'ft');
     
     F16 = get_Presf(F16, uni.specificiedMinimunYieldStrenght_sel_tl, 'psi');
     
@@ -8055,37 +8055,40 @@ function trackliadanalysis(vari,uni) {
     var F36 = 0;
 
 
-    if ((F23 / (2 * F28 * 12)) > 0 && (F23 / (2 * F28 * 12)) <= 1) {
-        F36 = (F23 / (2 * F28 * 12));
+    var m_findVal = F23 / (2 * F28 * 12);
+    if (m_findVal > 0 && m_findVal <= 1) {
+        F36 = m_findVal;
         F36 = F36.toFixed(1);
     } else {
-        if (((F23 / (2 * F28 * 12)) > 1 && (F23 / (2 * F28 * 12)) <= 1.2)) {
+        if (m_findVal > 1 && m_findVal <= 1.2) {
             F36 = 1.2;
         } else {
-            if ((F23 / (2 * F28 * 12)) > 1.2 && (F23 / (2 * F28 * 12)) <= 1.5) {
+            if (m_findVal > 1.2 && m_findVal <= 1.5) {
                 F36 = 1.5;
             } else {
-                if ((F23 / (2 * F28 * 12)) > 1.5 && (F23 / (2 * F28 * 12)) <= 2) {
+                if (m_findVal > 1.5 && m_findVal <= 2) {
                     F36 = 2;
                 }
             }
         }
     }
+    
     var F37 = 0;
-    if ((F24 / (2 * F28)) > 0 && (F24 / (2 * F28)) <= 1) {
-        F37 = (F24 / (2 * F28));
+    var n_findVal = F24 / (2 * F28);
+    if (n_findVal > 0 && n_findVal <= 1) {
+        F37 = n_findVal;
         F37 = F37.toFixed(1);
     } else {
-        if ((F24 / (2 * F28)) > 1 && (F24 / (2 * F28)) <= 1.2) {
+        if (n_findVal > 1 && n_findVal <= 1.2) {
             F37 = 1.2;
         } else {
-            if ((F24 / (2 * F28)) > 1.2 && (F24 / (2 * F28)) <= 1.5) {
+            if (n_findVal > 1.2 && n_findVal <= 1.5) {
                 F37 = 1.5;
             } else {
-                if ((F24 / (2 * F28)) > 1.5 && (F24 / (2 * F28)) <= 2) {
+                if (n_findVal > 1.5 && n_findVal <= 2) {
                     F37 = 2;
                 } else {
-                    if ((F24 / (2 * F28)) > 2 && (F24 / (2 * F28)) <= 5) {
+                    if (n_findVal > 2 && n_findVal <= 5) {
                         F37 = 5;
                     }
                 }
@@ -8111,7 +8114,40 @@ function trackliadanalysis(vari,uni) {
         [2, 0.124, 0.244, 0.355, 0.454, 0.54, 0.613, 0.674, 0.725, 0.766, 0.8, 0.849, 0.894, 0.93, 0.956]
     ];
 
-
+    var Columna_lower = 0;
+    var Columna_upper = 0;
+    for (var n = 0; n <= 14; ++n) {
+        var n_findValTrunc = n_findVal.toFixed(1);
+        if (m[0][n] == n_findValTrunc) {
+            Columna_lower = n;
+            Columna_upper = n;
+            break;
+        }
+        
+        if (m[0][n] > n_findValTrunc) {
+            Columna_lower = n - 1;
+            Columna_upper = n;
+            break;
+        }
+    }
+    
+    var Fila_lower = 0;
+    var Fila_upper = 0;
+    for (var n = 0; n <= 14; ++n) {
+        var m_findValTrunc = m_findVal.toFixed(1);
+        if (m[0][n] == m_findValTrunc) {
+            Fila_lower = n;
+            Fila_upper = n;
+            break;
+        }
+        
+        if (m[0][n] > m_findValTrunc) {
+            Fila_lower = n - 1;
+            Fila_upper = n;
+            break;
+        }
+    }
+    
     //------------------
     var switch1 = true;
     var switch2 = true;
@@ -8140,21 +8176,60 @@ function trackliadanalysis(vari,uni) {
         }
     }
 
-    var F38 = m[fila][Columna];
+    var F38 = -405; // TODO m[fila][Columna];
     if (F38 === undefined) {
         F38 = 0;
     }
+    
+    console.log('nFindVal', n_findVal, 'mFindVal', m_findVal, 'Col lower', Columna_lower, 'upper', Columna_upper, 'Fila lower', Fila_lower, 'upper', Fila_upper);
+    {
+        var m_minus_one = m[0][Columna_lower];
+        var m_plus_one = m[0][Columna_upper];
+        var n_i = m_findVal.toFixed(1);
+        
+        var n_minus_one = m[Fila_lower][0];
+        var n_plus_one = m[Fila_upper][0];
+        var m_i = n_findVal.toFixed(1);
+       
+        var n_minus_oneVal = 0;
+        var n_plus_oneVal = 0;
+        
+        if (m_plus_one - m_minus_one == 0) {
+            n_minus_oneVal = m[Fila_lower][Columna_lower];
+            n_plus_oneVal = m[Fila_upper][Columna_lower];
+        } else {
+            n_minus_oneVal = m[Fila_lower][Columna_lower] + (m_i - m_minus_one) / (m_plus_one - m_minus_one) * (m[Fila_lower][Columna_upper] - m[Fila_lower][Columna_lower]);
+            n_plus_oneVal = m[Fila_upper][Columna_lower] + (m_i - m_minus_one) / (m_plus_one - m_minus_one) * (m[Fila_upper][Columna_upper] - m[Fila_upper][Columna_lower]);
+        }
+
+        var finalValue = 0;
+        if (n_plus_one - n_minus_one == 0) {
+            finalValue = n_minus_oneVal;
+        } else {
+            finalValue = n_minus_oneVal + (n_i - n_minus_one) / (n_plus_one - n_minus_one) * (n_plus_oneVal - n_minus_oneVal);
+        }
+        
+        console.log('m_-1', m_minus_one, 'm_+1', m_plus_one, 'm_i', m_i, 'n_-1', n_minus_one, 'n_+1', n_plus_one, 'n_i', n_i, 'n_minus_oneVal', n_minus_oneVal, 'n_plus_oneVal', n_plus_oneVal, 'final', finalValue);
+        F38 = finalValue;
+        F36 = n_i;
+        F37 = m_i;
+    }
+    
 // alert(F34+" "+F35+" "+F36+" "+F37+" "+F38);
 
     var F39 = 0.5 * F22 / (F23 * F24 / 12) * F38;
 
-    var F40 = (F21 * F39 / 12) * (F14 / 12);
+    var F40 = (impactFactor * F39 / 12) * (F14 / 12);
 
     var F41 = F35 + F40;
     
     console.log('F35', F35, 'F40', F40, 'F41', F41);
 
     var F42 = 29000000 * F14 * F31 / (48 * Math.pow(F30, 2));
+    
+    if (F30 == 0) {
+        F42 = 0;
+    }
 
     var F43 = (F35 + F40) * (3 * F25 * 29000000 * F14 * F15) / (29000000 * Math.pow(F15, 3) + 3 * F26 * F27 * Math.pow(F14, 3));
 
@@ -8193,7 +8268,7 @@ function trackliadanalysis(vari,uni) {
      * 
      */
 
-    return [F34, F35.toFixed(2), F36, F37, F38, F39, F40, F41, F42, F43, F44, F45, F46, F55, dec];
+    return [F34, F35.toFixed(2), F36, F37, F38.toFixed(3), F39, F40, F41, F42, F43, F44, F45, F46, F55, dec];
 
 
 
