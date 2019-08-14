@@ -143,13 +143,25 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <br/>
-                                                                    <label>Young's Modulus for Steel</label>
-                                                                    <input class="form-control" id="youngModulusForSteel1_spch" name="youngModulusForSteel1_spch" type="text" required/>
-                                                                    <br/>
+                                                                    <div class="form-group">
+                                                                        <div class="col-md-12">
+                                                                            <label>Young's Modulus for Steel:</label>
+                                                                        </div>
+                                                                        <div class="col-md-8">
+                                                                            <input type="text" class="form-control" id="youngModulusForSteel1_spch" name="youngModulusForSteel1_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                        </div>
+                                                                        <div class="col-md-4" id = "div_youngModulusForSteel1_sel_spch">
+                                                                            <select class="form-control" id="youngModulusForSteel1_sel_spch" name="youngModulusForSteel1_sel_spch">
+                                                                                <option value="psi">psi</option>
+                                                                                <option value="MPa">MPa</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    
                                                                     <label>Poisson's Ratio for Steel</label>
                                                                     <input class="form-control" id="poissonsRatioForSteel1_spch" name="poissonsRatioForSteel1_spch" type="text" required/>
                                                                     <br/>
+                                                                    
                                                                     <label>Coefficient of Thermal Expansion</label>
                                                                     <input class="form-control" id="coefficientOfThermalExpasion1_spch" name="coefficientThermalExpasion1_spch" type="text" required/>
                                                                     <br/>
@@ -200,23 +212,83 @@
                                                     <div class="col-lg-12">
                                                         <form role="form">
                                                             <div class="form-group">
-                                                                <label>Operating Pressure</label>
-                                                                <input class="form-control" id="operatingPressure_spch" name="operatingPressure_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Operating Temperature</label>
-                                                                <input class="form-control" id="operatingTemperature_spch" name="operatingTemperature_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Pipe Outside Diameter</label>
-                                                                <input class="form-control" id="pipeOutsideDiameter_spch" name="pipeOutsideDiameter_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Pipe Wall Thickness</label>
-                                                                <input class="form-control" id="pipeWallThickness_spch" name="pipeWallThickness_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Pipe Grade</label>
-                                                                <input class="form-control" id="pipeGrade_spch" name="pipeGrade_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Specified Minimum Yield Stress</label>
-                                                                <input class="form-control" id="specificiedMinimunYieldStress_spch" name="specificiedMinimunYieldStress_spch" type="text" required/>
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Operating Pressure</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="operatingPressure_spch" name="operatingPressure_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4" id = "div_operatingPressure_sel_spch">
+                                                                        <select class="form-control" id="operatingPressure_sel_spch" name="operatingPressure_sel_spch">
+                                                                            <option value="psi">psi</option>
+                                                                            <option value="MPa">MPa</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Operating Temperature</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="operatingTemperature_spch" name="operatingTemperature_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4" id = "div_operatingTemperature_sel_spch">
+                                                                        <select class="form-control" id="operatingTemperature_sel_spch" name="operatingTemperature_sel_spch">
+                                                                            <option value="C">C</option>
+                                                                            <option value="F">F</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Pipe Outside Diameter</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="pipeOutsideDiameter_spch" name="pipeOutsideDiameter_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4" id = "div_pipeOutsideDiameter_sel_spch">
+                                                                        <select class="form-control" id="pipeOutsideDiameter_sel_spch" name="pipeOutsideDiameter_sel_spch">
+                                                                            <option value="in">in</option>
+                                                                            <option value="cm">cm</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Pipe Wall Thickness</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="pipeWallThickness_spch" name="pipeWallThickness_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="pipeWallThickness_sel_spch">
+                                                                            <option value="in">in</option>
+                                                                            <option value="cm">cm</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Pipe Grade</label>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <input type="text" class="form-control" id="pipeGrade_spch" name="pipeGrade_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Specified Minimum Yield Stress</label>
+                                                                    </div>
+                                                                    <div class="col-md-12">
+                                                                        <input type="text" class="form-control" id="specificiedMinimunYieldStress_spch" name="specificiedMinimunYieldStress_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -259,21 +331,82 @@
                                                     <div class="col-lg-12">
                                                         <form role="form">
                                                             <div class="form-group">
-                                                                <label>Pipe Depth</label>
-                                                                <input class="form-control" id="pipeDepth_spch" name="pipeDepth_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Bored Diameter</label>
-                                                                <input class="form-control" id="boredDiameter_spch" name="boredDiameter_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Installation Temperature</label>
-                                                                <input class="form-control" id="installationTemperature_spch" name="installationTemperature_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Design Wheel Load from Single Axle</label>
-                                                                <input class="form-control" id="designWheelLoadFromSingleAxle_spch" name="designWheelLoadFromSingleAxle_spch" type="text" required/>
-                                                                <br/>
-                                                                <label>Design Wheel Load from Tandem Axles</label>
-                                                                <input class="form-control" id="designWheelLoadFromTademAxles_spch" name="designWheelLoadFromTademAxles_spch" type="text" required/>
-                                                                <br/>
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Pipe Depth</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="pipeDepth_spch" name="pipeDepth_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="pipeDepth_sel_spch">
+                                                                            <option value="ft">ft</option>
+                                                                            <option value="mt">m</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Bored Diameter</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="boredDiameter_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="boredDiameter_sel_spch">
+                                                                            <option value="in">in</option>
+                                                                            <option value="ft">ft</option>
+                                                                            <option value="mt">m</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Installation Temperature</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="installationTemperature_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="installationTemperature_sel_spch">
+                                                                            <option value="C">C</option>
+                                                                            <option value="F">F</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Design Wheel Load from Single Axle</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="designWheelLoadFromSingleAxle_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="designWheelLoadFromSingleAxle_sel_spch">
+                                                                            <option value="ksi">ksi</option>
+                                                                            <option value="MPa">MPa</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12">
+                                                                        <label>Design Wheel Load from Tandem Axles</label>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" id="designWheelLoadFromTademAxles_spch" onchange='onchange_Input_spch(this)' required> 
+                                                                    </div>
+                                                                    <div class="col-md-4">
+                                                                        <select class="form-control" id="designWheelLoadFromTademAxles_sel_spch">
+                                                                            <option value="ksi">ksi</option>
+                                                                            <option value="MPa">MPa</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                
                                                                 <label>Pavament Type</label>
                                                                 <select class="form-control" id="pavementType" name="pavementType">
                                                                     <option value="0" >Flexible</option>
@@ -342,17 +475,17 @@
                                                         <div class="form-group">
                                                             <div class="col-lg-12">
                                                                 <label>Hoop Stress</label>
-                                                                <input class="form-control" id="hoopStress_spch" name="hoopStress_spch" type="text" required/>
+                                                                <input class="form-control" id="hoopStress_spch" name="hoopStress_spch" type="text" readonly required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <label>Allowable Hoop Stress</label>
-                                                                <input class="form-control" id="allowableHoopStress_spch" name="allowableHoopStress_spch" type="text" required/>
+                                                                <input class="form-control" id="allowableHoopStress_spch" name="allowableHoopStress_spch" readonly type="text" required/>
                                                                 <br/>
                                                             </div>    
                                                             <div class="col-lg-9">
                                                                 <label>Stiffness Factor for Earth Load Circumferential Stress</label>
-                                                                <input class="form-control" id="stiffnessFactorForEarthLoadCirncumferentialStress_spch" name="stiffnessFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="stiffnessFactorForEarthLoadCirncumferentialStress_spch" readonly name="stiffnessFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -362,7 +495,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Burial Factor for Earth Load Circumferential Stress</label>
-                                                                <input class="form-control" id="burialFactorForEarthLoadCirncumferentialStress_spch" name="burialFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="burialFactorForEarthLoadCirncumferentialStress_spch" readonly name="burialFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -372,7 +505,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Excavation Factor for Earth Load Circumferential Stress</label>
-                                                                <input class="form-control" id="excavationFactorForEarthLoadCirncumferentialStress_spch" name="excavationFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="excavationFactorForEarthLoadCirncumferentialStress_spch" readonly name="excavationFactorForEarthLoadCirncumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -382,12 +515,12 @@
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <label>Circumferential Stress for Earth Load</label>
-                                                                <input class="form-control"id="cirncumferentialStressForEarthLoad_spch" name="cirncumferentialStressForEarthLoad_spch" type="text" required/>
+                                                                <input class="form-control"id="cirncumferentialStressForEarthLoad_spch" readonly name="cirncumferentialStressForEarthLoad_spch" type="text" required/>
                                                                 <br/>
                                                             </div>    
                                                             <div class="col-lg-4">
                                                                 <label>Impact Factor</label>
-                                                                <input class="form-control" id="impactFactor_spch" name="impactFactor_spch" type="text" required/>
+                                                                <input class="form-control" id="impactFactor_spch" name="impactFactor_spch" readonly type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-5">
@@ -402,7 +535,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Highway Stiffness Factor for Cyclic Circumferential Stress</label>
-                                                                <input class="form-control" id="highwayStiffnessFactorForCyclicCircumferentialStress_spch" name="highwayStiffnessFactorForCyclicCircumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="highwayStiffnessFactorForCyclicCircumferentialStress_spch" readonly name="highwayStiffnessFactorForCyclicCircumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -412,7 +545,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Highway Geometry Factor for Cyclic Circumferential Stress</label>
-                                                                <input class="form-control" id="highwayGeometryFactorForCyclicCircumferentialStress_spch" name="highwayGeometryFactorForCyclicCircumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="highwayGeometryFactorForCyclicCircumferentialStress_spch" readonly name="highwayGeometryFactorForCyclicCircumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -422,12 +555,12 @@
                                                             </div>
                                                             <div class="col-lg-12">
                                                                 <label>Cyclic Circumferential Stress</label>
-                                                                <input class="form-control" id="CyclicCircumferentialStress_spch" name="CyclicCircumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="CyclicCircumferentialStress_spch" readonly name="CyclicCircumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Highway Stiffness Factor for Cyclic Longitudinal Stress</label>
-                                                                <input class="form-control" id="highwayStiffnessFactorForCyclicLongitudinalStress_spch" name="highwayStiffnessFactorForCyclicLongitudinalStress_spch" type="text" required/>
+                                                                <input class="form-control" id="highwayStiffnessFactorForCyclicLongitudinalStress_spch" readonly name="highwayStiffnessFactorForCyclicLongitudinalStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -437,7 +570,7 @@
                                                             </div>
                                                             <div class="col-lg-9">
                                                                 <label>Highway Geometry Factor for Cyclic Longitudinal Stress</label>
-                                                                <input class="form-control" id="highwayGeometryFactorForCyclicLongitudinalStress_spch" name="highwayGeometryFactorForCyclicLongitudinalStress_spch" type="text" required/>
+                                                                <input class="form-control" id="highwayGeometryFactorForCyclicLongitudinalStress_spch" readonly name="highwayGeometryFactorForCyclicLongitudinalStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                             <div class="col-lg-3">
@@ -448,7 +581,7 @@
                                                             <br/>
                                                             <div class="col-lg-12">
                                                                 <label>Cyclic Longitudinal Stress</label>
-                                                                <input class="form-control" id="CyclicLongitudinalStress_spch" name="CyclicLongitudinalStress_spch" type="text" required/>
+                                                                <input class="form-control" id="CyclicLongitudinalStress_spch" readonly name="CyclicLongitudinalStress_spch" type="text" required/>
                                                                 <br/>
                                                             </div>
                                                         </div>
@@ -465,25 +598,25 @@
                                                         <div class="form-group"> 
                                                             <div class="col-lg-12">
                                                                 <label>Maximum Circumferential Stress</label>
-                                                                <input class="form-control" id="maximumCircumferentialStress_spch" name="maximumCircumferentialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="maximumCircumferentialStress_spch" readonly name="maximumCircumferentialStress_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Maximum Longitudinal Stress</label>
-                                                                <input class="form-control" id="maximumLongitudinalStress_spch" name="maximumLongitudinalStress_spch" type="text" required/>
+                                                                <input class="form-control" id="maximumLongitudinalStress_spch" readonly name="maximumLongitudinalStress_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Maximum Radial Stress</label>
-                                                                <input class="form-control" id="maximumRadialStress_spch" name="maximumRadialStress_spch" type="text" required/>
+                                                                <input class="form-control" id="maximumRadialStress_spch" readonly name="maximumRadialStress_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Total Effective Stress</label>
-                                                                <input class="form-control" id="totalEffectiveStress_spch" name="totalEffectiveStress_spch" type="text" required/>
+                                                                <input class="form-control" id="totalEffectiveStress_spch" readonly name="totalEffectiveStress_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Allowable Effective Stress</label>
-                                                                <input class="form-control" id="allowableEffectiveStress_spch" name="allowableEffectiveStress_spch" type="text" required/>
+                                                                <input class="form-control" id="allowableEffectiveStress_spch" readonly name="allowableEffectiveStress_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Fatigue Resistance of Girth Welds</label>
-                                                                <input class="form-control" id="fatigueResistanceOfGirthWelds_spch" name="fatigueResistanceOfGirthWelds_spch" type="text" required/>
+                                                                <input class="form-control" id="fatigueResistanceOfGirthWelds_spch" readonly name="fatigueResistanceOfGirthWelds_spch" type="text" required/>
                                                                 <br/>
                                                                 <label>Fatigue Resistance of Longitudinal Welds</label>
-                                                                <input class="form-control" id="fatigueResistanceOfLongitudinalWelds_spch" name="fatigueResistanceOfLongitudinalWelds_spch" type="text" required/>
+                                                                <input class="form-control" id="fatigueResistanceOfLongitudinalWelds_spch" readonly name="fatigueResistanceOfLongitudinalWelds_spch" type="text" required/>
                                                                 <br/>
                                                                 <table class="table table-hover">
                                                                     <thead>
@@ -602,6 +735,19 @@
         }
          function calculatebtn_spch1(){
           // alert($("#pipeGrade_spch").val());
+          var unidades = {
+              "youngModulusForSteel1_sel_spch": $("#youngModulusForSteel1_sel_spch").val(),
+              "operatingPressure_sel_spch": $("#operatingPressure_sel_spch").val(),
+              "operatingTemperature_sel_spch": $("#operatingTemperature_sel_spch").val(),
+              "pipeOutsideDiameter_sel_spch": $("#pipeOutsideDiameter_sel_spch").val(),
+              "pipeWallThickness_sel_spch": $("#pipeWallThickness_sel_spch").val(),
+              "pipeDepth_sel_spch": $("#pipeDepth_sel_spch").val(),
+              "boredDiameter_sel_spch": $("#boredDiameter_sel_spch").val(),
+              "installationTemperature_sel_spch": $("#installationTemperature_sel_spch").val(),
+              "designWheelLoadFromSingleAxle_sel_spch": $("#designWheelLoadFromSingleAxle_sel_spch").val(),
+              "designWheelLoadFromTademAxles_sel_spch": $("#designWheelLoadFromTademAxles_sel_spch").val()
+          };
+          
                  var parameter = {
                       "D"     : $("#pipeOutsideDiameter_spch").val(),
                       "P"     : $("#operatingPressure_spch").val(),
@@ -631,7 +777,7 @@
                  
                   };
                   
-                  var res = SteelpipelinesCH(parameter);
+                  var res = SteelpipelinesCH(parameter, unidades);
                                    
                   
                   $("#hoopStress_spch").val(res[0]);
@@ -1072,8 +1218,8 @@
                     if(sw != true){
                         inp.value = "";
                     }     
-                    onchange_Input_zero(inp);
-                   // cleanOut_spch();
+                    //onchange_Input_zero(inp);
+                    cleanOut_spch();
                     
                 }
                 function onchange_soil_spch(){
@@ -1140,7 +1286,9 @@
                         $("#impactFactor_spch").val("1");
                     }
                 }
-        
-        
+                
+                function cleanOut_spch() {
+                    $("input[readonly]").val("");
+                }
     </script>     
 </html>
