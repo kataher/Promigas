@@ -37,7 +37,7 @@ import org.json.JSONObject;
 public class Datasheet {
     
     
-    public static JSONObject genDSMedidores(HttpServletRequest request, String ruta, String username){
+    public static JSONObject genDSMedidores(HttpServletRequest request, String ruta, String username)throws Exception {
         
         System.out.println("archivo a generarse");
         
@@ -49,7 +49,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\medidores.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\medidores.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -89,18 +89,13 @@ public class Datasheet {
             cell = sheet.getRow(13).getCell(8);
             cell.setCellValue(request.getParameter("temp"));
             
-            
-            
-            
             //Guardar el archivo modificado            
             String nuevoNombre = "medidores_" + d.getTime();
             
-                    
-            
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -108,20 +103,22 @@ public class Datasheet {
             
             wb.write(fileOut);
             fileOut.close();
+            
+            borrarArchivos(ruta + "\\Selector", "medidores_");
                             
         } catch(IOException ex) { 
-            System.out.println("Error al leer el fichero."); 
+            throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            System.out.println("Error al construrir el json."); 
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
-        
-        System.out.println("archivo generado");
         
         return json;
         
     }
     
-    public static JSONObject genDSComputadores(HttpServletRequest request, String ruta, String username){
+    public static JSONObject genDSComputadores(HttpServletRequest request, String ruta, String username) throws Exception{
         
         JSONObject json = new JSONObject();       
         
@@ -131,7 +128,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\compflujo.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\compflujo.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -272,10 +269,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "compflujo_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -283,11 +280,15 @@ public class Datasheet {
             
             wb.write(fileOut);
             fileOut.close();
+            
+            borrarArchivos(ruta + "\\Selector", "compflujo_");
                             
         } catch(IOException ex) { 
-            System.out.println("Error al leer el fichero."); 
+            throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            System.out.println("Error al construrir el json."); 
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -308,28 +309,28 @@ public class Datasheet {
             
             switch(op){
                 case "1":
-                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\tt.xls"));
+                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\tt.xls"));
                     nuevoNombre = "tt_" + d.getTime();
-                    borrarArchivos(ruta, "tt_");
+                    borrarArchivos(ruta + "\\Selector", "tt_");
                     break;
                 case "2":
-                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\tpe.xls"));
+                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\tpe.xls"));
                     nuevoNombre = "tpe_" + d.getTime();
-                    borrarArchivos(ruta, "tpe_");
+                    borrarArchivos(ruta + "\\Selector", "tpe_");
                     break;
                 case "3":
-                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\tpd.xls"));
+                    fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\tpd.xls"));
                     nuevoNombre = "tpd_" + d.getTime();
-                    borrarArchivos(ruta, "tpd_");
+                    borrarArchivos(ruta + "\\Selector", "tpd_");
                     break;
             }
             
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             
-            FileOutputStream fileOut = new FileOutputStream(ruta + "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta + "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta );
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -339,9 +340,11 @@ public class Datasheet {
             fileOut.close();
                             
         } catch(IOException ex) { 
-            System.out.println("Error al leer el fichero."); 
+            throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            System.out.println("Error al construrir el json."); 
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -358,7 +361,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\mov.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\mov.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -378,10 +381,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "mov_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -390,12 +393,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "mov_");
+            borrarArchivos(ruta + "\\Selector", "mov_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -412,7 +417,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\valsa.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\valsa.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -435,7 +440,7 @@ public class Datasheet {
             FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -444,12 +449,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "valsa_");
+            borrarArchivos(ruta + "\\Selector", "valsa_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -466,7 +473,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\act.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\act.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -486,10 +493,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "act_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -498,12 +505,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "act_");
+            borrarArchivos(ruta + "\\Selector", "act_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -520,7 +529,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\valslam.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\valslam.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -540,10 +549,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "sh_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -552,12 +561,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "sh_");
+            borrarArchivos(ruta + "\\Selector", "sh_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -574,7 +585,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\reg.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\reg.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -594,10 +605,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "reg_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -606,12 +617,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "reg_");
+            borrarArchivos(ruta + "\\Selector", "reg_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -628,7 +641,7 @@ public class Datasheet {
         
         try
         {
-            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\pla.xls"));
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Selector\\pla.xls"));
             HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
             HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
 
@@ -672,10 +685,10 @@ public class Datasheet {
             //Guardar el archivo modificado            
             String nuevoNombre = "pla_" + d.getTime();
             
-            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + nuevoNombre + ".xls");
+            FileOutputStream fileOut = new FileOutputStream(ruta+ "\\Selector\\" + nuevoNombre + ".xls");
 
             HashMap<String, String> map = new HashMap<String,String>();
-            map.put("path", ruta);
+            map.put("path", ruta + "\\Selector");
             map.put("file", nuevoNombre + ".xls");
             
             json.put("row", map);
@@ -684,12 +697,14 @@ public class Datasheet {
             wb.write(fileOut);
             fileOut.close();
             
-            borrarArchivos(ruta, "pla_");
+            borrarArchivos(ruta + "\\Selector", "pla_");
                             
         } catch(IOException ex) { 
             throw new Exception("Error al leer el fichero.");
         } catch (JSONException ex) {
-            throw new Exception("Error al construrir el json.");
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
         }
         
         return json;
@@ -722,7 +737,7 @@ public class Datasheet {
                     }
                 }
         }else{ 
-            throw new Exception("La ruta no existe");
+            throw new Exception("La ruta para la eliminacion de archivos no existe");
         }
     }
     

@@ -410,6 +410,7 @@
 
                     },
                     error: function (xhr, ajaxOptions, err) {
+                        alert(err);
                         show_OkDialog($("#error_Dialog_mem"), "Error");
                     },
                     complete: function () {
