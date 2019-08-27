@@ -7598,8 +7598,8 @@ function SteelpipelinesCH(vari, uni) {
     H = get_Long(H, uni.pipeDepth_sel_spch, 'ft');
     Bd = get_Long(Bd, uni.boredDiameter_sel_spch, 'in');
     
-    Ps = get_Presf(Ps, uni.designWheelLoadFromSingleAxle_sel_spch, 'psi');
-    Pt = get_Presf(Pt, uni.designWheelLoadFromTademAxles_sel_spch, 'psi');
+    Ps = get_Presf(Ps, uni.designWheelLoadFromSingleAxle_sel_spch, 'ksi');
+    Pt = get_Presf(Pt, uni.designWheelLoadFromTademAxles_sel_spch, 'ksi');
     
     Y = Y / 1728;
     var OBd = Bd;
@@ -7728,7 +7728,6 @@ function SteelpipelinesCH(vari, uni) {
     var all_efe_stre = F * E * SMYS;
 
     var cicly_cir_ste = Klh * Ghh * R * L * Fi * w;
-    alert(cicly_cir_ste);
     //-----------------------------------
     var all_barlow = "";
     if (hoop < alhoop) {
