@@ -2,6 +2,10 @@
 //@ sourceURL=/formulasK.js
 //
 //Generales
+function parseFloatWithCommas(number) {
+    return parseFloat( number.toString().replace(/[^\d\.-]/g,'') );
+}
+
 function get_Pres(pres, E, unie, unis){
     //Para convertir PSIG en PSIA,  sumarle a la primera 14,7 (la presion atmosferica)
     var presAt = localAtmosphericPressure_Form(E);
@@ -14,36 +18,36 @@ function get_Pres(pres, E, unie, unis){
     
     if(unie === "psig"){
         if(unis === "psia"){
-            presS = parseFloat(pres)+ parseFloat(presAt);
+            presS = parseFloatWithCommas(pres)+ parseFloatWithCommas(presAt);
         }
     }else if(unie === "psia"){
         if(unis === "psig"){
-            presS = parseFloat(pres) - parseFloat(presAt);
+            presS = parseFloatWithCommas(pres) - parseFloatWithCommas(presAt);
         }
     }
     
     if (unie === "psig" && unis === "kpag") {
-        presS = parseFloat(pres) * 6.895;
+        presS = parseFloatWithCommas(pres) * 6.895;
     } else if (unie === "kpag" && unis === "psig") {
-        presS = parseFloat(pres) / 6.895;
+        presS = parseFloatWithCommas(pres) / 6.895;
     }
     
     if (unie === "psig" && unis === "kpaa") {
-        presS = (parseFloat(pres) + parseFloat(presAt)) * 6.895;
+        presS = (parseFloatWithCommas(pres) + parseFloatWithCommas(presAt)) * 6.895;
     }  else if (unie === "psia" && unis === "kpaa") {
-        presS = parseFloat(pres) / 6.895;
+        presS = parseFloatWithCommas(pres) / 6.895;
     } else if (unie === "psia" && unis === "kpag") {
-        presS = (parseFloat(pres) - parseFloat(presAt)) * 6.895;
+        presS = (parseFloatWithCommas(pres) - parseFloatWithCommas(presAt)) * 6.895;
     } else if (unie === "kpaa" && unis === "kpag") {
-        presS = parseFloat(pres) - parseFloat(presAt) * 6.895;
+        presS = parseFloatWithCommas(pres) - parseFloatWithCommas(presAt) * 6.895;
     } else if (unie === "kpaa" && unis === "psia") {
-        presS = parseFloat(pres) / 6.895;
+        presS = parseFloatWithCommas(pres) / 6.895;
     } else if (unie === "kpaa" && unis === "psig") {
-        presS = parseFloat(pres) / 6.895 - parseFloat(presAt);
+        presS = parseFloatWithCommas(pres) / 6.895 - parseFloatWithCommas(presAt);
     } else if (unie === "kpag" && unis === "kpaa") {
-        presS = parseFloat(pres) + parseFloat(presAt) * 6.895;
+        presS = parseFloatWithCommas(pres) + parseFloatWithCommas(presAt) * 6.895;
     } else if (unie === "kpag" && unis === "psia") {
-        presS = parseFloat(pres) / 6.895 + parseFloat(presAt);
+        presS = parseFloatWithCommas(pres) / 6.895 + parseFloatWithCommas(presAt);
     }
     return presS;    
 }
@@ -164,23 +168,23 @@ function get_Presf(pres, unie, unis){
     }
     
     if(unie === "psi"){
-        psi = parseFloat(pres);
+        psi = parseFloatWithCommas(pres);
     }else if(unie === "MPa"){
-        psi = parseFloat(pres) * 14.7 / 0.1013529;
+        psi = parseFloatWithCommas(pres) * 14.7 / 0.1013529;
     }else if(unie === "ksi"){
-        psi = parseFloat(pres) * 1000;
+        psi = parseFloatWithCommas(pres) * 1000;
     }else if(unie === "kpa"){
-        psi = parseFloat(pres) / 6.895;
+        psi = parseFloatWithCommas(pres) / 6.895;
     }
     
     if(unis === "MPa"){
-        presS = parseFloat(psi) * 0.1013529 / 14.7;
+        presS = parseFloatWithCommas(psi) * 0.1013529 / 14.7;
     } else if (unis === "ksi") {
-        presS = parseFloat(psi) / 1000.0;
+        presS = parseFloatWithCommas(psi) / 1000.0;
     } else if (unis === "psi") {
-        presS = parseFloat(psi);
+        presS = parseFloatWithCommas(psi);
     } else if (unis === "kpa") {
-        presS = parseFloat(psi) * 6.895;
+        presS = parseFloatWithCommas(psi) * 6.895;
     }
     return presS;    
 }
@@ -551,7 +555,7 @@ $(document).ready(function() {
       // Replace all commas with empty space
       fieldText = fieldText.replace(/,/, '');
       
-      var fieldValue = parseFloat(fieldText);
+      var fieldValue = parseFloatWithCommas(fieldText);
       sel.data("prev", newValue);
       
       if (fieldText === '')
@@ -595,10 +599,10 @@ $(document).ready(function() {
 
 function adiabaticHead_Form(vari, uni){
     
-    var elev =  get_Long(parseFloat(vari.enteree_ah), uni.ee_sel_ah, "ft"); //Altura [ft]
-    var Ps = get_Pres(parseFloat(vari.suctionp_ah), elev, uni.sp_sel_ah, "psia"); //Presión de succión psia
-    var Pd = get_Pres(parseFloat(vari.dischargep_ah), elev, uni.dp_sel_ah, "psia"); //Presión de descarga psia
-    var efad =  parseFloat(vari.adiabatice_ah); //Eficiencia adiabatica
+    var elev =  get_Long(parseFloatWithCommas(vari.enteree_ah), uni.ee_sel_ah, "ft"); //Altura [ft]
+    var Ps = get_Pres(parseFloatWithCommas(vari.suctionp_ah), elev, uni.sp_sel_ah, "psia"); //Presión de succión psia
+    var Pd = get_Pres(parseFloatWithCommas(vari.dischargep_ah), elev, uni.dp_sel_ah, "psia"); //Presión de descarga psia
+    var efad =  parseFloatWithCommas(vari.adiabatice_ah); //Eficiencia adiabatica
     
     //var Tb = get_Temp(vari.basetemperature_ah, "C", "R");
     //alert(Tb);
@@ -606,7 +610,7 @@ function adiabaticHead_Form(vari, uni){
     var MW = 0;
     var GasG = 0;
     var Mair = 28.96443;    //Mair=28.96443 g/mole (molecular weight of standard air - CRC, 1983).
-    var G = parseFloat(vari.gst_ah);
+    var G = parseFloatWithCommas(vari.gst_ah);
     
     if(vari.gs_sel_ah === "9"){ //Gas Specific Gravity (Relative to Air)
         MW = G * Mair; //G = M / Mair ,  where G=gas specific gravity, M=gas molecular weight, 
@@ -616,14 +620,14 @@ function adiabaticHead_Form(vari, uni){
         GasG = MW / Mair; //G = M / Mair
     }
     
-    var Ts = get_Temp(parseFloat(vari.suctiont_ah), uni.st_sel_ah, "R"); //Temperatura de succiòn ªR    
+    var Ts = get_Temp(parseFloatWithCommas(vari.suctiont_ah), uni.st_sel_ah, "R"); //Temperatura de succiòn ªR    
     
-    var k = parseFloat(vari.gass_ah); //Relación de calor específico del gas
+    var k = parseFloatWithCommas(vari.gass_ah); //Relación de calor específico del gas
     
     var Zs;
     
     if(vari.opz_ah === "compfactors2_ah"){
-        Zs = parseFloat(vari.z1s_ah); //Z1 - Factor de compresibilidad en condiciones de succión
+        Zs = parseFloatWithCommas(vari.z1s_ah); //Z1 - Factor de compresibilidad en condiciones de succión
     }else{
         Zs = getZ(Ts, Ps, GasG,  "psia", elev); //Z1 - Factor de compresibilidad en condiciones de succión:
     }
@@ -634,7 +638,7 @@ function adiabaticHead_Form(vari, uni){
     var Td = Ts * (Math.pow(Pd, (k-1)/k)/Math.pow(Ps, (k-1)/k) - 1 )/efad + Ts;  //Temperatura de descarga [°F]:
     
     var Zd = getZ(Td, Pd, GasG, "psia", elev); //Z1 - Factor de compresibilidad en condiciones de succión:
-    var Zavg = (parseFloat(Zs) + parseFloat(Zd))/2; //Promedio Z1, Z2
+    var Zavg = (parseFloatWithCommas(Zs) + parseFloatWithCommas(Zd))/2; //Promedio Z1, Z2
     var Na = (Ts/(Td-Ts))*( (Zs/Zd) * Math.pow(Pd/Ps,((k-1)/k)) - 1 ); //Na (Eficiencia Isotrópica)
     
     
@@ -653,22 +657,22 @@ function adiabaticHead_Form(vari, uni){
 function adiabaticHorsePower_Form(vari, uni){
     //Validado Julio
     
-    var elev =  get_Long(parseFloat(vari.enteree_ahp), uni.ee_sel_ahp, "ft"); //Altura [ft]
+    var elev =  get_Long(parseFloatWithCommas(vari.enteree_ahp), uni.ee_sel_ahp, "ft"); //Altura [ft]
     var MW = 1;
     var GasG = 0;
     var Mair = 28.96443;    //Mair=28.96443 g/mole (molecular weight of standard air - CRC, 1983).
     
-    var Ps = get_Pres(parseFloat(vari.suctionp_ahp), elev, uni.sp_sel_ahp, "psia"); //Presión de succión psia
-    var Pd = get_Pres(parseFloat(vari.dischargep_ahp), elev, uni.dp_sel_ahp, "psia"); //Presión de descarga psia
-    var Ts = get_Temp(parseFloat(vari.suctiont_ahp), uni.st_sel_ahp, "R"); //Temperatura de succión ºR
-    var k = parseFloat(vari.gass_ahp); //Relación de calor específico del gas
+    var Ps = get_Pres(parseFloatWithCommas(vari.suctionp_ahp), elev, uni.sp_sel_ahp, "psia"); //Presión de succión psia
+    var Pd = get_Pres(parseFloatWithCommas(vari.dischargep_ahp), elev, uni.dp_sel_ahp, "psia"); //Presión de descarga psia
+    var Ts = get_Temp(parseFloatWithCommas(vari.suctiont_ahp), uni.st_sel_ahp, "R"); //Temperatura de succión ºR
+    var k = parseFloatWithCommas(vari.gass_ahp); //Relación de calor específico del gas
     
-    var Q = get_Flujo(parseFloat(vari.capacityr_ahp), uni.cr_sel_ahp, "MMSCFD"); //Flujo estándar
-    var Nm = parseFloat(vari.mechanicale_ahp); //Eficiencia mecánica:
-    var G = parseFloat(vari.gst_ahp); // Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
-    var efad = parseFloat(vari.adiabatice_ahp);
-    var Pb = get_Pres(parseFloat(vari.basepressure_ahp), elev, uni.bp_sel_ahp, "psia");
-    var Tb = get_Temp(parseFloat(vari.basetemperature_ahp), uni.bt_sel_ahp, "R");
+    var Q = get_Flujo(parseFloatWithCommas(vari.capacityr_ahp), uni.cr_sel_ahp, "MMSCFD"); //Flujo estándar
+    var Nm = parseFloatWithCommas(vari.mechanicale_ahp); //Eficiencia mecánica:
+    var G = parseFloatWithCommas(vari.gst_ahp); // Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
+    var efad = parseFloatWithCommas(vari.adiabatice_ahp);
+    var Pb = get_Pres(parseFloatWithCommas(vari.basepressure_ahp), elev, uni.bp_sel_ahp, "psia");
+    var Tb = get_Temp(parseFloatWithCommas(vari.basetemperature_ahp), uni.bt_sel_ahp, "R");
     
     if(vari.gs_sel_ahp === "9"){ //Gas Specific Gravity (Relative to Air)
         MW = G * Mair; //G = M / Mair ,  where G=gas specific gravity, M=gas molecular weight, 
@@ -696,7 +700,7 @@ function adiabaticHorsePower_Form(vari, uni){
     var Ha = (Zs * Rc * Ts * (k/(k-1)) * (Math.pow((Pd/Ps),((k-1)/k))-1))/efad;  //Cabeza adiabatica [ft*lbf/lbm]:
     
     var Na = (Ts/(Td-Ts))*( (Zs/Zd) * Math.pow(Pd/Ps,((k-1)/k)) - 1 );
-    var Zavg = (parseFloat(Zs) + parseFloat(Zd))/2; //Promedia Z1, Z2
+    var Zavg = (parseFloatWithCommas(Zs) + parseFloatWithCommas(Zd))/2; //Promedia Z1, Z2
     
     var HP = (0.0857 * (k/(k-1)) * Q * Ts * Zavg * (1/Na) * ( Math.pow(Pd/Ps,((k-1)/k)) - 1 ))/efad; //Potencia adiabática [HP]:
     var HP1 = (0.0857 * (k/(k-1)) * Ts * Zavg * (1/Na) * ( Math.pow(Pd/Ps,((k-1)/k)) - 1 ))/efad; //Potencia adiabatica por unidad de flujo [HP/MMSCFD]:
@@ -709,8 +713,8 @@ function adiabaticHorsePower_Form(vari, uni){
     
     var Qr = (facACFM * (Q / ((Ps/Pb) * (Tb/Ts) * (Zb/Zs)))).toFixed(2); // Flujo real [ACFM]
     
-    Zd = parseFloat(Zd);
-    Zs = parseFloat(Zs);
+    Zd = parseFloatWithCommas(Zd);
+    Zs = parseFloatWithCommas(Zs);
     
     Td = get_Temp(Td, "R", uni.st_sel_ahp).toFixed(4);
     Zavg = Zavg.toFixed(4);
@@ -733,23 +737,23 @@ function adiabaticHorsePower_Form(vari, uni){
 //1.1.3 Polytropic Horse Power
 function polytropicHorsePower_Form(vari, uni){
     
-    var elev =  get_Long(parseFloat(vari.enteree_php), uni.ee_sel_php, "ft"); //Altura [ft]:
+    var elev =  get_Long(parseFloatWithCommas(vari.enteree_php), uni.ee_sel_php, "ft"); //Altura [ft]:
     var MW = 1;
     var GasG = 0;
     var Mair = 28.96443;    //Mair=28.96443 g/mole (molecular weight of standard air - CRC, 1983).
     
-    var P1 = get_Pres(parseFloat(vari.suctionp_php), elev, uni.sp_sel_php, "psia"); //Presión de succión:
-    var P2 = get_Pres(parseFloat(vari.dischargep_php), elev, uni.dp_sel_php, "psia"); //Presión de descarga:
-    var T1 = get_Temp(parseFloat(vari.suctiont_php), uni.st_sel_php, "R"); //Temperatura de succión:
-    var Pb = get_Pres(parseFloat(vari.basepressure_php), elev, uni.bp_sel_php, "psia"); //Presión base:
-    var Tb = get_Temp(parseFloat(vari.basetemperature_php), uni.bt_sel_php, "R"); //Temperatura base
+    var P1 = get_Pres(parseFloatWithCommas(vari.suctionp_php), elev, uni.sp_sel_php, "psia"); //Presión de succión:
+    var P2 = get_Pres(parseFloatWithCommas(vari.dischargep_php), elev, uni.dp_sel_php, "psia"); //Presión de descarga:
+    var T1 = get_Temp(parseFloatWithCommas(vari.suctiont_php), uni.st_sel_php, "R"); //Temperatura de succión:
+    var Pb = get_Pres(parseFloatWithCommas(vari.basepressure_php), elev, uni.bp_sel_php, "psia"); //Presión base:
+    var Tb = get_Temp(parseFloatWithCommas(vari.basetemperature_php), uni.bt_sel_php, "R"); //Temperatura base
     
-    var k = parseFloat(vari.gass_php); //Relación de calor específico del gas:
-    var Q = get_Flujo(parseFloat(vari.capacityr_php), uni.cr_sel_php, "MMSCFD");  //Capacity/Required Tasa de flujo [MMSCFD]:
-    var Nm = parseFloat(vari.mechanicale_php); // Mechanical Efficiency:
-    var Np = parseFloat(vari.polytropice_php); //Plytropic Efficience:
-    var G = parseFloat(vari.gst_php);      // Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
-    var efad = parseFloat(vari.adiabatice_php); //Eficiencia adiabatica
+    var k = parseFloatWithCommas(vari.gass_php); //Relación de calor específico del gas:
+    var Q = get_Flujo(parseFloatWithCommas(vari.capacityr_php), uni.cr_sel_php, "MMSCFD");  //Capacity/Required Tasa de flujo [MMSCFD]:
+    var Nm = parseFloatWithCommas(vari.mechanicale_php); // Mechanical Efficiency:
+    var Np = parseFloatWithCommas(vari.polytropice_php); //Plytropic Efficience:
+    var G = parseFloatWithCommas(vari.gst_php);      // Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
+    var efad = parseFloatWithCommas(vari.adiabatice_php); //Eficiencia adiabatica
     
     if(vari.gs_sel_php === "9"){ //Gas Specific Gravity (Relative to Air)
         MW = G * Mair; //G = M / Mair ,  where G=gas specific gravity, M=gas molecular weight, 
@@ -775,7 +779,7 @@ function polytropicHorsePower_Form(vari, uni){
     var Rc = 1545.3/MW;
     var Ha = Z1 * Rc * T1 * (k/(k-1)) * (Math.pow((P2/P1),((k-1)/k))-1); //Cabeza adiabatica [ft*lbf/lbm]:
     
-    var Zavg = (parseFloat(Z1) + parseFloat(Z2))/2;
+    var Zavg = (parseFloatWithCommas(Z1) + parseFloatWithCommas(Z2))/2;
     var HP = (0.0857 * ((n)/(n-1)) * Q * T1 * Zavg * (1/Np) * ( Math.pow(P2/P1,((n-1)/n)) - 1 ))/efad; // Potencia adiabática [HP]:
     var HP1 = HP/Q; //Potencia adiabatica por unidad de flujo [HP/MMSCFD]:
     var BHP = HP/Nm; //Potencia brake [HP]
@@ -786,8 +790,8 @@ function polytropicHorsePower_Form(vari, uni){
     var ACFM = (Q*(((Pb/(Tb))*((T1)/(P1))*(Z1/Zb)))) * facACFM;
     T2 = get_Temp(T2, "R", uni.st_sel_php).toFixed(2);
     
-    Z1 = parseFloat(Z1);
-    Z2 = parseFloat(Z2);
+    Z1 = parseFloatWithCommas(Z1);
+    Z2 = parseFloatWithCommas(Z2);
     
     var res = [n.toFixed(4), T2, Zavg.toFixed(4), Ha.toFixed(4), HP.toFixed(4), HP1.toFixed(4), BHP.toFixed(2), ACFM.toFixed(4), Z1.toFixed(4), Z2.toFixed(4)];    
     changeToDecimal(res);
@@ -801,11 +805,11 @@ function fanLaws_Form(vari, uni){
     //Validado Formula con Excel Julio
     //Validado BD
     
-    var Q1 = get_Flujo(parseFloat(vari.initialflowrate_fl), uni.if_sel_fl, "MMSCFD"); //Tasa de flujo inicial            
-    var H1 = parseFloat(vari.initialcompressorhead_fl); //Cabeza inicial [ft * lbf/lbm]:
-    var BHP1 = parseFloat(vari.initialshafthorsepower_fl); // Potencia inicial brake [HP]:
-    var N1 = parseFloat(vari.initialimpellerrotational_fl); //Velocidad inicial [rpm]:
-    var N2 = parseFloat(vari.finalimpellerrotational_fl); //Velocidad final [rpm]:
+    var Q1 = get_Flujo(parseFloatWithCommas(vari.initialflowrate_fl), uni.if_sel_fl, "MMSCFD"); //Tasa de flujo inicial            
+    var H1 = parseFloatWithCommas(vari.initialcompressorhead_fl); //Cabeza inicial [ft * lbf/lbm]:
+    var BHP1 = parseFloatWithCommas(vari.initialshafthorsepower_fl); // Potencia inicial brake [HP]:
+    var N1 = parseFloatWithCommas(vari.initialimpellerrotational_fl); //Velocidad inicial [rpm]:
+    var N2 = parseFloatWithCommas(vari.finalimpellerrotational_fl); //Velocidad final [rpm]:
     
     var Q2 = Q1/(N1/N2); //Flujo final [MMSCFD]
     var H2 = (H1/Math.pow(N1/N2, 2)).toFixed(2); //Cabeza final [ft * lbf/lbm]
@@ -824,28 +828,28 @@ function capacityHorsePower_Form(vari, uni){
     //Validado Excel Julio
     //Valido BD
     
-    var elev =  get_Long(parseFloat(vari.enteree_chp), uni.ee_sel_chp, "ft"); //Altura [ft]
-    var Pb = get_Pres(parseFloat(vari.basepressure_chp), elev, uni.bp_sel_chp, "psia"); //Presión base:
-    var Ps = get_Pres(parseFloat(vari.suctionp_chp), elev, uni.sp_sel_chp, "psia"); //Presión succiòn:
-    var Pd = get_Pres(parseFloat(vari.dischargep_chp), elev, uni.dp_sel_chp, "psia"); //Presión descarga:
+    var elev =  get_Long(parseFloatWithCommas(vari.enteree_chp), uni.ee_sel_chp, "ft"); //Altura [ft]
+    var Pb = get_Pres(parseFloatWithCommas(vari.basepressure_chp), elev, uni.bp_sel_chp, "psia"); //Presión base:
+    var Ps = get_Pres(parseFloatWithCommas(vari.suctionp_chp), elev, uni.sp_sel_chp, "psia"); //Presión succiòn:
+    var Pd = get_Pres(parseFloatWithCommas(vari.dischargep_chp), elev, uni.dp_sel_chp, "psia"); //Presión descarga:
     
-    var Tb = get_Temp(parseFloat(vari.basetemperature_chp), uni.bt_sel_chp, "R");  //Temperatura base
-    var T1 = get_Temp(parseFloat(vari.suctiont_chp), uni.st_sel_chp, "R"); //Temperatura de succión:
+    var Tb = get_Temp(parseFloatWithCommas(vari.basetemperature_chp), uni.bt_sel_chp, "R");  //Temperatura base
+    var T1 = get_Temp(parseFloatWithCommas(vari.suctiont_chp), uni.st_sel_chp, "R"); //Temperatura de succión:
     
 
-    var D = get_Long(parseFloat(vari.borec_chp), uni.bc_sel_chp, "in"); //Bore/Cylinder Inside Diameter:
-    var s = get_Long(parseFloat(vari.stroket_chp), uni.str_sel_chp, "in"); //Stroke/Travel Length of Piston:
-    var n = parseFloat(vari.rotationals_chp); //Rotational Speed
-    var d = get_Long(parseFloat(vari.pistonrd_chp), uni.prd_sel_chp, "in"); //Piston Rod Diameter
+    var D = get_Long(parseFloatWithCommas(vari.borec_chp), uni.bc_sel_chp, "in"); //Bore/Cylinder Inside Diameter:
+    var s = get_Long(parseFloatWithCommas(vari.stroket_chp), uni.str_sel_chp, "in"); //Stroke/Travel Length of Piston:
+    var n = parseFloatWithCommas(vari.rotationals_chp); //Rotational Speed
+    var d = get_Long(parseFloatWithCommas(vari.pistonrd_chp), uni.prd_sel_chp, "in"); //Piston Rod Diameter
     
-    var C = parseFloat(vari.cylindercl_chp);   //Cylider Clearance
-    var G = parseFloat(vari.gst_chp); /// Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
-    var k = parseFloat(vari.gass_chp); //Relación de calor específico del gas
-    var Nm = parseFloat(vari.mechanicale_chp); //Compresor Mechanical Efficiency
+    var C = parseFloatWithCommas(vari.cylindercl_chp);   //Cylider Clearance
+    var G = parseFloatWithCommas(vari.gst_chp); /// Gas Molecular Weight ò  Gas Specific Gravity (Relative to Air)
+    var k = parseFloatWithCommas(vari.gass_chp); //Relación de calor específico del gas
+    var Nm = parseFloatWithCommas(vari.mechanicale_chp); //Compresor Mechanical Efficiency
     var opP = vari.pact_sel_chp.trim();
     
-    var A = parseFloat(vari.effect_chp); //Effect of leakage, Losses, etc [%]
-    var Lw = parseFloat(vari.effect2_chp); //Effect due to Lack of Lubrication [%]
+    var A = parseFloatWithCommas(vari.effect_chp); //Effect of leakage, Losses, etc [%]
+    var Lw = parseFloatWithCommas(vari.effect2_chp); //Effect due to Lack of Lubrication [%]
     
     var Z1, Z2;
     var T2 = T1 * (Math.pow(Pd, (k-1)/k)/Math.pow(Ps, (k-1)/k) - 1 )/Nm + T1; //Temperatura de descarga [°F]:
@@ -885,8 +889,8 @@ function capacityHorsePower_Form(vari, uni){
     var HP = 100/33 * Ps * (Qs/Nm) * ((k-1)/k) * (Math.pow(r, (k-1)/k) - 1); //Cylinder Brake Horse Power [HP]
     
     T2 = get_Temp(T2, "R", uni.st_sel_chp);
-    Z1 = parseFloat(Z1);
-    Z2 = parseFloat(Z2);
+    Z1 = parseFloatWithCommas(Z1);
+    Z2 = parseFloatWithCommas(Z2);
    
     var res = [PD.toFixed(4), T2.toFixed(4), Z1.toFixed(4), Z2.toFixed(4), VE.toFixed(4), Qact.toFixed(4), Qs.toFixed(4), HP.toFixed(1)];   
     changeToDecimal(res);
@@ -900,12 +904,12 @@ function diameterGV_Form(vari, uni){
     //Validado formula con Excel Julio
     //Validado BD
     
-    var elev = get_Long(parseFloat(vari.enteree_dgv), uni.al_sel_dgv, "ft"); //Altura [ft]
-    var Q = get_Flujo(parseFloat(vari.flowr_dgv), uni.fr_sel_dgv, "MMSCFD");
-    var Pb = get_Pres(parseFloat(vari.basepressure_dgv), elev, uni.bp_sel_dgv, "psia"); //Presión base:
-    var Pf = get_Pres(parseFloat(vari.flowingp_dgv), elev, uni.fp_sel_dgv, "psia"); //Presión de flujo:
-    var Tf = get_Temp(parseFloat(vari.flowingt_dgv), uni.ft_sel_dgv, "R"); //Temperatura de flujo:
-    var Tb = get_Temp(parseFloat(vari.basetemperature_dgv), uni.bt_sel_dgv, "R"); //Temperatura base:
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_dgv), uni.al_sel_dgv, "ft"); //Altura [ft]
+    var Q = get_Flujo(parseFloatWithCommas(vari.flowr_dgv), uni.fr_sel_dgv, "MMSCFD");
+    var Pb = get_Pres(parseFloatWithCommas(vari.basepressure_dgv), elev, uni.bp_sel_dgv, "psia"); //Presión base:
+    var Pf = get_Pres(parseFloatWithCommas(vari.flowingp_dgv), elev, uni.fp_sel_dgv, "psia"); //Presión de flujo:
+    var Tf = get_Temp(parseFloatWithCommas(vari.flowingt_dgv), uni.ft_sel_dgv, "R"); //Temperatura de flujo:
+    var Tb = get_Temp(parseFloatWithCommas(vari.basetemperature_dgv), uni.bt_sel_dgv, "R"); //Temperatura base:
     var G  = vari.gst_dgv;
     var v; //Velocidad del gas [ft/min]
     var D; //Diametro interno de la tuberia [in]
@@ -922,15 +926,15 @@ function diameterGV_Form(vari, uni){
         GasG = MW / Mair; //G = M / Mair
     }
     
-    var presPsig = get_Pres(parseFloat(vari.flowingp_dgv), elev, uni.fp_sel_dgv, "psig"); //Presion en psig  
+    var presPsig = get_Pres(parseFloatWithCommas(vari.flowingp_dgv), elev, uni.fp_sel_dgv, "psig"); //Presion en psig  
     
     var Z = Math.pow((1+((presPsig*344400* Math.pow(10,(1.78* GasG)))/(Math.pow(Tf,3.825)))),(-1));
    //             (1+)
     if(vari.tipo_sel_dgv == "2"){ //Se calcula el diametro, se pide la velocidad
-        v = parseFloat(vari.gasv_dgv);
+        v = parseFloatWithCommas(vari.gasv_dgv);
         res = Math.pow((127.3* Math.pow(10,3) * Q * Pb * Tf * Z)/(v * Pf * Tb), 0.5);  //   Diametro interno de la tuberia
     }else{ //Se calcula la velocidad, se pide el diametro
-        D = get_Long(parseFloat(vari.pipeinternald_dgv), uni.pid_sel_dgv, "in"); 
+        D = get_Long(parseFloatWithCommas(vari.pipeinternald_dgv), uni.pid_sel_dgv, "in"); 
         res =(127.3*Math.pow(10,3)*Q*Pb*Tf*Z) / ((Math.pow(D,2) * Pf * Tb)); //Velocidad del gas [ft/min]:
     }
     
@@ -952,17 +956,17 @@ function regulatorSizing1_Form(vari, uni){
     //Validado Hoja de Excel
     //Pendiente conversion de Flujo
     
-    var elev = get_Long(parseFloat(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
-    var Gf = parseFloat(vari.gs_rs); //Gravedad especifica del gas
-    var p1 = get_Pres(parseFloat(vari.p1_rs), elev, uni.p1_sel_rs, "psia"); //P1- Presión de entrada:
-    var p2 = get_Pres(parseFloat(vari.p2_rs), elev, uni.p2_sel_rs, "psia"); //P2- Presión de salida:
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
+    var Gf = parseFloatWithCommas(vari.gs_rs); //Gravedad especifica del gas
+    var p1 = get_Pres(parseFloatWithCommas(vari.p1_rs), elev, uni.p1_sel_rs, "psia"); //P1- Presión de entrada:
+    var p2 = get_Pres(parseFloatWithCommas(vari.p2_rs), elev, uni.p2_sel_rs, "psia"); //P2- Presión de salida:
  
     
-    var Q =  get_Flujo(parseFloat(vari.flowrate_rs), uni.fr_sel_rs, "MSCFH"); //Q - Flujo:
-    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "R"); //Temperatura de flujo del gas:
-    var C1 = parseFloat(vari.c1_rs); //C1- Coeficiente de Recuperación de la Válvula:
-    var Ca = parseFloat(vari.capacityr_rs); //Factor de Capacidad (80% Recomendado)
-    var k = parseFloat(vari.k_rs); //Relación de calor especifico:
+    var Q =  get_Flujo(parseFloatWithCommas(vari.flowrate_rs), uni.fr_sel_rs, "MSCFH"); //Q - Flujo:
+    var T = get_Temp(parseFloatWithCommas(vari.flowingg_rs), uni.fg_sel_rs, "R"); //Temperatura de flujo del gas:
+    var C1 = parseFloatWithCommas(vari.c1_rs); //C1- Coeficiente de Recuperación de la Válvula:
+    var Ca = parseFloatWithCommas(vari.capacityr_rs); //Factor de Capacidad (80% Recomendado)
+    var k = parseFloatWithCommas(vari.k_rs); //Relación de calor especifico:
     
     
     var Rc = get_Rc(k);
@@ -991,15 +995,15 @@ function regulatorSizing2_Form(vari, uni){
     //Validado Hoja de Excel
     //Pendiente conversion de Flujo
     
-    var elev = get_Long(parseFloat(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
-    var P1 = get_Pres(parseFloat(vari.p1opu_rs), elev, uni.p1opu_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
-    var Qb = get_Flujo(parseFloat(vari.flowrateu_rs), uni.fru_sel_rs, "MSCFH"); //Q - Flujo
-    var u1 = parseFloat(vari.ag_rs);     //V-Velocidad del Gas Asumida [ft/sec]
-    var Tf = parseFloat(vari.tempu_rs); // T-Factor de Temperatura
-    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "R");  //Temperatura de flujo del gas
-    var syms = parseFloat(vari.smys_rs); //SMYS- Esfuerzo de Fluencia Especificado [pstemp_rsi]
-    var Jf = parseFloat(vari.jfu_rs); //E- Factor de Junta Longitudinal
-    var Df = parseFloat(vari.df_rs); // Factor de diseño
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
+    var P1 = get_Pres(parseFloatWithCommas(vari.p1opu_rs), elev, uni.p1opu_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
+    var Qb = get_Flujo(parseFloatWithCommas(vari.flowrateu_rs), uni.fru_sel_rs, "MSCFH"); //Q - Flujo
+    var u1 = parseFloatWithCommas(vari.ag_rs);     //V-Velocidad del Gas Asumida [ft/sec]
+    var Tf = parseFloatWithCommas(vari.tempu_rs); // T-Factor de Temperatura
+    var T = get_Temp(parseFloatWithCommas(vari.flowingg_rs), uni.fg_sel_rs, "R");  //Temperatura de flujo del gas
+    var syms = parseFloatWithCommas(vari.smys_rs); //SMYS- Esfuerzo de Fluencia Especificado [pstemp_rsi]
+    var Jf = parseFloatWithCommas(vari.jfu_rs); //E- Factor de Junta Longitudinal
+    var Df = parseFloatWithCommas(vari.df_rs); // Factor de diseño
         
     var ID1 = Math.pow((((Qb*1000)*((14.7/P1)*(T/520))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12; //verificación de la formula
     
@@ -1017,15 +1021,15 @@ function regulatorSizing2_Form(vari, uni){
 //1.3 form 3 Regulator and Station Piping Sizing
 function regulatorSizing3_Form(vari, uni){
     
-    var elev = get_Long(parseFloat(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
-    var P2 = get_Pres(parseFloat(vari.p2op_rs), elev, uni.p2op_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
-    var Qb = get_Flujo(parseFloat(vari.flowrated_rs), uni.frd_sel_rs, "MSCFH"); //Q - Flujo 
-    var T = get_Temp(parseFloat(vari.flowingg_rs), uni.fg_sel_rs, "R"); //Temperatura de flujo del gas
-    var u1 = parseFloat(vari.agd_rs); //V- Velocidad del Gas Asumida [ft/sec]
-    var syms = parseFloat(vari.smysd_rs); //SMYS- Esfuerzo de Fluencia Mínimo [psi]
-    var Df = parseFloat(vari.df_rs); // F- Factor de Diseño
-    var Jf = parseFloat(vari.jfdp_rs); // Longitudinal Joint Factor - E
-    var Tf = parseFloat(vari.tempu_rs); // T-Factor de Temperatura
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_rs), uni.ee_sel_rs, "ft"); //Altura [ft]
+    var P2 = get_Pres(parseFloatWithCommas(vari.p2op_rs), elev, uni.p2op_sel_rs, "psia"); //P1- Presión de Operación-Aguas Arriba
+    var Qb = get_Flujo(parseFloatWithCommas(vari.flowrated_rs), uni.frd_sel_rs, "MSCFH"); //Q - Flujo 
+    var T = get_Temp(parseFloatWithCommas(vari.flowingg_rs), uni.fg_sel_rs, "R"); //Temperatura de flujo del gas
+    var u1 = parseFloatWithCommas(vari.agd_rs); //V- Velocidad del Gas Asumida [ft/sec]
+    var syms = parseFloatWithCommas(vari.smysd_rs); //SMYS- Esfuerzo de Fluencia Mínimo [psi]
+    var Df = parseFloatWithCommas(vari.df_rs); // F- Factor de Diseño
+    var Jf = parseFloatWithCommas(vari.jfdp_rs); // Longitudinal Joint Factor - E
+    var Tf = parseFloatWithCommas(vari.tempu_rs); // T-Factor de Temperatura
     
     var ID2 = Math.pow((((Qb*1000)*((14.7/P2)*(T/520))*(1/3600)/(u1))*(4/Math.PI)), (1/2)) * 12;
     
@@ -1043,26 +1047,26 @@ function regulatorSizing3_Form(vari, uni){
 
 //1.13 Relief Valve Sizing
 function reliefValveSizing_Form(vari,uni){
-    var elev =  get_Long(parseFloat(vari.enteree_rvs), uni.ee_sel_rvs, "ft"); //Altura
+    var elev =  get_Long(parseFloatWithCommas(vari.enteree_rvs), uni.ee_sel_rvs, "ft"); //Altura
     
     var opso = vari.opso; //Area o flow
     var opsk = vari.opsk; //Gra esp, o peso mole
     
-    var P1 = get_Pres(parseFloat(vari.relief_rvs), elev, uni.rv_sel_rvs, "psia"); //>Set de presión de la válvula de alívio
-    var T = get_Temp(parseFloat(vari.gasvaporf_rvs), uni.gfv_sel_rvs, "R"); //Temperatura del gas o vapor
-    var P2 = get_Pres(parseFloat(vari.gasp_rvs), elev, uni.bp_sel_rvs, "psia"); // Back pressure
+    var P1 = get_Pres(parseFloatWithCommas(vari.relief_rvs), elev, uni.rv_sel_rvs, "psia"); //>Set de presión de la válvula de alívio
+    var T = get_Temp(parseFloatWithCommas(vari.gasvaporf_rvs), uni.gfv_sel_rvs, "R"); //Temperatura del gas o vapor
+    var P2 = get_Pres(parseFloatWithCommas(vari.gasp_rvs), elev, uni.bp_sel_rvs, "psia"); // Back pressure
     
     
     
-    var Fl = parseFloat(vari.requiredf_rvs); //Flujo requerido [MSCFH]
+    var Fl = parseFloatWithCommas(vari.requiredf_rvs); //Flujo requerido [MSCFH]
     
-    var Kd = parseFloat(vari.effectivec_rvs);  //Kd- Coeficiente de descarga efectivo
-    var Kb = parseFloat(vari.capacityc_rvs); //Kb- Factor de corrección de capacidad
-    var Z = parseFloat(vari.compressibilityf_rvs); //Factor de compresibilidad
-    var M = parseFloat(vari.molecularws_rvs); //Peso Molecular
-    var G = parseFloat(vari.specificg_rvs); // Gravedad Específica
-    var k = parseFloat(vari.specifich_rvs); // Relación de calor específico
-    var A = parseFloat(vari.requiredeff_rvs); //Área efectiva de descarga requerida [in2]
+    var Kd = parseFloatWithCommas(vari.effectivec_rvs);  //Kd- Coeficiente de descarga efectivo
+    var Kb = parseFloatWithCommas(vari.capacityc_rvs); //Kb- Factor de corrección de capacidad
+    var Z = parseFloatWithCommas(vari.compressibilityf_rvs); //Factor de compresibilidad
+    var M = parseFloatWithCommas(vari.molecularws_rvs); //Peso Molecular
+    var G = parseFloatWithCommas(vari.specificg_rvs); // Gravedad Específica
+    var k = parseFloatWithCommas(vari.specifich_rvs); // Relación de calor específico
+    var A = parseFloatWithCommas(vari.requiredeff_rvs); //Área efectiva de descarga requerida [in2]
     var Kc = 1;
     
     var Pcf = Math.pow((2 / (k + 1)),(k / (k - 1)))* P1;  //Razón de Flujo Crítico:
@@ -1135,12 +1139,12 @@ function reliefValveSizing_Form(vari,uni){
 function reliefValveReaction_Form(vari,uni){
     
     var opsk = vari.opsk_rvr;
-    var elev = get_Long(parseFloat(vari.enteree_rvr), uni.ee_sel_rvr, "ft"); //Altura [ft]
-    var W = parseFloat(vari.requiredf_rvr); // Flujo del gas o vapor [lbm/hr]
-    var k = parseFloat(vari.specifichs_rvr); //Relación de calor específico
-    var T = get_Temp(parseFloat(vari.temperatureo_rvr), uni.tempo_sel_rvr, "R"); // Temperatura en la salida
-    var P = get_Pres(parseFloat(vari.staticp_rvr), elev, uni.sp_sel_rvr, "psig"); // Presión estática dentro de la salida en el punto de descarga [psig]
-    var A = get_Long(parseFloat(vari.areao_rvr), uni.ao_sel_rvr, "in"); //Área de la salida en el punto de descarga [in]
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_rvr), uni.ee_sel_rvr, "ft"); //Altura [ft]
+    var W = parseFloatWithCommas(vari.requiredf_rvr); // Flujo del gas o vapor [lbm/hr]
+    var k = parseFloatWithCommas(vari.specifichs_rvr); //Relación de calor específico
+    var T = get_Temp(parseFloatWithCommas(vari.temperatureo_rvr), uni.tempo_sel_rvr, "R"); // Temperatura en la salida
+    var P = get_Pres(parseFloatWithCommas(vari.staticp_rvr), elev, uni.sp_sel_rvr, "psig"); // Presión estática dentro de la salida en el punto de descarga [psig]
+    var A = get_Long(parseFloatWithCommas(vari.areao_rvr), uni.ao_sel_rvr, "in"); //Área de la salida en el punto de descarga [in]
     var M; // Peso molecular del gas o vapor
     var G; // Gravedad Específica
     
@@ -1148,10 +1152,10 @@ function reliefValveReaction_Form(vari,uni){
     
     if(opsk === "selectk2_rvr")
     {   // 'Gravedad Especifica'
-        G = parseFloat(vari.specificgra_rvr);
+        G = parseFloatWithCommas(vari.specificgra_rvr);
         M = G * 28.96443;
     }else{
-        M = parseFloat(vari.pesomolecular_rvr); 
+        M = parseFloatWithCommas(vari.pesomolecular_rvr); 
         G = M / 28.96443;
     }  
     
@@ -1172,16 +1176,16 @@ function hotTapSizing_Form(vari, uni){
     // OK Excel Julio
     
     //Obtenido de excel
-    /*var elev =  parseFloat(vari.enteree_htz);
-    var G = parseFloat(vari.gsg_htz);
-    var Co = parseFloat(vari.orificec_htz);
-    var F = parseFloat(vari.criticalf_htz);
+    /*var elev =  parseFloatWithCommas(vari.enteree_htz);
+    var G = parseFloatWithCommas(vari.gsg_htz);
+    var Co = parseFloatWithCommas(vari.orificec_htz);
+    var F = parseFloatWithCommas(vari.criticalf_htz);
     
-    var dP = get_Pres(parseFloat(vari.pressurel_htz), elev, uni.pl_sel_htz, "psig");
-    var T = get_Temp(parseFloat(vari.flowingt_htz), uni.flowt_sel_htz, "R");
-    var P = get_Pres(parseFloat(vari.pressure_htz), elev, uni.pre_sel_htz, "psig");
+    var dP = get_Pres(parseFloatWithCommas(vari.pressurel_htz), elev, uni.pl_sel_htz, "psig");
+    var T = get_Temp(parseFloatWithCommas(vari.flowingt_htz), uni.flowt_sel_htz, "R");
+    var P = get_Pres(parseFloatWithCommas(vari.pressure_htz), elev, uni.pre_sel_htz, "psig");
     
-    var Fr = get_Flujo(parseFloat(vari.flowrate_htz), uni.fr_sel_htz, "MSCFH");
+    var Fr = get_Flujo(parseFloatWithCommas(vari.flowrate_htz), uni.fr_sel_htz, "MSCFH");
     var r = (P-dP)/P;
     var aux = Math.pow((  ((Co/(Co-1))*  Math.pow(r,(2/Co)))  *   ((1 - Math.pow(r,(Co-1)/Co))/(1-r))   ), 1/2);
     var M = 28.964*F;
@@ -1201,24 +1205,24 @@ function hotTapSizing_Form(vari, uni){
     
     var res = [branchGV, calOA, calTD, Z, condFlujo];*/
     
-    var elev = get_Long(parseFloat(vari.enteree_htz), uni.ee_sel_htz, "ft"); //Altura [ft]
-    var P1 = get_Pres(parseFloat(vari.pressure_htz), elev, uni.pre_sel_htz, "psig"); // Presión del cabezal (psig)
-    var dP = parseFloat(vari.pressurel_htz); //Delta P
-    var T = get_Temp(parseFloat(vari.flowingt_htz), uni.flowt_sel_htz, "R"); //Temperatura del gas
-    var Qm = get_Flujo(parseFloat(vari.flowrate_htz), uni.fr_sel_htz, "SCFH"); //Flow Rate (SCFM)
-    var G = parseFloat(vari.gsg_htz); //Gas Specific Gravity
-    var dC = parseFloat(vari.holec_htz); // Diámetro de la corona (in)    
-    var k =  parseFloat(vari.specifich_htz); // Specific Heat Ratio
-    var K = parseFloat(vari.orificec_htz); // Orifice Coefficient
-    var Pb = get_Pres(parseFloat(vari.pressureb_htz), elev, uni.preb_sel_htz, "psia"); // Presión base (psig)
-    var Tb = get_Temp(parseFloat(vari.baset_htz), uni.bt_sel_htz, "R"); //Temperatura base (R)
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_htz), uni.ee_sel_htz, "ft"); //Altura [ft]
+    var P1 = get_Pres(parseFloatWithCommas(vari.pressure_htz), elev, uni.pre_sel_htz, "psig"); // Presión del cabezal (psig)
+    var dP = parseFloatWithCommas(vari.pressurel_htz); //Delta P
+    var T = get_Temp(parseFloatWithCommas(vari.flowingt_htz), uni.flowt_sel_htz, "R"); //Temperatura del gas
+    var Qm = get_Flujo(parseFloatWithCommas(vari.flowrate_htz), uni.fr_sel_htz, "SCFH"); //Flow Rate (SCFM)
+    var G = parseFloatWithCommas(vari.gsg_htz); //Gas Specific Gravity
+    var dC = parseFloatWithCommas(vari.holec_htz); // Diámetro de la corona (in)    
+    var k =  parseFloatWithCommas(vari.specifich_htz); // Specific Heat Ratio
+    var K = parseFloatWithCommas(vari.orificec_htz); // Orifice Coefficient
+    var Pb = get_Pres(parseFloatWithCommas(vari.pressureb_htz), elev, uni.preb_sel_htz, "psia"); // Presión base (psig)
+    var Tb = get_Temp(parseFloatWithCommas(vari.baset_htz), uni.bt_sel_htz, "R"); //Temperatura base (R)
     
     var P2 = P1 - dP; //Presión en la derivación
     
     var Z;
     
     if(vari.opz_htz === "compfactors2_htz"){
-        Z = parseFloat(vari.z1s_htz); //Z1 - Factor de compresibilidad en condiciones de succión
+        Z = parseFloatWithCommas(vari.z1s_htz); //Z1 - Factor de compresibilidad en condiciones de succión
     }else{
         Z = getZ(T, P1, G, "psig", elev); //Z1 - Factor de compresibilidad en condiciones de succión:
     }
@@ -1268,7 +1272,7 @@ function hotTapSizing_Form(vari, uni){
 function pipelinehydrostatic_Form(vari, uni){
     
     var Fwt = -1;
-    var tt = get_Temp(parseFloat(vari.testt_phy), uni.tt_sel_phy, "F"); //Temperatura de prueba
+    var tt = get_Temp(parseFloatWithCommas(vari.testt_phy), uni.tt_sel_phy, "F"); //Temperatura de prueba
     var ttc = get_Temp(tt, "F", "C");
     
     
@@ -1291,7 +1295,7 @@ function pipelinehydrostatic_Form(vari, uni){
             if(data == null){
                 Fwt = 0; // Pendiente solucionar esto cuando la data es null
             }else{
-                Fwt = parseFloat(data.row.fwt); //Cambio térmico en el volúmen específico de agua 
+                Fwt = parseFloatWithCommas(data.row.fwt); //Cambio térmico en el volúmen específico de agua 
             }
         },
         complete: function(){
@@ -1300,12 +1304,12 @@ function pipelinehydrostatic_Form(vari, uni){
      });
     
     
-    var elev = get_Long(parseFloat(vari.enteree_phy), uni.h_sel_phy, "ft");
-    var D =  get_Long(parseFloat(vari.pipeo_phy), uni.po_sel_phy, "in"); //Diametro externo de la tubería
-    var t = parseFloat(vari.pipew_phy); //Espesor de pared
-    var di = get_Long(parseFloat(vari.pipei_phy), uni.pi_sel_phy, "in"); // Diametro interno de la tuberia
-    var tp = get_Pres(parseFloat(vari.testp_phy), elev, uni.tp_sel_phy, "psig");//Presión de prueba
-    var pl = get_Long(parseFloat(vari.pipelinel_phy), uni.pl_sel_phy, "ft"); //Longitud de la tubería
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_phy), uni.h_sel_phy, "ft");
+    var D =  get_Long(parseFloatWithCommas(vari.pipeo_phy), uni.po_sel_phy, "in"); //Diametro externo de la tubería
+    var t = parseFloatWithCommas(vari.pipew_phy); //Espesor de pared
+    var di = get_Long(parseFloatWithCommas(vari.pipei_phy), uni.pi_sel_phy, "in"); // Diametro interno de la tuberia
+    var tp = get_Pres(parseFloatWithCommas(vari.testp_phy), elev, uni.tp_sel_phy, "psig");//Presión de prueba
+    var pl = get_Long(parseFloatWithCommas(vari.pipelinel_phy), uni.pl_sel_phy, "ft"); //Longitud de la tubería
     
     var pat = localAtmosphericPressure_Form(elev);
     var Fwp = (1/(1-(4.5*Math.pow(10,(-5)))*(tp/pat))); //Compresibilidad del agua debido al aumento de la presión
@@ -1387,11 +1391,11 @@ function comprensibilidad(xo){
 //  Prueba de presión de la tubería de gas 6.2
 function gaspipelineMod6_Form(vari, uni){
         
-    var h = get_Long(parseFloat(vari.enteree_gp), uni.h_sel_gp, "ft"); //Altura [ft]
-    var P1 = get_Pres(parseFloat(vari.initialt_gp), h, uni.it_sel_gp, "psig"); //Initial Test Pressure 
-    var t = get_Time(parseFloat(vari.shut_gp), uni.shut_sel_gp, "min"); // Shut-in Time
+    var h = get_Long(parseFloatWithCommas(vari.enteree_gp), uni.h_sel_gp, "ft"); //Altura [ft]
+    var P1 = get_Pres(parseFloatWithCommas(vari.initialt_gp), h, uni.it_sel_gp, "psig"); //Initial Test Pressure 
+    var t = get_Time(parseFloatWithCommas(vari.shut_gp), uni.shut_sel_gp, "min"); // Shut-in Time
     
-    var D = get_Long(parseFloat(vari.internalpd_gp), uni.ipd_sel_gp, "in"); //Internal Pipe Diameter
+    var D = get_Long(parseFloatWithCommas(vari.internalpd_gp), uni.ipd_sel_gp, "in"); //Internal Pipe Diameter
     var A = (949)*60; //Tomado de un despeje del formulario de toolbox
     
     var res = (t*P1)/(A*D); //Acceptable Pressure Loss
@@ -1407,18 +1411,18 @@ function pipelineTime_Form(vari, uni){
 
 function packPipeline_Form(vari, uni){
     
-    var elev = get_Long(parseFloat(vari.h_pap), uni.h_sel_pap, "ft");; // Altura al nivel del mar
+    var elev = get_Long(parseFloatWithCommas(vari.h_pap), uni.h_sel_pap, "ft");; // Altura al nivel del mar
     var Mair = 28.96443;    //Mair=28.96443 g/mole (molecular weight of standard air - CRC, 1983).
     
-    var Tave = get_Temp(parseFloat(vari.gasavetemp_pap), uni.gat_sel_pap, "R"); ///Gas Average Temperature
-    var Pb = get_Pres(parseFloat(vari.basep_pap), elev, uni.bp_sel_pap, "psia"); //Presión base
-    var P1 =  get_Pres(parseFloat(vari.upstreamp_pap), elev, uni.up_sel_pap, "psia"); //Upstream Pressure
-    var P2 = get_Pres(parseFloat(vari.downstreamp_pap), elev, uni.dp_sel_pap, "psia"); //Downstream Pressure
-    var D = get_Long(parseFloat(vari.internalp_pap), uni.ip_sel_pap, "ft");    // Internal Pipe Diameter //
-    var L = get_Long(parseFloat(vari.lenghtp_pap), uni.lp_sel_pap, "ft"); //Length of pipeline
+    var Tave = get_Temp(parseFloatWithCommas(vari.gasavetemp_pap), uni.gat_sel_pap, "R"); ///Gas Average Temperature
+    var Pb = get_Pres(parseFloatWithCommas(vari.basep_pap), elev, uni.bp_sel_pap, "psia"); //Presión base
+    var P1 =  get_Pres(parseFloatWithCommas(vari.upstreamp_pap), elev, uni.up_sel_pap, "psia"); //Upstream Pressure
+    var P2 = get_Pres(parseFloatWithCommas(vari.downstreamp_pap), elev, uni.dp_sel_pap, "psia"); //Downstream Pressure
+    var D = get_Long(parseFloatWithCommas(vari.internalp_pap), uni.ip_sel_pap, "ft");    // Internal Pipe Diameter //
+    var L = get_Long(parseFloatWithCommas(vari.lenghtp_pap), uni.lp_sel_pap, "ft"); //Length of pipeline
     var R = 10.73; //Gas constant
     var GasG = 0;
-    var G = parseFloat(vari.gst_pap);
+    var G = parseFloatWithCommas(vari.gst_pap);
     
     if(vari.gs_sel_pap === "9"){ //Gas Specific Gravity (Relative to Air)
         GasG = G;
@@ -1440,11 +1444,11 @@ function packPipeline_Form(vari, uni){
 
 function purginCalculations_Form(vari, uni){
     
-    var elev = get_Long(parseFloat(vari.h_pca), uni.h_sel_pca, "ft"); //Altura [ft]
-    var D = get_Long(parseFloat(vari.internald_pca), uni.idp_sel_pca, "in"); // Internal diameter of the pipe section:
-    var L = get_Long(parseFloat(vari.lenghtp_pca), uni.lp_sel_pca, "mil");  // Length of the pipe section
-    var K = parseFloat(vari.blowoffc_pca); //Blow-off coefficient
-    var P2 = get_Pres(parseFloat(vari.blowoffp_pca), elev, uni.bop_sel_pca, "psia");  //Blow-off pressure, just upstream of the valve (Recommended: 18-20)
+    var elev = get_Long(parseFloatWithCommas(vari.h_pca), uni.h_sel_pca, "ft"); //Altura [ft]
+    var D = get_Long(parseFloatWithCommas(vari.internald_pca), uni.idp_sel_pca, "in"); // Internal diameter of the pipe section:
+    var L = get_Long(parseFloatWithCommas(vari.lenghtp_pca), uni.lp_sel_pca, "mil");  // Length of the pipe section
+    var K = parseFloatWithCommas(vari.blowoffc_pca); //Blow-off coefficient
+    var P2 = get_Pres(parseFloatWithCommas(vari.blowoffp_pca), elev, uni.bop_sel_pca, "psia");  //Blow-off pressure, just upstream of the valve (Recommended: 18-20)
     
     //Metodo A
     //paso 1
@@ -1494,16 +1498,16 @@ function purginCalculations_Form(vari, uni){
     var V1b = (K*P1*(Tb/60))-V1; //Volume of gas lost - minumun time
     var V2b = (K*P1*((2*Tb)/60))-V1; //Volume of gas lost - recommended time
     
-    Q = parseFloat(Q).toFixed(1);
-    P1 = parseFloat(P1).toFixed(1);
-    V1 = parseFloat(V1).toFixed(1);
-    rT = parseFloat(rT).toFixed(1);
-    V1a = parseFloat(V1a).toFixed(1);
-    V2a = parseFloat(V2a).toFixed(1);
-    Tb = parseFloat(Tb).toFixed(1);
-    rTb = parseFloat(rTb).toFixed(1);
-    V1b = parseFloat(V1b).toFixed(1);
-    V2b = parseFloat(V2b).toFixed(1);
+    Q = parseFloatWithCommas(Q).toFixed(1);
+    P1 = parseFloatWithCommas(P1).toFixed(1);
+    V1 = parseFloatWithCommas(V1).toFixed(1);
+    rT = parseFloatWithCommas(rT).toFixed(1);
+    V1a = parseFloatWithCommas(V1a).toFixed(1);
+    V2a = parseFloatWithCommas(V2a).toFixed(1);
+    Tb = parseFloatWithCommas(Tb).toFixed(1);
+    rTb = parseFloatWithCommas(rTb).toFixed(1);
+    V1b = parseFloatWithCommas(V1b).toFixed(1);
+    V2b = parseFloatWithCommas(V2b).toFixed(1);
     
     var res = [Q,P1,V1,rT,rT,V1a,V2a,Tb,rTb,V1b,V2b];
     changeToDecimal(res);
@@ -1514,14 +1518,14 @@ function purginCalculations_Form(vari, uni){
 //MAOP 7.1
 function maop_Form(vari, uni){
     
-    var T = parseFloat(vari.tempu_ma); //Temperature Derating Factor
-    var D = get_Long(parseFloat(vari.nomps_ma), uni.pipeo_sel_ma, "in"); //Diametro externo de la tubería 
-    var t = get_Long(parseFloat(vari.wallt_ma), uni.np_sel_ma, "in"); //Espesor de la pared nominal de la tubería
-    var d = get_Long(parseFloat(vari.maximund_ma), uni.md_sel_ma, "in"); //Maximun Depth of Corroded Area
-    var L = get_Long(parseFloat(vari.longitudinale_ma), uni.le_sel_ma, "in"); //Longitudinal Extent of Corroded Area
-    var S = parseFloat(vari.grade_ma); //Specified Minimun Yield Strength - SYMS
-    var F = parseFloat(vari.df_ma); // Desing Factor - F
-    var MAOP = parseFloat(vari.mop_ma); //Maximun Operating Pressure - MOP
+    var T = parseFloatWithCommas(vari.tempu_ma); //Temperature Derating Factor
+    var D = get_Long(parseFloatWithCommas(vari.nomps_ma), uni.pipeo_sel_ma, "in"); //Diametro externo de la tubería 
+    var t = get_Long(parseFloatWithCommas(vari.wallt_ma), uni.np_sel_ma, "in"); //Espesor de la pared nominal de la tubería
+    var d = get_Long(parseFloatWithCommas(vari.maximund_ma), uni.md_sel_ma, "in"); //Maximun Depth of Corroded Area
+    var L = get_Long(parseFloatWithCommas(vari.longitudinale_ma), uni.le_sel_ma, "in"); //Longitudinal Extent of Corroded Area
+    var S = parseFloatWithCommas(vari.grade_ma); //Specified Minimun Yield Strength - SYMS
+    var F = parseFloatWithCommas(vari.df_ma); // Desing Factor - F
+    var MAOP = parseFloatWithCommas(vari.mop_ma); //Maximun Operating Pressure - MOP
     
     //Hallar el valor de la ecuacion L = 1.12B raiz(Dt)
     var B = Math.sqrt(Math.pow((d/t)/(1.1 *  (d/t) - 0.15), 2)-1);
@@ -1558,9 +1562,9 @@ function maop_Form(vari, uni){
 //Maximun Allowable Longitudinal Extent of Corrosion 7.2
 function maximunAllowable_Form(vari, uni){
     
-    var d = get_Long(parseFloat(vari.maximund_mal), uni.md_sel_mal, "in");//Maximun Depth of corroded area
-    var D = get_Long(parseFloat(vari.pipeo_mal), uni.po_sel_mal, "in");  // Diametro externo de la tubería
-    var t = get_Long(parseFloat(vari.nomip_mal), uni.np_sel_mal, "in"); // Espesor de la pared nominal de la tubería
+    var d = get_Long(parseFloatWithCommas(vari.maximund_mal), uni.md_sel_mal, "in");//Maximun Depth of corroded area
+    var D = get_Long(parseFloatWithCommas(vari.pipeo_mal), uni.po_sel_mal, "in");  // Diametro externo de la tubería
+    var t = get_Long(parseFloatWithCommas(vari.nomip_mal), uni.np_sel_mal, "in"); // Espesor de la pared nominal de la tubería
     
     //var porpitin = 100*D/t;
     
@@ -1584,9 +1588,9 @@ function maximunAllowable_Form(vari, uni){
 
 function rateElectrical_Form(vari){
     
-    var Ec = parseFloat(vari.potentialc_re); //Potential of the cathode with respect to a reference electrode
-    var Ea = parseFloat(vari.potentiala_re); //Potential of the anode with respect to the same reference electrode
-    var Rt = parseFloat(vari.totalr_re); // Total resistance to electrical current flow thugh the cell
+    var Ec = parseFloatWithCommas(vari.potentialc_re); //Potential of the cathode with respect to a reference electrode
+    var Ea = parseFloatWithCommas(vari.potentiala_re); //Potential of the anode with respect to the same reference electrode
+    var Rt = parseFloatWithCommas(vari.totalr_re); // Total resistance to electrical current flow thugh the cell
     
     var I = (Ea-Ec)/Rt; //Rate of the electrical current flow through the corrosion cell
     
@@ -1597,9 +1601,9 @@ function rateElectrical_Form(vari){
 
 function relationship_Form(vari, uni){
     
-    var p = get_Long(parseFloat(vari.electrolyter_rel), uni.er_sel_rel, "cm"); //Electrolyte resistivity
-    var dL = get_Long(parseFloat(vari.distancee_rel), uni.de_sel_rel, "cm"); //Distance through the electrolyte traveled by the current
-    var A = parseFloat(vari.crosss_rel); //Cross sectional area through which the current flows
+    var p = get_Long(parseFloatWithCommas(vari.electrolyter_rel), uni.er_sel_rel, "cm"); //Electrolyte resistivity
+    var dL = get_Long(parseFloatWithCommas(vari.distancee_rel), uni.de_sel_rel, "cm"); //Distance through the electrolyte traveled by the current
+    var A = parseFloatWithCommas(vari.crosss_rel); //Cross sectional area through which the current flows
     
     var R = (p*dL)/A; //Electrical resistance
     var res =[R.toFixed(2)];
@@ -1609,9 +1613,9 @@ function relationship_Form(vari, uni){
 
 function electroyleResistance_Form(vari, uni){
     
-    var p = get_Long(parseFloat(vari.electrolyter_ere), uni.er_sel_ere, "cm"); //Resistivity of soil:
-    var Ka = parseFloat(vari.geof_ere);//Geometry Factor for the Central Electrode
-    var d =  get_Long(parseFloat(vari.distancec_ere), uni.dc_sel_ere, "cm"); //Length of Electrode
+    var p = get_Long(parseFloatWithCommas(vari.electrolyter_ere), uni.er_sel_ere, "cm"); //Resistivity of soil:
+    var Ka = parseFloatWithCommas(vari.geof_ere);//Geometry Factor for the Central Electrode
+    var d =  get_Long(parseFloatWithCommas(vari.distancec_ere), uni.dc_sel_ere, "cm"); //Length of Electrode
     
     var r = Ka * p;
     
@@ -1623,9 +1627,9 @@ function electroyleResistance_Form(vari, uni){
 
 function electricalResistance_Form(vari, uni){
     
-    var L = get_Long(parseFloat(vari.length_elr), uni.le_sel_elr, "cm"); //Length of the Conductor
-    var A = get_Long_Cuadrada(parseFloat(vari.cross_elr), uni.cs_sel_elr, "cm"); //Cross Sectional Area of the Conductor
-    var p = get_Long(parseFloat(vari.conductorr_elr), uni.cr_sel_elr, "cm"); //Conductor Resistivity
+    var L = get_Long(parseFloatWithCommas(vari.length_elr), uni.le_sel_elr, "cm"); //Length of the Conductor
+    var A = get_Long_Cuadrada(parseFloatWithCommas(vari.cross_elr), uni.cs_sel_elr, "cm"); //Cross Sectional Area of the Conductor
+    var p = get_Long(parseFloatWithCommas(vari.conductorr_elr), uni.cr_sel_elr, "cm"); //Conductor Resistivity
     
     var R = p * (L/A); //Electrical Resistanace of a Conductor
     var res = [R.toFixed(2)];
@@ -1634,11 +1638,11 @@ function electricalResistance_Form(vari, uni){
 }
 
 function ohm_Form(vari, uni){
-    var Ec = parseFloat(vari.potentiald_ohm); //Potential difference between the polarized cathode and reference electrode
-    var Ea = parseFloat(vari.potentiale_ohm); //Potential difference between the polarized anode and the same reference electrode:
-    var Kc = parseFloat(vari.geometryc_ohm); //Geometry factor for a cathode
-    var Ka = parseFloat(vari.geometrya_ohm); //Geometry factor for an anode
-    var p = get_Long(parseFloat(vari.averages_ohm), uni.as_sel_ohm, "cm"); //Average soil resistivity
+    var Ec = parseFloatWithCommas(vari.potentiald_ohm); //Potential difference between the polarized cathode and reference electrode
+    var Ea = parseFloatWithCommas(vari.potentiale_ohm); //Potential difference between the polarized anode and the same reference electrode:
+    var Kc = parseFloatWithCommas(vari.geometryc_ohm); //Geometry factor for a cathode
+    var Ka = parseFloatWithCommas(vari.geometrya_ohm); //Geometry factor for an anode
+    var p = get_Long(parseFloatWithCommas(vari.averages_ohm), uni.as_sel_ohm, "cm"); //Average soil resistivity
     
     var I = ((Ec-Ea)/(Ka-Kc))*p; // Corrosion current
     var res = [I.toFixed(2)];
@@ -1651,11 +1655,11 @@ function ohm_Form(vari, uni){
 //Modulo 8 1.1
 function estimatedWeight_Form(vari, uni){
     
-    var La = parseFloat(vari.assumedl_ew); //Assumed Life of a Magnesium Anode:
-    var Ia = parseFloat(vari.electricalc_ew); //Electrical Current Flow from the Anode to the pipe:
-    var Ep = parseFloat(vari.polarizedp_ew); //Polarized Potential Difference between pipe and reference electrode:
-    var Ea = parseFloat(vari.polarizedae_ew); //Polarized Potential Difference between the anode and same reference electrode
-    var p = get_Long(parseFloat(vari.averages_ew), uni.ave_sel_ew, "cm"); //Average soil resistivity
+    var La = parseFloatWithCommas(vari.assumedl_ew); //Assumed Life of a Magnesium Anode:
+    var Ia = parseFloatWithCommas(vari.electricalc_ew); //Electrical Current Flow from the Anode to the pipe:
+    var Ep = parseFloatWithCommas(vari.polarizedp_ew); //Polarized Potential Difference between pipe and reference electrode:
+    var Ea = parseFloatWithCommas(vari.polarizedae_ew); //Polarized Potential Difference between the anode and same reference electrode
+    var p = get_Long(parseFloatWithCommas(vari.averages_ew), uni.ave_sel_ew, "cm"); //Average soil resistivity
     
     Ia = (Ep-Ea)/(0.00545*p);
     var Wa = (La/0.0571)*(Ia); //Estimated Weight of a Magnesium Anode [lbs]:
@@ -1670,10 +1674,10 @@ function estimatedWeight_Form(vari, uni){
 //Modulo 8 1.2
 function resistanceEarthIAGB_Form(vari, uni){
     
-    var r = get_Long(parseFloat(vari.resistancee_riagb), uni.res_sel_riagb, "cm");
-    var p = get_Long(parseFloat(vari.actuals_riagb), uni.act_sel_riagb, "cm");
-    var K = parseFloat(vari.correctionf_riagb); //Correction Factor for anode grouping
-    var N = parseFloat(vari.numbera_riagb); // Number of Anodes
+    var r = get_Long(parseFloatWithCommas(vari.resistancee_riagb), uni.res_sel_riagb, "cm");
+    var p = get_Long(parseFloatWithCommas(vari.actuals_riagb), uni.act_sel_riagb, "cm");
+    var K = parseFloatWithCommas(vari.correctionf_riagb); //Correction Factor for anode grouping
+    var N = parseFloatWithCommas(vari.numbera_riagb); // Number of Anodes
     
     var R = ((r*1000)*(p*1000)*K)/(N); //Total Group Bed to the Earth Resistance
     
@@ -1686,10 +1690,10 @@ function resistanceEarthIAGB_Form(vari, uni){
 //Modulo 8 1.3
 function rudengergsFormula_Form(vari, uni){
  
-    var I = parseFloat(vari.grounda_rf); //Ground Anode Current amperes
-    var p = get_Long(parseFloat(vari.actuals_rf), uni.act_sel_rf, "cm"); //Earth resistivity in ohm-centimeters
-    var y = get_Long(parseFloat(vari.lengtha_rf), uni.xdi_sel_rf, "ft"); //>Length of Anode in Earth
-    var x = get_Long(parseFloat(vari.xdistance_rf), uni.al_sel_rf, "ft"); //X Distance from the ground to anode
+    var I = parseFloatWithCommas(vari.grounda_rf); //Ground Anode Current amperes
+    var p = get_Long(parseFloatWithCommas(vari.actuals_rf), uni.act_sel_rf, "cm"); //Earth resistivity in ohm-centimeters
+    var y = get_Long(parseFloatWithCommas(vari.lengtha_rf), uni.xdi_sel_rf, "ft"); //>Length of Anode in Earth
+    var x = get_Long(parseFloatWithCommas(vari.xdistance_rf), uni.al_sel_rf, "ft"); //X Distance from the ground to anode
     var Vx = 1;
     
     if(x > 10*y){
@@ -1707,9 +1711,9 @@ function rudengergsFormula_Form(vari, uni){
 //Modulo 8 1.4
 function resistanceEarthSVA_Form(vari, uni){
 
-    var p = get_Long(parseFloat(vari.soilr_rsva), uni.so_sel_rsva, "cm"); //Soil Resistivity    
-    var L = get_Long(parseFloat(vari.anodel_rsva), uni.al_sel_rsva, "ft"); //Anode Length ft
-    var d = get_Long(parseFloat(vari.anoded_rsva), uni.ad_sel_rsva, "ft"); //Anode Diameter
+    var p = get_Long(parseFloatWithCommas(vari.soilr_rsva), uni.so_sel_rsva, "cm"); //Soil Resistivity    
+    var L = get_Long(parseFloatWithCommas(vari.anodel_rsva), uni.al_sel_rsva, "ft"); //Anode Length ft
+    var d = get_Long(parseFloatWithCommas(vari.anoded_rsva), uni.ad_sel_rsva, "ft"); //Anode Diameter
     
     var R = ((0.00521*p)/(L))*(2.3*Math.log10((8*L)/d)-1); // Vertical Anode Resistance to Earth [Ohm]
     
@@ -1722,11 +1726,11 @@ function resistanceEarthSVA_Form(vari, uni){
 //Modulo 8 1.5
 function resistanceEarthMVA_Form(vari, uni){
 
-    var p = get_Long(parseFloat(vari.soilr_rmva), uni.so_sel_rmva, "cm");  //Soil Resistivity ohm-cm
-    var L = get_Long(parseFloat(vari.anodel_rmva), uni.al_sel_rmva, "ft"); //Anode Length ft
-    var d = get_Long(parseFloat(vari.anoded_rmva), uni.ad_sel_rmva, "ft"); //Anode Diameter ft
-    var N = parseFloat(vari.numbera_rmva); //Number of Anodes in Parallel:
-    var s = get_Long(parseFloat(vari.anodes_rmva), uni.as_sel_rmva, "ft"); // Anode Spacing ft
+    var p = get_Long(parseFloatWithCommas(vari.soilr_rmva), uni.so_sel_rmva, "cm");  //Soil Resistivity ohm-cm
+    var L = get_Long(parseFloatWithCommas(vari.anodel_rmva), uni.al_sel_rmva, "ft"); //Anode Length ft
+    var d = get_Long(parseFloatWithCommas(vari.anoded_rmva), uni.ad_sel_rmva, "ft"); //Anode Diameter ft
+    var N = parseFloatWithCommas(vari.numbera_rmva); //Number of Anodes in Parallel:
+    var s = get_Long(parseFloatWithCommas(vari.anodes_rmva), uni.as_sel_rmva, "ft"); // Anode Spacing ft
     
     var R = ((0.00521*p)/(N*L))*(2.3*Math.log10((8*L)/d) -1 + ((2*L)/s)*2.3*Math.log10(0.655*N)); //Anode Resistance to Earth
     
@@ -1739,10 +1743,10 @@ function resistanceEarthMVA_Form(vari, uni){
 //Modulo 8 1.6
 function resistanceEarthSHA_Form(vari, uni){
     
-    var p = get_Long(parseFloat(vari.soilr_rsha), uni.so_sel_rsha, "cm"); //Soil Resistivity ohm.com
-    var L = get_Long(parseFloat(vari.anodel_rsha), uni.al_sel_rsha, "ft"); //Anode Length ft
-    var d = get_Long(parseFloat(vari.anoded_rsha), uni.ad_sel_rsha, "ft"); //Anode Diameter ft
-    var h = get_Long(parseFloat(vari.distancee_rsha), uni.di_sel_rsha, "ft"); //Distance Earth of a Single Horizontal Anode: ft
+    var p = get_Long(parseFloatWithCommas(vari.soilr_rsha), uni.so_sel_rsha, "cm"); //Soil Resistivity ohm.com
+    var L = get_Long(parseFloatWithCommas(vari.anodel_rsha), uni.al_sel_rsha, "ft"); //Anode Length ft
+    var d = get_Long(parseFloatWithCommas(vari.anoded_rsha), uni.ad_sel_rsha, "ft"); //Anode Diameter ft
+    var h = get_Long(parseFloatWithCommas(vari.distancee_rsha), uni.di_sel_rsha, "ft"); //Distance Earth of a Single Horizontal Anode: ft
     
     var R = ((0.0052*p)/(L))*(2.303*Math.log((4*L)/d) + ((2*h)/L) - 2); //Resistance to Earth of a Single Horizontal Anode [Ohm]
     var res = [R.toFixed(2)];
@@ -1754,9 +1758,9 @@ function resistanceEarthSHA_Form(vari, uni){
 
 function requiredNumberAnodes_Form(vari){
     
-    var E = parseFloat(vari.drivingv_rn); //Driving Volatage
-    var R = parseFloat(vari.anoder_rn); //Anode Resistance
-    var It = parseFloat(vari.totalc_rn); // Total Current
+    var E = parseFloatWithCommas(vari.drivingv_rn); //Driving Volatage
+    var R = parseFloatWithCommas(vari.anoder_rn); //Anode Resistance
+    var It = parseFloatWithCommas(vari.totalc_rn); // Total Current
      
    
     var Ia = E/R; 
@@ -1770,9 +1774,9 @@ function requiredNumberAnodes_Form(vari){
 
 function powerConsumption_Form(vari){
      
-    var Er = parseFloat(vari.rectifiero_pc); //Rectifier Output Voltage
-    var Ir = parseFloat(vari.rectifierc_pc); //Rectifier Current Output
-    var Ur = parseFloat(vari.utilityr_pc); //Utility Rate
+    var Er = parseFloatWithCommas(vari.rectifiero_pc); //Rectifier Output Voltage
+    var Ir = parseFloatWithCommas(vari.rectifierc_pc); //Rectifier Current Output
+    var Ur = parseFloatWithCommas(vari.utilityr_pc); //Utility Rate
     
     var P = 1.5 * Er * Ir; //Power Consumption per Month [$/kWh]
     var MB = P * Ur; // Montly Bill [$]
@@ -1784,13 +1788,13 @@ function powerConsumption_Form(vari){
 }
 
 function cathodicProtection_Form(vari, uni){
-    var p =  get_Long(parseFloat(vari.specificr_cc), "cm", "mt"); //Specific Resistance of pipeline material
-    var Do = get_Long(parseFloat(vari.pipeod_cc), uni.pi_sel_cc, "mt"); //Diametro externo de la tubería
-    var Ro = parseFloat(vari.pipeel_cc) * 0.092903; //Pipe to Electrolyte insulation resistance
-    var L = get_Long(parseFloat(vari.halfd_cc), uni.ha_sel_cc, "mt"); //Half Distance between drain points (anodes)
-    var X = get_Long(parseFloat(vari.xdistance_cc), uni.xd_sel_cc, "mt"); // X - Distance from the Drain Point (anode)
-    var Eo = parseFloat(vari.pipeep_cc); //Pipe to Electrolyte potential at the drain point
-    var Ir = get_Long(parseFloat(vari.pipew_cc), uni.pip_sel_cc, "mt");//Espesor de la pared de la tubería
+    var p =  get_Long(parseFloatWithCommas(vari.specificr_cc), "cm", "mt"); //Specific Resistance of pipeline material
+    var Do = get_Long(parseFloatWithCommas(vari.pipeod_cc), uni.pi_sel_cc, "mt"); //Diametro externo de la tubería
+    var Ro = parseFloatWithCommas(vari.pipeel_cc) * 0.092903; //Pipe to Electrolyte insulation resistance
+    var L = get_Long(parseFloatWithCommas(vari.halfd_cc), uni.ha_sel_cc, "mt"); //Half Distance between drain points (anodes)
+    var X = get_Long(parseFloatWithCommas(vari.xdistance_cc), uni.xd_sel_cc, "mt"); // X - Distance from the Drain Point (anode)
+    var Eo = parseFloatWithCommas(vari.pipeep_cc); //Pipe to Electrolyte potential at the drain point
+    var Ir = get_Long(parseFloatWithCommas(vari.pipew_cc), uni.pip_sel_cc, "mt");//Espesor de la pared de la tubería
     
     var Di = Do - 2 * Ir; //Diametro interno de la tubería
     var Au = 1;
@@ -1815,18 +1819,18 @@ function cathodicProtection_Form(vari, uni){
 
 function distribuitedStatic_Form(vari, uni){
    
-    var w =  parseFloat(vari.unitw_dst);
-    var H = get_Long(parseFloat(vari.hight_dst), uni.hi_sel_dst, "ft");
-    var Bd = get_Long(parseFloat(vari.trench_dst), uni.tre_sel_dst, "ft");
-    var Ku = parseFloat(vari.ku_dst);
-    var N = get_Long(parseFloat(vari.n_dst), uni.n_sel_dst, "ft");
-    var M = get_Long(parseFloat(vari.m_dst), uni.m_sel_dst, "ft");
-    var M1 = get_Long(parseFloat(vari.m1_dst), uni.m1_sel_dst, "ft");
-    var DR = parseFloat(vari.dr_dst); 
-    var Bd = get_Long(parseFloat(vari.bd_dst), uni.bd_sel_dst, "ft");
-    var Do = get_Long(parseFloat(vari.do_dst), uni.do_sel_dst, "ft");
-    var ep = parseFloat(vari.ep_dst); 
-    var epn = parseFloat(vari.en_dst); 
+    var w =  parseFloatWithCommas(vari.unitw_dst);
+    var H = get_Long(parseFloatWithCommas(vari.hight_dst), uni.hi_sel_dst, "ft");
+    var Bd = get_Long(parseFloatWithCommas(vari.trench_dst), uni.tre_sel_dst, "ft");
+    var Ku = parseFloatWithCommas(vari.ku_dst);
+    var N = get_Long(parseFloatWithCommas(vari.n_dst), uni.n_sel_dst, "ft");
+    var M = get_Long(parseFloatWithCommas(vari.m_dst), uni.m_sel_dst, "ft");
+    var M1 = get_Long(parseFloatWithCommas(vari.m1_dst), uni.m1_sel_dst, "ft");
+    var DR = parseFloatWithCommas(vari.dr_dst); 
+    var Bd = get_Long(parseFloatWithCommas(vari.bd_dst), uni.bd_sel_dst, "ft");
+    var Do = get_Long(parseFloatWithCommas(vari.do_dst), uni.do_sel_dst, "ft");
+    var ep = parseFloatWithCommas(vari.ep_dst); 
+    var epn = parseFloatWithCommas(vari.en_dst); 
     var type = vari.type_dst;
     
    
@@ -1953,11 +1957,11 @@ function distribuitedCombined_Form(w, H, Ku, Bd){
 
 function allowable_Form(vari, uni){
     
-    var D = get_Long(parseFloat(vari.do_all), uni.do_sel_all, "in"); //Pipe Outside Diameter [in]
-    var DR =  parseFloat(vari.pdr_all); //Pipe Dimension Ratio
-    var fy =  parseFloat(vari.tyd_all); //Tensible Yield Desing Safety Factor
-    var ft =  parseFloat(vari.tut_all); //Time Under Tension Desing Safety Factor
-    var Ty =  parseFloat(vari.tys_all); //Tensible Yield Strengh [psi]
+    var D = get_Long(parseFloatWithCommas(vari.do_all), uni.do_sel_all, "in"); //Pipe Outside Diameter [in]
+    var DR =  parseFloatWithCommas(vari.pdr_all); //Pipe Dimension Ratio
+    var fy =  parseFloatWithCommas(vari.tyd_all); //Tensible Yield Desing Safety Factor
+    var ft =  parseFloatWithCommas(vari.tut_all); //Time Under Tension Desing Safety Factor
+    var Ty =  parseFloatWithCommas(vari.tys_all); //Tensible Yield Strengh [psi]
    
     
     var ATL =  fy * ft * Ty * Math.PI * Math.pow(D, 2) * (1/DR - (1/Math.pow(DR, 2))); //ATL - Allowable Tensible Load [lbf]
@@ -1970,26 +1974,26 @@ function installation_Form(vari, uni){
     //R <= 1200*Dia Ext
     //var R = H / (1-cosB) > 1200 Diametro
     
-    var D = get_Long(parseFloat(vari.pod_ins), uni.pod_sel_ins, "in"); //Pipe Outside Diameter [in]
-    var DR =  parseFloat(vari.bd_ins); // Standart Diameter Ratio
-    var ya = parseFloat(vari.eg_ins); //Specific Gravity of Pipe Material
-    var yb = parseFloat(vari.sgmd_ins); //Specific Gravity of Mud Slurry (Conservativly assumed 1.5)
-    var B = parseFloat(vari.paex_ins) * Math.PI / 180; // Bore Hole Angle at Pipe Exit [rad]
-    var A = parseFloat(vari.paecro_ins) * Math.PI / 180; // Bore Hole Angle at Pipe Entry [rad]
-    var H = get_Long(parseFloat(vari.h_ins), uni.h_sel_ins, "ft"); //Depth of Bore beneth Surface [ft]
-    var Ea = parseFloat(vari.ampaecro_ins); //Apparent Modulus of Elasticity [psi]
-    var va = parseFloat(vari.cf_ins); //Friction Coefficient before Pipe Enters Bore Hole
-    var vb = parseFloat(vari.cfb_ins); //Friction Coefficient Applicable within Lubricated Bore Hole
-    var L1 =  get_Long(parseFloat(vari.l1_ins), uni.l1_sel_ins, "ft");  //// Length Of Pipe Required for Handling and Thermal Contraction [ft]
-    var Dh = get_Long(parseFloat(vari.bac_ins), uni.bac_sel_ins, "in"); //Backreamed Hole Diameter [in]
-    var dP = parseFloat(vari.hy_ins); //Hydrokinetic Pressure [psi] (Estimated 10 psi)
-    var Lt = get_Long(parseFloat(vari.cro_ins), uni.cro_sel_ins, "ft"); //Horizontal Transition Distance [ft]
-    var uw = parseFloat(vari.uw_ins); //Unit Weigth of Water [lb/ft3]
-    var esp = get_Long(parseFloat(vari.mpwt_ins), uni.mpwt_sel_ins, "in"); // Minimun Pipe Wall Thickness
+    var D = get_Long(parseFloatWithCommas(vari.pod_ins), uni.pod_sel_ins, "in"); //Pipe Outside Diameter [in]
+    var DR =  parseFloatWithCommas(vari.bd_ins); // Standart Diameter Ratio
+    var ya = parseFloatWithCommas(vari.eg_ins); //Specific Gravity of Pipe Material
+    var yb = parseFloatWithCommas(vari.sgmd_ins); //Specific Gravity of Mud Slurry (Conservativly assumed 1.5)
+    var B = parseFloatWithCommas(vari.paex_ins) * Math.PI / 180; // Bore Hole Angle at Pipe Exit [rad]
+    var A = parseFloatWithCommas(vari.paecro_ins) * Math.PI / 180; // Bore Hole Angle at Pipe Entry [rad]
+    var H = get_Long(parseFloatWithCommas(vari.h_ins), uni.h_sel_ins, "ft"); //Depth of Bore beneth Surface [ft]
+    var Ea = parseFloatWithCommas(vari.ampaecro_ins); //Apparent Modulus of Elasticity [psi]
+    var va = parseFloatWithCommas(vari.cf_ins); //Friction Coefficient before Pipe Enters Bore Hole
+    var vb = parseFloatWithCommas(vari.cfb_ins); //Friction Coefficient Applicable within Lubricated Bore Hole
+    var L1 =  get_Long(parseFloatWithCommas(vari.l1_ins), uni.l1_sel_ins, "ft");  //// Length Of Pipe Required for Handling and Thermal Contraction [ft]
+    var Dh = get_Long(parseFloatWithCommas(vari.bac_ins), uni.bac_sel_ins, "in"); //Backreamed Hole Diameter [in]
+    var dP = parseFloatWithCommas(vari.hy_ins); //Hydrokinetic Pressure [psi] (Estimated 10 psi)
+    var Lt = get_Long(parseFloatWithCommas(vari.cro_ins), uni.cro_sel_ins, "ft"); //Horizontal Transition Distance [ft]
+    var uw = parseFloatWithCommas(vari.uw_ins); //Unit Weigth of Water [lb/ft3]
+    var esp = get_Long(parseFloatWithCommas(vari.mpwt_ins), uni.mpwt_sel_ins, "in"); // Minimun Pipe Wall Thickness
     
     
-    var asps = parseFloat(vari.asps_ins); // Allowable/Safe Pull Stress [psi]
-    var perpipe = parseFloat(vari.perp_ins); // Percent of Pipe [%]:
+    var asps = parseFloatWithCommas(vari.asps_ins); // Allowable/Safe Pull Stress [psi]
+    var perpipe = parseFloatWithCommas(vari.perp_ins); // Percent of Pipe [%]:
     
     var Rs = H / (1-Math.cos(B)); //Local Radius of Curvature along Path Segment [ft]
     var Re = H / (1-Math.cos(A)); //Local Radius of Curvature along Path Segment [ft]
@@ -2044,22 +2048,22 @@ function installation_Form(vari, uni){
 
 function postInstallation_Form(vari, uni){
    
-    var Di = get_Long(parseFloat(vari.intb_poi), uni.intb_sel_poi, "ft");
-    var D = get_Long(parseFloat(vari.pod_poi), uni.pod_sel_poi, "in"); //Pipe Outside Diameter
-    var fi = parseFloat(vari.ifa_poi); // Angle of Soil Internal Friction    
-    var r = parseFloat(vari.uws_poi); //Soil Weight [lb/ft3]
-    var H = get_Long(parseFloat(vari.dbo_poi), uni.dbo_sel_poi, "ft"); //Depth of Cover
+    var Di = get_Long(parseFloatWithCommas(vari.intb_poi), uni.intb_sel_poi, "ft");
+    var D = get_Long(parseFloatWithCommas(vari.pod_poi), uni.pod_sel_poi, "in"); //Pipe Outside Diameter
+    var fi = parseFloatWithCommas(vari.ifa_poi); // Angle of Soil Internal Friction    
+    var r = parseFloatWithCommas(vari.uws_poi); //Soil Weight [lb/ft3]
+    var H = get_Long(parseFloatWithCommas(vari.dbo_poi), uni.dbo_sel_poi, "ft"); //Depth of Cover
     var d = fi; //Angle of Wall Friction
     var B = 1; //"silo" width
     var t = (get_Long(Di, "ft", "in") - D)/(-2); //Pipe wall Thickness
     
     var r2 = 1;
-    var yw = parseFloat(vari.uwf_poi);  //Weight of Fluid in Bore Hole
-    var E = parseFloat(vari.ame_poi);// Modulus of Elasticity
+    var yw = parseFloatWithCommas(vari.uwf_poi);  //Weight of Fluid in Bore Hole
+    var E = parseFloatWithCommas(vari.ame_poi);// Modulus of Elasticity
     
-    var u = parseFloat(vari.pr_poi);  //Poisson Ratio
-    var R = get_Long(parseFloat(vari.rac_poi), uni.rac_sel_poi, "in"); //Radius of Curvature
-    var perov = parseFloat(vari.po_poi);  //Percent of Ovality
+    var u = parseFloatWithCommas(vari.pr_poi);  //Poisson Ratio
+    var R = get_Long(parseFloatWithCommas(vari.rac_poi), uni.rac_sel_poi, "in"); //Radius of Curvature
+    var perov = parseFloatWithCommas(vari.po_poi);  //Percent of Ovality
     
     
     
@@ -2098,17 +2102,17 @@ function capacidadMedidoresMas_Form(vari, uni){
     //Validado BD
     
     var modelo = vari.mo_sel;
-    var presop = parseFloat(vari.presionop);
-    var presba = parseFloat(vari.preisonba);
-    var fmin = parseFloat(vari.flujomin);
-    var fmax = parseFloat(vari.flujomax);
+    var presop = parseFloatWithCommas(vari.presionop);
+    var presba = parseFloatWithCommas(vari.preisonba);
+    var fmin = parseFloatWithCommas(vari.flujomin);
+    var fmax = parseFloatWithCommas(vari.flujomax);
     var por = 0.75;
     var medidores = vari.medidores.split("@");    
     var modEva = modEva = modelo.split(",")[0];
     var capaopt = 0;
     
     var fp = (presop+14.7)/14.7;
-    var capmodev = parseFloat(modelo.split(",")[1]);
+    var capmodev = parseFloatWithCommas(modelo.split(",")[1]);
     var capmodev2 = capmodev*fp/((500+presba)/presba).toFixed(2);
     
     var trabminev = (fmin/capmodev2)*100;
@@ -2125,7 +2129,7 @@ function capacidadMedidoresMas_Form(vari, uni){
          
         medi[3] = medidores[cont].split(",")[0];
                 
-        var cap_ref = parseFloat(medidores[cont].split(",")[1]);
+        var cap_ref = parseFloatWithCommas(medidores[cont].split(",")[1]);
         
         if(cap_ref*fp/((500+14.7)/14.7) > fmax){
             if( mendis == undefined){
@@ -2158,10 +2162,10 @@ function capacidadMedidores_Form(vari, uni){
    
     
     var modelo = vari.mo_sel;
-    var presop = parseFloat(vari.presionop);
-    var presba = parseFloat(vari.preisonba);
-    var fmin = parseFloat(vari.flujomin);
-    var fmax = parseFloat(vari.flujomax);
+    var presop = parseFloatWithCommas(vari.presionop);
+    var presba = parseFloatWithCommas(vari.preisonba);
+    var fmin = parseFloatWithCommas(vari.flujomin);
+    var fmax = parseFloatWithCommas(vari.flujomax);
     var por = 0.75;
     var medidores = vari.medidores.split("@");    
     var modEva = modEva = modelo.split(",")[0];
@@ -2183,7 +2187,7 @@ function capacidadMedidores_Form(vari, uni){
         var aux1 = (uni.po_sel.split(",")[1] === "psig" ? 1 : 14.504); //1 si es psi, 14.504 si es bar 
         var aux2 = (uni.pb_sel.split(",")[1] === "psig" ? 1 : 14.504); 
         
-        var cap_ref = parseFloat(medidores[cont].split(",")[1]);
+        var cap_ref = parseFloatWithCommas(medidores[cont].split(",")[1]);
         medi[4] = ((presop*aux1+presba*aux2)/(presba*aux2)*cap_ref); //capa_maxima
         //medi[0] = (fmin / medi[4]); //porcentaje
         //alert(fmin/medi[4]);
@@ -2237,22 +2241,22 @@ function valslamshut_Form(vari, uni){
     
     
     var fun = vari.tam_sel_sh.split(",");
-    var prest = get_Pres(parseFloat(vari.prest_sh), 0, uni.prest_sel_sh, "psig");
-    var pmin = get_Pres(parseFloat(vari.pmin_sh), 0, uni.pmin_sel_sh, "psig");
-    var pmax = get_Pres(parseFloat(vari.pmax_sh), 0, uni.pmax_sel_sh, "psig");
+    var prest = get_Pres(parseFloatWithCommas(vari.prest_sh), 0, uni.prest_sel_sh, "psig");
+    var pmin = get_Pres(parseFloatWithCommas(vari.pmin_sh), 0, uni.pmin_sel_sh, "psig");
+    var pmax = get_Pres(parseFloatWithCommas(vari.pmax_sh), 0, uni.pmax_sel_sh, "psig");
     
     
     var min = Math.min(prest, pmin, pmax);
     var max = Math.max(prest, pmin, pmax);
     
     
-    var x0 = parseFloat(fun[0]);
-    var x1 = parseFloat(fun[1]);
-    var x2 = parseFloat(fun[2]);
-    var x3 = parseFloat(fun[3]);
-    var x4 = parseFloat(fun[4]);
-    var x5 = parseFloat(fun[5]);
-    var x6 = parseFloat(fun[6]);
+    var x0 = parseFloatWithCommas(fun[0]);
+    var x1 = parseFloatWithCommas(fun[1]);
+    var x2 = parseFloatWithCommas(fun[2]);
+    var x3 = parseFloatWithCommas(fun[3]);
+    var x4 = parseFloatWithCommas(fun[4]);
+    var x5 = parseFloatWithCommas(fun[5]);
+    var x6 = parseFloatWithCommas(fun[6]);
     
     var resfun = (x0 + x1*prest + x2*Math.pow(prest,2)+ x3*Math.pow(prest,3) + x4*Math.pow(prest,4) +x5*Math.pow(prest,5) + x6*Math.pow(prest,6))*1;
     
@@ -2327,16 +2331,16 @@ function valvulas_Form(vari, uni){
     //Validado excel Johan
     //Validado BD
    
-    var setpresion = parseFloat(vari.presiondis_val.replace(",",""));
-    var k = parseFloat(vari.relak_val.replace(",",""));
-    var pb = parseFloat(vari.presionb_val.replace(",",""));
-    var kd = parseFloat(vari.coefdes_val.replace(",",""));
-    var faccor = parseFloat(vari.factcor_val.replace(",",""));
-    var flujo = get_Flujo(parseFloat(vari.flujomax_val.replace(",","")), uni.flujomax_sel_val, "MMSCFD") ;
-    var pesomol = parseFloat(vari.pesom_val.replace(",",""));
-    var temp = get_Temp(parseFloat(vari.tempope_val.replace(",","")), uni.tempope_sel_val, "R");
-    var min = parseFloat(vari.nivelsobmin_val.replace(",",""));
-    var max = parseFloat(vari.nivelsobmax_val.replace(",",""));
+    var setpresion = parseFloatWithCommas(vari.presiondis_val.replace(",",""));
+    var k = parseFloatWithCommas(vari.relak_val.replace(",",""));
+    var pb = parseFloatWithCommas(vari.presionb_val.replace(",",""));
+    var kd = parseFloatWithCommas(vari.coefdes_val.replace(",",""));
+    var faccor = parseFloatWithCommas(vari.factcor_val.replace(",",""));
+    var flujo = get_Flujo(parseFloatWithCommas(vari.flujomax_val.replace(",","")), uni.flujomax_sel_val, "MMSCFD") ;
+    var pesomol = parseFloatWithCommas(vari.pesom_val.replace(",",""));
+    var temp = get_Temp(parseFloatWithCommas(vari.tempope_val.replace(",","")), uni.tempope_sel_val, "R");
+    var min = parseFloatWithCommas(vari.nivelsobmin_val.replace(",",""));
+    var max = parseFloatWithCommas(vari.nivelsobmax_val.replace(",",""));
     var p1 = setpresion + Math.max(min,max) + pb;
     var p2 = setpresion + pb;
     
@@ -2401,7 +2405,7 @@ function valvulas_Form(vari, uni){
         success: function(data, status, request){
             
             for(var i = 0; i < data.row.length; i++){
-                var orival = parseFloat(data.row[i].valor);
+                var orival = parseFloatWithCommas(data.row[i].valor);
                 if(orival - areares >= 0){                    
                     resori.info[resori.info.length] =  orival - areares;
                     if(swmin === 0){
@@ -2417,7 +2421,7 @@ function valvulas_Form(vari, uni){
                 }
             }
             
-            orimin = parseFloat(data.row[posmin].valor);
+            orimin = parseFloatWithCommas(data.row[posmin].valor);
             orirecom = data.row[posmin].orificio;
             flujorecom = 6.32*orimin*kd*p1*c*faccor/(Math.pow(z*temp*pesomol, 0.5));
         },
@@ -2450,7 +2454,7 @@ function valvulas_Form(vari, uni){
         },
         success: function(data, status, request){
            var pos = 5;
-           var presd = parseFloat(vari.presiondis_val);
+           var presd = parseFloatWithCommas(vari.presiondis_val);
            if(presd < 274){
                pos = 2;
            }else if(presd < 739){
@@ -2470,7 +2474,7 @@ function valvulas_Form(vari, uni){
         }
     });
     
-    var flujorecpor =  parseFloat(vari.flujomax_val) / flujorecom;
+    var flujorecpor =  parseFloatWithCommas(vari.flujomax_val) / flujorecom;
    
    
     var res = [z, tipoflujo, areares.toFixed(4), c.toFixed(2), orirecom, orimin, flujorecom, "MMSCFD", modelo, flujorecpor, temp, flujo];
@@ -2490,11 +2494,11 @@ function actuadores_Form(vari, uni){
     var torqueMinr = "N/A";
     var torqueMaxr = "N/A";
     
-    var torqueEs = parseFloat(vari.torquees_act);
-    var torqueMax = parseFloat(vari.torquema_act);
+    var torqueEs = parseFloatWithCommas(vari.torquees_act);
+    var torqueMax = parseFloatWithCommas(vari.torquema_act);
     var presion = vari.pre_sel_act;
     
-    var uniTorque = parseFloat(uni.toes_sel_act);
+    var uniTorque = parseFloatWithCommas(uni.toes_sel_act);
     var maxRequerido = Math.round(Math.max(torqueEs, torqueMax)*uniTorque*1.13);
     var porTrabajo = 0;
     var max = -1;
@@ -2532,20 +2536,20 @@ function actuadores_Form(vari, uni){
                     porTrabajo = data.row[i].maximos;
                 } 
                 
-                var maximoF = parseFloat(data.row[i].maximo);
+                var maximoF = parseFloatWithCommas(data.row[i].maximo);
                 
                 if(max < maximoF){
                     max = maximoF;
                     maxPre = data.row[i].name;
                 }
                 
-                if(parseFloat(data.row[i].aux)>1 && swPMinr === 0){
+                if(parseFloatWithCommas(data.row[i].aux)>1 && swPMinr === 0){
                     swPMinr = 1;
                     idPreminr = data.row[i].id_presion;
                     minPrer = data.row[i].name;
                 }
                 
-                if(parseFloat(data.row[i].aux)>1.75 && swPmaxr === 0){
+                if(parseFloatWithCommas(data.row[i].aux)>1.75 && swPmaxr === 0){
                     swPmaxr = 1;
                     idPremaxr = data.row[i].id_presion;
                     maxPrer = data.row[i].name;
@@ -2627,7 +2631,7 @@ function platina_Form(vari){
         }
     });
     
-    var flujo_pla =  parseFloat(vari.flujo3_pla); //Flujo de diseño [acfh]    
+    var flujo_pla =  parseFloatWithCommas(vari.flujo3_pla); //Flujo de diseño [acfh]    
     var d = 0.00925*Math.sqrt((flujo_pla)); //Orifice Dia. [in]
     var tinicial = d/8;
     var t = 0;     
@@ -2652,12 +2656,12 @@ function reguladores_Form(vari, uni){
     
     var mod = vari.mod_sel_reg;
     var tam = vari.tam_sel_reg;
-    var pmin = get_Pres(parseFloat(vari.rangomin_reg), 0, uni.rangomin_sel_reg, "psig");
-    var pmax = get_Pres(parseFloat(vari.rangomax_reg), 0, uni.rangomax_sel_reg, "psig");
-    var preg = get_Pres(parseFloat(vari.presionr_reg), 0, uni.presionr_sel_reg, "psig");
-    var flujo = get_Flujo(parseFloat(vari.flujomax_reg), uni.flujomax_sel_reg, "SCFH");    
-    var temp = get_Temp(parseFloat(vari.tempope_reg), uni.tempope_sel_reg, "F");
-    var gesp = parseFloat(vari.grav_reg);
+    var pmin = get_Pres(parseFloatWithCommas(vari.rangomin_reg), 0, uni.rangomin_sel_reg, "psig");
+    var pmax = get_Pres(parseFloatWithCommas(vari.rangomax_reg), 0, uni.rangomax_sel_reg, "psig");
+    var preg = get_Pres(parseFloatWithCommas(vari.presionr_reg), 0, uni.presionr_sel_reg, "psig");
+    var flujo = get_Flujo(parseFloatWithCommas(vari.flujomax_reg), uni.flujomax_sel_reg, "SCFH");    
+    var temp = get_Temp(parseFloatWithCommas(vari.tempope_reg), uni.tempope_sel_reg, "F");
+    var gesp = parseFloatWithCommas(vari.grav_reg);
     
     
     var cv, presLl = 0;
@@ -2681,7 +2685,7 @@ function reguladores_Form(vari, uni){
         success: function(data, status, request){
 
             if(data.row.length > 0){                
-                cv = parseFloat(data.row[0].cv);
+                cv = parseFloatWithCommas(data.row[0].cv);
                 
                 if(cv != 0){
                     presLl = Math.min(pmin, pmax);
@@ -2743,8 +2747,8 @@ function reguladores_Form(vari, uni){
            //alert(JSON.stringify(data));
            //alert(data.row.length);
            for(var i = 0; i < data.row.length; i++){
-               if(parseFloat(data.row[i].maximo) > maxS){
-                   maxS = parseFloat(data.row[i].maximo);
+               if(parseFloatWithCommas(data.row[i].maximo) > maxS){
+                   maxS = parseFloatWithCommas(data.row[i].maximo);
                    modS = data.row[i].modelo;
                }
            }
@@ -2786,14 +2790,14 @@ function p_wall_thinkness_Form(vari, uni) {
      K = Sobre Espesor
      */
 
-    var elev = get_Long(parseFloat(vari.enteree_ppw), uni.al_sel_ppw, "ft"); //Altura [ft]
-    var P = get_Pres(parseFloat(vari.designp_ppw), elev, uni.dp_sel_ppw, "psig");
-    var D = get_Long(parseFloat(vari.nominalos_ppw), uni.nod_sel_ppw, "in");
-    var tc = get_Long(parseFloat(vari.especp_ppw), uni.ac_sel_ppw, "in");
-    var S = parseFloat(vari.specifiedmys_ppw);
-    var F = parseFloat(vari.designf_ppw);
-    var E = parseFloat(vari.ljf_ppw);
-    var T = parseFloat(vari.temperaturedf_ppw);
+    var elev = get_Long(parseFloatWithCommas(vari.enteree_ppw), uni.al_sel_ppw, "ft"); //Altura [ft]
+    var P = get_Pres(parseFloatWithCommas(vari.designp_ppw), elev, uni.dp_sel_ppw, "psig");
+    var D = get_Long(parseFloatWithCommas(vari.nominalos_ppw), uni.nod_sel_ppw, "in");
+    var tc = get_Long(parseFloatWithCommas(vari.especp_ppw), uni.ac_sel_ppw, "in");
+    var S = parseFloatWithCommas(vari.specifiedmys_ppw);
+    var F = parseFloatWithCommas(vari.designf_ppw);
+    var E = parseFloatWithCommas(vari.ljf_ppw);
+    var T = parseFloatWithCommas(vari.temperaturedf_ppw);
     var t = ((P * D) / (2 * S * F * E * T)) + tc;
     return  t.toFixed(3);
 }
@@ -2818,21 +2822,21 @@ function reinforcementwelded_Form(vari, uni) {
      
      */
     
-    var elev = get_Long(parseFloat(vari.h_rwb), uni.h_sel_rwb, "ft"); //Altura [ft]
-    var df = parseFloat(vari.df_rwb);
-    var temp = parseFloat(vari.temp_rwb);
-    var p1 = get_Pres(parseFloat(vari.p1_rwb), elev, uni.p1_sel_rwb, "psig");
-    var odh = parseFloat(vari.odh_rwb);
-    var nwtb = parseFloat(vari.nwtb_rwb);
-    var smys = parseFloat(vari.smys_rwb);
-    var ljf = parseFloat(vari.ljf_rwb);
-    var bodh = parseFloat(vari.bodh_rwb);
-    var bnwtb = parseFloat(vari.bnwtb_rwb);
-    var smys2 = parseFloat(vari.smys2_rwb);
-    var ljf1 = parseFloat(vari.ljf1_rwb);
-    var mrod = get_Long(parseFloat(vari.mrod_rwb), uni.mrod_sel_rwb, "in");
-    var tar = parseFloat(vari.tar_rwb);
-    var rsmys = parseFloat(vari.rsmys_rwb);
+    var elev = get_Long(parseFloatWithCommas(vari.h_rwb), uni.h_sel_rwb, "ft"); //Altura [ft]
+    var df = parseFloatWithCommas(vari.df_rwb);
+    var temp = parseFloatWithCommas(vari.temp_rwb);
+    var p1 = get_Pres(parseFloatWithCommas(vari.p1_rwb), elev, uni.p1_sel_rwb, "psig");
+    var odh = parseFloatWithCommas(vari.odh_rwb);
+    var nwtb = parseFloatWithCommas(vari.nwtb_rwb);
+    var smys = parseFloatWithCommas(vari.smys_rwb);
+    var ljf = parseFloatWithCommas(vari.ljf_rwb);
+    var bodh = parseFloatWithCommas(vari.bodh_rwb);
+    var bnwtb = parseFloatWithCommas(vari.bnwtb_rwb);
+    var smys2 = parseFloatWithCommas(vari.smys2_rwb);
+    var ljf1 = parseFloatWithCommas(vari.ljf1_rwb);
+    var mrod = get_Long(parseFloatWithCommas(vari.mrod_rwb), uni.mrod_sel_rwb, "in");
+    var tar = parseFloatWithCommas(vari.tar_rwb);
+    var rsmys = parseFloatWithCommas(vari.rsmys_rwb);
     
     
 
@@ -2917,32 +2921,32 @@ function downstreampressureB_Form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation*/
      
-    var Tb = parseFloat(vari.basetemperature_bdp);
-    var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp);
-    var G = parseFloat(vari.gasspecificgra_bdp);
-    var Ef = parseFloat(vari.pipelineefficiency_bdp);
-    var P1 = parseFloat(vari.upstreampressure_bdp);
-    var Q = parseFloat(vari.flowrate_bdp);
-    var D = parseFloat(vari.internalpipe_bdp);
-    var L = parseFloat(vari.lengthof_bdp);
-    var h1 = parseFloat(vari.upstreamelevation_bdp);
-    var h2 = parseFloat(vari.downstreamelevation_bdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_bdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_bdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_bdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_bdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_bdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_bdp);
+    var Q = parseFloatWithCommas(vari.flowrate_bdp);
+    var D = parseFloatWithCommas(vari.internalpipe_bdp);
+    var L = parseFloatWithCommas(vari.lengthof_bdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_bdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_bdp);
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_bdp, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_bdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_bdp, "psia");
-//P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_bdp, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_bdp, "psia");
+//P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_bdp, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3010,31 +3014,31 @@ function flowrate_Form(vari, uni) {
      */
     
 
-    var Tb = parseFloat(vari.basetemperature_adp); // *
-    var Pb = parseFloat(vari.basepressure_adp);   //*
-    var Tf = parseFloat(vari.gasflowingtemp_adp); // *
-    var G = parseFloat(vari.gasspecificgra_adp);  // *
-    var E = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp); // *
-    var D = parseFloat(vari.internalpipe_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var H1 = parseFloat(vari.upstreamelevation_adp);
-    var H2 = parseFloat(vari.downstreamelevation_adp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_adp); // *
+    var Pb = parseFloatWithCommas(vari.basepressure_adp);   //*
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_adp); // *
+    var G = parseFloatWithCommas(vari.gasspecificgra_adp);  // *
+    var E = parseFloatWithCommas(vari.pipelineefficiency_adp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_adp); // *
+    var D = parseFloatWithCommas(vari.internalpipe_adp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_adp);
+    var L = parseFloatWithCommas(vari.lengthof_adp);
+    var H1 = parseFloatWithCommas(vari.upstreamelevation_adp);
+    var H2 = parseFloatWithCommas(vari.downstreamelevation_adp);
     
     
     
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base Base Temperature
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Gas flow temperature 
-    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft"); // Upstream Elevation
-    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft"); //Downstream Elevation
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_adp, "R");  //Temperatura base Base Temperature
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gasft_sel_adp, "R");  //Gas flow temperature 
+    H1 = get_Long(parseFloatWithCommas(H1), uni.ue_sel_apd, "ft"); // Upstream Elevation
+    H2 = get_Long(parseFloatWithCommas(H2), uni.de_sel_apd, "ft"); //Downstream Elevation
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
-    P1 = get_Pres(parseFloat(P1), H1, uni.up_sel_adp, "psia"); //Upstream Pressure
-    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia"); // Downstream Pressure
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloatWithCommas(P1), H1, uni.up_sel_adp, "psia"); //Upstream Pressure
+    P2 = get_Pres(parseFloatWithCommas(P2), H2, uni.bp_sel_adp, "psia"); // Downstream Pressure
 
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil"); // Length of Pipeline    
-    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_apd, "mil"); // Length of Pipeline    
+    D = get_Long(parseFloatWithCommas(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
     
     var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
     var Z = getZ(Tf, Pavg, G,  "psia", (H1+H2)/2); //1 / (1 + ((Pavg * 344400 * Math.pow(10,1.785) * G) / (Math.pow(Tf,3.825))));
@@ -3075,27 +3079,27 @@ function internalpipediameter_Form(vari, uni) {
      h2 = Downstream Elevation
     h = Height
      */
-    var Tb = parseFloat(vari.basetemperature_adp);
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp);
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var E = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var H1 = parseFloat(vari.upstreamelevation_adp);
-    var H2 = parseFloat(vari.downstreamelevation_adp); 
+    var Tb = parseFloatWithCommas(vari.basetemperature_adp);
+    var Pb = parseFloatWithCommas(vari.basepressure_adp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_adp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_adp);
+    var E = parseFloatWithCommas(vari.pipelineefficiency_adp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_adp);
+    var Q = parseFloatWithCommas(vari.flowrate_adp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_adp);
+    var L = parseFloatWithCommas(vari.lengthof_adp);
+    var H1 = parseFloatWithCommas(vari.upstreamelevation_adp);
+    var H2 = parseFloatWithCommas(vari.downstreamelevation_adp); 
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura flujo
-    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
-    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
-    P1 = get_Pres(parseFloat(P1), H1, uni.up_sel_adp, "psia");
-    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia");
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gasft_sel_adp, "R");  //Temperatura flujo
+    H1 = get_Long(parseFloatWithCommas(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloatWithCommas(H2), uni.de_sel_apd, "ft");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base
+    P1 = get_Pres(parseFloatWithCommas(P1), H1, uni.up_sel_adp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), H2, uni.bp_sel_adp, "psia");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_adp, "SCFD");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_apd, "mil");
     
     
     var Pavg = (2 / 3) * (P1 + P2 - P1 * P2 / (P1 + P2)); 
@@ -3134,35 +3138,35 @@ function upstreampressure_Form(vari, uni) {
      h2 = Downstream Elevation
      h = Height
      */
-    var Tb = parseFloat(vari.basetemperature_adp);
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp);
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var Ef = parseFloat(vari.pipelineefficiency_adp);
-    var P2 = parseFloat(vari.downstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var D = parseFloat(vari.internalpipe_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var H1 = parseFloat(vari.upstreamelevation_adp);
-    var H2 = parseFloat(vari.downstreamelevation_adp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_adp);
+    var Pb = parseFloatWithCommas(vari.basepressure_adp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_adp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_adp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_adp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_adp);
+    var Q = parseFloatWithCommas(vari.flowrate_adp);
+    var D = parseFloatWithCommas(vari.internalpipe_adp);
+    var L = parseFloatWithCommas(vari.lengthof_adp);
+    var H1 = parseFloatWithCommas(vari.upstreamelevation_adp);
+    var H2 = parseFloatWithCommas(vari.downstreamelevation_adp);
     var sw = 10;
     var Le;
     var P1 = 0; // 
     var Z = 1;
     var e = Math.E;
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
-    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
-    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
+    H1 = get_Long(parseFloatWithCommas(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloatWithCommas(H2), uni.de_sel_apd, "ft");
 
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
-    P2 = get_Pres(parseFloat(P2), H2, uni.bp_sel_adp, "psia"); //Downstream psia
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
+    P2 = get_Pres(parseFloatWithCommas(P2), H2, uni.bp_sel_adp, "psia"); //Downstream psia
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_adp, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
-    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_apd, "mil");
+    D = get_Long(parseFloatWithCommas(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
 
 
     var s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf; 
@@ -3210,35 +3214,35 @@ function downstreampressure_Form(vari, uni) {
      h2 = Downstream Elevation
      h = Height
      */
-    var Tb = parseFloat(vari.basetemperature_adp);
-    var Pb = parseFloat(vari.basepressure_adp);
-    var Tf = parseFloat(vari.gasflowingtemp_adp);
-    var G = parseFloat(vari.gasspecificgra_adp);
-    var Ef = parseFloat(vari.pipelineefficiency_adp);
-    var P1 = parseFloat(vari.upstreampressure_adp);
-    var Q = parseFloat(vari.flowrate_adp);
-    var D = parseFloat(vari.internalpipe_adp);
-    var L = parseFloat(vari.lengthof_adp);
-    var H1 = parseFloat(vari.upstreamelevation_adp);
-    var H2 = parseFloat(vari.downstreamelevation_adp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_adp);
+    var Pb = parseFloatWithCommas(vari.basepressure_adp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_adp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_adp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_adp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_adp);
+    var Q = parseFloatWithCommas(vari.flowrate_adp);
+    var D = parseFloatWithCommas(vari.internalpipe_adp);
+    var L = parseFloatWithCommas(vari.lengthof_adp);
+    var H1 = parseFloatWithCommas(vari.upstreamelevation_adp);
+    var H2 = parseFloatWithCommas(vari.downstreamelevation_adp);
     var sw = 10;
     var Le;
     var P2 = 0; // 
     var Z = 1;
     var e = Math.E;
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
-    H1 = get_Long(parseFloat(H1), uni.ue_sel_apd, "ft");
-    H2 = get_Long(parseFloat(H2), uni.de_sel_apd, "ft");
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_adp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gasft_sel_adp, "R");  //Temperatura base 
+    H1 = get_Long(parseFloatWithCommas(H1), uni.ue_sel_apd, "ft");
+    H2 = get_Long(parseFloatWithCommas(H2), uni.de_sel_apd, "ft");
 
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
-    P1 = get_Pres(parseFloat(P1), H1, uni.bp_sel_adp, "psia"); //Downstream psia
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_adp, "psia"); //Presión base:
+    P1 = get_Pres(parseFloatWithCommas(P1), H1, uni.bp_sel_adp, "psia"); //Downstream psia
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_adp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_adp, "SCFD");
 
-    L = get_Long(parseFloat(L), uni.le_sel_apd, "mil");
-    D = get_Long(parseFloat(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_apd, "mil");
+    D = get_Long(parseFloatWithCommas(D), uni.ipd_sel_apd, "in"); // Internal Pipe Diameter
 
 
     var s = 0.0375 * G * (H2 / Z - H1 / Z) / Tf; 
@@ -3285,31 +3289,31 @@ function flowrateB_Form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_bdp);
-    var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp);
-    var G = parseFloat(vari.gasspecificgra_bdp);
-    var Ef = parseFloat(vari.pipelineefficiency_bdp);
-    var P1 = parseFloat(vari.upstreampressure_bdp);
-    var D = parseFloat(vari.internalpipe_bdp);
-    var P2 = parseFloat(vari.downstreampressure_bdp);
-    var L = parseFloat(vari.lengthof_bdp);
-    var h1 = parseFloat(vari.upstreamelevation_bdp);
-    var h2 = parseFloat(vari.downstreamelevation_bdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_bdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_bdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_bdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_bdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_bdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_bdp);
+    var D = parseFloatWithCommas(vari.internalpipe_bdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_bdp);
+    var L = parseFloatWithCommas(vari.lengthof_bdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_bdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_bdp);
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
 
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_bdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_bdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_bdp, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_bdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_bdp, "psia");
 
-    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_bdp, "in");
 
     var Z = 1;
     var e = Math.E;
@@ -3349,31 +3353,31 @@ function internalpipediameterB_Form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_bdp);
-    var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp);
-    var G = parseFloat(vari.gasspecificgra_bdp);
-    var Ef = parseFloat(vari.pipelineefficiency_bdp);
-    var P1 = parseFloat(vari.upstreampressure_bdp);
-    var Q = parseFloat(vari.flowrate_bdp);
-    var P2 = parseFloat(vari.downstreampressure_bdp);
-    var L = parseFloat(vari.lengthof_bdp);
-    var h1 = parseFloat(vari.upstreamelevation_bdp);
-    var h2 = parseFloat(vari.downstreamelevation_bdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_bdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_bdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_bdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_bdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_bdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_bdp);
+    var Q = parseFloatWithCommas(vari.flowrate_bdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_bdp);
+    var L = parseFloatWithCommas(vari.lengthof_bdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_bdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_bdp);
 
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_bdp, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_bdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_bdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_bdp, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_bdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_bdp, "SCFD");
 
     var Le;
 
@@ -3411,32 +3415,32 @@ function upstreampressureB_Form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_bdp);
-    var Pb = parseFloat(vari.basepressure_bdp);
-    var Tf = parseFloat(vari.gasflowingtemp_bdp);
-    var G = parseFloat(vari.gasspecificgra_bdp);
-    var Ef = parseFloat(vari.pipelineefficiency_bdp);
-    var P2 = parseFloat(vari.downstreampressure_bdp);
-    var Q = parseFloat(vari.flowrate_bdp);
-    var D = parseFloat(vari.internalpipe_bdp);
-    var L = parseFloat(vari.lengthof_bdp);
-    var h1 = parseFloat(vari.upstreamelevation_bdp);
-    var h2 = parseFloat(vari.downstreamelevation_bdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_bdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_bdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_bdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_bdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_bdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_bdp);
+    var Q = parseFloatWithCommas(vari.flowrate_bdp);
+    var D = parseFloatWithCommas(vari.internalpipe_bdp);
+    var L = parseFloatWithCommas(vari.lengthof_bdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_bdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_bdp);
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_bdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_bdp, "R");  //Temperatura flujo 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_bdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_bdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_bdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_bdp, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_bdp, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_bdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_bdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_bdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_bdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-//P1 = get_Pres(parseFloat(P1),0, uni.up_sel_bdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_bdp, "psia");
+//P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_bdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_bdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_bdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_bdp, "SCFD");
 
     var sw = 20;
     var Le;
@@ -3497,36 +3501,36 @@ function flowrate_cl_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_cfr);
-    var Pb = parseFloat(vari.basepressure_cfr);
-    var u = parseFloat(vari.pipelineroughness_cfr);
-    var Tf = parseFloat(vari.gasflowingtemp_cfr);
-    var G = parseFloat(vari.gasspecificgra_cfr);
-    var Ef = parseFloat(vari.pipelineefficiency_cfr);
+    var Tb = parseFloatWithCommas(vari.basetemperature_cfr);
+    var Pb = parseFloatWithCommas(vari.basepressure_cfr);
+    var u = parseFloatWithCommas(vari.pipelineroughness_cfr);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_cfr);
+    var G = parseFloatWithCommas(vari.gasspecificgra_cfr);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_cfr);
     var Q = 0;
-    var P1 = parseFloat(vari.upstreampressure_cfr);
-    var D = parseFloat(vari.internalpipe_cfr);
-    var P2 = parseFloat(vari.downstreampressure_cfr);
-    var L = parseFloat(vari.lengthof_cfr);
-    var h1 = parseFloat(vari.upstreamelevation_cfr);
-    var h2 = parseFloat(vari.downstreamelevation_cfr);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_cfr);
+    var D = parseFloatWithCommas(vari.internalpipe_cfr);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_cfr);
+    var L = parseFloatWithCommas(vari.lengthof_cfr);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_cfr);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_cfr);
 
     var Le = 0;
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_cfr, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_cfr, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_cfr, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_cfr, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_cfr, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_cfr, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_cfr, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_cfr,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_cfr,"MMSCFD");
 
 
     /*L =   L / 1609;
@@ -3581,36 +3585,36 @@ function downstream_cl_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_cfr);
-    var Pb = parseFloat(vari.basepressure_cfr);
-    var u = parseFloat(vari.pipelineroughness_cfr);
-    var Tf = parseFloat(vari.gasflowingtemp_cfr);
-    var G = parseFloat(vari.gasspecificgra_cfr);
-    var Ef = parseFloat(vari.pipelineefficiency_cfr);
-    var Q = parseFloat(vari.flowrate_cfr);
-    var P1 = parseFloat(vari.upstreampressure_cfr);
-    var D = parseFloat(vari.internalpipe_cfr);
-    //var P2 = parseFloat(vari.downstreampressure_cfr);
-    var L = parseFloat(vari.lengthof_cfr);
-    var h1 = parseFloat(vari.upstreamelevation_cfr);
-    var h2 = parseFloat(vari.downstreamelevation_cfr);
+    var Tb = parseFloatWithCommas(vari.basetemperature_cfr);
+    var Pb = parseFloatWithCommas(vari.basepressure_cfr);
+    var u = parseFloatWithCommas(vari.pipelineroughness_cfr);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_cfr);
+    var G = parseFloatWithCommas(vari.gasspecificgra_cfr);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_cfr);
+    var Q = parseFloatWithCommas(vari.flowrate_cfr);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_cfr);
+    var D = parseFloatWithCommas(vari.internalpipe_cfr);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_cfr);
+    var L = parseFloatWithCommas(vari.lengthof_cfr);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_cfr);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_cfr);
     // alert(Q);
     var Le = 0;
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_cfr, "in")
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_cfr, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_cfr, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_cfr, "psia");
-    // P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_cfr, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_cfr, "psia");
+    // P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_cfr, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3685,35 +3689,35 @@ function upstream_cl_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_cfr);
-    var Pb = parseFloat(vari.basepressure_cfr);
-    var u = parseFloat(vari.pipelineroughness_cfr);
-    var Tf = parseFloat(vari.gasflowingtemp_cfr);
-    var G = parseFloat(vari.gasspecificgra_cfr);
-    var Ef = parseFloat(vari.pipelineefficiency_cfr);
-    var Q = parseFloat(vari.flowrate_cfr);
-    //var P1 = parseFloat(vari.upstreampressure_cfr);
-    var D = parseFloat(vari.internalpipe_cfr);
-    var P2 = parseFloat(vari.downstreampressure_cfr);
-    var L = parseFloat(vari.lengthof_cfr);
-    var h1 = parseFloat(vari.upstreamelevation_cfr);
-    var h2 = parseFloat(vari.downstreamelevation_cfr);
+    var Tb = parseFloatWithCommas(vari.basetemperature_cfr);
+    var Pb = parseFloatWithCommas(vari.basepressure_cfr);
+    var u = parseFloatWithCommas(vari.pipelineroughness_cfr);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_cfr);
+    var G = parseFloatWithCommas(vari.gasspecificgra_cfr);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_cfr);
+    var Q = parseFloatWithCommas(vari.flowrate_cfr);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure_cfr);
+    var D = parseFloatWithCommas(vari.internalpipe_cfr);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_cfr);
+    var L = parseFloatWithCommas(vari.lengthof_cfr);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_cfr);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_cfr);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_cfr, "in")
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_cfr, "in")
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_cfr, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_cfr, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_cfr, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_cfr, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_cfr, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_cfr, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3790,34 +3794,34 @@ function internal_cl_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_cfr);
-    var Pb = parseFloat(vari.basepressure_cfr);
-    var u = parseFloat(vari.pipelineroughness_cfr);
-    var Tf = parseFloat(vari.gasflowingtemp_cfr);
-    var G = parseFloat(vari.gasspecificgra_cfr);
-    var Ef = parseFloat(vari.pipelineefficiency_cfr);
-    var Q = parseFloat(vari.flowrate_cfr);
-    var P1 = parseFloat(vari.upstreampressure_cfr);
-    //var D = parseFloat(vari.internalpipe_cfr);
-    var P2 = parseFloat(vari.downstreampressure_cfr);
-    var L = parseFloat(vari.lengthof_cfr);
-    var h1 = parseFloat(vari.upstreamelevation_cfr);
-    var h2 = parseFloat(vari.downstreamelevation_cfr);
+    var Tb = parseFloatWithCommas(vari.basetemperature_cfr);
+    var Pb = parseFloatWithCommas(vari.basepressure_cfr);
+    var u = parseFloatWithCommas(vari.pipelineroughness_cfr);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_cfr);
+    var G = parseFloatWithCommas(vari.gasspecificgra_cfr);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_cfr);
+    var Q = parseFloatWithCommas(vari.flowrate_cfr);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_cfr);
+    //var D = parseFloatWithCommas(vari.internalpipe_cfr);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_cfr);
+    var L = parseFloatWithCommas(vari.lengthof_cfr);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_cfr);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_cfr);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_cfr, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.ee_sel_cfr, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_cfr, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_cfr, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_cfr, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_cfr, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_cfr, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_cfr, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_cfr, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_cfr, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_cfr, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_cfr, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_cfr, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_cfr, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_cfr, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3867,35 +3871,35 @@ function flowrate_wdp_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_wdp);
-    var Pb = parseFloat(vari.basepressure_wdp);
-    var u = parseFloat(vari.pipelineroughness_wdp);
-    var Tf = parseFloat(vari.gasflowingtemp_wdp);
-    var G = parseFloat(vari.gasspecificgra_wdp);
-    var Ef = parseFloat(vari.pipelineefficiency_wdp);
-    var P1 = parseFloat(vari.upstreampressure_wdp);
-    var D = parseFloat(vari.internalpipe_wdp);
-    var P2 = parseFloat(vari.downstreampressure_wdp);
-    var L = parseFloat(vari.lengthof_wdp);
-    var h1 = parseFloat(vari.upstreamelevation_wdp);
-    var h2 = parseFloat(vari.downstreamelevation_wdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_wdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_wdp);
+    var u = parseFloatWithCommas(vari.pipelineroughness_wdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_wdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_wdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_wdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_wdp);
+    var D = parseFloatWithCommas(vari.internalpipe_wdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_wdp);
+    var L = parseFloatWithCommas(vari.lengthof_wdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_wdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_wdp);
 
     var Le = 0;
 
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_wdp, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_wdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_wdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_wdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_wdp, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_wdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_wdp, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_wdp,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_wdp,"MMSCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3934,33 +3938,33 @@ function internal_wdp_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_wdp);
-    var Pb = parseFloat(vari.basepressure_wdp);
-    var u = parseFloat(vari.pipelineroughness_wdp);
-    var Tf = parseFloat(vari.gasflowingtemp_wdp);
-    var G = parseFloat(vari.gasspecificgra_wdp);
-    var Ef = parseFloat(vari.pipelineefficiency_wdp);
-    var P1 = parseFloat(vari.upstreampressure_wdp);
-    // var D = parseFloat(vari.internalpipe_wdp);
-    var Q = parseFloat(vari.flowrate_wdp);
-    var P2 = parseFloat(vari.downstreampressure_wdp);
-    var L = parseFloat(vari.lengthof_wdp);
-    var h1 = parseFloat(vari.upstreamelevation_wdp);
-    var h2 = parseFloat(vari.downstreamelevation_wdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_wdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_wdp);
+    var u = parseFloatWithCommas(vari.pipelineroughness_wdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_wdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_wdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_wdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_wdp);
+    // var D = parseFloatWithCommas(vari.internalpipe_wdp);
+    var Q = parseFloatWithCommas(vari.flowrate_wdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_wdp);
+    var L = parseFloatWithCommas(vari.lengthof_wdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_wdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_wdp);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_wdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_wdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_wdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_wdp, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_wdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_wdp, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -3996,34 +4000,34 @@ function downstream_wdp_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_wdp);
-    var Pb = parseFloat(vari.basepressure_wdp);
-    var u = parseFloat(vari.pipelineroughness_wdp);
-    var Tf = parseFloat(vari.gasflowingtemp_wdp);
-    var G = parseFloat(vari.gasspecificgra_wdp);
-    var Ef = parseFloat(vari.pipelineefficiency_wdp);
-    var P1 = parseFloat(vari.upstreampressure_wdp);
-    var D = parseFloat(vari.internalpipe_wdp);
-    var Q = parseFloat(vari.flowrate_wdp);
-    //var P2 = parseFloat(vari.downstreampressure_wdp);
-    var L = parseFloat(vari.lengthof_wdp);
-    var h1 = parseFloat(vari.upstreamelevation_wdp);
-    var h2 = parseFloat(vari.downstreamelevation_wdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_wdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_wdp);
+    var u = parseFloatWithCommas(vari.pipelineroughness_wdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_wdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_wdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_wdp);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_wdp);
+    var D = parseFloatWithCommas(vari.internalpipe_wdp);
+    var Q = parseFloatWithCommas(vari.flowrate_wdp);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_wdp);
+    var L = parseFloatWithCommas(vari.lengthof_wdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_wdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_wdp);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_wdp, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_wdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_wdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_wdp, "psia");
-    // P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_wdp, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_wdp, "psia");
+    // P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_wdp, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4083,34 +4087,34 @@ function upstream_wdp_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_wdp);
-    var Pb = parseFloat(vari.basepressure_wdp);
-    var u = parseFloat(vari.pipelineroughness_wdp);
-    var Tf = parseFloat(vari.gasflowingtemp_wdp);
-    var G = parseFloat(vari.gasspecificgra_wdp);
-    var Ef = parseFloat(vari.pipelineefficiency_wdp);
-    // var P1 = parseFloat(vari.upstreampressure_wdp);
-    var D = parseFloat(vari.internalpipe_wdp);
-    var Q = parseFloat(vari.flowrate_wdp);
-    var P2 = parseFloat(vari.downstreampressure_wdp);
-    var L = parseFloat(vari.lengthof_wdp);
-    var h1 = parseFloat(vari.upstreamelevation_wdp);
-    var h2 = parseFloat(vari.downstreamelevation_wdp);
+    var Tb = parseFloatWithCommas(vari.basetemperature_wdp);
+    var Pb = parseFloatWithCommas(vari.basepressure_wdp);
+    var u = parseFloatWithCommas(vari.pipelineroughness_wdp);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_wdp);
+    var G = parseFloatWithCommas(vari.gasspecificgra_wdp);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_wdp);
+    // var P1 = parseFloatWithCommas(vari.upstreampressure_wdp);
+    var D = parseFloatWithCommas(vari.internalpipe_wdp);
+    var Q = parseFloatWithCommas(vari.flowrate_wdp);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_wdp);
+    var L = parseFloatWithCommas(vari.lengthof_wdp);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_wdp);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_wdp);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_wdp, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_wdp, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_wdp, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_wdp, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_wdp, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_wdp, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_wdp, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_wdp, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_wdp, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_wdp, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_wdp, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_wdp, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_wdp, "psia"); //Presión base: preguntar por elevación
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_wdp, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_wdp, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_wdp, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_wdp, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4158,33 +4162,33 @@ function flowrate_aga_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_aga);
-    var Pb = parseFloat(vari.basepressure_aga);
-    var u = parseFloat(vari.pipelineroughness_aga);
-    var Tf = parseFloat(vari.gasflowingtemp_aga);
-    var G = parseFloat(vari.gasspecificgra_aga);
-    var Ef = parseFloat(vari.pipelineefficiency_aga);
-    //var Q = parseFloat(vari.flowrate_aga);
-    var P1 = parseFloat(vari.upstreampressure_aga);
-    var D = parseFloat(vari.internalpipe_aga);
-    var P2 = parseFloat(vari.downstreampressure_aga);
-    var L = parseFloat(vari.lengthof_aga);
-    var h1 = parseFloat(vari.upstreamelevation_aga);
-    var h2 = parseFloat(vari.downstreamelevation_aga);
+    var Tb = parseFloatWithCommas(vari.basetemperature_aga);
+    var Pb = parseFloatWithCommas(vari.basepressure_aga);
+    var u = parseFloatWithCommas(vari.pipelineroughness_aga);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_aga);
+    var G = parseFloatWithCommas(vari.gasspecificgra_aga);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_aga);
+    //var Q = parseFloatWithCommas(vari.flowrate_aga);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_aga);
+    var D = parseFloatWithCommas(vari.internalpipe_aga);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_aga);
+    var L = parseFloatWithCommas(vari.lengthof_aga);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_aga);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_aga);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_aga, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_aga, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_aga, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_aga, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_aga, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_aga, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_aga,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_aga,"MMSCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4244,34 +4248,34 @@ function internal_aga_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_aga);
-    var Pb = parseFloat(vari.basepressure_aga);
-    var u = parseFloat(vari.pipelineroughness_aga);
-    var Tf = parseFloat(vari.gasflowingtemp_aga);
-    var G = parseFloat(vari.gasspecificgra_aga);
-    var Ef = parseFloat(vari.pipelineefficiency_aga);
-    var Q = parseFloat(vari.flowrate_aga);
-    var P1 = parseFloat(vari.upstreampressure_aga);
-    //var D = parseFloat(vari.internalpipe_aga);
-    var P2 = parseFloat(vari.downstreampressure_aga);
-    var L = parseFloat(vari.lengthof_aga);
-    var h1 = parseFloat(vari.upstreamelevation_aga);
-    var h2 = parseFloat(vari.downstreamelevation_aga);
+    var Tb = parseFloatWithCommas(vari.basetemperature_aga);
+    var Pb = parseFloatWithCommas(vari.basepressure_aga);
+    var u = parseFloatWithCommas(vari.pipelineroughness_aga);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_aga);
+    var G = parseFloatWithCommas(vari.gasspecificgra_aga);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_aga);
+    var Q = parseFloatWithCommas(vari.flowrate_aga);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_aga);
+    //var D = parseFloatWithCommas(vari.internalpipe_aga);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_aga);
+    var L = parseFloatWithCommas(vari.lengthof_aga);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_aga);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_aga);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_aga, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_aga, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_aga, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_aga, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_aga, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_aga, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4315,34 +4319,34 @@ function downstream_aga_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_aga);
-    var Pb = parseFloat(vari.basepressure_aga);
-    var u = parseFloat(vari.pipelineroughness_aga);
-    var Tf = parseFloat(vari.gasflowingtemp_aga);
-    var G = parseFloat(vari.gasspecificgra_aga);
-    var Ef = parseFloat(vari.pipelineefficiency_aga);
-    var Q = parseFloat(vari.flowrate_aga);
-    var P1 = parseFloat(vari.upstreampressure_aga);
-    var D = parseFloat(vari.internalpipe_aga);
-    //var P2 = parseFloat(vari.downstreampressure_aga);
-    var L = parseFloat(vari.lengthof_aga);
-    var h1 = parseFloat(vari.upstreamelevation_aga);
-    var h2 = parseFloat(vari.downstreamelevation_aga);
+    var Tb = parseFloatWithCommas(vari.basetemperature_aga);
+    var Pb = parseFloatWithCommas(vari.basepressure_aga);
+    var u = parseFloatWithCommas(vari.pipelineroughness_aga);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_aga);
+    var G = parseFloatWithCommas(vari.gasspecificgra_aga);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_aga);
+    var Q = parseFloatWithCommas(vari.flowrate_aga);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_aga);
+    var D = parseFloatWithCommas(vari.internalpipe_aga);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_aga);
+    var L = parseFloatWithCommas(vari.lengthof_aga);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_aga);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_aga);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_aga, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_aga, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_aga, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_aga, "psia");
-    //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_aga, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_aga, "psia");
+    //P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_aga, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4403,35 +4407,35 @@ function upstream_aga_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_aga);
-    var Pb = parseFloat(vari.basepressure_aga);
-    var u = parseFloat(vari.pipelineroughness_aga);
-    var Tf = parseFloat(vari.gasflowingtemp_aga);
-    var G = parseFloat(vari.gasspecificgra_aga);
-    var Ef = parseFloat(vari.pipelineefficiency_aga);
-    var Q = parseFloat(vari.flowrate_aga);
-    //var P1 = parseFloat(vari.upstreampressure_aga);
-    var D = parseFloat(vari.internalpipe_aga);
-    var P2 = parseFloat(vari.downstreampressure_aga);
-    var L = parseFloat(vari.lengthof_aga);
-    var h1 = parseFloat(vari.upstreamelevation_aga);
-    var h2 = parseFloat(vari.downstreamelevation_aga);
+    var Tb = parseFloatWithCommas(vari.basetemperature_aga);
+    var Pb = parseFloatWithCommas(vari.basepressure_aga);
+    var u = parseFloatWithCommas(vari.pipelineroughness_aga);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_aga);
+    var G = parseFloatWithCommas(vari.gasspecificgra_aga);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_aga);
+    var Q = parseFloatWithCommas(vari.flowrate_aga);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure_aga);
+    var D = parseFloatWithCommas(vari.internalpipe_aga);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_aga);
+    var L = parseFloatWithCommas(vari.lengthof_aga);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_aga);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_aga);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_aga, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_aga, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_aga, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_aga, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_aga, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_aga, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_aga, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_aga, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_aga, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_aga, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_aga, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_aga, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_aga, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_aga, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_aga, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_aga, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_aga, "SCFD");
 
 
     
@@ -4487,34 +4491,34 @@ function flowrate_igt_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_igt);
-    var Pb = parseFloat(vari.basepressure_igt);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp_igt);
-    var G = parseFloat(vari.gasspecificgra_igt);
-    var Ef = parseFloat(vari.pipelineefficiency_igt);
-    //var Q = parseFloat(vari.flowrate_igt);
-    var P1 = parseFloat(vari.upstreampressure_igt);
-    var D = parseFloat(vari.internalpipe_igt);
-    var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof_igt);
-    var h1 = parseFloat(vari.upstreamelevation_igt);
-    var h2 = parseFloat(vari.downstreamelevation_igt);
+    var Tb = parseFloatWithCommas(vari.basetemperature_igt);
+    var Pb = parseFloatWithCommas(vari.basepressure_igt);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_igt);
+    var G = parseFloatWithCommas(vari.gasspecificgra_igt);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_igt);
+    //var Q = parseFloatWithCommas(vari.flowrate_igt);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_igt);
+    var D = parseFloatWithCommas(vari.internalpipe_igt);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof_igt);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_igt);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_igt);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_igt, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_igt, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_igt, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_igt, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_igt, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_igt, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_igt,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_igt,"MMSCFD");
     
     var e = Math.E;
     /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
@@ -4556,34 +4560,34 @@ function internal_igt_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_igt);
-    var Pb = parseFloat(vari.basepressure_igt);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp_igt);
-    var G = parseFloat(vari.gasspecificgra_igt);
-    var Ef = parseFloat(vari.pipelineefficiency_igt);
-    var Q = parseFloat(vari.flowrate_igt);
-    var P1 = parseFloat(vari.upstreampressure_igt);
-    //var D = parseFloat(vari.internalpipe_igt);
-    var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof_igt);
-    var h1 = parseFloat(vari.upstreamelevation_igt);
-    var h2 = parseFloat(vari.downstreamelevation_igt);
+    var Tb = parseFloatWithCommas(vari.basetemperature_igt);
+    var Pb = parseFloatWithCommas(vari.basepressure_igt);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_igt);
+    var G = parseFloatWithCommas(vari.gasspecificgra_igt);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_igt);
+    var Q = parseFloatWithCommas(vari.flowrate_igt);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_igt);
+    //var D = parseFloatWithCommas(vari.internalpipe_igt);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof_igt);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_igt);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_igt);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_igt, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_igt, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_igt, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_igt, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_igt, "SCFD");
     
   /*  var Z = 1;
     var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
@@ -4626,35 +4630,35 @@ function downstream_igt_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_igt);
-    var Pb = parseFloat(vari.basepressure_igt);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp_igt);
-    var G = parseFloat(vari.gasspecificgra_igt);
-    var Ef = parseFloat(vari.pipelineefficiency_igt);
-    var Q = parseFloat(vari.flowrate_igt);
-    var P1 = parseFloat(vari.upstreampressure_igt);
-    var D = parseFloat(vari.internalpipe_igt);
-    //var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof_igt);
-    var h1 = parseFloat(vari.upstreamelevation_igt);
-    var h2 = parseFloat(vari.downstreamelevation_igt);
+    var Tb = parseFloatWithCommas(vari.basetemperature_igt);
+    var Pb = parseFloatWithCommas(vari.basepressure_igt);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_igt);
+    var G = parseFloatWithCommas(vari.gasspecificgra_igt);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_igt);
+    var Q = parseFloatWithCommas(vari.flowrate_igt);
+    var P1 = parseFloatWithCommas(vari.upstreampressure_igt);
+    var D = parseFloatWithCommas(vari.internalpipe_igt);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof_igt);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_igt);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_igt);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_igt, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_igt, "ft");
 
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_igt, "psia");
-    //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_igt, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_igt, "psia");
+    //P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_igt, "SCFD");
 
 
     var Z = 1;
@@ -4715,35 +4719,35 @@ function upstream_igt_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature_igt);
-    var Pb = parseFloat(vari.basepressure_igt);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp_igt);
-    var G = parseFloat(vari.gasspecificgra_igt);
-    var Ef = parseFloat(vari.pipelineefficiency_igt);
-    var Q = parseFloat(vari.flowrate_igt);
-    //var P1 = parseFloat(vari.upstreampressure_igt);
-    var D = parseFloat(vari.internalpipe_igt);
-    var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof_igt);
-    var h1 = parseFloat(vari.upstreamelevation_igt);
-    var h2 = parseFloat(vari.downstreamelevation_igt);
+    var Tb = parseFloatWithCommas(vari.basetemperature_igt);
+    var Pb = parseFloatWithCommas(vari.basepressure_igt);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp_igt);
+    var G = parseFloatWithCommas(vari.gasspecificgra_igt);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency_igt);
+    var Q = parseFloatWithCommas(vari.flowrate_igt);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure_igt);
+    var D = parseFloatWithCommas(vari.internalpipe_igt);
+    var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof_igt);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation_igt);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation_igt);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_igt, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_igt, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_igt, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_igt, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_igt, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_igt, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_igt, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_igt, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_igt, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_igt, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_igt, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_igt, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_igt, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_igt, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_igt, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_igt, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_igt, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -4793,34 +4797,34 @@ function flowrate_mll_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    //var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    //var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura flujo
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_mll, "R");  //Temperatura flujo
 
-    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_mll, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_mll, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_mll, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_mll, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_mll, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_mll, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_mll,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_mll,"MMSCFD");
     
    
     /*var Z = 1;
@@ -4874,33 +4878,33 @@ function internal_mll_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    //var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    //var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_mll, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_mll, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_mll, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_mll, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_mll, "SCFD");
 
     var e = Math.E;
     /*var Pavg = 2 / 3 * (Math.pow(P1, 3) - Math.pow(P2, 3)) / (Math.pow(P1, 2) - Math.pow(P2, 2));
@@ -4941,35 +4945,35 @@ function downstream_mll_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    //var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_mll, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_mll, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_mll, "psia");
-    //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_mll, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_mll, "psia");
+    //P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_mll, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -5030,35 +5034,35 @@ function upstream_mll_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    //var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_mll, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_mll, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_mll, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_mll, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_mll, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_mll, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_mll, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_mll, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_mll, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_mll, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_mll, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_mll, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_mll, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_mll, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_mll, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_mll, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_mll, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -5109,35 +5113,35 @@ function flowrate_spi_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    //var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    //var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
     //alert(Tb+" "+Pb+" "+Tf+" "+G+" "+Ef+" "+P1+" "+D+" "+P2+" "+L+" "+h1+" "+h2);
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_spi, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_spi, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_spi, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_spi, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_spi, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_spi, "psia");
 
-    //Q = get_Flujo(parseFloat(Q),uni.if_sel_spi,"MMSCFD");
+    //Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_spi,"MMSCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -5179,34 +5183,34 @@ function internal_spi_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    //var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    //var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_spi, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_spi, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_spi, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_spi, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_spi, "SCFD");
 
     
     var Z = 1;
@@ -5253,34 +5257,34 @@ function downstream_spi_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    //var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_spi, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_spi, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_spi, "psia");
-    //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_spi, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_spi, "psia");
+    //P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_spi, "SCFD");
 
     
     var Z = 1;
@@ -5337,35 +5341,35 @@ function upstream_spi_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    //var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_spi, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_spi, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_spi, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_spi, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_spi, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_spi, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_spi, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_spi, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_spi, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_spi, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_spi, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_spi, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_spi, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_spi, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_spi, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_spi, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_spi, "SCFD");
 
     
     var Z = 1;
@@ -5417,35 +5421,35 @@ function flowrate_fri_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    //var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    //var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_fri, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_fri, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_fri, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_fri, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_fri, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_fri, "psia");
 
-    // Q = get_Flujo(parseFloat(Q),uni.if_sel_fri,"MMSCFD");
+    // Q = get_Flujo(parseFloatWithCommas(Q),uni.if_sel_fri,"MMSCFD");
 
     var e = Math.E;
 
@@ -5491,33 +5495,33 @@ function internal_fri_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    //var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    //var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_fri, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_fri, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_fri, "psia");
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_fri, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_fri, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -5557,35 +5561,35 @@ function downstream_fri_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    //var P2 = parseFloat(vari.downstreampressure_igt);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    //var P2 = parseFloatWithCommas(vari.downstreampressure_igt);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_fri, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_fri, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    P1 = get_Pres(parseFloat(P1), h1, uni.up_sel_fri, "psia");
-    //P2 = get_Pres(parseFloat(P2),0, uni.bp_sel_fri, "psia");
+    P1 = get_Pres(parseFloatWithCommas(P1), h1, uni.up_sel_fri, "psia");
+    //P2 = get_Pres(parseFloatWithCommas(P2),0, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_fri, "SCFD");
 
     var Z = 1;
     var e = Math.E;
@@ -5646,35 +5650,35 @@ function upstream_fri_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
-    var Tb = parseFloat(vari.basetemperature);
-    var Pb = parseFloat(vari.basepressure);
-    //var u = parseFloat(vari.pipelineroughness_igt);
-    var Tf = parseFloat(vari.gasflowingtemp);
-    var G = parseFloat(vari.gasspecificgra);
-    var Ef = parseFloat(vari.pipelineefficiency);
-    var Q = parseFloat(vari.flowrate);
-    //var P1 = parseFloat(vari.upstreampressure);
-    var D = parseFloat(vari.internalpipe);
-    var P2 = parseFloat(vari.downstreampressure);
-    var L = parseFloat(vari.lengthof);
-    var h1 = parseFloat(vari.upstreamelevation);
-    var h2 = parseFloat(vari.downstreamelevation);
+    var Tb = parseFloatWithCommas(vari.basetemperature);
+    var Pb = parseFloatWithCommas(vari.basepressure);
+    //var u = parseFloatWithCommas(vari.pipelineroughness_igt);
+    var Tf = parseFloatWithCommas(vari.gasflowingtemp);
+    var G = parseFloatWithCommas(vari.gasspecificgra);
+    var Ef = parseFloatWithCommas(vari.pipelineefficiency);
+    var Q = parseFloatWithCommas(vari.flowrate);
+    //var P1 = parseFloatWithCommas(vari.upstreampressure);
+    var D = parseFloatWithCommas(vari.internalpipe);
+    var P2 = parseFloatWithCommas(vari.downstreampressure);
+    var L = parseFloatWithCommas(vari.lengthof);
+    var h1 = parseFloatWithCommas(vari.upstreamelevation);
+    var h2 = parseFloatWithCommas(vari.downstreamelevation);
 
     var Le = 0;
-    Tb = get_Temp(parseFloat(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
-    Tf = get_Temp(parseFloat(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
+    Tb = get_Temp(parseFloatWithCommas(Tb), uni.bt_sel_fri, "R");  //Temperatura base 
+    Tf = get_Temp(parseFloatWithCommas(Tf), uni.gft_sel_fri, "R");  //Temperatura base 
 
-    D = get_Long(parseFloat(D), uni.diam_sel_fri, "in");
-    L = get_Long(parseFloat(L), uni.le_sel_fri, "mil");
-    h1 = get_Long(parseFloat(h1), uni.ue_sel_fri, "ft");
-    h2 = get_Long(parseFloat(h2), uni.de_sel_fri, "ft");
+    D = get_Long(parseFloatWithCommas(D), uni.diam_sel_fri, "in");
+    L = get_Long(parseFloatWithCommas(L), uni.le_sel_fri, "mil");
+    h1 = get_Long(parseFloatWithCommas(h1), uni.ue_sel_fri, "ft");
+    h2 = get_Long(parseFloatWithCommas(h2), uni.de_sel_fri, "ft");
     
-    Pb = get_Pres(parseFloat(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
+    Pb = get_Pres(parseFloatWithCommas(Pb), 0, uni.bte_sel_fri, "psia"); //Presión base: preguntar por elevación
     //en vez de 0 debe ir o Pa1 o Pa2 que son el calculo de la altura
-    //P1 = get_Pres(parseFloat(P1),0, uni.up_sel_fri, "psia");
-    P2 = get_Pres(parseFloat(P2), h2, uni.bp_sel_fri, "psia");
+    //P1 = get_Pres(parseFloatWithCommas(P1),0, uni.up_sel_fri, "psia");
+    P2 = get_Pres(parseFloatWithCommas(P2), h2, uni.bp_sel_fri, "psia");
 
-    Q = get_Flujo(parseFloat(Q), uni.if_sel_fri, "SCFD");
+    Q = get_Flujo(parseFloatWithCommas(Q), uni.if_sel_fri, "SCFD");
 
     
     var Z = 1;
@@ -5727,16 +5731,16 @@ function erf_Form(vari, uni) {
      * 
      */
 
-    var longacor_erf = get_Long(parseFloat(vari.longacor_erf), uni.de_sel_erf, "mm");
-    //alert(parseFloat(vari.longacor_erf));
+    var longacor_erf = get_Long(parseFloatWithCommas(vari.longacor_erf), uni.de_sel_erf, "mm");
+    //alert(parseFloatWithCommas(vari.longacor_erf));
     //alert(longacor_erf);
-    var pmpmac_erf = parseFloat(vari.pmpmac_erf); //porcentaje
+    var pmpmac_erf = parseFloatWithCommas(vari.pmpmac_erf); //porcentaje
     pmpmac_erf = pmpmac_erf / 100;
-    var dianoex_erf = get_Long(parseFloat(vari.dianoex_erf), uni.dn_sel_erf, "in");
-    var esnotu_erf = get_Long(parseFloat(vari.esnotu_erf), uni.en_sel_erf, "in");
-    var smys_erf = parseFloat(vari.smys_erf); //psi
-    var maop_erf = parseFloat(vari.maop_erf); //psi
-    var fdiseno = parseFloat(vari.cllocalidad_erf);
+    var dianoex_erf = get_Long(parseFloatWithCommas(vari.dianoex_erf), uni.dn_sel_erf, "in");
+    var esnotu_erf = get_Long(parseFloatWithCommas(vari.esnotu_erf), uni.en_sel_erf, "in");
+    var smys_erf = parseFloatWithCommas(vari.smys_erf); //psi
+    var maop_erf = parseFloatWithCommas(vari.maop_erf); //psi
+    var fdiseno = parseFloatWithCommas(vari.cllocalidad_erf);
     
     var L = longacor_erf/25.4;
     var A = 0.893*L/(Math.pow(dianoex_erf*esnotu_erf, 0.5));
@@ -5803,12 +5807,12 @@ function erf_Form(vari, uni) {
     
     
 
-    /*smys_erf;//= get_Pres(parseFloat(smys_erf),0, uni.smys_sel_erf, "psia"); //Presión base: preguntar por elevación
-    maop_erf;//= get_Pres(parseFloat(maop_erf),0, uni.maop_sel_erf, "psia"); //Presión base: preguntar por elevación
+    /*smys_erf;//= get_Pres(parseFloatWithCommas(smys_erf),0, uni.smys_sel_erf, "psia"); //Presión base: preguntar por elevación
+    maop_erf;//= get_Pres(parseFloatWithCommas(maop_erf),0, uni.maop_sel_erf, "psia"); //Presión base: preguntar por elevación
 
-    /*  L           =  get_Long(parseFloat(L) ,uni.de_sel_erf, "mm") ;
-     dianoex_erf =  get_Long(parseFloat(dianoex_erf) ,uni.dn_sel_erf, "mm") ;
-     esnotu_erf  =  get_Long(parseFloat(esnotu_erf) ,uni.en_sel_erf, "mm") ;
+    /*  L           =  get_Long(parseFloatWithCommas(L) ,uni.de_sel_erf, "mm") ;
+     dianoex_erf =  get_Long(parseFloatWithCommas(dianoex_erf) ,uni.dn_sel_erf, "mm") ;
+     esnotu_erf  =  get_Long(parseFloatWithCommas(esnotu_erf) ,uni.en_sel_erf, "mm") ;
      
     var L = longacor_erf / 25.4;// preguntar porque esta division a que esta pasando mm
 
@@ -5925,15 +5929,15 @@ function bending_stress_form(vari,uni) {
      */
 
 
-    var F15 = parseFloat(vari.pipe_dia_bds);    // in
-    var F16 = parseFloat(vari.pipe_wt_bds);     // in
-    var F17 = parseFloat(vari.pipe_lenght_bds); // ft
-    var F18 = parseFloat(vari.mod_elas_bds);    // psi
+    var F15 = parseFloatWithCommas(vari.pipe_dia_bds);    // in
+    var F16 = parseFloatWithCommas(vari.pipe_wt_bds);     // in
+    var F17 = parseFloatWithCommas(vari.pipe_lenght_bds); // ft
+    var F18 = parseFloatWithCommas(vari.mod_elas_bds);    // psi
     
-   F15 = get_Long(parseFloat(F15), uni.ee_sel_bds, "in");
-   F16 = get_Long(parseFloat(F16), uni.ee1_sel_bds, "in");
-   F17 = get_Long(parseFloat(F17), uni.pipe_lenght_sel_bds, "ft");
-   F18 = get_Presf(parseFloat(F18), uni.dp_sel_ppw, "psi");
+   F15 = get_Long(parseFloatWithCommas(F15), uni.ee_sel_bds, "in");
+   F16 = get_Long(parseFloatWithCommas(F16), uni.ee1_sel_bds, "in");
+   F17 = get_Long(parseFloatWithCommas(F17), uni.pipe_lenght_sel_bds, "ft");
+   F18 = get_Presf(parseFloatWithCommas(F18), uni.dp_sel_ppw, "psi");
  
  
     var E_MaxEsFl = (10.2 * (10.69 * (F15 - F16) * F16) * F15 * Math.pow(F17, 2)) / (Math.pow(F15, 4) - Math.pow((F15 - 2 * F16), 4));
@@ -5981,17 +5985,17 @@ function bending_stress_fluid_form(vari,uni) {
      *  F19 = Lenght of Pipe
      * 
      */
-    var F15 = parseFloat(vari.unit_weight_bdsf);
-    var F16 = parseFloat(vari.pipe_dia_bdsf);
-    var F17 = parseFloat(vari.pipe_in_dia_bdsf);
-    var F19 = parseFloat(vari.vel_fluid_bdsf);
-    var F20 = parseFloat(vari.lenght_pipe_bdsf);
+    var F15 = parseFloatWithCommas(vari.unit_weight_bdsf);
+    var F16 = parseFloatWithCommas(vari.pipe_dia_bdsf);
+    var F17 = parseFloatWithCommas(vari.pipe_in_dia_bdsf);
+    var F19 = parseFloatWithCommas(vari.vel_fluid_bdsf);
+    var F20 = parseFloatWithCommas(vari.lenght_pipe_bdsf);
 
-    F15 = get_Density(parseFloat(F15), uni.unit_weight_sel_bdsf, "lbft3");
-    F16 = get_Long(parseFloat(F16), uni.pipe_diam_sel_bdsf, "in");
-    F17 = get_Long(parseFloat(F17), uni.pipe_in_diam_sel_bdsf, "in");
-    F19 = get_Speed(parseFloat(F19), uni.vel_fluid_sel_bdsf, "ft/s");
-    F20 = get_Long(parseFloat(F20), uni.lenght_pipe_sel_bdsf, "ft");
+    F15 = get_Density(parseFloatWithCommas(F15), uni.unit_weight_sel_bdsf, "lbft3");
+    F16 = get_Long(parseFloatWithCommas(F16), uni.pipe_diam_sel_bdsf, "in");
+    F17 = get_Long(parseFloatWithCommas(F17), uni.pipe_in_diam_sel_bdsf, "in");
+    F19 = get_Speed(parseFloatWithCommas(F19), uni.vel_fluid_sel_bdsf, "ft/s");
+    F20 = get_Long(parseFloatWithCommas(F20), uni.lenght_pipe_sel_bdsf, "ft");
     
     var F18 = F16 - 2 * F17;
     
@@ -6017,14 +6021,14 @@ function buoyancy_analisis_form(vari, uni) {
      * F23 = Pipe Lenght
      * 
      */
-    var F16 = parseFloat(vari.nomout_basc);
-    var F17 = parseFloat(vari.nom_wall_basc);
-    var F18 = parseFloat(vari.spec_gra_basc);
-    var F19 = parseFloat(vari.corr_coa_thick_basc);
-    var F20 = parseFloat(vari.pipe_lenght_basc);
-    var F21 = parseFloat(vari.water_dens);
-    var F22 = parseFloat(vari.conc_water_dens);
-    var F23 = parseFloat(vari.corr_coa);
+    var F16 = parseFloatWithCommas(vari.nomout_basc);
+    var F17 = parseFloatWithCommas(vari.nom_wall_basc);
+    var F18 = parseFloatWithCommas(vari.spec_gra_basc);
+    var F19 = parseFloatWithCommas(vari.corr_coa_thick_basc);
+    var F20 = parseFloatWithCommas(vari.pipe_lenght_basc);
+    var F21 = parseFloatWithCommas(vari.water_dens);
+    var F22 = parseFloatWithCommas(vari.conc_water_dens);
+    var F23 = parseFloatWithCommas(vari.corr_coa);
     
     F16 = get_Long(F16, uni.nomout_sel_basc, "in");
     F17 = get_Long(F17, uni.nom_wall_sel_basc, "in");
@@ -6093,16 +6097,16 @@ function buyancy_weight_form(vari, uni) {
      * F22 = Factor de Seguridad
      * 
      */
-    var F14 = parseFloat(vari.nomout_baw);
-    var F15 = parseFloat(vari.nom_wall_baw);
-    var F16 = parseFloat(vari.corr_coa_baw);
-    var F17 = parseFloat(vari.esp_capa_baw);
-    var F18 = parseFloat(vari.vol_agua_baw);
-    var F19 = parseFloat(vari.dens_recu_baw);
-    var F20 = parseFloat(vari.dens_prod_baw);
-    var F21 = parseFloat(vari.dens_conc_baw);
-    var F22 = parseFloat(vari.safe_fact_baw);
-    var concrete_volume = parseFloat(vari.concrete_vol_baw);
+    var F14 = parseFloatWithCommas(vari.nomout_baw);
+    var F15 = parseFloatWithCommas(vari.nom_wall_baw);
+    var F16 = parseFloatWithCommas(vari.corr_coa_baw);
+    var F17 = parseFloatWithCommas(vari.esp_capa_baw);
+    var F18 = parseFloatWithCommas(vari.vol_agua_baw);
+    var F19 = parseFloatWithCommas(vari.dens_recu_baw);
+    var F20 = parseFloatWithCommas(vari.dens_prod_baw);
+    var F21 = parseFloatWithCommas(vari.dens_conc_baw);
+    var F22 = parseFloatWithCommas(vari.safe_fact_baw);
+    var concrete_volume = parseFloatWithCommas(vari.concrete_vol_baw);
 
     F14 = get_Long(F14, uni.nomout_sel_baw, "in");
     F15 = get_Long(F15, uni.nom_wall_sel_baw, "in");
@@ -6152,14 +6156,14 @@ function design_pressure_form(vari, uni) {
      *  E = Longitudinal Join Factor
      *  T = Temperature Derating Factor
      */
-    var nom_pipeop_dp = parseFloat(vari.nom_pipeop_dp);
-    var D = parseFloat(vari.nomout_pipeop_dp);
-    var t = parseFloat(vari.nomwall_pipeop_dp);
-    //var gra_pipeop_dp = parseFloat(vari.gra_pipeop_dp);
-    var S = parseFloat(vari.yield_pipeop_dp);
-    var F = parseFloat(vari.fact_pipeop_dp);
-    var E = parseFloat(vari.long_pipeop_dp);
-    var T = parseFloat(vari.temp_pipeop_dp);
+    var nom_pipeop_dp = parseFloatWithCommas(vari.nom_pipeop_dp);
+    var D = parseFloatWithCommas(vari.nomout_pipeop_dp);
+    var t = parseFloatWithCommas(vari.nomwall_pipeop_dp);
+    //var gra_pipeop_dp = parseFloatWithCommas(vari.gra_pipeop_dp);
+    var S = parseFloatWithCommas(vari.yield_pipeop_dp);
+    var F = parseFloatWithCommas(vari.fact_pipeop_dp);
+    var E = parseFloatWithCommas(vari.long_pipeop_dp);
+    var T = parseFloatWithCommas(vari.temp_pipeop_dp);
 
     nom_pipeop_dp = get_Long(nom_pipeop_dp, uni.nom_pipeop_sel_dp, "in");
     D = get_Long(D, uni.nomout_pipeop_sel_dp, "in");
@@ -6190,12 +6194,12 @@ function desing_pressure_polyethylene_form(vari, uni) {
      *  
      */
 
-    var TextBox5 = parseFloat(vari.nom_pipeop_dpp);
-    var TextBox6 = parseFloat(vari.out_pipeop_dpp);
-    var TextBox7 = parseFloat(vari.wall_pipeop_dpp);
-    var TextBox8 = parseFloat(vari.hyd_pipeop_dpp);
-    var TextBox9 = parseFloat(vari.fact_pipeop_dpp);
-    var ComboBox2 = parseFloat(vari.minimal_sel_dpp);
+    var TextBox5 = parseFloatWithCommas(vari.nom_pipeop_dpp);
+    var TextBox6 = parseFloatWithCommas(vari.out_pipeop_dpp);
+    var TextBox7 = parseFloatWithCommas(vari.wall_pipeop_dpp);
+    var TextBox8 = parseFloatWithCommas(vari.hyd_pipeop_dpp);
+    var TextBox9 = parseFloatWithCommas(vari.fact_pipeop_dpp);
+    var ComboBox2 = parseFloatWithCommas(vari.minimal_sel_dpp);
     
     TextBox5 = get_Long(TextBox5, uni.nom_pipeop_sel_dpp, "in");
     TextBox6 = get_Long(TextBox6, uni.out_pipeop_sel_dpp, "in");
@@ -6233,15 +6237,15 @@ function gaspipeline_form(vari, uni) {
      * a2   = Alpha 2 - Creater Wall Angle at Half Depht [°]
      * Psoil= Soil density
      */
-    var height = parseFloat(vari.height);
-    var Dp = parseFloat(vari.Dp);
-    var P0 = parseFloat(vari.P0);
-    var Dc = parseFloat(vari.Dc);
-    var Y = parseFloat(vari.y);
-    var w = parseFloat(vari.w);
-    var a1 = parseFloat(vari.alpha1);
-    var a2 = parseFloat(vari.alpha2);
-    var Psoil = parseFloat(vari.Psoil);
+    var height = parseFloatWithCommas(vari.height);
+    var Dp = parseFloatWithCommas(vari.Dp);
+    var P0 = parseFloatWithCommas(vari.P0);
+    var Dc = parseFloatWithCommas(vari.Dc);
+    var Y = parseFloatWithCommas(vari.y);
+    var w = parseFloatWithCommas(vari.w);
+    var a1 = parseFloatWithCommas(vari.alpha1);
+    var a2 = parseFloatWithCommas(vari.alpha2);
+    var Psoil = parseFloatWithCommas(vari.Psoil);
 
     console.log(vari);
     console.log(uni);
@@ -6324,11 +6328,11 @@ function hoop_longitudinal_form(vari, uni) {
      * F18 = Internal Pressure
      * 
      */
-    var F15 = parseFloat(vari.nom_pipe_hoop);
-    var F16 = parseFloat(vari.nomout_hoop);
-    var F17 = parseFloat(vari.nom_wall_hoop);
-    var F18 = parseFloat(vari.int_press_hoop);
-    var height = parseFloat(vari.height_hoop);
+    var F15 = parseFloatWithCommas(vari.nom_pipe_hoop);
+    var F16 = parseFloatWithCommas(vari.nomout_hoop);
+    var F17 = parseFloatWithCommas(vari.nom_wall_hoop);
+    var F18 = parseFloatWithCommas(vari.int_press_hoop);
+    var height = parseFloatWithCommas(vari.height_hoop);
     
     F15 = get_Long(F15, uni.nom_pipe_sel_hoop, "in");
     F16 = get_Long(F16, uni.nomout_sel_hoop, "in");
@@ -6367,55 +6371,55 @@ function install_pipelines_Form(vari) {
      * 
      * 
      */
-    var E11 = parseFloat(vari.E11);
+    var E11 = parseFloatWithCommas(vari.E11);
     E11 = E11.toFixed(2);
     var TextBox5 = E11;
-    var E12 = parseFloat(vari.E12);
+    var E12 = parseFloatWithCommas(vari.E12);
     E12 = E12.toFixed(2);
     var TextBox6 = E12;
-    var E13 = parseFloat(vari.E13);
+    var E13 = parseFloatWithCommas(vari.E13);
     E13 = E13.toFixed(2);
-    var E14 = parseFloat(vari.E14);
+    var E14 = parseFloatWithCommas(vari.E14);
     E14 = E14.toFixed(2);
 //alert(E14);
-    var G11 = parseFloat(vari.G11); // TextBox10
+    var G11 = parseFloatWithCommas(vari.G11); // TextBox10
     G11 = G11.toFixed(2);
     var TextBox10 = G11;
-    var G12 = parseFloat(vari.G12); // TextBox11
+    var G12 = parseFloatWithCommas(vari.G12); // TextBox11
     G12 = G12.toFixed(2);
     var TextBox11 = G12;
-    var E18 = parseFloat(vari.E18);
+    var E18 = parseFloatWithCommas(vari.E18);
     E18 = E18.toFixed(2);
-    var E19 = parseFloat(vari.E19);
+    var E19 = parseFloatWithCommas(vari.E19);
     E19 = E19.toFixed(2);
-    var E22 = parseFloat(vari.E22); // TextBox15
+    var E22 = parseFloatWithCommas(vari.E22); // TextBox15
     E22 = E22.toFixed(2);
     var TextBox15 = E22;
-    var E23 = parseFloat(vari.E23); // TextBox16
+    var E23 = parseFloatWithCommas(vari.E23); // TextBox16
     E23 = E23.toFixed(2);
     var TextBox16 = E23;
-    var E24 = parseFloat(vari.E24); // TextBox17
+    var E24 = parseFloatWithCommas(vari.E24); // TextBox17
     E24 = E24.toFixed(2);
     var TextBox17 = E24;
-    var E27 = parseFloat(vari.E27); // TextBox18}
+    var E27 = parseFloatWithCommas(vari.E27); // TextBox18}
     E27 = E27.toFixed(2);
     var TextBox18 = E27;
-    var E30 = parseFloat(vari.E30); // TextBox19
+    var E30 = parseFloatWithCommas(vari.E30); // TextBox19
     E30 = E30.toFixed(2);
     var TextBox19 = E30;
-    var E31 = parseFloat(vari.E31); // TextBox20
+    var E31 = parseFloatWithCommas(vari.E31); // TextBox20
     E31 = E31.toFixed(2);
     var TextBox20 = E31;
-    var E32 = parseFloat(vari.E32); // TextBox21
+    var E32 = parseFloatWithCommas(vari.E32); // TextBox21
     E32 = E32.toFixed(2);
     var TextBox21 = E32;
-    var E35 = parseFloat(vari.E35);
+    var E35 = parseFloatWithCommas(vari.E35);
     E35 = E35.toFixed(2);
     var TextBox22 = E35;
-    var E36 = parseFloat(vari.E36);
+    var E36 = parseFloatWithCommas(vari.E36);
     E36 = E36.toFixed(2);
     var TextBox23 = E36;
-    var TextBox8 = parseFloat(vari.TextBox8);
+    var TextBox8 = parseFloatWithCommas(vari.TextBox8);
     TextBox8 = TextBox8.toFixed(2);
 
 //alert(E11+" "+E12+" "+E13+" "+E14+" "+G11+" "+G12+" "+E18+" "+E19+" "+E22+" "+E23+" "+E27+" "+E30+" "+E31+" "+E32+" "+E35+" "+E36+" "+TextBox8);
@@ -6858,19 +6862,19 @@ function installment_pipe_opera_form(vari, uni) {
      * F24 = Coefficient of Thermal Expansion
      * 
      */
-    var height = parseFloat(vari.height_ippo);
-    var F13 = parseFloat(vari.oper_press_ippo);
-    var F14 = parseFloat(vari.pipe_dia_ippo);
-    var F15 = parseFloat(vari.pipe_wall_ippo);
-    var F16 = parseFloat(vari.min_yield_ippo);
-    var F17 = parseFloat(vari.inst_temp_ippo);
-    var F18 = parseFloat(vari.oper_temp_ippo);
-    var F19 = parseFloat(vari.depth_pipe_ippo);
-    var F20 = parseFloat(vari.ground_table_ippo);
-    var F21 = parseFloat(vari.short_rad_ippo);
-    var F22 = parseFloat(vari.poi_rat_ippo);
-    var F23 = parseFloat(vari.youn_steel_ippo);
-    var F24 = parseFloat(vari.coeff_therm_ippo);
+    var height = parseFloatWithCommas(vari.height_ippo);
+    var F13 = parseFloatWithCommas(vari.oper_press_ippo);
+    var F14 = parseFloatWithCommas(vari.pipe_dia_ippo);
+    var F15 = parseFloatWithCommas(vari.pipe_wall_ippo);
+    var F16 = parseFloatWithCommas(vari.min_yield_ippo);
+    var F17 = parseFloatWithCommas(vari.inst_temp_ippo);
+    var F18 = parseFloatWithCommas(vari.oper_temp_ippo);
+    var F19 = parseFloatWithCommas(vari.depth_pipe_ippo);
+    var F20 = parseFloatWithCommas(vari.ground_table_ippo);
+    var F21 = parseFloatWithCommas(vari.short_rad_ippo);
+    var F22 = parseFloatWithCommas(vari.poi_rat_ippo);
+    var F23 = parseFloatWithCommas(vari.youn_steel_ippo);
+    var F24 = parseFloatWithCommas(vari.coeff_therm_ippo);
 
     console.log(uni);
     console.log(vari);
@@ -6936,12 +6940,12 @@ function internal_pressure_form(vari, uni) {
      * 
      * 
      */
-    var F14 = parseFloat(vari.nom_pipe_ipsmys);
-    var F15 = parseFloat(vari.nomout_ipsmys);
-    var F16 = parseFloat(vari.nom_wall_ipsmys);
-    var F17 = parseFloat(vari.grade_ipsmys);
-    var F18 = parseFloat(vari.min_yield_ipsmys);
-    var F19 = parseFloat(vari.porc_SMYS_ipsmys);
+    var F14 = parseFloatWithCommas(vari.nom_pipe_ipsmys);
+    var F15 = parseFloatWithCommas(vari.nomout_ipsmys);
+    var F16 = parseFloatWithCommas(vari.nom_wall_ipsmys);
+    var F17 = parseFloatWithCommas(vari.grade_ipsmys);
+    var F18 = parseFloatWithCommas(vari.min_yield_ipsmys);
+    var F19 = parseFloatWithCommas(vari.porc_SMYS_ipsmys);
 
     F14 = get_Long(F14, uni.nom_pipe_sel_ipsmys, "in");
     F15 = get_Long(F15, uni.nomout_sel_ipsmys, "in");
@@ -6970,10 +6974,10 @@ function linear_thermal_form(vari, uni) {
      * F17 = Modulus of Elasticity 
      * 
      */
-    var F14 = parseFloat(vari.pipe_lenght_lther);
-    var F15 = parseFloat(vari.coeff_exp_lther);
-    var F16 = parseFloat(vari.temp_chan_lther);
-    var F17 = parseFloat(vari.mod_elas_lther);
+    var F14 = parseFloatWithCommas(vari.pipe_lenght_lther);
+    var F15 = parseFloatWithCommas(vari.coeff_exp_lther);
+    var F16 = parseFloatWithCommas(vari.temp_chan_lther);
+    var F17 = parseFloatWithCommas(vari.mod_elas_lther);
     
     F14 = get_Long(F14, uni.pipe_lenght_sel_lther, "in");
     F17 = get_Presf(F17, uni.mod_elas_sel_lther, "psi");
@@ -6995,21 +6999,21 @@ function linear_thermal_form(vari, uni) {
 }
 //3.13
 function maximunallowable(vari, uni) {
-    var height = parseFloat(vari.height);
-    var D = parseFloat(vari.D);
-    var steel_density = parseFloat(vari.W);
-    var MOP = parseFloat(vari.MOP);
-    var t = parseFloat(vari.t);
-    var SMYS = parseFloat(vari.SMYS);
-    var E = parseFloat(vari.E);
-    var L = parseFloat(vari.L);
-    var d = parseFloat(vari.d);
-    var temde = parseFloat(vari.temde);
-    var aul = parseFloat(vari.aul);
-    var mtp = parseFloat(vari.mtp);
-    var maSMYS = parseFloat(vari.maSMYS);
-    var F = parseFloat(vari.F);
-    var Pmod = parseFloat(vari.Pmod);
+    var height = parseFloatWithCommas(vari.height);
+    var D = parseFloatWithCommas(vari.D);
+    var steel_density = parseFloatWithCommas(vari.W);
+    var MOP = parseFloatWithCommas(vari.MOP);
+    var t = parseFloatWithCommas(vari.t);
+    var SMYS = parseFloatWithCommas(vari.SMYS);
+    var E = parseFloatWithCommas(vari.E);
+    var L = parseFloatWithCommas(vari.L);
+    var d = parseFloatWithCommas(vari.d);
+    var temde = parseFloatWithCommas(vari.temde);
+    var aul = parseFloatWithCommas(vari.aul);
+    var mtp = parseFloatWithCommas(vari.mtp);
+    var maSMYS = parseFloatWithCommas(vari.maSMYS);
+    var F = parseFloatWithCommas(vari.F);
+    var Pmod = parseFloatWithCommas(vari.Pmod);
     
     aul = get_WeightLong(aul, uni.add_maxallo_sel_max, 'lbs/ft');
     height = get_Long(height, uni.height_sel_max, 'ft');
@@ -7091,19 +7095,19 @@ function longitudinal_Stress_Form(vari, uni) {
      * 
      * 
      */
-    var TextBox5 = parseFloat(vari.TextBox5);
-    var TextBox6 = parseFloat(vari.TextBox6);
-    var TextBox7 = parseFloat(vari.TextBox7);
-    var TextBox8 = parseFloat(vari.TextBox8);
-    var TextBox9 = parseFloat(vari.TextBox9);
-    var TextBox10 = parseFloat(vari.TextBox10);
-    var TextBox11 = parseFloat(vari.TextBox11);
-    var TextBox12 = parseFloat(vari.TextBox12);
-    var TextBox13 = parseFloat(vari.TextBox13);
-    var TextBox14 = parseFloat(vari.TextBox14);
-    var TextBox15 = parseFloat(vari.TextBox15);
-    var ComboBox4 = parseFloat(vari.ComboBox4);
-    var TextBox17 = parseFloat(vari.TextBox17);
+    var TextBox5 = parseFloatWithCommas(vari.TextBox5);
+    var TextBox6 = parseFloatWithCommas(vari.TextBox6);
+    var TextBox7 = parseFloatWithCommas(vari.TextBox7);
+    var TextBox8 = parseFloatWithCommas(vari.TextBox8);
+    var TextBox9 = parseFloatWithCommas(vari.TextBox9);
+    var TextBox10 = parseFloatWithCommas(vari.TextBox10);
+    var TextBox11 = parseFloatWithCommas(vari.TextBox11);
+    var TextBox12 = parseFloatWithCommas(vari.TextBox12);
+    var TextBox13 = parseFloatWithCommas(vari.TextBox13);
+    var TextBox14 = parseFloatWithCommas(vari.TextBox14);
+    var TextBox15 = parseFloatWithCommas(vari.TextBox15);
+    var ComboBox4 = parseFloatWithCommas(vari.ComboBox4);
+    var TextBox17 = parseFloatWithCommas(vari.TextBox17);
 
     TextBox5 = get_Long(TextBox5, uni.nom_pipe_sel_lostre, "in");
     TextBox6 = get_Long(TextBox6, uni.pipe_dia_sel_lostre, "in");
@@ -7205,13 +7209,13 @@ function maximun_impact_form(vari, uni) {
      * F21 = Empirical Coefficient of Penetration
      * 
      */
-    var F15 = parseFloat(vari.weight_fall_milpd);
-    var F16 = parseFloat(vari.drop_height_milpd);
-    var F17 = parseFloat(vari.imp_area_milpd);
-    var F18 = parseFloat(vari.weight_soil_milpd);
-    var F19 = parseFloat(vari.poi_soil_milpd);
-    var F20 = parseFloat(vari.wave_vel_milpd);
-    var F21 = parseFloat(vari.emp_coef);
+    var F15 = parseFloatWithCommas(vari.weight_fall_milpd);
+    var F16 = parseFloatWithCommas(vari.drop_height_milpd);
+    var F17 = parseFloatWithCommas(vari.imp_area_milpd);
+    var F18 = parseFloatWithCommas(vari.weight_soil_milpd);
+    var F19 = parseFloatWithCommas(vari.poi_soil_milpd);
+    var F20 = parseFloatWithCommas(vari.wave_vel_milpd);
+    var F21 = parseFloatWithCommas(vari.emp_coef);
     
     // 0.0482 soil with vegetation
     // 0.0732 soft soil
@@ -7258,16 +7262,16 @@ function pipeanchorforce_form(vari, uni) {
      * d  = Operating Temperature
      * 
      */
-    var u = parseFloat(vari.poi_paf);
-    var E = parseFloat(vari.you_elas_paf);
-    var thermal = parseFloat(vari.ther_exp_paf);
-    var height = parseFloat(vari.height_paf);
-    var P = parseFloat(vari.design_press_paf);
-    var D = parseFloat(vari.nomout_paf);
-    var t = parseFloat(vari.nom_wall_paf);
-    var Ti = parseFloat(vari.temp_paf);
-    var To = parseFloat(vari.oper_temp_paf);
-    var d = parseFloat(vari.nomin_paf);
+    var u = parseFloatWithCommas(vari.poi_paf);
+    var E = parseFloatWithCommas(vari.you_elas_paf);
+    var thermal = parseFloatWithCommas(vari.ther_exp_paf);
+    var height = parseFloatWithCommas(vari.height_paf);
+    var P = parseFloatWithCommas(vari.design_press_paf);
+    var D = parseFloatWithCommas(vari.nomout_paf);
+    var t = parseFloatWithCommas(vari.nom_wall_paf);
+    var Ti = parseFloatWithCommas(vari.temp_paf);
+    var To = parseFloatWithCommas(vari.oper_temp_paf);
+    var d = parseFloatWithCommas(vari.nomin_paf);
     
     height = get_Long(height, uni.height_sel_paf, 'ft');
     D = get_Long(D, uni.nomout_sel_paf, 'in');
@@ -7320,21 +7324,21 @@ function pipeanchorforce_form(vari, uni) {
 //3.17
 function Restrained_form(vari, uni) {
 
-    var Spoisson = parseFloat(vari.Spoisson);
-    var E = parseFloat(vari.E);
-    var alpha = parseFloat(vari.alpha);
-    var height = parseFloat(vari.height);
-    var P = parseFloat(vari.P);
-    var D = parseFloat(vari.D);
-    var t = parseFloat(vari.t);
-    var Grade = parseFloat(vari.Grade);
-    var S = parseFloat(vari.S);
-    var T = parseFloat(vari.T);
-    var T1 = parseFloat(vari.T1);
-    var T2 = parseFloat(vari.T2);
-    var Sb = parseFloat(vari.Sb);
-    var Sx = parseFloat(vari.Sx);
-    var Kfactor = parseFloat(vari.Kfactor);
+    var Spoisson = parseFloatWithCommas(vari.Spoisson);
+    var E = parseFloatWithCommas(vari.E);
+    var alpha = parseFloatWithCommas(vari.alpha);
+    var height = parseFloatWithCommas(vari.height);
+    var P = parseFloatWithCommas(vari.P);
+    var D = parseFloatWithCommas(vari.D);
+    var t = parseFloatWithCommas(vari.t);
+    var Grade = parseFloatWithCommas(vari.Grade);
+    var S = parseFloatWithCommas(vari.S);
+    var T = parseFloatWithCommas(vari.T);
+    var T1 = parseFloatWithCommas(vari.T1);
+    var T2 = parseFloatWithCommas(vari.T2);
+    var Sb = parseFloatWithCommas(vari.Sb);
+    var Sx = parseFloatWithCommas(vari.Sx);
+    var Kfactor = parseFloatWithCommas(vari.Kfactor);
     
     height = get_Long(height, uni.height_sel_rpls, 'ft');
     D = get_Long(D, uni.nomout_sel_rpls, 'in');
@@ -7373,12 +7377,12 @@ function Restrained_form(vari, uni) {
 }
 //3.18
 function unpressured_pipe_form(vari, uni) {
-    var young_modulus = parseFloat(vari.you_elast_urpp);
-    var max_defl = parseFloat(vari.max_defl_urpp);
-    var nomout = parseFloat(vari.nomout_urpp);
-    var nomwall = parseFloat(vari.nom_wall_urpp);
-    var smys = parseFloat(vari.min_yield_urpp);
-    var perc_smys = parseFloat(vari.porc_SMYS_urpp);
+    var young_modulus = parseFloatWithCommas(vari.you_elast_urpp);
+    var max_defl = parseFloatWithCommas(vari.max_defl_urpp);
+    var nomout = parseFloatWithCommas(vari.nomout_urpp);
+    var nomwall = parseFloatWithCommas(vari.nom_wall_urpp);
+    var smys = parseFloatWithCommas(vari.min_yield_urpp);
+    var perc_smys = parseFloatWithCommas(vari.porc_SMYS_urpp);
 
     max_defl = get_Long(max_defl, uni.max_defl_sel_urpp, 'in');
     nomout = get_Long(nomout, uni.nomout_sel_urpp, 'in');
@@ -7398,18 +7402,18 @@ function unpressured_pipe_form(vari, uni) {
 }
 //3.19
 function UnRestrained_form(vari, uni) {
-    var Spoisson = parseFloat(vari.Spoisson);
-    var E = parseFloat(vari.E);
-    var alpha = parseFloat(vari.alpha);
-    var height = parseFloat(vari.height);
-    var P = parseFloat(vari.P);
-    var D = parseFloat(vari.D);
-    var t = parseFloat(vari.t);
-    var Grade = parseFloat(vari.Grade);
-    var S = parseFloat(vari.S);
-    var T = parseFloat(vari.T);
-    var Sb = parseFloat(vari.Sb);
-    var Sx = parseFloat(vari.Sx);
+    var Spoisson = parseFloatWithCommas(vari.Spoisson);
+    var E = parseFloatWithCommas(vari.E);
+    var alpha = parseFloatWithCommas(vari.alpha);
+    var height = parseFloatWithCommas(vari.height);
+    var P = parseFloatWithCommas(vari.P);
+    var D = parseFloatWithCommas(vari.D);
+    var t = parseFloatWithCommas(vari.t);
+    var Grade = parseFloatWithCommas(vari.Grade);
+    var S = parseFloatWithCommas(vari.S);
+    var T = parseFloatWithCommas(vari.T);
+    var Sb = parseFloatWithCommas(vari.Sb);
+    var Sx = parseFloatWithCommas(vari.Sx);
 
     height = get_Long(height, uni.height_sel_unrpl, 'ft');
     D = get_Long(D, uni.nomout_sel_unrpl, 'in');
@@ -7454,16 +7458,16 @@ function wallthickness_ssp(vari, uni) {
      * 
      */
 
-    var E19 = parseFloat(vari.nomout_pipeop_wts);
-    var height = parseFloat(vari.height_wts);
-    var E20 = parseFloat(vari.despress_pipeop_wts);
+    var E19 = parseFloatWithCommas(vari.nomout_pipeop_wts);
+    var height = parseFloatWithCommas(vari.height_wts);
+    var E20 = parseFloatWithCommas(vari.despress_pipeop_wts);
 
-    var E22 = parseFloat(vari.yield_pipeop_wts);
-    var E23 = parseFloat(vari.fact_pipeop_wts);
-    var E24 = parseFloat(vari.long_pipeop_wts);
-    var E25 = parseFloat(vari.temp_pipeop_wts);
+    var E22 = parseFloatWithCommas(vari.yield_pipeop_wts);
+    var E23 = parseFloatWithCommas(vari.fact_pipeop_wts);
+    var E24 = parseFloatWithCommas(vari.long_pipeop_wts);
+    var E25 = parseFloatWithCommas(vari.temp_pipeop_wts);
 
-    var E26 = parseFloat(vari.about_thick_wts); //debe ser in
+    var E26 = parseFloatWithCommas(vari.about_thick_wts); //debe ser in
     
     E19 = get_Long(E19, uni.nomout_pipeop_sel_wts, 'in');
     height = get_Long(height, uni.height_sel_wts, 'ft');
@@ -7488,12 +7492,12 @@ function wallthickness_ssp(vari, uni) {
 //3.21
 function wall_poly_lene_form(vari, uni) {
 
-    var D = parseFloat(vari.nom_pipeop_wtpe);
-    var OD = parseFloat(vari.out_pipeop_wtpe);
-    var P = parseFloat(vari.despress_pipeop_wtpe);
-    var HDB = parseFloat(vari.hyd_pipeop_wtpe);
-    var F = parseFloat(vari.fact_pipeop_wtpe);
-    var height = parseFloat(vari.height_wtpe);
+    var D = parseFloatWithCommas(vari.nom_pipeop_wtpe);
+    var OD = parseFloatWithCommas(vari.out_pipeop_wtpe);
+    var P = parseFloatWithCommas(vari.despress_pipeop_wtpe);
+    var HDB = parseFloatWithCommas(vari.hyd_pipeop_wtpe);
+    var F = parseFloatWithCommas(vari.fact_pipeop_wtpe);
+    var height = parseFloatWithCommas(vari.height_wtpe);
     
     height = get_Long(height, uni.height_sel_wtpe, 'ft');
     
@@ -7516,19 +7520,19 @@ function wall_poly_lene_form(vari, uni) {
 //=============MODULO 4=============================
 //4.1
 function designuncascro(vari, uni) {
-    var height = parseFloat(vari.height);
-    var D = parseFloat(vari.D);
-    var t = parseFloat(vari.t);
-    var E = parseFloat(vari.E);
-    var g = parseFloat(vari.g);
-    var Kz = parseFloat(vari.Kz);
-    var Kb = parseFloat(vari.Kb);
-    var I = parseFloat(vari.I);
-    var P = parseFloat(vari.P);
-    var L = parseFloat(vari.L);
-    var Bd = parseFloat(vari.Bd);
-    var H = parseFloat(vari.H);
-    var Cd = parseFloat(vari.Cd);
+    var height = parseFloatWithCommas(vari.height);
+    var D = parseFloatWithCommas(vari.D);
+    var t = parseFloatWithCommas(vari.t);
+    var E = parseFloatWithCommas(vari.E);
+    var g = parseFloatWithCommas(vari.g);
+    var Kz = parseFloatWithCommas(vari.Kz);
+    var Kb = parseFloatWithCommas(vari.Kb);
+    var I = parseFloatWithCommas(vari.I);
+    var P = parseFloatWithCommas(vari.P);
+    var L = parseFloatWithCommas(vari.L);
+    var Bd = parseFloatWithCommas(vari.Bd);
+    var H = parseFloatWithCommas(vari.H);
+    var Cd = parseFloatWithCommas(vari.Cd);
 
     height = get_Long(height, uni.height_sel_duc, 'ft');
     D = get_Long(D, uni.nominalOutsideDiameter_sel_duc, 'in');
@@ -7557,32 +7561,32 @@ function designuncascro(vari, uni) {
 function SteelpipelinesCH(vari, uni) {
 
 
-    var D = parseFloat(vari.D);
-    var t = parseFloat(vari.t);
-    var tw = parseFloat(vari.tw);
-    var Vs = parseFloat(vari.Vs);
-    var F = parseFloat(vari.F);
-    var SMYS = parseFloat(vari.SMYS);
-    var Bd = parseFloat(vari.Bd);
-    var E = parseFloat(vari.E);
-    var Es = parseFloat(vari.Es);
-    var Esr = parseFloat(vari.Esr);
-    var Er = parseFloat(vari.Er);
-    var P = parseFloat(vari.P);
-    var Ps = parseFloat(vari.Ps);
-    var Pt = parseFloat(vari.Pt);
-    var T = parseFloat(vari.T);
-    var AT = parseFloat(vari.AT);
-    var Y = parseFloat(vari.Y);
-    var H = parseFloat(vari.H);
-    var Fi = parseFloat(vari.Fi);
-    var PaveTy = parseFloat(vari.PaveTy);
-    var lfs = parseFloat(vari.lfs);
-    var grade = parseFloat(vari.grade);
-    var p = parseFloat(vari.p);
-    var T1 = parseFloat(vari.T1);
-    var T2 = parseFloat(vari.T2);
-    var soil = parseFloat(vari.soil);
+    var D = parseFloatWithCommas(vari.D);
+    var t = parseFloatWithCommas(vari.t);
+    var tw = parseFloatWithCommas(vari.tw);
+    var Vs = parseFloatWithCommas(vari.Vs);
+    var F = parseFloatWithCommas(vari.F);
+    var SMYS = parseFloatWithCommas(vari.SMYS);
+    var Bd = parseFloatWithCommas(vari.Bd);
+    var E = parseFloatWithCommas(vari.E);
+    var Es = parseFloatWithCommas(vari.Es);
+    var Esr = parseFloatWithCommas(vari.Esr);
+    var Er = parseFloatWithCommas(vari.Er);
+    var P = parseFloatWithCommas(vari.P);
+    var Ps = parseFloatWithCommas(vari.Ps);
+    var Pt = parseFloatWithCommas(vari.Pt);
+    var T = parseFloatWithCommas(vari.T);
+    var AT = parseFloatWithCommas(vari.AT);
+    var Y = parseFloatWithCommas(vari.Y);
+    var H = parseFloatWithCommas(vari.H);
+    var Fi = parseFloatWithCommas(vari.Fi);
+    var PaveTy = parseFloatWithCommas(vari.PaveTy);
+    var lfs = parseFloatWithCommas(vari.lfs);
+    var grade = parseFloatWithCommas(vari.grade);
+    var p = parseFloatWithCommas(vari.p);
+    var T1 = parseFloatWithCommas(vari.T1);
+    var T2 = parseFloatWithCommas(vari.T2);
+    var soil = parseFloatWithCommas(vari.soil);
 
     console.log(vari);
     console.log(uni);
@@ -7784,30 +7788,30 @@ function SteelpipelinesCH(vari, uni) {
 //4.3
 function SteelpipelinesCR(vari, uni) {
 
-    var Es = parseFloat(vari.Es);
-    var Vs = parseFloat(vari.Vs);
-    var AT = parseFloat(vari.AT);
-    var p = parseFloat(vari.p);
-    var P = parseFloat(vari.P);
-    var T1 = parseFloat(vari.T1);
-    var D = parseFloat(vari.D);
-    var tw = parseFloat(vari.tw);
-    var gd = parseFloat(vari.gd);
-    var SMYS = parseFloat(vari.SMYS);
-    var F = parseFloat(vari.F);
-    var E = parseFloat(vari.E);
-    var T = parseFloat(vari.T);
-    var H = parseFloat(vari.H);
-    var Bd = parseFloat(vari.Bd);
-    var T2 = parseFloat(vari.T2);
-    var Lg = parseFloat(vari.Lg);
-    var Nt = parseFloat(vari.Nt);
-    var Ep = parseFloat(vari.Ep);
-    var Er = parseFloat(vari.Er);
-    var Y = parseFloat(vari.Y);
-    var w = parseFloat(vari.w);
-    var lfs = parseFloat(vari.lfs);
-    var grade = parseFloat(vari.grade);
+    var Es = parseFloatWithCommas(vari.Es);
+    var Vs = parseFloatWithCommas(vari.Vs);
+    var AT = parseFloatWithCommas(vari.AT);
+    var p = parseFloatWithCommas(vari.p);
+    var P = parseFloatWithCommas(vari.P);
+    var T1 = parseFloatWithCommas(vari.T1);
+    var D = parseFloatWithCommas(vari.D);
+    var tw = parseFloatWithCommas(vari.tw);
+    var gd = parseFloatWithCommas(vari.gd);
+    var SMYS = parseFloatWithCommas(vari.SMYS);
+    var F = parseFloatWithCommas(vari.F);
+    var E = parseFloatWithCommas(vari.E);
+    var T = parseFloatWithCommas(vari.T);
+    var H = parseFloatWithCommas(vari.H);
+    var Bd = parseFloatWithCommas(vari.Bd);
+    var T2 = parseFloatWithCommas(vari.T2);
+    var Lg = parseFloatWithCommas(vari.Lg);
+    var Nt = parseFloatWithCommas(vari.Nt);
+    var Ep = parseFloatWithCommas(vari.Ep);
+    var Er = parseFloatWithCommas(vari.Er);
+    var Y = parseFloatWithCommas(vari.Y);
+    var w = parseFloatWithCommas(vari.w);
+    var lfs = parseFloatWithCommas(vari.lfs);
+    var grade = parseFloatWithCommas(vari.grade);
     var soil = vari.soil;
     
     soil = soil || '';
@@ -8045,24 +8049,24 @@ function trackliadanalysis(vari,uni) {
      *  
      */
 
-    var F14 = parseFloat(vari.TextBox5);
-    var F15 = parseFloat(vari.TextBox6);
-    var F16 = parseFloat(vari.TextBox7);
-    var F17 = parseFloat(vari.TextBox8);
-    var F18 = parseFloat(vari.TextBox9);
-    var F19 = parseFloat(vari.TextBox10);
-    var F20 = parseFloat(vari.TextBox11);
-    var impactFactor = parseFloat(vari.TextBox12);
-    var F22 = parseFloat(vari.TextBox13);
-    var F23 = parseFloat(vari.TextBox14);
-    var F24 = parseFloat(vari.TextBox15);
-    var F25 = parseFloat(vari.TextBox16);
-    var F26 = parseFloat(vari.TextBox17);
-    var F27 = parseFloat(vari.TextBox18);
-    var F28 = parseFloat(vari.TextBox19);
-    var F29 = parseFloat(vari.TextBox20);
-    var F30 = parseFloat(vari.TextBox21);
-    var F31 = parseFloat(vari.TextBox22);
+    var F14 = parseFloatWithCommas(vari.TextBox5);
+    var F15 = parseFloatWithCommas(vari.TextBox6);
+    var F16 = parseFloatWithCommas(vari.TextBox7);
+    var F17 = parseFloatWithCommas(vari.TextBox8);
+    var F18 = parseFloatWithCommas(vari.TextBox9);
+    var F19 = parseFloatWithCommas(vari.TextBox10);
+    var F20 = parseFloatWithCommas(vari.TextBox11);
+    var impactFactor = parseFloatWithCommas(vari.TextBox12);
+    var F22 = parseFloatWithCommas(vari.TextBox13);
+    var F23 = parseFloatWithCommas(vari.TextBox14);
+    var F24 = parseFloatWithCommas(vari.TextBox15);
+    var F25 = parseFloatWithCommas(vari.TextBox16);
+    var F26 = parseFloatWithCommas(vari.TextBox17);
+    var F27 = parseFloatWithCommas(vari.TextBox18);
+    var F28 = parseFloatWithCommas(vari.TextBox19);
+    var F29 = parseFloatWithCommas(vari.TextBox20);
+    var F30 = parseFloatWithCommas(vari.TextBox21);
+    var F31 = parseFloatWithCommas(vari.TextBox22);
     
     F14 = get_Long(F14, uni.pipeOutsideDiameter_sel_tl, 'in');
     F15 = get_Long(F15, uni.pipeWallThickness_sel_tl, 'in');
@@ -8325,31 +8329,31 @@ function wheelLoadAnalysis(vari) {
      *  F32 = Trench Width 
      *  
      */
-    var F14 = parseFloat(vari.TextBox14);
-    var F15 = parseFloat(vari.TextBox15);
-    var F16 = parseFloat(vari.TextBox16);
-    var F17 = parseFloat(vari.TextBox17);
-    var F18 = parseFloat(vari.TextBox18);
-    var F19 = parseFloat(vari.TextBox19);
-    var F20 = parseFloat(vari.TextBox20);
-    var F21 = parseFloat(vari.TextBox21);
-    var F22 = parseFloat(vari.TextBox22);
-    var F23 = parseFloat(vari.TextBox23);
-    var F24 = parseFloat(vari.TextBox24);
-    var F25 = parseFloat(vari.TextBox25);
-    var F26 = parseFloat(vari.TextBox26);
-    var F27 = parseFloat(vari.TextBox27);
-    var F28 = parseFloat(vari.TextBox28);
-    var F29 = parseFloat(vari.TextBox29);
-    var F30 = parseFloat(vari.TextBox30);
-    var F31 = parseFloat(vari.TextBox31);
-    var F32 = parseFloat(vari.TextBox32);
+    var F14 = parseFloatWithCommas(vari.TextBox14);
+    var F15 = parseFloatWithCommas(vari.TextBox15);
+    var F16 = parseFloatWithCommas(vari.TextBox16);
+    var F17 = parseFloatWithCommas(vari.TextBox17);
+    var F18 = parseFloatWithCommas(vari.TextBox18);
+    var F19 = parseFloatWithCommas(vari.TextBox19);
+    var F20 = parseFloatWithCommas(vari.TextBox20);
+    var F21 = parseFloatWithCommas(vari.TextBox21);
+    var F22 = parseFloatWithCommas(vari.TextBox22);
+    var F23 = parseFloatWithCommas(vari.TextBox23);
+    var F24 = parseFloatWithCommas(vari.TextBox24);
+    var F25 = parseFloatWithCommas(vari.TextBox25);
+    var F26 = parseFloatWithCommas(vari.TextBox26);
+    var F27 = parseFloatWithCommas(vari.TextBox27);
+    var F28 = parseFloatWithCommas(vari.TextBox28);
+    var F29 = parseFloatWithCommas(vari.TextBox29);
+    var F30 = parseFloatWithCommas(vari.TextBox30);
+    var F31 = parseFloatWithCommas(vari.TextBox31);
+    var F32 = parseFloatWithCommas(vari.TextBox32);
 
     var F35 = (1 - Math.exp(-2 * F19 * (F30 / F32))) / (2 * F19);
     F35 = F35.toFixed(3);
-    F35 = parseFloat(F35) + 0.001;
+    F35 = parseFloatWithCommas(F35) + 0.001;
     var F36 = F35 * F20 * (Math.pow(F32, 2) * (0.0833));
-    F36 = parseFloat(F36.toFixed(2));
+    F36 = parseFloatWithCommas(F36.toFixed(2));
     var op4 = -0.5 * (F31) / (F30 * 12);
     if (op4 < 0) {
         op4 = op4 * -1;
@@ -8360,7 +8364,7 @@ function wheelLoadAnalysis(vari) {
     }
 
     var F37 = ((0.0104 * F29 * F14 * F21) / (Math.PI * Math.pow((F31 / 12 + F30), 2))) * Math.pow(((F22 * F24) / (F23 * F25)), op4);
-    F37 = parseFloat(F37.toFixed(2));
+    F37 = parseFloatWithCommas(F37.toFixed(2));
     var F38 = F36 + F37;
     // PREGUNTAR POR ESTA FORMULA
     var F39 = 29000000 * F14 * 0 / 48 * Math.pow(1, 2);
