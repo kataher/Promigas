@@ -86,16 +86,16 @@ public class UsuariosController extends Controller.Controller{
         return json;
     }
     
-    public JSONObject login(String user, String pass) throws Exception{  
+    public JSONObject login(String user, String pass, String ip) throws Exception{  
         JSONObject json = new JSONObject();
-        json = model.login(stringToBD(user),stringToBD(pass));
+        json = model.login(stringToBD(user),stringToBD(pass), stringToBD(ip));
         return json;
        
     }
     
     public JSONObject getRolUser(String user, String pass) throws Exception{  
         JSONObject json = new JSONObject();
-        json = model.login(stringToBD(user),stringToBD(pass));
+        json = model.login(stringToBD(user),stringToBD(pass), null);
         return json;
        
     }

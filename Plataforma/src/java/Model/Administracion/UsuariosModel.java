@@ -189,7 +189,7 @@ public class UsuariosModel extends Model {
         return username;
     }
 
-    public JSONObject login(String name, String pass) throws Exception {
+    public JSONObject login(String name, String pass, String ip) throws Exception {
 
         JSONObject json = new JSONObject();
         try {
@@ -234,6 +234,8 @@ public class UsuariosModel extends Model {
                 json.put("roles", strRoles);
                 json.put("fullname", fname);
                 json.put("name", name);
+                
+                setDateSession(id, ip);
 
                 /*where = " id_user = " + id;
                 data = this.consultar("RolesUsuario", "id_rol", where);
@@ -264,6 +266,23 @@ public class UsuariosModel extends Model {
 
         } catch (Exception ex) {
             throw new Exception(ex.getMessage());
+        }
+    }
+    
+    public void setDateSession(String id_user, String ip) throws Exception{
+        if(ip == null){
+            return;
+        }
+        String sql = "INSERT INTO [" + this.bd + "].[dbo].[UsersSession]\n"
+                + "           ([id_user]\n"
+                + "           ,[date],[ip])\n"
+                + " VALUES \n" 
+                + "      ("+ id_user +",getdate(), " + ip + ")\n";
+
+        try {
+            this.ejecutarUpdate(sql, null);
+        } catch (Exception ex) {
+            throw new Exception("Error al inicio de sesión");
         }
     }
 

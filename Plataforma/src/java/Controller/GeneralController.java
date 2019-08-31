@@ -690,6 +690,8 @@ public class GeneralController {
         String op = request.getParameter("from").trim();
 
         switch (op) {
+            case "ah":
+                return Datasheets.Datasheet.genFileAh(request, rutads, username);
             case "med":
                 return Datasheets.Datasheet.genDSMedidores(request, rutads, username);
             case "com":
@@ -997,16 +999,17 @@ public class GeneralController {
     public JSONObject login(HttpServletRequest request) throws Exception {
         setController(from);
         String user = request.getParameter("name").trim();
-        String pass = request.getParameter("pass").trim();
+        String pass = request.getParameter("pass").trim();        
+        String ip = request.getParameter("ip").trim();
 
-        return ((UsuariosController) controller).login(user, pass);
+        return ((UsuariosController) controller).login(user, pass, ip);
     }
 
     public JSONObject getRolUser(HttpServletRequest request) throws Exception {
         setController("usu");
         String user = request.getParameter("name").trim();
 
-        return ((UsuariosController) controller).login(user, null);
+        return ((UsuariosController) controller).login(user, null, null);
     }
 
     public JSONObject getRoles(HttpServletRequest request) throws Exception {

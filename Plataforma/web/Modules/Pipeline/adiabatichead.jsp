@@ -281,15 +281,13 @@
                                     <div class="panel-body">
                                         <div class="row">
                                             <div class="col-lg-12">
-
                                                 <input type="button" id="calculateBtn_ah" name="calculateBtn_ah" value="Calculate" onclick="calculate_ah()" class="btn btn-info btn-block">
                                                 <input type="button" id="saveBtn_ah" name="saveBtn_ah" value="Save" onclick="save_ah()" class="btn btn-success btn-block">   
                                                 <input type="button" id="delteBtn_ah" name="delteBtn_ah" value="Delete" onclick="delete_ah()" class="btn btn-danger btn-block">
+                                                <input type="button" id="dateSBtn_ah" name="dateSBtn_ah" value="Generate File" onclick="load_file_ah()" class="btn btn-success btn-block">   
                                                 <input type="button" id="cleanAllBtn_ah" name="cleanBtn_ah" value="Clean All Data" onclick="cleanAll_ah()" class="btn btn-warning btn-block">
                                                 <input type="button" id="cleanInputBtn_ah" name="cleanBtn_ah" value="Clean Input Data" onclick="cleanIn_ah()" class="btn btn-warning btn-block">
-
                                                 <input type="button" id="cleanOutputBtn_ah" name="cleanBtn_ah" value="Clean Output Data" onclick="cleanOut_ah()" class="btn btn-warning btn-block">
-
                                             </div>
                                         </div>
                                     </div>
@@ -704,7 +702,6 @@
                     "ee_sel_ah": $("#ee_sel_ah").val().split(",")[1]
                 };
 
-
                 var res = adiabaticHead_Form(variables, unidades);
 
                 $("#discharget_ah").val(res[0]);
@@ -842,6 +839,57 @@
                 alert("You must load a record to be able to delete it");
             }
         }
+        
+        function load_file_ah() {
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+            
+            var parametros = {
+                    "opcion": "102", 
+                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                    "from": "ah"
+                };
+            
+            for (var i = 0; i < inputs.size(); i++) {
+                parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+            }
+            
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $( "#" + $(selects[i]).attr("id") + " option:selected" ).text();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+                
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                async: false,
+                dataType: "json",
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    alert("Successfully generated file");
+                    var file = data.row.file;
+                    var path = data.row.path;
+                    window.location = "/Plataforma/bajar.jsp?filename=" + file + "&path=" + path;
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    alert(err);
+                    show_OkDialog($("#error_Dialog_mem"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+
+        }
+
 
     </script>
 

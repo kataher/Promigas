@@ -295,6 +295,8 @@ public class ProyectosModel extends Model.Model {
             } else {
 
                 //Agregar el proyecto
+                
+                values1.put("date", "getdate()");
                 this.add("ProyectsTemp", values1, conn);
 
                 //Devolver el id del proyecto

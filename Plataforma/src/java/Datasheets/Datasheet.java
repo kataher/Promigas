@@ -711,15 +711,118 @@ public class Datasheet {
         
     }
     
+    public static JSONObject genFileAh(HttpServletRequest request, String ruta, String username) throws Exception{
+        
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+        Date d= new Date();
+        
+        try
+        {
+            String ar = "ah";
+            POIFSFileSystem fs = new POIFSFileSystem( new FileInputStream(ruta + "\\Pipeline\\" + ar + ".xls"));
+            HSSFWorkbook wb = new HSSFWorkbook(fs); //libro 
+            HSSFSheet sheet = wb.getSheetAt(0); //hoja 0
+
+            
+            //Guardar el archivo modificado            
+            String nuevoNombre = ar + "_" + d.getTime();
+            
+            HSSFCell cell;
+            
+            cell = sheet.getRow(4).getCell(3);
+            cell.setCellValue(dt.format(d));
+            
+            cell = sheet.getRow(5).getCell(3);
+            cell.setCellValue(username);
+            
+            cell = sheet.getRow(9).getCell(6);
+            cell.setCellValue(request.getParameter("enteree_ah"));
+            
+            cell = sheet.getRow(10).getCell(6);
+            cell.setCellValue(request.getParameter("basetemperature_ah"));
+            
+            cell = sheet.getRow(11).getCell(6);
+            cell.setCellValue(request.getParameter("basepressure_ah"));
+            
+            cell = sheet.getRow(12).getCell(6);
+            cell.setCellValue(request.getParameter("suctionp_ah"));
+            
+            cell = sheet.getRow(13).getCell(6);
+            cell.setCellValue(request.getParameter("suctiont_ah"));
+            
+            cell = sheet.getRow(14).getCell(6);
+            cell.setCellValue(request.getParameter("dischargep_ah"));
+            
+            cell = sheet.getRow(15).getCell(6);
+            cell.setCellValue(request.getParameter("gass_ah"));
+            
+            cell = sheet.getRow(16).getCell(6);
+            cell.setCellValue(request.getParameter("gass_ah"));
+            
+            cell = sheet.getRow(17).getCell(6);
+            cell.setCellValue(request.getParameter("adiabatice_ah"));
+
+            cell = sheet.getRow(9).getCell(5);
+            cell.setCellValue(request.getParameter("ee_sel_ah"));
+            
+            cell = sheet.getRow(10).getCell(5);
+            cell.setCellValue(request.getParameter("bt_sel_ah"));
+            
+            cell = sheet.getRow(21).getCell(5);
+            cell.setCellValue(request.getParameter("bt_sel_ah"));
+            
+            cell = sheet.getRow(11).getCell(5);
+            cell.setCellValue(request.getParameter("bp_sel_ah"));
+            
+            cell = sheet.getRow(12).getCell(5);
+            cell.setCellValue(request.getParameter("sp_sel_ah"));
+            
+            cell = sheet.getRow(13).getCell(5);
+            cell.setCellValue(request.getParameter("st_sel_ah"));
+            
+            cell = sheet.getRow(14).getCell(5);
+            cell.setCellValue(request.getParameter("dp_sel_ah"));
+            
+            return returnValues(ruta, nuevoNombre, wb, "Pipeline", ar);
+            
+                            
+        } catch(IOException ex) { 
+            throw new Exception("Error al leer el fichero.");
+        } catch (JSONException ex) {
+            throw new Exception("Error al construrir el json."); 
+        } catch (Exception ex) {
+            throw new Exception(ex.getMessage()); 
+        }
+        
+    }
+    
+    private static JSONObject returnValues(String ruta, String nuevoNombre, HSSFWorkbook wb, String padre, String ab) throws Exception{
+        
+        JSONObject json = new JSONObject(); 
+        
+        FileOutputStream fileOut = new FileOutputStream(ruta+ "\\" + padre + "\\" + nuevoNombre + ".xls");
+        HashMap<String, String> map = new HashMap<String,String>();
+        map.put("path", ruta + "\\" + padre);
+        map.put("file", nuevoNombre + ".xls");            
+        json.put("row", map);
+        wb.write(fileOut);
+        fileOut.close();
+
+        borrarArchivos(ruta + "\\" + padre, ab +"_");
+        return json;
+        
+    }
+    
     private static void borrarArchivos(String ruta, String inicio) throws Exception{
         
         //FEcha actual
-        Date date = new Date();      
+        Date date = new Date();   
+        Date dateAr = new Date();      
         
         //Restar un dia a la fecha
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date); 
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        calendar.add(Calendar.HOUR_OF_DAY, -1);
         date = calendar.getTime();
         
         
@@ -731,9 +834,13 @@ public class Datasheet {
             File[] archivos = carpeta.listFiles();
                 for (int i = 0; i < archivos.length; i++){
                     String nombre = archivos[i].getName();
-
-                    if(nombre.contains(inicio) &&   archivos[i].lastModified() < date.getTime()){
-                        archivos[i].delete();
+                    if(nombre.contains(inicio)){  
+                        calendar.setTimeInMillis(archivos[i].lastModified());
+                        dateAr = calendar.getTime();
+                        
+                        if(dateAr.compareTo(date) < 0){
+                            archivos[i].delete();
+                        }
                     }
                 }
         }else{ 

@@ -345,8 +345,6 @@
                         $("#error_Dialog_mem"));
             });
 
-
-
             function load_datasheet_mem() {
 
                 var flujmin = $("#flujomin_mem").val() + " " + $("#fmin_sel_mem option:selected").text();
@@ -419,8 +417,6 @@
                 });
 
             }
-
-
 
             function setGrafica_mem() {
 

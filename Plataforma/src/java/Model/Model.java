@@ -34,17 +34,17 @@ public class Model {
     public Model() {
         try {
             miConexion = null;
-            bd = "Plataforma"; //OJO corregir
+            bd = "Plataforma2"; //OJO corregir
             
             //En tagua es plataforma2
             
             //dbManager = new DBManager(DBManager.SQLSERVER, "MARTIN\\SQLEXPRESS", bd, "sa", "promigas2016", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "096834-DOCENT-O\\SQLEXPRESS", bd, "sa", "promigas2016", "1433");
-            //dbManager = new DBManager(DBManager.SQLSERVER, "TAGUA\\SQLEXPRESS", bd, "sa", "promigas", "1433");
+            dbManager = new DBManager(DBManager.SQLSERVER, "TAGUA\\SQLEXPRESS", bd, "sa", "promigas", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "DESKTOP-49A22JB\\SQLSERVER", bd, "sa", "123456", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "097699-DOCENT-P\\PROMIGAS", bd, "sa", "123", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "SEBAS-PC\\SQLEXPRESS", bd, "sa", "asd", "1433");
-            dbManager = new DBManager(DBManager.SQLSERVER, "localhost", bd, "sa", "123", "1433");
+            //dbManager = new DBManager(DBManager.SQLSERVER, "localhost", bd, "sa", "123", "1433");
             
         
         } catch (IOException ex) {
