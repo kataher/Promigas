@@ -127,7 +127,7 @@
 
                                             <div class="form-group col-lg-12">
                                                 <div>
-                                                    <label>Capacity:</label>
+                                                    <label id="lbl_capacity_meu">Capacity:</label>
                                                 </div>
                                                 <input class="form-control" type="text" id="capa_meu" name="capa_meu" onchange="onchange_Input_meu(this)" disabled>
                                             </div>
@@ -531,12 +531,16 @@
 
                     $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCFH]: ");
                     $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCFH]: ");
+                    $("#lbl_capacity_mer").text("Capacity [SCFH]: ");
+                   
                 } else {
                     $("#fmin_sel_meu").val("1285,SCMH");
                     $("#fmax_sel_meu").val("1285,SCMH");
 
                     $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCMH]: ");
                     $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCMH]: ");
+                    
+                    $("#lbl_capacity_mer").text("Capacity [SCMH]: ");
                 }
 
                 var parametros = {

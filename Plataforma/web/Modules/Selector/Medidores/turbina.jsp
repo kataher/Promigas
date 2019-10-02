@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="form-group col-lg-12">
                                             <div>
-                                                <label>Capacity:</label>
+                                                <label id="lbl_capacity_met">Capacity:</label>
                                             </div>
                                             <input class="form-control" type="text" id="capa_met" name="capa_met" onchange="onchange_Input_met(this)" disabled>
                                         </div>
@@ -525,12 +525,15 @@
 
                             $("#lbl_capa_met").text("Maximum Capacity of Measurement (Optimum) [SCFH]: ");
                             $("#lbl_mcapae_met").text("Maximum Capacity of Measurement(Evaluated) [SCFH]: ");
+                            $("#lbl_capacity_met").text("Capacity [SCFH]: ");
+                            
                         } else {
                             $("#fmin_sel_met").val("1285,SCMH");
                             $("#fmax_sel_met").val("1285,SCMH");
 
                             $("#lbl_capa_met").text("Maximum Capacity of Measurement (Optimum) [SCMH]: ");
                             $("#lbl_mcapae_met").text("Maximum Capacity of Measurement(Evaluated) [SCMH]: ");
+                            $("#lbl_capacity_met").text("Capacity [SCMH]: ");
                         }
 
                         onchange_serie_met(false);

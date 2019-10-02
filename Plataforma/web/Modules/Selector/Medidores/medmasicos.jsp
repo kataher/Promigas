@@ -136,7 +136,7 @@
 
                                                     <div class="form-group col-lg-12">
                                                         <div>
-                                                            <label>Capacity:</label>
+                                                            <label>Capacity [SCFH]:</label>
                                                         </div>
                                                         <input class="form-control" type="text" id="capa_mem" name="capa_mem" onchange="onchange_Input_mem(this)" disabled>
                                                     </div>

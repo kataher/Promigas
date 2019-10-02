@@ -129,7 +129,7 @@
 
                                             <div class="form-group col-lg-12">
                                                 <div>
-                                                    <label>Capacity:</label>
+                                                    <label id="lbl_capacity_mer">Capacity:</label>
                                                 </div>
                                                 <input class="form-control" type="text" id="capa_mer" name="capa_mer" onchange="onchange_Input_mer(this)" disabled>
                                             </div>
@@ -323,9 +323,7 @@
                         $("#proyects_sel_mer"),
                         $("#error_Dialog_mer"));
             });
-
-
-
+            
             function load_datasheet_mer() {
 
                 var flujmin = $("#flujomin_mer").val() + " " + $("#fmin_sel_mer option:selected").text();
@@ -536,8 +534,8 @@
             }
 
             function onchange_serie_mer(swclear) {
-
-                if (swclear) {
+                
+               if (swclear) {
                     cleanOut_mer();
                 }
 
@@ -549,12 +547,14 @@
 
                     $("#lbl_capa_mer").text("Maximum Capacity of Measurement (Optimum) [SCFH]: ");
                     $("#lbl_mcapae_mer").text("Maximum Capacity of Measurement(Evaluated) [SCFH]: ");
-
+                    
+                    $("#lbl_capacity_mer").text("Capacity [SCFH]: ");
                 } else {
                     $("#fmin_sel_mer").val("1285,SCMH");
                     $("#fmax_sel_mer").val("1285,SCMH");
                     $("#lbl_capa_mer").text("Maximum Capacity of Measurement (Optimum) [SCMH]: ");
                     $("#lbl_mcapae_mer").text("Maximum Capacity of Measurement(Evaluated) [SCMH]: ");
+                    $("#lbl_capacity_mer").text("Capacity [SCMH]: ");
                 }
 
 
