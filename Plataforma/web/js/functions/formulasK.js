@@ -3,6 +3,9 @@
 //
 //Generales
 function parseFloatWithCommas(number) {
+    if (number == null) {
+        return 0;
+    }
     return parseFloat( number.toString().replace(/[^\d\.-]/g,'') );
 }
 
