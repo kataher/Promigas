@@ -18,7 +18,9 @@
 
     String respuesta;
     JSONObject json;
+    System.err.println("HOLA! ERR");
     int opcion = Integer.parseInt(request.getParameter("opcion"));
+    System.err.println(opcion);
     GeneralController controller = new GeneralController(request);
 
     switch (opcion) {
@@ -807,6 +809,7 @@
             session.setAttribute("idusu", res.get("id"));
             session.setAttribute("tipo", res.get("type"));
             session.setAttribute("roles", res.get("roles"));
+            
 
         } catch (Exception ex) {
             response.sendError(1, ex.getMessage());

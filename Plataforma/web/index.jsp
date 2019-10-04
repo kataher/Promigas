@@ -425,6 +425,8 @@
                 });
 
             });
+            
+            
             !function (a) {
                 function b(b, d) {
                     function e() {
@@ -605,7 +607,8 @@
 
             });
 
-            function getUserIP(onNewIP) { //  onNewIp - your listener function for new IPs
+            function getUserIP(onNewIP) { 
+                //  onNewIp - your listener function for new IPs
                 //compatibility for firefox and chrome
                 var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
                 var pc = new myPeerConnection({
@@ -647,12 +650,13 @@
             }
 
             function login() {
+                
                 var parametros = {
                     "opcion": 304,
                     "from": "usu",
                     "name": $("#user").val(),
-                    "pass": $("#password").val(),
-                    "ip": ipLocal
+                    "pass": $("#password").val()
+                    //"ip": ipLocal
                 };
                 $.ajax({
                     type: "POST",

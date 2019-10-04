@@ -999,9 +999,11 @@ public class GeneralController {
     public JSONObject login(HttpServletRequest request) throws Exception {
         setController(from);
         String user = request.getParameter("name").trim();
-        String pass = request.getParameter("pass").trim();        
-        String ip = request.getParameter("ip").trim();
-
+        String pass = request.getParameter("pass").trim();
+        String ip = request.getRemoteAddr();
+        //String ipTest2 = request.getRemoteHost();
+        //System.err.println(ip);
+        //System.err.println(ipTest2);
         return ((UsuariosController) controller).login(user, pass, ip);
     }
 
