@@ -94,7 +94,7 @@
                                     <div class="panel-heading">
                                         Input Data
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel-body" id="input_rvr">
                                         <div class="row">
                                             <div class="col-lg-12">
 
@@ -267,7 +267,7 @@
                                     <div class="panel-heading">
                                         Results
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="panel-body" id="results_rvr">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
@@ -290,8 +290,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rvr" name="id_rvr">   
-                            <input type="hidden" id="opt_rvr" name="opt_rvr">   
+                            <input type="hidden" id="id_rvr" name="id_rvr" value="-1">   
+                            <input type="hidden" id="opt_rvr" name="opt_rvr" value="-1">   
                         </div>
                         <div id="load_Dialog_rvr" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -730,22 +730,11 @@
         }
 
         function cleanOut_rvr() {
-            $("#reactionf_rvr").val("");
+            $("#results_rvr input[type='text'][readonly]").val("");
         }
 
         function cleanIn_rvr() {
-            $("#molecularw_rvr").val("");
-            $("#specifich_rvr").val("");
-            $("#criticalf_rvr").val("");
-
-            $("#requiredf_rvr").val("");
-            $("#temperatureo_rvr").val("");
-            $("#staticp_rvr").val("");
-            $("#areao_rvr").val("");
-            $("#molecularw_rvr").val("");
-            $("#specificg_rvr").val("");
-            $("#specifichs_rvr").val("");
-            $("#criticalfw_rvr").val("");
+            $("#input_rvr input[type='text']").val("");
         }
 
         function cleanAll_rvr() {
@@ -766,7 +755,7 @@
 
         function calculate_rvr() {
             var sel = $("input[type='radio'][name='selectk_rvr']:checked");
-
+            
             var variables = {
                 "opsk_rvr": sel.val(),
                 "specificgra_rvr": $("#specificgra_rvr").val(),
@@ -811,42 +800,43 @@
         function save_rvr() {
 
             var sel = $("input[type='radio'][name='selectk_rvr']:checked");
-
+            
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+            
             var parametros = {
-                "opsk_rvr": sel.val(),
-                "specificg_rvr": $("#specificg_rvr").val(),
-                "molecularw_rvr": $("#molecularw_rvr").val(),
-                "specifich_rvr": $("#specifich_rvr").val(),
-                "criticalf_rvr": $("#criticalf_rvr").val(),
-                "enteree_rvr": $("#enteree_rvr").val(),
-                "requiredf_rvr": $("#requiredf_rvr").val(),
-                "temperatureo_rvr": $("#temperatureo_rvr").val(),
-                "staticp_rvr": $("#staticp_rvr").val(),
-                "areao_rvr": $("#areao_rvr").val(),
-                "pesomolecular_rvr": $("#pesomolecular_rvr").val(),
-                "specificgra_rvr": $("#specificgra_rvr").val(),
-                "specifichs_rvr": $("#specifichs_rvr").val(),
-                "criticalfw_rvr": $("#criticalfw_rvr").val(),
-                "selectgv_sel_rvr": $("#selectgv_sel_rvr").val(),
-                "rf_sel_rvr": $("#rf_sel_rvr").val(),
-                "tempo_sel_rvr": $("#tempo_sel_rvr").val(),
-                "sp_sel_rvr": $("#sp_sel_rvr").val(),
-                "ao_sel_rvr": $("#ao_sel_rvr").val(),
-                "ee_sel_rvr": $("#ee_sel_rvr").val(),
-                "reactionf_rvr": $("#reactionf_rvr").val(),
-                "idproyect": $("#proyects_sel_rvr").val(),
-                "opcion": $("#opt_rvr").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_rvr": 1,
-                "description_rvr": $("#description_rvr").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rvr"
             };
-
+            
+            
             if (sel.val() == "selectk1_rvr") {
                 $("#specificgra_rvr").val("0");
+                parametros["specificgra_rvr"] = "0";
             } else {
                 $("#pesomolecular_rvr").val("0");
+                parametros["pesomolecular_rvr"] = "0";
             }
+            
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["selectk_rvr"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
@@ -857,6 +847,8 @@
                 if ($("#opt_rvr").val() == 2) {
                     parametros.id_rvr = $("#id_rvr").val();
                 }
+                
+               
 
                 $.ajax({
                     type: "POST",

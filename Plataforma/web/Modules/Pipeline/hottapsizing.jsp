@@ -310,8 +310,8 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" id="id_htz" name="id_htz">  
-                        <input type="hidden" id="opt_htz" name="opt_htz">
+                        <input type="hidden" id="id_htz" name="id_htz" value="-1">  
+                        <input type="hidden" id="opt_htz" name="opt_htz" value="-1">
 
                         <div id="load_Dialog_htz" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -846,46 +846,40 @@
         }
 
         function save_htz() {
+            var sel = $("input[type='radio'][name='opz_htz']:checked");
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+            
             var parametros = {
-                "nominalb_sel_htz": $("#nominalb_sel_htz").val(),
-                "molecularws_htz": $("#molecularws_htz").val(),
-                "specifich_htz": $("#specifich_htz").val(),
-                "criticalf_htz": $("#criticalf_htz").val(),
-                "holec_htz": $("#holec_htz").val(),
-                "pressure_htz": $("#pressure_htz").val(),
-                "flowingt_htz": $("#flowingt_htz").val(),
-                "pressurel_htz": $("#pressurel_htz").val(),
-                "flowrate_htz": $("#flowrate_htz").val(),
-                "orificec_htz": $("#orificec_htz").val(),
-                "gsg_htz": $("#gsg_htz").val(),
-                "compressibilityf_htz": $("#compressibilityf_htz").val(),
-                "selectgv_sel_htz": $("#selectgv_sel_htz").val(),
-                "oc_sel_htz": $("#oc_sel_htz").val(),
-                "pre_sel_htz": $("#pre_sel_htz").val(),
-                "flowt_sel_htz": $("#flowt_sel_htz").val(),
-                "fr_sel_htz": $("#fr_sel_htz").val(),
-                "branchgv_htz": $("#branchgv_htz").val(),
-                "calculatedoa_htz": $("#calculatedoa_htz").val(),
-                "calculatedtd_htz": $("#calculatedtd_htz").val(),
-                "idproyect": $("#proyects_sel_htz").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_htz": 1,
-                "description_htz": $("#description_htz").val(),
-                "opcion": $("#opt_htz").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "htz"
-
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["opz_htz"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
-            if (isOk === false)
-            {
+            if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_htz").val() == 2) {
-                    parametros.id_htz = $("#id_htz").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -901,14 +895,15 @@
                         show_OkDialog($("#save_Dialog_htz"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_htz"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
+
 
         }
 
@@ -952,7 +947,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_htz").val("");
+                    $("#id_htz").val("-1");
                     $("#opt_htz").val("1");
                     cleanAll_htz();
                     show_OkDialog($("#delete_Dialog_htz"), "Satisfactory process");

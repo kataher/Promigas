@@ -515,6 +515,7 @@
         }
 
         function calculate_wdp() {
+        //alert("here");
             var variables = {
                 "basetemperature_wdp": $("#basetemperature_wdp").val(),
                 "basepressure_wdp": $("#basepressure_wdp").val(),

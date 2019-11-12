@@ -241,9 +241,6 @@
                                                     <div class="col-md-8">
                                                         <input class="form-control" type="text" id="requiredeff_rvs" name="requiredeff_rvs" onchange="onchange_Input_rvs(this)" required>
                                                     </div>
-                                                    <div class="col-md-4" id = "div_re_sel_rvs">
-                                                        <select class="form-control" id="re_sel_rvs" name="re_sel_rvs"> </select>
-                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-md-12">
@@ -324,8 +321,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rvs" name="id_rvs">  
-                            <input type="hidden" id="opt_rvs" name="opt_rvs">
+                            <input type="hidden" id="id_rvs" name="id_rvs" value="-1">  
+                            <input type="hidden" id="opt_rvs" name="opt_rvs" value="-1">
                         </div>
                         <div id="load_Dialog_rvs" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -387,8 +384,6 @@
                 load_flue_sel_rvs();
                 load_capfac_sel_rvs();
                 load_in_sel_rvs();
-
-                document.getElementById('re_sel_rvs').style.visibility = 'hidden';
 
                 getproyectos(<%=session.getAttribute("idusu")%>,
                         $("#proyects_sel_rvs"),
@@ -656,33 +651,6 @@
                 });
             }
 
-            function load_he_sel_rvs() {
-                var parametros = {
-                    "combo": "he",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='re_sel_rvs' id='re_sel_rvs'>" + data;
-                        $("#div_re_sel_rvs").html(newHtml);
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_rvs"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
             function load_temp_sel_rvs() {
                 var parametros = {
                     "combo": "temp",
@@ -917,41 +885,36 @@
             function save_rvs() {
                 var sel1 = $("input[type='radio'][name='sizingo_rvs']:checked");
                 var sel2 = $("input[type='radio'][name='selectk_rvs']:checked");
+                
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
 
                 var parametros = {
-                    "opso_rvs": sel1.val(),
-                    "opsk_rvs": sel2.val(),
-                    "molecularws_rvs": $("#molecularws_rvs").val(),
-                    "specifich_rvs": $("#specifich_rvs").val(),
-                    "criticalf_rvs": $("#criticalf_rvs").val(),
-                    "relief_rvs": $("#relief_rvs").val(),
-                    "gasvaporf_rvs": $("#gasvaporf_rvs").val(),
-                    "gasp_rvs": $("#gasp_rvs").val(),
-                    "requiredf_rvs": $("#requiredf_rvs").val(),
-                    "requiredeff_rvs": $("#requiredeff_rvs").val(),
-                    "effectivec_rvs": $("#effectivec_rvs").val(),
-                    "capacityc_rvs": $("#capacityc_rvs").val(),
-                    "compressibilityf_rvs": $("#compressibilityf_rvs").val(),
-                    "specificg_rvs": $("#specificg_rvs").val(),
-                    "selectgv_sel_rvs": $("#selectgv_sel_rvs").val(),
-                    "rv_sel_rvs": $("#rv_sel_rvs").val(),
-                    "gfv_sel_rvs": $("#gfv_sel_rvs").val(),
-                    "bp_sel_rvs": $("#bp_sel_rvs").val(),
-                    "rf_sel_rvs": $("#rf_sel_rvs").val(),
-                    "cc_sel_rvs": $("#cc_sel_rvs").val(),
-                    "re_sel_rvs": $("#re_sel_rvs").val(),
-                    "criticafr_rvs": $("#criticafr_rvs").val(),
-                    "flowingc_rvs": $("#flowingc_rvs").val(),
-                    "requirede_rvs": $("#requirede_rvs").val(),
-                    "requiredfo_rvs": $("#requirede_rvs").val(),
-                    "ccoefficient_rvs": $("#ccoefficient_rvs").val(),
-                    "idproyect": $("#proyects_sel_rvs").val(),
-                    "opcion": $("#opt_rvs").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "id_rvs": 1,
-                    "description_rvs": $("#description_rvs").val(),
+                    "id_user": <% out.print(session.getAttribute("idusu"));%>,
                     "from": "rvs"
                 };
+                
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                    }
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+                parametros["sizingo_rvs"] = sel1.val();
+                parametros["selectk_rvs"] = sel2.val();
+                
+                alert(JSON.stringify(parametros));
 
                 var isOk = validate(parametros);
 

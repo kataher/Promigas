@@ -745,6 +745,7 @@
 
             parametros["opcion"] = parametros["opt_" + parametros["from"]];
             parametros["opz_ah"] = sel.val();
+            
 
             var isOk = validate(parametros);
 

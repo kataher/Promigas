@@ -3874,6 +3874,7 @@ function flowrate_wdp_form(vari, uni) {
      h1 = Upstream Elevation
      h2 = Downstream Elevation
      */
+    //alert("here 2")
     var Tb = parseFloatWithCommas(vari.basetemperature_wdp);
     var Pb = parseFloatWithCommas(vari.basepressure_wdp);
     var u = parseFloatWithCommas(vari.pipelineroughness_wdp);

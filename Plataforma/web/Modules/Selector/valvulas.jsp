@@ -426,7 +426,7 @@
                 };
 
                 var x = fmax * (1 / 60);
-                alert(x);
+                //alert(x);
                 
                 var pOpe = {
                     x: [fin - 40, fin - 40],

@@ -18,7 +18,6 @@
 
     String respuesta;
     JSONObject json;
-    System.err.println("HOLA! ERR");
     int opcion = Integer.parseInt(request.getParameter("opcion"));
     System.err.println(opcion);
     GeneralController controller = new GeneralController(request);
