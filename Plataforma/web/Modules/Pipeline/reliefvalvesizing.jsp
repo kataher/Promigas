@@ -378,7 +378,7 @@
                 $('#specificg_rvs').val("0");
                 $("#opt_rvs").val("1");
 
-                load_press_sel_rvs();
+                load_press_sel_rvs();|
                 load_temp_sel_rvs();
                 load_gasvap_sel_rvs();
                 load_flue_sel_rvs();
@@ -913,8 +913,6 @@
                 parametros["opcion"] = parametros["opt_" + parametros["from"]];
                 parametros["sizingo_rvs"] = sel1.val();
                 parametros["selectk_rvs"] = sel2.val();
-                
-                alert(JSON.stringify(parametros));
 
                 var isOk = validate(parametros);
 

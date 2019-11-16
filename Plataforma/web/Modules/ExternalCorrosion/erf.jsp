@@ -53,7 +53,7 @@
                                 <br>
                                 <!-- Button trigger modal -->
                                 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="load_history_erf()">
-                                    Record
+                                    Records
                                 </button>
 
                                 <!-- MODAL -->
@@ -79,28 +79,31 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                Description:  
+                                Description: 
                                 <input  class="form-control" type="text" id="description_erf" name="description_erf"><br>
                                 Projects:
                                 <select class="form-control" id="proyects_sel_erf" name="proyects_sel_erf"> </select>
                             </div>
                         </div>
+
                         <hr>
                         <div class="row">
+
                             <div class="col-lg-9">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Data
                                     </div>
                                     <div class="panel-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">                                              
-                                                <div class="form-group">
+                                        <div class="row">                                           
+
+                                            <div class="col-lg-12">                                                
+                                                 <div class="form-group">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">
                                                             Input Data
                                                         </div>
-                                                        <div class="panel-body">
+                                                        <div class="panel-body" id="input_erf">
                                                             <div class="row">
                                                                 <div class="col-lg-12">
                                                                     <div class="col-md-12">
@@ -166,7 +169,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+
+                                                <div class="form-group" id="results_erf">
                                                     <div class="col-lg-6">            
                                                         <div class="panel panel-default">
                                                             <div class="panel-heading">
@@ -228,7 +232,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>                                              
                                             </div>
                                         </div>
                                     </div>  
@@ -236,7 +240,6 @@
                             </div>  
 
                             <div class="col-lg-3">
-
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         Actions
@@ -250,33 +253,34 @@
                                                 <input type="button" id="cleanAllBtn" name="cleanBtn" value="Clean All" onclick="cleanAll_erf()" class="btn btn-warning btn-block">
                                                 <input type="button" id="cleanInputBtn" name="cleanBtn" value="Clean Input Data" onclick="cleanIn_erf()" class="btn btn-warning btn-block">
                                                 <input type="button" id="cleanOutputBtn" name="cleanBtn" value="Clean Output Data" onclick="cleanOut_erf()" class="btn btn-warning btn-block">
-                                                <input type="button" id="cleanSuggestedBtn" name="cleanBtn" value="Limpiar Datos Sugeridos" onclick="cleanSugg_erf()" class="btn btn-warning btn-block">
-                                            </div>
+                                                  </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="opcion_erf" name="opcion_erf"> 
-                            <input type="hidden" id="id_erf" name="opcion_erf">  
+                            <input type="hidden" id="id_erf" name="id_erf" value="-1">  
+                            <input type="hidden" id="opt_erf" name="opt_erf" value="1">  
                         </div>
-                        <div id="load_Dialog_erf" title="Basic dialog" style='display:none;'>
-                            <p>Datos cargados exitosamente</p>
-                        </div>
-
                         <div id="save_Dialog_erf" title="Basic dialog" style='display:none;'>
-                            <p>Datos guardados exitosamente</p>
+                            <p>Data saved successfully</p>
                         </div>
 
                         <div id="error_Dialog_erf" title="Basic dialog" style='display:none;'>
-                            <p>Ha ocurrido un error en el proceso</p>
+                            <p>An error has occurred in the process</p>
                         </div>
 
                         <div id="calculate_Dialog_erf" title="Basic dialog" style='display:none;'>
-                            <p>Calculo realizado exitosamente</p>
+                            <p>Calculation done successfully</p>
                         </div>
 
                         <div id="delete_Dialog_erf" title="Basic dialog" style='display:none;'>
-                            <p>Registro eliminado exitosamente</p>
+                            <p>Successfully deleted record</p>
+                        </div>
+
+                        <div id="dialog-confirm_erf" title="Delete record" style='display:none;'>
+                            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                                Are you sure you want to permanently delete this record?
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -289,15 +293,87 @@
     </body>
 
     <script>
+
         $(document).ready(function () {
             load_len_sel_erf();
             load_desingf_sel_erf();
-
             getproyectos(<%=session.getAttribute("idusu")%>,
                     $("#proyects_sel_erf"),
                     $("#error_Dialog_erf"));
 
         });
+        
+        function load_history_erf() {
+            var parametros = {
+                "idproyect": $("#proyects_sel_erf").val(),
+                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "from": "erf",
+                "opcion": "6",
+                "nombre": "historial"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    $("#opt_erf").val("1");
+                    $("#id_erf").val("-1");
+                    cleanAll_erf();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+
+                    if (data !== null) {
+                        var tags = Object.keys(data.historial[0]);
+
+                        var tamano = data.size;
+
+                        var html = "<table class='table table-bordered table-striped'>";
+                        html += "<thead>";
+                        html += "<tr>";
+                        html += "<th>Creation date</th>";
+                        html += "<th>Code</th>";
+                        html += "<th>Description</th>";
+                        html += "<th>Load</th>";
+                        html += "</tr>";
+                        html += "</thead>";
+                        if (tamano > 0) {
+
+                            html += '<tbody>';
+                            for (var i = 0; i < tamano; i++) {
+                                html += "<tr>";
+                                html += "<td>" + data.historial[i].date + "</td>";
+                                html += "<td>" + data.historial[i].id + "</td>";
+                                html += "<td>" + data.historial[i].description_erf + "</td>";
+                                html += "<td><a href='#' onClick='load_form_erf(" + data.historial[i].id + ")'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a></td>";
+                                html += "<tr>";
+
+                            }
+                            html += '</tbody>';
+                        } else {
+                            html += '<p>No records available.</p>';
+                        }
+                        html += "</table><br><br>";
+
+                    } else {
+                        html = '<p>No records available.</p>';
+                    }
+                    $("#div-table_erf").empty();
+                    $("#div-table_erf").html(html);
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_erf"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+        
 
         function onchange_Input_erf(inp) {
             var sw = validateDecimal(inp.value);
@@ -310,93 +386,17 @@
         }
 
         function cleanOut_erf() {
-            $("#prefalperme_erf").val("");
-            $("#preseop_erf").val("");
-            $("#erf_erf").val("");
-            $("#prefalpermeM_erf").val("");
-            $("#preseopM_erf").val("");
-            $("#erfM_erf").val("");
-            $("#fos_erf").val("");
-        }
-
-        function cleanSugg_erf() {
-            $("#basepressure_erf").val("");
-            $("#basetemperature_erf").val("");
+             $("#results_erf input[type='text'][readonly]").val("");
         }
 
         function cleanIn_erf() {
-            $("#longacor_erf").val("");
-            $("#pmpmac_erf").val("");
-            $("#dianoex_erf").val("");
-            $("#esnotu_erf").val("");
-            $("#smys_erf").val("");
-            $("#maop_erf").val("");
-            $("#cllocalidad_erf").val("");
-            $("#upstreamelevation_erf").val("");
-            $("#downstreamelevation_erf").val("");
+            $("#input_erf input[type='text']").val("");
         }
 
         function cleanAll_erf() {
             cleanIn_erf();
-            cleanSugg_erf();
             cleanOut_erf();
-        }
-
-        function save_erf() {
-
-            var parametros = {
-                "basetemperature_pha": $("#basetemperature_erf").val(),
-                "basepressure_pha": $("#basepressure_erf").val(),
-                "longacor_pha": $("#longacor_erf").val(),
-                "pmpmac_pha": $("#pmpmac_erf").val(),
-                "pipelineefficiency_pha": $("#dianoex_erf").val(),
-                "upstreampressure_pha": $("#esnotu_erf").val(),
-                "flowrate_pha": $("#smys_erf").val(),
-                "internalpipe_pha": $("#maop_erf").val(),
-                "lengthof_pha": $("#cllocalidad_erf").val(),
-                "upstreamelevation_pha": $("#upstreamelevation_erf").val(),
-                "downstreamelevation_pha": $("#downstreamelevation_erf").val(),
-                "downstreampressure_pha": $("#prefalperme_erf").val(),
-                "transmissionfactor_pha": $("#preseop_erf").val(),
-                "velocity_pha": $("#erf_erf").val(),
-                "idproyect": <% out.print(session.getAttribute("id_proyect"));%>,
-                "form": "1",
-                "opcion": $("#opcion_erf").val()
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                beforeSend: function (xhr) {
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    $("#id_erf").val(data);
-                    show_OkDialog($("#save_Dialog_erf"), "Proceso satisfactorio");
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_erf"), "Error");
-
-                    $("#basetemperature_erf").val(parametros.basetemperature_pha);
-                    $("#basepressure_erf").val(parametros.basepressure_pha);
-                    $("#longacor_erf").val(parametros.longacor_pha);
-                    $("#pmpmac_erf").val(parametros.pmpmac_pha);
-                    $("#dianoex_erf").val(parametros.pipelineefficiency_pha);
-                    $("#esnotu_erf").val(parametros.upstreampressure_pha);
-                    $("#smys_erf").val(parametros.flowrate_pha);
-                    $("#maop_erf").val(parametros.internalpipe_pha);
-                    $("#cllocalidad_erf").val(parametros.lengthof_pha);
-                    $("#upstreamelevation_erf").val(parametros.upstreamelevation_pha);
-                    $("#downstreamelevation_erf").val(parametros.downstreamelevation_pha);
-                    $("#prefalperme_erf").val(parametros.downstreampressure_pha);
-                    $("#preseop_erf").val(parametros.transmissionfactor_pha);
-                    $("#erf_erf").val(parametros.velocity_pha);
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
+            $("#description_erf").val("");
         }
 
         function calculate_erf() {
@@ -434,6 +434,56 @@
 
 
         }
+        
+        function load_form_erf(id) {
+
+            var parametros = {
+                "id": id,
+                "from": "erf",
+                "opcion": "4"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    cleanAll_erf();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+                    if (data != null)
+                    {
+                        var tags = Object.keys(data.row);
+
+                        for (var i = 0; i < tags.length; i++) {
+                            if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user" && tags[i] != "id")
+                            {
+                                $("#" + tags[i]).val(data.row[tags[i]]);
+                            }
+                        }
+
+                        $("#opt_erf").val("2");
+                        $("#id_erf").val(data.row.id);
+
+                        alert("Successfully uploaded data");
+                    } else {
+                        $("#opt_erf").val("1");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    $("#opt_erf").val("1");
+                    show_OkDialog($("#error_Dialog_erf"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+        
 
         function load_desingf_sel_erf() {
             var parametros = {
@@ -483,7 +533,6 @@
                 url: "../manager.jsp",
                 data: parametros,
                 beforeSend: function (xhr) {
-                    cleanSugg_erf();
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
@@ -502,34 +551,70 @@
                 }
             });
         }
+        
+        function delete_erf() {
+
+            //Confirmacion
+            if ($("#opt_erf").val() == 2) {
+                $("#dialog-confirm_erf").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {
+                            deleteReg_erf();
+                            $(this).dialog("close");
+                        },
+                        Cancelar: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            } else {
+                alert("You must load a record to be able to delete it");
+            }
+        }
 
         function deleteReg_erf() {
-
             var parametros = {
                 "id_erf": $("#id_erf").val(),
-                "form": "1",
-                "opcion": "3"
+                "opcion": 3,
+                "iduser": <%=session.getAttribute("idusu")%>,
+                "from": "erf"
             };
-            $.ajax({
-                type: "POST",
-                url: "../manager.jsp",
-                data: parametros,
-                beforeSend: function (xhr) {
-                    cleanSugg_erf();
-                    block("Cargando...");
-                },
-                success: function (data, status, request) {
-                    cleanAll_erf();
-                    show_OkDialog($("#delete_Dialog_erf"), "Proceso satisfactorio");
-                },
-                error: function (xhr, ajaxOptions, err) {
-                    show_OkDialog($("#error_Dialog_erf"), "Error");
-                },
-                complete: function () {
-                    unBlock();
-                }
-            });
+
+
+            if ($("#opt_erf").val() == 2) {
+                $.ajax({
+                    type: "POST",
+                    url: "../manager.jsp",
+                    data: parametros,
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        cleanAll_erf();
+                        $("#id_erf").val("-1");
+                        $("#opt_erf").val("1");
+                        show_OkDialog($("#delete_Dialog_erf"), "Satisfactory process");
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        alert(err);
+                        show_OkDialog($("#error_Dialog_erf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+
+            } else {
+                alert("You must load a record to be able to delete it");
+            }
         }
+        
+        
 
         function load_len_sel_erf() {
             var parametros = {
@@ -564,7 +649,69 @@
             });
         }
 
+        function save_erf() {
+
+            //Todos inputs y select que no tengan readonly
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
+            var parametros = {
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
+                "from": "erf"
+            };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+            var isOk = validate(parametros);
+
+            if (isOk === false) {
+                alert("You must perform the calculation and fill out the description");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "../manager.jsp",
+                    data: parametros,
+                    dataType: 'json',
+                    beforeSend: function (xhr) {
+                        block("Cargando...");
+                    },
+                    success: function (data, status, request) {
+                        $("#id_erf").val(data.row.id);
+                        $("#code_erf").val(data.row.id);
+                        $("#opt_erf").val("2"); //opcion editar
+                        show_OkDialog($("#save_Dialog_erf"), "Satisfactory process");
+                    },
+                    error: function (xhr, ajaxOptions, err) {
+                        alert(err);
+                        show_OkDialog($("#error_Dialog_erf"), "Error");
+                    },
+                    complete: function () {
+                        unBlock();
+                    }
+                });
+            }
+
+        }
+
+
 
     </script>
+
 
 </html>

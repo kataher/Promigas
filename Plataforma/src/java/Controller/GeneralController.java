@@ -28,6 +28,7 @@ import Controller.Hydraulics.*;
 import Controller.PipelineTesting.*;
 import Controller.PipelineCorrosion.*;
 import Controller.CathodicProtection.*;
+import Controller.ExternalCorrosion.ErfController;
 import Controller.Selector.*;
 import Controller.StellPipeDesing.BendingStresFluidController;
 import Controller.StellPipeDesing.BendingStressController;
@@ -245,6 +246,10 @@ public class GeneralController {
 
             //Modulo 4
             //Modulo 5
+            case "erf":
+                controller = new ErfController();
+                model = new GeneralModel(((ErfController) controller).getModel(), from);
+                break;
             //Modulo 6
             case "alc":
                 controller = new AlternativeAcceptanceController();
