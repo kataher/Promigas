@@ -44,7 +44,7 @@ public class Model {
             //dbManager = new DBManager(DBManager.SQLSERVER, "DESKTOP-49A22JB\\SQLSERVER", bd, "sa", "123456", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "097699-DOCENT-P\\PROMIGAS", bd, "sa", "123", "1433");
             //dbManager = new DBManager(DBManager.SQLSERVER, "SEBAS-PC\\SQLEXPRESS", bd, "sa", "asd", "1433");
-            dbManager = new DBManager(DBManager.SQLSERVER, "localhost", bd, "sa", "123", "1433");
+            dbManager = new DBManager(DBManager.SQLSERVER, "DESKTOP-8DVLP94\\SQLEXPRESS", bd, "sa", "123", "1433");
             
         
         } catch (IOException ex) {

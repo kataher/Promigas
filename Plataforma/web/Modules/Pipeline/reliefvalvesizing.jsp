@@ -703,14 +703,14 @@
                             var tags = Object.keys(data.row);
 
                             for (var i = 0; i < tags.length; i++) {
-                                if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user" && tags[i] != "opso_rvs" && tags[i] != "opsk_rvs")
+                                if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user" && tags[i] != "sizingo_rvs" && tags[i] != "selectk_rvs")
                                 {
                                     $("#" + tags[i]).val(data.row[tags[i]]);
                                 }
                             }
 
                             var valoutOp, valinOp, valinK;
-                            if (data.row["opso_rvs"] === "sizingo1_rvs") {
+                            if (data.row["sizingo_rvs"] === "sizingo1_rvs") {
                                 $('#sizingo1_rvs').attr('checked', true);
                                 valoutOp = data.row["requirede_rvs"];
                                 valinOp = data.row["requiredf_rvs"];
@@ -720,7 +720,7 @@
                                 valinOp = data.row["requiredeff_rvs"];
                             }
 
-                            if (data.row["opsk_rvs"] === "selectk1_rvs") {
+                            if (data.row["selectk_rvs"] === "selectk1_rvs") {
                                 $('#selectk1_rvs').attr('checked', true);
                                 $('#ocu_molecularws_rvs').show();
                                 $('#ocu_specificg_rvs').hide();

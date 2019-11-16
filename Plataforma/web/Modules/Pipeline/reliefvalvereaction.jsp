@@ -814,9 +814,12 @@
             if (sel.val() == "selectk1_rvr") {
                 $("#specificgra_rvr").val("0");
                 parametros["specificgra_rvr"] = "0";
+                parametros["opsk_rvr"] = "selectk1_rvr";
+                
             } else {
                 $("#pesomolecular_rvr").val("0");
                 parametros["pesomolecular_rvr"] = "0";
+                parametros["opsk_rvr"] = "selectk2_rvr";
             }
             
             for (var i = 0; i < inputs.size(); i++) {
