@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rf" name="id_rf">  
+                            <input type="hidden" id="id_rf" name="id_rf" value="-1">  
                             <input type="hidden" id="opt_rf" name="opt_rf" value="1">   
                         </div>
                         <div id="load_Dialog_rf" title="Basic dialog" style='display:none;'>
@@ -440,33 +440,38 @@
 
         function save_rf() {
 
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "grounda_rf": $("#grounda_rf").val(),
-                "actuals_rf": $("#actuals_rf").val(),
-                "lengtha_rf": $("#lengtha_rf").val(),
-                "xdistance_rf": $("#xdistance_rf").val(),
-                "potentialx_rf": $("#potentialx_rf").val(),
-                "gr_sel_rf": $("#gr_sel_rf").val(),
-                "act_sel_rf": $("#act_sel_rf").val(),
-                "xdi_sel_rf": $("#xdi_sel_rf").val(),
-                "al_sel_rf": $("#al_sel_rf").val(),
-                "idproyect": $("#proyects_sel_rf").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_rf").val(),
-                "id_rf": 1,
-                "description_rf": $("#description_rf").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rf"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-                if ($("#opt_rf").val() == 2) {
-                    parametros.id_rf = $("#id_rf").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -482,15 +487,14 @@
                         show_OkDialog($("#save_Dialog_rf"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_rf"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
-
 
         }
 
@@ -564,7 +568,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_rf").val("");
+                    $("#id_rf").val("-1");
                     $("#opt_rf").val("1");
                     cleanAll_rf();
                     show_OkDialog($("#delete_Dialog_rf"), "Satisfactory process");
