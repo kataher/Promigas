@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" id="id_ohm" name="id_ohm">  
+                        <input type="hidden" id="id_ohm" name="id_ohm" value="-1">  
                         <input type="hidden" id="opt_ohm" name="opt_ohm" value="1"> 
                     </div>
                     <div id="load_Dialog_ohm" title="Basic dialog" style='display:none;'>
@@ -365,8 +365,9 @@
 
         function load_form_ohm(id) {
             var parametros = {
-                "id_ohm": id,
-                "opcion": "4"
+                "id": id,
+                "opcion": "4",
+                "from": "ohm"
             };
 
             $.ajax({
@@ -443,32 +444,37 @@
 
         function save_ohm() {
 
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
             var parametros = {
-                "potentiald_ohm": $("#potentiald_ohm").val(),
-                "potentiale_ohm": $("#potentiale_ohm").val(),
-                "geometryc_ohm": $("#geometryc_ohm").val(),
-                "geometrya_ohm": $("#geometrya_ohm").val(),
-                "averages_ohm": $("#averages_ohm").val(),
-                "pd_sel_ohm": $("#pd_sel_ohm").val(),
-                "pe_sel_ohm": $("#pe_sel_ohm").val(),
-                "as_sel_ohm": $("#as_sel_ohm").val(),
-                "corrosionc_ohm": $("#corrosionc_ohm").val(),
-                "idproyect": $("#proyects_sel_ohm").val(),
-                "opcion": $("#opt_ohm").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_ohm": 1,
-                "description_ohm": $("#description_ohm").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "ohm"
             };
 
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
             var isOk = validate(parametros);
+
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_ohm").val() == 2) {
-                    parametros.id_ohm = $("#id_ohm").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -484,8 +490,8 @@
                         show_OkDialog($("#save_Dialog_ohm"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_ohm"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
@@ -564,7 +570,7 @@
                 },
                 success: function (data, status, request) {
                     cleanAll_ohm();
-                    $("#id_ohm").val("");
+                    $("#id_ohm").val("-1");
                     $("#opt_ohm").val("1");
                     show_OkDialog($("#delete_Dialog_ohm"), "Satisfactory process");
                 },
