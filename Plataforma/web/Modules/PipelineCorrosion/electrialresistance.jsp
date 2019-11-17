@@ -183,8 +183,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_elr" name="id_elr">  
-                            <input type="hidden" id="opt_elr" name="opt_elr">   
+                            <input type="hidden" id="id_elr" name="id_elr" value="-1">  
+                            <input type="hidden" id="opt_elr" name="opt_elr" value="-1">   
                         </div>
                         <div id="load_Dialog_elr" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -433,32 +433,38 @@
         }
 
         function save_elr() {
+            
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "length_elr": $("#length_elr").val(),
-                "cross_elr": $("#cross_elr").val(),
-                "conductorr_elr": $("#conductorr_elr").val(),
-                "le_sel_elr": $("#le_sel_elr").val(),
-                "cs_sel_elr": $("#cs_sel_elr").val(),
-                "cr_sel_elr": $("#cr_sel_elr").val(),
-                "elecr_elr": $("#elecr_elr").val(),
-                "idproyect": $("#proyects_sel_elr").val(),
-                "opcion": $("#opt_elr").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_elr": 1,
-                "description_elr": $("#description_elr").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "elr"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_elr").val() == 2) {
-                    parametros.id_elr = $("#id_elr").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -474,8 +480,8 @@
                         show_OkDialog($("#save_Dialog_elr"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_elr"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
@@ -557,7 +563,7 @@
                     },
                     success: function (data, status, request) {
                         cleanAll_elr();
-                        $("#id_elr").val("");
+                        $("#id_elr").val("-1");
                         $("#opt_elr").val("1");
                         show_OkDialog($("#delete_Dialog_elr"), "Satisfactory process");
                     },
