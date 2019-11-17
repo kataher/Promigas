@@ -25,9 +25,9 @@ public class Main {
     static int[] inc;
     public static void main(String[] args)
     {
-        /*try {
+        try {
             Connection miConexion;
-            DBManager dbManager = new DBManager(DBManager.SQLSERVER, "097699-DOCENT-P\\PROMIGAS", "Plataforma", "sa", "123", "1433");
+            DBManager dbManager = new DBManager(DBManager.SQLSERVER, "DESKTOP-8DVLP94\\SQLEXPRESS", "Plataforma", "sa", "123", "1433");
             //DBManager dbManager = new DBManager(DBManager.SQLSERVER);
             
             miConexion=dbManager.GetConnection();
@@ -38,9 +38,9 @@ public class Main {
             }
         } catch (IOException | SQLException | ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
-        inc = new int[3];
+        /*inc = new int[3];
         inc[0] = 1;
         inc[1] = 3;
         inc[2] = 5;
@@ -58,7 +58,7 @@ public class Main {
         for(int i=0;i<=4;i+=1)
         {//Notemos que escribir i+=2 es similar a escribir i = i + 2
                 System.err.println(V[i] + " @ ");
-        }
+        }*/
         
         
         

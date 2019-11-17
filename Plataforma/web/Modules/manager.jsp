@@ -19,7 +19,6 @@
     String respuesta;
     JSONObject json;
     int opcion = Integer.parseInt(request.getParameter("opcion"));
-    System.err.println(opcion);
     GeneralController controller = new GeneralController(request);
 
     switch (opcion) {

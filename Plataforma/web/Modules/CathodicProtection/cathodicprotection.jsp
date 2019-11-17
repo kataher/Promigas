@@ -228,8 +228,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_cc" name="id_cc">  
-                            <input type="hidden" id="opt_cc" name="opt_cc">   
+                            <input type="hidden" id="id_cc" name="id_cc" value="-1">  
+                            <input type="hidden" id="opt_cc" name="opt_cc" value="1">   
                         </div>
                         <div id="load_Dialog_cc" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -431,43 +431,38 @@
         }
 
         function save_cc() {
-
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "pipeod_cc": $("#pipeod_cc").val(),
-                "pipew_cc": $("#pipew_cc").val(),
-                "halfd_cc": $("#halfd_cc").val(),
-                "specificr_cc": $("#specificr_cc").val(),
-                "pipeel_cc": $("#pipeel_cc").val(),
-                "pipeep_cc": $("#pipeep_cc").val(),
-                "xdistance_cc": $("#xdistance_cc").val(),
-                "pi_sel_cc": $("#pi_sel_cc").val(),
-                "pip_sel_cc": $("#pip_sel_cc").val(),
-                "ha_sel_cc": $("#ha_sel_cc").val(),
-                "pil_sel_cc": $("#pil_sel_cc").val(),
-                "pie_sel_cc": $("#pie_sel_cc").val(),
-                "xd_sel_cc": $("#xd_sel_cc").val(),
-                "linear_cc": $("#linear_cc").val(),
-                "leakage_cc": $("#leakage_cc").val(),
-                "characteristicsr_cc": $("#characteristicsr_cc").val(),
-                "attenuationc_cc": $("#attenuationc_cc").val(),
-                "pipee_cc": $("#pipee_cc").val(),
-                "idproyect": $("#proyects_sel_cc").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_cc").val(),
-                "id_cc": 1,
-                "description_cc": $("#description_cc").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "cc"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-                if ($("#opt_cc").val() == 2) {
-                    parametros.id_cc = $("#id_cc").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -483,15 +478,14 @@
                         show_OkDialog($("#save_Dialog_cc"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_cc"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
-
         }
 
         function load_in2_sel_cc() {
