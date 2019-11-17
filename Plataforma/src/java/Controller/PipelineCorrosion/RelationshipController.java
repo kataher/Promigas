@@ -29,42 +29,25 @@ public class RelationshipController extends Controller.Controller{
     
     public  Map<String, String> getValues(HttpServletRequest request) throws Exception{
         
-         //Input Data
-        String description_rel = request.getParameter("description_rel");
-        String electrolyter_rel = request.getParameter("electrolyter_rel");
-        String distancee_rel = request.getParameter("distancee_rel");
-        String crosss_rel = request.getParameter("crosss_rel");
-        String er_sel_rel = request.getParameter("er_sel_rel");
-        String de_sel_rel = request.getParameter("de_sel_rel");
-        String cs_sel_rel = request.getParameter("cs_sel_rel");
-        String electr_rel = request.getParameter("electr_rel");
-                
-        //ids
-        String id_proyect = request.getParameter("idproyect");
-        String iduser = request.getParameter("iduser");
-       
-        Map<String, String> values = new HashMap<String, String>();
-                
-        try
-        {
-            values.put("description_rel", stringToBD(description_rel.trim()));
-            values.put("electrolyter_rel", stringToBD(electrolyter_rel.trim()));
-            values.put("distancee_rel",  stringToBD(distancee_rel.trim()));
-            values.put("crosss_rel",  stringToBD(crosss_rel.trim()));
-            values.put("er_sel_rel",  stringToBD(er_sel_rel.trim()));
-            values.put("de_sel_rel",  stringToBD(de_sel_rel.trim()));
-            values.put("cs_sel_rel",  stringToBD(cs_sel_rel.trim()));
-            values.put("electr_rel",  stringToBD(electr_rel.trim()));
-            
-            values.put("id_proyect", id_proyect.trim());
-            values.put("id_user", iduser.trim());
-            
-        }catch(Exception ex){
-            throw new Exception(ex.getMessage());
-        }
-       
-       return values;
+         Map<String, String[]> vals = request.getParameterMap();
         
+        Map<String, String> values = new HashMap<String, String>();
+        
+        for (String key : vals.keySet()){
+            
+            if(!key.equals("opcion") && !key.equals("from") && !key.equals("opt_" + vals.get("from")[0])) {
+                if(key.equals("id_" + vals.get("from")[0]))
+                    values.put("id", stringToBD(vals.get(key)[0].trim()));
+                else if (key.equals("proyects_sel_" + vals.get("from")[0]))
+                    values.put("id_proyect", stringToBD(vals.get(key)[0].trim()));
+                else
+                    values.put(key, stringToBD(vals.get(key)[0].trim()));
+            }
+        }
+        
+        
+        
+        return values;
     }
       
       
