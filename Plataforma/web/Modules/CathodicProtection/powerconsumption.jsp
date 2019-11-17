@@ -182,7 +182,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_pc" name="id_pc">  
+                            <input type="hidden" id="id_pc" name="id_pc" value="1">  
                             <input type="hidden" id="opt_pc" name="opt_pc" value="1">   
                         </div>
                         <div id="load_Dialog_pc" title="Basic dialog" style='display:none;'>
@@ -375,34 +375,38 @@
         }
 
         function save_pc() {
-
-
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "rectifiero_pc": $("#rectifiero_pc").val(),
-                "rectifierc_pc": $("#rectifierc_pc").val(),
-                "utilityr_pc": $("#utilityr_pc").val(),
-                "ro_sel_pc": $("#ro_sel_pc").val(),
-                "rc_sel_pc": $("#rc_sel_pc").val(),
-                "ut_sel_pc": $("#ut_sel_pc").val(),
-                "powerc_pc": $("#powerc_pc").val(),
-                "montlyb_pc": $("#montlyb_pc").val(),
-                "idproyect": $("#proyects_sel_pc").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_pc").val(),
-                "id_pc": 1,
-                "description_pc": $("#description_pc").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "pc"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-                if ($("#opt_pc").val() == 2) {
-                    parametros.id_pc = $("#id_pc").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -418,8 +422,8 @@
                         show_OkDialog($("#save_Dialog_pc"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_pc"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
@@ -483,7 +487,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_pc").val("");
+                    $("#id_pc").val("1");
                     $("#opt_pc").val("1");
                     cleanAll_pc();
                     show_OkDialog($("#delete_Dialog_pc"), "Satisfactory process");
