@@ -288,8 +288,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_phy" name="id_phy">  
-                            <input type="hidden" id="opt_phy" name="opt_phy">
+                            <input type="hidden" id="id_phy" name="id_phy" value="-1">  
+                            <input type="hidden" id="opt_phy" name="opt_phy" value="-1">
                         </div>
                         <div id="load_Dialog_phy" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -354,6 +354,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -385,6 +386,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -413,12 +415,13 @@
         function load_pres_sel_phy() {
             var parametros = {
                 "combo": "pres",
-                "opcion": "5"
+                "opcion": "5",
             };
             $.ajax({
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -447,6 +450,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -472,6 +476,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -499,6 +504,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -529,6 +535,7 @@
                 type: "POST",
                 url: "../manager.jsp",
                 data: parametros,
+                async: false,
                 beforeSend: function (xhr) {
                     block("Cargando...");
                 },
@@ -796,51 +803,39 @@
 
         function save_phy() {
             var sel = $("input[type='radio'][name='pipe_rad_phy']:checked");
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "pipeo_phy": $("#pipeo_phy").val(),
-                "pipei_phy": $("#pipei_phy").val(),
-                "testp_phy": $("#testp_phy").val(),
-                "testt_phy": $("#testt_phy").val(),
-                "pipelinel_phy": $("#pipelinel_phy").val(),
-                "waterc_phy": $("#waterc_phy").val(),
-                "volumec_phy": $("#volumec_phy").val(),
-                "thermalc_phy": $("#thermalc_phy").val(),
-                "volumect_phy": $("#volumect_phy").val(),
-                "volumecr_phy": $("#volumecr_phy").val(),
-                "pipelinef_phy": $("#pipelinef_phy").val(),
-                "volumer_phy": $("#volumer_phy").val(),
-                "incrementalv_phy": $("#incrementalv_phy").val(),
-                "compf_phy": $("#compf_phy").val(),
-                "pressurec_phy": $("#pressurec_phy").val(),
-                "pipew_phy": $("#pipew_phy").val(),
-                "enteree_phy": $("#enteree_phy").val(),
-                "h_sel_phy": $("#h_sel_phy").val(),
-                "pipe_rad_phy": sel.val(),
-                "nomps_sel_phy": $("#nomps_sel_phy").val(),
-                "wallt_sel_phy": $("#wallt_sel_phy").val(),
-                "po_sel_phy": $("#po_sel_phy").val(),
-                "pi_sel_phy": $("#pi_sel_phy").val(),
-                "tp_sel_phy": $("#tp_sel_phy").val(),
-                "tt_sel_phy": $("#tt_sel_phy").val(),
-                "pl_sel_phy": $("#pl_sel_phy").val(),
-                "idproyect": $("#proyects_sel_phy").val(),
-                "opcion": $("#opt_phy").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_phy": 1,
-                "description_phy": $("#description_phy").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "phy"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["pipe_rad_phy"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_phy").val() == 2) {
-                    parametros.id_phy = $("#id_phy").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -856,15 +851,14 @@
                         show_OkDialog($("#save_Dialog_phy"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_phy"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
-
         }
 
         function delete_phy() {
