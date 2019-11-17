@@ -29,41 +29,25 @@ public class RateofElectricalController extends Controller.Controller{
     
     public  Map<String, String> getValues(HttpServletRequest request) throws Exception{
         
-         //Input Data
-        String description_re = request.getParameter("description_re");
-        String potentialc_re = request.getParameter("potentialc_re");
-        String potentiala_re = request.getParameter("potentiala_re");
-        String totalr_re = request.getParameter("totalr_re");
-        String pc_sel_re = request.getParameter("pc_sel_re");
-        String pa_sel_re = request.getParameter("pa_sel_re");
-        String tr_sel_re = request.getParameter("tr_sel_re");
-        String ratee_re = request.getParameter("ratee_re");
-                
-        //ids
-        String id_proyect = request.getParameter("idproyect");
-        String iduser = request.getParameter("iduser");
-       
+         Map<String, String[]> vals = request.getParameterMap();
+        
         Map<String, String> values = new HashMap<String, String>();
-                
-        try
-        {
-            values.put("description_re", stringToBD(description_re.trim()));
-            values.put("potentialc_re", stringToBD(potentialc_re.trim()));
-            values.put("potentiala_re",  stringToBD(potentiala_re.trim()));
-            values.put("totalr_re",  stringToBD(totalr_re.trim()));
-            values.put("pc_sel_re",  stringToBD(pc_sel_re.trim()));
-            values.put("pa_sel_re",  stringToBD(pa_sel_re.trim()));
-            values.put("tr_sel_re",  stringToBD(tr_sel_re.trim()));
-            values.put("ratee_re",  stringToBD(ratee_re.trim()));
+        
+        for (String key : vals.keySet()){
             
-            values.put("id_proyect", id_proyect.trim());
-            values.put("id_user", iduser.trim());
-            
-        }catch(Exception ex){
-            throw new Exception(ex.getMessage());
+            if(!key.equals("opcion") && !key.equals("from") && !key.equals("opt_" + vals.get("from")[0])) {
+                if(key.equals("id_" + vals.get("from")[0]))
+                    values.put("id", stringToBD(vals.get(key)[0].trim()));
+                else if (key.equals("proyects_sel_" + vals.get("from")[0]))
+                    values.put("id_proyect", stringToBD(vals.get(key)[0].trim()));
+                else
+                    values.put(key, stringToBD(vals.get(key)[0].trim()));
+            }
         }
-       
-       return values;
+        
+        
+        
+        return values;
         
     }
       

@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" id="id_re" name="id_re">  
+                        <input type="hidden" id="id_re" name="id_re" value="-1">  
                         <input type="hidden" id="opt_re" name="opt_re" value="1"> 
                     </div>
                     <div id="load_Dialog_re" title="Basic dialog" style='display:none;'>
@@ -433,31 +433,37 @@
     }
 
     function save_re() {
+        var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+        var selects = $("#page-wrapper select");
+        var resultados = $("#page-wrapper input[type='text'][readonly]");
 
         var parametros = {
-            "potentialc_re": $("#potentialc_re").val(),
-            "potentiala_re": $("#potentiala_re").val(),
-            "totalr_re": $("#totalr_re").val(),
-            "pc_sel_re": $("#pc_sel_re").val(),
-            "pa_sel_re": $("#pa_sel_re").val(),
-            "tr_sel_re": $("#tr_sel_re").val(),
-            "ratee_re": $("#ratee_re").val(),
-            "idproyect": $("#proyects_sel_re").val(),
-            "opcion": $("#opt_re").val(),
-            "iduser": <% out.print(session.getAttribute("idusu"));%>,
-            "id_re": 1,
-            "description_re": $("#description_re").val(),
+            "id_user": <% out.print(session.getAttribute("idusu"));%>,
             "from": "re"
         };
 
+        for (var i = 0; i < inputs.size(); i++) {
+            if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+            {
+                parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+            }
+        }
+
+        for (var i = 0; i < selects.size(); i++) {
+            parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+        }
+
+        for (var i = 0; i < resultados.size(); i++) {
+            parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+        }
+
+        parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
         var isOk = validate(parametros);
+
         if (isOk === false) {
             alert("You must perform the calculation and fill out the description");
         } else {
-
-            if ($("#opt_re").val() == 2) {
-                parametros.id_re = $("#id_re").val();
-            }
 
             $.ajax({
                 type: "POST",
@@ -473,8 +479,8 @@
                     show_OkDialog($("#save_Dialog_re"), "Satisfactory process");
                 },
                 error: function (xhr, ajaxOptions, err) {
-                    alert(err);
                     show_OkDialog($("#error_Dialog_re"), "Error");
+                    alert(err);
                 },
                 complete: function () {
                     unBlock();
@@ -549,7 +555,7 @@
             },
             success: function (data, status, request) {
                 cleanAll_re();
-                $("#id_re").val("");
+                $("#id_re").val("-1");
                 $("#opt_re").val("1");
                 show_OkDialog($("#delete_Dialog_re"), "Satisfactory process");
             },
