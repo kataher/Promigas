@@ -19,7 +19,7 @@ public class ResistanceEarthSHAModel extends Model.Model{
 
     public ResistanceEarthSHAModel() {
       super();
-      this.tabla = "ResistanceSHA";
+      this.tabla = "ResistanceRSHA";
     }
     
     public String getTabla() {

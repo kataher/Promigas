@@ -190,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rsha" name="id_rsha">  
+                            <input type="hidden" id="id_rsha" name="id_rsha" value="-1">  
                             <input type="hidden" id="opt_rsha" name="opt_rsha" value="1">   
                         </div>
                         <div id="load_Dialog_rsha" title="Basic dialog" style='display:none;'>
@@ -445,35 +445,38 @@
         }
 
         function save_rsha() {
-
-
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "soilr_rsha": $("#soilr_rsha").val(),
-                "anodel_rsha": $("#anodel_rsha").val(),
-                "anoded_rsha": $("#anoded_rsha").val(),
-                "distancee_rsha": $("#distancee_rsha").val(),
-                "so_sel_rsha": $("#so_sel_rsha").val(),
-                "al_sel_rsha": $("#al_sel_rsha").val(),
-                "ad_sel_rsha": $("#ad_sel_rsha").val(),
-                "di_sel_rsha": $("#di_sel_rsha").val(),
-                "resistancee_rsha": $("#resistancee_rsha").val(),
-                "idproyect": $("#proyects_sel_rsha").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_rsha").val(),
-                "id_rsha": 1,
-                "description_rsha": $("#description_rsha").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rsha"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-                if ($("#opt_rsha").val() == 2) {
-                    parametros.id_rsha = $("#id_rsha").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -489,14 +492,15 @@
                         show_OkDialog($("#save_Dialog_rsha"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_rsha"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
+           
         }
 
         function calculate_rsha() {
@@ -571,7 +575,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_rsha").val("");
+                    $("#id_rsha").val("-1");
                     $("#opt_rsha").val("1");
                     cleanAll_rsha();
                     show_OkDialog($("#delete_Dialog_rsha"), "Satisfactory process");
