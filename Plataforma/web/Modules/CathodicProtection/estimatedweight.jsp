@@ -200,7 +200,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_ew" name="id_ew">  
+                            <input type="hidden" id="id_ew" name="id_ew" value="-1">  
                             <input type="hidden" id="opt_ew" name="opt_ew" value="1">   
                         </div>
                         <div id="load_Dialog_ew" title="Basic dialog" style='display:none;'>
@@ -240,325 +240,329 @@
 
     <script>
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                getproyectos(<%=session.getAttribute("idusu")%>,
-                        $("#proyects_sel_ew"),
-                        $("#error_Dialog_ew"));
-                        
-                        load_ohmcm_sel_ew();
+            getproyectos(<%=session.getAttribute("idusu")%>,
+                    $("#proyects_sel_ew"),
+                    $("#error_Dialog_ew"));
+
+            load_ohmcm_sel_ew();
+        });
+        function load_history_ew() {
+            var parametros = {
+                "idproyect": $("#proyects_sel_ew").val(),
+                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "opcion": "6",
+                "nombre": "historial",
+                "from": "ew"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                async: false,
+                beforeSend: function (xhr) {
+                    cleanAll_ew();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+
+
+                    if (data !== null) {
+                        var tags = Object.keys(data.historial[0]);
+
+                        var tamano = data.size;
+
+                        var html = "<table class='table table-bordered table-striped'>";
+                        html += "<thead>";
+                        html += "<tr>";
+                        html += "<th>Creation date</th>";
+                        html += "<th>Code</th>";
+                        html += "<th>Description</th>";
+                        html += "<th>Load</th>";
+                        html += "</tr>";
+                        html += "</thead>";
+                        if (tamano > 0) {
+
+                            html += '<tbody>';
+                            for (var i = 0; i < tamano; i++) {
+                                html += "<tr>";
+                                html += "<td>" + data.historial[i].date + "</td>";
+                                html += "<td>" + data.historial[i].id + "</td>";
+                                html += "<td>" + data.historial[i].description_ew + "</td>";
+                                html += "<td><a href='#' onClick='load_form_ew(" + data.historial[i].id + ")'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a></td>";
+                                html += "<tr>";
+
+                            }
+                            html += '</tbody>';
+                        } else {
+                            html += '<p>No records available.</p>';
+                        }
+                        html += "</table><br><br>";
+
+                    } else {
+                        html = '<p>No records available.</p>';
+                    }
+                    $("#div-table_ew").empty();
+                    $("#div-table_ew").html(html);
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_ew"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
             });
-            function load_history_ew() {
-                var parametros = {
-                    "idproyect": $("#proyects_sel_ew").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "opcion": "6",
-                    "nombre": "historial",
-                    "from": "ew"
-                };
+        }
+
+        function load_form_ew(id) {
+            var parametros = {
+                "id": id,
+                "from": "ew",
+                "opcion": "4"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    cleanAll_ew();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+                    if (data !== null)
+                    {
+                        var tags = Object.keys(data.row);
+
+                        for (var i = 0; i < tags.length; i++) {
+                            if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user")
+                            {
+                                $("#" + tags[i]).val(data.row[tags[i]]);
+                            }
+                        }
+
+                        $("#opt_ew").val("2");
+                        $("#id_ew").val(data.row.id);
+                        $("#proyects_sel_ew").val(data.row.id_proyect);
+                    } else {
+                        $("#opt_ew").val("1");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    $("#opt_ew").val("1");
+                    show_OkDialog($("#error_Dialog_ew"), "Error");
+
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+        function onchange_Input_ew(inp) {
+            var sw = validateDecimal(inp.value);
+
+            if (sw != true) {
+                inp.value = "";
+            }
+            onchange_Input_zero(inp);
+            cleanOut_ew();
+        }
+
+        function cleanOut_ew() {
+            $("#estimatedw_ew").val("");
+        }
+
+        function cleanIn_ew() {
+            $("#electricalc_ew").val("");
+            $("#assumedl_ew").val("");
+            $("#polarizedp_ew").val("");
+            $("#polarizedae_ew").val("");
+            $("#averages_ew").val("");
+        }
+
+        function cleanAll_ew() {
+            cleanIn_ew();
+            cleanOut_ew();
+            $("#description_ew").val("");
+        }
+
+
+        function save_ew() {
+
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
+            var parametros = {
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
+                "from": "ew"
+            };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+
+            var isOk = validate(parametros);
+
+            if (isOk === false) {
+                alert("You must perform the calculation and fill out the description");
+            } else {
 
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
-                    async: false,
-                    beforeSend: function (xhr) {
-                        cleanAll_ew();
-                        block("Cargado datos...");
-                    },
-                    success: function (data, status, request) {
-
-
-                        if (data !== null) {
-                            var tags = Object.keys(data.historial[0]);
-
-                            var tamano = data.size;
-
-                            var html = "<table class='table table-bordered table-striped'>";
-                            html += "<thead>";
-                            html += "<tr>";
-                            html += "<th>Creation date</th>";
-                            html += "<th>Code</th>";
-                            html += "<th>Description</th>";
-                            html += "<th>Load</th>";
-                            html += "</tr>";
-                            html += "</thead>";
-                            if (tamano > 0) {
-
-                                html += '<tbody>';
-                                for (var i = 0; i < tamano; i++) {
-                                    html += "<tr>";
-                                    html += "<td>" + data.historial[i].date + "</td>";
-                                    html += "<td>" + data.historial[i].id + "</td>";
-                                    html += "<td>" + data.historial[i].description_ew + "</td>";
-                                    html += "<td><a href='#' onClick='load_form_ew(" + data.historial[i].id + ")'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a></td>";
-                                    html += "<tr>";
-
-                                }
-                                html += '</tbody>';
-                            } else {
-                                html += '<p>No records available.</p>';
-                            }
-                            html += "</table><br><br>";
-
-                        } else {
-                            html = '<p>No records available.</p>';
-                        }
-                        $("#div-table_ew").empty();
-                        $("#div-table_ew").html(html);
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_ew"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function load_form_ew(id) {
-                var parametros = {
-                    "id": id,
-                    "from": "ew",
-                    "opcion": "4"
-                };
-
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    dataType: 'json',
-                    beforeSend: function (xhr) {
-                        cleanAll_ew();
-                        block("Cargado datos...");
-                    },
-                    success: function (data, status, request) {
-                        if (data !== null)
-                        {
-                            var tags = Object.keys(data.row);
-
-                            for (var i = 0; i < tags.length; i++) {
-                                if (tags[i] != "date" && tags[i] != "id_proyect" && tags[i] != "id_user")
-                                {
-                                    $("#" + tags[i]).val(data.row[tags[i]]);
-                                }
-                            }
-
-                            $("#opt_ew").val("2");
-                            $("#id_ew").val(data.row.id);
-                            $("#proyects_sel_ew").val(data.row.id_proyect);
-                        } else {
-                            $("#opt_ew").val("1");
-                        }
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        $("#opt_ew").val("1");
-                        show_OkDialog($("#error_Dialog_ew"), "Error");
-
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-            function onchange_Input_ew(inp) {
-                var sw = validateDecimal(inp.value);
-
-                if (sw != true) {
-                    inp.value = "";
-                }
-                onchange_Input_zero(inp);
-                cleanOut_ew();
-            }
-
-            function cleanOut_ew() {
-                $("#estimatedw_ew").val("");
-            }
-
-            function cleanIn_ew() {
-                $("#electricalc_ew").val("");
-                $("#assumedl_ew").val("");
-                $("#polarizedp_ew").val("");
-                $("#polarizedae_ew").val("");
-                $("#averages_ew").val("");
-            }
-
-            function cleanAll_ew() {
-                cleanIn_ew();
-                cleanOut_ew();
-                $("#description_ew").val("");
-            }
-
-
-            function save_ew() {
-
-                var parametros = {
-                    "assumedl_ew": $("#assumedl_ew").val(),
-                    "electricalc_ew": $("#electricalc_ew").val(),
-                    "polarizedp_ew": $("#polarizedp_ew").val(),
-                    "polarizedae_ew": $("#polarizedae_ew").val(),
-                    "averages_ew": $("#averages_ew").val(),
-                    "estimatedw_ew": $("#estimatedw_ew").val(),
-                    "al_sel_ew": $("#al_sel_ew").val(),
-                    "ele_sel_ew": $("#ele_sel_ew").val(),
-                    "polp_sel_ew": $("#polp_sel_ew").val(),
-                    "pole_sel_ew": $("#pole_sel_ew").val(),
-                    "ave_sel_ew": $("#ave_sel_ew").val(),
-                    "idproyect": $("#proyects_sel_ew").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "opcion": $("#opt_ew").val(),
-                    "id_ew": 1,
-                    "description_ew": $("#description_ew").val(),
-                    "from": "ew"
-                };
-
-                var isOk = validate(parametros);
-
-                if (isOk === false) {
-                    alert("Debe realizar el càlculo");
-                } else {
-                    if ($("#opt_ew").val() == 2) {
-                        parametros.id_ew = $("#id_ew").val();
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: "../manager.jsp",
-                        data: parametros,
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            block("Cargando...");
-                        },
-                        success: function (data, status, request) {
-                            $("#id_ew").val(data.row.id);
-                            $("#opt_ew").val("2");
-                            show_OkDialog($("#save_Dialog_ew"), "Satisfactory process");
-                        },
-                        error: function (xhr, ajaxOptions, err) {
-                            alert(err);
-                            show_OkDialog($("#error_Dialog_ew"), "Error");
-                        },
-                        complete: function () {
-                            unBlock();
-                        }
-                    });
-                }
-            }
-            
-            function load_ohmcm_sel_ew() {
-                var parametros = {
-                    "combo": "ohm2",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='ave_sel_ew' id= 'ave_sel_ew' onchange='cleanOut_ew()'>" + data;
-                        $("#div_ave_sel_ew").html(newHtml);
+                        $("#id_ew").val(data.row.id);
+                        $("#opt_ew").val("2");
+                        show_OkDialog($("#save_Dialog_ew"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_ew"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
-            
-            
+        }
 
-            function calculate_ew() {
-                
-                var variables = {
-                    "assumedl_ew": $("#assumedl_ew").val().replace(",", ""),
-                    "electricalc_ew": $("#electricalc_ew").val().replace(",", ""),
-                    "polarizedp_ew": $("#polarizedp_ew").val().replace(",", ""),
-                    "polarizedae_ew": $("#polarizedae_ew").val().replace(",", ""),
-                    "averages_ew": $("#averages_ew").val().replace(",", "")
-                };
-                
-                var isOk = validate(variables);
-
-                if (isOk === false) {
-                    alert("You must complete all fields");
-                } else {
-
-                    var unidades = {
-                        "ave_sel_ew": $("#ave_sel_ew").val().split(",")[1]
-                    };
-
-                    var res = estimatedWeight_Form(variables, unidades);
-
-                    $("#estimatedw_ew").val(res[0]);
-
-                    show_OkDialog($("#calculate_Dialog_ew"), "Satisfactory process");
+        function load_ohmcm_sel_ew() {
+            var parametros = {
+                "combo": "ohm2",
+                "opcion": "5"
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                async: false,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    var newHtml = "<select class='form-control' name='ave_sel_ew' id= 'ave_sel_ew' onchange='cleanOut_ew()'>" + data;
+                    $("#div_ave_sel_ew").html(newHtml);
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_ew"), "Error");
+                },
+                complete: function () {
+                    unBlock();
                 }
+            });
+        }
+
+
+
+        function calculate_ew() {
+
+            var variables = {
+                "assumedl_ew": $("#assumedl_ew").val().replace(",", ""),
+                "electricalc_ew": $("#electricalc_ew").val().replace(",", ""),
+                "polarizedp_ew": $("#polarizedp_ew").val().replace(",", ""),
+                "polarizedae_ew": $("#polarizedae_ew").val().replace(",", ""),
+                "averages_ew": $("#averages_ew").val().replace(",", "")
+            };
+
+            var isOk = validate(variables);
+
+            if (isOk === false) {
+                alert("You must complete all fields");
+            } else {
+
+                var unidades = {
+                    "ave_sel_ew": $("#ave_sel_ew").val().split(",")[1]
+                };
+
+                var res = estimatedWeight_Form(variables, unidades);
+
+                $("#estimatedw_ew").val(res[0]);
+
+                show_OkDialog($("#calculate_Dialog_ew"), "Satisfactory process");
             }
+        }
 
-            function delete_ew() {
+        function delete_ew() {
 
-                //Confirmacion
-                if ($("#opt_ew").val() == 2) {
-                    $("#dialog-confirm_ew").dialog({
-                        resizable: false,
-                        height: "auto",
-                        width: 400,
-                        modal: true,
-                        buttons: {
-                            "Delete": function () {
-                                deleteReg_ew();
-                                $(this).dialog("close");
-                            },
-                            Cancelar: function () {
-                                $(this).dialog("close");
-                            }
+            //Confirmacion
+            if ($("#opt_ew").val() == 2) {
+                $("#dialog-confirm_ew").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {
+                            deleteReg_ew();
+                            $(this).dialog("close");
+                        },
+                        Cancelar: function () {
+                            $(this).dialog("close");
                         }
-                    });
-                } else {
-                    alert("You must load a record to be able to delete it");
-                }
-            }
-
-            function deleteReg_ew() {
-
-                var parametros = {
-                    "id_ew": $("#id_ew").val(),
-                    "opcion": "3",
-                    "iduser": <%=session.getAttribute("idusu")%>,
-                    "from": "ew"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
-                    beforeSend: function (xhr) {
-                        block("Cargando...");
-                    },
-                    success: function (data, status, request) {
-                        $("#id_ew").val("");
-                        $("#opt_ew").val("1");
-                        cleanAll_ew();
-                        show_OkDialog($("#delete_Dialog_ew"), "Satisfactory process");
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_ew"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
                     }
                 });
+            } else {
+                alert("You must load a record to be able to delete it");
             }
+        }
 
-        </script>
+        function deleteReg_ew() {
+
+            var parametros = {
+                "id_ew": $("#id_ew").val(),
+                "opcion": "3",
+                "iduser": <%=session.getAttribute("idusu")%>,
+                "from": "ew"
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    $("#id_ew").val("");
+                    $("#opt_ew").val("1");
+                    cleanAll_ew();
+                    show_OkDialog($("#delete_Dialog_ew"), "Satisfactory process");
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_ew"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+    </script>
 
 </html>
