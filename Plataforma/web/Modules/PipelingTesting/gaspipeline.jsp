@@ -193,8 +193,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_gp" name="id_gp">  
-                            <input type="hidden" id="opt_gp" name="opt_gp">   
+                            <input type="hidden" id="id_gp" name="id_gp" value="-1">  
+                            <input type="hidden" id="opt_gp" name="opt_gp" value="-1">   
                         </div>
                         <div id="load_Dialog_gp" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -528,33 +528,38 @@
 
         function save_gp() {
 
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
             var parametros = {
-                "initialt_gp": $("#initialt_gp").val(),
-                "shut_gp": $("#shut_gp").val(),
-                "internalpd_gp": $("#internalpd_gp").val(),
-                "it_sel_gp": $("#it_sel_gp").val(),
-                "shut_sel_gp": $("#shut_sel_gp").val(),
-                "ipd_sel_gp": $("#ipd_sel_gp").val(),
-                "enteree_gp": $("#enteree_gp").val(),
-                "h_sel_gp": $("#h_sel_gp").val(),
-                "acceptablep_gp": $("#acceptablep_gp").val(),
-                "idproyect": $("#proyects_sel_gp").val(),
-                "opcion": $("#opt_gp").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_gp": 1,
-                "description_gp": $("#description_gp").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "gp"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_gp").val() == 2) {
-                    parametros.id_gp = $("#id_gp").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -570,14 +575,13 @@
                         show_OkDialog($("#save_Dialog_gp"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_gp"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
-
             }
         }
 
