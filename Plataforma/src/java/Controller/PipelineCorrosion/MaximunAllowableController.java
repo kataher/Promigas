@@ -29,42 +29,25 @@ public class MaximunAllowableController extends Controller.Controller{
     
     public  Map<String, String> getValues(HttpServletRequest request) throws Exception{
         
-         //Input Data
-        String description_mal = request.getParameter("description_mal");
-        String maximund_mal = request.getParameter("maximund_mal");
-        String pipeo_mal = request.getParameter("pipeo_mal");
-        String nomip_mal = request.getParameter("nomip_mal");
-        String md_sel_mal = request.getParameter("md_sel_mal");
-        String po_sel_mal = request.getParameter("po_sel_mal");
-        String np_sel_mal = request.getParameter("np_sel_mal");
-        String maximuna_mal = request.getParameter("maximuna_mal");
-                
-        //ids
-        String id_proyect = request.getParameter("idproyect");
-        String iduser = request.getParameter("iduser");
-       
+         Map<String, String[]> vals = request.getParameterMap();
+        
         Map<String, String> values = new HashMap<String, String>();
-                
-        try
-        {
-            values.put("description_mal", stringToBD(description_mal.trim()));
-            values.put("maximund_mal", stringToBD(maximund_mal.trim()));
-            values.put("pipeo_mal",  stringToBD(pipeo_mal.trim()));
-            values.put("nomip_mal",  stringToBD(nomip_mal.trim()));
-            values.put("md_sel_mal",  stringToBD(md_sel_mal.trim()));
-            values.put("po_sel_mal",  stringToBD(po_sel_mal.trim()));
-            values.put("np_sel_mal",  stringToBD(np_sel_mal.trim()));
-            values.put("maximuna_mal",  stringToBD(maximuna_mal.trim()));
+        
+        for (String key : vals.keySet()){
             
-            
-            values.put("id_proyect", id_proyect.trim());
-            values.put("id_user", iduser.trim());
-            
-        }catch(Exception ex){
-            throw new Exception(ex.getMessage());
+            if(!key.equals("opcion") && !key.equals("from") && !key.equals("opt_" + vals.get("from")[0])) {
+                if(key.equals("id_" + vals.get("from")[0]))
+                    values.put("id", stringToBD(vals.get(key)[0].trim()));
+                else if (key.equals("proyects_sel_" + vals.get("from")[0]))
+                    values.put("id_proyect", stringToBD(vals.get(key)[0].trim()));
+                else
+                    values.put(key, stringToBD(vals.get(key)[0].trim()));
+            }
         }
-       
-       return values;
+        
+        
+        
+        return values;
         
     }
       
