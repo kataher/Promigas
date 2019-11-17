@@ -195,7 +195,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_rmva" name="id_rmva">  
+                            <input type="hidden" id="id_rmva" name="id_rmva" value="-1">  
                             <input type="hidden" id="opt_rmva" name="opt_rmva" value="1">   
                         </div>
                         <div id="load_Dialog_rmva" title="Basic dialog" style='display:none;'>
@@ -452,34 +452,38 @@
 
         function save_rmva() {
 
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
             var parametros = {
-                "soilr_rmva": $("#soilr_rmva").val(),
-                "anodel_rmva": $("#anodel_rmva").val(),
-                "anoded_rmva": $("#anoded_rmva").val(),
-                "numbera_rmva": $("#numbera_rmva").val(),
-                "anodes_rmva": $("#anodes_rmva").val(),
-                "so_sel_rmva": $("#so_sel_rmva").val(),
-                "al_sel_rmva": $("#al_sel_rmva").val(),
-                "ad_sel_rmva": $("#ad_sel_rmva").val(),
-                "as_sel_rmva": $("#as_sel_rmva").val(),
-                "anoder_rmva": $("#anoder_rmva").val(),
-                "idproyect": $("#proyects_sel_rmva").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_rmva").val(),
-                "id_rmva": 1,
-                "description_rmva": $("#description_rmva").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "rmva"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_rmva").val() == 2) {
-                    parametros.id_rmva = $("#id_rmva").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -495,14 +499,13 @@
                         show_OkDialog($("#save_Dialog_rmva"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_rmva"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
-
             }
 
         }
@@ -580,7 +583,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_rmva").val("");
+                    $("#id_rmva").val("-1");
                     $("#opt_rmva").val("1");
                     cleanAll_rmva();
                     show_OkDialog($("#delete_Dialog_rmva"), "Satisfactory process");

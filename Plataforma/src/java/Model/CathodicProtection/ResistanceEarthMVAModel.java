@@ -19,7 +19,7 @@ public class ResistanceEarthMVAModel extends Model.Model{
 
     public ResistanceEarthMVAModel() {
       super();
-      this.tabla = "ResistanceMVA";
+      this.tabla = "ResistanceRMVA";
     }
     public String getTabla() {
         return tabla;
