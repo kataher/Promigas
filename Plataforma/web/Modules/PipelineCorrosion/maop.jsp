@@ -303,8 +303,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_ma" name="id_ma">  
-                            <input type="hidden" id="opt_ma" name="opt_ma">   
+                            <input type="hidden" id="id_ma" name="id_ma" value="-1">  
+                            <input type="hidden" id="opt_ma" name="opt_ma" value="-1">   
                         </div>
                         <div id="load_Dialog_ma" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -900,48 +900,39 @@
         function save_ma() {
 
             var sel = $("input[type='radio'][name='linepipe_ma']:checked");
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "linepipe_ma": sel.val(),
-                "nomps_sel_ma": $("#nomps_sel_ma").val(),
-                "nomps_ma": $("#nomps_ma").val(),
-                "pipeo_sel_ma": $("#pipeo_sel_ma").val(),
-                "wallt_sel_ma": $("#wallt_sel_ma").val(),
-                "wallt_ma": $("#wallt_ma").val(),
-                "np_sel_ma": $("#np_sel_ma").val(),
-                "td_sel_ma": $("#td_sel_ma").val(),
-                "tempu_ma": $("#tempu_ma").val(),
-                "grade_sel_ma": $("#grade_sel_ma").val(),
-                "grade_ma": $("#grade_ma").val(),
-                "df_sel_ma": $("#df_sel_ma").val(),
-                "df_ma": $("#df_ma").val(),
-                "jf_sel_ma": $("#jf_sel_ma").val(),
-                "jf_ma": $("#jf_ma").val(),
-                "maximund_ma": $("#maximund_ma").val(),
-                "md_sel_ma": $("#md_sel_ma").val(),
-                "longitudinale_ma": $("#longitudinale_ma").val(),
-                "le_sel_ma": $("#le_sel_ma").val(),
-                "mop_ma": $("#mop_ma").val(),
-                "maximuns_ma": $("#maximuns_ma").val(),
-                "designp_ma": $("#designp_ma").val(),
-                "intermediatef_ma": $("#intermediatef_ma").val(),
-                "idproyect": $("#proyects_sel_ma").val(),
-                "opcion": $("#opt_ma").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_ma": 1,
-                "description_ma": $("#description_ma").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "ma"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["linepipe_ma"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_ma").val() == 2) {
-                    parametros.id_ma = $("#id_ma").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -957,8 +948,8 @@
                         show_OkDialog($("#save_Dialog_ma"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_ma"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
