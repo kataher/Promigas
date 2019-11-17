@@ -23,49 +23,29 @@ public class ResistanceEarthIAGBController extends Controller.Controller{
         return model;
     }
     
-    
-    
     public  Map<String, String> getValues(HttpServletRequest request) throws Exception{
         
-         //Input Data
-        String description_riagb = request.getParameter("description_riagb");
-        String resistancee_riagb = request.getParameter("resistancee_riagb");
-        String actuals_riagb = request.getParameter("actuals_riagb");
-        String correctionf_riagb = request.getParameter("correctionf_riagb");
-        String numbera_riagb = request.getParameter("numbera_riagb");
-        String res_sel_riagb = request.getParameter("res_sel_riagb");
-        String act_sel_riagb = request.getParameter("act_sel_riagb");
-        String totalg_riagb = request.getParameter("totalg_riagb");
-       
-                
-        //ids
-        String id_proyect = request.getParameter("idproyect");
-        String iduser = request.getParameter("iduser");
-       
+        Map<String, String[]> vals = request.getParameterMap();
+        
         Map<String, String> values = new HashMap<String, String>();
-                
-        try
-        {
-            values.put("description_riagb", stringToBD(description_riagb.trim()));
-            values.put("resistancee_riagb", stringToBD(resistancee_riagb.trim()));
-            values.put("actuals_riagb",  stringToBD(actuals_riagb.trim()));
-            values.put("correctionf_riagb",  stringToBD(correctionf_riagb.trim()));
-            values.put("numbera_riagb",  stringToBD(numbera_riagb.trim()));
-            values.put("res_sel_riagb",  stringToBD(res_sel_riagb.trim()));
-            values.put("act_sel_riagb",  stringToBD(act_sel_riagb.trim()));
-            values.put("totalg_riagb",  stringToBD(totalg_riagb.trim()));
+        
+        for (String key : vals.keySet()){
             
-            values.put("id_proyect", id_proyect.trim());
-            values.put("id_user", iduser.trim());
-            
-        }catch(Exception ex){
-            throw new Exception(ex.getMessage());
+            if(!key.equals("opcion") && !key.equals("from") && !key.equals("opt_" + vals.get("from")[0])) {
+                if(key.equals("id_" + vals.get("from")[0]))
+                    values.put("id", stringToBD(vals.get(key)[0].trim()));
+                else if (key.equals("proyects_sel_" + vals.get("from")[0]))
+                    values.put("id_proyect", stringToBD(vals.get(key)[0].trim()));
+                else
+                    values.put(key, stringToBD(vals.get(key)[0].trim()));
+            }
         }
-       
-       return values;
+        
+        
+        
+        return values;
         
     }
-      
       
        
 }
