@@ -1001,7 +1001,7 @@
                     },
                     success: function (data, status, request) {
                         cleanAll_ma();
-                        $("#id_ma").val("");
+                        $("#id_ma").val("-1");
                         $("#opt_ma").val("1");
                         show_OkDialog($("#delete_Dialog_ma"), "Satisfactory process");
                     },

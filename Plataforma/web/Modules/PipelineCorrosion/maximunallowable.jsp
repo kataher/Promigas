@@ -565,7 +565,7 @@
                 },
                 success: function (data, status, request) {
                     cleanAll_mal();
-                    $("#id_mal").val("");
+                    $("#id_mal").val("-1");
                     $("#opt_mal").val("1");
                     show_OkDialog($("#delete_Dialog_mal"), "Satisfactory process");
                 },
