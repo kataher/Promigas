@@ -19,7 +19,7 @@ public class ResistanceEarthSVAModel extends Model.Model{
 
     public ResistanceEarthSVAModel() {
       super();
-      this.tabla = "ResistanceSVA";
+      this.tabla = "ResistanceRSVA";
     }
     
       
