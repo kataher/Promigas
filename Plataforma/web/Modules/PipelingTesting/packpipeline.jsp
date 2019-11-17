@@ -284,8 +284,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_pap" name="id_pap">   
-                            <input type="hidden" id="opt_pap" name="opt_pap">    
+                            <input type="hidden" id="id_pap" name="id_pap" value="-1">   
+                            <input type="hidden" id="opt_pap" name="opt_pap" value="-1">    
                         </div>
                         <div id="load_Dialog_pap" title="Basic dialog" style='display:none;'>
                             <p>Successfully uploaded data</p>
@@ -805,51 +805,44 @@
 
         function save_pap() {
             var sel = $("input[type='radio'][name='pipe_rad_pap']:checked");
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "gasavetemp_pap": $("#gasavetemp_pap").val(),
-                "basep_pap": $("#basep_pap").val(),
-                "upstreamp_pap": $("#upstreamp_pap").val(),
-                "downstreamp_pap": $("#downstreamp_pap").val(),
-                "internalp_pap": $("#internalp_pap").val(),
-                "lenghtp_pap": $("#lenghtp_pap").val(),
-                "gst_pap": $("#gst_pap").val(),
-                "pipe_rad_pap": sel.val(),
-                "nomps_sel_pap": $("#nomps_sel_pap").val(),
-                "wallt_sel_pap": $("#wallt_sel_pap").val(),
-                "gat_sel_pap": $("#gat_sel_pap").val(),
-                "bp_sel_pap": $("#bp_sel_pap").val(),
-                "up_sel_pap": $("#up_sel_pap").val(),
-                "dp_sel_pap": $("#dp_sel_pap").val(),
-                "ip_sel_pap": $("#ip_sel_pap").val(),
-                "lp_sel_pap": $("#lp_sel_pap").val(),
-                "h_pap": $("#h_pap").val(),
-                "h_sel_pap": $("#h_sel_pap").val(),
-                "averagep_pap": $("#averagep_pap").val(),
-                "averagec_pap": $("#averagec_pap").val(),
-                "packg_pap": $("#packg_pap").val(),
-                "idproyect": $("#proyects_sel_pap").val(),
-                "opcion": $("#opt_pap").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_pap": 1,
-                "description_pap": $("#description_pap").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "pap"
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["pipe_rad_pap"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
-                alert("Debe realizar el càlculo");
+                alert("You must perform the calculation and fill out the description");
             } else {
-                if ($("#opt_pap").val() == 2) {
-                    parametros.id_pap = $("#id_pap").val();
-                }
 
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
                     data: parametros,
-                    async: false,
                     dataType: 'json',
                     beforeSend: function (xhr) {
                         block("Cargando...");
@@ -860,14 +853,13 @@
                         show_OkDialog($("#save_Dialog_pap"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        alert(err);
                         show_OkDialog($("#error_Dialog_pap"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
-
             }
         }
 
