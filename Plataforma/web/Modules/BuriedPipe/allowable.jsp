@@ -218,7 +218,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_all" name="id_all">  
+                            <input type="hidden" id="id_all" name="id_all" value="-1">  
                             <input type="hidden" id="opt_all" name="opt_all" value="1">   
                         </div>
                         <div id="load_Dialog_all" title="Basic dialog" style='display:none;'>
@@ -256,338 +256,345 @@
         <!-- /#wrapper -->
     </body>
 
-       <script>
-            $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-                getproyectos(<%=session.getAttribute("idusu")%>,
-                        $("#proyects_sel_all"),
-                        $("#error_Dialog_all"));
+            getproyectos(<%=session.getAttribute("idusu")%>,
+                    $("#proyects_sel_all"),
+                    $("#error_Dialog_all"));
 
 
-                load_in_sel_all();
+            load_in_sel_all();
 
+        });
+
+        function load_history_all() {
+            var parametros = {
+                "idproyect": $("#proyects_sel_all").val(),
+                "iduser": <% out.print(session.getAttribute("idusu"));%>,
+                "opcion": "6",
+                "nombre": "historial",
+                "from": "all"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                async: false,
+                beforeSend: function (xhr) {
+                    $("#opt_all").val("1");
+                    $("#id_all").val("");
+                    cleanAll_all();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+
+                    if (data !== null) {
+                        var tags = Object.keys(data.historial[0]);
+
+                        var tamano = data.size;
+
+                        var html = "<table class='table table-bordered table-striped'>";
+                        html += "<thead>";
+                        html += "<tr>";
+                        html += "<th>Creation date</th>";
+                        html += "<th>Description</th>";
+                        html += "<th>Load</th>";
+                        html += "</tr>";
+                        html += "</thead>";
+                        if (tamano > 0) {
+
+                            html += '<tbody>';
+                            for (var i = 0; i < tamano; i++) {
+                                html += "<tr>";
+                                html += "<td>" + data.historial[i].date + "</td>";
+                                html += "<td>" + data.historial[i].description_all + "</td>";
+                                html += "<td><a href='#' onClick='load_form_all(" + data.historial[i].id + ")'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a></td>";
+                                html += "<tr>";
+
+                            }
+                            html += '</tbody>';
+                        } else {
+                            html += '<p>No records available.</p>';
+                        }
+                        html += "</table><br><br>";
+
+                    } else {
+                        html = '<p>No records available.</p>';
+                    }
+                    $("#div-table_all").empty();
+                    $("#div-table_all").html(html);
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_all"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
             });
+        }
 
-            function load_history_all() {
-                var parametros = {
-                    "idproyect": $("#proyects_sel_all").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "opcion": "6",
-                    "nombre": "historial",
-                    "from": "all"
+
+
+        function onchange_Input_all(inp) {
+
+            var sw = validateDecimal(inp.value);
+
+            if (sw !== true) {
+                inp.value = "";
+            }
+            onchange_Input_zero(inp);
+            cleanOut_all();
+
+        }
+
+        function cleanOut_all() {
+            $("#atl_all").val("");
+        }
+
+        function cleanIn_all() {
+            $("#do_all").val("");
+            $("#pdr_all").val("");
+            $("#tyd_all").val("");
+            $("#tut_all").val("");
+            $("#tys_all").val("");
+        }
+
+
+        function load_in_sel_all() {
+            var parametros = {
+                "combo": "in",
+                "opcion": "5"
+            };
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                beforeSend: function (xhr) {
+                    block("Cargando...");
+                },
+                success: function (data, status, request) {
+                    var newHtml = "<select class='form-control' name='do_sel_all' id='do_sel_all'>" + data;
+                    $("#div_do_sel_all").html(newHtml);
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    show_OkDialog($("#error_Dialog_chp"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+        function load_form_all(id) {
+
+            var parametros = {
+                "id": id,
+                "opcion": "4",
+                "from": "all"
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "../manager.jsp",
+                data: parametros,
+                dataType: 'json',
+                beforeSend: function (xhr) {
+                    cleanAll_all();
+                    block("Cargado datos...");
+                },
+                success: function (data, status, request) {
+                    if (data != null)
+                    {
+                        var tags = Object.keys(data.row);
+
+                        for (var i = 0; i < tags.length; i++) {
+                            $("#" + tags[i]).val(data.row[tags[i]]);
+                        }
+
+                        $("#proyects_sel_all").val(data.row["id_proyect"]);
+                        $("#opt_all").val("2");
+                        $("#id_all").val(data.row.id);
+                    } else {
+                        $("#opt_all").val("1");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, err) {
+                    $("#opt_all").val("1");
+                    show_OkDialog($("#error_Dialog_all"), "Error");
+                },
+                complete: function () {
+                    unBlock();
+                }
+            });
+        }
+
+
+        function cleanAll_all() {
+            cleanIn_all();
+            cleanOut_all();
+            $("#description_all").val("");
+        }
+
+        function validate_atl_all(inp) {
+            onchange_Input_all(inp);
+            validatePress(inp, $("#bd_all"), $("#dischargep_all"));
+        }
+
+        function calculate_all() {
+
+            var variables = {
+                "pdr_all": $("#pdr_all").val().replace(",", ""),
+                "do_all": $("#do_all").val().replace(",", ""),
+                "tut_all": $("#tut_all").val().replace(",", ""),
+                "tyd_all": $("#tyd_all").val().replace(",", ""),
+                "tys_all": $("#tys_all").val().replace(",", "")
+            };
+
+            var isOk = validate(variables);
+
+            if (isOk === false) {
+                alert("You must complete all fields");
+            } else {
+
+                var unidades = {
+                    "do_sel_all": $("#do_sel_all").val().split(",")[1]
                 };
+
+
+                var res = allowable_Form(variables, unidades);
+
+                $("#atl_all").val(res[0]);
+
+                show_OkDialog($("#calculate_Dialog_all"), "Satisfactory process");
+
+
+            }
+        }
+
+        function save_all() {
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
+
+            var parametros = {
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
+                "from": "all"
+            };
+
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
+
+            var isOk = validate(parametros);
+
+            if (isOk === false) {
+                alert("You must perform the calculation and fill out the description");
+            } else {
 
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
-                    async: false,
-                    beforeSend: function (xhr) {
-                        $("#opt_all").val("1");
-                        $("#id_all").val("");
-                        cleanAll_all();
-                        block("Cargado datos...");
-                    },
-                    success: function (data, status, request) {
-
-                        if (data !== null) {
-                            var tags = Object.keys(data.historial[0]);
-
-                            var tamano = data.size;
-
-                            var html = "<table class='table table-bordered table-striped'>";
-                            html += "<thead>";
-                            html += "<tr>";
-                            html += "<th>Creation date</th>";
-                            html += "<th>Description</th>";
-                            html += "<th>Load</th>";
-                            html += "</tr>";
-                            html += "</thead>";
-                            if (tamano > 0) {
-
-                                html += '<tbody>';
-                                for (var i = 0; i < tamano; i++) {
-                                    html += "<tr>";
-                                    html += "<td>" + data.historial[i].date + "</td>";
-                                    html += "<td>" + data.historial[i].description_all + "</td>";
-                                    html += "<td><a href='#' onClick='load_form_all(" + data.historial[i].id + ")'><span class='glyphicon glyphicon-plus' aria-hidden='true'></span></a></td>";
-                                    html += "<tr>";
-
-                                }
-                                html += '</tbody>';
-                            } else {
-                                html += '<p>No records available.</p>';
-                            }
-                            html += "</table><br><br>";
-
-                        } else {
-                            html = '<p>No records available.</p>';
-                        }
-                        $("#div-table_all").empty();
-                        $("#div-table_all").html(html);
-
-                    },
-                    error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_all"), "Error");
-                    },
-                    complete: function () {
-                        unBlock();
-                    }
-                });
-            }
-
-
-
-            function onchange_Input_all(inp) {
-
-                var sw = validateDecimal(inp.value);
-
-                if (sw !== true) {
-                    inp.value = "";
-                }
-                onchange_Input_zero(inp);
-                cleanOut_all();
-
-            }
-
-            function cleanOut_all() {
-                $("#atl_all").val("");
-            }
-
-            function cleanIn_all() {
-                $("#do_all").val("");
-                $("#pdr_all").val("");
-                $("#tyd_all").val("");
-                $("#tut_all").val("");
-                $("#tys_all").val("");
-            }
-
-
-            function load_in_sel_all() {
-                var parametros = {
-                    "combo": "in",
-                    "opcion": "5"
-                };
-                $.ajax({
-                    type: "POST",
-                    url: "../manager.jsp",
-                    data: parametros,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        var newHtml = "<select class='form-control' name='do_sel_all' id='do_sel_all'>" + data;
-                        $("#div_do_sel_all").html(newHtml);
+                        $("#id_all").val(data.row.id);
+                        $("#opt_all").val("2");
+                        show_OkDialog($("#save_Dialog_all"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        show_OkDialog($("#error_Dialog_chp"), "Error");
+                        show_OkDialog($("#error_Dialog_all"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
             }
+        }
 
-            function load_form_all(id) {
+        function delete_all() {
 
-                var parametros = {
-                    "id": id,
-                    "opcion": "4",
-                    "from": "all"
-                };
+            //Confirmacion
+            if ($("#opt_all").val() == 2) {
+                $("#dialog-confirm_all").dialog({
+                    resizable: false,
+                    height: "auto",
+                    width: 400,
+                    modal: true,
+                    buttons: {
+                        "Delete": function () {
+                            deleteReg_all();
+                            $(this).dialog("close");
+                        },
+                        Cancelar: function () {
+                            $(this).dialog("close");
+                        }
+                    }
+                });
+            } else {
+                alert("You must load a record to be able to delete it");
+            }
+        }
 
+        function deleteReg_all() {
+            var parametros = {
+                "id_all": $("#id_all").val(),
+                "opcion": 3,
+                "iduser": <%=session.getAttribute("idusu")%>,
+                "from": "all"
+            };
+
+
+            if ($("#opt_all").val() == 2) {
                 $.ajax({
                     type: "POST",
                     url: "../manager.jsp",
                     data: parametros,
                     dataType: 'json',
                     beforeSend: function (xhr) {
-                        cleanAll_all();
-                        block("Cargado datos...");
+                        block("Cargando...");
                     },
                     success: function (data, status, request) {
-                        if (data != null)
-                        {
-                            var tags = Object.keys(data.row);
-
-                            for (var i = 0; i < tags.length; i++) {
-                                $("#" + tags[i]).val(data.row[tags[i]]);
-                            }
-
-                            $("#proyects_sel_all").val(data.row["id_proyect"]);
-                            $("#opt_all").val("2");
-                            $("#id_all").val(data.row.id);
-                        } else {
-                            $("#opt_all").val("1");
-                        }
-
+                        cleanAll_all();
+                        $("#id_all").val("-1");
+                        $("#opt_all").val("1");
+                        show_OkDialog($("#delete_Dialog_all"), "Satisfactory process");
                     },
                     error: function (xhr, ajaxOptions, err) {
-                        $("#opt_all").val("1");
+                        alert(err);
                         show_OkDialog($("#error_Dialog_all"), "Error");
                     },
                     complete: function () {
                         unBlock();
                     }
                 });
+
+            } else {
+                alert("You must load a record to be able to delete it");
             }
+        }
 
-
-            function cleanAll_all() {
-                cleanIn_all();
-                cleanOut_all();
-                $("#description_all").val("");
-            }
-
-            function validate_atl_all(inp) {
-                onchange_Input_all(inp);
-                validatePress(inp, $("#bd_all"), $("#dischargep_all"));
-            }
-
-            function calculate_all() {
-
-                var variables = {
-                    "pdr_all": $("#pdr_all").val().replace(",", ""),
-                    "do_all": $("#do_all").val().replace(",", ""),
-                    "tut_all": $("#tut_all").val().replace(",", ""),
-                    "tyd_all": $("#tyd_all").val().replace(",", ""),
-                    "tys_all": $("#tys_all").val().replace(",", "")
-                };
-
-                var isOk = validate(variables);
-
-                if (isOk === false) {
-                    alert("You must complete all fields");
-                } else {
-
-                    var unidades = {
-                        "do_sel_all": $("#do_sel_all").val().split(",")[1]
-                    };
-
-
-                    var res = allowable_Form(variables, unidades);
-
-                    $("#atl_all").val(res[0]);
-
-                    show_OkDialog($("#calculate_Dialog_all"), "Satisfactory process");
-
-
-                }
-            }
-
-            function save_all() {
-                var parametros = {
-                    "do_sel_all": $("#do_sel_all").val(),
-                    "do_all": $("#do_all").val(),
-                    "pdr_all": $("#pdr_all").val(),
-                    "tyd_all": $("#tyd_all").val(),
-                    "tut_all": $("#tut_all").val(),
-                    "tys_all": $("#tys_all").val(),
-                    "atl_all": $("#atl_all").val(),
-                    "idproyect": $("#proyects_sel_all").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "opcion": $("#opt_all").val(),
-                    "id_all": 1,
-                    "description_all": $("#description_all").val(),
-                    "from": "all"
-
-                };
-
-                var isOk = validate(parametros);
-
-                if (isOk === false) {
-                    alert("You must perform the calculation and fill out the description");
-                } else {
-
-                    if ($("#opt_all").val() == 2) {
-                        parametros.id_all = $("#id_all").val();
-                    }
-
-                    $.ajax({
-                        type: "POST",
-                        url: "../manager.jsp",
-                        data: parametros,
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            block("Cargando...");
-                        },
-                        success: function (data, status, request) {
-                            $("#id_all").val(data.row.id);
-                            $("#opt_all").val("2");
-                            show_OkDialog($("#save_Dialog_all"), "Satisfactory process");
-                        },
-                        error: function (xhr, ajaxOptions, err) {
-                            show_OkDialog($("#error_Dialog_all"), "Error");
-                        },
-                        complete: function () {
-                            unBlock();
-                        }
-                    });
-                }
-            }
-
-            function delete_all() {
-
-                //Confirmacion
-                if ($("#opt_all").val() == 2) {
-                    $("#dialog-confirm_all").dialog({
-                        resizable: false,
-                        height: "auto",
-                        width: 400,
-                        modal: true,
-                        buttons: {
-                            "Delete": function () {
-                                deleteReg_all();
-                                $(this).dialog("close");
-                            },
-                            Cancelar: function () {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
-                } else {
-                    alert("You must load a record to be able to delete it");
-                }
-            }
-
-            function deleteReg_all() {
-                var parametros = {
-                    "id_all": $("#id_all").val(),
-                    "opcion": 3,
-                    "iduser": <%=session.getAttribute("idusu")%>,
-                    "from": "all"
-                };
-
-
-                if ($("#opt_all").val() == 2) {
-                    $.ajax({
-                        type: "POST",
-                        url: "../manager.jsp",
-                        data: parametros,
-                        dataType: 'json',
-                        beforeSend: function (xhr) {
-                            block("Cargando...");
-                        },
-                        success: function (data, status, request) {
-                            cleanAll_all();
-                            $("#id_all").val("");
-                            $("#opt_all").val("1");
-                            show_OkDialog($("#delete_Dialog_all"), "Satisfactory process");
-                        },
-                        error: function (xhr, ajaxOptions, err) {
-                            alert(err);
-                            show_OkDialog($("#error_Dialog_all"), "Error");
-                        },
-                        complete: function () {
-                            unBlock();
-                        }
-                    });
-
-                } else {
-                    alert("You must load a record to be able to delete it");
-                }
-            }
-
-        </script>
+    </script>
 </html>
