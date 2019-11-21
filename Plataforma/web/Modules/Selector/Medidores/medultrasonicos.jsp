@@ -283,6 +283,31 @@
                         <input type="hidden" id="opt_meu" name="opt_meu">
                         <input type="hidden" id="capaopt_meu" name="capaopt_meu">
                     </div>
+                    <div id="load_Dialog_meu" title="Basic dialog" style='display:none;'>
+                        <p>Successfully uploaded data</p>
+                    </div>
+
+                    <div id="save_Dialog_meu" title="Basic dialog" style='display:none;'>
+                        <p>Data saved successfully</p>
+                    </div>
+
+                    <div id="error_Dialog_meu" title="Basic dialog" style='display:none;'>
+                        <p>An error has occurred in the process</p>
+                    </div>
+
+                    <div id="calculate_Dialog_meu" title="Basic dialog" style='display:none;'>
+                        <p>Calculation done successfully</p>
+                    </div>
+
+                    <div id="delete_Dialog_meu" title="Basic dialog" style='display:none;'>
+                        <p>Successfully deleted record</p>
+                    </div>
+
+                    <div id="dialog-confirm_meu" title="Delete record" style='display:none;'>
+                        <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                            Are you sure you want to permanently delete this record?
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -531,7 +556,7 @@
 
                     $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCFH]: ");
                     $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCFH]: ");
-                    $("#lbl_capacity_mer").text("Capacity [SCFH]: ");
+                    $("#lbl_capacity_meu").text("Capacity [SCFH]: ");
                    
                 } else {
                     $("#fmin_sel_meu").val("1285,SCMH");
@@ -540,7 +565,7 @@
                     $("#lbl_capa_meu").text("Maximum Capacity of Measurement (Optimum) [SCMH]: ");
                     $("#lbl_mcapae_meu").text("Maximum Capacity of Measurement(Evaluated) [SCMH]: ");
                     
-                    $("#lbl_capacity_mer").text("Capacity [SCMH]: ");
+                    $("#lbl_capacity_meu").text("Capacity [SCMH]: ");
                 }
 
                 var parametros = {
@@ -916,9 +941,12 @@
             }
 
             function delete_meu() {
+            alert("here");
+               
 
                 //Confirmacion
                 if ($("#opt_meu").val() == 2) {
+                    alert("here");
                     $("#dialog-confirm_meu").dialog({
                         resizable: false,
                         height: "auto",
@@ -940,7 +968,7 @@
             }
 
             function deleteReg_meu() {
-                var parametros = {
+                 var parametros = {
                     "id_med": $("#id_meu").val(),
                     "iduser": <%=session.getAttribute("idusu")%>,
                     "opcion": 3,

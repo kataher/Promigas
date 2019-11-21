@@ -371,7 +371,6 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
-                    async: false,
                     dataType: "json",
                     beforeSend: function (xhr) {
                         block("Cargando...");
@@ -480,6 +479,7 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
+                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
@@ -512,6 +512,7 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
+                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
@@ -568,6 +569,7 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
+                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
@@ -672,6 +674,7 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
+                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },
@@ -712,6 +715,7 @@
                     type: "POST",
                     url: "../../manager.jsp",
                     data: parametros,
+                    async: false,
                     beforeSend: function (xhr) {
                         block("Cargando...");
                     },

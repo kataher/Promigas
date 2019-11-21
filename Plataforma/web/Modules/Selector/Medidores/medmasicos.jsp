@@ -316,8 +316,8 @@
                                 Are you sure you want to permanently delete this record?
                             </p>
                         </div>
-                        <input type="hidden" id="id_mem" name="id_mem">  
-                        <input type="hidden" id="opt_mem" name="opt_mem">  
+                        <input type="hidden" id="id_mem" name="id_mem" value="-1">  
+                        <input type="hidden" id="opt_mem" name="opt_mem" value="1">  
                         <input type="hidden" id="capaopt_mem" name="capaopt_mem">
                     </div>
                 </div>
