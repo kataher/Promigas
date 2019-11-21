@@ -257,8 +257,8 @@
                             Are you sure you want to permanently delete this record?
                         </p>
                     </div>
-                    <input type="hidden" id="id_pla" name="id_pla">  
-                    <input type="hidden" id="opt_pla" name="opt_pla">
+                    <input type="hidden" id="id_pla" name="id_pla" value="-1">  
+                    <input type="hidden" id="opt_pla" name="opt_pla" value="1">
                 </div>
             </div>
         </div>
@@ -493,32 +493,37 @@
 
             function save_pla() {
 
+                var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+                var selects = $("#page-wrapper select");
+                var resultados = $("#page-wrapper input[type='text'][readonly]");
+
                 var parametros = {
-                    "type_sel_pla": $("#type_sel_pla").val(),
-                    "nps_sel_pla": $("#nps_sel_pla").val(),
-                    "flujo1_pla": $("#flujo1_pla").val(),
-                    "flujo2_pla": $("#flujo2_pla").val(),
-                    "flujo3_pla": $("#flujo3_pla").val(),
-                    "espesor_pla": $("#espesor_pla").val(),
-                    "orifice_pla": $("#orifice_pla").val(),
-                    "d_pla": $("#d_pla").val(),
-                    "l_pla": $("#l_pla").val(),
-                    "idproyect": $("#proyects_sel_pla").val(),
-                    "opcion": $("#opt_pla").val(),
-                    "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                    "id_pla": 1,
-                    "description_pla": $("#description_pla").val(),
+                    "id_user": <% out.print(session.getAttribute("idusu"));%>,
                     "from": "pla"
                 };
+
+                for (var i = 0; i < inputs.size(); i++) {
+                    if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                    {
+                        parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                    }
+                }
+
+                for (var i = 0; i < selects.size(); i++) {
+                    parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+                }
+
+                for (var i = 0; i < resultados.size(); i++) {
+                    parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+                }
+
+                parametros["opcion"] = parametros["opt_" + parametros["from"]];
+
                 var isOk = validate(parametros);
 
                 if (isOk === false) {
                     alert("You must perform the calculation and fill out the description");
                 } else {
-
-                    if ($("#opt_pla").val() == 2) {
-                        parametros.id_pla = $("#id_pla").val();
-                    }
 
                     $.ajax({
                         type: "POST",
@@ -534,8 +539,8 @@
                             show_OkDialog($("#save_Dialog_pla"), "Satisfactory process");
                         },
                         error: function (xhr, ajaxOptions, err) {
-                            alert(err);
                             show_OkDialog($("#error_Dialog_pla"), "Error");
+                            alert(err);
                         },
                         complete: function () {
                             unBlock();

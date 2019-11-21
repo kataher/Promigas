@@ -941,12 +941,8 @@
             }
 
             function delete_meu() {
-            alert("here");
-               
-
                 //Confirmacion
                 if ($("#opt_meu").val() == 2) {
-                    alert("here");
                     $("#dialog-confirm_meu").dialog({
                         resizable: false,
                         height: "auto",
