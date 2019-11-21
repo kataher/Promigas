@@ -334,7 +334,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_poi" name="id_poi">  
+                            <input type="hidden" id="id_poi" name="id_poi" value="-1">  
                             <input type="hidden" id="opt_poi" name="opt_poi" value="1">   
                         </div>
                         <div id="load_Dialog_poi" title="Basic dialog" style='display:none;'>
@@ -819,48 +819,37 @@
         }
 
         function save_poi() {
-            var parametros = {
-                "intb_poi": $("#intb_poi").val(),
-                "dbo_poi": $("#dbo_poi").val(),
-                "uwf_poi": $("#uwf_poi").val(),
-                "uws_poi": $("#uws_poi").val(),
-                "ifa_poi": $("#ifa_poi").val(),
-                "pod_poi": $("#pod_poi").val(),
-                "sdr_poi": $("#sdr_poi").val(),
-                "po_poi": $("#po_poi").val(),
-                "ame_poi": $("#ame_poi").val(),
-                "pr_poi": $("#pr_poi").val(),
-                "rac_poi": $("#rac_poi").val(),
-                "ll_poi": $("#ll_poi").val(),
-                "ep_poi": $("#ep_poi").val(),
-                "af_poi": $("#af_poi").val(),
-                "ef_poi": $("#ef_poi").val(),
-                "bd_poi": $("#bd_poi").val(),
-                "ocf_poi": $("#ocf_poi").val(),
-                "intb_sel_poi": $("#intb_sel_poi").val(),
-                "dbo_sel_poi": $("#dbo_sel_poi").val(),
-                "pod_sel_poi": $("#pod_sel_poi").val(),
-                "rac_sel_poi": $("#rac_sel_poi").val(),
-                "idproyect": $("#proyects_sel_poi").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "opcion": $("#opt_poi").val(),
-                "id_poi": 1,
-                "description_poi": $("#description_poi").val(),
-                "from": "poi"
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
+            var parametros = {
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
+                "from": "poi"
             };
 
+            for (var i = 0; i < inputs.size(); i++) {
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
 
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_poi").val() == 2) {
-                    parametros.id_poi = $("#id_poi").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -877,6 +866,7 @@
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_poi"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
@@ -929,7 +919,7 @@
                     },
                     success: function (data, status, request) {
                         cleanAll_poi();
-                        $("#id_poi").val("");
+                        $("#id_poi").val("-1");
                         $("#opt_poi").val("1");
                         show_OkDialog($("#delete_Dialog_poi"), "Satisfactory process");
                     },
