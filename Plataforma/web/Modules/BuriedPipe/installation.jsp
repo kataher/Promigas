@@ -569,7 +569,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_ins" name="id_ins">  
+                            <input type="hidden" id="id_ins" name="id_ins" value="-1">  
                             <input type="hidden" id="opt_ins" name="opt_ins" value="1">   
                         </div>
                         <div id="load_Dialog_ins" title="Basic dialog" style='display:none;'>
@@ -1090,83 +1090,42 @@
 
         function save_ins() {
             var sel = $("input[type='radio'][name='meluw_ins']:checked");
+            var inputs = $("#page-wrapper input[type='text'],[type='hidden']").not("[readonly]");
+            var selects = $("#page-wrapper select");
+            var resultados = $("#page-wrapper input[type='text'][readonly]");
 
             var parametros = {
-                "pod_ins": $("#pod_ins").val(),
-                "bd_ins": $("#bd_ins").val(),
-                "eg_ins": $("#eg_ins").val(),
-                "sgmd_ins": $("#sgmd_ins").val(),
-                "paex_ins": $("#paex_ins").val(),
-                "h_ins": $("#h_ins").val(),
-                "paecro_ins": $("#paecro_ins").val(),
-                "apaecro_ins": $("#apaecro_ins").val(),
-                "l1_ins": $("#l1_ins").val(),
-                "bac_ins": $("#bac_ins").val(),
-                "hy_ins": $("#hy_ins").val(),
-                "cf_ins": $("#cf_ins").val(),
-                "cfb_ins": $("#cfb_ins").val(),
-                "cro_ins": $("#cro_ins").val(),
-                "ampaecro_ins": $("#ampaecro_ins").val(),
-                "asps_ins": $("#asps_ins").val(),
-                "uw_ins": $("#uw_ins").val(),
-                "mpwt_ins": $("#mpwt_ins").val(),
-                "perp_ins": $("#perp_ins").val(),
-                "meluw_ins": sel.val(),
-                "pr_sel_ins": $("#pr_sel_ins").val(),
-                "pr_ins": $("#pr_ins").val(),
-                "ae_sel_ins": $("#ae_sel_ins").val(),
-                "ts_sel_ins": $("#ts_sel_ins").val(),
-                "ts_ins": $("#ts_ins").val(),
-                "pod_sel_ins": $("#pod_sel_ins").val(),
-                "h_sel_ins": $("#h_sel_ins").val(),
-                "l1_sel_ins": $("#l1_sel_ins").val(),
-                "bac_sel_ins": $("#bac_sel_ins").val(),
-                "cro_sel_ins": $("#cro_sel_ins").val(),
-                "mpwt_sel_ins": $("#mpwt_sel_ins").val(),
-                "we_ins": $("#we_ins").val(),
-                "wb_ins": $("#wb_ins").val(),
-                "averex_ins": $("#averex_ins").val(),
-                "averen_ins": $("#averen_ins").val(),
-                "bs_ins": $("#bs_ins").val(),
-                "bst_ins": $("#bst_ins").val(),
-                "fa_ins": $("#fa_ins").val(),
-                "fb_ins": $("#fb_ins").val(),
-                "fc_ins": $("#fc_ins").val(),
-                "fd_ins": $("#fd_ins").val(),
-                "aa1_ins": $("#aa1_ins").val(),
-                "ab1_ins": $("#ab1_ins").val(),
-                "ac1_ins": $("#ac1_ins").val(),
-                "ad1_ins": $("#ad1_ins").val(),
-                "l2_ins": $("#l2_ins").val(),
-                "l3_ins": $("#l3_ins").val(),
-                "l4_ins": $("#l4_ins").val(),
-                "ast_ins": $("#ast_ins").val(),
-                "sh_ins": $("#sh_ins").val(),
-                "mp_ins": $("#mp_ins").val(),
-                "bl_ins": $("#bl_ins").val(),
-                "oc_ins": $("#oc_ins").val(),
-                "aa2_ins": $("#aa2_ins").val(),
-                "ab2_ins": $("#ab2_ins").val(),
-                "ac2_ins": $("#ac2_ins").val(),
-                "ad2_ins": $("#ad2_ins").val(),
-                "idproyect": $("#proyects_sel_ins").val(),
-                "opcion": $("#opt_ins").val(),
-                "iduser": <% out.print(session.getAttribute("idusu"));%>,
-                "id_ins": 1,
-                "description_ins": $("#description_ins").val(),
+                "id_user": <% out.print(session.getAttribute("idusu"));%>,
                 "from": "ins"
-
             };
+
+            for (var i = 0; i < inputs.size(); i++) {
+               
+                if (!($(inputs[i]).attr("id") === "id_" + parametros["from"] && $(inputs[i]).val() === "-1"))
+                {
+                    parametros[$(inputs[i]).attr("id")] = $(inputs[i]).val();
+                }
+            }
+
+            for (var i = 0; i < selects.size(); i++) {
+                parametros[$(selects[i]).attr("id")] = $(selects[i]).val();
+            }
+
+            for (var i = 0; i < resultados.size(); i++) {
+                parametros[$(resultados[i]).attr("id")] = $(resultados[i]).val();
+            }
+
+            parametros["opcion"] = parametros["opt_" + parametros["from"]];
+            parametros["perp_ins"] = $("#perp_ins").val();
+            alert(parametros["perp_ins"]);
+            parametros["meluw_ins"] = sel.val();
+            
 
             var isOk = validate(parametros);
 
             if (isOk === false) {
                 alert("You must perform the calculation and fill out the description");
             } else {
-
-                if ($("#opt_ins").val() == 2) {
-                    parametros.id_ins = $("#id_ins").val();
-                }
 
                 $.ajax({
                     type: "POST",
@@ -1183,6 +1142,7 @@
                     },
                     error: function (xhr, ajaxOptions, err) {
                         show_OkDialog($("#error_Dialog_ins"), "Error");
+                        alert(err);
                     },
                     complete: function () {
                         unBlock();
@@ -1233,7 +1193,7 @@
                     block("Cargando...");
                 },
                 success: function (data, status, request) {
-                    $("#id_ins").val("");
+                    $("#id_ins").val("-1");
                     $("#opt_ins").val("1");
                     cleanAll_ins();
                     show_OkDialog($("#delete_Dialog_ins"), "Satisfactory process");
